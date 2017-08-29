@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Serenity.Extra</id>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <authors>dfaruque</authors>
     <owners>dfaruque</owners>
     <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
@@ -19,27 +19,6 @@
     
   </metadata>
   <files>
-    <!--<file src="_My\Bases\EntityDialogBase.ts" target="content\_My\Bases\EntityDialogBase.ts"></file>
-    <file src="_My\Bases\EntityGridBase.ts" target="content\_My\Bases\EntityGridBase.ts"></file>
-    <file src="_My\Bases\NRow.cs" target="content\_My\Bases\NRow.cs"></file>
-    <file src="_My\Editors\ColorEditor.ts" target="content\_My\Editors\ColorEditor.ts"></file>
-    <file src="_My\Editors\DateTimePickerEditor.ts" target="content\_My\Editors\DateTimePickerEditor.ts"></file>
-    <file src="_My\Editors\GridEditorBase.ts" target="content\_My\Editors\GridEditorBase.ts"></file>
-    <file src="_My\Editors\GridEditorDialog.ts" target="content\_My\Editors\GridEditorDialog.ts"></file>
-    <file src="_My\Editors\slick.editors.js" target="content\_My\Editors\slick.editors.js"></file>
-    <file src="_My\Editors\StaticTextBlock.ts" target="content\_My\Editors\StaticTextBlock.ts"></file>
-    <file src="_My\Editors\TimelineEditor.ts" target="content\_My\Editors\TimelineEditor.ts"></file>
-    <file src="_My\Formatters\ApprovalStatusFormatter.ts" target="content\_My\Formatters\ApprovalStatusFormatter.ts"></file>
-    <file src="_My\_q.d.ts" target="content\_My\_q.d.ts"></file>
-    <file src="_My\_q.ts" target="content\_My\_q.ts"></file>
-    <file src="_My\DateTimeHelper.cs" target="content\_My\DateTimeHelper.cs"></file>
-    <file src="_My\EnumHelper.cs" target="content\_My\EnumHelper.cs"></file>
-    <file src="_My\Enums.cs" target="content\_My\Enums.cs"></file>
-    <file src="_My\NumberToWords.cs" target="content\_My\NumberToWords.cs"></file>
-    <file src="_My\ObjectExtentions.cs" target="content\_My\ObjectExtentions.cs"></file>
-    <file src="_My\ObjectExtentions.cs" target="content\_My\ObjectExtentions.cs"></file>
-    <file src="_My\ScriptInitialization.ts" target="content\_My\ScriptInitialization.ts"></file>
-    <file src="_My\ScriptInitialization.ts" target="content\_My\ScriptInitialization.ts"></file>-->
-    <file src="_Ext\**\*.*" target="content\_Ext" />
+    <file src="_Ext\**\*.*" target="content\Modules\_Ext" />
   </files>
 </package>
