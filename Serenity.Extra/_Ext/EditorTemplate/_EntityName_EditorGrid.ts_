@@ -1,0 +1,34 @@
+﻿
+namespace PMS.Bill {
+
+    @Serenity.Decorators.registerClass()
+    export class _EntityName_Editor extends _Ext.GridEditorBase<_EntityName_Row> {
+        protected getColumnsKey() { return 'Bill._EntityName_Editor'; }
+        protected getDialogType() { return _EntityName_EditorDialog; }
+        protected getLocalTextPrefix() { return _EntityName_Row.localTextPrefix; }
+
+        constructor(container: JQuery) {
+            super(container);
+        }
+
+        validateEntity(row: _EntityName_Row, id) {
+
+            ////Check duplicate 
+            //row.VesselId = Q.toId(row.VesselId);
+            //var sameVessel = Q.tryFirst(this.view.getItems(), x => x.VesselId === row.VesselId);
+            //if (sameVessel && this.id(sameVessel) !== id) {
+            //    Q.alert('This Vessel is already in list!');
+            //    return false;
+            //}
+
+            ////fill names
+            //let Equipment = EquipmentRow.getLookup().itemById[row.EquipmentId];
+            //if (Equipment) {
+            //    row.EquipmentName = Equipment.Name;
+            //}
+
+            return true;
+        }
+
+    }
+}

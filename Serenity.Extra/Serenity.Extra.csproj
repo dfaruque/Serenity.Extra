@@ -1,0 +1,894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6717F88B-6ACB-4EAF-9F92-299763DE20ED}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Serenity.Extra</RootNamespace>
+    <AssemblyName>Serenity.Extra</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NUglify, Version=1.5.8.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUglify.1.5.8\lib\net40\NUglify.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Core, Version=2.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Core.2.10.3\lib\net45\Serenity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Data, Version=2.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Data.2.10.3\lib\net45\Serenity.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Data.Entity, Version=2.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Data.Entity.2.10.3\lib\net45\Serenity.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Services, Version=2.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Services.2.10.3\lib\net45\Serenity.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Web, Version=2.10.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serenity.Web.2.10.3\lib\net45\Serenity.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Ext\DateTimeHelper.cs" />
+    <Compile Include="_Ext\EnumHelper.cs" />
+    <Compile Include="_Ext\Enums.cs" />
+    <Compile Include="_Ext\NumberToWords.cs" />
+    <Compile Include="_Ext\ObjectExtentions.cs" />
+    <Compile Include="_Ext\Reporting\ReportBase.cs" />
+    <Compile Include="_Ext\Reporting\ReportModelBase.cs" />
+    <Compile Include="_Ext\Reporting\ReportRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Content\bootstrap-theme.min.css.map" />
+    <None Include="Content\bootstrap.css.map" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <None Include="Content\toastr.less" />
+    <None Include="Content\toastr.scss" />
+    <None Include="fonts\fontawesome-webfont.eot" />
+    <None Include="fonts\fontawesome-webfont.ttf" />
+    <None Include="fonts\fontawesome-webfont.woff" />
+    <None Include="fonts\fontawesome-webfont.woff2" />
+    <None Include="fonts\FontAwesome.otf" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="fonts\ionicons.eot" />
+    <None Include="fonts\ionicons.ttf" />
+    <None Include="fonts\ionicons.woff" />
+    <None Include="fonts\OpenSans.woff" />
+    <None Include="fonts\OpenSansBold.woff" />
+    <None Include="fonts\OpenSansItalic.woff" />
+    <None Include="fonts\OpenSansLight.woff" />
+    <None Include="fonts\OpenSansSemiBold.woff" />
+    <None Include="fonts\Simple-Line-Icons.eot" />
+    <None Include="fonts\Simple-Line-Icons.ttf" />
+    <None Include="fonts\Simple-Line-Icons.woff" />
+    <None Include="fonts\Simple-Line-Icons.woff2" />
+    <None Include="Package.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Scripts\ckeditor\CHANGES.md" />
+    <None Include="Scripts\ckeditor\LICENSE.md" />
+    <None Include="Scripts\ckeditor\README.md" />
+    <None Include="Scripts\ckeditor\skins\moono\readme.md" />
+    <None Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <None Include="Scripts\serenity\texts\serenity.texts.de.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.es.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.fa.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.it.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.pt-BR.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.pt.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.ru.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.tr.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.vi-VN.json" />
+    <None Include="Scripts\serenity\texts\serenity.texts.zh-CN.json" />
+    <None Include="Scripts\SlickGrid\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\aristo\aristo.css" />
+    <Content Include="Content\aristo\images\icon_sprite.png" />
+    <Content Include="Content\aristo\images\progress_bar.gif" />
+    <Content Include="Content\aristo\images\slider_handles.png" />
+    <Content Include="Content\aristo\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\aristo\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorbox\images\border.png" />
+    <Content Include="Content\colorbox\images\controls.png" />
+    <Content Include="Content\colorbox\images\loading.gif" />
+    <Content Include="Content\colorbox\images\loading_background.png" />
+    <Content Include="Content\colorbox\jquery.colorbox.css" />
+    <Content Include="Content\css\select2-spinner.gif" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\select2.png" />
+    <Content Include="Content\css\select2x2.png" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\font-open-sans.css" />
+    <Content Include="Content\glyphicons.css" />
+    <Content Include="Content\images\collapse.gif" />
+    <Content Include="Content\images\down.gif" />
+    <Content Include="Content\images\expand.gif" />
+    <Content Include="Content\images\header-columns-bg.gif" />
+    <Content Include="Content\images\header-columns-over-bg.gif" />
+    <Content Include="Content\images\sort-asc.gif" />
+    <Content Include="Content\images\sort-desc.gif" />
+    <Content Include="Content\ionicons.css" />
+    <Content Include="Content\ionicons.min.css" />
+    <Content Include="Content\jquery.fileupload.css" />
+    <Content Include="Content\pace.css" />
+    <Content Include="Content\serenity\images\32px.png" />
+    <Content Include="Content\serenity\images\accessright.png" />
+    <Content Include="Content\serenity\images\accordion-down.png" />
+    <Content Include="Content\serenity\images\accordion-left.png" />
+    <Content Include="Content\serenity\images\accordion-right.png" />
+    <Content Include="Content\serenity\images\add.png" />
+    <Content Include="Content\serenity\images\add2.png" />
+    <Content Include="Content\serenity\images\address-book-open.png" />
+    <Content Include="Content\serenity\images\address-book.png" />
+    <Content Include="Content\serenity\images\agenda.png" />
+    <Content Include="Content\serenity\images\alarm-clock-exclamation.png" />
+    <Content Include="Content\serenity\images\alarm-clock.png" />
+    <Content Include="Content\serenity\images\application-resize-actual.png" />
+    <Content Include="Content\serenity\images\application-resize-full.png" />
+    <Content Include="Content\serenity\images\application-resize.png" />
+    <Content Include="Content\serenity\images\apply-button.png" />
+    <Content Include="Content\serenity\images\apply-changes-button.png" />
+    <Content Include="Content\serenity\images\arrow-circle-135.png" />
+    <Content Include="Content\serenity\images\arrow-circle-double.png" />
+    <Content Include="Content\serenity\images\arrow-continue.png" />
+    <Content Include="Content\serenity\images\arrow-curve-left.png" />
+    <Content Include="Content\serenity\images\arrow-down.png" />
+    <Content Include="Content\serenity\images\arrow-step-over.png" />
+    <Content Include="Content\serenity\images\arrow-stop.png" />
+    <Content Include="Content\serenity\images\arrow-up.png" />
+    <Content Include="Content\serenity\images\asterisk.png" />
+    <Content Include="Content\serenity\images\auction-hammer.png" />
+    <Content Include="Content\serenity\images\back-arrow-black.png" />
+    <Content Include="Content\serenity\images\back-arrow-white.png" />
+    <Content Include="Content\serenity\images\balance.png" />
+    <Content Include="Content\serenity\images\balloon.png" />
+    <Content Include="Content\serenity\images\balloons.png" />
+    <Content Include="Content\serenity\images\barcode.png" />
+    <Content Include="Content\serenity\images\bell.png" />
+    <Content Include="Content\serenity\images\bin-exclamation.png" />
+    <Content Include="Content\serenity\images\bin-minus.png" />
+    <Content Include="Content\serenity\images\bin.png" />
+    <Content Include="Content\serenity\images\binocular.png" />
+    <Content Include="Content\serenity\images\blank.gif" />
+    <Content Include="Content\serenity\images\block.png" />
+    <Content Include="Content\serenity\images\blog.png" />
+    <Content Include="Content\serenity\images\bomb.png" />
+    <Content Include="Content\serenity\images\book-open.png" />
+    <Content Include="Content\serenity\images\book.png" />
+    <Content Include="Content\serenity\images\bookmark.png" />
+    <Content Include="Content\serenity\images\box.png" />
+    <Content Include="Content\serenity\images\briefcase.png" />
+    <Content Include="Content\serenity\images\brightness-small-low.png" />
+    <Content Include="Content\serenity\images\brightness-small.png" />
+    <Content Include="Content\serenity\images\bug.png" />
+    <Content Include="Content\serenity\images\building-arrow.png" />
+    <Content Include="Content\serenity\images\building-medium.png" />
+    <Content Include="Content\serenity\images\building-old.png" />
+    <Content Include="Content\serenity\images\building.png" />
+    <Content Include="Content\serenity\images\calculator.png" />
+    <Content Include="Content\serenity\images\calculator2.png" />
+    <Content Include="Content\serenity\images\calculator3.png" />
+    <Content Include="Content\serenity\images\calendar-blue.png" />
+    <Content Include="Content\serenity\images\calendar-day.png" />
+    <Content Include="Content\serenity\images\calendar-task.png" />
+    <Content Include="Content\serenity\images\calendar.png" />
+    <Content Include="Content\serenity\images\card-small.png" />
+    <Content Include="Content\serenity\images\categories.png" />
+    <Content Include="Content\serenity\images\category.png" />
+    <Content Include="Content\serenity\images\certificate-fail.png" />
+    <Content Include="Content\serenity\images\certificate-fail2.png" />
+    <Content Include="Content\serenity\images\certificate-ok.png" />
+    <Content Include="Content\serenity\images\certificate-ok2.png" />
+    <Content Include="Content\serenity\images\chain-small.png" />
+    <Content Include="Content\serenity\images\check2.png" />
+    <Content Include="Content\serenity\images\checkbox-gray.png" />
+    <Content Include="Content\serenity\images\checkbox-no.png" />
+    <Content Include="Content\serenity\images\checkbox-null.png" />
+    <Content Include="Content\serenity\images\checkbox-states.png" />
+    <Content Include="Content\serenity\images\checkbox-yes.png" />
+    <Content Include="Content\serenity\images\clipboard-list.png" />
+    <Content Include="Content\serenity\images\clipboard-task.png" />
+    <Content Include="Content\serenity\images\clock.png" />
+    <Content Include="Content\serenity\images\column-picker.png" />
+    <Content Include="Content\serenity\images\construction.png" />
+    <Content Include="Content\serenity\images\control-record-small.png" />
+    <Content Include="Content\serenity\images\counter.png" />
+    <Content Include="Content\serenity\images\credit-card.png" />
+    <Content Include="Content\serenity\images\cross-script.png" />
+    <Content Include="Content\serenity\images\cross.png" />
+    <Content Include="Content\serenity\images\csv.png" />
+    <Content Include="Content\serenity\images\currency.png" />
+    <Content Include="Content\serenity\images\cv.png" />
+    <Content Include="Content\serenity\images\data-sync.png" />
+    <Content Include="Content\serenity\images\datepicker.gif" />
+    <Content Include="Content\serenity\images\datepicker.png" />
+    <Content Include="Content\serenity\images\delete.png" />
+    <Content Include="Content\serenity\images\delete2.png" />
+    <Content Include="Content\serenity\images\dialog-alert.png" />
+    <Content Include="Content\serenity\images\dialog-confirm.png" />
+    <Content Include="Content\serenity\images\dialog-information.png" />
+    <Content Include="Content\serenity\images\dialog-warning.png" />
+    <Content Include="Content\serenity\images\direction.png" />
+    <Content Include="Content\serenity\images\disk-arrow.png" />
+    <Content Include="Content\serenity\images\disk-black-accept.png" />
+    <Content Include="Content\serenity\images\disk-black.png" />
+    <Content Include="Content\serenity\images\disk.png" />
+    <Content Include="Content\serenity\images\doc.png" />
+    <Content Include="Content\serenity\images\document-copy.png" />
+    <Content Include="Content\serenity\images\document-print-preview.png" />
+    <Content Include="Content\serenity\images\document-small-list.png" />
+    <Content Include="Content\serenity\images\document-small.png" />
+    <Content Include="Content\serenity\images\document-task.png" />
+    <Content Include="Content\serenity\images\document.png" />
+    <Content Include="Content\serenity\images\documents-stack.png" />
+    <Content Include="Content\serenity\images\docx.png" />
+    <Content Include="Content\serenity\images\door.png" />
+    <Content Include="Content\serenity\images\down.gif" />
+    <Content Include="Content\serenity\images\drawer.png" />
+    <Content Include="Content\serenity\images\dropdown.png" />
+    <Content Include="Content\serenity\images\edit.png" />
+    <Content Include="Content\serenity\images\envelope.png" />
+    <Content Include="Content\serenity\images\eraser-plus.png" />
+    <Content Include="Content\serenity\images\eraser.png" />
+    <Content Include="Content\serenity\images\exclamation.png" />
+    <Content Include="Content\serenity\images\eye.png" />
+    <Content Include="Content\serenity\images\feed.png" />
+    <Content Include="Content\serenity\images\file-import.png" />
+    <Content Include="Content\serenity\images\fingerprint.png" />
+    <Content Include="Content\serenity\images\folder-arrow.png" />
+    <Content Include="Content\serenity\images\folder-close.png" />
+    <Content Include="Content\serenity\images\folder-horizontal.png" />
+    <Content Include="Content\serenity\images\folder-import.png" />
+    <Content Include="Content\serenity\images\folder-open-document.png" />
+    <Content Include="Content\serenity\images\full-screen-2.png" />
+    <Content Include="Content\serenity\images\funnel.png" />
+    <Content Include="Content\serenity\images\gear.png" />
+    <Content Include="Content\serenity\images\get-products.png" />
+    <Content Include="Content\serenity\images\get.png" />
+    <Content Include="Content\serenity\images\globe-small.png" />
+    <Content Include="Content\serenity\images\grid-title-bg.gif" />
+    <Content Include="Content\serenity\images\gtk-print-preview.png" />
+    <Content Include="Content\serenity\images\hammer-screwdriver.png" />
+    <Content Include="Content\serenity\images\hammer.png" />
+    <Content Include="Content\serenity\images\header-columns-bg.gif" />
+    <Content Include="Content\serenity\images\header-columns-over-bg.gif" />
+    <Content Include="Content\serenity\images\home.png" />
+    <Content Include="Content\serenity\images\hourglass.png" />
+    <Content Include="Content\serenity\images\inbox-document-text.png" />
+    <Content Include="Content\serenity\images\inbox-document.png" />
+    <Content Include="Content\serenity\images\inbox.png" />
+    <Content Include="Content\serenity\images\information-frame.png" />
+    <Content Include="Content\serenity\images\item.png" />
+    <Content Include="Content\serenity\images\jpg.png" />
+    <Content Include="Content\serenity\images\key.png" />
+    <Content Include="Content\serenity\images\keyboard.png" />
+    <Content Include="Content\serenity\images\layer-small.png" />
+    <Content Include="Content\serenity\images\license-key.png" />
+    <Content Include="Content\serenity\images\lifebuoy.png" />
+    <Content Include="Content\serenity\images\light-bulb.png" />
+    <Content Include="Content\serenity\images\list-delete.png" />
+    <Content Include="Content\serenity\images\loading.gif" />
+    <Content Include="Content\serenity\images\location.png" />
+    <Content Include="Content\serenity\images\lock.png" />
+    <Content Include="Content\serenity\images\luggage.png" />
+    <Content Include="Content\serenity\images\magnifier-left.png" />
+    <Content Include="Content\serenity\images\magnifier-medium-left.png" />
+    <Content Include="Content\serenity\images\magnifier-medium.png" />
+    <Content Include="Content\serenity\images\magnifier-zoom.png" />
+    <Content Include="Content\serenity\images\magnifier.png" />
+    <Content Include="Content\serenity\images\mail-open.png" />
+    <Content Include="Content\serenity\images\mail.png" />
+    <Content Include="Content\serenity\images\maximize-button.png" />
+    <Content Include="Content\serenity\images\maximize-button2.png" />
+    <Content Include="Content\serenity\images\medal.png" />
+    <Content Include="Content\serenity\images\meeting.png" />
+    <Content Include="Content\serenity\images\mhtml.png" />
+    <Content Include="Content\serenity\images\money.png" />
+    <Content Include="Content\serenity\images\new.png" />
+    <Content Include="Content\serenity\images\newspaper.png" />
+    <Content Include="Content\serenity\images\node-insert-next.png" />
+    <Content Include="Content\serenity\images\node-select-all.png" />
+    <Content Include="Content\serenity\images\notebook-pencil.png" />
+    <Content Include="Content\serenity\images\notebook-share.png" />
+    <Content Include="Content\serenity\images\notebook.png" />
+    <Content Include="Content\serenity\images\notebooks.png" />
+    <Content Include="Content\serenity\images\odata.png" />
+    <Content Include="Content\serenity\images\ok.png" />
+    <Content Include="Content\serenity\images\open-share.png" />
+    <Content Include="Content\serenity\images\order.png" />
+    <Content Include="Content\serenity\images\organization-tree.png" />
+    <Content Include="Content\serenity\images\outlook.png" />
+    <Content Include="Content\serenity\images\pager-bg.gif" />
+    <Content Include="Content\serenity\images\pager-buttons.png" />
+    <Content Include="Content\serenity\images\pager-load.gif" />
+    <Content Include="Content\serenity\images\paper-bag.png" />
+    <Content Include="Content\serenity\images\paper-clip.png" />
+    <Content Include="Content\serenity\images\payment.png" />
+    <Content Include="Content\serenity\images\pda.png" />
+    <Content Include="Content\serenity\images\pdf.png" />
+    <Content Include="Content\serenity\images\pencil.png" />
+    <Content Include="Content\serenity\images\picture-delete.png" />
+    <Content Include="Content\serenity\images\picture.png" />
+    <Content Include="Content\serenity\images\pill.png" />
+    <Content Include="Content\serenity\images\pin.png" />
+    <Content Include="Content\serenity\images\pipette.png" />
+    <Content Include="Content\serenity\images\place-empty.png" />
+    <Content Include="Content\serenity\images\plug.png" />
+    <Content Include="Content\serenity\images\plus-button.png" />
+    <Content Include="Content\serenity\images\plus-circle-false.png" />
+    <Content Include="Content\serenity\images\plus-circle.png" />
+    <Content Include="Content\serenity\images\plus-octagon-frame.png" />
+    <Content Include="Content\serenity\images\plus.png" />
+    <Content Include="Content\serenity\images\png.png" />
+    <Content Include="Content\serenity\images\price-tag.png" />
+    <Content Include="Content\serenity\images\printer.png" />
+    <Content Include="Content\serenity\images\product.png" />
+    <Content Include="Content\serenity\images\project-logs.png" />
+    <Content Include="Content\serenity\images\project-module.png" />
+    <Content Include="Content\serenity\images\project-version.png" />
+    <Content Include="Content\serenity\images\project.png" />
+    <Content Include="Content\serenity\images\projection-screen-presentation.png" />
+    <Content Include="Content\serenity\images\projection-screen.png" />
+    <Content Include="Content\serenity\images\property-blue.png" />
+    <Content Include="Content\serenity\images\property.png" />
+    <Content Include="Content\serenity\images\question-frame.png" />
+    <Content Include="Content\serenity\images\quick-search-loading.gif" />
+    <Content Include="Content\serenity\images\receipt.png" />
+    <Content Include="Content\serenity\images\report-arrow.png" />
+    <Content Include="Content\serenity\images\report-excel.png" />
+    <Content Include="Content\serenity\images\report-minus.png" />
+    <Content Include="Content\serenity\images\report-pencil.png" />
+    <Content Include="Content\serenity\images\report-plus.png" />
+    <Content Include="Content\serenity\images\report.png" />
+    <Content Include="Content\serenity\images\ruby.png" />
+    <Content Include="Content\serenity\images\ruler.png" />
+    <Content Include="Content\serenity\images\safe.png" />
+    <Content Include="Content\serenity\images\sale.png" />
+    <Content Include="Content\serenity\images\scissors.png" />
+    <Content Include="Content\serenity\images\script.png" />
+    <Content Include="Content\serenity\images\scripts-text.png" />
+    <Content Include="Content\serenity\images\sitemap-application-blue.png" />
+    <Content Include="Content\serenity\images\sitemap.png" />
+    <Content Include="Content\serenity\images\slash.png" />
+    <Content Include="Content\serenity\images\slick-header-columns-over-bg.gif" />
+    <Content Include="Content\serenity\images\slides.png" />
+    <Content Include="Content\serenity\images\sofa.png" />
+    <Content Include="Content\serenity\images\sort-order.png" />
+    <Content Include="Content\serenity\images\spreadsheet-template.png" />
+    <Content Include="Content\serenity\images\spreadsheet.png" />
+    <Content Include="Content\serenity\images\sprites.png" />
+    <Content Include="Content\serenity\images\star-pencil.png" />
+    <Content Include="Content\serenity\images\sticky-note-plus.png" />
+    <Content Include="Content\serenity\images\sticky-note-small-pin.png" />
+    <Content Include="Content\serenity\images\sticky-note-small.png" />
+    <Content Include="Content\serenity\images\sticky-notes-pin.png" />
+    <Content Include="Content\serenity\images\sticky-notes-stack.png" />
+    <Content Include="Content\serenity\images\sticky-notes.png" />
+    <Content Include="Content\serenity\images\stock.png" />
+    <Content Include="Content\serenity\images\store.png" />
+    <Content Include="Content\serenity\images\table-chart.png" />
+    <Content Include="Content\serenity\images\table-header.gif" />
+    <Content Include="Content\serenity\images\table-select-all.png" />
+    <Content Include="Content\serenity\images\table.png" />
+    <Content Include="Content\serenity\images\tag--arrow.png" />
+    <Content Include="Content\serenity\images\tag--exclamation.png" />
+    <Content Include="Content\serenity\images\tag-label.png" />
+    <Content Include="Content\serenity\images\tag-plus.png" />
+    <Content Include="Content\serenity\images\tag-small.png" />
+    <Content Include="Content\serenity\images\tag.png" />
+    <Content Include="Content\serenity\images\tags-label.png" />
+    <Content Include="Content\serenity\images\tags.png" />
+    <Content Include="Content\serenity\images\thumb-file-72.png" />
+    <Content Include="Content\serenity\images\tick-empty.png" />
+    <Content Include="Content\serenity\images\tick-green.png" />
+    <Content Include="Content\serenity\images\tick-red.png" />
+    <Content Include="Content\serenity\images\ticket-arrow.png" />
+    <Content Include="Content\serenity\images\ticket-exclamation.png" />
+    <Content Include="Content\serenity\images\ticket-plus.png" />
+    <Content Include="Content\serenity\images\ticket-stub.png" />
+    <Content Include="Content\serenity\images\ticket-user.png" />
+    <Content Include="Content\serenity\images\toggle-expand.png" />
+    <Content Include="Content\serenity\images\toggle-small-expand.png" />
+    <Content Include="Content\serenity\images\toggle-small.png" />
+    <Content Include="Content\serenity\images\toggle.png" />
+    <Content Include="Content\serenity\images\toolbar-bg.gif" />
+    <Content Include="Content\serenity\images\toolbox.png" />
+    <Content Include="Content\serenity\images\trash.gif" />
+    <Content Include="Content\serenity\images\trash.png" />
+    <Content Include="Content\serenity\images\tree-item.png" />
+    <Content Include="Content\serenity\images\truck.png" />
+    <Content Include="Content\serenity\images\ui-check-box-uncheck.png" />
+    <Content Include="Content\serenity\images\ui-radio-button-uncheck.png" />
+    <Content Include="Content\serenity\images\unchecked.gif" />
+    <Content Include="Content\serenity\images\universal.png" />
+    <Content Include="Content\serenity\images\unlock-disable.png" />
+    <Content Include="Content\serenity\images\unlock.png" />
+    <Content Include="Content\serenity\images\user-arrow.png" />
+    <Content Include="Content\serenity\images\user-business.png" />
+    <Content Include="Content\serenity\images\user-female.png" />
+    <Content Include="Content\serenity\images\user-share.png" />
+    <Content Include="Content\serenity\images\user-worker.png" />
+    <Content Include="Content\serenity\images\user.png" />
+    <Content Include="Content\serenity\images\users.png" />
+    <Content Include="Content\serenity\images\viewtree.png" />
+    <Content Include="Content\serenity\images\wall-brick.png" />
+    <Content Include="Content\serenity\images\wand-plus.png" />
+    <Content Include="Content\serenity\images\wand.png" />
+    <Content Include="Content\serenity\images\warning.png" />
+    <Content Include="Content\serenity\images\wheel.png" />
+    <Content Include="Content\serenity\images\wooden-box.png" />
+    <Content Include="Content\serenity\images\wrench-screwdriver.png" />
+    <Content Include="Content\serenity\images\wrench.png" />
+    <Content Include="Content\serenity\images\xls.png" />
+    <Content Include="Content\serenity\images\xlsx.png" />
+    <Content Include="Content\serenity\images\xml.png" />
+    <Content Include="Content\serenity\images\zones-stack.png" />
+    <Content Include="Content\serenity\images\zoom.png" />
+    <Content Include="Content\serenity\serenity.css" />
+    <Content Include="Content\simple-line-icons.css" />
+    <Content Include="Content\slick-default-theme.css" />
+    <Content Include="Content\slick.columnpicker.css" />
+    <Content Include="Content\slick.grid.css" />
+    <Content Include="Content\slick.headerbuttons.css" />
+    <Content Include="Content\slick.headermenu.css" />
+    <Content Include="Content\slick.pager.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\ionicons.svg" />
+    <Content Include="fonts\Simple-Line-Icons.svg" />
+    <Content Include="nuget.exe" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\ckeditor\build-config.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\lang\af.js" />
+    <Content Include="Scripts\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\lang\bn.js" />
+    <Content Include="Scripts\ckeditor\lang\bs.js" />
+    <Content Include="Scripts\ckeditor\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\lang\es.js" />
+    <Content Include="Scripts\ckeditor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\lang\id.js" />
+    <Content Include="Scripts\ckeditor\lang\is.js" />
+    <Content Include="Scripts\ckeditor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\lang\ka.js" />
+    <Content Include="Scripts\ckeditor\lang\km.js" />
+    <Content Include="Scripts\ckeditor\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\lang\ms.js" />
+    <Content Include="Scripts\ckeditor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\lang\si.js" />
+    <Content Include="Scripts\ckeditor\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\lang\th.js" />
+    <Content Include="Scripts\ckeditor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\icons.png" />
+    <Content Include="Scripts\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\widget\images\handle.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono\images\spinner.gif" />
+    <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui-i18n.js" />
+    <Content Include="Scripts\jquery-ui-i18n.min.js" />
+    <Content Include="Scripts\jquery.autoNumeric.js" />
+    <Content Include="Scripts\jquery.autoNumeric.min.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.blockUI.min.js" />
+    <Content Include="Scripts\jquery.colorbox.js" />
+    <Content Include="Scripts\jquery.colorbox.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.cookie.min.js" />
+    <Content Include="Scripts\jquery.cropzoom.js" />
+    <Content Include="Scripts\jquery.cropzoom.min.js" />
+    <Content Include="Scripts\jquery.dialogextendQ.js" />
+    <Content Include="Scripts\jquery.dialogextendQ.min.js" />
+    <Content Include="Scripts\jquery.event.drag.js" />
+    <Content Include="Scripts\jquery.event.drag.min.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.fileupload.min.js" />
+    <Content Include="Scripts\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.iframe-transport.min.js" />
+    <Content Include="Scripts\jquery.json.js" />
+    <Content Include="Scripts\jquery.json.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.scrollintoview.js" />
+    <Content Include="Scripts\jquery.scrollintoview.min.js" />
+    <Content Include="Scripts\jquery.slimscroll.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jspdf.js" />
+    <Content Include="Scripts\jspdf.min.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.js" />
+    <Content Include="Scripts\jspdf.plugin.autotable.min.js" />
+    <Content Include="Scripts\jsrender.js" />
+    <Content Include="Scripts\jsrender.min.js" />
+    <Content Include="Scripts\pace.js" />
+    <Content Include="Scripts\pace.min.js" />
+    <Content Include="Scripts\rsvp.js" />
+    <Content Include="Scripts\rsvp.min.js" />
+    <Content Include="Scripts\saltarelle\linq.js" />
+    <Content Include="Scripts\saltarelle\linq.min.js" />
+    <Content Include="Scripts\saltarelle\mscorlib.js" />
+    <Content Include="Scripts\saltarelle\mscorlib.min.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ar.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_az.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_bg.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ca.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_cs.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_da.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_de.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_el.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_es.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_et.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_eu.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_fa.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_fi.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_fr.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_gl.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_he.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_hr.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_hu.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_id.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_is.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_it.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ja.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ka.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ko.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_lt.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_lv.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_mk.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ms.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_nl.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_no.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_pl.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_pt-BR.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_pt-PT.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ro.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_rs.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ru.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_sk.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_sv.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_th.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_tr.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ua.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_ug-CN.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_uk.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_vi.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_zh-CN.js" />
+    <Content Include="Scripts\Select2-locales\select2_locale_zh-TW.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\serenity\Serenity.CoreLib.js" />
+    <Content Include="Scripts\serenity\Serenity.CoreLib.min.js" />
+    <Content Include="Scripts\serenity\Serenity.Script.UI.js" />
+    <Content Include="Scripts\serenity\Serenity.Script.UI.min.js" />
+    <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
+    <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
+    <Content Include="Scripts\SlickGrid\MIT-LICENSE.txt" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.autotooltips.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.autotooltips.min.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.cellcopymanager.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.cellrangedecorator.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.cellrangeselector.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.cellselectionmodel.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.checkboxselectcolumn.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.headerbuttons.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.headermenu.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.rowmovemanager.js" />
+    <Content Include="Scripts\SlickGrid\Plugins\slick.rowselectionmodel.js" />
+    <Content Include="Scripts\SlickGrid\slick.core.js" />
+    <Content Include="Scripts\SlickGrid\slick.core.min.js" />
+    <Content Include="Scripts\SlickGrid\slick.dataview.js" />
+    <Content Include="Scripts\SlickGrid\slick.editors.js" />
+    <Content Include="Scripts\SlickGrid\slick.formatters.js" />
+    <Content Include="Scripts\SlickGrid\slick.grid.js" />
+    <Content Include="Scripts\SlickGrid\slick.grid.min.js" />
+    <Content Include="Scripts\SlickGrid\slick.groupitemmetadataprovider.js" />
+    <Content Include="Scripts\SlickGrid\slick.groupitemmetadataprovider.min.js" />
+    <Content Include="Scripts\SlickGrid\slick.remotemodel-yahoo.js" />
+    <Content Include="Scripts\SlickGrid\slick.remotemodel.js" />
+    <Content Include="Scripts\sortable.js" />
+    <Content Include="Scripts\sortable.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="_Ext\Editors\slick.editors.js" />
+    <Content Include="_Ext\report.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Ext\Behaviours\" />
+    <Folder Include="_Ext\Formatters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
+    <TypeScriptCompile Include="_Ext\Bases\DialogBase.ts" />
+    <TypeScriptCompile Include="_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="_Ext\DialogUtils.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\ColorEditor.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\DateTimePickerEditor.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\EditorDialogBase.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\GridEditorBase.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\StaticTextBlock.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\TimelineEditor.ts" />
+    <TypeScriptCompile Include="_Ext\ExcelExportHelper.ts" />
+    <TypeScriptCompile Include="_Ext\PdfExportHelper.ts" />
+    <TypeScriptCompile Include="_Ext\ReportHelper.ts" />
+    <TypeScriptCompile Include="_Ext\Using.ts" />
+    <TypeScriptCompile Include="_Ext\_q.d.ts" />
+    <TypeScriptCompile Include="_Ext\_q.ts" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
