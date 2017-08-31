@@ -1,9 +1,6 @@
 ﻿namespace _Ext {
 
-    @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue])
-    @Serenity.Decorators.editor()
-    @Serenity.Decorators.element("<div/>")
-    export class CorolEditor extends Serenity.TemplatedWidget<any>
+    export class ColorEditor extends Serenity.TemplatedWidget<any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         protected getTemplate() {
 

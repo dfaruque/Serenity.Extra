@@ -1,8 +1,5 @@
 ﻿namespace _Ext {
 
-    @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
-    @Serenity.Decorators.editor()
-    @Serenity.Decorators.element("<input/>")
     export class DateTimePickerEditor extends Serenity.Widget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
         public getEditValue(property, target) { target[property.name] = this.value; }
         public setEditValue(source, property) { this.value = source[property.name]; }

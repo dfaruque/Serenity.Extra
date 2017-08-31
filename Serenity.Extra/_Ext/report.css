@@ -69,6 +69,10 @@ hr {
     text-align: right;
 }
 
+.rpt-status {
+    text-align: center;
+}
+
 .rpt-sign-line {
     border-top:1px solid black; 
     margin-left:20px;

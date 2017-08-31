@@ -30,11 +30,3 @@ function loadScript(url) {
     });
 }
 
-
-function usingVisjs() {
-    if (typeof vis !== "undefined") {
-        return;
-    } else {
-        loadScript(Q.resolveUrl("~/Scripts/visjs/vis.min.js"))
-    }
-}

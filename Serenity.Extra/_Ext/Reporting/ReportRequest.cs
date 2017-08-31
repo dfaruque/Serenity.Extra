@@ -5,9 +5,8 @@ using System.Linq;
 using System.Web;
 
 namespace _Ext
-
 {
-    public partial class ReportListRequest : ListRequest
+    public partial class ListReportRequest : ListRequest
     {
         /// <summary>
         /// it is only used in client side to determine report key for generating report
@@ -23,7 +22,7 @@ namespace _Ext
         public Dictionary<string, string> EqualityFilterWithTextValue { get; set; }
     }
 
-    public partial class ReportRetrieveRequest : RetrieveRequest
+    public partial class EntityReportRequest : RetrieveRequest
     {
         /// <summary>
         /// it is only used in client side to determine report key for generating report

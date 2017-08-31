@@ -1,5 +1,8 @@
 ﻿namespace _Ext {
     export class q {
+        static jsPDFHeaderImageData : string = null
+        static jsPDFHeaderTitle: string = 'Report Title';
+
         static nextTick(date) {
             return new Date(date.getTime() + 1);
         }

@@ -1,21 +1,15 @@
-﻿using Serenity;
-using Serenity.Reporting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace _Ext
+﻿namespace _Ext
 
 {
-    public class ReportListModelBase
+    public class ListReportModelBase
     {
-        public ReportListRequest Request { get; set; }
+        public ListReportRequest Request { get; set; }
 
     }
-    public class ReportModelBase
+
+    public class EntityReportModelBase
     {
-        public _Ext.ReportRetrieveRequest Request { get; set; }
+        public _Ext.EntityReportRequest Request { get; set; }
 
     }
 }

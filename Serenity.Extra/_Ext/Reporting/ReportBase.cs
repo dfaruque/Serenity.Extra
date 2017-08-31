@@ -6,12 +6,19 @@ using System.Linq;
 using System.Web;
 
 namespace _Ext
-
 {
-    public partial class ReportBase : ICustomizeHtmlToPdf
+    public partial class ListReportBase : ReportBase
     {
-        public ReportListRequest reportListRequest { get; set; }
-        public ReportRetrieveRequest reportRetrieveRequest { get; set; }
+        public ListReportRequest Request { get; set; }
+    }
+
+    public partial class EntityReportBase : ReportBase
+    {
+        public EntityReportRequest Request { get; set; }
+    }
+
+    public abstract class ReportBase : ICustomizeHtmlToPdf
+    {
 
         public virtual void Customize(IHtmlToPdfOptions options)
         {

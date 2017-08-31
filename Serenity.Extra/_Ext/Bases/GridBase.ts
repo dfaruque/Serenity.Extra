@@ -44,7 +44,7 @@ namespace _Ext {
                     separator: true
                 }));
             }
-            
+
             if (reportRequest.ReportKey) {
                 buttons.push({
                     title: 'Export to PDF',
@@ -78,34 +78,52 @@ namespace _Ext {
         protected getReportRequest()//: _Ext.ReportRequest
         {
             let view = this.getView();
+
             var request = Q.deepClone(view ? view.params : {}) //as _Ext.ReportRequest;
             request.ReportServiceMethodName = null;     // if some value found in this property than "view as report" button will appear
             request.ReportKey = null;                   // if some value found in this property than "export to pdf" button will appear
             request.ListExcelServiceMethodName = null;  // if some value found in this property than "export to xls" button will appear
             request.EqualityFilterWithTextValue = {};
 
-            if (request.EqualityFilter) {
+            if (view) {
                 let quickFilters = this.getQuickFilters();
 
-                for (let ef in request.EqualityFilter) {
-                    let quickFilter = Q.first(quickFilters, x => x.field == ef);
-                    let filterValue = request.EqualityFilter[ef];
+                for (let quickFilter of quickFilters) {
+                    let filterValue = request.EqualityFilter[quickFilter.field];
                     if (filterValue) {
                         if (quickFilter.options.lookupKey) {
                             let lookup = Q.getLookup(quickFilter.options.lookupKey);
                             request.EqualityFilterWithTextValue[quickFilter.title] = lookup.itemById[filterValue][lookup.textField];
-
-                        } else if (quickFilter.options.enumKey) {
+                        }
+                        else if (quickFilter.options.enumKey) {
                             let enumKey = quickFilter.options.enumKey;
                             let enumValue = Q.toId(filterValue);
                             request.EqualityFilterWithTextValue[quickFilter.title] = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), enumValue);
                         }
+
                         else {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterValue;
                         }
+                    } else if (quickFilter.type == Serenity.DateEditor) {
+                        let qf = this.findQuickFilter(Serenity.DateEditor, quickFilter.field);
+                        let dateFrom = qf.element.val();
+                        let dateTo = qf.element.siblings('input').val()
+
+                        let filterText = '';
+
+                        if (!Q.isEmptyOrNull(dateFrom))
+                            filterText = 'From ' + dateFrom
+
+                        if (!Q.isEmptyOrNull(dateTo))
+                            filterText = filterText + ' To ' + dateTo
+
+                        if (!Q.isEmptyOrNull(filterText))
+                            request.EqualityFilterWithTextValue[quickFilter.title] = filterText
                     }
                 }
+
             }
+
             return request;
         }
 
@@ -156,7 +174,7 @@ namespace _Ext {
 
                         if (c.sourceItem.editorType == "Lookup") {
                             c.editor = Slick['Editors']['Select2'];
-                            
+
                             c.width = c.minWidth > 160 ? c.minWidth : 160;
 
                         } else if (c.sourceItem.editorType == "Date") {
@@ -226,7 +244,7 @@ namespace _Ext {
             this.isAutosized = true;
 
             let gridContainerWidth = this.slickContainer.width();
-            
+
             if (gridContainerWidth == 0) {
                 gridContainerWidth = this.element.closest('.s-Dialog').width() - 55;
             }
