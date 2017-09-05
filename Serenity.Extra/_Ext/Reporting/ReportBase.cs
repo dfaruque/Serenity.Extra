@@ -26,7 +26,7 @@ namespace _Ext
             options.Landscape = false;
             options.PageSize = "A4";
             options.MarginsAll = "1.2cm";
-            options.FooterHtmlUrl = GetBaseUrl() + "ReportFooter.html";
+            options.FooterHtmlUrl = GetBaseUrl() + "Modules/_Ext/Reporting/ReportFooter.html";
         }
 
         public string GetBaseUrl()

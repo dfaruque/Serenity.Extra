@@ -1,4 +1,6 @@
-﻿namespace _Ext {
+﻿var isPageRefreshRequired: boolean;
+
+namespace _Ext {
     export class q {
         static jsPDFHeaderImageData : string = null
         static jsPDFHeaderTitle: string = 'Report Title';

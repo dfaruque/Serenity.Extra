@@ -1,0 +1,213 @@
+﻿/* Dialog Styles ---------------------------------------*/
+
+.s-Dialog > .size {
+    width: 750px;
+    height: 600px;
+}
+
+.s-Dialog .caption {
+    width: 170px;
+}
+
+.s-Form .caption {
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 0px;
+}
+
+    .s-Form .caption sup {
+        float: right;
+        top: 10px;
+        font-size: 15px;
+    }
+
+.s-Form .category .field {
+    padding-left: 20px;
+}
+
+.emaildomain {
+    width: 200px;
+}
+
+@media (min-width: 768px) {
+    .width2 {
+        flex: auto !important;
+        width: 20% !important;
+    }
+
+        .width2 .caption {
+            width: 90px;
+        }
+}
+
+@media (min-width: 768px) {
+    .width3 {
+        flex: auto !important;
+        width: 25% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .width4 {
+        flex: auto !important;
+        width: 32% !important;
+    }
+
+        .width4 .caption {
+            width: 90px;
+        }
+}
+
+@media (min-width: 768px) {
+    .width6 {
+        flex: auto !important;
+        width: 48% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .width9 {
+        flex: auto !important;
+        width: 73% !important;
+    }
+}
+
+.no-label {
+    padding-left: 5px;
+}
+
+    .no-label label {
+        display: none;
+    }
+
+/* Grid Styles ---------------------------------------*/
+
+.slick-header-column {
+    border: 1px solid #bbb !important;
+    border-width: thin !important;
+    background-color: #eee;
+    border-bottom-color: #5bc0de !important;
+    border-bottom-width: 2px !important;
+    text-align: center;
+}
+
+.slick-cell {
+    border-right: 1px solid #ddd !important;
+    border-width: thin !important;
+}
+
+.serial-column {
+    background-color: #eee;
+    text-align: center;
+}
+
+.quick-filter-item .inplace-button {
+    display: none;
+}
+
+.quick-filter-item .s-LookupEditor {
+    width: 230px;
+}
+
+.inline-action {
+    opacity: 1;
+}
+
+    .inline-action :hover {
+        color: coral;
+        text-shadow: 0px 0px 2px #000;
+    }
+
+/*slick-row:hover {
+    background-color: cadetblue;
+}*/
+
+/* Slick.Editors.Text, Slick.Editors.Date */
+input.editor-text {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    background: transparent;
+    outline: 0;
+    padding: 0;
+}
+
+.slick-cell .ui-datepicker-trigger {
+    margin-top: 2px;
+    padding: 0;
+    vertical-align: top;
+    float: right !important;
+}
+
+#ui-datepicker-div {
+    z-index: 1200 !important;
+}
+/* Slick.Editors.YesNoSelect */
+select.editor-yesno {
+    width: 100%;
+    margin: 0;
+    vertical-align: middle;
+}
+/* Slick.Editors.Checkbox */
+input.editor-checkbox {
+    margin: 0 !important;
+    height: 100%;
+    padding: 0;
+    border: 0;
+}
+
+.slick-cell {
+    /* Slick.Editors.Select2 */
+}
+
+    .slick-cell .select2-container {
+        width: 104%;
+        top: -2px;
+        left: -5px;
+    }
+
+input.s-DateTimePickerEditor {
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+/* make bootstarp dropdown menu compatilbe with slick grid */
+.cell-overflowed {
+    overflow: visible;
+}
+
+.slick-group > .slick-cell,
+.no-z-index {
+    z-index: auto;
+}
+
+.z-indexed-dropdown {
+    z-index: 999999;
+    border: 1px solid gray;
+}
+
+ul.list-inline {
+    padding: 5px 20px;
+}
+
+.btn-customized-save .button-inner {
+    background-image: url(../serenity/images/disk-arrow.png);
+}
+
+/* Misc. ---------------------------------------*/
+.info-window dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    font-weight: bold;
+}
+
+.info-window dd {
+    float: left;
+    margin: 5px 0px 5px 50px;
+}
+
+.vis-item .vis-item-overflow {
+    overflow: visible;
+}
