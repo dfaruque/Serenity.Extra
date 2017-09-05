@@ -36,5 +36,9 @@ It is just some useful utilities and some extra functionality like
         }
 ```
  - To hide a field in a Dialog use `_Ext.q.hideField(this.form.SomeField)`.
+ - To access parent/master dialog from child/detail dialog
+   
+   Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)`
+   Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
  
  ### Please explore the codes to know more...
