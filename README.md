@@ -23,10 +23,10 @@ It is just some useful utilities and some extra functionality like
   `Common.EditorDialogBase` -> `_Ext.EditorDialogBase`
 
 ## Examples
-  To set form fields width simply use '[CssClass("width6")]' on top of Form.cs properties.
+  - To set form fields width simply use '[CssClass("width6")]' on top of Form.cs properties.
   here "width6" is similar to col-6 in bootstrap
 
-  To make a detail grid inline editable 
+  - To make a detail grid inline editable 
   add the following code to Grid.ts
   ```
           protected getSlickOptions() {
