@@ -35,4 +35,6 @@ It is just some useful utilities and some extra functionality like
             return opt;
         }
 ```
-
+ - To hide a field in a Dialog use `_Ext.q.hideField(this.form.SomeField)`.
+ 
+ ### Please explore the codes to know more...
