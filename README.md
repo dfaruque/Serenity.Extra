@@ -34,7 +34,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 
   #### To make a detail grid inline editable 
   
-    add the following code to Grid.ts
+  add the following code to Grid.ts
   ```TypeScript
 protected getSlickOptions() {
     let opt = super.getSlickOptions();
