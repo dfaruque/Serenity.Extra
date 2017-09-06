@@ -29,7 +29,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 
 ## Examples
   - To set form fields width simply use `[CssClass("width6")]` on top of the property in Form.cs.
-  here "width6" is similar to col-6 in bootstrap
+  here "width6" is similar to "col-xx-6" in bootstrap
 
   - To make a detail grid inline editable 
   add the following code to Grid.ts
