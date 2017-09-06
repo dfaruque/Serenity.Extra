@@ -31,6 +31,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
   here "width6" is similar to "col-xx-6" in bootstrap
 
   - To make a detail grid inline editable 
+  
   add the following code to Grid.ts
   ```TypeScript
 protected getSlickOptions() {
