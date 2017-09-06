@@ -10,7 +10,7 @@ It is just some useful utilities and some extra functionality like
 
 ## How to use
 1. Install NuGet Package Serenity.Extra
-2. Include the following lines to _LayoutHead.cshtml
+2. Include the following lines in _LayoutHead.cshtml
 ```C#
 @Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
 @Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
@@ -27,12 +27,12 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
    
 
 ## Examples
-  - To set width of fields in a dialog
+  #### Setting the field's width in a dialog
   
     simply use `[CssClass("width6")]` on top of the property in Form.cs.
     here "width6" is similar to "col-xx-6" in bootstrap
 
-  - To make a detail grid inline editable 
+  #### To make a detail grid inline editable 
   
     add the following code to Grid.ts
   ```TypeScript
@@ -42,10 +42,10 @@ protected getSlickOptions() {
     return opt;
 }
 ```
- - To hide a field in a Dialog 
+ #### To hide a field in a Dialog 
  
    use `_Ext.q.hideField(this.form.SomeField)`.
- - To access parent/master dialog from child/detail dialog
+ #### To access parent/master dialog from child/detail dialog
    
    Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)`
    Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
