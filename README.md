@@ -27,12 +27,14 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
    
 
 ## Examples
-  - To set form fields width simply use `[CssClass("width6")]` on top of the property in Form.cs.
-  here "width6" is similar to "col-xx-6" in bootstrap
+  - To set width of fields in a dialog
+  
+    simply use `[CssClass("width6")]` on top of the property in Form.cs.
+    here "width6" is similar to "col-xx-6" in bootstrap
 
   - To make a detail grid inline editable 
   
-  add the following code to Grid.ts
+    add the following code to Grid.ts
   ```TypeScript
 protected getSlickOptions() {
     let opt = super.getSlickOptions();
@@ -40,7 +42,9 @@ protected getSlickOptions() {
     return opt;
 }
 ```
- - To hide a field in a Dialog use `_Ext.q.hideField(this.form.SomeField)`.
+ - To hide a field in a Dialog 
+ 
+   use `_Ext.q.hideField(this.form.SomeField)`.
  - To access parent/master dialog from child/detail dialog
    
    Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)`
