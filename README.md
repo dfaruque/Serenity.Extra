@@ -33,7 +33,6 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
   here "width6" is similar to "col-xx-6" in bootstrap
 
   #### To make a detail grid inline editable 
-  
   add the following code to Grid.ts
   ```TypeScript
 protected getSlickOptions() {
@@ -43,10 +42,8 @@ protected getSlickOptions() {
 }
 ```
  #### To hide a field in a Dialog 
- 
    use `_Ext.q.hideField(this.form.SomeField)`.
  #### To access parent/master dialog from child/detail dialog
-   
    Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)` in dialog's constructor() OR onDialogOpen() overload 
    
    Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
