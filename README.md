@@ -9,15 +9,14 @@ It is just some useful utilities and some extra functionality like
 - Added some useful function in q (Not Q).
 
 ## How to use
-- Install NuGet Package Serenity.Extra
-- Include the following lines to _LayoutHead.cshtml
-  ```C#
-  @Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
-  @Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
-  @Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
-  ```
-
-- Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
+1. Install NuGet Package Serenity.Extra
+2. Include the following lines to _LayoutHead.cshtml
+```C#
+@Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
+@Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
+@Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
+```
+3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
 
 Serenity Default  |  _Ext
 ------------ | -------------
