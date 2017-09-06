@@ -29,8 +29,8 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 ## Examples
   #### Setting the field's width in a dialog
   
-    simply use `[CssClass("width6")]` on top of the property in Form.cs.
-    here "width6" is similar to "col-xx-6" in bootstrap
+  simply use `[CssClass("width6")]` on top of the property in Form.cs.
+  here "width6" is similar to "col-xx-6" in bootstrap
 
   #### To make a detail grid inline editable 
   
@@ -47,7 +47,7 @@ protected getSlickOptions() {
    use `_Ext.q.hideField(this.form.SomeField)`.
  #### To access parent/master dialog from child/detail dialog
    
-   Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)` in dialog's constructor() OR onDialogOpen(). 
+   Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)` in dialog's constructor() OR onDialogOpen() overload 
    
    Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
    > Make sure that you have declared form in parent/master dialog as public
