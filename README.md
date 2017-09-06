@@ -47,7 +47,8 @@ protected getSlickOptions() {
    use `_Ext.q.hideField(this.form.SomeField)`.
  #### To access parent/master dialog from child/detail dialog
    
-   Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)`
+   Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)` in dialog's constructor() OR onDialogOpen(). 
+   
    Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
    > Make sure that you have declared form in parent/master dialog as public
  
