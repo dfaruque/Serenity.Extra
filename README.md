@@ -34,11 +34,11 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
   - To make a detail grid inline editable 
   add the following code to Grid.ts
   ```TypeScript
-          protected getSlickOptions() {
-            let opt = super.getSlickOptions();
-            opt.editable = true;
-            return opt;
-        }
+protected getSlickOptions() {
+    let opt = super.getSlickOptions();
+    opt.editable = true;
+    return opt;
+}
 ```
  - To hide a field in a Dialog use `_Ext.q.hideField(this.form.SomeField)`.
  - To access parent/master dialog from child/detail dialog
