@@ -18,10 +18,14 @@ It is just some useful utilities and some extra functionality like
   ```
 
 - Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
-  > `Serenity.EntityGrid` -> `_Ext.GridBase`
-   `Serenity.EntityDialog` -> `_Ext.DialogBase`
-   `Common.GridEditorBase` -> `_Ext.GridEditorBase`
-   `Common.EditorDialogBase` -> `_Ext.EditorDialogBase`
+
+Serenity Default  |  _Ext
+------------ | -------------
+Serenity.EntityGrid | _Ext.GridBase
+Serenity.EntityDialog | _Ext.DialogBase
+Common.GridEditorBase | _Ext.GridEditorBase
+Common.EditorDialogBase | _Ext.EditorDialogBase
+   
 
 ## Examples
   - To set form fields width simply use `[CssClass("width6")]` on top of Form.cs properties.
