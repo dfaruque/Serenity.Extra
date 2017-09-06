@@ -49,5 +49,6 @@ protected getSlickOptions() {
    
    Initialize detail editor by using `_Ext.q.initDetailEditor(this, this.form.someDetailField)`
    Then you should be able to access parent dialog like `this.parentEditor.parentDialog`
+   > Make sure that you have declared form in parent/master dialog as public
  
  ### Please explore the code to know more...
