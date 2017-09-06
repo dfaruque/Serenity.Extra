@@ -11,7 +11,7 @@ It is just some useful utilities and some extra functionality like
 ## How to use
 - Install NuGet Package Serenity.Extra
 - Include the following lines to _LayoutHead.cshtml
-  ```
+  ```C#
   @Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
   @Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
   @Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
@@ -33,7 +33,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 
   - To make a detail grid inline editable 
   add the following code to Grid.ts
-  ```
+  ```TypeScript
           protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.editable = true;
