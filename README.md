@@ -25,6 +25,8 @@ Serenity.EntityDialog | _Ext.DialogBase
 Common.GridEditorBase | _Ext.GridEditorBase
 Common.EditorDialogBase | _Ext.EditorDialogBase
    
+4. Add following line in ScriptInitialization.ts
+```Q.Config.rootNamespaces.push('_Ext');```
 
 ## Examples
   #### Setting the field's width in a dialog
