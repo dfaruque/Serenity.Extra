@@ -28,7 +28,7 @@
             }
 
             input.autocomplete({
-                minLength: opt.minSearchLenth || 1,
+                minLength: opt.minSearchLength || 1,
                 autoFocus: true,
                 source: source,
                 focus: function (event, ui) {
@@ -52,6 +52,6 @@
         lookupKey: string;
         sourceArray: string[];
         sourceCSV: string;
-        minSearchLenth: number;
+        minSearchLength: number;
     }
 }
