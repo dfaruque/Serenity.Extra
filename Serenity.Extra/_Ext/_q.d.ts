@@ -7,3 +7,6 @@ declare namespace Slick {
         onChange?: any;
     }
 }
+declare namespace LiteDB {
+
+}

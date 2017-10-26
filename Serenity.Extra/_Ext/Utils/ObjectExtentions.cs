@@ -45,6 +45,13 @@ public static partial class ObjectExtentions
 
     }
 
+    public static string ToNumberFormat(this decimal? input)
+    {
+        if (input == null) return "0.00";
+        else return input.Value.ToString("#,##0.00");
+
+    }
+
     public static string ToStringDollar(this decimal? input)
     {
         if (input == null) return "$ 0.000";

@@ -1,4 +1,8 @@
-﻿.table {
+﻿ol {
+    list-style-position: inside;
+}
+
+.table {
     border: 1px solid #000000 !important;
     font-size: 11px;
 }
@@ -43,6 +47,7 @@ hr {
         font-weight: bold;
         width: 180px;
         display: inline-block;
+        vertical-align: top;
     }
 
 .report-label-caption {

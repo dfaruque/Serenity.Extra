@@ -2,9 +2,11 @@
 
 namespace _Ext {
     export class q {
-        static jsPDFHeaderImageData : string = null
+        static queryString = {};
+        static jsPDFHeaderImageData: string = null
         static jsPDFHeaderTitle: string = 'Report Title';
 
+        //date time
         static nextTick(date) {
             return new Date(date.getTime() + 1);
         }
@@ -90,11 +92,15 @@ namespace _Ext {
         }
 
         static formatISODate(date: Date): string {
-            var offset = date.getTimezoneOffset();
-            var result = new Date(date.getTime() - offset * 60 * 1000);
+            if (date) {
+                var offset = date.getTimezoneOffset();
+                var result = new Date(date.getTime() - offset * 60 * 1000);
 
-            return result.toISOString();
+                return result.toISOString();
+            } else return null
         }
+
+        //editor utils
 
         static bindDateTimeEditorChange(editor, handler): void {
             editor.change(handler);
@@ -124,7 +130,7 @@ namespace _Ext {
                     editor.element.find('.grid-container').height(options.height);
 
                 } else {
-                    let editorHeight = (categoriesHeight - editor.element.position().top + 20);
+                    let editorHeight = (categoriesHeight - editor.element.position().top + 40);
 
                     editor.element.find('.grid-container').height(editorHeight);
                 }
@@ -265,17 +271,6 @@ namespace _Ext {
 
         }
 
-        // Check numeric or not then return value, if NAN then return zero(0)
-        static ToNumber(value) {
-            return isNaN(value) ? 0 : value;
-        }
-
-        static ToBool(value) {
-            return value == 'true' ? true : false;
-        }
-
-        static queryString = {};
-        
 
         static setEditorLabel(editor: Serenity.Widget<any>, value: string) {
 
@@ -310,10 +305,38 @@ namespace _Ext {
                 editor.element.closest('.field').show();
         }
 
+        // for select2 lookup editor
+        static getSelectedRow<TRow>(e: JQueryEventObject) {
+            let selectedItem: Serenity.Select2Item = (e as any).added;
+            let selectedRow: TRow = selectedItem.source;
+
+            return selectedRow;
+        }
+
         static getEnumText(enumKey, value) {
             let title = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
             return title;
         }
+
+        static formatDecimal(value) {
+            let title = Serenity.NumberFormatter.format(value, '#,##0.00');
+            return title;
+        }
+
+        static formatInt(value) {
+            let title = Serenity.NumberFormatter.format(value, '#,##0');
+            return title;
+        }
+
+        // Check numeric or not then return value, if NAN then return zero(0)
+        static ToNumber(value) {
+            return isNaN(value) ? 0 : value;
+        }
+
+        static ToBool(value) {
+            return value == 'true' ? true : false;
+        }
+
 
     }
 
@@ -325,4 +348,10 @@ interface GridEditorOptions {
     width?: number;
     showCaption?: boolean;
     hideToolbar?: boolean;
+}
+
+declare namespace LiteDB {
+    interface ObjectId {
+
+    }
 }

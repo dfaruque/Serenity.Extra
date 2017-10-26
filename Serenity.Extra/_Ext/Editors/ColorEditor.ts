@@ -1,8 +1,11 @@
 ﻿namespace _Ext {
-
+    @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue])
+    @Serenity.Decorators.editor()
+    @Serenity.Decorators.element("<div/>")
     export class ColorEditor extends Serenity.TemplatedWidget<any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         protected getTemplate() {
+            usingBootstrapColorPicker()
 
             return `<div class="input-group colorpicker-component">
                         <input type="text" value="#00AABB" class="form-control" />
@@ -29,7 +32,7 @@
             let val = source[property.name];
             //this.element.children('input').val(val);
             try {
-            this.element.data('colorpicker').setValue(val);
+                this.element.data('colorpicker').setValue(val);
             } catch (e) { }
         }
 

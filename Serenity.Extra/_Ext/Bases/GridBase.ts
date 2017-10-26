@@ -53,6 +53,24 @@ namespace _Ext {
                         ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: this.getReportRequest() } });
                     }
                 });
+
+                buttons.push({
+                    title: 'View as Report',
+                    icon: 'fa fa-html5',
+                    onClick: () => {
+                        ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: this.getReportRequest() }, extension: 'html' });
+                    }
+                });
+
+            } else if (reportRequest.ReportServiceMethodName) {
+                buttons.push({
+                    title: 'View as Report',
+                    icon: 'fa fa-eye',
+                    onClick: () => {
+                        Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + reportRequest.ReportServiceMethodName), request: this.getReportRequest(), target: '_blank' });
+                    }
+                });
+
             } else {
                 buttons.push(PdfExportHelper.createToolButton({
                     grid: this,
@@ -61,15 +79,7 @@ namespace _Ext {
                 }));
             }
 
-            if (reportRequest.ReportServiceMethodName) {
-                buttons.push({
-                    title: 'View as Report',
-                    icon: 'fa fa-eye',
-                    onClick: () => {
-                        Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + reportRequest.ReportServiceMethodName), request: this.getReportRequest(), target: '_blank' });
-                    }
-                });
-            }
+
 
 
             return buttons;
@@ -134,7 +144,7 @@ namespace _Ext {
 
             cols.forEach(c => {
 
-                c.width = c.minWidth || 50;
+                c.width = c.minWidth || c.width || 50;
                 c.cssClass = c.cssClass || '';
                 if (c.sourceItem) {
                     if (c.sourceItem.filteringType == String("Lookup")) {
@@ -147,7 +157,7 @@ namespace _Ext {
                                 else return '-';
                             };
                         }
-                        c.width = c.minWidth > 160 ? c.minWidth : 160;
+                        //c.width = c.minWidth > 160 ? c.minWidth : 160;
                     } else if (c.sourceItem.filteringType == String("Enum")) {
                         //c.cssClass += ' align-center';
                     } else if (c.sourceItem.formatterType == String("Date")) {
@@ -174,17 +184,25 @@ namespace _Ext {
 
                         if (c.sourceItem.editorType == "Lookup") {
                             c.editor = Slick['Editors']['Select2'];
-
                             c.width = c.minWidth > 160 ? c.minWidth : 160;
-
                         } else if (c.sourceItem.editorType == "Date") {
-
                             c.editor = Slick['Editors']['Date'];
-
+                        } else if (c.sourceItem.editorType == "Enum") {//ToDo
+                            //c.editor = Slick['Editors']['Date'];
                         } else if (c.sourceItem.editorType == "Boolean") {
-
                             c.editor = Slick['Editors']['Checkbox'];
-
+                        } else if (c.sourceItem.editorType == "Integer") {
+                            c.editor = Slick['Editors']['Integer'];
+                        } else if (c.sourceItem.editorType == "Decimal") {
+                            c.editor = Slick['Editors']['Float'];
+                        } else if (c.sourceItem.editorType == "YesNoSelect") {
+                            c.editor = Slick['Editors']['YesNoSelect'];
+                        } else if (c.sourceItem.editorType == "PercentComplete") {
+                            c.editor = Slick['Editors']['PercentComplete'];
+                        } else if (c.sourceItem.editorType == "LongText") {
+                            c.editor = Slick['Editors']['LongText'];
+                        } else {
+                            c.editor = Slick['Editors']['Text'];
                         }
                     }
                 } else {
@@ -208,9 +226,9 @@ namespace _Ext {
                     name: '#',
                     cssClass: 'align-center',
                     headerCssClass: 'align-center',
-                    width: 35,
-                    minWidth: 35,
-                    maxWidth: 35,
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40,
                     //format: ctx => (ctx.row + 1).toString()
                 });
 

@@ -29,6 +29,30 @@
     width: 200px;
 }
 
+.row-reversed {
+    flex-direction: row-reverse;
+}
+
+.no-label {
+    padding-left: 5px;
+}
+
+    .no-label label {
+        display: none;
+    }
+
+
+.offset-field {
+}
+
+    .offset-field label {
+        display: none;
+    }
+
+    .offset-field input {
+        display: none;
+    }
+
 @media (min-width: 768px) {
     .width2 {
         flex: auto !important;
@@ -37,6 +61,17 @@
 
         .width2 .caption {
             width: 90px;
+        }
+}
+
+@media (min-width: 768px) {
+    .width-1percent {
+        flex: auto !important;
+        width: 1% !important;
+    }
+
+        .width-1percent .caption {
+            width: 100%;
         }
 }
 
@@ -50,7 +85,7 @@
 @media (min-width: 768px) {
     .width4 {
         flex: auto !important;
-        width: 32% !important;
+        width: 33% !important;
     }
 
         .width4 .caption {
@@ -61,7 +96,7 @@
 @media (min-width: 768px) {
     .width6 {
         flex: auto !important;
-        width: 48% !important;
+        width: 50% !important;
     }
 }
 
@@ -72,16 +107,7 @@
     }
 }
 
-.no-label {
-    padding-left: 5px;
-}
-
-    .no-label label {
-        display: none;
-    }
-
 /* Grid Styles ---------------------------------------*/
-
 .slick-header-column {
     border: 1px solid #bbb !important;
     border-width: thin !important;
@@ -95,6 +121,12 @@
     border-right: 1px solid #ddd !important;
     border-width: thin !important;
 }
+
+    .slick-cell.editable {
+         /*background: white;*/ 
+         /*border-color: black;*/ 
+         border-style: none; 
+    }
 
 .serial-column {
     background-color: #eee;
@@ -210,4 +242,16 @@ ul.list-inline {
 
 .vis-item .vis-item-overflow {
     overflow: visible;
+}
+
+.left-indent-2 {
+    padding-left: 20px;
+}
+
+.left-indent-3 {
+    padding-left: 40px;
+}
+
+.left-indent-4 {
+    padding-left: 60px;
 }

@@ -9,7 +9,7 @@
 
     public class EntityReportModelBase
     {
-        public _Ext.EntityReportRequest Request { get; set; }
+        public EntityReportRequest Request { get; set; }
 
     }
 }

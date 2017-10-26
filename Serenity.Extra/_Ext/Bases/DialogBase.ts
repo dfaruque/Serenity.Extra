@@ -49,6 +49,22 @@
             //        this.onRefreshClick();
             //    }
             //})
+
+            //buttons.push({
+            //    title: 'Change Log',
+            //    icon: 'fa fa-history',
+            //    onClick: () => {
+            //        let entityId = this.entity['Id'];
+            //        if (entityId) {
+            //            let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
+
+            //            dlg.dialogOpen();
+            //        } else {
+            //            Q.alert('No change log found for this entity.')
+            //        }
+            //    }
+            //})
+
             return buttons;
         }
 
