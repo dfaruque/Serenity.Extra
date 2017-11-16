@@ -68,6 +68,7 @@ hr {
 
 .rpt-date {
     text-align: center;
+    min-width: 80px;
 }
 
 .rpt-number {
