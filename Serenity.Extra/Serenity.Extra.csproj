@@ -88,14 +88,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_Ext\DateTimeHelper.cs" />
-    <Compile Include="_Ext\EnumHelper.cs" />
-    <Compile Include="_Ext\Enums.cs" />
-    <Compile Include="_Ext\NumberToWords.cs" />
-    <Compile Include="_Ext\ObjectExtentions.cs" />
     <Compile Include="_Ext\Reporting\ReportBase.cs" />
     <Compile Include="_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="_Ext\Reporting\ReportRequest.cs" />
+    <Compile Include="_Ext\Utils\DateTimeHelper.cs" />
+    <Compile Include="_Ext\Utils\EnumHelper.cs" />
+    <Compile Include="_Ext\Utils\Enums.cs" />
+    <Compile Include="_Ext\Utils\NumberToWords.cs" />
+    <Compile Include="_Ext\Utils\ObjectExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -858,8 +858,8 @@
     <Content Include="Scripts\sortable.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
     <Content Include="_Ext\Editors\slick.editors.js" />
-    <Content Include="_Ext\report.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_Ext\Behaviours\" />
@@ -869,19 +869,17 @@
     <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
     <TypeScriptCompile Include="_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="_Ext\Bases\GridBase.ts" />
-    <TypeScriptCompile Include="_Ext\DialogUtils.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\AutoCompleteEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\ColorEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\DateTimePickerEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\EditorDialogBase.ts" />
     <TypeScriptCompile Include="_Ext\Editors\GridEditorBase.ts" />
-    <TypeScriptCompile Include="_Ext\Editors\StaticTextBlock.ts" />
-    <TypeScriptCompile Include="_Ext\Editors\TimelineEditor.ts" />
-    <TypeScriptCompile Include="_Ext\ExcelExportHelper.ts" />
-    <TypeScriptCompile Include="_Ext\PdfExportHelper.ts" />
-    <TypeScriptCompile Include="_Ext\ReportHelper.ts" />
-    <TypeScriptCompile Include="_Ext\Using.ts" />
+    <TypeScriptCompile Include="_Ext\Utils\DialogUtils.ts" />
+    <TypeScriptCompile Include="_Ext\Utils\Using.ts" />
     <TypeScriptCompile Include="_Ext\_q.d.ts" />
     <TypeScriptCompile Include="_Ext\_q.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.d.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

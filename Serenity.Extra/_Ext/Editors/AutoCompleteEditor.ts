@@ -2,7 +2,7 @@
     @Serenity.Decorators.registerEditor()
     export class AutoCompleteEditor extends Serenity.StringEditor {
         constructor(input: JQuery, options: AutoCompleteOptions) {
-            super(input, options);
+            super(input);
             this.options = options;
 
             input.bind('change', e => {

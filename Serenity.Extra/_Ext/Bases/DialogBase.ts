@@ -104,12 +104,15 @@
             let dialogElement = this.element ? this.element.closest(".ui-dialog") : $(".ui-dialog");
 
             if ($content.length > 0) {
-                this.element.dialog("option", "width", $content.width() + (width || 0));
-                this.element.dialog("option", "height", $content.height() + (height || 105));
+                try {
+                    this.element.dialog("option", "width", $content.width() + 30 + (width || 0));
+                    this.element.dialog("option", "height", $content.height() + (height || 50));
+                } catch (e) {
+                }
 
                 dialogElement.css({
-                    left: $content.position().left + 15 + (left || 0),
-                    top: (top || 0),
+                    left: $content.position().left + (left || 0),
+                    top: (top || 52),
                 });
             }
         }

@@ -1,4 +1,5 @@
-﻿namespace _Ext {
+﻿/// <reference path="../Bases/GridBase.ts" />
+namespace _Ext {
 
     @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
     @Serenity.Decorators.editor()

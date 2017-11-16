@@ -1,18 +1,28 @@
 ﻿/* Dialog Styles ---------------------------------------*/
+.ui-dialog .ui-dialog-titlebar {
+    border-bottom: solid 1px #999;
+    background-color: #444;
+}
+/*.ui-dialog .ui-dialog-titlebar {
+    border-bottom: solid 1px #999;
+    background: linear-gradient(#fff 0px, #069 10%, #fff 120%) repeat-x #ffffff;
+    text-shadow: 2px 2px 1px #505050;
+}*/
+
+    .ui-dialog .ui-dialog-title {
+    font-weight: 600;
+}
 
 .s-Dialog > .size {
     width: 750px;
     height: 600px;
 }
 
-.s-Dialog .caption {
-    width: 170px;
-}
-
 .s-Form .caption {
     text-align: left;
     padding-left: 10px;
     padding-right: 0px;
+    width: 170px;
 }
 
     .s-Form .caption sup {
@@ -123,9 +133,9 @@
 }
 
     .slick-cell.editable {
-         /*background: white;*/ 
-         /*border-color: black;*/ 
-         border-style: none; 
+        /*background: white;*/
+        /*border-color: black;*/
+        border-style: none;
     }
 
 .serial-column {
@@ -227,6 +237,107 @@ ul.list-inline {
     background-image: url(../serenity/images/disk-arrow.png);
 }
 
+/* grid cardview. ---------------------------------------*/
+
+.view-switch {
+    position: relative;
+    top: -10px;
+}
+
+.card-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #ecf0f5;
+}
+
+    .card-container .card-items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px 0px;
+    }
+
+    .card-container .card-item {
+        /*flex: 0 1 calc(100% - 4px);*/
+        padding: 8px;
+        background-color: #fff;
+        box-shadow: 1px 2px 3px rgba(0,0,0,.2);
+        /*height: 130px;*/
+        overflow: hidden;
+        margin: 10px;
+    }
+
+        .card-container .card-item table {
+            width: 100%;
+            table-layout: fixed
+        }
+
+        .card-container .card-item td {
+            padding: 4px;
+        }
+
+            .card-container .card-item td.img {
+                width: 116px
+            }
+
+                .card-container .card-item td.img img {
+                    width: 100px
+                }
+
+        .card-container .card-item .name {
+            font-weight: bold
+        }
+
+/*@media(min-width: 900px) {
+    .card-container .card-item {
+        flex-basis: calc(50% - 12px)
+    }
+}
+
+@media(min-width: 1600px) {
+    .card-container .card-item {
+        flex-basis: calc(33% - 12px)
+    }
+}*/
+
+.favorite-views {
+    margin-right: 4px;
+    position: relative;
+    top: -12px
+}
+
+    .favorite-views ul {
+        font-size: 12px;
+        width: 150px;
+        min-width: 150px
+    }
+
+    .favorite-views li.save {
+        padding: 6px
+    }
+
+        .favorite-views li.save input {
+            margin-top: 2px;
+            width: 126px
+        }
+
+        .favorite-views li.save button {
+            margin-top: 4px;
+            font-size: 12px
+        }
+
+    .favorite-views li.fav {
+        position: relative;
+        padding-right: 16px
+    }
+
+    .favorite-views i.fa-trash-o {
+        cursor: pointer;
+        position: absolute;
+        right: 4px;
+        top: 5px;
+        color: #800000
+    }
 /* Misc. ---------------------------------------*/
 .info-window dt {
     float: left;

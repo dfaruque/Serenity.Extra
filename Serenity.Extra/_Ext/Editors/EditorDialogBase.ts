@@ -1,4 +1,5 @@
-﻿namespace _Ext {
+﻿/// <reference path="../Bases/DialogBase.ts" />
+namespace _Ext {
 
     @Serenity.Decorators.registerClass()
     export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
