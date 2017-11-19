@@ -860,6 +860,9 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
     <Content Include="_Ext\Editors\slick.editors.js" />
+    <Content Include="_Ext\ExtStyles.css" />
+    <Content Include="_Ext\Reporting\report.css" />
+    <Content Include="_Ext\Reporting\ReportFooter.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_Ext\Behaviours\" />
@@ -874,10 +877,11 @@
     <TypeScriptCompile Include="_Ext\Editors\DateTimePickerEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\EditorDialogBase.ts" />
     <TypeScriptCompile Include="_Ext\Editors\GridEditorBase.ts" />
+    <TypeScriptCompile Include="_Ext\Reporting\ExcelExportHelper.ts" />
+    <TypeScriptCompile Include="_Ext\Reporting\PdfExportHelper.ts" />
+    <TypeScriptCompile Include="_Ext\Reporting\ReportHelper.ts" />
     <TypeScriptCompile Include="_Ext\Utils\DialogUtils.ts" />
     <TypeScriptCompile Include="_Ext\Utils\Using.ts" />
-    <TypeScriptCompile Include="_Ext\_q.d.ts" />
-    <TypeScriptCompile Include="_Ext\_q.ts" />
     <TypeScriptCompile Include="_Ext\_q\_q.d.ts" />
     <TypeScriptCompile Include="_Ext\_q\_q.ts" />
   </ItemGroup>
