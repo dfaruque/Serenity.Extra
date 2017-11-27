@@ -6,7 +6,7 @@
         extends Serenity.EntityDialog<TEntity, TOptions> {
         //protected getLookupKey() { return this.getLocalTextPrefix() }
         private loadedState: string;
-        isReadOnly: boolean;
+        isReadOnly: boolean = false;
         protected form: any;
 
         constructor(opt?) {
@@ -18,26 +18,32 @@
         protected updateInterface() {
             super.updateInterface();
 
+            this.setReadOnly(this.isReadOnly);
+        }
+        protected onDialogOpen() {
+            super.onDialogOpen();
+            this.fullContentArea();
+            this.element.fadeTo(100, 1);
+        }
+
+        protected setReadOnly(value: boolean) {
+            this.isReadOnly = value;
+
             if (this.isReadOnly == true) {
-                this.saveAndCloseButton.addClass('disabled');
-                this.applyChangesButton.addClass('disabled');
-                this.deleteButton.addClass('disabled');
+                this.saveAndCloseButton.toggleClass('disabled', this.isReadOnly);
+                this.applyChangesButton.toggleClass('disabled', this.isReadOnly);
+                this.deleteButton.toggleClass('disabled', this.isReadOnly);
 
                 // remove required asterisk (*)
-                this.element.find('sup').hide();
+                this.element.find('sup').toggle(this.isReadOnly);
                 for (let editor in this.form) {
                     if (this.form[editor].widgetName) {
 
                         Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
                     }
                 }
-            }
 
-        }
-        protected onDialogOpen() {
-            super.onDialogOpen();
-            this.fullContentArea();
-            this.element.fadeTo(100, 1);
+            }
         }
 
         protected getToolbarButtons(): Serenity.ToolButton[] {
@@ -106,25 +112,25 @@
             if ($content.length > 0) {
                 try {
                     this.element.dialog("option", "width", $content.width() + 30 + (width || 0));
-                    this.element.dialog("option", "height", $content.height() + (height || 50));
+                    this.element.dialog("option", "height", $content.height() + (height || 30));
                 } catch (e) {
                 }
 
                 dialogElement.css({
                     left: $content.position().left + (left || 0),
-                    top: (top || 52),
+                    top: (top || 50),
                 });
             }
-        }
 
-        hideEditorCaption(editor: JQuery) {
-            editor.siblings('.caption').hide();
-        }
-
-        setGridEditorHeight(editor: JQuery, heightInPx: number) {
-            editor.css('height', heightInPx + 'px');
-            editor.children('.grid-container').css('height', (heightInPx - 25) + 'px');
+            setTimeout(() => {
+                this.afterSetDialogSize();
+            }, 200);
 
         }
+
+        afterSetDialogSize() {
+
+        }
+
     }
 }
