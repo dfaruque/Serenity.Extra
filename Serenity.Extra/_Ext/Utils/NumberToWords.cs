@@ -55,6 +55,43 @@ public static class NumberToWords
         return words;
     }
 
+    #region DecimalToWordsTk
+    public static string DecimalToWordsTk(decimal number, int decimals = 2)
+    {
+        number = Math.Round(number, decimals);
+
+        if (number == 0)
+            return "zero";
+
+        if (number < 0)
+            return "minus " + DecimalToWordsTk(Math.Abs(number));
+
+        string words = "";
+
+        int intPortion = (int)number;
+        decimal fraction = (number - intPortion) * 100;
+        int decPortion = (int)fraction;
+
+        words = IntToWords(intPortion) + " Taka";
+        if (decPortion > 0)
+        {
+            words += " and " + IntToWords(decPortion) + " Paisa";
+        }
+        return words + " Only";
+    }
+
+    public static string ToWordsTk(this decimal number, int decimals = 2)
+    {
+        return DecimalToWordsTk(number, decimals).ToUpper();
+    }
+
+    public static string ToWordsTk(this decimal? number, int decimals = 2)
+    {
+        return DecimalToWordsTk(number ?? 0, decimals).ToUpper();
+    } 
+    #endregion
+
+    #region DecimalToWords
     public static string DecimalToWords(decimal number, int decimals = 2)
     {
         number = Math.Round(number, decimals);
@@ -71,12 +108,12 @@ public static class NumberToWords
         decimal fraction = (number - intPortion) * 100;
         int decPortion = (int)fraction;
 
-        words = IntToWords(intPortion) + " Taka";
+        words = IntToWords(intPortion);
         if (decPortion > 0)
         {
-            words += " and " + IntToWords(decPortion) + " Paisa";
+            words += " Point " + IntToWords(decPortion);
         }
-        return words + " Only";
+        return words;
     }
 
     public static string ToWords(this decimal number, int decimals = 2)
@@ -89,4 +126,5 @@ public static class NumberToWords
         return DecimalToWords(number ?? 0, decimals).ToUpper();
     }
 
+    #endregion
 }

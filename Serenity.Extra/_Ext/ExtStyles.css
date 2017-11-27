@@ -9,7 +9,7 @@
     text-shadow: 2px 2px 1px #505050;
 }*/
 
-    .ui-dialog .ui-dialog-title {
+.ui-dialog .ui-dialog-title {
     font-weight: 600;
 }
 
@@ -18,14 +18,14 @@
     height: 600px;
 }
 
-.s-Form .caption {
+.s-Form label.caption {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 5px;
     padding-right: 0px;
     width: 170px;
 }
 
-    .s-Form .caption sup {
+    .s-Form label.caption sup {
         float: right;
         top: 10px;
         font-size: 15px;

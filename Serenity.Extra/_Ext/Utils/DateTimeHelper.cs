@@ -6,19 +6,56 @@ using System.Web;
 
 public static class DateTimeHelper
 {
+    /// <summary>
+    /// Gets date string of default date format for current culture.
+    /// </summary>
+    /// <param name="inputValue"></param>
+    /// <returns></returns>
     public static string ToDateFormat(this DateTime? inputValue)
     {
         return inputValue?.ToString(DateHelper.CurrentDateFormat);
     }
+
+    /// <summary>
+    /// Gets date string of default date format for current culture.
+    /// </summary>
+    /// <param name="inputValue"></param>
+    /// <returns></returns>
     public static string ToDateFormat(this DateTime inputValue)
     {
         return inputValue.ToString(DateHelper.CurrentDateFormat);
     }
+
+    /// <summary>
+    /// Gets date time string of default date time format for current culture.
+    /// </summary>
+    /// <param name="inputValue"></param>
+    /// <returns></returns>
     public static string ToDateTimeFormat(this DateTime? inputValue)
     {
         string format = "dd-MM-yyyy HH:mm";
         string result = inputValue?.ToString(format).Replace('.', ':');
         return result;
+    }
+
+    /// <summary>
+    /// Gets date string of default date format for current culture.
+    /// </summary>
+    /// <param name="inputValue"></param>
+    /// <returns></returns>
+    public static string ToLongDateFormat(this DateTime? inputValue)
+    {
+        return inputValue?.ToString("dd MMMM, yyyy");
+    }
+
+    /// <summary>
+    /// Gets date string of default date format for current culture.
+    /// </summary>
+    /// <param name="inputValue"></param>
+    /// <returns></returns>
+    public static string ToLongDateFormat(this DateTime inputValue)
+    {
+        return inputValue.ToString("dd MMMM, yyyy");
     }
 
     public static int GetMonths(DateTime fromDate, DateTime toDate)

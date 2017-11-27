@@ -10,3 +10,4 @@ declare namespace Slick {
 declare namespace LiteDB {
 
 }
+

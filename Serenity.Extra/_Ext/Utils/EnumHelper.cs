@@ -17,7 +17,7 @@ public static class EnumUtil
     public static string GetEnumDescription(this Enum value)
     {
         if (value == null)
-            return "";
+            return null;
 
         FieldInfo fi = value.GetType().GetField(value.ToString());
 
