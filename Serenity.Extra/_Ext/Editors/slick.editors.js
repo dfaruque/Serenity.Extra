@@ -21,7 +21,16 @@
             }
         }
     });
+    //-------------------------onChange----------------------------
+    function onChange(e, args) {
+        var input = $(e.target);
+        var val = Q.coalesce(Q.trimToNull(input.val()), '0');
 
+        if (args.column.onChange) {
+            args.column.onChange(e, args.item, val);
+            //args.grid.render();
+        }
+    }
     //-------------------------Select2----------------------------
     function PopulateSelect(select, dataSource, addBlank) {
         var index, len, newOption;
@@ -52,6 +61,11 @@
             PopulateSelectWithSerenityLookup($input[0], args.column.lookup, true);
             $input.appendTo(args.container);
             $input.focus().select();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
+
 
             $input.select2({
                 placeholder: '-',
@@ -115,6 +129,10 @@
                 })
                 .focus()
                 .select();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
         };
 
         this.destroy = function () {
@@ -185,6 +203,10 @@
 
             $input.appendTo(args.container);
             $input.focus().select();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
         };
 
         this.destroy = function () {
@@ -254,6 +276,11 @@
 
             $input.appendTo(args.container);
             $input.focus().select();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
+
         };
 
         this.destroy = function () {
@@ -278,8 +305,8 @@
 
             var decPlaces = getDecimalPlaces();
             if (decPlaces !== null
-            && (defaultValue || defaultValue === 0)
-            && defaultValue.toFixed) {
+                && (defaultValue || defaultValue === 0)
+                && defaultValue.toFixed) {
                 defaultValue = defaultValue.toFixed(decPlaces);
             }
 
@@ -293,8 +320,8 @@
 
             var decPlaces = getDecimalPlaces();
             if (decPlaces !== null
-            && (rtn || rtn === 0)
-            && rtn.toFixed) {
+                && (rtn || rtn === 0)
+                && rtn.toFixed) {
                 rtn = parseFloat(rtn.toFixed(decPlaces));
             }
 
@@ -453,6 +480,11 @@
             $select = $("<SELECT tabIndex='0' class='editor-yesno'><OPTION value='yes'>Yes</OPTION><OPTION value='no'>No</OPTION></SELECT>");
             $select.appendTo(args.container);
             $select.focus();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
+
         };
 
         this.destroy = function () {
@@ -499,6 +531,11 @@
             $select = $("<INPUT type=checkbox value='true' class='editor-checkbox' hideFocus>");
             $select.appendTo(args.container);
             $select.focus();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
+
         };
 
         this.destroy = function () {
@@ -643,6 +680,11 @@
 
             scope.position(args.position);
             $input.focus().select();
+
+            $input.bind('blur', function (e) {
+                onChange(e, args);
+            });
+
         };
 
         this.handleKeyDown = function (e) {
