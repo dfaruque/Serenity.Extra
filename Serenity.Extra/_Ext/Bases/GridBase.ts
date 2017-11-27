@@ -14,7 +14,7 @@ namespace _Ext {
         isAutosized = false;
         isChildGrid = false;
         public autoColumnSizePlugin;
-
+        
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
             this.slickContainer.fadeTo(0, 0);
@@ -127,8 +127,14 @@ namespace _Ext {
                         if (!Q.isEmptyOrNull(dateTo))
                             filterText = filterText + ' To ' + dateTo
 
-                        if (!Q.isEmptyOrNull(filterText))
+                        if (!Q.isEmptyOrNull(filterText)) {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterText
+                        }
+                        else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
+                            request.EqualityFilterWithTextValue[quickFilter.title] = '--any--'
+                        }
+                    } else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
+                        request.EqualityFilterWithTextValue[quickFilter.title] = '--any--'
                     }
                 }
 
