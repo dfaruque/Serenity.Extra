@@ -200,7 +200,7 @@ namespace _Ext {
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.forceFitColumns = false;
-
+            opt.autoHeight = true;
             return opt;
         }
 
