@@ -48,6 +48,27 @@
             select.appendChild(newOption);
         });
     };
+    function PopulateSelectWithSerenityEnum(select, enumKey, addBlank) {
+        var index, len, newOption;
+        if (addBlank) { select.appendChild(new Option('', '')); }
+
+        var enumType = Serenity.EnumTypeRegistry.get(enumKey);
+        if (ss.isValue(enumType)) {
+            var enumKeyAttr = ss.getAttributes(enumType, Serenity.EnumKeyAttribute, false);
+            if (enumKeyAttr.length > 0) {
+                enumKey = enumKeyAttr[0].value;
+            }
+        }
+        var values = ss.Enum.getValues(enumType);
+        for (var i = 0; i < values.length; i++) {
+            var value = Q.toId(values[i]);
+
+            var text = _Ext.q.getEnumText(enumKey, Q.toId(value));
+
+            newOption = new Option(text, value);
+            select.appendChild(newOption);
+        }
+    };
     function Select2Editor(args) {
         var $input;
         var defaultValue;
@@ -58,11 +79,22 @@
             $input = $('<select></select>');
             $input.width(args.container.clientWidth + 3);
             //PopulateSelect($input[0], args.column.dataSource, true);
-            PopulateSelectWithSerenityLookup($input[0], args.column.lookup, true);
+            if (args.column.lookup) {
+                PopulateSelectWithSerenityLookup($input[0], args.column.lookup, true);
+            } else if (args.column.sourceItem) {
+                if (args.column.sourceItem.editorParams) {
+                    var enumKey = args.column.sourceItem.editorParams.enumKey;
+                    if (enumKey) {
+                        PopulateSelectWithSerenityEnum($input[0], enumKey, true);
+                    }
+
+                }
+            }
+
             $input.appendTo(args.container);
             $input.focus().select();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
 
@@ -130,7 +162,7 @@
                 .focus()
                 .select();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
         };
@@ -204,7 +236,7 @@
             $input.appendTo(args.container);
             $input.focus().select();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
         };
@@ -277,8 +309,9 @@
             $input.appendTo(args.container);
             $input.focus().select();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
+                e.preventDefault();
             });
 
         };
@@ -481,7 +514,7 @@
             $select.appendTo(args.container);
             $select.focus();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
 
@@ -532,7 +565,7 @@
             $select.appendTo(args.container);
             $select.focus();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
 
@@ -681,7 +714,7 @@
             scope.position(args.position);
             $input.focus().select();
 
-            $input.bind('blur', function (e) {
+            $input.bind('change', function (e) {
                 onChange(e, args);
             });
 

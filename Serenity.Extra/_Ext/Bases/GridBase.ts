@@ -14,7 +14,7 @@ namespace _Ext {
         isAutosized = false;
         isChildGrid = false;
         public autoColumnSizePlugin;
-        
+
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
             this.slickContainer.fadeTo(0, 0);
@@ -166,6 +166,13 @@ namespace _Ext {
                         //c.width = c.minWidth > 160 ? c.minWidth : 160;
                     } else if (c.sourceItem.filteringType == String("Enum")) {
                         //c.cssClass += ' align-center';
+
+                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                            let enumKey = columnDef.sourceItem.editorParams.enumKey
+                            let text = q.getEnumText(enumKey, Q.toId(value));
+                            if (text) return text;
+                            else return '-';
+                        };
                     } else if (c.sourceItem.formatterType == String("Date")) {
                         c.cssClass += ' align-center';
                         c.width = c.minWidth > 99 ? c.minWidth : 99;
@@ -188,13 +195,11 @@ namespace _Ext {
                     //editor
                     if (isEditable == true && c.sourceItem.readOnly != true) {
 
-                        if (c.sourceItem.editorType == "Lookup") {
+                        if (c.sourceItem.editorType == "Lookup"  || c.sourceItem.editorType == "Enum") {
                             c.editor = Slick['Editors']['Select2'];
                             c.width = c.minWidth > 160 ? c.minWidth : 160;
                         } else if (c.sourceItem.editorType == "Date") {
                             c.editor = Slick['Editors']['Date'];
-                        } else if (c.sourceItem.editorType == "Enum") {//ToDo
-                            //c.editor = Slick['Editors']['Date'];
                         } else if (c.sourceItem.editorType == "Boolean") {
                             c.editor = Slick['Editors']['Checkbox'];
                         } else if (c.sourceItem.editorType == "Integer") {
