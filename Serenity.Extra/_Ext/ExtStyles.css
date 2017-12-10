@@ -18,14 +18,14 @@
     height: 600px;
 }
 
-.s-Form label.caption {
+.s-Form .caption {
     text-align: left;
     padding-left: 5px;
     padding-right: 0px;
     width: 170px;
 }
 
-    .s-Form label.caption sup {
+    .s-Form .caption sup {
         float: right;
         top: 10px;
         font-size: 15px;
@@ -51,6 +51,13 @@
         display: none;
     }
 
+.label-only > label {
+    width: 100% !important;
+}
+
+.label-only > input {
+    display: none;
+}
 
 .offset-field {
 }
@@ -63,10 +70,12 @@
         display: none;
     }
 
+
+
 @media (min-width: 768px) {
     .width2 {
         flex: auto !important;
-        width: 20% !important;
+        width: 16.5% !important;
     }
 
         .width2 .caption {
@@ -269,7 +278,7 @@ ul.list-inline {
 
         .card-container .card-item table {
             width: 100%;
-            table-layout: fixed
+            table-layout: fixed;
         }
 
         .card-container .card-item td {
@@ -277,15 +286,15 @@ ul.list-inline {
         }
 
             .card-container .card-item td.img {
-                width: 116px
+                width: 116px;
             }
 
                 .card-container .card-item td.img img {
-                    width: 100px
+                    width: 100px;
                 }
 
         .card-container .card-item .name {
-            font-weight: bold
+            font-weight: bold;
         }
 
 /*@media(min-width: 900px) {
@@ -303,32 +312,32 @@ ul.list-inline {
 .favorite-views {
     margin-right: 4px;
     position: relative;
-    top: -12px
+    top: -12px;
 }
 
     .favorite-views ul {
         font-size: 12px;
         width: 150px;
-        min-width: 150px
+        min-width: 150px;
     }
 
     .favorite-views li.save {
-        padding: 6px
+        padding: 6px;
     }
 
         .favorite-views li.save input {
             margin-top: 2px;
-            width: 126px
+            width: 126px;
         }
 
         .favorite-views li.save button {
             margin-top: 4px;
-            font-size: 12px
+            font-size: 12px;
         }
 
     .favorite-views li.fav {
         position: relative;
-        padding-right: 16px
+        padding-right: 16px;
     }
 
     .favorite-views i.fa-trash-o {
@@ -336,7 +345,7 @@ ul.list-inline {
         position: absolute;
         right: 4px;
         top: 5px;
-        color: #800000
+        color: #800000;
     }
 /* Misc. ---------------------------------------*/
 .info-window dt {
