@@ -55,22 +55,58 @@
             //        this.onRefreshClick();
             //    }
             //})
+            try {
+                if (Q.Authorization.username.indexOf('admin') >= 0) {
+                    if (Q.isEmptyOrNull(this.getService()) == false) {
+                        buttons.push({
+                            title: 'Replace',
+                            icon: 'fa fa-trash-o',
+                            onClick: () => {
+                                let idProperty = this['getIdProperty']();
+                                let nameProperty = this['getNameProperty']();
+                                let entityId = this.entity[idProperty];
+                                let entityName = this.entity[nameProperty];
 
-            //buttons.push({
-            //    title: 'Change Log',
-            //    icon: 'fa fa-history',
-            //    onClick: () => {
-            //        let entityId = this.entity['Id'];
-            //        if (entityId) {
-            //            let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
+                                if (entityId) {
 
-            //            dlg.dialogOpen();
-            //        } else {
-            //            Q.alert('No change log found for this entity.')
-            //        }
-            //    }
-            //})
+                                    Q.serviceRequest(this.getService() + '/List', {}, (response: Serenity.ListResponse<any>) => {
+                                        let entityList = response.Entities;
 
+                                        let dlg = new ReplaceRowDialog({
+                                            FormKey: this.getFormKey(),
+                                            IdProperty: idProperty,
+                                            NameProperty: nameProperty,
+                                            EntityTypeTitle: this.getEntitySingular(),
+                                            DeletedEntityName: entityName,
+                                            DeletedEntityId: entityId,
+                                        },
+                                            entityList);
+
+                                        dlg.dialogOpen();
+
+                                        this.dialogClose();
+                                    });
+                                }
+                            }
+                        })
+                    }
+
+                    buttons.push({
+                        title: 'Change Log',
+                        icon: 'fa fa-history',
+                        onClick: () => {
+                            let entityId = this.entity['Id'];
+                            if (entityId) {
+                                let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
+
+                                dlg.dialogOpen();
+                            } else {
+                                Q.alert('No change log found for this entity.')
+                            }
+                        }
+                    })
+                }
+            } catch (e) { }
             return buttons;
         }
 

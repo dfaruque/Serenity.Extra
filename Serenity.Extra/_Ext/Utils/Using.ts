@@ -76,3 +76,151 @@ function usingJqueryUITimepickerAddon() {
     }
 }
 
+function usingBabylonjs() {
+    if (window['BABYLON'] && window['BABYLON']['Engine']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl("~/Scripts/babylonjs/babylon.js"))
+    }
+}
+
+function usingVuejs() {
+    if (window['Vue']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl("~/Scripts/vue.js"));
+
+        //filters
+        window['Vue'].filter('formatDate', function (value) {
+            if (value) {
+                return Q.formatDate(value)
+            }
+        });
+
+        window['Vue'].filter('formatDateReadable', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return date.getDate() + ' ' + _Ext.Months[date.getMonth()] + ' ' + date.getFullYear();
+            }
+        });
+
+        window['Vue'].filter('formatDateTimeReadable', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return date.getDate() + ' ' + _Ext.Months[date.getMonth()] + ' ' + date.getFullYear()
+                    + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            }
+        });
+
+        window['Vue'].filter('enumText', function (value, enumKey) {
+            if (value) {
+                return Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
+            }
+        });
+
+        window['Vue'].filter('enumName', function (value) {
+            if (value) {
+                return Serenity.EnumFormatter.getName(value);
+            }
+        });
+
+    }
+}
+
+function usingChartjs() {
+    if (window['Chart']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl('~/Scripts/chartjs/Chart.js'))
+    }
+}
+
+function includeCustomMarkerCss() {
+    var style = $("#customMarker");
+    if (style.length > 0) {
+        return;
+    }
+
+    $("<link/>")
+        .attr("type", "text/css")
+        .attr("id", "customMarker")
+        .attr("rel", "stylesheet")
+        .attr("href", Q.resolveUrl("~/Scripts/googlemap/CustomMarker.css"))
+        .appendTo(document.head);
+
+}
+
+function usingCustomMarker() {
+    if (window['CustomMarker']) {
+        return;
+    } else {
+        includeCustomMarkerCss();
+        loadScript(Q.resolveUrl("~/Scripts/googlemap/CustomMarker.js"))
+    }
+}
+
+
+function includeGoogleMap(callback?: Function, callbackFullName?: string) {
+    if (window['google']) {
+        if (callback) callback();
+        return;
+    }
+
+    var script = $("#googleScript");
+    if (script.length > 0) {
+        if (callback) callback();
+        return;
+    }
+
+    $("<script/>")
+        .attr("type", "text/javascript")
+        .attr("id", "googleScript")
+        .attr("src", 'http://maps.google.com/maps/api/js?key=AIzaSyCRiY7aFA2cI6STbl3YQ3r6m1IpUFmBM98&callback=' + callbackFullName || 'includeGoogleMap')
+        .appendTo(document.head);
+
+}
+
+function includeMarkerWithLabel() {
+    if (window['MarkerWithLabel']) {
+        return;
+    }
+
+    var script = $("#MarkerWithLabelScript");
+    if (script.length > 0) {
+        return;
+    }
+
+    $("<script/>")
+        .attr("type", "text/javascript")
+        .attr("id", "MarkerWithLabelScript")
+        .attr("src", Q.resolveUrl("~/Scripts/googlemap/markerwithlabel.js"))
+        .appendTo(document.head);
+
+}
+
+function includeVisCss() {
+    var style = $("#Vis");
+    if (style.length > 0) {
+        return;
+    }
+
+    $("<link/>")
+        .attr("type", "text/css")
+        .attr("id", "Vis")
+        .attr("rel", "stylesheet")
+        .attr("href", Q.resolveUrl("~/Scripts/visjs/vis.min.css"))
+        .appendTo(document.head);
+
+}
+
+function usingVisjs() {
+    if (window['vis']) {
+        return;
+    } else {
+        includeVisCss()
+        loadScript(Q.resolveUrl("~/Scripts/visjs/vis.min.js"))
+    }
+}
+
+
+

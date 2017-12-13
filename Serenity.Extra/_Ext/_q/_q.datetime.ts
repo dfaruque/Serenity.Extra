@@ -9,6 +9,10 @@ namespace q {
         return new Date(date.getTime() + minutes * 60000);
     }
 
+    export function addHours(date: Date, hours: number) {
+        return new Date(date.getTime() + hours * 3600000);
+    }
+
     export function getHours(fromDate: Date, toDate: Date): number {
         let hours = 0;
         if (fromDate && toDate) {
@@ -18,16 +22,26 @@ namespace q {
         return hours;
     }
 
-    export function getDays(fromDate: Date, toDate: Date): number {
+    export function getDays24HourPulse(fromDate: Date, toDate: Date): number {
 
         let days = q.getHours(fromDate, toDate) / 24;
 
         return Math.ceil(days);
     }
 
+    export function getDays(pFromDate: Date, pToDate: Date): number {
+        let fromDate = new Date(pFromDate.getFullYear(), pFromDate.getMonth(), pFromDate.getDate());
+        let toDate = new Date(pToDate.getFullYear(), pToDate.getMonth(), pToDate.getDate(), 23, 59, 59);
+
+        let days = q.getHours(fromDate, toDate) / 24;
+
+        days = days <= 0 ? 1 : days;
+
+        return Math.ceil(days);
+    }
 
     export function getMonths(fromDate: Date, toDate: Date): number {
-        let months = q.getDays(fromDate, toDate) / 30;
+        let months = q.getDays24HourPulse(fromDate, toDate) / 30;
         return Math.ceil(months);
     }
 
@@ -60,7 +74,7 @@ namespace q {
     export function getPeriods(fromDate: Date, toDate: Date, periodUnit: _Ext.TimeUoM): number {
         if (periodUnit == _Ext.TimeUoM.Day) {
             let days = q.getDays(fromDate, toDate);
-            return days == 0 ? 1 : days;
+            return days;
         }
         else if (periodUnit == _Ext.TimeUoM.Month) {
             let months = q.getMonths(fromDate, toDate);

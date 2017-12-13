@@ -182,8 +182,28 @@ namespace _Ext {
                     } else if (c.sourceItem.formatterType == String("Number")) {
                         c.cssClass += ' align-right';
                         if (c.sourceItem.editorType == String("Decimal")) {
-                            c.format = ctx => Serenity.NumberFormatter.format(ctx.value, '#,##0.00');
+
+                            let formatSrt = '#,##0.00';
+
+                            if (c.sourceItem.editorParams) {
+                                let decimals = c.sourceItem.editorParams['decimals'];
+                                if (decimals) {
+                                    formatSrt = '#,##0.'
+                                    for (let i = 0; i < decimals; i++) {
+                                        formatSrt += '0'
+                                    }
+                                }
+                                else if (c.sourceItem.editorParams['minValue']) {
+                                    let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
+                                    if (splitedMinValue.length > 0) {
+                                        formatSrt = '#,##0.' + splitedMinValue[1];
+                                    }
+                                }
+                            }
+
+                            c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
                         }
+
                     } else if (c.sourceItem.formatterType == String("Checkbox")) {
                         c.cssClass += ' align-center';
                     } else {
