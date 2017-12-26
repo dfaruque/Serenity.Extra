@@ -128,11 +128,6 @@
 
 /* Grid Styles ---------------------------------------*/
 .slick-header-column {
-    border: 1px solid #bbb !important;
-    border-width: thin !important;
-    background-color: #eee;
-    border-bottom-color: #5bc0de !important;
-    border-bottom-width: 2px !important;
     text-align: center;
 }
 
