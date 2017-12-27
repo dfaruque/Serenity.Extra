@@ -3,6 +3,7 @@ namespace q {
     export var queryString = {};
     export var jsPDFHeaderImageData: string = null
     export var jsPDFHeaderTitle: string = 'Report Title';
+    export var hideCategoyLinksBarInPropertyDialog: boolean = false;
 
     export var DefaultMainGridOptions: GridOptions = {
         AutoColumnSize: true,

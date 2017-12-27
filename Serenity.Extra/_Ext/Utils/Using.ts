@@ -175,7 +175,7 @@ function includeGoogleMap(callback?: Function, callbackFullName?: string) {
     $("<script/>")
         .attr("type", "text/javascript")
         .attr("id", "googleScript")
-        .attr("src", 'http://maps.google.com/maps/api/js?key=AIzaSyCRiY7aFA2cI6STbl3YQ3r6m1IpUFmBM98&callback=' + callbackFullName || 'includeGoogleMap')
+        .attr("src", 'http://maps.google.com/maps/api/js?v=3.31&key=AIzaSyCRiY7aFA2cI6STbl3YQ3r6m1IpUFmBM98&callback=' + callbackFullName || 'includeGoogleMap')
         .appendTo(document.head);
 
 }

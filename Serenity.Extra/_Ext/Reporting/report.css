@@ -106,3 +106,9 @@ hr {
 /*@media print {
     h1 {page-break-before: always;}
 }*/
+
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+} 

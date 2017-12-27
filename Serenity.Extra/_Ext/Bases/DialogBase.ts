@@ -19,6 +19,10 @@
             super.updateInterface();
 
             this.setReadOnly(this.isReadOnly);
+
+            if (q.hideCategoyLinksBarInPropertyDialog == true) {
+                this.element.find('.category-links').hide();
+            }
         }
         protected onDialogOpen() {
             super.onDialogOpen();

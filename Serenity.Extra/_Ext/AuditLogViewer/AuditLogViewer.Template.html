@@ -1,0 +1,49 @@
+﻿<!--VUE-->
+<div class="s-DialogContent" id="~_dialogContent" style="padding:0px 15px;">
+
+    <link href="Modules/_Ext/AuditLogViewer/jsondiffpatch/formatters-styles/html.css" rel="stylesheet" />
+    <script src="Modules/_Ext/AuditLogViewer/jsondiffpatch/jsondiffpatch.min.js"></script>
+    <script src="Modules/_Ext/AuditLogViewer/jsondiffpatch/jsondiffpatch-formatters.min.js"></script>
+
+    <style>
+        pre {
+            line-height: unset;
+            color: unset;
+            word-break: unset;
+            word-wrap: unset;
+            border: unset;
+            border-radius: unset;
+        }
+    </style>
+
+    <h3> Versions </h3>
+    <table class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Action Date</th>
+            <th>User</th>
+            <th>Show Changes</th>
+            <!--<th>Full Diff.</th>-->
+        </tr>
+
+        <template v-for="item in entityVersions">
+            <tr>
+                <th>{{item.VersionNo}}</th>
+                <th>{{item.VersionDate | formatDateTimeReadable}}</th>
+                <th>{{item.UserId}} - {{item.UserName}}</th>
+                <td>
+                    <input type="checkbox" class="btn btn-xs btn-info" v-model="item.isShowed" />
+                </td>
+                <!--<th class="align-center"><button class="btn btn-sm btn-primary" v-on:click="showDiff(version)"><i class="fa fa-eye"></i></button></th>-->
+            </tr>
+            <tr v-show="item.isShowed">
+                <td colspan="4">
+                    <div v-html="getDiff(item)"></div>
+                </td>
+            </tr>
+        </template>
+    </table>
+
+    <!--<h3> Differences </h3>
+    <div id="visualizeDiff"></div>-->
+</div>

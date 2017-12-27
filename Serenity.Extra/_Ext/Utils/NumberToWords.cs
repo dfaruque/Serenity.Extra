@@ -6,31 +6,52 @@ using System.Web;
 public static class NumberToWords
 {
 
-    public static string IntToWords(int number)
+    public static string IntToWords(int number, bool isMillion = false)
     {
         if (number == 0)
-            return "zero";
+            return "Zero";
 
         if (number < 0)
-            return "minus " + IntToWords(Math.Abs(number));
+            return "Minus " + IntToWords(Math.Abs(number));
 
         string words = "";
 
-        if ((number / 1000000) > 0)
+        if (isMillion)
         {
-            words += IntToWords(number / 1000000) + " million ";
-            number %= 1000000;
+            int oneMillion = 1000000;
+            if ((number / oneMillion) > 0)
+            {
+                words += IntToWords(number / oneMillion) + " Million ";
+                number %= oneMillion;
+            }
+        }
+        else
+        {
+            int oneCrore = 10000000;
+            if ((number / oneCrore) > 0)
+            {
+                words += IntToWords(number / oneCrore) + " Crore ";
+                number %= oneCrore;
+            }
+
+            int oneLac = 100000;
+            if ((number / oneLac) > 0)
+            {
+                words += IntToWords(number / oneLac) + " Lac ";
+                number %= oneLac;
+            }
+
         }
 
         if ((number / 1000) > 0)
         {
-            words += IntToWords(number / 1000) + " thousand ";
+            words += IntToWords(number / 1000) + " Thousand ";
             number %= 1000;
         }
 
         if ((number / 100) > 0)
         {
-            words += IntToWords(number / 100) + " hundred ";
+            words += IntToWords(number / 100) + " Hundred ";
             number %= 100;
         }
 
@@ -39,8 +60,8 @@ public static class NumberToWords
             if (words != "")
                 words += "and ";
 
-            var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
-            var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+            var unitsMap = new[] { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+            var tensMap = new[] { "Zero", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
 
             if (number < 20)
                 words += unitsMap[number];
@@ -61,10 +82,10 @@ public static class NumberToWords
         number = Math.Round(number, decimals);
 
         if (number == 0)
-            return "zero";
+            return "Zero";
 
         if (number < 0)
-            return "minus " + DecimalToWordsTk(Math.Abs(number));
+            return "Minus " + DecimalToWordsTk(Math.Abs(number));
 
         string words = "";
 
@@ -77,18 +98,19 @@ public static class NumberToWords
         {
             words += " and " + IntToWords(decPortion) + " Paisa";
         }
+
         return words + " Only";
     }
 
     public static string ToWordsTk(this decimal number, int decimals = 2)
     {
-        return DecimalToWordsTk(number, decimals).ToUpper();
+        return DecimalToWordsTk(number, decimals);
     }
 
     public static string ToWordsTk(this decimal? number, int decimals = 2)
     {
-        return DecimalToWordsTk(number ?? 0, decimals).ToUpper();
-    } 
+        return DecimalToWordsTk(number ?? 0, decimals);
+    }
     #endregion
 
     #region DecimalToWords
@@ -97,10 +119,10 @@ public static class NumberToWords
         number = Math.Round(number, decimals);
 
         if (number == 0)
-            return "zero";
+            return "Zero";
 
         if (number < 0)
-            return "minus " + DecimalToWords(Math.Abs(number));
+            return "Minus " + DecimalToWords(Math.Abs(number));
 
         string words = "";
 
@@ -118,12 +140,12 @@ public static class NumberToWords
 
     public static string ToWords(this decimal number, int decimals = 2)
     {
-        return DecimalToWords(number, decimals).ToUpper();
+        return DecimalToWords(number, decimals);
     }
 
     public static string ToWords(this decimal? number, int decimals = 2)
     {
-        return DecimalToWords(number ?? 0, decimals).ToUpper();
+        return DecimalToWords(number ?? 0, decimals);
     }
 
     #endregion

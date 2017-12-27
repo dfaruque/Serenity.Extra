@@ -35,7 +35,7 @@ namespace q {
 
         let days = q.getHours(fromDate, toDate) / 24;
 
-        days = days <= 0 ? 1 : days;
+        //days = days <= 0 ? 1 : days;
 
         return Math.ceil(days);
     }

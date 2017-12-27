@@ -131,10 +131,10 @@ namespace _Ext {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterText
                         }
                         else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
-                            request.EqualityFilterWithTextValue[quickFilter.title] = '--any--'
+                            request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
                         }
                     } else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
-                        request.EqualityFilterWithTextValue[quickFilter.title] = '--any--'
+                        request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
                     }
                 }
 
@@ -195,8 +195,11 @@ namespace _Ext {
                                 }
                                 else if (c.sourceItem.editorParams['minValue']) {
                                     let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
-                                    if (splitedMinValue.length > 0) {
+                                    if (splitedMinValue.length > 1) {
                                         formatSrt = '#,##0.' + splitedMinValue[1];
+                                    } else {
+                                        formatSrt = '#,##0';
+
                                     }
                                 }
                             }
