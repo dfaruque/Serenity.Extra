@@ -859,6 +859,7 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <Content Include="_Ext\Editors\SerenityInlineEditors.js" />
     <Content Include="_Ext\Editors\slick.editors.js" />
     <Content Include="_Ext\ExtStyles.css" />
     <Content Include="_Ext\Reporting\report.css" />
@@ -872,11 +873,15 @@
     <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
     <TypeScriptCompile Include="_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="_Ext\Bases\ReportGridBase.ts" />
     <TypeScriptCompile Include="_Ext\Editors\AutoCompleteEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\ColorEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\DateTimePickerEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\EditorDialogBase.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\EmptyLookupEditor.ts" />
     <TypeScriptCompile Include="_Ext\Editors\GridEditorBase.ts" />
+    <TypeScriptCompile Include="_Ext\Editors\StaticTextBlock.ts" />
+    <TypeScriptCompile Include="_Ext\Mixins\CardViewMixin.ts" />
     <TypeScriptCompile Include="_Ext\Reporting\ExcelExportHelper.ts" />
     <TypeScriptCompile Include="_Ext\Reporting\PdfExportHelper.ts" />
     <TypeScriptCompile Include="_Ext\Reporting\ReportHelper.ts" />
