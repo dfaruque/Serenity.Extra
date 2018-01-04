@@ -15,7 +15,7 @@ It is just some useful utilities and some extra functionality like
 ```C#
 @Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
 @Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
-@Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
+@Html.Script("~/Modules/_Ext/Editors/SerenityInlineEditors.js") 
 ```
 3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
 4. Please Build solution then Transform All T4 Templates and then Run to avoid errors
