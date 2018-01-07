@@ -10,7 +10,13 @@ It is just some useful utilities and some extra functionality like
 - Added some useful function in q (Not Q).
 - Audit Log in a single Table and a nice viewer.
 - Replace Row (useful for deleting a record and replace the dependants records with another record)
-
+- Added some editors
+   - AutoCompleteEditor
+   - ColorEditor
+   - DateTimePickerEditor
+   - EmptyLookupEditor
+   - StaticTextBlock
+   
 ## How to use
 1. Install NuGet Package Serenity.Extra
 2. Include the following lines in _LayoutHead.cshtml
