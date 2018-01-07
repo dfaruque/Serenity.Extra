@@ -49,10 +49,5 @@ namespace _Ext {
 
         parentEditor: GridEditorBase<any>;
 
-        protected masterEntity;
-        setMasterEntity(entity) {
-            this.masterEntity = entity;
-        }
-
     }
 }
