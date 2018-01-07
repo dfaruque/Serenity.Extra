@@ -224,3 +224,17 @@ function usingVisjs() {
 
 
 
+function usingJsonDiffPatch() {
+    if (window['jsondiffpatch']) {
+        return;
+    } else {
+
+        $("<link/>").attr("type", "text/css").attr("id", "JsonDiffPatch").attr("rel", "stylesheet")
+            .attr("href", Q.resolveUrl("~/Modules/_Ext/AuditLogViewer/jsondiffpatch/formatters-styles/html.css"))
+            .appendTo(document.head);
+
+
+        loadScript(Q.resolveUrl("~/Modules/_Ext/AuditLogViewer/jsondiffpatch/jsondiffpatch.min.js"))
+        loadScript(Q.resolveUrl("~/Modules/_Ext/AuditLogViewer/jsondiffpatch/jsondiffpatch-formatters.min.js"))
+    }
+}

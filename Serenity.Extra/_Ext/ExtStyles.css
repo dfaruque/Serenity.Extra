@@ -16,7 +16,7 @@
 }
 
 .tool-button, .button-outer, .inplace-button {
-    border-radius: 1px;
+    border-radius: 1px !important;
 }
 
 .select2-choice, .select2-arrow, .select2-drop {
@@ -31,22 +31,45 @@ input {
     border-radius: 1px !important;
 }
 
-/*.required, .required * {
-    background-color: mistyrose !important;
-}*/
+/*.tool-button, .button-outer, button-inner {
+    border-color: #ddd !important;
+    background-color: #ddd !important;
+}
+
+    .tool-button:hover, .button-outer:hover, button-inner:hover {
+        border-color: #eee !important;
+        background-color: #eee !important;
+    }
+
+    .tool-button:active, .button-outer:active, button-inner:active {
+        border-color: #fff !important;
+        background-color: #fff !important;
+    }*/
+
+/* Form Styles ---------------------------------------*/
+form input, form .select2-choice {
+    border-left-width: 5px !important;
+}
+
+.required, .required > .select2-choice {
+    border-left-color: #f77 !important;
+}
+
+.field > .caption > sup {
+    display: none;
+}
+
 /* Dialog Styles ---------------------------------------*/
 .ui-dialog .ui-dialog-titlebar {
-    border-bottom: solid 1px #999;
     background-color: #222d32;
 }
-/*.ui-dialog .ui-dialog-titlebar {
-    border-bottom: solid 1px #999;
-    background: linear-gradient(#fff 0px, #069 10%, #fff 120%) repeat-x #ffffff;
-    text-shadow: 2px 2px 1px #505050;
-}*/
 
 .ui-dialog .ui-dialog-title {
     font-weight: 600;
+}
+
+.s-Dialog .s-DialogToolbar {
+    padding-left: 8px;
 }
 
 .s-Dialog > .size {
@@ -172,7 +195,7 @@ input {
     border-width: thin !important;
 }
 
-.slick-cell.r0 {
+    .slick-cell.r0 {
         border-left: none !important;
     }
 
