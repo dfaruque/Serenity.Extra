@@ -3,7 +3,7 @@
 Name of the repo says that this is an EXTRA of my Beloved https://github.com/volkanceylan/Serenity platform
 
 It is just some useful utilities and some extra functionality like 
-- Showing lookup text instead of id value in grid etc.
+- Showing lookup text instead of id value in grid.
 - Automatic width adjustment of grid columns.
 - Adding export report button automatically in grid if a report service method in defined.
 - Added funtionality to make a detail grid editable (inline)
