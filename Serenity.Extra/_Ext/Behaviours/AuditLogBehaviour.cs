@@ -1,4 +1,4 @@
-﻿using LiteDB;
+﻿using _Ext.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Serenity;
@@ -35,14 +35,14 @@ namespace _Ext
         public void OnAfterSave(ISaveRequestHandler handler) { }
         public void OnAudit(ISaveRequestHandler handler)
         {
-            if (handler.IsCreate)
-            {
-                InsertNewLog(handler.Row, handler.Old, AuditActionType.Insert);
-            }
+            //if (handler.IsCreate)
+            //{
+            //    InsertNewLog(handler.UnitOfWork, handler.Row, handler.Old, AuditActionType.Insert);
+            //}
 
             if (handler.IsUpdate)
             {
-                InsertNewLog(handler.Row, handler.Old, AuditActionType.Update);
+                InsertNewLog(handler.UnitOfWork, handler.Row, handler.Old, AuditActionType.Update);
             }
         }
 
@@ -55,57 +55,52 @@ namespace _Ext
         public void OnAfterDelete(IDeleteRequestHandler handler) { }
         public void OnAudit(IDeleteRequestHandler handler)
         {
-            InsertNewLog(handler.Row, null, AuditActionType.Delete);
+            InsertNewLog(handler.UnitOfWork, handler.Row, null, AuditActionType.Delete);
         }
         public void OnBeforeDelete(IDeleteRequestHandler handler) { }
         public void OnPrepareQuery(IDeleteRequestHandler handler, SqlQuery query) { }
         public void OnReturn(IDeleteRequestHandler handler) { }
         public void OnValidateRequest(IDeleteRequestHandler handler) { }
 
-        private void InsertNewLog(Row row, Row oldRow, AuditActionType auditActionType)
+        private void InsertNewLog(IUnitOfWork uow, Row row, Row oldRow, AuditActionType auditActionType)
         {
             try
             {
-                // Open database (or create if doesn't exist)
+                var connection = uow.Connection;
+                var fld = AuditLogRow.Fields;
 
-                var constr = ConfigurationManager.ConnectionStrings["LogLiteDB"].ConnectionString;
-                if (String.IsNullOrWhiteSpace(constr)) return;
-                using (var db = new LiteDatabase(constr))
+                var entityId = (row as IIdRow).IdField[row] ?? 0;
+
+                var lastVersion = connection.TryFirst<AuditLogRow>(q => q
+                .Select(fld.VersionNo, fld.NewEntity)
+                .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
+                .OrderBy(fld.Id, desc: true));
+
+                //var jsonSerializerSettings = new JsonSerializerSettings
+                //{
+                //    ContractResolver = new DynamicContractResolver("IDate", "IUser", "EDate", "EUser")
+                //};
+
+                var rowJson = JsonConvert.SerializeObject(row);//, jsonSerializerSettings);
+                var oldrowJson = JsonConvert.SerializeObject(oldRow);//, jsonSerializerSettings);
+
+                if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
                 {
-                    var collectionName = row.Table.Replace('.', '_');
-                    var collections = db.GetCollection<VersionInfo>(collectionName);
+                    int versionNo = (lastVersion?.VersionNo ?? 0) + 1;
 
-                    var entityId = (row as IIdRow).IdField[row] ?? 0;
-                    var previousVersions = collections.Find(x => x.EntityId == entityId);
-
-                    var lastVersion = previousVersions?.OrderBy(o => o.VersionNo).LastOrDefault();
-
-                    //var jsonSerializerSettings = new JsonSerializerSettings
-                    //{
-                    //    ContractResolver = new DynamicContractResolver("IDate", "IUser", "EDate", "EUser")
-                    //};
-
-                    var rowJson = JsonConvert.SerializeObject(row);//, jsonSerializerSettings);
-                    var oldrowJson = JsonConvert.SerializeObject(oldRow);//, jsonSerializerSettings);
-
-                    if (auditActionType == AuditActionType.Delete || lastVersion?.Entity != rowJson)
+                    var auditLogRow = new AuditLogRow
                     {
-                        int versionNo = previousVersions?.Count() ?? 0;
+                        VersionNo = versionNo,
+                        UserId = int.Parse(Authorization.UserId),
+                        ActionType = auditActionType,
+                        ActionDate = DateTime.Now,
+                        EntityTableName = row.Table,
+                        EntityId = entityId,
+                        OldEntity = oldrowJson,
+                        NewEntity = rowJson
+                    };
 
-                        var versionInfo = new VersionInfo
-                        {
-                            VersionNo = versionNo,
-                            VersionDate = DateTime.Now,
-                            UserId = Authorization.UserId,
-                            AuditActionType = auditActionType,
-                            ChangeViaUrl = GetPageUrl(),
-                            EntityId = entityId,
-                            OldEntity = oldrowJson,
-                            Entity = rowJson
-                        };
-
-                        collections.Insert(versionInfo);
-                    }
+                    connection.Insert<AuditLogRow>(auditLogRow);
                 }
             }
             catch { }
@@ -158,21 +153,6 @@ namespace _Ext
     /// </summary>
     public class IgnoreAuditLog : Attribute
     {
-    }
-
-    [ScriptInclude]
-    public class VersionInfo
-    {
-        public ObjectId Id { get; set; }
-        public int VersionNo { get; set; }
-        public DateTime VersionDate { get; set; }
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string ChangeViaUrl { get; set; }
-        public AuditActionType AuditActionType { get; set; }
-        public Int64 EntityId { get; set; }
-        public string OldEntity { get; set; }
-        public string Entity { get; set; }
     }
 
     public class DynamicContractResolver : DefaultContractResolver
