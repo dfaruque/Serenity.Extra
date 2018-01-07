@@ -15,17 +15,18 @@ namespace _Ext {
                 AuditLogViewerService.List(this.request, response => {
                     response.EntityVersions.forEach(e => {
                         delete (e.Id)
-                        delete (e.ChangeViaUrl)
 
 
                         e.OldEntity = JSON.parse(e.OldEntity) as any;
-                        e.Entity = JSON.parse(e.Entity)
+                        e.NewEntity = JSON.parse(e.NewEntity)
 
                         delete ((e.OldEntity as any).Id);
                         delete ((e.OldEntity as any).IDate);
                         delete ((e.OldEntity as any).IUser);
+                        delete ((e.OldEntity as any).EDate);
+                        delete ((e.OldEntity as any).EUser);
 
-                        e.AuditActionType = AuditActionType[e.AuditActionType] as any;
+                        e.ActionType = AuditActionType[e.ActionType] as any;
                         (e as any).isShowed = false;
                     });
 
@@ -39,10 +40,9 @@ namespace _Ext {
 
         protected getTemplateName(): string {
             usingVuejs();
-
+            usingJsonDiffPatch();
             return '_Ext.AuditLogViewer'
         }
-
 
     }
 

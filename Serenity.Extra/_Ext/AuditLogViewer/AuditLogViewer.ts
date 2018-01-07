@@ -10,7 +10,7 @@ namespace _Ext {
         entity
         entityId
 
-        constructor(el: string, entityVersions: VersionInfo[]) {
+        constructor(el: string, entityVersions: AuditLogRow[]) {
             this.el = el || this.el;
             this.data.entityVersions = entityVersions;
         }
@@ -32,10 +32,10 @@ namespace _Ext {
         }
 
         methods = {
-            showDiff: (versionInfo: VersionInfo) => {
+            showDiff: (versionInfo: AuditLogRow) => {
                 //showing diff visually
                 var left = versionInfo.OldEntity;
-                var right = versionInfo.Entity;
+                var right = versionInfo.NewEntity;
                 var delta = jsondiffpatch.diff(left, right);
 
                 // beautiful html diff
@@ -43,10 +43,10 @@ namespace _Ext {
 
             },
 
-            getDiff: (versionInfo: VersionInfo) => {
+            getDiff: (versionInfo: AuditLogRow) => {
                 //showing diff visually
                 var left = versionInfo.OldEntity;
-                var right = versionInfo.Entity;
+                var right = versionInfo.NewEntity;
                 var delta = jsondiffpatch.diff(left, right);
 
                 // beautiful html diff

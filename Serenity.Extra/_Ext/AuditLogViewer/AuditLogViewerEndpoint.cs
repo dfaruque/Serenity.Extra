@@ -1,36 +1,31 @@
 ﻿
 namespace _Ext.Endpoints
 {
-    using LiteDB;
+    using _Ext.Entities;
+    using Serenity.Data;
     using Serenity.Services;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Data;
     using System.Linq;
     using System.Web.Mvc;
 
     [RoutePrefix("Services/AuditLogViewer"), Route("{action}")]
+    [ConnectionKey(typeof(AuditLogRow))]
     public partial class AuditLogViewerController : ServiceEndpoint
     {
-        public AuditLogViewerResponse List(AuditLogViewerRequest request)
+        public AuditLogViewerResponse List(IDbConnection connection, AuditLogViewerRequest request)
         {
             var response = new AuditLogViewerResponse();
 
             var rowType = Q.GetRowTypeByFormKey(request.FormKey);
             string connectionKey = Q.GetConnectionKeyByRowType(rowType);
             string tableName = Q.GetTableNameByRowType(rowType);
+            var fld = AuditLogRow.Fields;
 
-            // Open database (or create if doesn't exist)
-            var constr = ConfigurationManager.ConnectionStrings["LogLiteDB"].ConnectionString;
-            //if (constr.IsTrimmedEmpty()) return;
-            using (var db = new LiteDatabase(constr))
-            {
+            response.EntityVersions = connection.List<AuditLogRow>(fld.EntityTableName == tableName
+                && fld.EntityId == request.EntityId).ToList();
 
-                var collectionName = tableName?.Replace('.', '_');
-                var collections = db.GetCollection<VersionInfo>(collectionName);
-
-                response.EntityVersions = collections.Find(x => x.EntityId == request.EntityId).ToList();
-
-            }
 
             return response;
         }
@@ -46,7 +41,7 @@ namespace _Ext.Endpoints
 
     public class AuditLogViewerResponse : ServiceResponse
     {
-        public List<VersionInfo> EntityVersions { get; set; }
+        public List<AuditLogRow> EntityVersions { get; set; }
 
     }
 
