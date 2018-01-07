@@ -219,7 +219,30 @@ namespace _Ext {
 
                     //editor
                     if (isEditable == true && c.sourceItem.readOnly != true) {
-                        c.editor = SerenityInlineEditor;
+                        if (q.useSerenityInlineEditors) {
+                            c.editor = SerenityInlineEditor;
+                        } else {
+                            if (c.sourceItem.editorType == "Lookup" || c.sourceItem.editorType == "Enum") {
+                                c.editor = Slick['Editors']['Select2'];
+                                c.width = c.minWidth > 160 ? c.minWidth : 160;
+                            } else if (c.sourceItem.editorType == "Date") {
+                                c.editor = Slick['Editors']['Date'];
+                            } else if (c.sourceItem.editorType == "Boolean") {
+                                c.editor = Slick['Editors']['Checkbox'];
+                            } else if (c.sourceItem.editorType == "Integer") {
+                                c.editor = Slick['Editors']['Integer'];
+                            } else if (c.sourceItem.editorType == "Decimal") {
+                                c.editor = Slick['Editors']['Float'];
+                            } else if (c.sourceItem.editorType == "YesNoSelect") {
+                                c.editor = Slick['Editors']['YesNoSelect'];
+                            } else if (c.sourceItem.editorType == "PercentComplete") {
+                                c.editor = Slick['Editors']['PercentComplete'];
+                            } else if (c.sourceItem.editorType == "LongText") {
+                                c.editor = Slick['Editors']['LongText'];
+                            } else {
+                                c.editor = Slick['Editors']['Text'];
+                            }
+                        }
                     }
                 } else {
                     c.cssClass += ' align-left';
