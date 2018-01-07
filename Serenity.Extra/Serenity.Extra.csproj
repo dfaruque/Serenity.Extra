@@ -88,6 +88,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Ext\AuditLogViewer\AuditLogViewerEndpoint.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogColumns.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogEndpoint.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogForm.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogPage.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogRepository.cs" />
+    <Compile Include="_Ext\AuditLog\AuditLogRow.cs" />
     <Compile Include="_Ext\Reporting\ReportBase.cs" />
     <Compile Include="_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="_Ext\Reporting\ReportRequest.cs" />
@@ -96,6 +103,10 @@
     <Compile Include="_Ext\Utils\Enums.cs" />
     <Compile Include="_Ext\Utils\NumberToWords.cs" />
     <Compile Include="_Ext\Utils\ObjectExtentions.cs" />
+    <Compile Include="_Ext\Utils\Q.cs" />
+    <Compile Include="_Ext\Utils\ReplaceRow\ReplaceRowEndpoint.cs" />
+    <Compile Include="_Ext\Utils\ReplaceRow\ReplaceRowForm.cs" />
+    <Compile Include="_Ext\_ExtNavigation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -147,6 +158,7 @@
     <None Include="Scripts\serenity\texts\serenity.texts.vi-VN.json" />
     <None Include="Scripts\serenity\texts\serenity.texts.zh-CN.json" />
     <None Include="Scripts\SlickGrid\README.md" />
+    <None Include="_Ext\AuditLog\AuditLogIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\aristo\aristo.css" />
@@ -858,6 +870,7 @@
     <Content Include="Scripts\sortable.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="_Ext\AuditLogViewer\AuditLogViewer.Template.html" />
     <Content Include="_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
     <Content Include="_Ext\Editors\SerenityInlineEditors.js" />
     <Content Include="_Ext\Editors\slick.editors.js" />
@@ -871,6 +884,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
+    <TypeScriptCompile Include="_Ext\AuditLogViewer\AuditLogViewer.ts" />
+    <TypeScriptCompile Include="_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
+    <TypeScriptCompile Include="_Ext\AuditLog\AuditLogActionTypeFormatter.ts" />
+    <TypeScriptCompile Include="_Ext\AuditLog\AuditLogDialog.ts" />
+    <TypeScriptCompile Include="_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="_Ext\Bases\GridBase.ts" />
     <TypeScriptCompile Include="_Ext\Bases\ReportGridBase.ts" />
@@ -886,9 +904,14 @@
     <TypeScriptCompile Include="_Ext\Reporting\PdfExportHelper.ts" />
     <TypeScriptCompile Include="_Ext\Reporting\ReportHelper.ts" />
     <TypeScriptCompile Include="_Ext\Utils\DialogUtils.ts" />
+    <TypeScriptCompile Include="_Ext\Utils\ReplaceRow\ReplaceRowDialog.ts" />
     <TypeScriptCompile Include="_Ext\Utils\Using.ts" />
     <TypeScriptCompile Include="_Ext\_q\_q.d.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.datetime.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.editor-utils.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.enum.ts" />
     <TypeScriptCompile Include="_Ext\_q\_q.ts" />
+    <TypeScriptCompile Include="_Ext\_q\_q.var.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
