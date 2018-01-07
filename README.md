@@ -8,6 +8,8 @@ It is just some useful utilities and some extra functionality like
 - Adding export report button automatically in grid if a report service method in defined.
 - Added funtionality to make a detail grid editable (inline)
 - Added some useful function in q (Not Q).
+- Audit Log in a single Table and a nice viewer.
+- Replace Row (useful for deleting a record and replace the dependants records with another record)
 
 ## How to use
 1. Install NuGet Package Serenity.Extra
