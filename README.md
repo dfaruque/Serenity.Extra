@@ -26,7 +26,8 @@ It is just some useful utilities and some extra functionalities like
 @Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
 ```
 3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
-4. Please Build solution then Transform All T4 Templates and then Run to avoid errors
+4. Add [LookupScript("Administration.User")] on UserRow
+5. Please Build solution then Transform All T4 Templates and then Run to avoid errors
 
 Serenity Default  |  _Ext
 ------------ | -------------
