@@ -4,6 +4,9 @@ const nameofFactory = <T>() => (name: keyof T) => name;
 //usage const nameof = nameofFactory<Edoc.RevenueReportModel>();
 
 namespace q {
+    export function isCosmicThemeApplied(): boolean {
+        return document.body.className.indexOf('cosmic') >= 0;
+    }
 
     export function formatDecimal(value) {
         let title = Serenity.NumberFormatter.format(value, '#,##0.00');
