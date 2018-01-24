@@ -1,33 +1,10 @@
 ﻿/* unset roundness ---------------------------------------*/
-.box, section.content > .s-DataGrid {
-    border-radius: 1px;
-}
-
-.s-QuickSearchBar, .quick-search-icon, .s-QuickSearchInput {
-    border-radius: 1px !important;
-}
-
-.quick-filters-bar {
-    border-radius: 1px;
-}
-
-.btn {
-    border-radius: 1px;
-}
-
-.tool-button, .button-outer, .inplace-button {
-    border-radius: 1px !important;
-}
-
-.select2-choice, .select2-arrow, .select2-drop {
-    border-radius: 1px !important;
-}
-
-.ui-corner-top {
-    border-radius: 1px;
-}
-
-input {
+.box, .ui-corner-top, section.content > .s-DataGrid,
+.s-QuickSearchBar, .quick-search-icon, .s-QuickSearchInput, .quick-filters-bar,
+.btn, .tool-button, .button-outer, .inplace-button,
+.select2-choice, .select2-arrow, .select2-drop,
+input, textarea
+{
     border-radius: 1px !important;
 }
 
@@ -221,12 +198,12 @@ form input, form .select2-choice {
 }
 
     .inline-action :hover {
-        text-shadow: 1px 1px 1px #111;
+        text-shadow: 0px 0px 1px #111;
     }
 
 .slick-row:hover {
     /*background: none repeat scroll 0 0 #f1f1ef;*/
-    text-shadow: 1px 1px 1px #bbb;
+    text-shadow: 0px 0px 1px #333;
 }
 
 /* Slick.Editors.Text, Slick.Editors.Date */

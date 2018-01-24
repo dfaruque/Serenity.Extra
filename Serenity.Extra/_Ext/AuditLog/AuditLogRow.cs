@@ -22,7 +22,7 @@ namespace _Ext.Entities
         public Int32? VersionNo { get { return Fields.VersionNo[this]; } set { Fields.VersionNo[this] = value; } }
 
         [DisplayName("User"), NotNull, QuickFilter]
-        [LookupEditor(typeof(EDS.Administration.Entities.UserRow))]
+        //[LookupEditor(typeof(PMS.Administration.Entities.UserRow))]
         public Int32? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
 
         [DisplayName("Action Type"), NotNull, QuickFilter]

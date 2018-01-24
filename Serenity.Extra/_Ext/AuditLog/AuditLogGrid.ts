@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../Bases/GridBase.ts" />
+
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()

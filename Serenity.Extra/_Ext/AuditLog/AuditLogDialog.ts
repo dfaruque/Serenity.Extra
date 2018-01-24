@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../Bases/DialogBase.ts" />
+
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()
