@@ -2,23 +2,32 @@
 
 Name of the repo says that this is an EXTRA of my Beloved https://github.com/volkanceylan/Serenity platform
 
-It is just some useful utilities and some extra functionality like 
-- Showing lookup text instead of id value in grid etc.
+It is just some useful utilities and some extra functionalities like 
+- Showing lookup text instead of id value in grid.
 - Automatic width adjustment of grid columns.
 - Adding export report button automatically in grid if a report service method in defined.
 - Added funtionality to make a detail grid editable (inline)
 - Added some useful function in q (Not Q).
-
+- Audit Log in a single Table and a nice viewer.
+- Replace Row (useful for deleting a record and replace the dependants records with another record)
+- Added some editors
+   - AutoCompleteEditor
+   - ColorEditor
+   - DateTimePickerEditor
+   - EmptyLookupEditor
+   - StaticTextBlock
+   
 ## How to use
 1. Install NuGet Package Serenity.Extra
 2. Include the following lines in _LayoutHead.cshtml
 ```C#
 @Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
 @Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
-@Html.Script("~/Modules/_Ext/Editors/SerenityInlineEditors.js") 
+@Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
 ```
 3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
-4. Please Build solution then Transform All T4 Templates and then Run to avoid errors
+4. Add [LookupScript("Administration.User")] on UserRow
+5. Please Build solution then Transform All T4 Templates and then Run to avoid errors
 
 Serenity Default  |  _Ext
 ------------ | -------------
