@@ -105,6 +105,14 @@ namespace q {
         tabAnchor.closest('li').hide();
     }
 
+    export function selectEditorTab(editor: Serenity.Widget<any>) {
+        let tabId = editor.element.closest('.tab-pane').attr('id');
+
+        let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
+
+        (tabAnchor as any).tab('show');
+    }
+
     // for select2 lookup editor
     export function getSelectedRow<TRow>(e: JQueryEventObject) {
         let selectedItem: Serenity.Select2Item = (e as any).added;
