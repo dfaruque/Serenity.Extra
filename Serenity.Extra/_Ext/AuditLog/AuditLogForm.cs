@@ -31,5 +31,7 @@ namespace _Ext.Forms
         public String NewEntity { get; set; }
         [OneWay, StaticTextBlock(IsHtml = true)]
         public String Differences { get; set; }
+        public String IpAddress { get; set; }
+        public String SessionId { get; set; }
     }
 }

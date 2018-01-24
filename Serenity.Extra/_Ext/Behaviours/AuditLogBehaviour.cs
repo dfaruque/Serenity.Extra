@@ -97,7 +97,9 @@ namespace _Ext
                         EntityTableName = row.Table,
                         EntityId = entityId,
                         OldEntity = oldrowJson,
-                        NewEntity = rowJson
+                        NewEntity = rowJson,
+                        IpAddress = HttpContext.Current.Request.UserHostAddress,
+                        SessionId = HttpContext.Current.Session.SessionID
                     };
 
                     connection.Insert<AuditLogRow>(auditLogRow);

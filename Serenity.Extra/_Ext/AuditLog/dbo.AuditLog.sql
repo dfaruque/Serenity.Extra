@@ -5,9 +5,10 @@
     [ActionType] INT            NOT NULL,
     [ActionDate] DATETIME       NOT NULL,
     [TableName]  VARCHAR (100)  NOT NULL,
-    [EntityId]   BIGINT            NOT NULL,
+    [EntityId]   BIGINT         NOT NULL,
     [OldEntity]  NVARCHAR (MAX) NULL,
     [NewEntity]  NVARCHAR (MAX) NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
+    [IpAddress]  VARCHAR (100)  NULL,
+    [SessionId]  VARCHAR (100)  NULL
 );
 

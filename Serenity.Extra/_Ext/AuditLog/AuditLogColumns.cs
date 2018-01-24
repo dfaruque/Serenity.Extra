@@ -23,6 +23,6 @@ namespace _Ext.Columns
         public AuditActionType ActionType { get; set; }
         public DateTime ActionDate { get; set; }
         public Int32 EntityId { get; set; }
-
+        public String IpAddress { get; set; }
     }
 }
