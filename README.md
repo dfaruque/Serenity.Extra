@@ -56,6 +56,13 @@ protected getSlickOptions() {
 ```
  #### To hide a field in a Dialog 
    use `q.hideField(this.form.SomeField)`.
+   
+ #### To disable a field in a Dialog 
+   use `Serenity.EditorUtils.setReadOnly(this.form.SomeField, true);`
+   
+ #### To disable a Dialog 
+   call `this.setReadOnly(true);` anywhere in your dialog.
+   
  #### To access parent/master dialog from child/detail dialog
    Initialize detail editor by using `q.initDetailEditor(this, this.form.someDetailField)` in dialog's constructor() OR onDialogOpen() overload 
    
