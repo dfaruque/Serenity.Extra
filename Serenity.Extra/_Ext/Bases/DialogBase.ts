@@ -99,7 +99,7 @@
                         title: 'Change Log',
                         icon: 'fa fa-history',
                         onClick: () => {
-                            let entityId = this.entity['Id'];
+                            let entityId = this.entity[this.getIdProperty()];
                             if (entityId) {
                                 let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
 
