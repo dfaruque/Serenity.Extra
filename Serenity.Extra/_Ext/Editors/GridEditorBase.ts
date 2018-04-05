@@ -197,13 +197,6 @@ namespace _Ext {
 
         protected onViewSubmit() { return false; }
 
-        protected getSlickOptions() {
-            let opt = super.getSlickOptions();
-            opt.forceFitColumns = false;
-            opt.autoHeight = true;
-            return opt;
-        }
-
         get_readOnly(): boolean {
             return this.isReadOnly;
         }
