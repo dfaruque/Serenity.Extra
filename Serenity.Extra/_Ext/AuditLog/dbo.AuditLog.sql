@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[AuditLog] (
+﻿drop table [dbo].[AuditLog]
+
+create TABLE [dbo].[AuditLog] (
     [Id]         BIGINT         IDENTITY (1, 1) NOT NULL,
     [VersionNo]  INT            NOT NULL,
     [UserId]     INT            NOT NULL,

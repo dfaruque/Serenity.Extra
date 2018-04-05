@@ -58,22 +58,16 @@ namespace q {
         return months == 0 ? 1 : months;
     }
 
-    export function addDays(date: Date | string, days: number): Date {
+    export function addDays(date: Date, days: number): Date {
         var result = new Date(date);
         result.setDate(result.getDate() + days);
         return result;
     }
 
 
-    export function addMonths(date: Date | string, months: number): Date {
+    export function addMonths(date: Date, months: number): Date {
         var result = new Date(date);
         result.setMonth(result.getMonth() + months);
-        return result;
-    }
-
-    export function addYear(date: Date | string, years: number): Date {
-        var result = new Date(date);
-        result.setFullYear(result.getFullYear() + years);
         return result;
     }
 
@@ -92,7 +86,7 @@ namespace q {
         }
     }
 
-    export function addPeriod(date: Date | string, period: number, periodUnit: _Ext.TimeUoM): Date {
+    export function addPeriod(date: Date, period: number, periodUnit: _Ext.TimeUoM): Date {
         var result = new Date(date);
         if (periodUnit == _Ext.TimeUoM.Day)
             result.setDate(result.getDate() + period);
@@ -224,5 +218,73 @@ namespace q {
         }, 500);
 
     }
-    
+
+    export function formatDate(d: Date | string, format?: string) {
+        if (!d) {
+            return '';
+        }
+
+        let date: Date;
+        if (typeof d == "string") {
+            var res = Q.parseDate(d);
+            if (!res)
+                return d;
+            date = res as Date;
+        }
+        else
+            date = d;
+
+        if (format == null || format == "d") {
+            format = Q.Culture.dateFormat;
+        }
+        else {
+            switch (format) {
+                case "g": format = Q.Culture.dateTimeFormat.replace(":ss", ""); break;
+                case "G": format = Q.Culture.dateTimeFormat; break;
+                case "s": format = "yyyy-MM-ddTHH:mm:ss"; break;
+                case "u": return Q.formatISODateTimeUTC(date);
+            }
+        }
+
+        let pad = function (i: number) {
+            return Q.zeroPad(i, 2);
+        };
+
+        return format.replace(new RegExp('dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|fff|zz?z?|\\/', 'g'),
+            function (fmt): any {
+                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                switch (fmt) {
+                    case '/': return Q.Culture.dateSeparator;
+                    case 'hh': return pad(((date.getHours() < 13) ? date.getHours() : (date.getHours() - 12)));
+                    case 'h': return ((date.getHours() < 13) ? date.getHours() : (date.getHours() - 12));
+                    case 'HH': return pad(date.getHours());
+                    case 'H': return date.getHours();
+                    case 'mm': return pad(date.getMinutes());
+                    case 'm': return date.getMinutes();
+                    case 'ss': return pad(date.getSeconds());
+                    case 's': return date.getSeconds();
+                    case 'yyyy': return date.getFullYear();
+                    case 'yy': return date.getFullYear().toString().substr(2, 4);
+                    case 'dddd': return days[date.getDay()];
+                    case 'ddd': return days[date.getDay()].substr(0, 3);
+                    case 'dd': return pad(date.getDate());
+                    case 'd': return date.getDate().toString();
+                    case 'MMMM': return months[date.getMonth()];
+                    case 'MMM': return months[date.getMonth()].substr(0, 3);
+                    case 'MM': return pad(date.getMonth() + 1);
+                    case 'M': return date.getMonth() + 1;
+                    case 't': return ((date.getHours() < 12) ? 'A' : 'P');
+                    case 'tt': return ((date.getHours() < 12) ? 'AM' : 'PM');
+                    case 'fff': return Q.zeroPad(date.getMilliseconds(), 3);
+                    case 'zzz':
+                    case 'zz':
+                    case 'z': return '';
+                    default: return fmt;
+                }
+            }
+        );
+    }
+
 }

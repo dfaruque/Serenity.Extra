@@ -15,7 +15,7 @@ namespace _Ext {
             this.data.entityVersions = entityVersions;
         }
 
-        ready = () => {
+        mounted = () => {
 
         }
 

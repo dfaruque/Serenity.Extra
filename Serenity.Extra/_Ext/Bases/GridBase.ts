@@ -169,12 +169,12 @@ namespace _Ext {
                     } else if (c.sourceItem.filteringType == String("Enum")) {
                         //c.cssClass += ' align-center';
 
-                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                            let enumKey = columnDef.sourceItem.editorParams.enumKey
-                            let text = q.getEnumText(enumKey, Q.toId(value));
-                            if (text) return text;
-                            else return '-';
-                        };
+                        //c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                        //    let enumKey = columnDef.sourceItem.editorParams.enumKey
+                        //    let text = q.getEnumText(enumKey, Q.toId(value));
+                        //    if (text) return text;
+                        //    else return '-';
+                        //};
                     } else if (c.sourceItem.formatterType == String("Date")) {
                         c.cssClass += ' align-center';
                         c.width = c.minWidth > 99 ? c.minWidth : 99;
