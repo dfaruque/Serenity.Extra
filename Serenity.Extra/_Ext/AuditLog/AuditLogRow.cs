@@ -45,6 +45,12 @@ namespace _Ext.Entities
         [DisplayName("New Entity")]
         public String NewEntity { get { return Fields.NewEntity[this]; } set { Fields.NewEntity[this] = value; } }
 
+        [DisplayName("IP Address"), Size(100)]
+        public String IpAddress { get { return Fields.IpAddress[this]; } set { Fields.IpAddress[this] = value; } }
+
+        [DisplayName("Session Id"), Size(100)]
+        public String SessionId { get { return Fields.SessionId[this]; } set { Fields.SessionId[this] = value; } }
+        
         #region Foreign Fields
         #endregion Foreign Fields
 
@@ -60,6 +66,8 @@ namespace _Ext.Entities
             public Int64Field EntityId;
             public StringField OldEntity;
             public StringField NewEntity;
+            public StringField IpAddress;
+            public StringField SessionId;
 
             public RowFields() : base()
             {

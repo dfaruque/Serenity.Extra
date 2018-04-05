@@ -8,8 +8,8 @@
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}")]
-    [DisplayName("{{Title}}"), InstanceName("{{Title}}"), TwoLevelCached]
+    [ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}"), TwoLevelCached]
+    [DisplayName("{{Title}}"), InstanceName("{{Title}}")]
     [ReadPermission("{{Permission}}")]
     [ModifyPermission("{{Permission}}")]
     public sealed class {{RowClassName}} : {{RowBaseClassAndInterfaces}}
