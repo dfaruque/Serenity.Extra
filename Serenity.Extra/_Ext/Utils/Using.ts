@@ -118,11 +118,6 @@ function usingVuejs() {
             }
         });
 
-        window['Vue'].filter('enumName', function (value) {
-            if (value) {
-                return Serenity.EnumFormatter.getName(value);
-            }
-        });
 
     }
 }
