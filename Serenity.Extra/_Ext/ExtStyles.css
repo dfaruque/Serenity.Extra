@@ -88,7 +88,7 @@ form input, form .select2-choice {
     }
 
 .label-only > label {
-    width: 100% !important;
+    width: 90% !important;
 }
 
 .label-only > input {
