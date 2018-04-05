@@ -30,6 +30,100 @@ function loadScript(url) {
     });
 }
 
+function usingVuejs() {
+    if (window['Vue']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl("~/Scripts/vue.js"));
+
+        //filters
+        window['Vue'].filter('formatDate', function (value, format) {
+            if (value) {
+                return Q.formatDate(value, format)
+            }
+        });
+
+        window['Vue'].filter('formatDateReadable', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return date.getDate() + ' ' + _Ext.Months[date.getMonth()].substr(0, 3) + ' ' + date.getFullYear();
+            }
+        });
+
+        window['Vue'].filter('dayOnly', function (value) {
+            if (value) {
+                return Q.formatDate(value, 'dd');
+            }
+        });
+
+        window['Vue'].filter('monthOnly', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return _Ext.Months[date.getMonth()];
+            }
+        });
+        window['Vue'].filter('monthOnly3', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return _Ext.Months[date.getMonth()].substr(0, 3);
+            }
+        });
+
+        window['Vue'].filter('yearOnly', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return date.getFullYear();
+            }
+        });
+
+        window['Vue'].filter('timeOnlyHHmm', function (value) {
+            if (value) {
+                return Q.formatDate(value, 'HH:mm');
+            }
+        });
+
+        window['Vue'].filter('formatDateTimeReadable', function (value) {
+            if (value) {
+                let date = Q.parseISODateTime(value);
+                return date.getDate() + ' ' + _Ext.Months[date.getMonth()] + ' ' + date.getFullYear()
+                    + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            }
+        });
+
+        window['Vue'].filter('enumText', function (value, enumKey) {
+            if (value) {
+                return Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
+            }
+        });
+
+        window['Vue'].filter('truncate', function (text, length, clamp) {
+            clamp = clamp || '...';
+            length = length || 30;
+
+            if (text.length <= length) return text;
+
+            var tcText = text.slice(0, length - clamp.length);
+            var last = tcText.length - 1;
+
+
+            while (last > 0 && tcText[last] !== ' ' && tcText[last] !== clamp[0]) last -= 1;
+
+            // Fix for case when text dont have any `space`
+            last = last || length - clamp.length;
+
+            tcText = tcText.slice(0, last);
+
+            return tcText + clamp;
+        });
+
+        window['Vue'].filter('capitalize', function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1)
+        });
+    }
+}
+
 function includeBootstrapColorPickerCss() {
     var style = $("#colorpicker");
     if (style.length > 0) {
@@ -84,43 +178,6 @@ function usingBabylonjs() {
     }
 }
 
-function usingVuejs() {
-    if (window['Vue']) {
-        return;
-    } else {
-        loadScript(Q.resolveUrl("~/Scripts/vue.js"));
-
-        //filters
-        window['Vue'].filter('formatDate', function (value) {
-            if (value) {
-                return Q.formatDate(value)
-            }
-        });
-
-        window['Vue'].filter('formatDateReadable', function (value) {
-            if (value) {
-                let date = Q.parseISODateTime(value);
-                return date.getDate() + ' ' + _Ext.Months[date.getMonth()] + ' ' + date.getFullYear();
-            }
-        });
-
-        window['Vue'].filter('formatDateTimeReadable', function (value) {
-            if (value) {
-                let date = Q.parseISODateTime(value);
-                return date.getDate() + ' ' + _Ext.Months[date.getMonth()] + ' ' + date.getFullYear()
-                    + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-            }
-        });
-
-        window['Vue'].filter('enumText', function (value, enumKey) {
-            if (value) {
-                return Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
-            }
-        });
-
-
-    }
-}
 
 function usingChartjs() {
     if (window['Chart']) {
