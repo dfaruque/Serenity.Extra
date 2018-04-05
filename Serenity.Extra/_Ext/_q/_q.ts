@@ -41,14 +41,6 @@ namespace q {
         return color;
     }
 
-    //Array utils
-    export function groupBy(xs: any[], key) {
-        return xs.reduce(function (rv, x) {
-            (rv[x[key]] = rv[x[key]] || []).push(x);
-            return rv;
-        }, {});
-    }
-
 }
 
 interface GridEditorOptions {
