@@ -58,16 +58,22 @@ namespace q {
         return months == 0 ? 1 : months;
     }
 
-    export function addDays(date: Date, days: number): Date {
+    export function addDays(date: Date | string, days: number): Date {
         var result = new Date(date);
         result.setDate(result.getDate() + days);
         return result;
     }
 
 
-    export function addMonths(date: Date, months: number): Date {
+    export function addMonths(date: Date | string, months: number): Date {
         var result = new Date(date);
         result.setMonth(result.getMonth() + months);
+        return result;
+    }
+
+    export function addYear(date: Date | string, years: number): Date {
+        var result = new Date(date);
+        result.setFullYear(result.getFullYear() + years);
         return result;
     }
 
@@ -86,7 +92,7 @@ namespace q {
         }
     }
 
-    export function addPeriod(date: Date, period: number, periodUnit: _Ext.TimeUoM): Date {
+    export function addPeriod(date: Date | string, period: number, periodUnit: _Ext.TimeUoM): Date {
         var result = new Date(date);
         if (periodUnit == _Ext.TimeUoM.Day)
             result.setDate(result.getDate() + period);
