@@ -1,4 +1,4 @@
-﻿
+
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()
@@ -30,7 +30,7 @@ namespace _Ext {
                     Q.confirm(`Are you sure? 
 
 ${this.request.EntityTypeTitle}: "${this.request.DeletedEntityName}" will be deleted 
-and all references will be replaced with "${this.form.ReplaceWithEntityId.get_text()}". 
+and all references will be replaced with "${this.form.ReplaceWithEntityId.text}". 
 
 This action cannot be undone!
 
@@ -40,8 +40,8 @@ This action cannot be undone!
                             Q.serviceRequest(Q.resolveUrl('~/Services/ReplaceRow/Replace'), this.request, response => {
                                 this.dialogClose()
 
-                                if (lastGrid)
-                                    lastGrid.refresh()
+                                if (window['lastGrid']) //for single paged apps
+                                    window['lastGrid'].refresh()
 
                             })
 
