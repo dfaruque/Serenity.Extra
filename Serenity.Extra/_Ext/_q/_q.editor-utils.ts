@@ -1,7 +1,7 @@
 ﻿
 namespace q {
 
-    export function initDetailEditor(dialog: _Ext.DialogBase< any, any>, editor: _Ext.GridEditorBase<any>, options: GridEditorOptions = {}): void {
+    export function initDetailEditor(dialog: _Ext.DialogBase<any, any>, editor: _Ext.GridEditorBase<any>, options: GridEditorOptions = {}): void {
 
         if (options.showCaption != true) {
             editor.element.siblings('.caption').hide();
@@ -103,6 +103,37 @@ namespace q {
         let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
 
         tabAnchor.closest('li').hide();
+    }
+
+    export function readOnlyEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
+        let $editors = editor.element.closest('.tab-pane').find('.editor');
+        
+        Serenity.EditorUtils.setReadonly($editors, value);
+    }
+
+    export function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend = false) {
+        let fieldDiv = editor.element.closest('.field');
+
+        if (isPrepend == true)
+            fieldDiv.prependTo(toElement);
+        else
+            fieldDiv.appendTo(toElement);
+    }
+
+    export function moveEditorCategoryFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend = false) {
+        let fieldDiv = editor.element.closest('.field');
+        let categoryDiv = editor.element.closest('.category');
+
+        if (isPrepend == true)
+            categoryDiv.prependTo(toElement);
+        else
+            categoryDiv.appendTo(toElement);
+
+        //hide category navigation link
+        let categoryAnchor = categoryDiv.find('.category-anchor');
+        let categoryAnchorName = categoryAnchor.attr('name');
+        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide();
+
     }
 
     export function selectEditorTab(editor: Serenity.Widget<any>) {
