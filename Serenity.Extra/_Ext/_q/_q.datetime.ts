@@ -58,25 +58,25 @@ namespace q {
         return months == 0 ? 1 : months;
     }
 
-    export function addDays(date: Date | string, days: number): Date {
-        var result = new Date(date);
+    export function addDays(date: Date, days: number): Date {
+        var result = new Date(date as any);
         result.setDate(result.getDate() + days);
         return result;
     }
 
 
-    export function addMonths(date: Date | string, months: number): Date {
-        var result = new Date(date);
+    export function addMonths(date: Date, months: number): Date {
+        var result = new Date(date as any);
         result.setMonth(result.getMonth() + months);
         return result;
     }
 
-    export function addYear(date: Date | string, years: number): Date {
-        var result = new Date(date);
+        export function addYear(date: Date, years: number): Date {
+        var result = new Date(date as any);
         result.setFullYear(result.getFullYear() + years);
         return result;
     }
-
+    
     export function getPeriods(fromDate: Date, toDate: Date, periodUnit: _Ext.TimeUoM): number {
         if (periodUnit == _Ext.TimeUoM.Day) {
             let days = q.getDays(fromDate, toDate);
@@ -92,8 +92,8 @@ namespace q {
         }
     }
 
-    export function addPeriod(date: Date | string, period: number, periodUnit: _Ext.TimeUoM): Date {
-        var result = new Date(date);
+    export function addPeriod(date: Date, period: number, periodUnit: _Ext.TimeUoM): Date {
+        var result = new Date(date as any);
         if (periodUnit == _Ext.TimeUoM.Day)
             result.setDate(result.getDate() + period);
         else if (periodUnit == _Ext.TimeUoM.Month)
