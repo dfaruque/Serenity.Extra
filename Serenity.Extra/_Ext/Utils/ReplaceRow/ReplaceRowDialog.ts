@@ -1,4 +1,4 @@
-
+﻿
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()
