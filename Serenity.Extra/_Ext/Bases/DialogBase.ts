@@ -155,8 +155,14 @@
 
             if ($content.length > 0) {
                 try {
-                    this.element.dialog("option", "width", $content.width() + 30 + (width || 0));
-                    this.element.dialog("option", "height", $content.height() + (height || 30));
+                    let dwidth = $content.width() + 48 + (width || 0);
+                    let dheight = $content.height() + (height || 30);
+
+                    this.element.dialog("option", "width", dwidth);
+                    this.element.dialog("option", "height", dheight);
+                    //Serenity.DialogExtensions.dialogResizable(this.element, dwidth, dheight);
+
+                    this.element.find('.categories').height(dheight - 110);//.flexHeightOnly(1);
                 } catch (e) {
                 }
 
@@ -164,6 +170,9 @@
                     left: $content.position().left + (left || 0),
                     top: (top || 50),
                 });
+                
+                //this.element.closest('.ui-dialog').triggerHandler("resize");
+                //this.arrange();
             }
 
             setTimeout(() => {
@@ -175,6 +184,6 @@
         afterSetDialogSize() {
 
         }
-
+        
     }
 }
