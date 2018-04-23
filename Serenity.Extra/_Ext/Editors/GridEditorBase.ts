@@ -52,7 +52,7 @@ namespace _Ext {
 
         protected deleteEntity(id: number) {
             this.view.deleteItem(id);
-            this.onItemsChanged();
+            setTimeout(this.onItemsChanged);
             return true;
         }
 
@@ -63,7 +63,7 @@ namespace _Ext {
 
         protected setEntities(items: TEntity[]) {
             this.view.setItems(items, true);
-            this.onItemsChanged();
+            setTimeout(this.onItemsChanged);
             this.refresh();
 
         }
@@ -209,6 +209,12 @@ namespace _Ext {
             }
         }
 
+        protected getSlickOptions() {
+            let opt = super.getSlickOptions();
+            opt.forceFitColumns = false;
+            opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
+            return opt;
+        }
 
         parentDialog: DialogBase<any, any>;
 
