@@ -1,4 +1,9 @@
-﻿var isPageRefreshRequired: boolean;
+﻿/// <reference path="../Bases/GridBase.ts" />
+/// <reference path="../Bases/DialogBase.ts" />
+/// <reference path="../Editors/EditorDialogBase.ts" />
+/// <reference path="../Editors/GridEditorBase.ts" />
+
+var isPageRefreshRequired: boolean;
 //const nameof = <T>(name: keyof T) => name;
 const nameofFactory = <T>() => (name: keyof T) => name;
 //usage const nameof = nameofFactory<Edoc.RevenueReportModel>();
