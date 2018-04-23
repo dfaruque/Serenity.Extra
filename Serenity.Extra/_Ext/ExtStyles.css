@@ -3,8 +3,7 @@
 .s-QuickSearchBar, .quick-search-icon, .s-QuickSearchInput, .quick-filters-bar,
 .btn, .tool-button, .button-outer, .inplace-button,
 .select2-choice, .select2-arrow, .select2-drop,
-input, textarea
-{
+input, textarea {
     border-radius: 1px !important;
 }
 
@@ -24,7 +23,7 @@ input, textarea
     }*/
 
 /* Form Styles ---------------------------------------*/
-form input, form .select2-choice {
+.field > input, .field > textarea, .field > .select2-container > .select2-choice {
     border-left-width: 5px !important;
 }
 
@@ -49,10 +48,14 @@ form input, form .select2-choice {
     padding-left: 8px;
 }
 
-.s-Dialog > .size {
+/*.s-Dialog > .size {
     width: 750px;
     height: 600px;
-}
+}*/
+
+/*.s-PropertyGrid .categories {
+    height: 400px;
+}*/
 
 .s-Form .caption {
     text-align: left;
