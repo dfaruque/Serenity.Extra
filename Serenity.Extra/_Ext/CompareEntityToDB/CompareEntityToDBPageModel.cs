@@ -29,7 +29,8 @@ namespace _Ext.Model
 
                 using (var connection = SqlConnections.NewByKey(connectionKey))
                 {
-                    var schemaProvider = SchemaHelper.GetSchemaProvider(connection.GetDialect().ServerType);
+                    var dialect = connection.GetDialect();
+                    var schemaProvider = SchemaHelper.GetSchemaProvider(dialect.ServerType);
 
                     var tableName = row.Table;
                     string schema = null;
@@ -38,12 +39,16 @@ namespace _Ext.Model
                         schema = tableName.Substring(0, tableName.IndexOf('.')).Trim('[', ']');
                         tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim('[', ']');
                     }
+                    else
+                    {
+                        tableName = tableName.Trim('[', ']');
+                    }
 
                     var rowFields = row.GetFields();
-                    var dbFields = schemaProvider.GetFieldInfos(connection, schema ?? "dbo", tableName);
+                    var dbFields = schemaProvider.GetFieldInfos(connection, schema, tableName);
                     if (dbFields == null || dbFields.Count() == 0)
                     {
-                        Issues.Add($"{Issues.Count + 1}. {row.Table} at Table:  {row.Table}; connection key: {connectionKey} <span class=\"label label-danger\">unable to retrive Table info.</span>");
+                        Issues.Add($"{Issues.Count + 1}. {rowClass} at Table:  {row.Table}; connection key: {connectionKey} <span class=\"label label-danger\">unable to retrive Table info.</span>");
 
                     }
                     else
@@ -57,18 +62,21 @@ namespace _Ext.Model
                                 string strNull = rowfield.Flags.HasFlag(FieldFlags.NotNull) ? "[NotNull]" : "";
 
                                 if (dbField == null)
-                                    Issues.Add($"{Issues.Count + 1}. {strNull} {rowfield.Type} {rowfield.Name} at Table:  {row.Table} <span class=\"label label-danger\">no corresponding field in database</span>");
+                                    Issues.Add($"{Issues.Count + 1}. {rowClass} > {strNull} {rowfield.Type} {rowfield.Name}  at Table:  {row.Table} <span class=\"label label-danger\">no corresponding field in database</span>");
                                 else
                                 {
-                                    string strTypeMismatch = rowfield.Type.ToString() == SchemaHelper.SqlTypeNameToFieldType(dbField.DataType, dbField.Size) ?
+                                    var rowfieldTypeName = rowfield.Type.ToString();
+
+
+                                    string strTypeMismatch = rowfieldTypeName == SchemaHelper.SqlTypeNameToFieldType(dbField.DataType, dbField.Size) ?
                                         "" : "DataType Mismatch";
 
                                     string strNullableMismatch = dbField.IsNullable == false && rowfield.Flags.HasFlag(FieldFlags.NotNull) == false ?
                                         "Nullable Mismatch" : "";
 
                                     if (!strNullableMismatch.IsEmptyOrNull() || !strTypeMismatch.IsEmptyOrNull())
-                                        Issues.Add($"{Issues.Count + 1}. {strNull} {rowfield.Type} {rowfield.Name} "
-                                        + $"at Table: {row.Table} <span class=\"label label-danger\">{strTypeMismatch} {strNullableMismatch}</span>");
+                                        Issues.Add($"{Issues.Count + 1}. {rowClass} > {strNull} {rowfield.Type} {rowfield.Name} "
+                                        + $"at Table: {row.Table} > {dbField.DataType} {(dbField.IsNullable ? "NULL" : "NOT NULL")} <span class=\"label label-danger\">{strTypeMismatch} {strNullableMismatch}</span>");
                                 }
                             }
                         }
