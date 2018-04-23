@@ -27,7 +27,9 @@
         var val = Q.coalesce(Q.trimToNull(input.val()), '0');
 
         if (args.column.onChange) {
-            args.column.onChange(e, args.item, val);
+            setTimeout(() => {
+                args.column.onChange(e, args.item, val);
+            }, 1); 
             //args.grid.render();
         }
     }
@@ -63,7 +65,7 @@
         for (var i = 0; i < values.length; i++) {
             var value = Q.toId(values[i]);
 
-            var text = _Ext.q.getEnumText(enumKey, Q.toId(value));
+            var text = q.getEnumText(enumKey, Q.toId(value));
 
             newOption = new Option(text, value);
             select.appendChild(newOption);
