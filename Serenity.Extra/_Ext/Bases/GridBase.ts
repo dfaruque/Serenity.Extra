@@ -157,7 +157,7 @@ namespace _Ext {
                 if (c.sourceItem) {
                     if (c.sourceItem.filteringType == String("Lookup")) {
                         c.cssClass += ' align-left';
-                        if (c.sourceItem.editorType == "Lookup") {
+                        if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
                             (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
                             c.formatter = (row, cell, value, columnDef: any, dataContext) => {
                                 let item = columnDef.lookup.itemById[value];
