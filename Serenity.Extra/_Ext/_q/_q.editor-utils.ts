@@ -96,7 +96,13 @@ namespace q {
         else
             editor.element.closest('.field').show();
     }
-
+    export function showField(editor: Serenity.Widget<any>, value: boolean = true) {
+        if (value == true)
+            editor.element.closest('.field').show();
+        else
+            editor.element.closest('.field').hide();
+    }
+    
     export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
         let tabId = editor.element.closest('.tab-pane').hide().attr('id');
 
