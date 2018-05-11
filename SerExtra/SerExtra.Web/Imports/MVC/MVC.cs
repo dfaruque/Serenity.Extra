@@ -4,6 +4,20 @@ namespace MVC
 {
     public static class Views
     {
+        public static class _Ext
+        {
+            public static class AuditLog
+            {
+                public const string AuditLogIndex = "~/Modules/_Ext/AuditLog/AuditLogIndex.cshtml";
+            }
+
+            public static class CompareEntityToDB
+            {
+                public const string CompareEntityToDBIndex = "~/Modules/_Ext/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+            }
+
+        }
+
         public static class Administration
         {
             public static class Language
@@ -117,11 +131,6 @@ namespace MVC
                     public const string Index = "~/Modules/BasicSamples/Dialogs/GetInsertedRecordId/Index.cshtml";
                 }
 
-                public static class MultiColumnResponsiveDialog
-                {
-                    public const string Index = "~/Modules/BasicSamples/Dialogs/MultiColumnResponsiveDialog/Index.cshtml";
-                }
-
                 public static class OtherFormInTab
                 {
                     public const string Index = "~/Modules/BasicSamples/Dialogs/OtherFormInTab/Index.cshtml";
@@ -140,11 +149,6 @@ namespace MVC
                 public static class ReadOnlyDialog
                 {
                     public const string Index = "~/Modules/BasicSamples/Dialogs/ReadOnlyDialog/Index.cshtml";
-                }
-
-                public static class ResponsiveDialog
-                {
-                    public const string Index = "~/Modules/BasicSamples/Dialogs/ResponsiveDialog/Index.cshtml";
                 }
 
                 public static class SerialAutoNumber
