@@ -74,7 +74,7 @@ namespace _Ext {
 
         protected getButtons(): Serenity.ToolButton[] {
             return [{
-                title: this.getAddButtonCaption(),
+                title: 'Add ' + this.getItemName(),
                 cssClass: 'add-button',
                 onClick: () => { this.addButtonClick() }
             }];
