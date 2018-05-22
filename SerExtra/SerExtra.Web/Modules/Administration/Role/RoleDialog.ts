@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class RoleDialog extends Serenity.EntityDialog<RoleRow, any> {
+    export class RoleDialog extends _Ext.DialogBase<RoleRow, any> {
         protected getFormKey() { return RoleForm.formKey; }
         protected getIdProperty() { return RoleRow.idProperty; }
         protected getLocalTextPrefix() { return RoleRow.localTextPrefix; }

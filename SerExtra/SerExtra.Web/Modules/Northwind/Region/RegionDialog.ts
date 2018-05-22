@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class RegionDialog extends Serenity.EntityDialog<RegionRow, any> {
+    export class RegionDialog extends _Ext.DialogBase<RegionRow, any> {
         protected getFormKey() { return RegionForm.formKey; }
         protected getIdProperty() { return RegionRow.idProperty; }
         protected getLocalTextPrefix() { return RegionRow.localTextPrefix; }

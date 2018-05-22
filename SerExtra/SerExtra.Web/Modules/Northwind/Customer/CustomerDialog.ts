@@ -2,7 +2,7 @@
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.panel()
-    export class CustomerDialog extends Serenity.EntityDialog<CustomerRow, any> {
+    export class CustomerDialog extends _Ext.DialogBase<CustomerRow, any> {
         protected getFormKey() { return CustomerForm.formKey; }
         protected getIdProperty() { return CustomerRow.idProperty; }
         protected getLocalTextPrefix() { return CustomerRow.localTextPrefix; }
@@ -12,7 +12,7 @@
         protected form = new CustomerForm(this.idPrefix);
 
         private ordersGrid: CustomerOrdersGrid;
-        private loadedState: string;
+        //private loadedState: string;
 
         constructor() {
             super();
@@ -23,7 +23,7 @@
             this.ordersGrid.openDialogsAsPanel = false; 
 
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
-            DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
+            //DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
         }
 
         getSaveState() {
@@ -37,7 +37,7 @@
 
         loadResponse(data) {
             super.loadResponse(data);
-            this.loadedState = this.getSaveState();
+            //this.loadedState = this.getSaveState();
         }
 
         loadEntity(entity: CustomerRow) {

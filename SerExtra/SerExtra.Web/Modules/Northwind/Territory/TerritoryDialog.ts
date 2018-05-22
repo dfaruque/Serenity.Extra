@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class TerritoryDialog extends Serenity.EntityDialog<TerritoryRow, any> {
+    export class TerritoryDialog extends _Ext.DialogBase<TerritoryRow, any> {
         protected getFormKey() { return TerritoryForm.formKey; }
         protected getIdProperty() { return TerritoryRow.idProperty; }
         protected getLocalTextPrefix() { return TerritoryRow.localTextPrefix; }

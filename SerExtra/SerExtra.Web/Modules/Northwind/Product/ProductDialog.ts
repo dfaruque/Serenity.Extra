@@ -2,7 +2,7 @@
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.maximizable()
-    export class ProductDialog extends Serenity.EntityDialog<ProductRow, any> {
+    export class ProductDialog extends _Ext.DialogBase<ProductRow, any> {
         protected getFormKey() { return ProductForm.formKey; }
         protected getIdProperty() { return ProductRow.idProperty; }
         protected getLocalTextPrefix() { return ProductRow.localTextPrefix; }

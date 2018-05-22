@@ -2095,16 +2095,6 @@ declare namespace SerExtra.LanguageList {
 }
 declare namespace SerExtra.ScriptInitialization {
 }
-declare namespace SerExtra.Administration {
-    class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: LanguageForm;
-    }
-}
 declare namespace Slick {
     class AutoColumnSize {
     }
@@ -2233,6 +2223,16 @@ declare namespace LiteDB {
     }
 }
 declare namespace SerExtra.Administration {
+    class LanguageDialog extends _Ext.DialogBase<LanguageRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: LanguageForm;
+    }
+}
+declare namespace SerExtra.Administration {
     class LanguageGrid extends _Ext.GridBase<LanguageRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof LanguageDialog;
@@ -2244,7 +2244,7 @@ declare namespace SerExtra.Administration {
     }
 }
 declare namespace SerExtra.Administration {
-    class RoleDialog extends Serenity.EntityDialog<RoleRow, any> {
+    class RoleDialog extends _Ext.DialogBase<RoleRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2301,7 +2301,7 @@ declare namespace SerExtra.Administration {
     }
 }
 declare namespace SerExtra.Administration {
-    class UserDialog extends Serenity.EntityDialog<UserRow, any> {
+    class UserDialog extends _Ext.DialogBase<UserRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getIsActiveProperty(): string;
@@ -2636,7 +2636,7 @@ declare namespace SerExtra.Common {
     }
 }
 declare namespace SerExtra.Northwind {
-    class CategoryDialog extends Serenity.EntityDialog<CategoryRow, any> {
+    class CategoryDialog extends _Ext.DialogBase<CategoryRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2656,7 +2656,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class CustomerDialog extends Serenity.EntityDialog<CustomerRow, any> {
+    class CustomerDialog extends _Ext.DialogBase<CustomerRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2664,7 +2664,6 @@ declare namespace SerExtra.Northwind {
         protected getService(): string;
         protected form: CustomerForm;
         private ordersGrid;
-        private loadedState;
         constructor();
         getSaveState(): string;
         loadResponse(data: any): void;
@@ -2691,7 +2690,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class OrderDialog extends Serenity.EntityDialog<OrderRow, any> {
+    class OrderDialog extends _Ext.DialogBase<OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2803,7 +2802,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class ProductDialog extends Serenity.EntityDialog<ProductRow, any> {
+    class ProductDialog extends _Ext.DialogBase<ProductRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2843,7 +2842,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class RegionDialog extends Serenity.EntityDialog<RegionRow, any> {
+    class RegionDialog extends _Ext.DialogBase<RegionRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2879,7 +2878,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class ShipperDialog extends Serenity.EntityDialog<ShipperRow, any> {
+    class ShipperDialog extends _Ext.DialogBase<ShipperRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2905,7 +2904,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class SupplierDialog extends Serenity.EntityDialog<SupplierRow, any> {
+    class SupplierDialog extends _Ext.DialogBase<SupplierRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2926,7 +2925,7 @@ declare namespace SerExtra.Northwind {
     }
 }
 declare namespace SerExtra.Northwind {
-    class TerritoryDialog extends Serenity.EntityDialog<TerritoryRow, any> {
+    class TerritoryDialog extends _Ext.DialogBase<TerritoryRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3363,7 +3362,7 @@ declare namespace SerExtra.BasicSamples {
     }
 }
 declare namespace SerExtra.BasicSamples {
-    class PopulateLinkedDataDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    class PopulateLinkedDataDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3504,13 +3503,13 @@ declare namespace SerExtra.BasicSamples {
     /**
      * Basic order dialog with a category selection
      */
-    class FilteredLookupInDetailDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    class FilteredLookupInDetailDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getNameProperty(): string;
         protected getService(): string;
-        private form;
+        protected form: FilteredLookupInDetailForm;
         constructor();
     }
 }
@@ -3688,7 +3687,7 @@ declare namespace SerExtra.BasicSamples {
     }
 }
 declare namespace SerExtra.BasicSamples {
-    class DragDropSampleDialog extends Serenity.EntityDialog<DragDropSampleRow, any> {
+    class DragDropSampleDialog extends _Ext.DialogBase<DragDropSampleRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3938,7 +3937,7 @@ declare namespace SerExtra.Membership {
     }
 }
 declare namespace _Ext {
-    class ReplaceRowDialog extends Serenity.EntityDialog<any, any> {
+    class ReplaceRowDialog extends _Ext.DialogBase<any, any> {
         request: ReplaceRowRequest;
         entityList: Array<any>;
         protected getFormKey(): string;

@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class SupplierDialog extends Serenity.EntityDialog<SupplierRow, any> {
+    export class SupplierDialog extends _Ext.DialogBase<SupplierRow, any> {
         protected getFormKey() { return SupplierForm.formKey; }
         protected getIdProperty() { return SupplierRow.idProperty; }
         protected getLocalTextPrefix() { return SupplierRow.localTextPrefix; }

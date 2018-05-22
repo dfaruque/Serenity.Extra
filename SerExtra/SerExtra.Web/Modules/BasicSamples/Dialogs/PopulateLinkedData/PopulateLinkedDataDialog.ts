@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.BasicSamples {
 
     @Serenity.Decorators.registerClass()
-    export class PopulateLinkedDataDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    export class PopulateLinkedDataDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
 
         protected getFormKey() { return PopulateLinkedDataForm.formKey; }
         protected getIdProperty() { return Northwind.OrderRow.idProperty; }
