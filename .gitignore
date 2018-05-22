@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 /SerExtra/SerExtra.Web/Content/site/site.css
 /SerExtra/SerExtra.Web/Scripts/site/SerExtra.Web.js
+/SerExtra/SerExtra.Web/Scripts/site/SerExtra.Web.d.ts
+/SerExtra/SerExtra.Web/Scripts/site/SerExtra.Web.js.map
