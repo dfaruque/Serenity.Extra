@@ -166,12 +166,12 @@ namespace _Ext {
                             };
                         }
                         //c.width = c.minWidth > 160 ? c.minWidth : 160;
-                    } else if (c.sourceItem.filteringType == String("Enum")) {
+                    } else if (c.sourceItem.formatterType == String("Enum")) {
                         //c.cssClass += ' align-center';
 
                         c.formatter = (row, cell, value, columnDef: any, dataContext) => {
                             let enumKey = columnDef.sourceItem.editorParams.enumKey
-                            let text = q.getEnumText(enumKey, Q.toId(value));
+                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
                             if (text) return text;
                             else return '-';
                         };
@@ -461,7 +461,7 @@ namespace _Ext {
 
                 let groups = this.view.getGroups();
 
-                let generateRowNumberNo = () => {
+                let generateRowNumber = () => {
                     groups = this.view.getGroups();
 
                     for (let gi = 0; gi < groups.length; gi++) {
@@ -476,9 +476,9 @@ namespace _Ext {
                 };
 
                 if (groups.length == 0) {
-                    setTimeout(generateRowNumberNo);
+                    setTimeout(generateRowNumber);
                 } else {
-                    generateRowNumberNo();
+                    generateRowNumber();
                 }
             }
             return r;
