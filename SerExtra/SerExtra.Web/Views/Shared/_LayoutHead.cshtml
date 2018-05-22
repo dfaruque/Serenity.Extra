@@ -11,11 +11,15 @@
 {
     @Html.Stylesheet("~/Content/site/site.rtl.css")
 }
-<script type="application/json" id="ScriptCulture">@Html.Raw(Serenity.JSON.Stringify(new ScriptCulture()))</script>
+@Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
+<script type="application/json" id="ScriptCulture">
+    @Html.Raw(Serenity.JSON.Stringify(new ScriptCulture()))
+</script>
 <script type="text/javascript">window.paceOptions = { startOnPageLoad: false, ajax: { trackMethods: ['GET', 'POST'], trackWebSockets: false, ignoreURLs: [] } };</script>
 @Html.ScriptBundle("Base")
 @Html.ScriptBundle("Site")
 @Html.LocalTextScript("Site")
+@Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
 
 <script type="text/javascript">
     @Html.Raw(DynamicScriptManager.GetScriptText("Lookup.Administration.Language"))
