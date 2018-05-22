@@ -82,12 +82,19 @@ namespace q {
         categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).text(value);
     }
 
-    export function hideEditorCategory(editor: Serenity.Widget<any>) {
-        editor.element.closest('.category').hide()
+    export function hideEditorCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+        if (value == true)
+            editor.element.closest('.category').hide();
+        else
+            editor.element.closest('.category').show();
+
         let categoryAnchor = editor.element.closest('.category').find('.category-anchor');
 
         let categoryAnchorName = categoryAnchor.attr('name');
-        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide();
+        if (value == true)
+            categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide();
+        else
+            categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).show();
     }
 
     export function hideField(editor: Serenity.Widget<any>, value: boolean = true) {
@@ -107,7 +114,7 @@ namespace q {
 
     export function readOnlyEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
         let $editors = editor.element.closest('.tab-pane').find('.editor');
-        
+
         Serenity.EditorUtils.setReadonly($editors, value);
     }
 
