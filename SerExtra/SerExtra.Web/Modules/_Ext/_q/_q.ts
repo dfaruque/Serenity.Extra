@@ -1,4 +1,5 @@
 ﻿/// <reference path="../Bases/GridBase.ts" />
+/// <reference path="../Bases/ReportGridBase.ts" />
 /// <reference path="../Bases/DialogBase.ts" />
 /// <reference path="../Editors/EditorDialogBase.ts" />
 /// <reference path="../Editors/GridEditorBase.ts" />
