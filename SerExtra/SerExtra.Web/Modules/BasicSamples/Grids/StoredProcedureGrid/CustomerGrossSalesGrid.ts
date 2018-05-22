@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.BasicSamples {
 
     @Serenity.Decorators.registerClass()
-    export class CustomerGrossSalesGrid extends Serenity.EntityGrid<Northwind.CustomerGrossSalesRow, any> {
+    export class CustomerGrossSalesGrid extends _Ext.GridBase<Northwind.CustomerGrossSalesRow, any> {
 
         protected getColumnsKey() { return "BasicSamples.CustomerGrossSales"; }
         protected getIdProperty() { return "__id"; }

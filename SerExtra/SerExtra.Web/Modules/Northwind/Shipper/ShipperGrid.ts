@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class ShipperGrid extends Serenity.EntityGrid<ShipperRow, any> {
+    export class ShipperGrid extends _Ext.GridBase<ShipperRow, any> {
         protected getColumnsKey() { return "Northwind.Shipper"; }
         protected getDialogType() { return <any>ShipperDialog; }
         protected getIdProperty() { return ShipperRow.idProperty; }

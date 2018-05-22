@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class RegionGrid extends Serenity.EntityGrid<RegionRow, any> {
+    export class RegionGrid extends _Ext.GridBase<RegionRow, any> {
         protected getColumnsKey() { return "Northwind.Region"; }
         protected getDialogType() { return <any>RegionDialog; }
         protected getIdProperty() { return RegionRow.idProperty; }

@@ -1,6 +1,6 @@
 ﻿namespace SerExtra.BasicSamples {
     @Serenity.Decorators.registerClass()
-    export class VSGalleryQAGrid extends Serenity.EntityGrid<BasicSamples.VSGalleryQAThread, any> {
+    export class VSGalleryQAGrid extends _Ext.GridBase<BasicSamples.VSGalleryQAThread, any> {
         protected getColumnsKey() { return "BasicSamples.VSGalleryQA"; }
         protected getIdProperty() { return "ThreadId"; }
         protected getService() { return VSGalleryQAService.baseUrl; }

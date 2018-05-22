@@ -1,7 +1,8 @@
-﻿namespace SerExtra.Administration {
+﻿/// <reference path="../../_Ext/_q/_q.ts" />
+namespace SerExtra.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class LanguageGrid extends Serenity.EntityGrid<LanguageRow, any> {
+    export class LanguageGrid extends _Ext.GridBase<LanguageRow, any> {
         protected getColumnsKey() { return "Administration.Language"; }
         protected getDialogType() { return LanguageDialog; }
         protected getIdProperty() { return LanguageRow.idProperty; }

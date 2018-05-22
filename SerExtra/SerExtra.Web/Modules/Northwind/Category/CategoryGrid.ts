@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class CategoryGrid extends Serenity.EntityGrid<CategoryRow, any> {
+    export class CategoryGrid extends _Ext.GridBase<CategoryRow, any> {
         protected getColumnsKey() { return "Northwind.Category"; }
         protected getDialogType() { return <any>CategoryDialog; }
         protected getIdProperty() { return CategoryRow.idProperty; }

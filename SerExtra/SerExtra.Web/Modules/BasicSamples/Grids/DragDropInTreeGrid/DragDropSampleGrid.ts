@@ -2,7 +2,7 @@
 namespace SerExtra.BasicSamples {
     
     @Serenity.Decorators.registerClass()
-    export class DragDropSampleGrid extends Serenity.EntityGrid<DragDropSampleRow, any> {
+    export class DragDropSampleGrid extends _Ext.GridBase<DragDropSampleRow, any> {
         protected getColumnsKey() { return 'BasicSamples.DragDropSample'; }
         protected getDialogType() { return DragDropSampleDialog; }
         protected getIdProperty() { return DragDropSampleRow.idProperty; }

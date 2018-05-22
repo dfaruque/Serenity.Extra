@@ -3,7 +3,7 @@
     import fld = Northwind.ProductRow.Fields;
 
     @Serenity.Decorators.registerClass()
-    export class ConditionalFormattingGrid extends Serenity.EntityGrid<Northwind.ProductRow, any> {
+    export class ConditionalFormattingGrid extends _Ext.GridBase<Northwind.ProductRow, any> {
 
         protected getColumnsKey() { return "Northwind.Product"; }
         protected getDialogType() { return <any>Northwind.ProductDialog; }
