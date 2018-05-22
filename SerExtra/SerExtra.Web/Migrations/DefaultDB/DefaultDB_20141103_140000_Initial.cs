@@ -24,7 +24,8 @@ namespace SerExtra.Migrations.DefaultDB
                 .WithColumn("UpdateUserId").AsInt32().Nullable()
                 .WithColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1));
 
-            Insert.IntoTable("Users").Row(new {
+            Insert.IntoTable("Users").Row(new
+            {
                 Username = "admin",
                 DisplayName = "admin",
                 Email = "admin@dummy.com",
@@ -104,6 +105,12 @@ namespace SerExtra.Migrations.DefaultDB
             {
                 LanguageId = "vi-VN",
                 LanguageName = "Vietnamese (Vietnam)"
+            });
+
+            Insert.IntoTable("Languages").Row(new
+            {
+                LanguageId = "bn",
+                LanguageName = "Bengali"
             });
         }
     }
