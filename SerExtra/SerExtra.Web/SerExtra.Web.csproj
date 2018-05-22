@@ -963,6 +963,7 @@
     <Content Include="tools\Mono.Cecil\Mono.Cecil.Rocks.dll" />
     <Content Include="tools\Node\lessc.cmd" />
     <Content Include="tools\JsEngine\lib.d.ts_" />
+    <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditActionType.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
