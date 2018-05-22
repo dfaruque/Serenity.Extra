@@ -1,4 +1,5 @@
-﻿namespace SerExtra.Administration {
+﻿/// <reference path="../../_Ext/_q/_q.ts" />
+namespace SerExtra.Administration {
 
     @Serenity.Decorators.registerClass()
     export class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
