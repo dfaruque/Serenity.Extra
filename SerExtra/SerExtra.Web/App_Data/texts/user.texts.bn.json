@@ -1,6 +1,3 @@
 {
-  "Controls.DataGrid.NewButton": "নতুন",
-  "Controls.FilterPanel.InvalidDate": "অসিদ্ধ তারিখ!",
-  "Controls.FilterPanel.InvalidNumber": "অসিদ্ধ সংখ্যা!",
-  "Controls.FilterPanel.InvalidOperator": "অসিদ্ধ অপারেটর!"
+  "Controls.CheckTreeEditor.SelectAll": "সবগুলো নির্বাচন করুন"
 }
