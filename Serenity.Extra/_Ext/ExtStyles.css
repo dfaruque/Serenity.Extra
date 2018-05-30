@@ -92,7 +92,7 @@ input, textarea {
     padding-left: 5px;
 }
 
-    .no-label label {
+    .no-label label.caption {
         display: none;
     }
 

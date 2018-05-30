@@ -103,6 +103,12 @@ namespace q {
         else
             editor.element.closest('.field').show();
     }
+    export function showField(editor: Serenity.Widget<any>, value: boolean = true) {
+        if (value == true)
+            editor.element.closest('.field').show();
+        else
+            editor.element.closest('.field').hide();
+    }
 
     export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
         let tabId = editor.element.closest('.tab-pane').hide().attr('id');
@@ -116,6 +122,24 @@ namespace q {
         let $editors = editor.element.closest('.tab-pane').find('.editor');
 
         Serenity.EditorUtils.setReadonly($editors, value);
+    }
+        
+    export function readOnlyEditorCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+        let $editors = editor.element.closest('.category').find('.editor');
+        
+        Serenity.EditorUtils.setReadonly($editors, value);
+    }
+    export function readonlyEditorCategory($editor: JQuery, value: boolean = true) {
+        let $editors = $editor.closest('.category').find('.editor');
+        Serenity.EditorUtils.setReadonly($editors, value);
+    }
+
+    export function readOnlyEditor(editor: Serenity.Widget<any>, value: boolean = true) {
+        Serenity.EditorUtils.setReadOnly(editor, value);
+    }
+
+    export function readonlyEditor($editor: JQuery, value: boolean = true) {
+        Serenity.EditorUtils.setReadonly($editor, value);
     }
 
     export function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend = false) {

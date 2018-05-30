@@ -138,9 +138,9 @@ namespace _Ext {
         public set value(value: TEntity[]) {
             var p = this.getIdProperty();
 
-            //let val = this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
+            let val = value || []; //this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
 
-            this.setEntities(value.map(x => {
+            this.setEntities(val.map(x => {
                 var y = Q.deepClone(x);
                 if ((y as any)[p] == null) {
                     (y as any)[p] = "`" + this.nextId++;
