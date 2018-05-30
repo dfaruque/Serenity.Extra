@@ -10,10 +10,10 @@
 
     [ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}")]
     [DisplayName("{{Title}}"), InstanceName("{{Title}}"), TwoLevelCached]
-    [ReadPermission("{{ModuleDot}}{{ClassName}}:Read")]
-    [InsertPermission("{{ModuleDot}}{{ClassName}}:Insert")]
-    [UpdatePermission("{{ModuleDot}}{{ClassName}}:Update")]
-    [DeletePermission("{{ModuleDot}}{{ClassName}}:Delete")]
+    [ReadPermission("{{Module}}:{{ClassName}}:Read")]
+    [InsertPermission("{{Module}}:{{ClassName}}:Insert")]
+    [UpdatePermission("{{Module}}:{{ClassName}}:Update")]
+    [DeletePermission("{{Module}}:{{ClassName}}:Delete")]
     public sealed class {{RowClassName}} : {{RowBaseClassAndInterfaces}}
     {
 {{~for x in Fields}}
