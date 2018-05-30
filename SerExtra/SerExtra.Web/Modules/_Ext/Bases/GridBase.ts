@@ -261,7 +261,7 @@ namespace _Ext {
                 //+ '<a class="inline-action delete-row" title="delete"><i class="fa fa-trash-o text-red"></i></a>'
             },
                 {
-                    field: 'RowNumber',
+                    field: 'RowNum',
                     name: '#',
                     cssClass: 'align-center',
                     headerCssClass: 'align-center',
@@ -455,7 +455,7 @@ namespace _Ext {
 
             if (grouping_levels.length == 0) {
                 for (let i = 0; i < items.length; i++) {
-                    (items[i] as any).RowNumber = response.Skip + i + 1;
+                    (items[i] as any).RowNum = response.Skip + i + 1;
                 }
             } else if (grouping_levels.length = 1) {
 
@@ -470,7 +470,7 @@ namespace _Ext {
 
                             let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
                             if (item)
-                                (item as any).RowNumber = i + 1;
+                                (item as any).RowNum = i + 1;
                         }
                     }
                 };
