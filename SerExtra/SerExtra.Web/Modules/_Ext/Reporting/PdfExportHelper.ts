@@ -141,7 +141,7 @@ namespace _Ext {
                     ///region Title
                     {
                         if (q.jsPDFHeaderImageData) {
-                            doc.addImage(q.jsPDFHeaderImageData, 'JPEG', 40, 40, 60, 60);
+                            doc.addImage(q.jsPDFHeaderImageData, 'PNG', 40, 40, 60, 60);
                         }
                         doc.autoTable([q.jsPDFHeaderTitle], [], {
                             margin: { bottom: 10 , left: 110},
@@ -199,7 +199,7 @@ namespace _Ext {
                             headerStyles: { fillColor: 255, textColor: 0 }
                         });
 
-                        var headerHeight = 100;
+                        var headerHeight = 125;
                         var headerFontSizeBase = 11;
 
                         var entities = (<Serenity.ListResponse<any>>response).Entities || [];

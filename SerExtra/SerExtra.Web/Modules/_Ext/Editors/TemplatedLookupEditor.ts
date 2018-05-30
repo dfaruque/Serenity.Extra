@@ -9,7 +9,7 @@
         }
 
 
-        protected getSelect2Options() {
+        getSelect2Options() {
             let opt = super.getSelect2Options();
 
             opt.escapeMarkup = (m) => {
