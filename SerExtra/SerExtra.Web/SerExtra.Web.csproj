@@ -812,8 +812,8 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="wkhtmltopdf-license.txt" />
-    <Content Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
     <Content Include="Modules\_Ext\CodeGeneratorTemplates\Row.scriban" />
+    <Content Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
     <Content Include="Modules\_Ext\AuditLog\AuditLogIndex.cshtml" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
