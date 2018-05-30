@@ -8,8 +8,10 @@ namespace _Ext.Pages
     using System.Linq;
     using System.Reflection;
     using Serenity.Data.Mapping;
+    using Serenity.Web;
 
     [RoutePrefix("CompareEntityToDB"), Route("{action=index}")]
+    [PageAuthorize("Administration:CompareEntityToDB")]
     public class CompareEntityToDBController : Controller
     {
         [Authorize, HttpGet]

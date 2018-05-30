@@ -3,7 +3,7 @@ namespace _Ext {
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.maximizable()
-    export class ReplaceRowDialog extends Serenity.EntityDialog<any, any> {
+    export class ReplaceRowDialog extends _Ext.DialogBase<any, any> {
         protected getFormKey() { return ReplaceRowForm.formKey; }
 
         protected form = new ReplaceRowForm(this.idPrefix);

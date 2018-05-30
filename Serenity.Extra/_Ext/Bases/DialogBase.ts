@@ -155,7 +155,7 @@
 
             if ($content.length > 0) {
                 try {
-                    let dwidth = $content.width() + 48 + (width || 0);
+                    let dwidth = $content.width() + 30 + (width || 0);
                     let dheight = $content.height() + (height || 30);
 
                     this.element.dialog("option", "width", dwidth);

@@ -166,15 +166,15 @@ namespace _Ext {
                             };
                         }
                         //c.width = c.minWidth > 160 ? c.minWidth : 160;
-                    } else if (c.sourceItem.filteringType == String("Enum")) {
+                    } else if (c.sourceItem.formatterType == String("Enum")) {
                         //c.cssClass += ' align-center';
 
-                        //c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                        //    let enumKey = columnDef.sourceItem.editorParams.enumKey
-                        //    let text = q.getEnumText(enumKey, Q.toId(value));
-                        //    if (text) return text;
-                        //    else return '-';
-                        //};
+                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                            let enumKey = columnDef.sourceItem.editorParams.enumKey
+                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                            if (text) return text;
+                            else return '-';
+                        };
                     } else if (c.sourceItem.formatterType == String("Date")) {
                         c.cssClass += ' align-center';
                         c.width = c.minWidth > 99 ? c.minWidth : 99;
@@ -261,7 +261,7 @@ namespace _Ext {
                 //+ '<a class="inline-action delete-row" title="delete"><i class="fa fa-trash-o text-red"></i></a>'
             },
                 {
-                    field: 'Serial',
+                    field: 'RowNum',
                     name: '#',
                     cssClass: 'align-center',
                     headerCssClass: 'align-center',
@@ -455,13 +455,13 @@ namespace _Ext {
 
             if (grouping_levels.length == 0) {
                 for (let i = 0; i < items.length; i++) {
-                    (items[i] as any).Serial = response.Skip + i + 1;
+                    (items[i] as any).RowNum = response.Skip + i + 1;
                 }
             } else if (grouping_levels.length = 1) {
 
                 let groups = this.view.getGroups();
 
-                let generateSerialNo = () => {
+                let generateRowNumber = () => {
                     groups = this.view.getGroups();
 
                     for (let gi = 0; gi < groups.length; gi++) {
@@ -470,15 +470,15 @@ namespace _Ext {
 
                             let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
                             if (item)
-                                (item as any).Serial = i + 1;
+                                (item as any).RowNum = i + 1;
                         }
                     }
                 };
 
                 if (groups.length == 0) {
-                    setTimeout(generateSerialNo);
+                    setTimeout(generateRowNumber);
                 } else {
-                    generateSerialNo();
+                    generateRowNumber();
                 }
             }
             return r;

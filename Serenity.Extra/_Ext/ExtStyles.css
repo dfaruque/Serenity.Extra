@@ -23,11 +23,17 @@ input, textarea {
     }*/
 
 /* Form Styles ---------------------------------------*/
-.field > input, .field > textarea, .field > .select2-container > .select2-choice {
+.field > input, .field > textarea, 
+.field > .select2-container > .select2-choice,
+.field > .select2-container > .select2-choices
+{
     border-left-width: 5px !important;
 }
 
-.required, .required > .select2-choice {
+.required,
+.required > .select2-choice,
+.required > .select2-choices 
+{
     border-left-color: #f77 !important;
 }
 
@@ -86,7 +92,7 @@ input, textarea {
     padding-left: 5px;
 }
 
-    .no-label label.caption {
+    .no-label label {
         display: none;
     }
 

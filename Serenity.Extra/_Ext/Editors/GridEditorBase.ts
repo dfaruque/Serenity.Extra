@@ -30,7 +30,7 @@ namespace _Ext {
 
             var id = this.id(row);
             if (id == null) {
-                (row as any)[this.getIdProperty()] = "`" + this.nextId++;
+                row[this.getIdProperty()] = "`" + this.nextId++;
             }
 
             if (!this.validateEntity(row, id)) {
@@ -57,11 +57,14 @@ namespace _Ext {
         }
 
         protected validateEntity(row: TEntity, id: number) {
-            row['Serial'] = this.nextId;
             return true;
         }
 
         protected setEntities(items: TEntity[]) {
+            let i = 1;
+            items.forEach(row => {
+                row['RowNum'] = i++;
+            });
             this.view.setItems(items, true);
             setTimeout(this.onItemsChanged);
             this.refresh();
@@ -74,7 +77,7 @@ namespace _Ext {
 
         protected getButtons(): Serenity.ToolButton[] {
             return [{
-                title: this.getAddButtonCaption(),
+                title: 'Add ' + this.getItemName(),
                 cssClass: 'add-button',
                 onClick: () => { this.addButtonClick() }
             }];
@@ -126,8 +129,8 @@ namespace _Ext {
                 if (id && id.toString().charAt(0) == '`')
                     delete y[p];
 
-                if (y['Serial'])
-                    delete y['Serial'];
+                if (y['RowNum'])
+                    delete y['RowNum'];
                 return y;
             });
         }
@@ -135,12 +138,13 @@ namespace _Ext {
         public set value(value: TEntity[]) {
             var p = this.getIdProperty();
 
-            let val = this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
+            //let val = this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
 
-            this.setEntities(val.map(x => {
+            this.setEntities(value.map(x => {
                 var y = Q.deepClone(x);
-                if ((y as any)[p] == null)
+                if ((y as any)[p] == null) {
                     (y as any)[p] = "`" + this.nextId++;
+                }
                 return y;
             }));
         }
