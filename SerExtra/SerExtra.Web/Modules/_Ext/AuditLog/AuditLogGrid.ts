@@ -3,7 +3,7 @@
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()
-    export class AuditLogGrid extends GridBase<AuditLogRow, any> {
+    export class AuditLogGrid extends ReportGridBase<AuditLogRow, any> {
         protected getColumnsKey() { return '_Ext.AuditLog'; }
         protected getDialogType() { return AuditLogDialog; }
         protected getIdProperty() { return AuditLogRow.idProperty; }
