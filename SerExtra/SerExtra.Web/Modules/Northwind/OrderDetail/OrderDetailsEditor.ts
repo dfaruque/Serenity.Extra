@@ -1,9 +1,8 @@
-﻿/// <reference path="../../Common/Helpers/GridEditorBase.ts" />
-
+﻿
 namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class OrderDetailsEditor extends Common.GridEditorBase<OrderDetailRow> {
+    export class OrderDetailsEditor extends _Ext.GridEditorBase<OrderDetailRow> {
         protected getColumnsKey() { return "Northwind.OrderDetail"; }
         protected getDialogType() { return OrderDetailDialog; }
         protected getLocalTextPrefix() { return OrderDetailRow.localTextPrefix; }
