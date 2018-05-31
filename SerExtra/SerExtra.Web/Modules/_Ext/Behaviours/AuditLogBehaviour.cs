@@ -22,11 +22,7 @@ namespace _Ext
             var auditLog = row as IAuditLog;
             if (auditLog == null)
             {
-                var exauditLog = row as IExAuditLog;
-                if (exauditLog == null)
-                    return false;
-                //else
-                //    IdFieldName = exauditLog.IdField.PropertyName;
+                return false;
             }
             return true;
         }
@@ -131,16 +127,6 @@ namespace _Ext
     {
     }
 
-    /// <summary>
-    /// This is used if want to store specific IdFields instead of default Identity field (or identity field is not avail able  ).
-    /// </summary>
-    public interface IExAuditLog
-    {
-        /// <summary>
-        /// Assign the field which need to save as reference id in Audit Log Table
-        /// </summary>
-        Int32Field IdField { get; }
-    }
 
     [EnumKey("Enum.Audit.AuditActionType"), ScriptInclude]
     public enum AuditActionType
