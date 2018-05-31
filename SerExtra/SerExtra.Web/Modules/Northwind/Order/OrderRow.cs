@@ -12,7 +12,7 @@ namespace SerExtra.Northwind.Entities
     [DisplayName("Orders"), InstanceName("Order")]
     [ReadPermission(PermissionKeys.General)]
     [ModifyPermission(PermissionKeys.General)]
-    public sealed class OrderRow : Row, IIdRow, INameRow
+    public sealed class OrderRow : Row, IIdRow, INameRow, _Ext.IAuditLog
     {
         [DisplayName("Order ID"), NotNull, Identity, QuickSearch]
         public Int32? OrderID

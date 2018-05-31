@@ -62,12 +62,12 @@ namespace _Ext
         {
             try
             {
-                var connection = uow.Connection;
+                var auditLogConnection = SqlConnections.NewFor<AuditLogRow>();
                 var fld = AuditLogRow.Fields;
 
                 var entityId = (row as IIdRow).IdField[row] ?? 0;
 
-                var lastVersion = connection.TryFirst<AuditLogRow>(q => q
+                var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
                 .Select(fld.VersionNo, fld.NewEntity)
                 .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
                 .OrderBy(fld.Id, desc: true));
@@ -98,10 +98,12 @@ namespace _Ext
                         SessionId = HttpContext.Current.Session.SessionID
                     };
 
-                    connection.Insert<AuditLogRow>(auditLogRow);
+                    auditLogConnection.Insert<AuditLogRow>(auditLogRow);
                 }
             }
-            catch { }
+            catch (Exception ex) {
+                Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
+            }
         }
 
         string GetPageUrl()

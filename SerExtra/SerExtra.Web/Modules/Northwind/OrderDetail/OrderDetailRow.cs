@@ -11,7 +11,7 @@ namespace SerExtra.Northwind.Entities
     [DisplayName("Order Details"), InstanceName("Order Detail")]
     [ReadPermission(PermissionKeys.General)]
     [ModifyPermission(PermissionKeys.General)]
-    public sealed class OrderDetailRow : Row, IIdRow
+    public sealed class OrderDetailRow : Row, IIdRow, _Ext.IAuditLog
     {
         [DisplayName("ID"), Identity]
         public Int32? DetailID

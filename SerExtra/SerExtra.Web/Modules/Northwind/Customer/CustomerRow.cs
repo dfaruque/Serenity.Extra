@@ -16,7 +16,7 @@ namespace SerExtra.Northwind.Entities
     [LeftJoin("cd", "CustomerDetails", "cd.[ID] = t0.[ID]", RowType = typeof(CustomerDetailsRow), TitlePrefix = "")]
     [UpdatableExtension("cd", typeof(CustomerDetailsRow), CascadeDelete = true)]
     [LookupScript(typeof(Lookups.CustomerLookup))]
-    public sealed class CustomerRow : Row, IIdRow, INameRow
+    public sealed class CustomerRow : Row, IIdRow, INameRow, _Ext.IAuditLog
     {
         [DisplayName("ID"), Identity]
         public Int32? ID
