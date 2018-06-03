@@ -3,7 +3,7 @@
 namespace _Ext {
 
     @Serenity.Decorators.registerClass()
-    export class AuditLogGrid extends _Ext.GridBase<AuditLogRow, any> {
+    export class AuditLogGrid extends GridBase<AuditLogRow, any> {
         protected getColumnsKey() { return '_Ext.AuditLog'; }
         protected getDialogType() { return AuditLogDialog; }
         protected getIdProperty() { return AuditLogRow.idProperty; }
@@ -13,7 +13,7 @@ namespace _Ext {
         constructor(container: JQuery) {
             super(container);
         }
-
+        
         protected getButtons() {
             var buttons = super.getButtons();
             buttons.splice(0, 1);
