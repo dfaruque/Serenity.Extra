@@ -22,7 +22,7 @@ namespace _Ext
             var auditLog = row as IAuditLog;
             if (auditLog == null)
             {
-                return false;
+                    return false;
             }
             return true;
         }
@@ -101,12 +101,13 @@ namespace _Ext
                     auditLogConnection.Insert<AuditLogRow>(auditLogRow);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
             }
         }
 
-        string GetPageUrl()
+            string GetPageUrl()
         {
             string pageUrl = "";
             if (HttpContext.Current != null && HttpContext.Current.Request != null)

@@ -6,6 +6,7 @@
     using Serenity.Data.Mapping;
     using System;
     using System.ComponentModel;
+	using System.Collections.Generic;
     using System.IO;
 
     [ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}")]
@@ -24,11 +25,9 @@
         #region Foreign Fields
 {{~for j in Joins}}
 {{~for k in j.Fields}}
-
         [{{k.Attributes}}]
         public {{k.PropertyType}} {{k.Ident}} { get { return Fields.{{k.Ident}}[this]; } set { Fields.{{k.Ident}}[this] = value; } }
 		public partial class RowFields { public {{k.FieldType}}Field {{k.Ident}}; }
-
 {{~end}}
 {{~end}}
         #endregion Foreign Fields
@@ -43,12 +42,6 @@
 
         public {{RowClassName}}() : base(Fields) { }
 
-		public partial class RowFields : {{FieldsBaseClass}}
-        {
-            public RowFields() : base({{if FieldPrefix}}"{{FieldPrefix}}"{{end}})
-            {
-                LocalTextPrefix = "{{ModuleDot}}{{ClassName}}";
-            }
-        }
+		public partial class RowFields : {{FieldsBaseClass}} { }
     }
 }
