@@ -480,36 +480,36 @@ namespace _Ext {
 
             if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
                 let items = r.Entities
-                let grouping_levels = this.view.getGrouping();
+                //let grouping_levels = this.view.getGrouping();
 
-                if (grouping_levels.length == 0) {
-                    for (let i = 0; i < items.length; i++) {
-                        (items[i] as any).RowNum = response.Skip + i + 1;
-                    }
-                } else if (grouping_levels.length = 1) {
-
-                    let groups = this.view.getGroups();
-
-                    let generateRowNumber = () => {
-                        groups = this.view.getGroups();
-
-                        for (let gi = 0; gi < groups.length; gi++) {
-                            let rows = groups[gi].rows;
-                            for (let i = 0; i < rows.length; i++) {
-
-                                let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
-                                if (item)
-                                    (item as any).RowNum = i + 1;
-                            }
-                        }
-                    };
-
-                    if (groups.length == 0) {
-                        setTimeout(generateRowNumber);
-                    } else {
-                        generateRowNumber();
-                    }
+                //if (grouping_levels.length == 0) {
+                for (let i = 0; i < items.length; i++) {
+                    (items[i] as any).RowNum = response.Skip + i + 1;
                 }
+                //} else if (grouping_levels.length = 1) {
+
+                //    let groups = this.view.getGroups();
+
+                //    let generateRowNumber = () => {
+                //        groups = this.view.getGroups();
+
+                //        for (let gi = 0; gi < groups.length; gi++) {
+                //            let rows = groups[gi].rows;
+                //            for (let i = 0; i < rows.length; i++) {
+
+                //                let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
+                //                if (item)
+                //                    (item as any).RowNum = i + 1;
+                //            }
+                //        }
+                //    };
+
+                //    if (groups.length == 0) {
+                //        setTimeout(generateRowNumber);
+                //    } else {
+                //        generateRowNumber();
+                //    }
+                //}
             }
             return r;
         }
