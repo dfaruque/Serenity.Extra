@@ -417,3 +417,7 @@ ul.list-inline {
 .left-indent-4 {
     padding-left: 60px;
 }
+
+.full-width{
+    width: 100% !important;
+}
