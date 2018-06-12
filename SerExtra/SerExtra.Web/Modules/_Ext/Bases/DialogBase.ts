@@ -32,7 +32,7 @@
         protected onDialogOpen() {
             super.onDialogOpen();
 
-            if (q.DefaultEntityDialogOptions.AutoFitContentArea == true) {
+            if (this.get_ExtDialogOptions().AutoFitContentArea == true) {
                 this.fullContentArea();
             }
             this.element.fadeTo(100, 1);
