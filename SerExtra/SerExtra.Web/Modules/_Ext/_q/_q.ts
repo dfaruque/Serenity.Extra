@@ -49,7 +49,7 @@ namespace q {
 
 }
 
-interface GridEditorOptions {
+interface ExtGridEditorOptions {
     isReadOnly?: boolean; //false
     height?: number;
     autoHeight?: boolean;//true
@@ -58,14 +58,21 @@ interface GridEditorOptions {
     hideToolbar?: boolean;//false
 }
 
-interface GridOptions {
+interface ExtGridOptions {
     AutoColumnSize: boolean,
     FadeInEffectWhenInit: boolean,
     ShowAnyInEqualityFilterWithTextValue: boolean,
+    ShowRowNumberColumn:boolean,
+    ShowInlineActionsColumn: boolean,
+    ShowEditInlineButtun: boolean,
+    ShowDeleteInlineButtun: boolean,
+
 }
 
-interface DialogOptions {
+interface ExtDialogOptions {
     AutoFitContentArea: boolean,
+    HideCategoyLinksBar: boolean,
+    PendingChangesConfirmation: boolean
 }
 
 

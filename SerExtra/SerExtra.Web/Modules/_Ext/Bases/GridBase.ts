@@ -11,6 +11,9 @@ namespace _Ext {
     export class GridBase<TItem, TOptions>
         //this comment is for preventing replacement 
         extends Serenity.EntityGrid<TItem, TOptions> {
+
+        protected get_ExtGridOptions() : ExtGridOptions { return q.DefaultMainGridOptions; }
+
         isReadOnly: boolean;
         isRequired: boolean;
         isAutosized = false;
@@ -27,7 +30,9 @@ namespace _Ext {
 
             setTimeout(() => {
                 if (this.isAutosized == false) {
-                    this.resizeAllCulumn();
+                    if (this.get_ExtGridOptions().AutoColumnSize == true) {
+                        this.resizeAllCulumn();
+                    }
                     this.slickContainer.fadeTo(100, 1);
                 }
             }, 100);
@@ -132,10 +137,10 @@ namespace _Ext {
                         if (!Q.isEmptyOrNull(filterText)) {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterText
                         }
-                        else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
+                        else if (this.get_ExtGridOptions().ShowAnyInEqualityFilterWithTextValue == true) {
                             request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
                         }
-                    } else if (q.DefaultMainGridOptions.ShowAnyInEqualityFilterWithTextValue == true) {
+                    } else if (this.get_ExtGridOptions().ShowAnyInEqualityFilterWithTextValue == true) {
                         request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
                     }
                 }
@@ -146,139 +151,157 @@ namespace _Ext {
         }
 
         protected getColumns(): Slick.Column[] {
-            let cols = super.getColumns();
+            let columns = super.getColumns();
 
             let isEditable = this.getSlickOptions().editable
+            let extOptions = this.get_ExtGridOptions();
 
-            cols.forEach(c => {
+            columns.forEach(c => {
+                if (extOptions.AutoColumnSize == true) {
+                    c.width = c.minWidth || c.width || 50;
+                    c.cssClass = c.cssClass || '';
+                    if (c.sourceItem) {
+                        if (c.sourceItem.filteringType == "Lookup") {
+                            c.cssClass += ' align-left';
+                            if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
+                                (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
+                                c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                                    let item = columnDef.lookup.itemById[value];
+                                    if (item) return item[columnDef.lookup.textField];
+                                    else return '-';
+                                };
+                            }
+                            c.width = c.minWidth > 100 ? c.minWidth : 100;
+                        } else if (c.sourceItem.formatterType == "Enum") {
+                            //c.cssClass += ' align-center';
 
-                c.width = c.minWidth || c.width || 50;
-                c.cssClass = c.cssClass || '';
-                if (c.sourceItem) {
-                    if (c.sourceItem.filteringType == String("Lookup")) {
-                        c.cssClass += ' align-left';
-                        if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
-                            (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
                             c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                                let item = columnDef.lookup.itemById[value];
-                                if (item) return item[columnDef.lookup.textField];
+                                let enumKey = columnDef.sourceItem.editorParams.enumKey
+                                let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                                if (text) return text;
                                 else return '-';
                             };
-                        }
-                        //c.width = c.minWidth > 160 ? c.minWidth : 160;
-                    } else if (c.sourceItem.formatterType == String("Enum")) {
-                        //c.cssClass += ' align-center';
+                        } else if (c.sourceItem.formatterType == "Date") {
+                            c.cssClass += ' align-center';
+                            c.width = c.minWidth > 99 ? c.minWidth : 99;
+                        } else if (c.sourceItem.formatterType == "DateTime") {
+                            c.cssClass += ' align-center';
+                            c.width = c.minWidth > 140 ? c.minWidth : 140;
+                        } else if (c.sourceItem.formatterType == "Number") {
+                            c.cssClass += ' align-right';
+                            if (c.sourceItem.editorType == "Decimal") {
 
-                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                            let enumKey = columnDef.sourceItem.editorParams.enumKey
-                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
-                            if (text) return text;
-                            else return '-';
-                        };
-                    } else if (c.sourceItem.formatterType == String("Date")) {
-                        c.cssClass += ' align-center';
-                        c.width = c.minWidth > 99 ? c.minWidth : 99;
-                    } else if (c.sourceItem.formatterType == String("DateTime")) {
-                        c.cssClass += ' align-center';
-                        c.width = c.minWidth > 140 ? c.minWidth : 140;
-                    } else if (c.sourceItem.formatterType == String("Number")) {
-                        c.cssClass += ' align-right';
-                        if (c.sourceItem.editorType == String("Decimal")) {
+                                let formatSrt = '#,##0.00';
 
-                            let formatSrt = '#,##0.00';
+                                if (c.sourceItem.editorParams) {
+                                    let decimals = c.sourceItem.editorParams['decimals'];
+                                    if (decimals) {
+                                        formatSrt = '#,##0.'
+                                        for (let i = 0; i < decimals; i++) {
+                                            formatSrt += '0'
+                                        }
+                                    }
+                                    else if (c.sourceItem.editorParams['minValue']) {
+                                        let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
+                                        if (splitedMinValue.length > 1) {
+                                            formatSrt = '#,##0.' + splitedMinValue[1];
+                                        } else {
+                                            formatSrt = '#,##0';
 
-                            if (c.sourceItem.editorParams) {
-                                let decimals = c.sourceItem.editorParams['decimals'];
-                                if (decimals) {
-                                    formatSrt = '#,##0.'
-                                    for (let i = 0; i < decimals; i++) {
-                                        formatSrt += '0'
+                                        }
                                     }
                                 }
-                                else if (c.sourceItem.editorParams['minValue']) {
-                                    let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
-                                    if (splitedMinValue.length > 1) {
-                                        formatSrt = '#,##0.' + splitedMinValue[1];
-                                    } else {
-                                        formatSrt = '#,##0';
 
-                                    }
-                                }
+                                c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
                             }
 
-                            c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
+                        } else if (c.sourceItem.formatterType == "Checkbox") {
+                            c.cssClass += ' align-center';
+                        } else {
+                            c.cssClass += ' align-left';
+                            c.width = c.minWidth > 99 ? c.minWidth : 99;
                         }
 
-                    } else if (c.sourceItem.formatterType == String("Checkbox")) {
-                        c.cssClass += ' align-center';
+
                     } else {
                         c.cssClass += ' align-left';
                         c.width = c.minWidth > 99 ? c.minWidth : 99;
                     }
+                }
 
-
-                    //editor
-                    if (isEditable == true && c.sourceItem.readOnly != true) {
-                        if (q.useSerenityInlineEditors) {
-                            c.editor = SerenityInlineEditor;
+                //editor
+                if (isEditable == true && c.sourceItem && c.sourceItem.readOnly != true) {
+                    if (q.useSerenityInlineEditors) {
+                        c.editor = SerenityInlineEditor;
+                    } else {
+                        if (c.sourceItem.editorType == "Lookup" || c.sourceItem.editorType == "Enum") {
+                            c.editor = Slick['Editors']['Select2'];
+                            c.width = c.minWidth > 160 ? c.minWidth : 160;
+                        } else if (c.sourceItem.editorType == "Date") {
+                            c.editor = Slick['Editors']['Date'];
+                        } else if (c.sourceItem.editorType == "Boolean") {
+                            c.editor = Slick['Editors']['Checkbox'];
+                        } else if (c.sourceItem.editorType == "Integer") {
+                            c.editor = Slick['Editors']['Integer'];
+                        } else if (c.sourceItem.editorType == "Decimal") {
+                            c.editor = Slick['Editors']['Float'];
+                        } else if (c.sourceItem.editorType == "YesNoSelect") {
+                            c.editor = Slick['Editors']['YesNoSelect'];
+                        } else if (c.sourceItem.editorType == "PercentComplete") {
+                            c.editor = Slick['Editors']['PercentComplete'];
+                        } else if (c.sourceItem.editorType == "LongText") {
+                            c.editor = Slick['Editors']['LongText'];
                         } else {
-                            if (c.sourceItem.editorType == "Lookup" || c.sourceItem.editorType == "Enum") {
-                                c.editor = Slick['Editors']['Select2'];
-                                c.width = c.minWidth > 160 ? c.minWidth : 160;
-                            } else if (c.sourceItem.editorType == "Date") {
-                                c.editor = Slick['Editors']['Date'];
-                            } else if (c.sourceItem.editorType == "Boolean") {
-                                c.editor = Slick['Editors']['Checkbox'];
-                            } else if (c.sourceItem.editorType == "Integer") {
-                                c.editor = Slick['Editors']['Integer'];
-                            } else if (c.sourceItem.editorType == "Decimal") {
-                                c.editor = Slick['Editors']['Float'];
-                            } else if (c.sourceItem.editorType == "YesNoSelect") {
-                                c.editor = Slick['Editors']['YesNoSelect'];
-                            } else if (c.sourceItem.editorType == "PercentComplete") {
-                                c.editor = Slick['Editors']['PercentComplete'];
-                            } else if (c.sourceItem.editorType == "LongText") {
-                                c.editor = Slick['Editors']['LongText'];
-                            } else {
-                                c.editor = Slick['Editors']['Text'];
-                            }
+                            c.editor = Slick['Editors']['Text'];
                         }
                     }
-                } else {
-                    c.cssClass += ' align-left';
-                    c.width = c.minWidth > 99 ? c.minWidth : 99;
                 }
 
             });
 
-            cols.unshift({
-                field: 'inline-actions',
-                name: '',
-                width: 25,
-                minWidth: 25,
-                maxWidth: 25,
-                format: ctx => '<a class="inline-action view-details" title="view details"><i class="view-details fa fa-pencil-square-o"></i></a>'
-                //+ '<a class="inline-action delete-row" title="delete"><i class="fa fa-trash-o text-red"></i></a>'
-            },
-                {
-                    field: 'RowNum',
-                    name: '#',
-                    cssClass: 'align-center',
-                    headerCssClass: 'align-center',
-                    width: 40,
-                    minWidth: 40,
-                    maxWidth: 40,
-                    //format: ctx => (ctx.row + 1).toString()
-                });
+            columns.unshift({
+                field: 'RowNum',
+                name: '#',
+                cssClass: 'align-center',
+                headerCssClass: 'align-center',
+                width: 40,
+                minWidth: 40,
+                maxWidth: 40,
+                visible: extOptions.ShowRowNumberColumn
+            });
 
-            return cols;
+            if (extOptions.ShowInlineActionsColumn == true) {
+                let inlineActionsColumnWidth = 0;
+                let inlineActionsColumnContent = '';
+
+                if (extOptions.ShowEditInlineButtun == true) {
+                    inlineActionsColumnWidth += 25;
+                    inlineActionsColumnContent += '<a class="inline-action view-details" title="edit/view details" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>';
+                }
+
+                if (extOptions.ShowDeleteInlineButtun == true) {
+                    inlineActionsColumnWidth += 25;
+                    inlineActionsColumnContent += '<a class="inline-action delete-row" title="delete"><i class="delete-row fa fa-trash-o text-red"></i></a>';
+                }
+                columns.unshift({
+                    field: 'inline-actions',
+                    name: '',
+                    width: inlineActionsColumnWidth,
+                    minWidth: inlineActionsColumnWidth,
+                    maxWidth: inlineActionsColumnWidth,
+                    format: ctx => inlineActionsColumnContent
+                });
+            }
+
+            return columns;
         }
 
         protected createSlickGrid() {
             var grid = super.createSlickGrid();
-            this.autoColumnSizePlugin = new Slick.AutoColumnSize();
-            grid.registerPlugin(this.autoColumnSizePlugin);
-
+            if (Slick.AutoColumnSize) {
+                this.autoColumnSizePlugin = new Slick.AutoColumnSize();
+                grid.registerPlugin(this.autoColumnSizePlugin);
+            }
             grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
 
             return grid;
@@ -291,7 +314,9 @@ namespace _Ext {
             this.slickGrid.setColumns(columns);
 
             setTimeout(() => {
-                this.resizeAllCulumn();
+                if (this.get_ExtGridOptions().AutoColumnSize == true) {
+                    this.resizeAllCulumn();
+                }
                 this.slickContainer.fadeTo(100, 1);
             }, 100);
 
@@ -395,9 +420,11 @@ namespace _Ext {
 
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
-            opt.forceFitColumns = true;
-            opt.enableTextSelectionOnCells = true;
+            if (this.get_ExtGridOptions().AutoColumnSize == true) {
+                opt.forceFitColumns = true;
+            }
 
+            opt.enableTextSelectionOnCells = true;
             opt.enableCellNavigation = true;
             opt.asyncEditorLoading = false;
             opt.autoEdit = true;
@@ -450,35 +477,38 @@ namespace _Ext {
 
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
             let r = super.onViewProcessData(response);
-            let items = r.Entities
-            let grouping_levels = this.view.getGrouping();
 
-            if (grouping_levels.length == 0) {
-                for (let i = 0; i < items.length; i++) {
-                    (items[i] as any).RowNum = response.Skip + i + 1;
-                }
-            } else if (grouping_levels.length = 1) {
+            if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
+                let items = r.Entities
+                let grouping_levels = this.view.getGrouping();
 
-                let groups = this.view.getGroups();
-
-                let generateRowNumber = () => {
-                    groups = this.view.getGroups();
-
-                    for (let gi = 0; gi < groups.length; gi++) {
-                        let rows = groups[gi].rows;
-                        for (let i = 0; i < rows.length; i++) {
-
-                            let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
-                            if (item)
-                                (item as any).RowNum = i + 1;
-                        }
+                if (grouping_levels.length == 0) {
+                    for (let i = 0; i < items.length; i++) {
+                        (items[i] as any).RowNum = response.Skip + i + 1;
                     }
-                };
+                } else if (grouping_levels.length = 1) {
 
-                if (groups.length == 0) {
-                    setTimeout(generateRowNumber);
-                } else {
-                    generateRowNumber();
+                    let groups = this.view.getGroups();
+
+                    let generateRowNumber = () => {
+                        groups = this.view.getGroups();
+
+                        for (let gi = 0; gi < groups.length; gi++) {
+                            let rows = groups[gi].rows;
+                            for (let i = 0; i < rows.length; i++) {
+
+                                let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
+                                if (item)
+                                    (item as any).RowNum = i + 1;
+                            }
+                        }
+                    };
+
+                    if (groups.length == 0) {
+                        setTimeout(generateRowNumber);
+                    } else {
+                        generateRowNumber();
+                    }
                 }
             }
             return r;

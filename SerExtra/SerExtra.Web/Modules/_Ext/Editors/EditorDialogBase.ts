@@ -3,6 +3,9 @@ namespace _Ext {
 
     @Serenity.Decorators.registerClass()
     export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
+
+        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+
         protected getIdProperty() { return "__id"; }
 
         public onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>,

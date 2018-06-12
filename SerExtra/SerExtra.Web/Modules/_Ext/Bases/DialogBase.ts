@@ -4,7 +4,9 @@
     export class DialogBase<TEntity, TOptions>
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
-        //protected getLookupKey() { return this.getLocalTextPrefix() }
+
+        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+
         private loadedState: string;
         isReadOnly: boolean = false;
         protected form: any;
@@ -12,7 +14,10 @@
         constructor(opt?) {
             super(opt);
             this.element.fadeTo(0, 0);
-            _Ext.DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
+
+            if (this.get_ExtDialogOptions().PendingChangesConfirmation == true) {
+                _Ext.DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
+            }
         }
 
         protected updateInterface() {
@@ -20,13 +25,16 @@
 
             this.setReadOnly(this.isReadOnly);
 
-            if (q.hideCategoyLinksBarInPropertyDialog == true) {
+            if (this.get_ExtDialogOptions().HideCategoyLinksBar == true) {
                 this.element.find('.category-links').hide();
             }
         }
         protected onDialogOpen() {
             super.onDialogOpen();
-            this.fullContentArea();
+
+            if (q.DefaultEntityDialogOptions.AutoFitContentArea == true) {
+                this.fullContentArea();
+            }
             this.element.fadeTo(100, 1);
         }
 
@@ -138,7 +146,10 @@
 
         loadResponse(data) {
             super.loadResponse(data);
-            this.loadedState = this.getSaveState();
+
+            if (this.get_ExtDialogOptions().PendingChangesConfirmation == true) {
+                this.loadedState = this.getSaveState();
+            }
         }
 
         maximize() {
@@ -170,7 +181,7 @@
                     left: $content.position().left + (left || 0),
                     top: (top || 50),
                 });
-                
+
                 //this.element.closest('.ui-dialog').triggerHandler("resize");
                 //this.arrange();
             }
@@ -184,6 +195,6 @@
         afterSetDialogSize() {
 
         }
-        
+
     }
 }

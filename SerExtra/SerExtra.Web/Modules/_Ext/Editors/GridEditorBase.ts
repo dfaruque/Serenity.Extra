@@ -7,6 +7,8 @@ namespace _Ext {
     export class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
 
+        protected get_ExtGridOptions() : ExtGridOptions { return q.DefaultEditorGridOptions; }
+
         protected getIdProperty() { return "__id"; }
 
         protected nextId = 1;
@@ -208,9 +210,14 @@ namespace _Ext {
             this.isReadOnly = value;
             if (value == true) {
                 this.element.find('.add-button').addClass('disabled');
+                let opt = this.slickGrid.getOptions();
+                opt.editable = false;
+
+                this.slickGrid.setOptions(opt);
             } else {
                 this.element.find('.add-button').removeClass('disabled');
             }
+
         }
 
         protected getSlickOptions() {

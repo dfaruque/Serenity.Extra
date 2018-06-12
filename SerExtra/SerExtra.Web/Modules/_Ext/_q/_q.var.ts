@@ -4,28 +4,37 @@ namespace q {
     export var jsPDFHeaderImageData: string = null
     export var jsPDFHeaderTitle: string = 'Report Title';
     export var useSerenityInlineEditors: boolean = true;
-    export var hideCategoyLinksBarInPropertyDialog: boolean = false;
 
-    export var DefaultMainGridOptions: GridOptions = {
+    export var DefaultMainGridOptions: ExtGridOptions = {
         AutoColumnSize: true,
         FadeInEffectWhenInit: true,
         ShowAnyInEqualityFilterWithTextValue: true,
+        ShowInlineActionsColumn: true,
+        ShowDeleteInlineButtun: true,
+        ShowEditInlineButtun: true,
+        ShowRowNumberColumn: true
     };
 
-    export var DefaultEditorGridOptions: GridOptions = {
+    export var DefaultEditorGridOptions: ExtGridOptions = {
         AutoColumnSize: true,
         FadeInEffectWhenInit: true,
         ShowAnyInEqualityFilterWithTextValue: true,
+        ShowInlineActionsColumn: true,
+        ShowDeleteInlineButtun: true,
+        ShowEditInlineButtun: true,
+        ShowRowNumberColumn: true
     };
 
-    export var DefaultEntityDialogOptions: DialogOptions = {
+    export var DefaultEntityDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: true,
-
+        HideCategoyLinksBar: true,
+        PendingChangesConfirmation: true
     };
 
-    export var DefaultEditorDialogOptions: DialogOptions = {
+    export var DefaultEditorDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: false,
-
+        HideCategoyLinksBar: true,
+        PendingChangesConfirmation: true
     };
 
     //date time

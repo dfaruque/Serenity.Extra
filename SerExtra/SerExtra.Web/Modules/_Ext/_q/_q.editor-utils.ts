@@ -1,7 +1,7 @@
 ﻿
 namespace q {
 
-    export function initDetailEditor(dialog: _Ext.DialogBase<any, any>, editor: _Ext.GridEditorBase<any>, options: GridEditorOptions = {}): void {
+    export function initDetailEditor(dialog: _Ext.DialogBase<any, any>, editor: _Ext.GridEditorBase<any>, options: ExtGridEditorOptions = {}): void {
 
         if (options.showCaption != true) {
             editor.element.siblings('.caption').hide();
@@ -123,10 +123,10 @@ namespace q {
 
         Serenity.EditorUtils.setReadonly($editors, value);
     }
-        
+
     export function readOnlyEditorCategory(editor: Serenity.Widget<any>, value: boolean = true) {
         let $editors = editor.element.closest('.category').find('.editor');
-        
+
         Serenity.EditorUtils.setReadonly($editors, value);
     }
     export function readonlyEditorCategory($editor: JQuery, value: boolean = true) {
