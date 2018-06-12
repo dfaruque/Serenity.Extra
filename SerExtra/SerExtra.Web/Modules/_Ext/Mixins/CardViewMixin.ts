@@ -105,7 +105,7 @@
         // data grid object
         grid: Serenity.DataGrid<TItem, any>;
         containerTemplate?: string;
-        itemTemplate: string;
+        itemTemplate?: string;
         methods?: any;
         itemCssClass?: string;
         defaultViewType?: ('list' | 'card');
