@@ -28,14 +28,14 @@
             }
 
             input.autocomplete({
-                minLength: opt.minSearchLength || 1,
+                minLength: opt.minSearchLength || 0,
                 autoFocus: true,
                 source: source,
                 focus: function (event, ui) {
 
-                    $(".ui-helper-hidden-accessible").hide();  //fix issue with the selected data showing up on webpage
-                    event.preventDefault();
-                    return false;
+                    //$(".ui-helper-hidden-accessible").hide();  //fix issue with the selected data showing up on webpage
+                    //event.preventDefault();
+                    //return false;
                 },
 
             });
@@ -45,6 +45,18 @@
                     .append("<a>" + item.label + "</a>")
                     .appendTo(ul);
             };
+
+            input.bind('click', e => {
+                var wasOpen = input.autocomplete("widget").is(":visible");
+                // Close if already visible
+                if (wasOpen) {
+                    return;
+                }
+
+                // Pass empty string as value to search for, displaying all results
+                input.autocomplete("search", "");
+
+            });
         }
     }
 
