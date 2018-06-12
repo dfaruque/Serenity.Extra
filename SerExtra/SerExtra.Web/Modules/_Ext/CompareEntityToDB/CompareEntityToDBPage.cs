@@ -11,7 +11,7 @@ namespace _Ext.Pages
     using Serenity.Web;
 
     [RoutePrefix("CompareEntityToDB"), Route("{action=index}")]
-    [PageAuthorize("Administration:CompareEntityToDB")]
+    [PageAuthorize("DevTools:CompareEntityToDB")]
     public class CompareEntityToDBController : Controller
     {
         [Authorize, HttpGet]

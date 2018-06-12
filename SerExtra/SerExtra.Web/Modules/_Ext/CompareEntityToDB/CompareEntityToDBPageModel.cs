@@ -32,18 +32,9 @@ namespace _Ext.Model
                     var dialect = connection.GetDialect();
                     var schemaProvider = SchemaHelper.GetSchemaProvider(dialect.ServerType);
 
-                    var tableName = row.Table;
-                    string schema = null;
-                    if (tableName.IndexOf('.') > 0)
-                    {
-                        schema = tableName.Substring(0, tableName.IndexOf('.')).Trim('[', ']');
-                        tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim('[', ']');
-                    }
-                    else
-                    {
-                        tableName = tableName.Trim('[', ']');
-                    }
-
+                    var tableName = SchemaHelper.GetTableNameOnly(row.Table);
+                    string schema = SchemaHelper.GetSchemaName(row.Table);
+                    
                     var rowFields = row.GetFields();
                     var dbFields = schemaProvider.GetFieldInfos(connection, schema, tableName);
                     if (dbFields == null || dbFields.Count() == 0)

@@ -818,6 +818,7 @@
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <Content Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2137,6 +2138,8 @@
     <Compile Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBPage.cs" />
     <Compile Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
     <Compile Include="Modules\_Ext\CompareEntityToDB\SchemaHelper.cs" />
+    <Compile Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
+    <Compile Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />

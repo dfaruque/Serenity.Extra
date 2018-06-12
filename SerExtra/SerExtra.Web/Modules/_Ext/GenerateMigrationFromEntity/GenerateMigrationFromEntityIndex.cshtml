@@ -1,0 +1,27 @@
+﻿@model _Ext.Model.GenerateMigrationFromEntityPageModel
+@{
+    ViewData["Title"] = "Generate Migration from Entity";
+}
+@section Head {
+    <style>
+        .migration {
+            font-family: Consolas;
+            font-size: 14px;
+            padding-bottom: 0;
+        }
+    </style>
+}
+@section ContentHeader {
+    <h1>Generate Migration from Entity/Row <small class="text-danger">Alpha!</small></h1>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="well lead bold">
+            Total Entity/Table: @Model.Migrations.Count
+        </div>
+        @foreach (var migration in Model.Migrations)
+        {
+            <div class="well migration">@Html.Raw(migration)</div>
+        }
+    </div>
+</div>

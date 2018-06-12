@@ -1,4 +1,5 @@
-﻿using Serenity.Data.Schema;
+﻿using Serenity.Data;
+using Serenity.Data.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,37 @@ namespace _Ext
                 return fieldType;
             else
                 return "Stream";
+        }
+
+        public static char[] Quotes = new char[] { '[', ']', '`', '"' };
+
+        public static string GetTableNameOnly(string tableName)
+        {
+            if (tableName.IndexOf('.') > 0)
+            {
+                tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim(SchemaHelper.Quotes);
+            }
+            else
+            {
+                tableName = tableName.Trim(SchemaHelper.Quotes);
+            }
+
+            return tableName;
+        }
+
+        public static string GetSchemaName(string tableName)
+        {
+            string schema = null;
+            if (tableName.IndexOf('.') > 0)
+            {
+                schema = tableName.Substring(0, tableName.IndexOf('.')).Trim(SchemaHelper.Quotes);
+                //tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim(SchemaHelper.Quotes);
+            }
+            else
+            {
+                //tableName = tableName.Trim(SchemaHelper.Quotes);
+            }
+            return schema;
         }
     }
 }
