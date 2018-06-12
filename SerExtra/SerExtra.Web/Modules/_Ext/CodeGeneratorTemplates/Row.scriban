@@ -25,7 +25,7 @@
         #region Foreign Fields
 {{~for j in Joins}}
 {{~for k in j.Fields}}
-        [{{k.Attributes}}]
+        [{{k.Attributes}}, ReadOnly(true)]
         public {{k.PropertyType}} {{k.Ident}} { get { return Fields.{{k.Ident}}[this]; } set { Fields.{{k.Ident}}[this] = value; } }
 		public partial class RowFields { public {{k.FieldType}}Field {{k.Ident}}; }
 {{~end}}
