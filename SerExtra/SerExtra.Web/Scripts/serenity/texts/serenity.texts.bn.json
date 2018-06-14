@@ -35,7 +35,7 @@
   "Controls.FilterPanel.ClearGroups": "পরিষ্কার গ্রুপিং",
   "Controls.FilterPanel.CurrentFilter": "সক্রিয় ফিল্টার: {0}",
   "Controls.FilterPanel.DialogTitle": "ফিল্টার সম্পাদনা করুন",
-  "Controls.FilterPanel.EditFilter": "ফিল্টার সম্পাদনা করুন",
+  "Controls.FilterPanel.EditFilter": "ফিল্টার",
   "Controls.FilterPanel.EffectiveEmpty": "না",
   "Controls.FilterPanel.EffectiveFilter": "সক্রিয় ফিল্টার:",
   "Controls.FilterPanel.FixErrorsMessage": "লাল চিহ্নিত ত্রুটিগুলো সংশোধন করুন",
