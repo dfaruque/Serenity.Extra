@@ -6,6 +6,9 @@ declare namespace Slick {
     interface Column {
         onChange?: any;
     }
+    class AutoColumnSize {
+
+    }
 }
 declare namespace LiteDB {
 
