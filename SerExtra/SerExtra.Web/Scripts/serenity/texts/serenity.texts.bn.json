@@ -13,7 +13,7 @@
   "Controls.EntityDialog.CloneButton": "ক্লোন",
   "Controls.EntityDialog.DeleteButton": "মুছুন",
   "Controls.EntityDialog.DeleteConfirmation": "আপনি রেকর্ডটি মুছে ফেলতে চান?",
-  "Controls.EntityDialog.EditRecordTitle": "{0} সম্পাদন করা{1}",
+  "Controls.EntityDialog.EditRecordTitle": "{0} সম্পাদনা {1}",
   "Controls.EntityDialog.LocalizationBack": "ফর্মে ফিরে যান",
   "Controls.EntityDialog.LocalizationButton": "স্থানীয়করণ",
   "Controls.EntityDialog.LocalizationConfirmation": "পরিবর্তিত অনুবাদগুলো সংরক্ষণ করবেন?",
@@ -99,7 +99,7 @@
   "Controls.Pager.Page": "পৃষ্ঠা",
   "Controls.Pager.PageStatus": "মোট {total}টি রেকর্ডের মধ্যে {from} থেকে {to} পর্যন্ত প্রদর্শিত হচ্ছে",
   "Controls.PropertyGrid.DefaultCategory": "প্রোপার্টিজ",
-  "Controls.PropertyGrid.RequiredHint": "এই ক্ষেত্রটি আবশ্যকীয়"
+  "Controls.PropertyGrid.RequiredHint": "এই ক্ষেত্রটি আবশ্যকীয়",
   "Controls.QuickSearch.FieldSelection": "অনুসন্ধানের ফিল্ড নির্বাচন করুন",
   "Controls.QuickSearch.Hint": "অনুসন্ধানের জন্য লিখুন...",
   "Controls.QuickSearch.Placeholder": "অনুসন্ধান...",
