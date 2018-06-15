@@ -9,6 +9,34 @@ namespace SerExtra.Northwind {
 
         constructor(container: JQuery) {
             super(container);
+
+            this.slickGrid.onCellChange.subscribe((p1, p2) => {
+                let cell = p2.cell;
+                let row = p2.row;
+                let grid = p2.grid as Slick.Grid;
+                let item = p2.item as OrderDetailRow;
+
+                var productID = Q.toId(item.ProductID);
+                if (productID != null) {
+                    item.UnitPrice = ProductRow.getLookup().itemById[productID].UnitPrice;
+                }
+
+                if (this.validateEntity(item, item[this.getIdProperty()])) {
+                    grid.updateRow(row);
+                }
+                else {
+                    //p1.stopPropagation();
+                    //p1.stopImmediatePropagation();
+                }
+                //console.log(p1);
+                //console.log(p2);
+            });
+        }
+
+        protected getSlickOptions() {
+            let opt = super.getSlickOptions();
+            opt.editable = true;
+            return opt;
         }
 
         validateEntity(row, id) {

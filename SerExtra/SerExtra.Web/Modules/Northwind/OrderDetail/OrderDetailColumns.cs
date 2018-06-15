@@ -9,7 +9,7 @@ namespace SerExtra.Northwind.Forms
     public class OrderDetailColumns
     {
         [EditLink, Width(200)]
-        public String ProductName { get; set; }
+        public String ProductID { get; set; }
         [Width(100)]
         public Decimal UnitPrice { get; set; }
         [Width(100)]
