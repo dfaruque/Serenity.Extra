@@ -290,3 +290,11 @@ function usingJsonDiffPatch() {
         loadScript(Q.resolveUrl("~/Modules/_Ext/AuditLogViewer/jsondiffpatch/jsondiffpatch-formatters.min.js"))
     }
 }
+
+function usingSlickGridEditors() {
+    if (window['Slick'] && window['Slick']['Editors'] && window['Slick']['Editors']['Text']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl("~/Modules/_Ext/Editors/slick.editors.js"))
+    }
+}

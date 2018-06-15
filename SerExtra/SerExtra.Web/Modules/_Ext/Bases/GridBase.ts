@@ -227,6 +227,8 @@ namespace _Ext {
 
                 //editor
                 if (isEditable == true && c.sourceItem && c.sourceItem.readOnly != true) {
+                    usingSlickGridEditors();
+
                     if (q.useSerenityInlineEditors) {
                         c.editor = SerenityInlineEditor;
                     } else {
