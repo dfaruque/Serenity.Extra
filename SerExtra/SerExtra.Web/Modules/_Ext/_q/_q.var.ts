@@ -10,7 +10,7 @@ namespace q {
         FadeInEffectWhenInit: true,
         ShowAnyInEqualityFilterWithTextValue: true,
         ShowInlineActionsColumn: true,
-        ShowDeleteInlineButtun: true,
+        ShowDeleteInlineButtun: false,
         ShowEditInlineButtun: true,
         ShowRowNumberColumn: true
     };
