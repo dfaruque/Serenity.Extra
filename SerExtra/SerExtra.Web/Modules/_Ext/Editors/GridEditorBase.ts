@@ -63,10 +63,6 @@ namespace _Ext {
         }
 
         protected setEntities(items: TEntity[]) {
-            let i = 1;
-            items.forEach(row => {
-                row['RowNum'] = i++;
-            });
             this.view.setItems(items, true);
             setTimeout(this.onItemsChanged);
             this.refresh();
