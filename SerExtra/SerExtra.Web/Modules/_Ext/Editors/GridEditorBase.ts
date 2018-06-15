@@ -127,21 +127,21 @@ namespace _Ext {
         }
 
         public set value(value: TEntity[]) {
-            var p = this.getIdProperty();
+            var id = this.getIdProperty();
 
-            let val = value || []; //this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
+            let val = value || [];
 
             let items = val.map(x => {
                 var y = Q.deepClone(x);
-                if ((y as any)[p] == null) {
-                    (y as any)[p] = "`" + this.nextId++;
+                if ((y as any)[id] == null) {
+                    (y as any)[id] = "`" + this.nextId++;
                 }
                 return y;
             });
 
             this.view.setItems(items, true);
             setTimeout(this.onItemsChanged);
-            this.resetRowNumber();
+            this.resetRowNumber(); // to generate serial no.
         }
 
         protected getGridCanLoad() {
