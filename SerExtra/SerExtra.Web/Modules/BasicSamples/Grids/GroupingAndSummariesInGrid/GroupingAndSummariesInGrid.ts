@@ -55,22 +55,28 @@ namespace SerExtra.BasicSamples {
             return [{
                 title: 'Group By Category',
                 cssClass: 'expand-all-button',
-                onClick: () => this.view.setGrouping(
-                    [{
-                        getter: 'CategoryName'
-                    }])
+                onClick: () => {
+                    this.view.setGrouping(
+                        [{
+                            getter: 'CategoryName'
+                        }]);
+                    this.resetRowNumber();
+                }
             },
             {
                 title: 'Group By Category and Supplier',
                 cssClass: 'expand-all-button',
-                onClick: () => this.view.setGrouping(
-                    [{
-                        formatter: x => 'Category: ' + x.value + ' (' + x.count + ' items)',
-                        getter: 'CategoryName'
-                    }, {
-                        formatter: x => 'Supplier: ' + x.value + ' (' + x.count + ' items)',
-                        getter: 'SupplierCompanyName'
-                    }])
+                onClick: () => {
+                    this.view.setGrouping(
+                        [{
+                            formatter: x => 'Category: ' + x.value + ' (' + x.count + ' items)',
+                            getter: 'CategoryName'
+                        }, {
+                            formatter: x => 'Supplier: ' + x.value + ' (' + x.count + ' items)',
+                            getter: 'SupplierCompanyName'
+                        }]);
+                    this.resetRowNumber();
+                }
             }, {
                 title: 'No Grouping',
                 cssClass: 'collapse-all-button',

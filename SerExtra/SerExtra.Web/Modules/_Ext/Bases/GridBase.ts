@@ -7,12 +7,13 @@ namespace _Ext {
         //this comment is for preventing replacement 
         extends Serenity.EntityGrid<TItem, TOptions> {
 
-        protected get_ExtGridOptions() : ExtGridOptions { return q.DefaultMainGridOptions; }
+        protected get_ExtGridOptions(): ExtGridOptions { return q.DefaultMainGridOptions; }
 
         isReadOnly: boolean;
         isRequired: boolean;
         isAutosized = false;
         isChildGrid = false;
+        nextRowNumber = 1;
         public autoColumnSizePlugin;
 
         constructor(container: JQuery, options?: TOptions) {
@@ -262,7 +263,13 @@ namespace _Ext {
                 width: 40,
                 minWidth: 40,
                 maxWidth: 40,
-                visible: extOptions.ShowRowNumberColumn
+                visible: extOptions.ShowRowNumberColumn,
+                format: ctx => {
+                    if (!ctx.item.RowNum) {
+                        ctx.item.RowNum = this.nextRowNumber++;
+                    }
+                    return ctx.item.RowNum; //+ ', ' + (ctx.row + 1)
+                }
             });
 
             if (extOptions.ShowInlineActionsColumn == true) {
@@ -470,17 +477,53 @@ namespace _Ext {
             }
         }
 
+        protected resetRowNumber() {
+            this.nextRowNumber = 1;
+            let items = this.getItems();
+
+            let grouping_fields = this.view.getGrouping();
+
+            if (grouping_fields.length == 0) {
+                for (let i = 0; i < items.length; i++) {
+                    (items[i] as any).RowNum = i + 1;
+                }
+            } else if (grouping_fields.length > 0) {
+
+                let generateRowNumber = (groups: Slick.Group<any>[]) => {
+
+                    for (let gi = 0; gi < groups.length; gi++) {
+                        let subGroups = groups[gi].groups;
+                        if (subGroups) {
+                            generateRowNumber(subGroups);
+                        } else {
+                            let rows = groups[gi].rows;
+                            for (let i = 0; i < rows.length; i++) {
+                                rows[i].RowNum = i + 1;
+                            }
+                        }
+                    }
+                };
+
+                let groups = this.view.getGroups();
+                generateRowNumber(groups);
+            }
+
+            this.setItems(items);
+        }
+
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
             let r = super.onViewProcessData(response);
 
             if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
                 let items = r.Entities
+
+                this.nextRowNumber = 1;
                 //let grouping_levels = this.view.getGrouping();
 
                 //if (grouping_levels.length == 0) {
-                for (let i = 0; i < items.length; i++) {
-                    (items[i] as any).RowNum = response.Skip + i + 1;
-                }
+                //for (let i = 0; i < items.length; i++) {
+                //    (items[i] as any).RowNum = response.Skip + i + 1;
+                //}
                 //} else if (grouping_levels.length = 1) {
 
                 //    let groups = this.view.getGroups();
