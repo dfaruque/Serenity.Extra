@@ -258,7 +258,7 @@ namespace _Ext {
             columns.unshift({
                 field: 'RowNum',
                 name: '#',
-                cssClass: 'align-center',
+                cssClass: 'rownum-column',
                 headerCssClass: 'align-center',
                 width: 40,
                 minWidth: 40,
@@ -278,16 +278,17 @@ namespace _Ext {
 
                 if (extOptions.ShowEditInlineButtun == true) {
                     inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += '<a class="inline-action view-details" title="edit/view details" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>';
+                    inlineActionsColumnContent += '<a class="inline-actions view-details" title="edit/view details" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>';
                 }
 
                 if (extOptions.ShowDeleteInlineButtun == true) {
                     inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += '<a class="inline-action delete-row" title="delete"><i class="delete-row fa fa-trash-o text-red"></i></a>';
+                    inlineActionsColumnContent += '<a class="inline-actions delete-row" title="delete"><i class="delete-row fa fa-trash-o text-red"></i></a>';
                 }
                 columns.unshift({
                     field: 'inline-actions',
                     name: '',
+                    cssClass: 'inline-actions-column',
                     width: inlineActionsColumnWidth,
                     minWidth: inlineActionsColumnWidth,
                     maxWidth: inlineActionsColumnWidth,
@@ -447,10 +448,10 @@ namespace _Ext {
             var target = $(e.target);
 
             // if user clicks "i" element, e.g. icon
-            if (target.parent().hasClass('inline-action') || target.parent().hasClass('inline-btn'))
+            if (target.parent().hasClass('inline-actions') || target.parent().hasClass('inline-btn'))
                 target = target.parent();
 
-            if (target.hasClass('inline-action') || target.hasClass('inline-btn')) {
+            if (target.hasClass('inline-actions') || target.hasClass('inline-btn')) {
                 //e.preventDefault();
 
                 this.onInlineActionClick(target, recordId, item);
@@ -516,44 +517,11 @@ namespace _Ext {
             this.resetRowNumber();
         }
 
-
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
             let r = super.onViewProcessData(response);
 
             if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
-                let items = r.Entities
-
-                this.nextRowNumber = 1;
-                //let grouping_levels = this.view.getGrouping();
-
-                //if (grouping_levels.length == 0) {
-                //for (let i = 0; i < items.length; i++) {
-                //    (items[i] as any).RowNum = response.Skip + i + 1;
-                //}
-                //} else if (grouping_levels.length = 1) {
-
-                //    let groups = this.view.getGroups();
-
-                //    let generateRowNumber = () => {
-                //        groups = this.view.getGroups();
-
-                //        for (let gi = 0; gi < groups.length; gi++) {
-                //            let rows = groups[gi].rows;
-                //            for (let i = 0; i < rows.length; i++) {
-
-                //                let item = (items as any[]).filter(f => f.Id == (rows[i] as any).Id)[0];
-                //                if (item)
-                //                    (item as any).RowNum = i + 1;
-                //            }
-                //        }
-                //    };
-
-                //    if (groups.length == 0) {
-                //        setTimeout(generateRowNumber);
-                //    } else {
-                //        generateRowNumber();
-                //    }
-                //}
+                setTimeout(this.resetRowNumber);
             }
             return r;
         }

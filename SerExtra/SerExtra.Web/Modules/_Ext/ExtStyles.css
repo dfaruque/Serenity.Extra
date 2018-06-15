@@ -23,17 +23,15 @@ input, textarea {
     }*/
 
 /* Form Styles ---------------------------------------*/
-.field > input, .field > textarea, 
+.field > input, .field > textarea,
 .field > .select2-container > .select2-choice,
-.field > .select2-container > .select2-choices
-{
+.field > .select2-container > .select2-choices {
     border-left-width: 5px !important;
 }
 
 .required,
 .required > .select2-choice,
-.required > .select2-choices 
-{
+.required > .select2-choices {
     border-left-color: #f77 !important;
 }
 
@@ -189,9 +187,15 @@ input, textarea {
         border-style: none;
     }
 
-.serial-column {
-    background-color: #eee;
+.rownum-column {
+    background-color: #f7f7f7 !important;
+    border-bottom: none;
     text-align: center;
+}
+
+.inline-actions-column {
+    /*background-color: #f7f7f7 !important;
+    border-bottom: none;*/
 }
 
 .quick-filter-item .inplace-button {
@@ -202,12 +206,14 @@ input, textarea {
     width: 230px;
 }
 
-.inline-action {
-    opacity: 0.75;
+.inline-actions {
+    opacity: 0.80;
+    cursor: pointer;
 }
 
-    .inline-action :hover {
+    .inline-actions :hover {
         text-shadow: 0px 0px 1px #111;
+        opacity: 1;
     }
 
 .slick-row:hover {
@@ -418,6 +424,6 @@ ul.list-inline {
     padding-left: 60px;
 }
 
-.full-width{
+.full-width {
     width: 100% !important;
 }
