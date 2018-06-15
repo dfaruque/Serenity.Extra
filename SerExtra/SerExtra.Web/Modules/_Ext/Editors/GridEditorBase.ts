@@ -7,7 +7,7 @@ namespace _Ext {
     export class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
 
-        protected get_ExtGridOptions() : ExtGridOptions { return q.DefaultEditorGridOptions; }
+        protected get_ExtGridOptions(): ExtGridOptions { return q.DefaultEditorGridOptions; }
 
         protected getIdProperty() { return "__id"; }
 
@@ -48,7 +48,7 @@ namespace _Ext {
                 items[index] = Q.deepClone({} as TEntity, items[index], row);
             }
 
-            this.setEntities(items);
+            this.value = items;
             callback({});
         }
 
@@ -60,13 +60,6 @@ namespace _Ext {
 
         protected validateEntity(row: TEntity, id: number) {
             return true;
-        }
-
-        protected setEntities(items: TEntity[]) {
-            this.view.setItems(items, true);
-            setTimeout(this.onItemsChanged);
-            this.refresh();
-
         }
 
         protected getNewEntity(): TEntity {
@@ -138,13 +131,17 @@ namespace _Ext {
 
             let val = value || []; //this.onViewProcessData({ Entities: value || [], Skip: 0 }).Entities; // to generate serial no.
 
-            this.setEntities(val.map(x => {
+            let items = val.map(x => {
                 var y = Q.deepClone(x);
                 if ((y as any)[p] == null) {
                     (y as any)[p] = "`" + this.nextId++;
                 }
                 return y;
-            }));
+            });
+
+            this.view.setItems(items, true);
+            setTimeout(this.onItemsChanged);
+            this.resetRowNumber();
         }
 
         protected getGridCanLoad() {

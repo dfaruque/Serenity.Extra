@@ -516,12 +516,12 @@ namespace _Ext {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }
-
+        
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
             let r = super.onViewProcessData(response);
 
             if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
-                setTimeout(this.resetRowNumber);
+                setTimeout(() => { this.resetRowNumber() });
             }
             return r;
         }
