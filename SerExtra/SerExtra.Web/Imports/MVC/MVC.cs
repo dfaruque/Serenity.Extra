@@ -11,9 +11,17 @@ namespace MVC
                 public const string AuditLogIndex = "~/Modules/_Ext/AuditLog/AuditLogIndex.cshtml";
             }
 
-            public static class CompareEntityToDB
+            public static class DevTools
             {
-                public const string CompareEntityToDBIndex = "~/Modules/_Ext/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                public static class CompareEntityToDB
+                {
+                    public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static class GenerateMigrationFromEntity
+                {
+                    public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
+                }
             }
 
         }

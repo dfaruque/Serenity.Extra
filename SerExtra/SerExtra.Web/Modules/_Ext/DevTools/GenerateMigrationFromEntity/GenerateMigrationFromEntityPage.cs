@@ -19,7 +19,7 @@ namespace _Ext.Pages
         {
             var model = new Model.GenerateMigrationFromEntityPageModel();
 
-            return View("~/Modules/_Ext/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml", model);
+            return View("~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml", model);
         }
     }
 }

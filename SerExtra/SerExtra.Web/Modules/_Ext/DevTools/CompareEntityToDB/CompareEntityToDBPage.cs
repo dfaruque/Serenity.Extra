@@ -19,7 +19,7 @@ namespace _Ext.Pages
         {
             var model = new Model.CompareEntityToDBPageModel();
 
-            return View("~/Modules/_Ext/CompareEntityToDB/CompareEntityToDBIndex.cshtml", model);
+            return View("~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml", model);
         }
     }
 }

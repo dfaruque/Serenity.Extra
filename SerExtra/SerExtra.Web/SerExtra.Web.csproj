@@ -571,7 +571,7 @@
     <Content Include="Modules\_Ext\ExtStyles.css" />
     <Content Include="Modules\_Ext\Reporting\report.css" />
     <Content Include="Modules\_Ext\Reporting\ReportFooter.html" />
-    <Content Include="Modules\_Ext\Utils\ReplaceRow\SP_ReplaceRow.sql" />
+    <Content Include="Modules\_Ext\DevTools\ReplaceRow\SP_ReplaceRow.sql" />
     <Content Include="Readme.CodeGenerator.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -813,12 +813,12 @@
     <Content Include="Content\toastr.less" />
     <Content Include="wkhtmltopdf-license.txt" />
     <Content Include="Modules\_Ext\CodeGeneratorTemplates\Row.scriban" />
-    <Content Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
+    <Content Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
     <Content Include="Modules\_Ext\AuditLog\AuditLogIndex.cshtml" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
-    <Content Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
+    <Content Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1035,7 +1035,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Reporting\PdfExportHelper.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\ReportHelper.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Utils\DialogUtils.ts" />
-    <TypeScriptCompile Include="Modules\_Ext\Utils\ReplaceRow\ReplaceRowDialog.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Utils\Using.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.array.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.d.ts" />
@@ -1910,6 +1910,9 @@
     <Compile Include="Imports\ClientTypes\_Ext.EmptyLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.HardCodedLookupEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.StaticTextBlockAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
@@ -2135,11 +2138,11 @@
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRepository.cs" />
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRow.cs" />
     <Compile Include="Modules\_Ext\Behaviours\AuditLogBehaviour.cs" />
-    <Compile Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBPage.cs" />
-    <Compile Include="Modules\_Ext\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
-    <Compile Include="Modules\_Ext\CompareEntityToDB\SchemaHelper.cs" />
-    <Compile Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
-    <Compile Include="Modules\_Ext\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
+    <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
+    <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />
@@ -2149,8 +2152,8 @@
     <Compile Include="Modules\_Ext\Utils\NumberToWords.cs" />
     <Compile Include="Modules\_Ext\Utils\ObjectExtentions.cs" />
     <Compile Include="Modules\_Ext\Utils\Q.cs" />
-    <Compile Include="Modules\_Ext\Utils\ReplaceRow\ReplaceRowEndpoint.cs" />
-    <Compile Include="Modules\_Ext\Utils\ReplaceRow\ReplaceRowForm.cs" />
+    <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowEndpoint.cs" />
+    <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowForm.cs" />
     <Compile Include="Modules\_Ext\_ExtNavigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Administration\User\UserRow.cs" />
