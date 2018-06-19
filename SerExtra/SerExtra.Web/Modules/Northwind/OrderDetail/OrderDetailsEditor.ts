@@ -10,11 +10,11 @@ namespace SerExtra.Northwind {
         constructor(container: JQuery) {
             super(container);
 
-            this.slickGrid.onCellChange.subscribe((p1, p2) => {
-                let cell = p2.cell;
-                let row = p2.row;
-                let grid = p2.grid as Slick.Grid;
-                let item = p2.item as OrderDetailRow;
+            this.slickGrid.onCellChange.subscribe((e, args) => {
+                let cell = args.cell;
+                let row = args.row;
+                let grid = args.grid as Slick.Grid;
+                let item = args.item as OrderDetailRow;
 
                 var productID = Q.toId(item.ProductID);
                 if (productID != null) {
@@ -25,11 +25,9 @@ namespace SerExtra.Northwind {
                     grid.updateRow(row);
                 }
                 else {
-                    //p1.stopPropagation();
-                    //p1.stopImmediatePropagation();
+                    //e.stopPropagation();
+                    //e.stopImmediatePropagation();
                 }
-                //console.log(p1);
-                //console.log(p2);
             });
         }
 
