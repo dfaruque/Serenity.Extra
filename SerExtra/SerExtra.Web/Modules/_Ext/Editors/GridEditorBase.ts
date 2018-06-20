@@ -53,7 +53,7 @@ namespace _Ext {
 
         protected deleteEntity(id: number) {
             this.view.deleteItem(id);
-            setTimeout(this.onItemsChanged);
+            setTimeout(() => { this.onItemsChanged() });
             return true;
         }
 
@@ -113,7 +113,11 @@ namespace _Ext {
 
             (this.slickGrid as any).getEditController().commitCurrentEdit();
 
-            return this.view.getItems().map(x => {
+            let items = this.view.getItems();
+
+            this.onBeforeGetValue(items);
+
+            return items.map(x => {
                 var y = Q.deepClone(x);
                 var id = y[p];
                 if (id && id.toString().charAt(0) == '`')
@@ -139,7 +143,7 @@ namespace _Ext {
             });
 
             this.view.setItems(items, true);
-            setTimeout(this.onItemsChanged);
+            setTimeout(() => { this.onItemsChanged() });
             this.resetRowNumber(); // to generate serial no.
         }
 
@@ -223,6 +227,9 @@ namespace _Ext {
 
         //custom events
         onItemsChanged() {
+
+        }
+        onBeforeGetValue(items: TEntity[]) {
 
         }
     }
