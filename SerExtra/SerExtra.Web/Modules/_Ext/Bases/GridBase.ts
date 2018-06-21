@@ -450,10 +450,10 @@ namespace _Ext {
             var target = $(e.target);
 
             // if user clicks "i" element, e.g. icon
-            if (target.parent().hasClass('inline-actions') || target.parent().hasClass('inline-btn'))
+            if (target.parent().hasClass('inline-action') || target.parent().hasClass('inline-actions') || target.parent().hasClass('inline-btn'))
                 target = target.parent();
 
-            if (target.hasClass('inline-actions') || target.hasClass('inline-btn')) {
+            if (target.hasClass('inline-action') || target.hasClass('inline-actions') || target.hasClass('inline-btn')) {
                 //e.preventDefault();
 
                 this.onInlineActionClick(target, recordId, item);
