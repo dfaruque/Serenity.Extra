@@ -93,9 +93,9 @@ namespace _Ext {
             let view = this.getView();
 
             var request = Q.deepClone(view ? view.params : {}) //as _Ext.ReportRequest;
-            request.ReportServiceMethodName = null;     // if some value found in this property than "view as report" button will appear
-            request.ReportKey = null;                   // if some value found in this property than "export to pdf" button will appear
-            request.ListExcelServiceMethodName = null;  // if some value found in this property than "export to xls" button will appear
+            request.ReportServiceMethodName = null;     // if some value found in this property then "view as report" button will appear
+            request.ReportKey = null;                   // if some value found in this property then "export to pdf" button will appear
+            request.ListExcelServiceMethodName = null;  // if some value found in this property then "export to xls" button will appear
             request.EqualityFilterWithTextValue = {};
 
             if (view) {
