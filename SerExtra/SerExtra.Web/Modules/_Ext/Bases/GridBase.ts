@@ -1,6 +1,5 @@
 ﻿/// <reference path="../_q/_q.d.ts" />
 namespace _Ext {
-    declare function SerenityInlineEditor(args: any): void;
 
     @Serenity.Decorators.filterable()
     export class GridBase<TItem, TOptions>
