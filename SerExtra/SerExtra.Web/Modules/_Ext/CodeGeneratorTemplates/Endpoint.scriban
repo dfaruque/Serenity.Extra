@@ -48,7 +48,7 @@ namespace {{RootNamespace}}{{DotModule}}.Endpoints
             return new MyRepository().List(connection, request);
         }
 
-		public FileContentResult ListExcel(IDbConnection connection, ListRequest request) {
+	public FileContentResult ListExcel(IDbConnection connection, ListRequest request) {
             var data = List(connection, request).Entities;
             var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.{{ClassName}}Columns));
             var bytes = new ReportRepository().Render(report);
