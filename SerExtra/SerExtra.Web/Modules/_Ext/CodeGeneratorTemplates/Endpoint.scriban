@@ -5,8 +5,8 @@ namespace {{RootNamespace}}{{DotModule}}.Endpoints
     using Serenity;
     using Serenity.Data;
     using Serenity.Services;
-	using Serenity.Web;
-	using Serenity.Reporting;
+    using Serenity.Reporting;
+    using Serenity.Web;
     using System.Data;{{if AspNetCore}}
     using Microsoft.AspNetCore.Mvc;{{else}}
     using System.Web.Mvc;{{end}}
