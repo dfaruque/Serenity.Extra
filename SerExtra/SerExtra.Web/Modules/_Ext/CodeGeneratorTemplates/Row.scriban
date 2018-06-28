@@ -42,6 +42,6 @@
 
         public {{RowClassName}}() : base(Fields) { }
 
-		public partial class RowFields : {{FieldsBaseClass}} { }
+	public partial class RowFields : {{FieldsBaseClass}} { }
     }
 }
