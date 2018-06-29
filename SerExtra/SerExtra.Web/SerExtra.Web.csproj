@@ -2138,6 +2138,7 @@
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRepository.cs" />
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRow.cs" />
     <Compile Include="Modules\_Ext\Behaviours\AuditLogBehaviour.cs" />
+    <Compile Include="Modules\_Ext\Behaviours\MultiScopeBehaviour.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
