@@ -22,6 +22,12 @@ namespace MVC
                 {
                     public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
                 }
+
+                public static class Sergen
+                {
+                    public const string SergenError = "~/Modules/_Ext/DevTools/Sergen/SergenError.cshtml";
+                    public const string SergenIndex = "~/Modules/_Ext/DevTools/Sergen/SergenIndex.cshtml";
+                }
             }
 
         }

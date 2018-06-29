@@ -566,6 +566,7 @@
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.js" />
     <Content Include="Modules\_Ext\AuditLog\dbo.AuditLog.sql" />
     <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <Content Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts.html" />
     <Content Include="Modules\_Ext\Editors\SerenityInlineEditors.js" />
     <Content Include="Modules\_Ext\Editors\slick.editors.js" />
     <Content Include="Modules\_Ext\ExtStyles.css" />
@@ -819,6 +820,8 @@
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
     <Content Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
+    <Content Include="Modules\_Ext\DevTools\Sergen\SergenError.cshtml" />
+    <Content Include="Modules\_Ext\DevTools\Sergen\SergenIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -990,6 +993,24 @@
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditLogViewerService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenConnection.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenGenerateOptions.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenGenerateRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenListTablesRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenService.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenTable.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.EntityReportRequest.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1022,6 +1043,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\AutoCompleteEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\ColorEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\DateTimePickerEditor.ts" />
@@ -2144,6 +2166,9 @@
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
+    <Compile Include="Modules\_Ext\DevTools\Sergen\SergenEndpoint.cs" />
+    <Compile Include="Modules\_Ext\DevTools\Sergen\SergenModels.cs" />
+    <Compile Include="Modules\_Ext\DevTools\Sergen\SergenPage.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />
