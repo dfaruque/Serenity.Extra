@@ -269,7 +269,7 @@ namespace _Ext {
                     if (!ctx.item.RowNum) {
                         ctx.item.RowNum = this.nextRowNumber++;
                     }
-                    return ctx.item.RowNum; //+ ', ' + (ctx.row + 1)
+                    return String(ctx.item.RowNum);
                 }
             });
 
