@@ -76,6 +76,16 @@ public static class NumberToWords
         return words;
     }
 
+    public static string ToWords(this int number, int decimals = 2)
+    {
+        return IntToWords(number);
+    }
+
+    public static string ToWords(this int? number, int decimals = 2)
+    {
+        return IntToWords(number ?? 0);
+    }
+
     #region DecimalToWordsTk
     public static string DecimalToWordsTk(decimal number, int decimals = 2)
     {
