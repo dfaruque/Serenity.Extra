@@ -18,7 +18,7 @@ namespace _Ext.Entities
         [DisplayName("Id"), PrimaryKey]
         public Int64? Id { get { return Fields.Id[this]; } set { Fields.Id[this] = value; } }
 
-        [DisplayName("Version No"), Size(20), NotNull]
+        [DisplayName("Version No."), Size(20), NotNull]
         public Int32? VersionNo { get { return Fields.VersionNo[this]; } set { Fields.VersionNo[this] = value; } }
 
         [DisplayName("User"), NotNull, QuickFilter]
