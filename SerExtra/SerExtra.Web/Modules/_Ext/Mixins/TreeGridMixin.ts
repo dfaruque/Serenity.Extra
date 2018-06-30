@@ -1,4 +1,4 @@
-namespace _Ext {
+﻿﻿namespace _Ext {
 
     /**
      * A mixin that can be applied to a DataGrid for tree functionality
@@ -10,7 +10,7 @@ namespace _Ext {
 
         constructor(private options: TreeGridMixinOptions<TItem>) {
             var dg = this.dataGrid = options.grid;
-            var idProperty = options.idProperty || (dg as any).getIdProperty();
+            var idProperty = options.idField || (dg as any).getIdProperty();
             var getId = this.getId = (item: TItem) => (item as any)[idProperty];
 
             dg.element.find('.grid-container').on('click', e => {
@@ -18,7 +18,7 @@ namespace _Ext {
                     var src = dg.slickGrid.getCellFromEvent(e);
                     if (src.cell >= 0 &&
                         src.row >= 0) {
-                        Serenity.SlickTreeHelper.toggleClick<TItem>(e, src.row, src.row, dg.view, getId);
+                        TreeGridMixin.toggleClick<TItem>(e, src.row, src.row, dg.view, getId);
                     }
                 }
             });
@@ -58,7 +58,16 @@ namespace _Ext {
 
             this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
         }
+        expandAll(): void {
+            Serenity.SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), false);
 
+            this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
+        }
+        collapsedAll(): void {
+            Serenity.SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), true);
+
+            this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
+        }
         /**
          * Reorders a set of items so that parents comes before their children.
          * This method is required for proper tree ordering, as it is not so easy to perform with SQL.
@@ -86,8 +95,10 @@ namespace _Ext {
 
             for (var item of items) {
                 var parentId = getParentId(item);
-                if (parentId == null ||
-                    !((byId[parentId] || []).length)) {
+                let hasParent = parentId != null;
+                let parent = byId[parentId];
+                let isRootItem = !hasParent || !(parent || []).length;
+                if (isRootItem) {
                     result.push(item);
                     takeChildren(getId(item));
                 }
@@ -102,7 +113,9 @@ namespace _Ext {
                 if (parentId == null) {
                     return null;
                 }
-                return view.getItems().filter(f => f[idProperty] == parentId)[0];
+                let items = view.getItems();
+                let parentItem = items.filter(f => f[idProperty] == parentId)[0];
+                return parentItem;
             });
         }
 
@@ -130,13 +143,44 @@ namespace _Ext {
                 return spacer + '<span class="s-TreeToggle"></span>' + text;
             };
         }
-    }
 
+        static toggleClick<TItem>(e: JQueryEventObject, row: number, cell: number,
+            view: Slick.RemoteView<TItem>, getId: (x: TItem) => any): void {
+            var target = $(e.target);
+            if (!target.hasClass('s-TreeToggle')) {
+                return;
+            }
+            if (target.hasClass('s-TreeCollapse') || target.hasClass('s-TreeExpand')) {
+                var item = view.getItem(row);
+                if (item != null) {
+                    if (!!!item._collapsed) {
+                        item._collapsed = true;
+                    }
+                    else {
+                        item._collapsed = false;
+                    }
+
+                    var id = getId(item);
+                    view.updateItem(item.__id || id, item); //to support in-memory grid we check fake item.__id
+                }
+                if (e.shiftKey) {
+                    view.beginUpdate();
+                    try {
+                        Serenity.SlickTreeHelper.setCollapsed(view.getItems(), !!item._collapsed);
+                        view.setItems(view.getItems(), true);
+                    }
+                    finally {
+                        view.endUpdate();
+                    }
+                }
+            }
+        }
+    }
     export interface TreeGridMixinOptions<TItem> {
         // data grid object
         grid: Serenity.DataGrid<TItem, any>;
+        idField?: string;
         // a function to get parent id
-        idProperty?: string;
         getParentId: (item: TItem) => any;
         // where should the toggle button be placed
         toggleField: string;
