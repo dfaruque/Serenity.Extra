@@ -4,6 +4,7 @@ using Serenity.Data;
 using Serenity.Data.Mapping;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -44,6 +45,21 @@ public static partial class Q
             throw new Exception($"There is no ConnectionKeyAttribute at {rowType.Name}");
 
         return ConnectionKeyAttr.Value;
+    }
+
+    public static string GetNameById<TRow>(object id)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.GetNameById<TRow>(id);
+    }
+
+    public static string GetIdByName<TRow>(string name)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.GetNameById<TRow>(name);
     }
 
 }
