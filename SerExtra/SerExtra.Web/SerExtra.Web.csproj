@@ -1031,6 +1031,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\TemplatedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Mixins\TreeGridMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\ExcelExportHelper.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\PdfExportHelper.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\ReportHelper.ts" />
@@ -2147,6 +2148,7 @@
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />
     <Compile Include="Modules\_Ext\Utils\DateTimeHelper.cs" />
+    <Compile Include="Modules\_Ext\Utils\DbConnectionExtentions.cs" />
     <Compile Include="Modules\_Ext\Utils\EnumHelper.cs" />
     <Compile Include="Modules\_Ext\Utils\Enums.cs" />
     <Compile Include="Modules\_Ext\Utils\NumberToWords.cs" />
