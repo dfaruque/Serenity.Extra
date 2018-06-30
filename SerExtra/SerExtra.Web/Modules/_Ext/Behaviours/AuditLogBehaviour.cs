@@ -22,7 +22,7 @@ namespace _Ext
             var auditLog = row as IAuditLog;
             if (auditLog == null)
             {
-                    return false;
+                return false;
             }
             return true;
         }
@@ -62,43 +62,45 @@ namespace _Ext
         {
             try
             {
-                var auditLogConnection = SqlConnections.NewFor<AuditLogRow>();
-                var fld = AuditLogRow.Fields;
-
-                var entityId = (row as IIdRow).IdField[row] ?? 0;
-
-                var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
-                .Select(fld.VersionNo, fld.NewEntity)
-                .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
-                .OrderBy(fld.Id, desc: true));
-
-                //var jsonSerializerSettings = new JsonSerializerSettings
-                //{
-                //    ContractResolver = new DynamicContractResolver("IDate", "IUser", "EDate", "EUser")
-                //};
-
-                var rowJson = JsonConvert.SerializeObject(row);//, jsonSerializerSettings);
-                var oldrowJson = JsonConvert.SerializeObject(oldRow);//, jsonSerializerSettings);
-
-                if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
+                using (var auditLogConnection = SqlConnections.NewFor<AuditLogRow>())
                 {
-                    int versionNo = (lastVersion?.VersionNo ?? 0) + 1;
+                    var fld = AuditLogRow.Fields;
 
-                    var auditLogRow = new AuditLogRow
+                    var entityId = (row as IIdRow).IdField[row] ?? 0;
+
+                    var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
+                    .Select(fld.VersionNo, fld.NewEntity)
+                    .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
+                    .OrderBy(fld.Id, desc: true));
+
+                    //var jsonSerializerSettings = new JsonSerializerSettings
+                    //{
+                    //    ContractResolver = new DynamicContractResolver("IDate", "IUser", "EDate", "EUser")
+                    //};
+
+                    var rowJson = JsonConvert.SerializeObject(row);//, jsonSerializerSettings);
+                    var oldrowJson = JsonConvert.SerializeObject(oldRow);//, jsonSerializerSettings);
+
+                    if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
                     {
-                        VersionNo = versionNo,
-                        UserId = int.Parse(Authorization.UserId),
-                        ActionType = auditActionType,
-                        ActionDate = DateTime.Now,
-                        EntityTableName = row.Table,
-                        EntityId = entityId,
-                        OldEntity = oldrowJson,
-                        NewEntity = rowJson,
-                        IpAddress = HttpContext.Current.Request.UserHostAddress,
-                        SessionId = HttpContext.Current.Session.SessionID
-                    };
+                        int versionNo = (lastVersion?.VersionNo ?? 0) + 1;
 
-                    auditLogConnection.Insert<AuditLogRow>(auditLogRow);
+                        var auditLogRow = new AuditLogRow
+                        {
+                            VersionNo = versionNo,
+                            UserId = int.Parse(Authorization.UserId),
+                            ActionType = auditActionType,
+                            ActionDate = DateTime.Now,
+                            EntityTableName = row.Table,
+                            EntityId = entityId,
+                            OldEntity = oldrowJson,
+                            NewEntity = rowJson,
+                            IpAddress = HttpContext.Current.Request.UserHostAddress,
+                            SessionId = HttpContext.Current.Session.SessionID
+                        };
+
+                        auditLogConnection.Insert<AuditLogRow>(auditLogRow);
+                    }
                 }
             }
             catch (Exception ex)
@@ -107,7 +109,7 @@ namespace _Ext
             }
         }
 
-            string GetPageUrl()
+        string GetPageUrl()
         {
             string pageUrl = "";
             if (HttpContext.Current != null && HttpContext.Current.Request != null)
