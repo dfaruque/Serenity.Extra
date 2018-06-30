@@ -1,5 +1,6 @@
 ﻿
 namespace {{RootNamespace}}{{DotModule}} {
+    import fld = {{RowClassName}}.Fields;
 
     @Serenity.Decorators.registerClass()
     export class {{ClassName}}Grid extends _Ext.GridBase<{{RowClassName}}, any> {

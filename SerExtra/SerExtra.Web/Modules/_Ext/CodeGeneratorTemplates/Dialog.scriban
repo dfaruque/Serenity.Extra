@@ -1,5 +1,6 @@
 ﻿
 namespace {{RootNamespace}}{{DotModule}} {
+    import fld = {{RowClassName}}.Fields;
 
     @Serenity.Decorators.registerClass(){{if CustomSettings.MaximizableDialog}}
     @Serenity.Decorators.maximizable(){{end}}
