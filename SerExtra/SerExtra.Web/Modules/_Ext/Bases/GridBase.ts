@@ -462,17 +462,21 @@ namespace _Ext {
 
         protected onInlineActionClick(target: JQuery, recordId, item: TItem): void {
             if (target.hasClass('delete-row')) {
-                Q.confirm('Delete record?', () => {
-                    let o = this as any;
-                    if (o.deleteEntity) { //for in-memory grid
-                        o.deleteEntity(recordId);
-                    }
-                    else {
-                        Q.serviceRequest(this.getService() + '/Delete', { EntityId: recordId }, response => {
-                            this.refresh();
-                        });
-                    }
-                });
+                if (this.isReadOnly == true) {
+                    Q.notifyWarning('Read only records could not be deleted!');
+                } else {
+                    Q.confirm('Delete record?', () => {
+                        let o = this as any;
+                        if (o.deleteEntity) { //for in-memory grid
+                            o.deleteEntity(recordId);
+                        }
+                        else {
+                            Q.serviceRequest(this.getService() + '/Delete', { EntityId: recordId }, response => {
+                                this.refresh();
+                            });
+                        }
+                    });
+                }
             }
             else if (target.hasClass('view-details')) {
                 this.editItem(recordId);
@@ -517,7 +521,7 @@ namespace _Ext {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }
-        
+
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
             let r = super.onViewProcessData(response);
 
