@@ -1,6 +1,7 @@
 ﻿
 namespace SerExtra.Northwind.Forms
 {
+    using _Ext;
     using Serenity.ComponentModel;
     using System;
 
@@ -9,6 +10,7 @@ namespace SerExtra.Northwind.Forms
     public class CategoryForm
     {
         public String CategoryName { get; set; }
+        [CustomerTemplatedLookupEditor]
         public String Description { get; set; }
     }
 }

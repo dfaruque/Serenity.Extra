@@ -1,6 +1,6 @@
 ﻿namespace SerExtra.ExtraSamples {
     export interface OrdersByCustomerReportRequestForm {
-        CustomerId: Serenity.IntegerEditor;
+        CustomerId: Serenity.LookupEditor;
     }
 
     export class OrdersByCustomerReportRequestForm extends Serenity.PrefixedContext {
@@ -14,7 +14,7 @@
                 OrdersByCustomerReportRequestForm.init = true;
 
                 var s = Serenity;
-                var w0 = s.IntegerEditor;
+                var w0 = s.LookupEditor;
 
                 Q.initFormType(OrdersByCustomerReportRequestForm, [
                     'CustomerId', w0
