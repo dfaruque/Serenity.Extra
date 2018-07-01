@@ -1,0 +1,58 @@
+﻿@using _Ext
+
+<!DOCTYPE html>
+@{
+    var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+}
+<html lang="@UICulture">
+<head>
+    @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
+    @Html.Stylesheet("~/Modules/_Ext/Reporting/report.css")
+    @RenderSection("Head", false)
+    <title>@ViewData["Title"]</title>
+
+    <script>
+        var pdfInfo = {};
+        var x = document.location.search.substring(1).split('&');
+        for (var i in x) { var z = x[i].split('=', 2); pdfInfo[z[0]] = unescape(z[1]); }
+        function getPdfInfo() {
+            //var page = pdfInfo.page || 1;
+            //var pageCount = pdfInfo.topage || 1;
+            //document.getElementById('pdfkit_page_current').textContent = page;
+            //document.getElementById('pdfkit_page_count').textContent = pageCount;
+        }
+
+
+    </script>
+
+</head>
+<body onload="getPdfInfo()" id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) no-navigation@(rtl ? " rtl" : "")">
+    <section class="invoice">
+        <div class="row">
+            <div class="col-xs-2">
+                <img width="100" height="100" src="~/Content/images/POMS_MPA_Logo.png" />
+            </div>
+
+            <div class="col-xs-10">
+                <h3>Mongla Port Authority</h3>
+                <h4>Mongla, Bagerhat-9351, Bangladesh.<small @((ViewData["HideDate"] != null) ? "hidden" : "") class="pull-right">Print Date: @DateTime.Now.ToDateFormat()</small></h4>
+                <hr style="margin-top:5px" />
+
+            </div>
+        </div>
+
+        <div class="@(ViewData["HideHeader"] != null ? "hidden" : "" )">
+            <h4 class="align-center">
+                @ViewData["Title"]
+            </h4>
+        </div>
+        <div class="report-body">
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="align-right" style="margin-top:20px; font-size:10px;"><i>Powered by</i> <b>TechnoVista</b></div>
+        </footer>
+    </section>
+</body>
+
+</html>

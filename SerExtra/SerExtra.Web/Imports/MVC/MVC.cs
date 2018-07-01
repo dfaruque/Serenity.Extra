@@ -315,6 +315,19 @@ namespace MVC
             public const string ValidationError = "~/Views/Errors/ValidationError.cshtml";
         }
 
+        public static class ExtraSamples
+        {
+            public static class Reports
+            {
+                public static class OrdersByCustomer
+                {
+                    public const string OrdersByCustomerIndex = "~/Modules/ExtraSamples/Reports/OrdersByCustomer/OrdersByCustomerIndex.cshtml";
+                    public const string OrdersByCustomerReport = "~/Modules/ExtraSamples/Reports/OrdersByCustomer/OrdersByCustomerReport.cshtml";
+                }
+            }
+
+        }
+
         public static class Membership
         {
             public static class Account
@@ -403,6 +416,7 @@ namespace MVC
             public const string _Layout = "~/Views/Shared/_Layout.cshtml";
             public const string _LayoutHead = "~/Views/Shared/_LayoutHead.cshtml";
             public const string _LayoutNoNavigation = "~/Views/Shared/_LayoutNoNavigation.cshtml";
+            public const string _LayoutReport = "~/Views/Shared/_LayoutReport.cshtml";
             public const string _LayoutSlim = "~/Views/Shared/_LayoutSlim.cshtml";
             public const string _LayoutSlimHead = "~/Views/Shared/_LayoutSlimHead.cshtml";
             public const string Error = "~/Views/Shared/Error.cshtml";

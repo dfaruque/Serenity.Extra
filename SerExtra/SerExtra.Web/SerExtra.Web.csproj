@@ -822,6 +822,8 @@
     <Content Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
     <Content Include="Modules\_Ext\DevTools\Sergen\SergenError.cshtml" />
     <Content Include="Modules\_Ext\DevTools\Sergen\SergenIndex.cshtml" />
+    <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cshtml" />
+    <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -969,6 +971,12 @@
     <Content Include="tools\JsEngine\lib.d.ts_" />
     <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
     <None Include="tsconfig.json" />
+    <TypeScriptCompile Include="Imports\ServerTypings\ExtraSamples.OrdersByCustomerReportRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\ExtraSamples.OrdersByCustomerReportRequestForm.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditActionType.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1035,6 +1043,7 @@
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.TimeUoM.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogActionTypeFormatter.ts" />
@@ -1847,6 +1856,7 @@
     <Content Include="Views\Errors\AccessDenied.cshtml" />
     <Content Include="Views\Shared\_LayoutSlim.cshtml" />
     <Content Include="Views\Shared\_LayoutSlimHead.cshtml" />
+    <Content Include="Views\Shared\_LayoutReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1995,6 +2005,10 @@
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesListRequest.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesEndpoint.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesRepository.cs" />
+    <Compile Include="Modules\ExtraSamples\ExtraSamplesNavigation.cs" />
+    <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerPage.cs" />
+    <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cs" />
+    <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportRequest.cs" />
     <Compile Include="Modules\Northwind\Customer\CustomerGrossSalesRow.cs" />
     <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAColumns.cs" />
     <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAParser.cs" />
@@ -2279,7 +2293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Modules\ExtraSample\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
