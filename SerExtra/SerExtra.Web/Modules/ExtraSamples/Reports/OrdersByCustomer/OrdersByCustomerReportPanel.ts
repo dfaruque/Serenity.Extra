@@ -1,7 +1,7 @@
 ﻿namespace SerExtra.ExtraSamples {
 
     @Serenity.Decorators.registerClass()
-    export class OrdersByCustomerReportPanel extends Serenity.PropertyPanel<OrdersByCustomerReportRequestForm, any> {
+    export class OrdersByCustomerReportPanel extends Serenity.PropertyPanel<OrdersByCustomerReportRequest, any> {
 
         protected getFormKey() { return OrdersByCustomerReportRequestForm.formKey; }
 
