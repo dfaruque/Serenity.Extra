@@ -1060,7 +1060,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\EmptyLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\GridEditorBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
-    <TypeScriptCompile Include="Modules\_Ext\Editors\TemplatedLookupEditor.ts" />
+    <TypeScriptCompile Include="Modules\ExtraSamples\CustomizedEditors\CustomerTemplatedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\TreeGridMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\ExcelExportHelper.ts" />
@@ -1937,6 +1937,9 @@
     <Compile Include="Imports\ClientTypes\_Ext.ColorEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.CustomerTemplatedLookupEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.DateTimePickerEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
@@ -1947,9 +1950,6 @@
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.StaticTextBlockAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\_Ext.TemplatedLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DefaultDB\DefaultDB_20180530_140000_AuditLog.cs" />

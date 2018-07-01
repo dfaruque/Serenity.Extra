@@ -7,11 +7,11 @@ using System.ComponentModel;
 
 namespace _Ext
 {
-    public partial class TemplatedLookupEditorAttribute : CustomEditorAttribute
+    public partial class CustomerTemplatedLookupEditorAttribute : LookupEditorBaseAttribute
     {
-        public const string Key = "_Ext.TemplatedLookupEditor";
+        public const string Key = "_Ext.CustomerTemplatedLookupEditor";
 
-        public TemplatedLookupEditorAttribute()
+        public CustomerTemplatedLookupEditorAttribute()
             : base(Key)
         {
         }
