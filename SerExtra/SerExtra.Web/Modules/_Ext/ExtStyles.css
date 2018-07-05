@@ -218,7 +218,7 @@ input, textarea {
 
 .slick-row:hover {
     /*background: none repeat scroll 0 0 #f1f1ef;*/
-    text-shadow: 0px 0px 1px #333;
+    text-shadow: 0px 0px 1px #ccc;
 }
 
 /* Slick.Editors.Text, Slick.Editors.Date */
