@@ -1,6 +1,7 @@
 ﻿
 namespace SerExtra.Northwind.Forms
 {
+    using _Ext;
     using Serenity.ComponentModel;
     using System;
     using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace SerExtra.Northwind.Forms
     {
         [Tab("General")]
         [Category("Order")]
+        [CustomerTemplatedLookupEditor]
         public String CustomerID { get; set; }
         [DefaultValue("now")]
         public DateTime OrderDate { get; set; }
