@@ -1,5 +1,5 @@
 ﻿
-namespace _Ext.Pages
+namespace _Ext.DevTools.Pages
 {
     using Serenity;
     using Serenity.Data;

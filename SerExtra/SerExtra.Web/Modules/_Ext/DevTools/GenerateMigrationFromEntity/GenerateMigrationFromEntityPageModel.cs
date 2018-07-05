@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace _Ext.Model
+namespace _Ext.DevTools.Model
 {
     public class GenerateMigrationFromEntityPageModel
     {

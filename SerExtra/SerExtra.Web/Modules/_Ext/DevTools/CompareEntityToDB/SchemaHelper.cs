@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Ext
+namespace _Ext.DevTools
 {
     public class SchemaHelper
     {

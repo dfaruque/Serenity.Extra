@@ -1,6 +1,7 @@
 ﻿namespace SerExtra.Northwind {
     export interface CategoryForm {
         CategoryName: Serenity.StringEditor;
+        Description: Serenity.StringEditor;
     }
 
     export class CategoryForm extends Serenity.PrefixedContext {
@@ -17,7 +18,8 @@
                 var w0 = s.StringEditor;
 
                 Q.initFormType(CategoryForm, [
-                    'CategoryName', w0
+                    'CategoryName', w0,
+                    'Description', w0
                 ]);
             }
         }

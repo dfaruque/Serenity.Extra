@@ -10,7 +10,6 @@ namespace SerExtra.Northwind.Forms
     public class CategoryForm
     {
         public String CategoryName { get; set; }
-        [CustomerTemplatedLookupEditor]
         public String Description { get; set; }
     }
 }

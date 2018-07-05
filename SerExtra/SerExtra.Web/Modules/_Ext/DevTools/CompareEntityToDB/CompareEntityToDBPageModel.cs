@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace _Ext.Model
+namespace _Ext.DevTools.Model
 {
     public class CompareEntityToDBPageModel
     {
