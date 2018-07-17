@@ -558,14 +558,14 @@
     }
 
     function CheckboxEditor(args) {
-        var $select;
+        var $input;
         var defaultValue;
         var scope = this;
 
         this.init = function () {
-            $select = $("<INPUT type=checkbox value='true' class='editor-checkbox' hideFocus>");
-            $select.appendTo(args.container);
-            $select.focus();
+            $input = $("<INPUT type=checkbox value='true' class='editor-checkbox' hideFocus>");
+            $input.appendTo(args.container);
+            $input.focus();
 
             $input.bind('change', function (e) {
                 onChange(e, args);
@@ -574,24 +574,24 @@
         };
 
         this.destroy = function () {
-            $select.remove();
+            $input.remove();
         };
 
         this.focus = function () {
-            $select.focus();
+            $input.focus();
         };
 
         this.loadValue = function (item) {
             defaultValue = !!item[args.column.field];
             if (defaultValue) {
-                $select.prop('checked', true);
+                $input.prop('checked', true);
             } else {
-                $select.prop('checked', false);
+                $input.prop('checked', false);
             }
         };
 
         this.serializeValue = function () {
-            return $select.prop('checked');
+            return $input.prop('checked');
         };
 
         this.applyValue = function (item, state) {
