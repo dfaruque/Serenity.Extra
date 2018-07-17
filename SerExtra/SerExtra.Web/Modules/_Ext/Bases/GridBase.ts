@@ -437,6 +437,13 @@ namespace _Ext {
 
         }
 
+        protected getViewOptions() {
+            let opt = super.getViewOptions();
+
+            opt.rowsPerPage = q.DefaultMainGridOptions.RowsPerPage;
+
+            return opt;
+        }
 
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);
