@@ -66,13 +66,14 @@ interface ExtGridOptions {
     ShowInlineActionsColumn: boolean,
     ShowEditInlineButtun: boolean,
     ShowDeleteInlineButtun: boolean,
-
+    RowsPerPage?: number
 }
 
 interface ExtDialogOptions {
     AutoFitContentArea: boolean,
     HideCategoyLinksBar: boolean,
-    PendingChangesConfirmation: boolean
+    PendingChangesConfirmation: boolean,
+    ShowCloseButtonInToolbar: boolean
 }
 
 

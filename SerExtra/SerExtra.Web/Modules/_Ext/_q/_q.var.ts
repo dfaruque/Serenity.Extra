@@ -12,7 +12,8 @@ namespace q {
         ShowInlineActionsColumn: true,
         ShowDeleteInlineButtun: false,
         ShowEditInlineButtun: true,
-        ShowRowNumberColumn: true
+        ShowRowNumberColumn: true,
+        RowsPerPage: 100
     };
 
     export var DefaultEditorGridOptions: ExtGridOptions = {
@@ -28,13 +29,15 @@ namespace q {
     export var DefaultEntityDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: true,
         HideCategoyLinksBar: true,
-        PendingChangesConfirmation: true
+        PendingChangesConfirmation: true,
+        ShowCloseButtonInToolbar: false
     };
 
     export var DefaultEditorDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: false,
         HideCategoyLinksBar: true,
-        PendingChangesConfirmation: true
+        PendingChangesConfirmation: true,
+        ShowCloseButtonInToolbar: false
     };
 
     //date time
