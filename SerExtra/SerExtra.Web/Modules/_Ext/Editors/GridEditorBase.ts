@@ -142,8 +142,9 @@ namespace _Ext {
                 return y;
             });
 
-            this.view.setItems(items, true);
-            setTimeout(() => { this.onItemsChanged() });
+            let r = this.onViewProcessData({ Entities: items })
+            this.view.setItems(r.Entities, true);
+            setTimeout(() => { this.onItemsChanged(); });
             this.resetRowNumber(); // to generate serial no.
         }
 
