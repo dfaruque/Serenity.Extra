@@ -5,7 +5,7 @@
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
 
-        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+        protected get_ExtDialogOptions(): ExtDialogOptions { return q.DefaultEntityDialogOptions; }
 
         private loadedState: string;
         isReadOnly: boolean = false;
@@ -35,6 +35,10 @@
             if (this.get_ExtDialogOptions().AutoFitContentArea == true) {
                 this.fullContentArea();
             }
+
+            //temporary fix to set grid editor height
+            setTimeout(() => { this.afterSetDialogSize(); }, 200)
+
             this.element.fadeTo(100, 1);
         }
 
@@ -63,6 +67,17 @@
 
         protected getToolbarButtons(): Serenity.ToolButton[] {
             let buttons = super.getToolbarButtons();
+            let extOptions = this.get_ExtDialogOptions();
+
+            if (extOptions.ShowCloseButtonInToolbar == true)
+                buttons.push({
+                    title: 'Close',
+                    icon: 'fa fa-close',
+                    onClick: () => {
+                        this.dialogClose();
+                    }
+                })
+
             //buttons.push({
             //    title: 'Refresh',
             //    icon: 'fa fa-refresh',
