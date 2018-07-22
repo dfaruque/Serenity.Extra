@@ -11,6 +11,10 @@
 
         constructor(container: JQuery) {
             super(container);
+
+            new _Ext.HeaderFiltersMixin({
+                grid: this
+            })
         }
 
         getButtons() {

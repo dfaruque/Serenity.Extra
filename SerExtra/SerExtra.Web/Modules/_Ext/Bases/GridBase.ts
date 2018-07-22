@@ -302,10 +302,12 @@ namespace _Ext {
 
         protected createSlickGrid() {
             var grid = super.createSlickGrid();
-            if (Slick.AutoColumnSize) {
-                this.autoColumnSizePlugin = new Slick.AutoColumnSize();
-                grid.registerPlugin(this.autoColumnSizePlugin);
-            }
+
+            usingSlickAutoColumnSize();
+
+            this.autoColumnSizePlugin = new Slick.AutoColumnSize();
+            grid.registerPlugin(this.autoColumnSizePlugin);
+
             grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
 
             return grid;

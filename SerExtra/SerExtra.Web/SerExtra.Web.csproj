@@ -556,6 +556,7 @@
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Fonts\ionicons.svg" />
     <Content Include="Fonts\Simple-Line-Icons.svg" />
+    <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick.headerfilters.js" />
     <Content Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.Template.html" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\formatters-styles\annotated.css" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\formatters-styles\html.css" />
@@ -567,6 +568,7 @@
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.js" />
     <Content Include="Modules\_Ext\AuditLog\dbo.AuditLog.sql" />
     <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick-headerfilters.css" />
     <Content Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts.html" />
     <Content Include="Modules\_Ext\Editors\SerenityInlineEditors.js" />
     <Content Include="Modules\_Ext\Editors\slick.editors.js" />
@@ -974,6 +976,9 @@
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
     <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <Content Include="node_modules\%40types\react\LICENSE" />
+    <Content Include="node_modules\%40types\react\package.json" />
+    <Content Include="node_modules\%40types\react\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1146,6 +1151,7 @@
     <TypeScriptCompile Include="Modules\ExtraSamples\CustomizedEditors\CustomerTemplatedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Mixins\HeaderFiltersMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\TreeGridMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Reporting\ExcelExportHelper.ts" />
@@ -1166,6 +1172,8 @@
     <TypeScriptCompile Include="node_modules\%40types\jquery.cookie\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery.validation\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jspdf\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react\global.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\sortablejs\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\toastr\index.d.ts" />
     <Content Include="Content\site\images\accordion-arrows.png" />
@@ -2316,6 +2324,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Modules\ExtraSamples\Mixins\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
