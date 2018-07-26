@@ -62,6 +62,7 @@ namespace _Ext.DevTools.Model
                         if (rowfield.Flags.HasFlag(FieldFlags.Unique))
                             sb.Append(".Unique()");
 
+
                         if (!string.IsNullOrWhiteSpace(rowfield.ForeignTable))
                         {
                             string foreignTableName = SchemaHelper.GetTableNameOnly(rowfield.ForeignTable);
