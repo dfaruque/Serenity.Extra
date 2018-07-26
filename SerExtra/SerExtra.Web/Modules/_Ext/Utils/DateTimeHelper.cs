@@ -8,6 +8,23 @@ using System.Web;
 
 public static class DateTimeHelper
 {
+    public static string ToISODateFormat(this DateTime inputValue)
+    {
+        return inputValue.ToString("yyyy-MM-dd");
+    }
+    public static string ToISODateFormat(this DateTime? inputValue)
+    {
+        return inputValue?.ToString("yyyy-MM-dd");
+    }
+    public static string ToISODateTimeFormat(this DateTime inputValue)
+    {
+        return inputValue.ToString(DateHelper.ISODateTimeFormatLocal);
+    }
+    public static string ToISODateTimeFormat(this DateTime? inputValue)
+    {
+        return inputValue?.ToString(DateHelper.ISODateTimeFormatLocal);
+    }
+
     /// <summary>
     /// Gets date string of default date format for current culture.
     /// </summary>
