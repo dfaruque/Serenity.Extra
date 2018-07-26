@@ -5,7 +5,7 @@
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
 
-        protected get_ExtDialogOptions(): ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEntityDialogOptions; }
 
         private loadedState: string;
         isReadOnly: boolean = false;
@@ -36,10 +36,16 @@
                 this.fullContentArea();
             }
 
-            //temporary fix to set grid editor height
-            setTimeout(() => { this.afterSetDialogSize(); }, 200)
+            //temporary fix for set grid editor height
+            setTimeout(() => { this.onAfterSetDialogSize(); }, 200)
 
             this.element.fadeTo(100, 1);
+        }
+
+        protected onDialogClose() {
+            super.onDialogClose();
+
+            this.onAfterDialogClose(this.entity);
         }
 
         protected setReadOnly(value: boolean) {
@@ -202,14 +208,13 @@
             }
 
             setTimeout(() => {
-                this.afterSetDialogSize();
+                this.onAfterSetDialogSize();
             }, 200);
 
         }
 
-        afterSetDialogSize() {
-
-        }
+        onAfterSetDialogSize() { }
+        onAfterDialogClose(entity: TEntity) { }
 
     }
 }
