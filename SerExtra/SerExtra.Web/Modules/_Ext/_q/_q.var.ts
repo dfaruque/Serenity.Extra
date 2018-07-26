@@ -30,14 +30,16 @@ namespace q {
         AutoFitContentArea: true,
         HideCategoyLinksBar: true,
         PendingChangesConfirmation: true,
-        ShowCloseButtonInToolbar: false
+        ShowCloseButtonInToolbar: false,
+        ShowRefreshButtonInToolbar: false
     };
 
     export var DefaultEditorDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: false,
         HideCategoyLinksBar: true,
         PendingChangesConfirmation: true,
-        ShowCloseButtonInToolbar: false
+        ShowCloseButtonInToolbar: false,
+        ShowRefreshButtonInToolbar: false
     };
 
     //date time

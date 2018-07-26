@@ -5,7 +5,7 @@
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
 
-        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+        protected get_ExtDialogOptions(): ExtDialogOptions { return q.DefaultEntityDialogOptions; }
 
         private loadedState: string;
         isReadOnly: boolean = false;
@@ -82,15 +82,17 @@
                     onClick: () => {
                         this.dialogClose();
                     }
-                })
+                });
 
-            //buttons.push({
-            //    title: 'Refresh',
-            //    icon: 'fa fa-refresh',
-            //    onClick: () => {
-            //        this.onRefreshClick();
-            //    }
-            //})
+            if (extOptions.ShowRefreshButtonInToolbar == true)
+                buttons.push({
+                    title: 'Refresh',
+                    icon: 'fa fa-refresh',
+                    onClick: () => {
+                        this.onRefreshClick();
+                    }
+                });
+
             //try {
             //    if (Q.Authorization.username.indexOf('admin') >= 0) {
             //        if (Q.isEmptyOrNull(this.getService()) == false) {
@@ -148,6 +150,7 @@
         }
 
         onRefreshClick() {
+            this.reloadById();
         }
 
         protected getSaveState() {
