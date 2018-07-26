@@ -25,7 +25,7 @@ namespace _Ext.DevTools.Model
             {
                 Row row = (Row)Activator.CreateInstance(rowClass);
 
-                var tableName = SchemaHelper.GetTableNameOnly(row.Table);
+                string tableName = SchemaHelper.GetTableNameOnly(row.Table);
                 string schema = SchemaHelper.GetSchemaName(row.Table);
 
                 var rowFields = row.GetFields();
@@ -33,7 +33,7 @@ namespace _Ext.DevTools.Model
                 StringBuilder sb = new StringBuilder();
                 sb.Append($@"Create.Table(""{tableName}"")");
 
-                if (!string.IsNullOrWhiteSpace(schema))
+                if (!string.IsNullOrWhiteSpace(schema) && schema != "dbo")
                     sb.Append($@".InSchema(""{schema}"")");
 
                 for (int i = 0; i < row.FieldCount; i++)
@@ -62,9 +62,15 @@ namespace _Ext.DevTools.Model
                         if (rowfield.Flags.HasFlag(FieldFlags.Unique))
                             sb.Append(".Unique()");
 
+
                         if (!string.IsNullOrWhiteSpace(rowfield.ForeignTable))
                         {
-                            sb.Append($@".ForeignKey(""{rowfield.ForeignTable}"", ""{rowfield.ForeignField}"")");
+                            string foreignTableName = SchemaHelper.GetTableNameOnly(rowfield.ForeignTable);
+                            sb.Append($@".ForeignKey(""{foreignTableName}"", ""{rowfield.ForeignField}"")");
+
+                            string foreignSchema = SchemaHelper.GetSchemaName(rowfield.ForeignTable);
+                            if (!string.IsNullOrWhiteSpace(foreignSchema) && foreignSchema != "dbo")
+                                sb.Append($@".InSchema(""{schema}"")");
                         }
                     }
                 }
