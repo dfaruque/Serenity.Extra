@@ -1,6 +1,8 @@
-﻿using Serenity;
+﻿using OfficeOpenXml;
+using Serenity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -27,7 +29,7 @@ public static class DateTimeHelper
     }
 
     /// <summary>
-    /// Gets date time string of default date time format for current culture.
+    /// Gets date time string of "dd-MM-yyyy HH:mm" format for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
@@ -39,23 +41,34 @@ public static class DateTimeHelper
     }
 
     /// <summary>
-    /// Gets date string of default date format for current culture.
+    /// Gets date string of "dd MMMM yyyy" for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
     public static string ToLongDateFormat(this DateTime? inputValue)
     {
-        return inputValue?.ToString("dd MMMM, yyyy");
+        return inputValue?.ToString("dd MMMM yyyy");
     }
 
     /// <summary>
-    /// Gets date string of default date format for current culture.
+    /// Gets date string of "dd MMMM yyyy" for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
     public static string ToLongDateFormat(this DateTime inputValue)
     {
-        return inputValue.ToString("dd MMMM, yyyy");
+        return inputValue.ToString("dd MMMM yyyy");
+    }
+
+    public static DateTime? GetValueAsDate(this ExcelWorksheet worksheet, int row, int col, string[] dateFormates)
+    {
+        var cellValueAsString = worksheet.GetValue<string>(row, col);
+        if (DateTime.TryParseExact(cellValueAsString, dateFormates, null, DateTimeStyles.AllowWhiteSpaces, out DateTime date))
+        {
+            return date;
+        }
+
+        return worksheet.GetValue<DateTime?>(row, col);
     }
 
     public static int GetMonths(DateTime fromDate, DateTime toDate)
