@@ -14,7 +14,7 @@ namespace q {
         }
         editor.parentDialog = dialog;
 
-        dialog.afterSetDialogSize = () => {
+        dialog.onAfterSetDialogSize = () => {
 
             if (options.height) {
                 editor.slickGrid.setOptions({ autoHeight: false });
