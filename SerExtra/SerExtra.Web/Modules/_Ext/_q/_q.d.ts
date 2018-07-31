@@ -12,6 +12,37 @@ declare namespace Slick {
     }
 }
 declare namespace LiteDB {
+    interface ObjectId {
 
+    }
 }
+
+interface ExtGridEditorOptions {
+    isReadOnly?: boolean; //false
+    height?: number;
+    autoHeight?: boolean;//true
+    width?: number;
+    showCaption?: boolean;//false
+    hideToolbar?: boolean;//false
+}
+
+interface ExtGridOptions {
+    AutoColumnSize: boolean,
+    FadeInEffectWhenInit: boolean,
+    ShowAnyInEqualityFilterWithTextValue: boolean,
+    ShowRowNumberColumn:boolean,
+    ShowInlineActionsColumn: boolean,
+    ShowEditInlineButtun: boolean,
+    ShowDeleteInlineButtun: boolean,
+    RowsPerPage?: number
+}
+
+interface ExtDialogOptions {
+    AutoFitContentArea: boolean,
+    HideCategoyLinksBar: boolean,
+    PendingChangesConfirmation: boolean,
+    ShowCloseButtonInToolbar: boolean
+    ShowRefreshButtonInToolbar: boolean
+}
+
 

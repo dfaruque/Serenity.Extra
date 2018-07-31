@@ -1,15 +1,4 @@
-﻿/// <reference path="../Bases/GridBase.ts" />
-/// <reference path="../Bases/ReportGridBase.ts" />
-/// <reference path="../Bases/DialogBase.ts" />
-/// <reference path="../Editors/EditorDialogBase.ts" />
-/// <reference path="../Editors/GridEditorBase.ts" />
-
-var isPageRefreshRequired: boolean;
-//const nameof = <T>(name: keyof T) => name;
-const nameofFactory = <T>() => (name: keyof T) => name;
-//usage const nameof = nameofFactory<Edoc.RevenueReportModel>();
-
-namespace q {
+﻿namespace q {
     export function isCosmicThemeApplied(): boolean {
         return document.body.className.indexOf('cosmic') >= 0;
     }
@@ -49,37 +38,3 @@ namespace q {
 
 }
 
-interface ExtGridEditorOptions {
-    isReadOnly?: boolean; //false
-    height?: number;
-    autoHeight?: boolean;//true
-    width?: number;
-    showCaption?: boolean;//false
-    hideToolbar?: boolean;//false
-}
-
-interface ExtGridOptions {
-    AutoColumnSize: boolean,
-    FadeInEffectWhenInit: boolean,
-    ShowAnyInEqualityFilterWithTextValue: boolean,
-    ShowRowNumberColumn:boolean,
-    ShowInlineActionsColumn: boolean,
-    ShowEditInlineButtun: boolean,
-    ShowDeleteInlineButtun: boolean,
-    RowsPerPage?: number
-}
-
-interface ExtDialogOptions {
-    AutoFitContentArea: boolean,
-    HideCategoyLinksBar: boolean,
-    PendingChangesConfirmation: boolean,
-    ShowCloseButtonInToolbar: boolean
-    ShowRefreshButtonInToolbar: boolean
-}
-
-
-declare namespace LiteDB {
-    interface ObjectId {
-
-    }
-}
