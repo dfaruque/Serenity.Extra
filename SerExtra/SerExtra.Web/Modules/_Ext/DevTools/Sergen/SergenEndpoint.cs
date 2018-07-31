@@ -9,7 +9,7 @@ namespace _Ext.DevTools.Endpoints
     using System.Web.Hosting;
     using System.Web.Mvc;
 
-    [Route("Services/DevTools/Sergen/[action]")]
+    [RoutePrefix("Services/DevTools/Sergen"), Route("{action}")]
     [ServiceAuthorize("DevTools:Sergen")]
     public class SergenController : ServiceEndpoint
     {
