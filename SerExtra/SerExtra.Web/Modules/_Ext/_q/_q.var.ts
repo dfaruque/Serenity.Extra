@@ -36,7 +36,10 @@ namespace q {
         HideCategoyLinksBar: true,
         PendingChangesConfirmation: true,
         ShowCloseButtonInToolbar: false,
-        ShowRefreshButtonInToolbar: false
+        ShowRefreshButtonInToolbar: false,
+        ShowChangeLogButtonInToolbar: false,
+        ShowReplaceRowButtonInToolbar: false
+
     };
 
     export var DefaultEditorDialogOptions: ExtDialogOptions = {
@@ -44,7 +47,9 @@ namespace q {
         HideCategoyLinksBar: true,
         PendingChangesConfirmation: true,
         ShowCloseButtonInToolbar: false,
-        ShowRefreshButtonInToolbar: false
+        ShowRefreshButtonInToolbar: false,
+        ShowChangeLogButtonInToolbar: false,
+        ShowReplaceRowButtonInToolbar: false
     };
 
     //date time

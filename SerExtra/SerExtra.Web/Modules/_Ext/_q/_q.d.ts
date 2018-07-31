@@ -41,8 +41,10 @@ interface ExtDialogOptions {
     AutoFitContentArea: boolean,
     HideCategoyLinksBar: boolean,
     PendingChangesConfirmation: boolean,
-    ShowCloseButtonInToolbar: boolean
-    ShowRefreshButtonInToolbar: boolean
+    ShowCloseButtonInToolbar: boolean,
+    ShowRefreshButtonInToolbar: boolean,
+    ShowChangeLogButtonInToolbar: boolean,
+    ShowReplaceRowButtonInToolbar: boolean
 }
 
 

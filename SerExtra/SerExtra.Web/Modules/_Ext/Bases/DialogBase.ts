@@ -93,59 +93,65 @@
                     }
                 });
 
-            //try {
-            //    if (Q.Authorization.username.indexOf('admin') >= 0) {
-            //        if (Q.isEmptyOrNull(this.getService()) == false) {
-            //            buttons.push({
-            //                title: 'Replace',
-            //                icon: 'fa fa-trash-o',
-            //                cssClass:'btn-replace-row',
-            //                onClick: () => {
-            //                    let idProperty = this['getIdProperty']();
-            //                    let nameProperty = this['getNameProperty']();
-            //                    let entityId = this.entity[idProperty];
-            //                    let entityName = this.entity[nameProperty];
+            try {
+                if (extOptions.ShowReplaceRowButtonInToolbar == true && Q.Authorization.hasPermission('Administration:ReplaceRow')) {
+                    if (Q.isEmptyOrNull(this.getService()) == false) {
+                        buttons.push({
+                            title: 'Replace',
+                            icon: 'fa fa-trash-o',
+                            cssClass: 'btn-replace-row',
+                            onClick: () => {
+                                let idProperty = this.getIdProperty();
+                                let nameProperty = this.getNameProperty();
+                                let entityId = this.entity[idProperty];
+                                let entityName = this.entity[nameProperty];
 
-            //                    if (entityId) {
+                                if (entityId) {
 
-            //                        Q.serviceRequest(this.getService() + '/List', {}, (response: Serenity.ListResponse<any>) => {
-            //                            let entityList = response.Entities;
+                                    Q.serviceRequest(this.getService() + '/List', {}, (response: Serenity.ListResponse<any>) => {
+                                        let entityList = response.Entities;
 
-            //                            let dlg = new ReplaceRowDialog({
-            //                                FormKey: this.getFormKey(),
-            //                                IdProperty: idProperty,
-            //                                NameProperty: nameProperty,
-            //                                EntityTypeTitle: this.getEntitySingular(),
-            //                                DeletedEntityName: entityName,
-            //                                DeletedEntityId: entityId,
-            //                            },
-            //                                entityList);
+                                        let dlg = new ReplaceRowDialog({
+                                            FormKey: this.getFormKey(),
+                                            IdProperty: idProperty,
+                                            NameProperty: nameProperty,
+                                            EntityTypeTitle: this.getEntitySingular(),
+                                            DeletedEntityName: entityName,
+                                            DeletedEntityId: entityId,
+                                        },
+                                            entityList);
 
-            //                            dlg.dialogOpen();
+                                        dlg.dialogOpen();
 
-            //                            this.dialogClose();
-            //                        });
-            //                    }
-            //                }
-            //            })
-            //        }
+                                        this.dialogClose();
+                                    });
+                                }
+                            }
+                        })
+                    }
 
-            //        buttons.push({
-            //            title: 'Change Log',
-            //            icon: 'fa fa-history',
-            //            onClick: () => {
-            //                let entityId = this.entity[this.getIdProperty()];
-            //                if (entityId) {
-            //                    let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
 
-            //                    dlg.dialogOpen();
-            //                } else {
-            //                    Q.alert('No change log found for this entity.')
-            //                }
-            //            }
-            //        })
-            //    }
-            //} catch (e) { }
+                }
+
+
+                if (extOptions.ShowChangeLogButtonInToolbar == true && Q.Authorization.hasPermission('Administration:AuditLog')) {
+
+                    buttons.push({
+                        title: 'Change Log',
+                        icon: 'fa fa-history',
+                        onClick: () => {
+                            let entityId = this.entity[this.getIdProperty()];
+                            if (entityId) {
+                                let dlg = new AuditLogViewerDialog({ FormKey: this.getFormKey(), EntityId: entityId });
+
+                                dlg.dialogOpen();
+                            } else {
+                                Q.alert('No change log found for this entity.')
+                            }
+                        }
+                    });
+                }
+            } catch (e) { }
             return buttons;
         }
 
