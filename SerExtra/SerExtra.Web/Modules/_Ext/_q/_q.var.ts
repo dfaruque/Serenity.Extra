@@ -8,7 +8,7 @@ namespace q {
     export var queryString = {};
     export var jsPDFHeaderImageData: string = null
     export var jsPDFHeaderTitle: string = 'Report Title';
-    export var useSerenityInlineEditors: boolean = true;
+    export var useSerenityInlineEditors: boolean = false;
 
     export var DefaultMainGridOptions: ExtGridOptions = {
         AutoColumnSize: true,
