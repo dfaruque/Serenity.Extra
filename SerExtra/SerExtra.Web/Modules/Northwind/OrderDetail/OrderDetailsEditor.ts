@@ -29,6 +29,20 @@ namespace SerExtra.Northwind {
                     //e.stopImmediatePropagation();
                 }
             });
+
+            //to disable certain cell to editing based on some condition
+            this.slickGrid.onBeforeEditCell.subscribe((e, args) => {
+                let item = args.item as OrderDetailRow;
+                let row = args.row as number;
+                let cell = args.cell as number;
+                let column = args.column as Slick.Column;
+
+                if (column.field == OrderDetailRow.Fields.UnitPrice) {
+                    if (item.ProductDiscontinued == true)
+                        return false;
+                }
+            });
+
         }
 
         protected getSlickOptions() {
