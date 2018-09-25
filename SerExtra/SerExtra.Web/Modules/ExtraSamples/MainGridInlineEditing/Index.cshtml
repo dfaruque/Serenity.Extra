@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Main Grid Inline Editing";
+}
+
+<div id="GridDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new SerExtra.ExtraSamples.MainGridInlineEditingGrid($('#GridDiv'), {}).init();
+
+        Q.initFullHeightGridPage($('#GridDiv'));
+    });
+</script>

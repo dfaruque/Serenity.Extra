@@ -317,6 +317,11 @@ namespace MVC
 
         public static class ExtraSamples
         {
+            public static class MainGridInlineEditing
+            {
+                public const string Index = "~/Modules/ExtraSamples/MainGridInlineEditing/Index.cshtml";
+            }
+
             public static class Reports
             {
                 public static class OrdersByCustomer

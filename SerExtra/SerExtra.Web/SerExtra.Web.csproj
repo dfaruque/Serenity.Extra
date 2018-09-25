@@ -979,6 +979,7 @@
     <Content Include="node_modules\%40types\react\LICENSE" />
     <Content Include="node_modules\%40types\react\package.json" />
     <Content Include="node_modules\%40types\react\README.md" />
+    <Content Include="Modules\ExtraSamples\MainGridInlineEditing\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1066,6 +1067,9 @@
     <TypeScriptCompile Include="Imports\ServerTypings\ExtraSamples.OrdersByCustomerReportRequestForm.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.MainGridInlineEditingColumns.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditActionType.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1133,6 +1137,7 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\_references.ts" />
+    <TypeScriptCompile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
@@ -2037,7 +2042,9 @@
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesListRequest.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesEndpoint.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesRepository.cs" />
+    <Compile Include="Modules\ExtraSamples\ExtraSamplesPage.cs" />
     <Compile Include="Modules\ExtraSamples\ExtraSamplesNavigation.cs" />
+    <Compile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingColumns.cs" />
     <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerPage.cs" />
     <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cs" />
     <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportRequest.cs" />
