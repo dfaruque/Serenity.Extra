@@ -42,7 +42,7 @@
             }
 
             if (IsEdited == true) {
-                klass += " text-danger text-bold";
+                klass += " text-bold";
             }
             return Q.trimToNull(klass);
         }
