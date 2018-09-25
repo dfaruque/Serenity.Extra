@@ -183,4 +183,7 @@ namespace q {
         return selectedRow;
     }
 
+    export function toSelect2Items(lookup: Q.Lookup<any>): Serenity.Select2Item[] {
+        return lookup.items.map<Serenity.Select2Item>(m => { return { id: m[lookup.idField], text: m[lookup.textField], source: m } });
+    }
 }
