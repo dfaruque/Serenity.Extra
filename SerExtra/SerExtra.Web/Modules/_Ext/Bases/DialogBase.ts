@@ -183,37 +183,55 @@
         }
 
         maximize() {
-            this.element.closest(".ui-dialog").find(".ui-icon-maximize-window").click();
+            this.element.closest(".ui-dialog").find(".ui-dialog-titlebar-maximize").click();
+
+            setTimeout(() => {
+                let dialogElement = this.element ? this.element.closest(".ui-dialog") : $(".ui-dialog");
+
+                let dialogHeight = dialogElement.height();
+                let titleBarHeight = dialogElement.find('.ui-dialog-title').height() || 20;
+                let toolBarHeight = dialogElement.find('.s-DialogToolbar.s-Toolbar').height() || 0;
+                let tabBarHeight = dialogElement.find('.nav.nav-tabs.property-tabs').height() || 0;
+                let categoryLinkHeight = dialogElement.find('.category-links').height() || 0;
+
+                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 40);
+            }, 100);
+
         }
 
         fullContentArea() {
             this.setDialogSize();
         }
         // set the dialog size relative to content area (to shrink use negative value)
-        setDialogSize(width?, height?, top?, left?) {
-            let $content = $('section.content');
+        setDialogSize(width?, height?, top?, left?, $content?) {
+            if (!$content) {
+                $content = $('section.content');
+            }
+            if ($content.length == 0) {
+                $content = $('.content-wrapper');
+            }
+
             let dialogElement = this.element ? this.element.closest(".ui-dialog") : $(".ui-dialog");
 
-            if ($content.length > 0) {
-                try {
-                    let dwidth = $content.width() + 30 + (width || 0);
-                    let dheight = $content.height() + (height || 30);
+            if ($content.length > 0 && dialogElement.length > 0) {
 
-                    this.element.dialog("option", "width", dwidth);
-                    this.element.dialog("option", "height", dheight);
-                    //Serenity.DialogExtensions.dialogResizable(this.element, dwidth, dheight);
+                let dialogWidth = $content.width() + 30 + (width || 0);
+                let dialogHeight = $content.height() + (height || 30);
 
-                    this.element.find('.categories').height(dheight - 110);//.flexHeightOnly(1);
-                } catch (e) {
-                }
+                this.element.dialog("option", "width", dialogWidth);
+                this.element.dialog("option", "height", dialogHeight);
+
+                let titleBarHeight = dialogElement.find('.ui-dialog-title').height() || 20;
+                let toolBarHeight = dialogElement.find('.s-DialogToolbar.s-Toolbar').height() || 0;
+                let tabBarHeight = dialogElement.find('.nav.nav-tabs.property-tabs').height() || 0;
+                let categoryLinkHeight = dialogElement.find('.category-links').height() || 0;
+
+                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 40);
 
                 dialogElement.css({
                     left: $content.position().left + (left || 0),
                     top: (top || 50),
                 });
-
-                //this.element.closest('.ui-dialog').triggerHandler("resize");
-                //this.arrange();
             }
 
             setTimeout(() => {
