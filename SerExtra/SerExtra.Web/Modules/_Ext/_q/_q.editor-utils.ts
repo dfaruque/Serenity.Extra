@@ -15,22 +15,27 @@ namespace q {
         editor.parentDialog = dialog;
 
         dialog.onAfterSetDialogSize = () => {
+        let $gridContainer = editor.element.find('.grid-container');
 
             if (options.height) {
                 editor.slickGrid.setOptions({ autoHeight: false });
-                editor.element.find('.grid-container').height(options.height);
+                $gridContainer.height(options.height);
 
-                editor.slickGrid.resizeCanvas();
+            } else {
+                let top = $gridContainer.position().top;
+                let height = dialog.element.innerHeight() - top - 40;
+
+                if (height > 200)
+                    $gridContainer.height(height);
+
             }
 
             if (options.width) {
-                editor.element.find('.grid-container').width(options.width);
+                $gridContainer.width(options.width);
 
-                editor.slickGrid.resizeCanvas();
             }
-            //else {
-            //    editor.element.find('.grid-container').width('100%');
-            //}
+
+            editor.slickGrid.resizeCanvas();
 
         }
 
@@ -183,7 +188,4 @@ namespace q {
         return selectedRow;
     }
 
-    export function toSelect2Items(lookup: Q.Lookup<any>): Serenity.Select2Item[] {
-        return lookup.items.map<Serenity.Select2Item>(m => { return { id: m[lookup.idField], text: m[lookup.textField], source: m } });
-    }
 }
