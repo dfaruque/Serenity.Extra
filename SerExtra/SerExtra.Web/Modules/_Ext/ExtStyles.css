@@ -237,6 +237,9 @@ input.editor-text {
     padding: 0;
     vertical-align: top;
     float: right !important;
+    position: absolute;
+    right: 2px;
+    top: 0px;
 }
 
 #ui-datepicker-div {
