@@ -56,6 +56,12 @@ public static class DateTimeHelper
         string result = inputValue?.ToString(format).Replace('.', ':');
         return result;
     }
+    public static string ToDateTimeFormat(this DateTime inputValue)
+    {
+        string format = "dd-MM-yyyy HH:mm";
+        string result = inputValue.ToString(format).Replace('.', ':');
+        return result;
+    }
 
     /// <summary>
     /// Gets date string of "dd MMMM yyyy" for current culture.
@@ -102,4 +108,24 @@ public static class DateTimeHelper
         int months = GetMonths(fromDate, toDate);
         return months <= 0 ? 1 : months;
     }
+
+
+    public static string GetFinancialYear(this DateTime? inputValue)
+    {
+        return inputValue?.GetFinancialYear() ?? "";
+    }
+
+    public static string GetFinancialYear(this DateTime inputValue)
+    {
+        if (inputValue.Month > 6)
+        {
+            return inputValue.Year.ToString() + "-" + (inputValue.Year + 1).ToString();
+        }
+        else
+        {
+            return (inputValue.Year - 1).ToString() + "-" + inputValue.Year.ToString();
+
+        }
+    }
+
 }
