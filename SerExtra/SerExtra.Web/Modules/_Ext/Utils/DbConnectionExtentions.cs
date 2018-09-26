@@ -42,4 +42,30 @@ public static partial class DbConnectionExtentions
         return null;
     }
 
+    public static List<string> GetNamesByIds<TRow>(this IDbConnection connection, IEnumerable<Int64> ids)
+where TRow : Row, IIdRow, INameRow, new()
+    {
+        var row = new TRow();
+
+        var query = new SqlQuery()
+            .From(row)
+            .Select(row.NameField)
+            .Where(((Field)row.IdField).In(ids));
+
+        return connection.Query<string>(query).ToList();
+    }
+
+    public static List<string> GetNamesByIds<TRow>(this IDbConnection connection, IEnumerable<Int32> ids)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        var row = new TRow();
+
+        var query = new SqlQuery()
+            .From(row)
+            .Select(row.NameField)
+            .Where(((Field)row.IdField).In(ids));
+
+        return connection.Query<string>(query).ToList();
+    }
+
 }
