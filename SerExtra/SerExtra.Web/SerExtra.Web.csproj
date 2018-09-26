@@ -1155,6 +1155,8 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\EmptyLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\GridEditorBase.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\CustomizedEditors\CustomerTemplatedLookupEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\HardCodedLookupEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\HtmlTemplateEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\HeaderFiltersMixin.ts" />

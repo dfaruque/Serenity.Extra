@@ -76,4 +76,11 @@ where TRow : Row, IIdRow, INameRow, new()
         using (var connection = SqlConnections.NewFor<TRow>())
             return connection.GetNamesByIds<TRow>(ids);
     }
+
+    public static TRow TryFirstByName<TRow>(string name)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.TryFirstByName<TRow>(name);
+    }
 }
