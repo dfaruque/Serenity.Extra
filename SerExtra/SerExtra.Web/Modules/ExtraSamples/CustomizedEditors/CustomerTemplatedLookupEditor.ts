@@ -1,8 +1,8 @@
-﻿namespace _Ext {
+﻿namespace SerExtra {
 
     @Serenity.Decorators.registerEditor()
     export class CustomerTemplatedLookupEditor extends Serenity.LookupEditorBase<any, any> {
-        protected getLookupKey(): string { return SerExtra.Northwind.CustomerRow.lookupKey }
+        protected getLookupKey(): string { return Northwind.CustomerRow.lookupKey }
 
         constructor(container: JQuery) {
             super(container, null);
