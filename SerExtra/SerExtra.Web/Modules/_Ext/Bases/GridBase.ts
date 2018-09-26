@@ -305,9 +305,10 @@ namespace _Ext {
 
             usingSlickAutoColumnSize();
 
-            this.autoColumnSizePlugin = new Slick.AutoColumnSize();
-            grid.registerPlugin(this.autoColumnSizePlugin);
-
+            if (Slick.AutoColumnSize) {
+                this.autoColumnSizePlugin = new Slick.AutoColumnSize();
+                grid.registerPlugin(this.autoColumnSizePlugin);
+            }
             grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
 
             return grid;

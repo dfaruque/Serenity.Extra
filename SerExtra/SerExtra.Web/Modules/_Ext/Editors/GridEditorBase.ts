@@ -220,7 +220,7 @@ namespace _Ext {
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.forceFitColumns = false;
-            opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
+            //opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
             return opt;
         }
 
