@@ -313,7 +313,7 @@ function usingSlickHeaderFilters() {
     } else {
         $("<link/>")
         .attr("type", "text/css")
-        .attr("id", "Vis")
+        .attr("id", "CustomSlickGridPlugin")
         .attr("rel", "stylesheet")
         .attr("href", Q.resolveUrl("~/Modules/_Ext/CustomSlickGridPlugin/slick-headerfilters.css"))
         .appendTo(document.head);
