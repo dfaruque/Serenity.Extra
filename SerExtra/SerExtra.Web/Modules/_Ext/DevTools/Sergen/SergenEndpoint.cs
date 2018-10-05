@@ -9,7 +9,7 @@ namespace _Ext.DevTools.Endpoints
     using System.Web.Hosting;
     using System.Web.Mvc;
 
-    [Route("Services/DevTools/Sergen/[action]")]
+    [RoutePrefix("Services/DevTools/Sergen"), Route("{action}")]
     [ServiceAuthorize("DevTools:Sergen")]
     public class SergenController : ServiceEndpoint
     {
@@ -79,7 +79,7 @@ namespace _Ext.DevTools.Endpoints
             }
         }
 
-        [HttpPost]
+        [HttpPost, HttpGet]
         public ListResponse<SergenConnection> ListConnections(ServiceRequest request)
         {
             CheckAccess();
@@ -93,7 +93,7 @@ namespace _Ext.DevTools.Endpoints
             return response;
         }
 
-        [HttpPost]
+        [HttpPost, HttpGet]
         public ListResponse<SergenTable> ListTables(SergenListTablesRequest request)
         {
             CheckAccess();

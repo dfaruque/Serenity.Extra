@@ -1,15 +1,15 @@
 ﻿namespace _Ext.DevTools {
     export namespace SergenService {
-        export const baseUrl = 'DevTools/Sergen/[action]';
+        export const baseUrl = 'DevTools/Sergen';
 
         export declare function ListConnections(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.ListResponse<SergenConnection>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function ListTables(request: SergenListTablesRequest, onSuccess?: (response: Serenity.ListResponse<SergenTable>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Generate(request: SergenGenerateRequest, onSuccess?: (response: Serenity.ServiceResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
-            ListConnections = "DevTools/Sergen/[action]/ListConnections",
-            ListTables = "DevTools/Sergen/[action]/ListTables",
-            Generate = "DevTools/Sergen/[action]/Generate"
+            ListConnections = "DevTools/Sergen/ListConnections",
+            ListTables = "DevTools/Sergen/ListTables",
+            Generate = "DevTools/Sergen/Generate"
         }
 
         [

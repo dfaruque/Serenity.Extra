@@ -1,6 +1,6 @@
 ﻿namespace SerExtra.Northwind {
     export interface OrderForm {
-        CustomerID: CustomerEditor;
+        CustomerID: _Ext.CustomerTemplatedLookupEditor;
         OrderDate: Serenity.DateEditor;
         RequiredDate: Serenity.DateEditor;
         EmployeeID: Serenity.LookupEditor;
@@ -27,7 +27,7 @@
                 OrderForm.init = true;
 
                 var s = Serenity;
-                var w0 = CustomerEditor;
+                var w0 = _Ext.CustomerTemplatedLookupEditor;
                 var w1 = s.DateEditor;
                 var w2 = s.LookupEditor;
                 var w3 = OrderDetailsEditor;
