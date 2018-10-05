@@ -1044,6 +1044,8 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
+    <TypeScriptCompile Include="Modules\Northwind\Product\Picker\ProductCheckGrid.ts" />
+    <TypeScriptCompile Include="Modules\Northwind\Product\ProductDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogActionTypeFormatter.ts" />
@@ -1903,7 +1905,7 @@
     <TypeScriptCompile Include="Modules\Northwind\OrderDetail\OrderDetailsEditor.ts" />
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\CancellableBulkAction\OrderBulkAction.ts" />
     <TypeScriptCompile Include="Modules\Northwind\Order\OrderGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\ProductDialog.ts" />
+    <TypeScriptCompile Include="Modules\Northwind\Product\Picker\ProductPickerDialog.ts" />
     <TypeScriptCompile Include="Modules\Northwind\Product\ProductGrid.ts" />
     <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerDetailsRow.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
