@@ -28,7 +28,7 @@
 
         protected getTemplate() {
             return `<div class="page-content s-DataGrid">
-                <div class="page-title grid-title">Orders By Castomer</div>
+                <div class="page-title grid-title">Orders By Customer</div>
 
                 <div class="s-Form flex-layout">
                     <form id="~_Form" action="">

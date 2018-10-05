@@ -34,5 +34,11 @@ namespace _Ext
         public string ReportServiceMethodName { get; set; } //"Report";
         public string ReportDesignPath { get; set; } //"~/Modules/.../.../Report/...ReportDesign.cshtml";
 
+        public EntityReportRequest()
+        {
+            ColumnSelection = RetrieveColumnSelection.Details;
+
+        }
+
     }
 }

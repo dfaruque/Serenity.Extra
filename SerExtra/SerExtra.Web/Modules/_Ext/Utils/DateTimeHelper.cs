@@ -1,11 +1,30 @@
-﻿using Serenity;
+﻿using OfficeOpenXml;
+using Serenity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
 public static class DateTimeHelper
 {
+    public static string ToISODateFormat(this DateTime inputValue)
+    {
+        return inputValue.ToString("yyyy-MM-dd");
+    }
+    public static string ToISODateFormat(this DateTime? inputValue)
+    {
+        return inputValue?.ToString("yyyy-MM-dd");
+    }
+    public static string ToISODateTimeFormat(this DateTime inputValue)
+    {
+        return inputValue.ToString(DateHelper.ISODateTimeFormatLocal);
+    }
+    public static string ToISODateTimeFormat(this DateTime? inputValue)
+    {
+        return inputValue?.ToString(DateHelper.ISODateTimeFormatLocal);
+    }
+
     /// <summary>
     /// Gets date string of default date format for current culture.
     /// </summary>
@@ -27,7 +46,7 @@ public static class DateTimeHelper
     }
 
     /// <summary>
-    /// Gets date time string of default date time format for current culture.
+    /// Gets date time string of "dd-MM-yyyy HH:mm" format for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
@@ -37,25 +56,42 @@ public static class DateTimeHelper
         string result = inputValue?.ToString(format).Replace('.', ':');
         return result;
     }
+    public static string ToDateTimeFormat(this DateTime inputValue)
+    {
+        string format = "dd-MM-yyyy HH:mm";
+        string result = inputValue.ToString(format).Replace('.', ':');
+        return result;
+    }
 
     /// <summary>
-    /// Gets date string of default date format for current culture.
+    /// Gets date string of "dd MMMM yyyy" for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
     public static string ToLongDateFormat(this DateTime? inputValue)
     {
-        return inputValue?.ToString("dd MMMM, yyyy");
+        return inputValue?.ToString("dd MMMM yyyy");
     }
 
     /// <summary>
-    /// Gets date string of default date format for current culture.
+    /// Gets date string of "dd MMMM yyyy" for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
     public static string ToLongDateFormat(this DateTime inputValue)
     {
-        return inputValue.ToString("dd MMMM, yyyy");
+        return inputValue.ToString("dd MMMM yyyy");
+    }
+
+    public static DateTime? GetValueAsDate(this ExcelWorksheet worksheet, int row, int col, string[] dateFormates)
+    {
+        var cellValueAsString = worksheet.GetValue<string>(row, col);
+        if (DateTime.TryParseExact(cellValueAsString, dateFormates, null, DateTimeStyles.AllowWhiteSpaces, out DateTime date))
+        {
+            return date;
+        }
+
+        return worksheet.GetValue<DateTime?>(row, col);
     }
 
     public static int GetMonths(DateTime fromDate, DateTime toDate)
@@ -72,4 +108,24 @@ public static class DateTimeHelper
         int months = GetMonths(fromDate, toDate);
         return months <= 0 ? 1 : months;
     }
+
+
+    public static string GetFinancialYear(this DateTime? inputValue)
+    {
+        return inputValue?.GetFinancialYear() ?? "";
+    }
+
+    public static string GetFinancialYear(this DateTime inputValue)
+    {
+        if (inputValue.Month > 6)
+        {
+            return inputValue.Year.ToString() + "-" + (inputValue.Year + 1).ToString();
+        }
+        else
+        {
+            return (inputValue.Year - 1).ToString() + "-" + inputValue.Year.ToString();
+
+        }
+    }
+
 }

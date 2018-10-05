@@ -13,9 +13,18 @@
       "./node_modules/@types/"
     ]
   },
+  "exclude": [
+    "./node_modules/",
+    "./Scripts/",
+    "./tools/",
+    "./bin/",
+    "./bin2/",
+    "./obj/",
+    "./Content/",
+    "./App_Data/"
+  ],
   "include": [
     "./Imports/",
-    "./Modules/",
-    "./Scripts/typings/"
+    "./Modules/"
   ]
 }

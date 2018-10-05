@@ -1,4 +1,9 @@
 ﻿
+var isPageRefreshRequired: boolean;
+//const nameof = <T>(name: keyof T) => name;
+const nameofFactory = <T>() => (name: keyof T) => name;
+//usage const nameof = nameofFactory<Edoc.RevenueReportModel>();
+
 namespace q {
     export var queryString = {};
     export var jsPDFHeaderImageData: string = null
@@ -12,7 +17,8 @@ namespace q {
         ShowInlineActionsColumn: true,
         ShowDeleteInlineButtun: false,
         ShowEditInlineButtun: true,
-        ShowRowNumberColumn: true
+        ShowRowNumberColumn: true,
+        RowsPerPage: 100
     };
 
     export var DefaultEditorGridOptions: ExtGridOptions = {
@@ -28,13 +34,22 @@ namespace q {
     export var DefaultEntityDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: true,
         HideCategoyLinksBar: true,
-        PendingChangesConfirmation: true
+        PendingChangesConfirmation: true,
+        ShowCloseButtonInToolbar: false,
+        ShowRefreshButtonInToolbar: false,
+        ShowChangeLogButtonInToolbar: false,
+        ShowReplaceRowButtonInToolbar: false
+
     };
 
     export var DefaultEditorDialogOptions: ExtDialogOptions = {
         AutoFitContentArea: false,
         HideCategoyLinksBar: true,
-        PendingChangesConfirmation: true
+        PendingChangesConfirmation: true,
+        ShowCloseButtonInToolbar: false,
+        ShowRefreshButtonInToolbar: false,
+        ShowChangeLogButtonInToolbar: false,
+        ShowReplaceRowButtonInToolbar: false
     };
 
     //date time

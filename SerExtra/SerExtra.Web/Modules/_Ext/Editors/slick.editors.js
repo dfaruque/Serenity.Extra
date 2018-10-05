@@ -17,8 +17,9 @@
                 "YesNoSelect": YesNoSelectEditor,
                 "Checkbox": CheckboxEditor,
                 "PercentComplete": PercentCompleteEditor,
-                "LongText": LongTextEditor
-            }
+                "LongText": LongTextEditor,
+                "TextArea": TextAreaEditor
+           }
         }
     });
     //-------------------------onChange----------------------------
@@ -516,7 +517,7 @@
             $select.appendTo(args.container);
             $select.focus();
 
-            $input.bind('change', function (e) {
+            $select.bind('change', function (e) {
                 onChange(e, args);
             });
 
@@ -558,14 +559,14 @@
     }
 
     function CheckboxEditor(args) {
-        var $select;
+        var $input;
         var defaultValue;
         var scope = this;
 
         this.init = function () {
-            $select = $("<INPUT type=checkbox value='true' class='editor-checkbox' hideFocus>");
-            $select.appendTo(args.container);
-            $select.focus();
+            $input = $("<INPUT type=checkbox value='true' class='editor-checkbox' hideFocus>");
+            $input.appendTo(args.container);
+            $input.focus();
 
             $input.bind('change', function (e) {
                 onChange(e, args);
@@ -574,24 +575,24 @@
         };
 
         this.destroy = function () {
-            $select.remove();
+            $input.remove();
         };
 
         this.focus = function () {
-            $select.focus();
+            $input.focus();
         };
 
         this.loadValue = function (item) {
             defaultValue = !!item[args.column.field];
             if (defaultValue) {
-                $select.prop('checked', true);
+                $input.prop('checked', true);
             } else {
-                $select.prop('checked', false);
+                $input.prop('checked', false);
             }
         };
 
         this.serializeValue = function () {
-            return $select.prop('checked');
+            return $input.prop('checked');
         };
 
         this.applyValue = function (item, state) {
@@ -801,6 +802,80 @@
 
         this.init();
     }
+
+        function TextAreaEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+
+        this.init = function () {
+            $input = $("<textarea style='width:100%; border-radius:0px !important; border:1px solid #CCCCCC !important; border-left:5px solid #CCCCCC !important;'  maxlength='255' class='editor-text' />")
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                })
+                .focus()
+                .select();
+
+            $input.bind('change', function (e) {
+                onChange(e, args);
+            });
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.val(defaultValue);
+            $input[0].defaultValue = defaultValue;
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            return {
+                valid: true,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+
 })(jQuery);
 
 // Inline serenity editors for slikgrid

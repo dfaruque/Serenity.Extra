@@ -62,4 +62,25 @@ public static partial class Q
             return connection.GetNameById<TRow>(name);
     }
 
+    public static List<string> GetNamesByIds<TRow>(IEnumerable<Int64> ids)
+where TRow : Row, IIdRow, INameRow, new()
+    {
+
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.GetNamesByIds<TRow>(ids);
+    }
+
+    public static List<string> GetNamesByIds<TRow>(IEnumerable<Int32> ids)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.GetNamesByIds<TRow>(ids);
+    }
+
+    public static TRow TryFirstByName<TRow>(string name)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        using (var connection = SqlConnections.NewFor<TRow>())
+            return connection.TryFirstByName<TRow>(name);
+    }
 }

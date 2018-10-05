@@ -5,11 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace _Ext
+namespace SerExtra
 {
     public partial class CustomerTemplatedLookupEditorAttribute : LookupEditorBaseAttribute
     {
-        public const string Key = "_Ext.CustomerTemplatedLookupEditor";
+        public const string Key = "SerExtra.CustomerTemplatedLookupEditor";
 
         public CustomerTemplatedLookupEditorAttribute()
             : base(Key)

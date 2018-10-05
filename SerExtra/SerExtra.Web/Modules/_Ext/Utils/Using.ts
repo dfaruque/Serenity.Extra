@@ -298,3 +298,26 @@ function usingSlickGridEditors() {
         loadScript(Q.resolveUrl("~/Modules/_Ext/Editors/slick.editors.js"))
     }
 }
+
+function usingSlickAutoColumnSize() {
+    if (window['Slick'] && window['Slick']['AutoColumnSize']) {
+        return;
+    } else {
+        loadScript(Q.resolveUrl("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js"))
+    }
+}
+
+function usingSlickHeaderFilters() {
+    if (window['Slick'] && window['Slick']['HeaderFilters']) {
+        return;
+    } else {
+        $("<link/>")
+        .attr("type", "text/css")
+        .attr("id", "CustomSlickGridPlugin")
+        .attr("rel", "stylesheet")
+        .attr("href", Q.resolveUrl("~/Modules/_Ext/CustomSlickGridPlugin/slick-headerfilters.css"))
+        .appendTo(document.head);
+
+        loadScript(Q.resolveUrl("~/Modules/_Ext/CustomSlickGridPlugin/slick.headerfilters.js"));
+    }
+}

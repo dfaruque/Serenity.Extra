@@ -205,6 +205,9 @@ var LoginPanel = (function (_super) {
                     { src: @Html.Raw(ContentHashCache.ResolveWithHash("~/Content/site/slides/slide3.jpg").ToJson()), transition: 'swirlLeft' }
                 ]
             });
+
+            var retryCount = 0;
+
             $('#LoginButton').click(function (e) {
                 e.preventDefault();
                 if (!_this.validateForm()) {
@@ -226,6 +229,13 @@ var LoginPanel = (function (_super) {
                         else {
                             window.location.href = Q.resolveUrl('~/');
                         }
+                    },
+                    onError: function (response) {
+                        retryCount++;
+                        if (retryCount >= 3) {
+                            $('.field.ReCaptcha').show();
+                        }
+                        Q.alert(response.Error.Message);
                     }
                 });
             });

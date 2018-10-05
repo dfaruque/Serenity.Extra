@@ -16,7 +16,27 @@ namespace _Ext {
         constructor(container: JQuery) {
             super(container);
 
+            this.slickGrid.onSort.subscribe((e, args) => {
+                this.sortGridFunction((args.grid as Slick.Grid), args.sortCols[0], args.sortCols[0].sortCol.field);
+
+                //(args.grid as Slick.Grid).init();
+                (args.grid as Slick.Grid).invalidateAllRows();
+                (args.grid as Slick.Grid).invalidate();
+                (args.grid as Slick.Grid).render();
+                (args.grid as Slick.Grid).resizeCanvas();
+            });
+            
         }
+
+        private sortGridFunction(grid: Slick.Grid, column: any, field: any) {
+            grid.getData().sort(function (a, b) {
+                var result = a[field] > b[field] ? 1 :
+                    a[field] < b[field] ? -1 :
+                        0;
+                return column.sortAsc ? result : -result;
+            });
+        }
+
         protected getQuickFilters() {
             return [];
         }
@@ -142,8 +162,9 @@ namespace _Ext {
                 return y;
             });
 
-            this.view.setItems(items, true);
-            setTimeout(() => { this.onItemsChanged() });
+            let r = this.onViewProcessData({ Entities: items })
+            this.view.setItems(r.Entities, true);
+            setTimeout(() => { this.onItemsChanged(); });
             this.resetRowNumber(); // to generate serial no.
         }
 
@@ -219,7 +240,7 @@ namespace _Ext {
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.forceFitColumns = false;
-            opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
+            //opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
             return opt;
         }
 
