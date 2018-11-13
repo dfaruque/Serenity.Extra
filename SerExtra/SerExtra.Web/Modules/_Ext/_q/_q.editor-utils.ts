@@ -15,7 +15,7 @@ namespace q {
         editor.parentDialog = dialog;
 
         dialog.onAfterSetDialogSize = () => {
-        let $gridContainer = editor.element.find('.grid-container');
+            let $gridContainer = editor.element.find('.grid-container');
 
             if (options.height) {
                 editor.slickGrid.setOptions({ autoHeight: false });
@@ -102,6 +102,33 @@ namespace q {
             categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).show();
     }
 
+    export function hideCategories(containerElement: JQuery, value: boolean = true) {
+        if (value == true)
+            containerElement.find('.category').hide();
+        else
+            containerElement.find('.category').show();
+
+        let categoryAnchor = containerElement.find('.category').find('.category-anchor');
+
+        let categoryAnchorName = categoryAnchor.attr('name');
+        if (value == true)
+            categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide();
+        else
+            categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).show();
+    }
+
+    export function hideFields(containerElement: JQuery, value: boolean = true) {
+        if (value == true)
+            containerElement.find('.field').hide();
+        else
+            containerElement.find('.field').show();
+    }
+
+    export function hideFieldsAndCategories(containerElement: JQuery, value: boolean = true) {
+        hideFields(containerElement);
+        hideCategories(containerElement);
+    }
+
     export function hideField(editor: Serenity.Widget<any>, value: boolean = true) {
         if (editor) {
             if (value == true)
@@ -117,6 +144,12 @@ namespace q {
             else
                 editor.element.closest('.field').hide();
         }
+    }
+        
+    export function showFieldAndCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+        showField(editor, value);
+        if (value == true)
+            hideEditorCategory(editor, false);
     }
 
     export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {

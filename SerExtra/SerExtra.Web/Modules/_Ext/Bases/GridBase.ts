@@ -334,9 +334,9 @@ namespace _Ext {
 
             let gridContainerWidth = this.slickContainer.width();
 
-            if (gridContainerWidth == 0) {
-                gridContainerWidth = this.element.closest('.s-Dialog').width() - 55;
-            }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = this.element.closest('.s-Dialog').width() - 55; }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = this.element.closest('.s-Panel').width() - 55; }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = $('section.content').width() - 75; }
 
             this.slickGrid.setOptions({ forceFitColumns: false });
 

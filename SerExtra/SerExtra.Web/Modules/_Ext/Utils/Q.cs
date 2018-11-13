@@ -63,7 +63,7 @@ public static partial class Q
     }
 
     public static List<string> GetNamesByIds<TRow>(IEnumerable<Int64> ids)
-where TRow : Row, IIdRow, INameRow, new()
+        where TRow : Row, IIdRow, INameRow, new()
     {
 
         using (var connection = SqlConnections.NewFor<TRow>())

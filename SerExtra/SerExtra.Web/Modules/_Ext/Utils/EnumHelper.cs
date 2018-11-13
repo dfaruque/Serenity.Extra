@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -30,19 +31,40 @@ public static class EnumUtil
             return value.ToString();
     }
 
-    public static string GetEnumCssClass(this Enum value)
+    public static string GetCssClass(this Enum value)
     {
         if (value == null)
             return "";
 
-        FieldInfo fi = value.GetType().GetField(value.ToString());
+        FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
 
-        CssClassAttribute[] attributes = (CssClassAttribute[])fi.GetCustomAttributes(typeof(CssClassAttribute), false);
+        var attribute = (CssClassAttribute)fieldInfo.GetCustomAttribute(typeof(CssClassAttribute));
 
-        if (attributes != null &&
-            attributes.Length > 0)
-            return attributes[0].CssClass;
-        else
+        return attribute?.CssClass ?? "";
+    }
+
+    public static string GetColumnName(this Enum value)
+    {
+        if (value == null)
             return "";
+
+        FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
+
+        var attribute = (ColumnAttribute)fieldInfo.GetCustomAttribute(typeof(ColumnAttribute));
+
+        return attribute?.Name ?? "";
+    }
+
+    public static T GetAttr<T>(this Enum value)
+        where T : Attribute
+    {
+        if (value == null)
+            return null;
+
+        FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
+
+        var attribute = fieldInfo.GetCustomAttribute<T>();
+
+        return attribute;
     }
 }
