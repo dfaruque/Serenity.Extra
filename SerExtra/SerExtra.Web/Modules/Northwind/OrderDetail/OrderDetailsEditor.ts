@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../Product/Picker/ProductPickerDialog.ts" />
+
 namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
@@ -49,6 +50,43 @@ namespace SerExtra.Northwind {
             let opt = super.getSlickOptions();
             opt.editable = true;
             return opt;
+        }
+
+        protected getButtons() {
+            let buttons = super.getButtons();
+
+            buttons.push({
+                title: "Pick Products",
+                cssClass: "add-button",
+                onClick: () => {
+                    var pickerDialog = new ProductPickerDialog();
+
+                    pickerDialog.onSuccess = (selectedItems: any[]) => {
+                        let selectedItems2 = selectedItems.filter(t => { return !Q.any(this.view.getItems(), n => n.ProductID == t.ProductID) });
+
+                        var orderDetails = selectedItems2.map<OrderDetailRow>(r => {
+                            return {
+                                ProductID: r.ProductID,
+                                ProductName: r.ProductName,
+                                UnitPrice: r.UnitPrice,
+                                Quantity: 1,
+                                Discount: 0,
+                                LineTotal: r.UnitPrice
+                            }
+                        });
+
+                        for (let orderDetail of orderDetails) {
+                            orderDetail[this.getIdProperty()] = this.nextId++;
+                            this.view.addItem(orderDetail);
+                        }
+
+                    }
+
+                    pickerDialog.dialogOpen();
+                }
+            });
+
+            return buttons;
         }
 
         validateEntity(row, id) {

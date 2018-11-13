@@ -27,7 +27,7 @@
                 OrderForm.init = true;
 
                 var s = Serenity;
-                var w0 = CustomerTemplatedLookupEditor;
+                var w0 = CustomerEditor;
                 var w1 = s.DateEditor;
                 var w2 = s.LookupEditor;
                 var w3 = OrderDetailsEditor;
