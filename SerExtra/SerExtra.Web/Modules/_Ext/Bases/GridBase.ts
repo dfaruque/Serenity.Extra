@@ -540,5 +540,12 @@ namespace _Ext {
             }
             return r;
         }
+
+        protected initDialog(dialog: DialogBase<TItem, any>): void {
+            super.initDialog(dialog);
+
+            dialog.parentGrid = this;
+        }
+
     }
 }

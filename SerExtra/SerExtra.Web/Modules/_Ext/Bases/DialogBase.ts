@@ -243,5 +243,6 @@
         onAfterSetDialogSize() { }
         onAfterDialogClose(entity: TEntity) { }
 
+        parentGrid: GridBase<TEntity, any>;
     }
 }
