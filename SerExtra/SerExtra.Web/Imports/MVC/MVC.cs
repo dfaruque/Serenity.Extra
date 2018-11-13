@@ -305,6 +305,10 @@ namespace MVC
 
             public static class Reporting
             {
+                public static class GridExport
+                {
+                    public const string CommonReport = "~/Modules/Common/Reporting/GridExport/CommonReport.cshtml";
+                }
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";
             }
         }

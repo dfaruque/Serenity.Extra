@@ -103,16 +103,20 @@ namespace q {
     }
 
     export function hideField(editor: Serenity.Widget<any>, value: boolean = true) {
-        if (value == true)
-            editor.element.closest('.field').hide();
-        else
-            editor.element.closest('.field').show();
+        if (editor) {
+            if (value == true)
+                editor.element.closest('.field').hide();
+            else
+                editor.element.closest('.field').show();
+        }
     }
     export function showField(editor: Serenity.Widget<any>, value: boolean = true) {
-        if (value == true)
-            editor.element.closest('.field').show();
-        else
-            editor.element.closest('.field').hide();
+        if (editor) {
+            if (value == true)
+                editor.element.closest('.field').show();
+            else
+                editor.element.closest('.field').hide();
+        }
     }
 
     export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {

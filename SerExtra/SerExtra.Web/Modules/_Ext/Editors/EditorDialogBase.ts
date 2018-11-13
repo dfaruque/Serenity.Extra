@@ -22,7 +22,7 @@ namespace _Ext {
 
         protected updateInterface() {
             super.updateInterface();
-            this.saveAndCloseButton.find('.button-inner').text(this.isNew() ? 'Add' : 'Apply');
+            this.saveAndCloseButton.find('.button-inner').text(this.isNew() ? (Q.tryGetText('Controls.AddButton') || 'Add') : (Q.tryGetText('Controls.ApplyButton') || 'Apply'));
             // apply changes button doesn't work properly with in-memory grids yet
             if (this.applyChangesButton) {
                 this.applyChangesButton.hide();

@@ -102,7 +102,7 @@ namespace _Ext {
 
                 for (let quickFilter of quickFilters) {
                     let filterValue = request.EqualityFilter[quickFilter.field];
-                    if (filterValue) {
+                    if (filterValue && filterValue.length > 0) {
                         if (quickFilter.options.lookupKey) {
                             let lookup = Q.getLookup(quickFilter.options.lookupKey);
                             request.EqualityFilterWithTextValue[quickFilter.title] = lookup.itemById[filterValue][lookup.textField];

@@ -980,6 +980,7 @@
     <Content Include="node_modules\%40types\react\package.json" />
     <Content Include="node_modules\%40types\react\README.md" />
     <Content Include="Modules\ExtraSamples\MainGridInlineEditing\Index.cshtml" />
+    <Content Include="Modules\Common\Reporting\GridExport\CommonReport.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1131,6 +1132,12 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.ReplaceRowService.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.Reports.CommonReportRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.Reports.CommonReportService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.TimeUoM.ts">
@@ -1988,6 +1995,9 @@
     <Compile Include="Imports\ClientTypes\_Ext.HardCodedLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.HtmlTemplateEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.StaticTextBlockAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
@@ -2225,8 +2235,14 @@
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenEndpoint.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenModels.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenPage.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReport.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReportEndpoint.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReportRequest.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\DynamicDataReport.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\ExcelReportGenerator.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\ReportGenerator.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />
     <Compile Include="Modules\_Ext\Utils\DateTimeHelper.cs" />
     <Compile Include="Modules\_Ext\Utils\DbConnectionExtentions.cs" />

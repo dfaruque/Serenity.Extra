@@ -1,0 +1,17 @@
+﻿@using _Ext
+
+@model _Ext.Reports.CommonReportModel
+@{
+    Layout = MVC.Views.Shared._LayoutReport;
+    ViewData["Title"] = @Model.ReportTitle;
+}
+
+<div>
+    @Html.Raw(Model.ReportBody)
+</div>
+
+<style type="text/css">
+    p {
+        font-weight: bold;
+    }
+</style>
