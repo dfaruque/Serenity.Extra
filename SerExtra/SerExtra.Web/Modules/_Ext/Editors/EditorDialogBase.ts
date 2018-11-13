@@ -50,7 +50,7 @@ namespace _Ext {
             this.onDelete && this.onDelete(options, callback);
         }
 
-        parentEditor: GridEditorBase<any>;
+        parentEditor: GridEditorBase<TEntity>;
 
     }
 }
