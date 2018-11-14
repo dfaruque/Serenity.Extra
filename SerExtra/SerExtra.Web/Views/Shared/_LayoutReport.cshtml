@@ -1,6 +1,4 @@
-﻿@using _Ext
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 @{
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
 }
@@ -22,37 +20,105 @@
             //document.getElementById('pdfkit_page_count').textContent = pageCount;
         }
 
+        function ExcelExport(fileName) {
+            var textRange; var j = 0;
+            //var tab_text = document.body.innerHTML;
+            var myTables = document.getElementsByTagName('table');
 
+            var tab_text = fileName;
+            tab_text += "<table style='margin-bottom:20px' border='1px'><tr>";
+
+            for (var t = 0; t < myTables.length; t++) {
+                var tab = myTables[t];
+                if(t > 0)
+                {
+                     tab_text += "<table border='1px'><tr>";
+                }
+
+                for (j = 0; j < tab.rows.length; j++) {
+                    tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+                }
+
+                tab_text = tab_text + "</table>";
+                tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+                tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+                tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+            }
+
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+            {
+                txtArea1.document.open("txt/html", "replace");
+                txtArea1.document.write(tab_text);
+                txtArea1.document.close();
+                txtArea1.focus();
+                sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+            }
+            else                 //other browser not tested on IE 11
+            {
+                var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text)
+
+                var downloadLink = document.createElement("a");
+                downloadLink.href = uri;
+
+                var dt = new Date();
+                var day = dt.getDate();
+                var month = dt.getMonth() + 1;
+                var year = dt.getFullYear();
+                var postfix = day + "-" + month + "-" + year;
+                downloadLink.download = fileName + " - " + postfix + ".xls";
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+        }
+
+        function PrintDocument() {
+            window.print();
+        }
     </script>
 
 </head>
-<body onload="getPdfInfo()" id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) no-navigation@(rtl ? " rtl" : "")">
+<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) no-navigation@(rtl ? " rtl" : "")">
     <section class="invoice">
-        <div class="row">
+        <div class="row report-header">
             <div class="col-xs-2">
-                <img width="100" height="100" src="~/Content/images/POMS_MPA_Logo.png" />
+                <img width="110" height="110" src="~/Content/serenity/images/dialog-confirm.png" />
             </div>
 
             <div class="col-xs-10">
-                <h3>Mongla Port Authority</h3>
-                <h4>Mongla, Bagerhat-9351, Bangladesh.<small @((ViewData["HideDate"] != null) ? "hidden" : "") class="pull-right">Print Date: @DateTime.Now.ToDateFormat()</small></h4>
-                <hr style="margin-top:5px" />
+                <div class="no-print pull-right">
+                    <button id="btn-excel-export" class="btn btn-info" title="Excel Export" onclick="ExcelExport('@ViewData["Title"]');"><i class="fa fa-file-excel-o margin-r-5"></i> Export to Excel</button>
+                    <button class="btn btn-primary" title="Print" onclick="PrintDocument();"><i class="fa fa-print margin-r-5"></i> Print</button>
+                </div>
 
+                <h2>Company Name</h2>
+                <h4>Address</h4>
+                <h5>Contact</h5>
+                <span @((ViewData["HideDate"] != null) ? "hidden" : "") class="pull-right">Print Date: @DateTime.Now.ToDateFormat()</span>
+                <hr />
+
+            </div>
+
+        </div>
+
+        <div class="row report-title">
+            <div class="col-xs-12">
+                <h3 class="align-center">
+                    @ViewData["Title"]
+                </h3>
             </div>
         </div>
 
-        <div class="@(ViewData["HideHeader"] != null ? "hidden" : "" )">
-            <h4 class="align-center">
-                @ViewData["Title"]
-            </h4>
-        </div>
         <div class="report-body">
             @RenderBody()
         </div>
-        <footer>
-            <div class="align-right" style="margin-top:20px; font-size:10px;"><i>Powered by</i> <b>TechnoVista</b></div>
-        </footer>
     </section>
+
 </body>
+
 
 </html>
