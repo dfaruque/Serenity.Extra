@@ -15,6 +15,8 @@ namespace _Ext {
         nextRowNumber = 1;
         public autoColumnSizePlugin;
 
+        public rowSelection = new Serenity.GridRowSelectionMixin(this);
+
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
             this.slickContainer.fadeTo(0, 0);
@@ -297,6 +299,10 @@ namespace _Ext {
                 });
             }
 
+            let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+            rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+            columns.unshift(rowSelectionCol);
+
             return columns;
         }
 
@@ -546,6 +552,13 @@ namespace _Ext {
 
             dialog.parentGrid = this;
         }
+
+        get selectedItems() {
+            return this.rowSelection.getSelectedAsInt64().map(m => {
+                return this.view.getItemById(m)
+            })
+        }
+
 
     }
 }

@@ -1,5 +1,4 @@
-﻿/// <reference path="../Product/Picker/ProductPickerDialog.ts" />
-
+﻿
 namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
@@ -59,7 +58,8 @@ namespace SerExtra.Northwind {
                 title: "Pick Products",
                 cssClass: "add-button",
                 onClick: () => {
-                    var pickerDialog = new ProductPickerDialog();
+                    //var pickerDialog = new ProductPickerDialog();
+                    var pickerDialog = new _Ext.GridItemPickerDialog(ProductGrid);
 
                     pickerDialog.onSuccess = (selectedItems: any[]) => {
                         let selectedItems2 = selectedItems.filter(t => { return !Q.any(this.view.getItems(), n => n.ProductID == t.ProductID) });
@@ -76,7 +76,7 @@ namespace SerExtra.Northwind {
                         });
 
                         for (let orderDetail of orderDetails) {
-                            orderDetail[this.getIdProperty()] = this.nextId++;
+                            orderDetail[this.getIdProperty()] = "`" +  this.nextId++;
                             this.view.addItem(orderDetail);
                         }
 

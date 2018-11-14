@@ -1147,6 +1147,8 @@
     <TypeScriptCompile Include="Imports\_references.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
+    <None Include="Modules\Northwind\Product\Picker\ProductCheckGrid.ts_" />
+    <None Include="Modules\Northwind\Product\Picker\ProductPickerDialog.ts_" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogActionTypeFormatter.ts" />
@@ -1154,6 +1156,7 @@
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Bases\GridItemPickerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportPanelBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts" />

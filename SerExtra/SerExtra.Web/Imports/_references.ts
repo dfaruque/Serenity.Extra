@@ -6,6 +6,7 @@
 /// <reference path="../Modules/_Ext/Bases/ReportPanelBase.ts" />
 
 /// <reference path="../Modules/_Ext/Bases/DialogBase.ts" />
+/// <reference path="../Modules/_Ext/Bases/GridItemPickerDialog.ts" />
 
 /// <reference path="../Modules/_Ext/Editors/EditorDialogBase.ts" />
 /// <reference path="../Modules/_Ext/Editors/GridEditorBase.ts" />
