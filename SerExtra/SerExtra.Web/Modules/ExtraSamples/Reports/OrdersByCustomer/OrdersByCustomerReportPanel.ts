@@ -23,6 +23,19 @@
 
             });
 
+            this.byId('DownloadPdfButton').click(e => {
+                e.preventDefault();
+
+                if (!this.validateForm()) {
+                    return;
+                }
+
+                var request = this.getSaveEntity();
+
+                _Ext.ReportHelper.execute({ reportKey: 'ExtraSamples.OrdersByCustomerReport', params: { Request: request }, extension: 'pdf' });
+
+            });
+
 
         }
 
@@ -39,7 +52,8 @@
                     </form>
                     <br />
                     <div class="buttons align-center">
-                        <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i>Show</button>
+                        <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i> Show</button>
+                        <button id="~_DownloadPdfButton" class="btn btn-default"><i class="fa fa-file-pdf-o margin-r-5"></i> Download PDF</button>
                     </div>
                 </div>
             </div>`;
