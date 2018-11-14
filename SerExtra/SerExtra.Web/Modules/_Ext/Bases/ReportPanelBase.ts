@@ -1,4 +1,4 @@
-﻿namespace SerExtra.ExtraSamples {
+﻿namespace _Ext {
 
     export class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, any> {
         protected getTemplateName() { return 'ReportPanel'; }
