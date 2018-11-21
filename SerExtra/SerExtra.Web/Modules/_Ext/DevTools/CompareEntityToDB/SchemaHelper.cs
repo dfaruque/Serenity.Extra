@@ -102,7 +102,7 @@ namespace _Ext.DevTools
 
         public static string GetSchemaName(string tableName)
         {
-            string schema = null;
+            string schema = "dbo"; //Todo: temporary fix
             if (tableName.IndexOf('.') > 0)
             {
                 schema = tableName.Substring(0, tableName.IndexOf('.')).Trim(SchemaHelper.Quotes);

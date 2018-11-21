@@ -13,9 +13,31 @@
 
 <div class="row">
     <div class="col-md-12">
-        @foreach (var issue in Model.Issues)
-        {
-            <div>@Html.Raw(issue)</div>
-        }
+        Total Entities/Rows: @Model.TableComparisonInfos.Count
+        <br />
+        Contains Issues in @Model.TableComparisonInfos.Count(c => c.HasIssue)
     </div>
 </div>
+@foreach (var TableComparisonInfo in Model.TableComparisonInfos.FindAll(f => f.HasIssue))
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h4> @TableComparisonInfo.RowClassName <small>@TableComparisonInfo.TableName</small></h4>
+            @TableComparisonInfo.Issues
+            @foreach (var field in TableComparisonInfo.FieldComparisonInfos.FindAll(f => f.HasIssue))
+            {
+                <div>
+                    @field.Name
+
+                    @foreach (var issue in field.Issues)
+                    {
+                        <span class="label label-warning">@issue.GetEnumDescription()</span>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+}
+

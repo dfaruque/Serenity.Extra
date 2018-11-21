@@ -12,7 +12,7 @@ namespace _Ext.DevTools.Model
 {
     public class CompareEntityToDBPageModel
     {
-        public List<string> Issues { get; set; } = new List<string>();
+        public List<TableComparisonInfo> TableComparisonInfos { get; set; } = new List<TableComparisonInfo>();
 
         public CompareEntityToDBPageModel()
         {
@@ -24,8 +24,17 @@ namespace _Ext.DevTools.Model
             foreach (var rowClass in rowClasses)
             {
                 Row row = (Row)Activator.CreateInstance(rowClass);
+                var rowFields = row.GetFields();
 
                 var connectionKey = rowClass.GetCustomAttribute<ConnectionKeyAttribute>().Value;
+
+                var TableComparisonInfo = new TableComparisonInfo
+                {
+                    ConnectionKey = connectionKey,
+                    RowClassName = rowClass.Name,
+                    TableName = row.Table
+                };
+                TableComparisonInfos.Add(TableComparisonInfo);
 
                 using (var connection = SqlConnections.NewByKey(connectionKey))
                 {
@@ -34,41 +43,26 @@ namespace _Ext.DevTools.Model
 
                     var tableName = SchemaHelper.GetTableNameOnly(row.Table);
                     string schema = SchemaHelper.GetSchemaName(row.Table);
-                    
-                    var rowFields = row.GetFields();
+
                     var dbFields = schemaProvider.GetFieldInfos(connection, schema, tableName);
                     if (dbFields == null || dbFields.Count() == 0)
                     {
-                        Issues.Add($"{Issues.Count + 1}. {rowClass} at Table:  {row.Table}; connection key: {connectionKey} <span class=\"label label-danger\">unable to retrive Table info.</span>");
-
+                        TableComparisonInfo.Issues += $"Unable to retrive Table info from Database. ";
                     }
                     else
                     {
                         for (int i = 0; i < row.FieldCount; i++)
                         {
                             Field rowfield = rowFields[i];
+
                             if (EntityFieldExtensions.IsTableField(rowfield))
                             {
                                 var dbField = dbFields.FirstOrDefault(f => f.FieldName == rowfield.Name);
-                                string strNull = rowfield.Flags.HasFlag(FieldFlags.NotNull) ? "[NotNull]" : "";
 
-                                if (dbField == null)
-                                    Issues.Add($"{Issues.Count + 1}. {rowClass} > {strNull} {rowfield.Type} {rowfield.Name}  at Table:  {row.Table} <span class=\"label label-danger\">no corresponding field in database</span>");
-                                else
-                                {
-                                    var rowfieldTypeName = rowfield.Type.ToString();
+                                var FieldComparisonInfo = new FieldComparisonInfo { RowField = rowfield, DBField = dbField };
+                                TableComparisonInfo.FieldComparisonInfos.Add(FieldComparisonInfo);
 
 
-                                    string strTypeMismatch = rowfieldTypeName == SchemaHelper.SqlTypeNameToFieldType(dbField.DataType, dbField.Size) ?
-                                        "" : "DataType Mismatch";
-
-                                    string strNullableMismatch = dbField.IsNullable == false && rowfield.Flags.HasFlag(FieldFlags.NotNull) == false ?
-                                        "Nullable Mismatch" : "";
-
-                                    if (!strNullableMismatch.IsEmptyOrNull() || !strTypeMismatch.IsEmptyOrNull())
-                                        Issues.Add($"{Issues.Count + 1}. {rowClass} > {strNull} {rowfield.Type} {rowfield.Name} "
-                                        + $"at Table: {row.Table} > {dbField.DataType} {(dbField.IsNullable ? "NULL" : "NOT NULL")} <span class=\"label label-danger\">{strTypeMismatch} {strNullableMismatch}</span>");
-                                }
                             }
                         }
                     }
@@ -80,33 +74,104 @@ namespace _Ext.DevTools.Model
             #endregion
 
             #region Form
-            Issues.Add("---------------------------");
-            Issues.Add("---------------------------");
-            var formClasses = assembly.GetTypes().Where(w => w.GetCustomAttribute<FormScriptAttribute>() != null && w.GetCustomAttribute<BasedOnRowAttribute>() != null);
+            //Issues.Add("---------------------------");
+            //Issues.Add("---------------------------");
+            //var formClasses = assembly.GetTypes().Where(w => w.GetCustomAttribute<FormScriptAttribute>() != null && w.GetCustomAttribute<BasedOnRowAttribute>() != null);
 
-            foreach (var formClass in formClasses)
+            //foreach (var formClass in formClasses)
+            //{
+            //    var basedOnRowType = formClass.GetCustomAttribute<BasedOnRowAttribute>().RowType;
+            //    Row basedOnRow = (Row)Activator.CreateInstance(basedOnRowType);
+            //    var rowFields = basedOnRow.GetFields();
+
+            //    for (int i = 0; i < basedOnRow.FieldCount; i++)
+            //    {
+            //        Field rowfield = rowFields[i];
+
+            //        if (rowfield.Flags.HasFlag(FieldFlags.NotNull) && !rowfield.Flags.HasFlag(FieldFlags.Identity))
+            //        {
+            //            var propInfo = formClass.GetProperty(rowfield.PropertyName);
+
+            //            if (propInfo == null)
+            //            {
+            //                Issues.Add($"{Issues.Count + 1}. {rowfield.Type} {rowfield.PropertyName} is [NotNull] in {basedOnRowType.Name} but not in {formClass.Name}");
+            //            }
+            //        }
+            //    }
+
+            //}
+            #endregion
+        }
+    }
+
+
+    public class TableComparisonInfo
+    {
+        public string ConnectionKey { get; set; }
+        public string RowClassName { get; set; }
+        public string TableName { get; set; }
+
+        public Row Row { get; set; }
+
+        public bool HasIssue
+        {
+            get
             {
-                var basedOnRowType = formClass.GetCustomAttribute<BasedOnRowAttribute>().RowType;
-                Row basedOnRow = (Row)Activator.CreateInstance(basedOnRowType);
-                var rowFields = basedOnRow.GetFields();
+                if (Issues.Length > 0) return true;
+                else if (FieldComparisonInfos.Any(f => f.HasIssue)) return true;
+                else return false;
+            }
+        }
+        public string Issues { get; set; } = String.Empty;
 
-                for (int i = 0; i < basedOnRow.FieldCount; i++)
+        public List<FieldComparisonInfo> FieldComparisonInfos { get; set; } = new List<FieldComparisonInfo>();
+
+    }
+
+    public class FieldComparisonInfo
+    {
+        public string Name => RowField.Name;
+        public Field RowField { get; set; }
+        public Serenity.Data.Schema.FieldInfo DBField { get; set; }
+
+        public bool HasIssue { get { return Issues.Count > 0; } }
+
+        private List<FieldComparisonIssue> _Issues;
+        public List<FieldComparisonIssue> Issues
+        {
+            get
+            {
+                if (_Issues == null)
                 {
-                    Field rowfield = rowFields[i];
+                    _Issues = new List<FieldComparisonIssue>();
 
-                    if (rowfield.Flags.HasFlag(FieldFlags.NotNull) && !rowfield.Flags.HasFlag(FieldFlags.Identity))
+                    if (DBField == null)
+                        _Issues.Add(FieldComparisonIssue.NotFoundInDB);
+                    else
                     {
-                        var propInfo = formClass.GetProperty(rowfield.PropertyName);
+                        var rowfieldTypeName = RowField.Type.ToString();
 
-                        if (propInfo == null)
-                        {
-                            Issues.Add($"{Issues.Count + 1}. {rowfield.Type} {rowfield.PropertyName} is [NotNull] in {basedOnRowType.Name} but not in {formClass.Name}");
-                        }
+                        if (rowfieldTypeName != SchemaHelper.SqlTypeNameToFieldType(DBField.DataType, DBField.Size))
+                            _Issues.Add(FieldComparisonIssue.DataTypeMismatch);
+
+
+                        if (DBField.IsNullable == false && RowField.Flags.HasFlag(FieldFlags.NotNull) == false)
+                            _Issues.Add(FieldComparisonIssue.NullableMismatch);
+
                     }
                 }
 
+                return _Issues;
             }
-            #endregion
         }
+
+    }
+
+    public enum FieldComparisonIssue
+    {
+        DataTypeMismatch = 1,
+        NullableMismatch = 2,
+        SizeMismatch = 3,
+        NotFoundInDB = 4
     }
 }
