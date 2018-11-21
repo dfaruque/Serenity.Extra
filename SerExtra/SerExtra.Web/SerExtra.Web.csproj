@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SerExtra</RootNamespace>
     <AssemblyName>SerExtra.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -26,6 +26,7 @@
     <Use64BitIISExpress />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <TypeScriptTarget>ES5</TypeScriptTarget>
@@ -80,7 +81,7 @@
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.7.6\lib\net45\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\packages\Serenity.Web.3.8.1\lib\net45\Mono.Cecil.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MsieJavaScriptEngine, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a3a2846a37ac0d3e, processorArchitecture=MSIL">
@@ -92,34 +93,52 @@
     <Reference Include="NUglify, Version=1.5.11.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUglify.1.5.11\lib\net40\NUglify.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Core, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Core.3.7.6\lib\net45\Serenity.Core.dll</HintPath>
+    <!--
+    <Reference Include="Serenity.Core, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Core.3.8.1\lib\net45\Serenity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.3.7.6\lib\net45\Serenity.Data.dll</HintPath>
+    <Reference Include="Serenity.Data, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.3.8.1\lib\net45\Serenity.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data.Entity, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.Entity.3.7.6\lib\net45\Serenity.Data.Entity.dll</HintPath>
+    <Reference Include="Serenity.Data.Entity, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.Entity.3.8.1\lib\net45\Serenity.Data.Entity.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Services, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Services.3.7.6\lib\net45\Serenity.Services.dll</HintPath>
+    <Reference Include="Serenity.Services, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Services.3.8.1\lib\net45\Serenity.Services.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Web, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.7.6\lib\net45\Serenity.Web.dll</HintPath>
+    <Reference Include="Serenity.Web, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Web.3.8.1\lib\net45\Serenity.Web.dll</HintPath>
+    </Reference>
+     -->
+    <!---->
+    <Reference Include="Serenity.Core, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Serenity\Serenity.Core\bin\Debug\net45\Serenity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Data, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Serenity\Serenity.Data\bin\Debug\net45\Serenity.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Data.Entity, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Serenity\Serenity.Data.Entity\bin\net45\Debug\Serenity.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Services, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Serenity\Serenity.Services\bin\Debug\net45\Serenity.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Serenity.Web, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Serenity\Serenity.Web\bin\Debug\net45\Serenity.Web.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Exceptional, Version=1.0.130.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\StackExchange.Exceptional.1.0.130\lib\net40\StackExchange.Exceptional.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -139,12 +158,12 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Import Project="..\..\Serenity\tools\Submodule\Serenity.Submodule.Web.targets" Condition=" Exists('..\..\Serenity\Serenity.Core\Serenity.Core.Net45.csproj') " />
   <ItemGroup>
@@ -576,9 +595,6 @@
     <Content Include="Modules\_Ext\DevTools\ReplaceRow\SP_ReplaceRow.sql" />
     <Content Include="Modules\_Ext\Reporting\report.css" />
     <Content Include="Modules\_Ext\Reporting\ReportFooter.html" />
-    <Content Include="node_modules\%40types\react\LICENSE" />
-    <Content Include="node_modules\%40types\react\package.json" />
-    <Content Include="node_modules\%40types\react\README.md" />
     <Content Include="Readme.CodeGenerator.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -942,6 +958,7 @@
     <Content Include="tools\Node\less\lib\less\tree\variable.js" />
     <Content Include="tools\Node\less\lib\less\visitor.js" />
     <Content Include="tools\Node\node.exe" />
+    <Content Include="Views\Templates\ReportPanel.Template.html" />
     <Content Include="wkhtmltopdf-license.txt" />
     <Content Include="Modules\_Ext\CodeGeneratorTemplates\Row.scriban" />
     <Content Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
@@ -950,6 +967,15 @@
     <Content Include="Modules\_Ext\DevTools\Sergen\SergenIndex.cshtml" />
     <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cshtml" />
     <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerIndex.cshtml" />
+    <Content Include="Modules\_Ext\AuditLog\AuditLogIndex.cshtml" />
+    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
+    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
+    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <Content Include="node_modules\%40types\react\LICENSE" />
+    <Content Include="node_modules\%40types\react\package.json" />
+    <Content Include="node_modules\%40types\react\README.md" />
+    <Content Include="Modules\ExtraSamples\MainGridInlineEditing\Index.cshtml" />
+    <Content Include="Modules\Common\Reporting\GridExport\CommonReport.cshtml" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
@@ -975,35 +1001,6 @@
     <Content Include="Fonts\fontawesome-webfont.woff" />
     <Content Include="Fonts\fontawesome-webfont.ttf" />
     <Content Include="Fonts\fontawesome-webfont.eot" />
-    <Content Include="Modules\_Ext\AuditLog\AuditLogIndex.cshtml" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
-    <Content Include="Modules\ExtraSamples\MainGridInlineEditing\Index.cshtml" />
-    <Content Include="node_modules\%40types\jquery.blockui\package.json" />
-    <Content Include="node_modules\%40types\jquery.blockui\README.md" />
-    <Content Include="node_modules\%40types\jquery.blockui\types-metadata.json" />
-    <Content Include="node_modules\%40types\jquery.cookie\LICENSE" />
-    <Content Include="node_modules\%40types\jquery.cookie\package.json" />
-    <Content Include="node_modules\%40types\jquery.cookie\README.md" />
-    <Content Include="node_modules\%40types\jquery.validation\LICENSE" />
-    <Content Include="node_modules\%40types\jquery.validation\package.json" />
-    <Content Include="node_modules\%40types\jquery.validation\README.md" />
-    <Content Include="node_modules\%40types\jqueryui\LICENSE" />
-    <Content Include="node_modules\%40types\jqueryui\package.json" />
-    <Content Include="node_modules\%40types\jqueryui\README.md" />
-    <Content Include="node_modules\%40types\jquery\LICENSE" />
-    <Content Include="node_modules\%40types\jquery\package.json" />
-    <Content Include="node_modules\%40types\jquery\README.md" />
-    <Content Include="node_modules\%40types\jspdf\package.json" />
-    <Content Include="node_modules\%40types\jspdf\README.md" />
-    <Content Include="node_modules\%40types\jspdf\types-metadata.json" />
-    <Content Include="node_modules\%40types\sortablejs\LICENSE" />
-    <Content Include="node_modules\%40types\sortablejs\package.json" />
-    <Content Include="node_modules\%40types\sortablejs\README.md" />
-    <Content Include="node_modules\%40types\toastr\LICENSE" />
-    <Content Include="node_modules\%40types\toastr\package.json" />
-    <Content Include="node_modules\%40types\toastr\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1069,11 +1066,9 @@
     </None>
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\serenity\texts\serenity.texts.es.json" />
-    <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
-    <Content Include="Scripts\SlickGrid\README.md" />
     <Content Include="tools\Node\lessc.cmd" />
     <Content Include="tools\JsEngine\lib.d.ts_" />
+    <Content Include="Scripts\SlickGrid\README.md" />
     <Content Include="Scripts\serenity\texts\serenity.texts.zh-CN.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.vi-VN.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.tr.json" />
@@ -1082,7 +1077,9 @@
     <Content Include="Scripts\serenity\texts\serenity.texts.pt-BR.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.it.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.fa.json" />
+    <Content Include="Scripts\serenity\texts\serenity.texts.es.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.de.json" />
+    <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
     <Content Include="Scripts\serenity\Serenity.CoreLib.js.map" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="Imports\ServerTypings\ExtraSamples.OrdersByCustomerReportRequest.ts">
@@ -1157,14 +1154,18 @@
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.ReplaceRowService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.Reports.CommonReportRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.Reports.CommonReportService.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.TimeUoM.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\_references.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\Picker\ProductCheckGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\ProductDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogActionTypeFormatter.ts" />
@@ -1172,6 +1173,8 @@
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Bases\GridItemPickerDialog.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Bases\ReportPanelBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\AutoCompleteEditor.ts" />
@@ -1200,6 +1203,16 @@
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.enum.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.var.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jqueryui\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jquery.blockui\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jquery.cookie\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jquery.validation\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\jspdf\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react\global.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\sortablejs\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\toastr\index.d.ts" />
     <Content Include="Content\site\images\accordion-arrows.png" />
     <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_Sqlite.sql" />
     <Content Include="Modules\BasicSamples\Dialogs\OtherFormInTabOneBar\OtherFormOneBarDialog.Template.html" />
@@ -1958,23 +1971,13 @@
     <TypeScriptCompile Include="Modules\Northwind\OrderDetail\OrderDetailsEditor.ts" />
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\CancellableBulkAction\OrderBulkAction.ts" />
     <TypeScriptCompile Include="Modules\Northwind\Order\OrderGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\Picker\ProductPickerDialog.ts" />
+    <TypeScriptCompile Include="Modules\Northwind\Product\ProductDialog.ts" />
     <TypeScriptCompile Include="Modules\Northwind\Product\ProductGrid.ts" />
     <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerDetailsRow.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleGrid.ts" />
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleDialog.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jquery.blockui\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jquery.cookie\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jquery.validation\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jqueryui\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\jspdf\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\react\global.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\react\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\sortablejs\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\toastr\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -2012,6 +2015,9 @@
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.HardCodedLookupEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.HtmlTemplateEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.StaticTextBlockAttribute.cs">
@@ -2251,8 +2257,14 @@
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenEndpoint.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenModels.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenPage.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReport.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReportEndpoint.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\CommonReportRequest.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\DynamicDataReport.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\ExcelReportGenerator.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
+    <Compile Include="Modules\Common\Reporting\GridExport\ReportGenerator.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportRequest.cs" />
     <Compile Include="Modules\_Ext\Utils\DateTimeHelper.cs" />
     <Compile Include="Modules\_Ext\Utils\DbConnectionExtentions.cs" />

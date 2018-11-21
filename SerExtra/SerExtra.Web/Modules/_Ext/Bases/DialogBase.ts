@@ -151,7 +151,30 @@
                         }
                     });
                 }
+
+                //clone button click event customization
+                let cloneButton = Q.tryFirst(buttons, x => x.cssClass == 'clone-button');
+
+                cloneButton.onClick = () => {
+
+                    if (!this.isEditMode()) {
+                        return;
+                    }
+
+                    var cloneEntity = this.getCloningEntity();
+
+                    Serenity.Widget.create({
+                        type: (ss as any).getInstanceType(this),
+                        init: (dlg: DialogBase<any, any>) => {
+                            this.parentGrid.initDialog(dlg);
+                            dlg.loadEntityAndOpenDialog(cloneEntity, null);
+                        }
+                    });
+
+                    this.dialogClose();
+                }
             } catch (e) { }
+
             return buttons;
         }
 
@@ -243,5 +266,6 @@
         onAfterSetDialogSize() { }
         onAfterDialogClose(entity: TEntity) { }
 
+        parentGrid: GridBase<TEntity, any>;
     }
 }

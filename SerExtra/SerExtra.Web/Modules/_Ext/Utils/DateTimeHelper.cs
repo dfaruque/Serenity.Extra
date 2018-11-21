@@ -83,17 +83,6 @@ public static class DateTimeHelper
         return inputValue.ToString("dd MMMM yyyy");
     }
 
-    public static DateTime? GetValueAsDate(this ExcelWorksheet worksheet, int row, int col, string[] dateFormates)
-    {
-        var cellValueAsString = worksheet.GetValue<string>(row, col);
-        if (DateTime.TryParseExact(cellValueAsString, dateFormates, null, DateTimeStyles.AllowWhiteSpaces, out DateTime date))
-        {
-            return date;
-        }
-
-        return worksheet.GetValue<DateTime?>(row, col);
-    }
-
     public static int GetMonths(DateTime fromDate, DateTime toDate)
     {
         int months;

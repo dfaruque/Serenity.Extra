@@ -15,6 +15,8 @@ namespace _Ext {
         nextRowNumber = 1;
         public autoColumnSizePlugin;
 
+        public rowSelection = new Serenity.GridRowSelectionMixin(this);
+
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
             this.slickContainer.fadeTo(0, 0);
@@ -102,7 +104,7 @@ namespace _Ext {
 
                 for (let quickFilter of quickFilters) {
                     let filterValue = request.EqualityFilter[quickFilter.field];
-                    if (filterValue) {
+                    if (filterValue && filterValue.length > 0) {
                         if (quickFilter.options.lookupKey) {
                             let lookup = Q.getLookup(quickFilter.options.lookupKey);
                             request.EqualityFilterWithTextValue[quickFilter.title] = lookup.itemById[filterValue][lookup.textField];
@@ -297,6 +299,10 @@ namespace _Ext {
                 });
             }
 
+            let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+            rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+            columns.unshift(rowSelectionCol);
+
             return columns;
         }
 
@@ -334,9 +340,9 @@ namespace _Ext {
 
             let gridContainerWidth = this.slickContainer.width();
 
-            if (gridContainerWidth == 0) {
-                gridContainerWidth = this.element.closest('.s-Dialog').width() - 55;
-            }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = this.element.closest('.s-Dialog').width() - 55; }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = this.element.closest('.s-Panel').width() - 55; }
+            if (gridContainerWidth > 0) { } else { gridContainerWidth = $('section.content').width() - 75; }
 
             this.slickGrid.setOptions({ forceFitColumns: false });
 
@@ -540,5 +546,19 @@ namespace _Ext {
             }
             return r;
         }
+
+        public initDialog(dialog: DialogBase<TItem, any>): void {
+            super.initDialog(dialog);
+
+            dialog.parentGrid = this;
+        }
+
+        get selectedItems() {
+            return this.rowSelection.getSelectedAsInt64().map(m => {
+                return this.view.getItemById(m)
+            })
+        }
+
+
     }
 }

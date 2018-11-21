@@ -9,7 +9,7 @@ namespace _Ext.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("Default"), TableName("[dbo].[AuditLog]")]
+    [ConnectionKey("Default"), TableName("[AuditLog]")]
     [DisplayName("Audit Log"), InstanceName("Audit Log"), TwoLevelCached]
     [ReadPermission("Administration:AuditLog")]
     [ModifyPermission("Administration:AuditLog")]

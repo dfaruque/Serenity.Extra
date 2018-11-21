@@ -19,8 +19,7 @@
             this.slickContainer.on('change', '.edit:input', (e) => this.inputsChange(e));
         }
 
-        protected getButtons()
-        {
+        protected getButtons() {
             var buttons = super.getButtons();
 
             buttons.push(Common.ExcelExportHelper.createToolButton({
@@ -57,6 +56,17 @@
                 separator: true
             });
 
+            buttons.push({
+                title: 'Print',
+                icon: 'fa fa-print',
+                onClick: () => {
+                    Q.postToService({
+                        service: ProductService.baseUrl + '/ListReport',
+                        request: this.getReportRequest(), target: '_blank'
+                    })
+                }
+            });
+
             return buttons;
         }
 
@@ -89,8 +99,8 @@
 
             var value = this.getEffectiveValue(item, ctx.column.field) as number;
 
-            return "<input type='text' class='" + klass + 
-                "' data-field='" + ctx.column.field + 
+            return "<input type='text' class='" + klass +
+                "' data-field='" + ctx.column.field +
                 "' value='" + Q.formatNumber(value, '0.##') + "'/>";
         }
 
@@ -108,7 +118,7 @@
 
             return "<input type='text' class='" + klass +
                 "' data-field='" + column.field +
-                "' value='" + Q.attrEncode(value) + 
+                "' value='" + Q.attrEncode(value) +
                 "' maxlength='" + column.sourceItem.maxLength + "'/>";
         }
 
@@ -127,7 +137,7 @@
 
             var value = this.getEffectiveValue(item, idField);
             var markup = "<select class='" + klass +
-                "' data-field='" + idField + 
+                "' data-field='" + idField +
                 "' style='width: 100%; max-width: 100%'>";
             for (var c of lookup.items) {
                 let id = c[lookup.idField];

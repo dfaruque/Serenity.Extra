@@ -11,32 +11,35 @@
         protected getLocalTextPrefix() { return ProductRow.localTextPrefix; }
         protected getService() { return ProductService.baseUrl; }
 
-        private rowSelection = new Serenity.GridRowSelectionMixin(this);
+        //private rowSelection = new Serenity.GridRowSelectionMixin(this);
 
         constructor(container: JQuery) {
             super(container);
         }
 
-        get selectedItems() {
-            return this.rowSelection.getSelectedAsInt32().map(m => {
-                return this.view.getItemById(m)
-            })
-        }
+        //get selectedItems() {
+        //    return this.rowSelection.getSelectedAsInt32().map(m => {
+        //        return this.view.getItemById(m)
+        //    })
+        //}
 
         protected getButtons() {
             var buttons = super.getButtons();
 
 
-            return buttons;
+            return buttons.filter(f => f.cssClass == 'refresh-button');
         }
 
-        protected getColumns() {
-            var columns = super.getColumns();
+        //protected getColumns() {
+        //    var columns = super.getColumns();
 
-            columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
+        //    let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+        //    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
 
-            return columns;
-        }
+        //    columns.unshift(rowSelectionCol);
+
+        //    return columns;
+        //}
 
     }
 }

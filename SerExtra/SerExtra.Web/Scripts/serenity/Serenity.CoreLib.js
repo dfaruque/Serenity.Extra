@@ -929,6 +929,40 @@ var Q;
         };
     }
     Q.dbTryText = dbTryText;
+    function proxyTexts(o, p, t) {
+        if (typeof window != 'undefined' && window['Proxy']) {
+            return new window['Proxy'](o, {
+                get: function (x, y) {
+                    var tv = t[y];
+                    if (tv == null)
+                        return;
+                    if (typeof tv == 'number')
+                        return Q.text(p + y);
+                    else {
+                        var z = o[y];
+                        if (z != null)
+                            return z;
+                        o[y] = z = proxyTexts({}, p + y + '.', tv);
+                        return z;
+                    }
+                },
+                ownKeys: function (x) { return Object.keys(t); }
+            });
+        }
+        else {
+            for (var _i = 0, _a = Object.keys(t); _i < _a.length; _i++) {
+                var k = _a[_i];
+                if (typeof t[k] == 'number')
+                    Object.defineProperty(o, k, {
+                        get: function () { return Q.text(p + k); }
+                    });
+                else
+                    o[k] = proxyTexts({}, p + k + '.', t[k]);
+            }
+            return o;
+        }
+    }
+    Q.proxyTexts = proxyTexts;
     var LT = /** @class */ (function () {
         function LT(key) {
             this.key = key;
@@ -3941,7 +3975,7 @@ var Serenity;
             if (index == null) {
                 return;
             }
-            if (index === tabs.tabs('option', 'active')) {
+            if (isDisabled && index === tabs.tabs('option', 'active')) {
                 tabs.tabs('option', 'active', 0);
             }
             tabs.tabs(isDisabled ? 'disable' : 'enable', index);
@@ -5105,10 +5139,12 @@ var Serenity;
                 if (value) {
                     this.element.addClass('readonly').attr('readonly', 'readonly');
                     this.element.nextAll('.ui-datepicker-trigger').css('opacity', '0.1');
+                    this.element.nextAll('.inplace-now').css('opacity', '0.1');
                 }
                 else {
                     this.element.removeClass('readonly').removeAttr('readonly');
                     this.element.nextAll('.ui-datepicker-trigger').css('opacity', '1');
+                    this.element.nextAll('.inplace-now').css('opacity', '1');
                 }
                 Serenity.EditorUtils.setReadonly(this.time, value);
             }
@@ -6262,7 +6298,7 @@ var Serenity;
             var _this = _super.call(this, input, opt) || this;
             input.addClass('decimalQ');
             var numericOptions = $.extend(Serenity.DecimalEditor.defaultAutoNumericOptions(), {
-                vMin: Q.coalesce(_this.options.minValue, '0.00'),
+                vMin: Q.coalesce(_this.options.minValue, _this.options.allowNegatives ? (_this.options.maxValue != null ? ("-" + _this.options.maxValue) : '-999999999999.99') : '0.00'),
                 vMax: Q.coalesce(_this.options.maxValue, '999999999999.99')
             });
             if (_this.options.decimals != null) {
@@ -6322,7 +6358,7 @@ var Serenity;
             var _this = _super.call(this, input, opt) || this;
             input.addClass('integerQ');
             var numericOptions = $.extend(Serenity.DecimalEditor.defaultAutoNumericOptions(), {
-                vMin: Q.coalesce(_this.options.minValue, 0),
+                vMin: Q.coalesce(_this.options.minValue, _this.options.allowNegatives ? (_this.options.maxValue != null ? ("-" + _this.options.maxValue) : '-2147483647') : '0'),
                 vMax: Q.coalesce(_this.options.maxValue, 2147483647),
                 aSep: null
             });
@@ -7280,8 +7316,23 @@ var Serenity;
                 }
             }
         };
+        RadioButtonEditor.prototype.get_readOnly = function () {
+            return this.element.attr('disabled') != null;
+        };
+        RadioButtonEditor.prototype.set_readOnly = function (value) {
+            if (this.get_readOnly() !== value) {
+                if (value) {
+                    this.element.attr('disabled', 'disabled')
+                        .find('input').attr('disabled', 'disabled');
+                }
+                else {
+                    this.element.removeAttr('disabled')
+                        .find('input').removeAttr('disabled');
+                }
+            }
+        };
         RadioButtonEditor = __decorate([
-            Editor('RadioButton', [Serenity.IStringValue]),
+            Editor('RadioButton', [Serenity.IStringValue, Serenity.IReadOnly]),
             Element('<div/>')
         ], RadioButtonEditor);
         return RadioButtonEditor;
@@ -11986,7 +12037,8 @@ var Serenity;
                 }
             };
             Serenity.WX.changeSelect2(widget, function (e1) {
-                _this.quickFilterChange(e1);
+                // use timeout give cascaded dropdowns a chance to update / clear themselves
+                window.setTimeout(function () { return _this.quickFilterChange(e1); }, 0);
             });
             this.add_submitHandlers(submitHandler);
             widget.element.bind('remove.' + this.uniqueName, function (x) {
@@ -12218,23 +12270,23 @@ var Serenity;
             }
             return Q.Authorization.hasPermission(item.readPermission);
         };
+        DataGrid.prototype.getPersistedSettings = function () {
+            var storage = this.getPersistanceStorage();
+            if (storage == null)
+                return null;
+            var json = Q.trimToNull(storage.getItem(this.getPersistanceKey()));
+            if (json != null && Q.startsWith(json, '{') && Q.endsWith(json, '}'))
+                return JSON.parse(json);
+            return null;
+        };
         DataGrid.prototype.restoreSettings = function (settings, flags) {
             var _this = this;
-            if (settings == null) {
-                var storage = this.getPersistanceStorage();
-                if (storage == null) {
-                    return;
-                }
-                var json = Q.trimToNull(storage.getItem(this.getPersistanceKey()));
-                if (json != null && Q.startsWith(json, '{') && Q.endsWith(json, '}')) {
-                    settings = JSON.parse(json);
-                }
-                else {
-                    return;
-                }
-            }
-            if (!this.slickGrid) {
+            if (!this.slickGrid)
                 return;
+            if (settings == null) {
+                settings = this.getPersistedSettings();
+                if (settings == null)
+                    return;
             }
             var columns = this.slickGrid.getColumns();
             var colById = null;
@@ -12885,6 +12937,9 @@ var Serenity;
             }
             var target = $(e.target);
             if (target.hasClass('check-box')) {
+                e.preventDefault();
+                if (this._readOnly)
+                    return;
                 var checkedOrPartial = target.hasClass('checked') || target.hasClass('partial');
                 var item = this.itemAt(row);
                 var anyChanged = item.isSelected !== !checkedOrPartial;
@@ -13031,6 +13086,8 @@ var Serenity;
                             cls += ' checked';
                         }
                     }
+                    if (_this._readOnly)
+                        cls += ' readonly';
                     return '<span class="' + cls + '"></span>' + _this.getItemText(ctx);
                 })
             });
@@ -13072,6 +13129,15 @@ var Serenity;
         };
         CheckTreeEditor.prototype.moveSelectedUp = function () {
             return false;
+        };
+        CheckTreeEditor.prototype.get_readOnly = function () {
+            return this._readOnly;
+        };
+        CheckTreeEditor.prototype.set_readOnly = function (value) {
+            if (!!this._readOnly != !!value) {
+                this._readOnly = !!value;
+                this.view.refresh();
+            }
         };
         CheckTreeEditor.prototype.get_value = function () {
             var list = [];
@@ -13125,7 +13191,7 @@ var Serenity;
             }
         };
         CheckTreeEditor = __decorate([
-            Serenity.Decorators.registerEditor('Serenity.CheckTreeEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue]),
+            Serenity.Decorators.registerEditor('Serenity.CheckTreeEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly]),
             Serenity.Decorators.element("<div/>")
         ], CheckTreeEditor);
         return CheckTreeEditor;

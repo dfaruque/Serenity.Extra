@@ -5,7 +5,7 @@ namespace SerExtra.BasicSamples {
 
     @Serenity.Decorators.registerClass()
     export class CancellableBulkActionGrid extends Northwind.OrderGrid {
-        private rowSelection: Serenity.GridRowSelectionMixin;
+        //private rowSelection: Serenity.GridRowSelectionMixin;
 
         constructor(container: JQuery) {
             super(container);
@@ -13,7 +13,7 @@ namespace SerExtra.BasicSamples {
 
         protected createToolbarExtensions() {
             super.createToolbarExtensions();
-            this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
         }
 
         protected getButtons() {
@@ -34,7 +34,7 @@ namespace SerExtra.BasicSamples {
 
         protected getColumns() {
             var columns = super.getColumns();
-            columns.splice(0, 0, Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
+            //columns.splice(0, 0, Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
             return columns;
         }
 

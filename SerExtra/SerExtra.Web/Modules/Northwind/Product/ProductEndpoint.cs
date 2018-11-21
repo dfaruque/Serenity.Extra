@@ -1,12 +1,15 @@
 ﻿
 namespace SerExtra.Northwind.Endpoints
 {
+    using _Ext;
+    using _Ext.Reports;
     using Serenity.Data;
     using Serenity.Reporting;
     using Serenity.Services;
     using Serenity.Web;
     using System;
     using System.Data;
+    using System.Linq;
     using System.Web.Mvc;
     using MyRepository = Repositories.ProductRepository;
     using MyRow = Entities.ProductRow;
@@ -51,5 +54,22 @@ namespace SerExtra.Northwind.Endpoints
             return ExcelContentResult.Create(bytes, "ProductList_" +
                 DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
+
+        //Not done
+        public ActionResult ListReport(IDbConnection connection, CommonReportRequest request)
+        {
+            var entities = List(connection, request).Entities;
+
+            var report = new DynamicDataReport(entities, request.IncludeColumns, typeof(Columns.ProductColumns));
+            var reportTitle = typeof(MyRow).CustomAttributes.Where(q => q.AttributeType.Name == "DisplayNameAttribute").FirstOrDefault().ConstructorArguments[0].Value.ToString();
+
+            //var htmlText = new _Ext.Reports.ReportGenerator().RenderHtml(report, typeof(Columns.PmsMeetingdiffCommitteDetailColumns), typeof(List<PmsMeetingdiffCommitteDetailRow>));
+            var htmlText = new _Ext.Reports.ReportGenerator().RenderHtml(report);
+            var data = new CommonReportModel(connection, request);
+            data.ReportBody = htmlText;
+            data.ReportTitle = reportTitle;
+            return View(MVC.Views.Common.Reporting.GridExport.CommonReport, data);
+        }
+
     }
 }

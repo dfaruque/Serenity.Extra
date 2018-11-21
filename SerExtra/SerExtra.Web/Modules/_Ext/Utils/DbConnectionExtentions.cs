@@ -87,4 +87,21 @@ public static partial class DbConnectionExtentions
             return null;
     }
 
+    public static object TryGetId<TRow>(this IDbConnection connection, ICriteria criteria)
+        where TRow : Row, IIdRow, INameRow, new()
+    {
+        var row = new TRow();
+
+        var query = new SqlQuery()
+            .From(row)
+            .Select((Field)row.IdField)
+            .Where(criteria);
+
+        using (var reader = SqlHelper.ExecuteReader(connection, query))
+            while (reader.Read())
+                return reader.GetValue(0);
+
+        return null;
+    }
+
 }

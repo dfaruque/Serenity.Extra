@@ -1,21 +1,19 @@
-﻿/// <reference path="ProductCheckGrid.ts" />
-namespace SerExtra.Northwind {
+﻿namespace SerExtra.Northwind {
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.maximizable()
     export class ProductPickerDialog extends Serenity.TemplatedDialog<any> {
-        getTemplate() { return '<div id="~_CheckGrid"><\/div>' }
+        getTemplate() { return '<div id="~_CheckGrid" style="margin: 15px 15px 0 15px;"><\/div>' }
 
-        checkGrid = new ProductCheckGrid(this.byId("CheckGrid"))
+        checkGrid = new ProductGrid(this.byId("CheckGrid"))
+        get selectedItems() { return this.checkGrid.selectedItems }
 
         constructor() {
             super();
 
-            this.dialogTitle = "Select Products"
-        }
+            this.dialogTitle = "Select " + this.checkGrid.getTitle();
+            this.checkGrid.setTitle(null);
 
-        get selectedItems() {
-            return this.checkGrid.selectedItems
         }
 
         onSuccess = (selectedItems) => { }
@@ -42,5 +40,6 @@ namespace SerExtra.Northwind {
 
             return opt
         }
+
     }
 }
