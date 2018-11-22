@@ -93,7 +93,7 @@
     <Reference Include="NUglify, Version=1.5.11.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUglify.1.5.11\lib\net40\NUglify.dll</HintPath>
     </Reference>
-    <!--
+    <!---->
     <Reference Include="Serenity.Core, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serenity.Core.3.8.1\lib\net45\Serenity.Core.dll</HintPath>
     </Reference>
@@ -109,8 +109,7 @@
     <Reference Include="Serenity.Web, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serenity.Web.3.8.1\lib\net45\Serenity.Web.dll</HintPath>
     </Reference>
-     -->
-    <!---->
+    <!--
     <Reference Include="Serenity.Core, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Serenity\Serenity.Core\bin\Debug\net45\Serenity.Core.dll</HintPath>
     </Reference>
@@ -126,6 +125,7 @@
     <Reference Include="Serenity.Web, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Serenity\Serenity.Web\bin\Debug\net45\Serenity.Web.dll</HintPath>
     </Reference>
+	-->
     <Reference Include="StackExchange.Exceptional, Version=1.0.130.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\StackExchange.Exceptional.1.0.130\lib\net40\StackExchange.Exceptional.dll</HintPath>
     </Reference>
@@ -1178,6 +1178,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\AutoCompleteEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPickerEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\ColorEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\DateTimePickerEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\EditorDialogBase.ts" />
@@ -2014,6 +2015,9 @@
     <Compile Include="Imports\ClientTypes\_Ext.EmptyLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.GridItemPickerEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.HardCodedLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
@@ -2262,6 +2266,7 @@
     <Compile Include="Modules\Common\Reporting\GridExport\CommonReportRequest.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\DynamicDataReport.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ExcelReportGenerator.cs" />
+    <Compile Include="Modules\_Ext\Editors\GridItemPickerEditorAttribute.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ReportGenerator.cs" />
@@ -2485,9 +2490,6 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\BasicSamples.OrdersByShipperResponse.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Common.Pages.UploadResponse.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Membership.ChangePasswordForm.ts">
