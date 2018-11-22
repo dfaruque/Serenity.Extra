@@ -2,7 +2,7 @@
 
     @Serenity.Decorators.registerClass()
     export class GridItemPickerDialog extends Serenity.TemplatedDialog<any> {
-        getTemplate() { return '<div id="~_RowSelectionCheckGrid" style="margin: 15px 15px 0 15px;"><\/div>' }
+        getTemplate() { return '<div id="~_RowSelectionCheckGrid" class="RowSelectionCheckGrid" style="margin: 15px 15px 0 15px;"><\/div>' }
 
         checkGrid: GridBase<any,any>;
         get selectedItems() { return this.checkGrid.selectedItems }

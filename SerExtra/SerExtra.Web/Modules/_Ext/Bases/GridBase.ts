@@ -300,7 +300,7 @@ namespace _Ext {
             }
 
             if (extOptions.ShowRowSelectionCheckboxColumn == true
-                || this.element[0].id.indexOf('RowSelectionCheckGrid') > 0) {
+                || this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
                 let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
                 rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
                 columns.unshift(rowSelectionCol);
