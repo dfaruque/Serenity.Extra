@@ -18,6 +18,7 @@ namespace q {
         ShowDeleteInlineButtun: false,
         ShowEditInlineButtun: true,
         ShowRowNumberColumn: true,
+        ShowRowSelectionCheckboxColumn: false,
         RowsPerPage: 100
     };
 
@@ -28,6 +29,7 @@ namespace q {
         ShowInlineActionsColumn: true,
         ShowDeleteInlineButtun: true,
         ShowEditInlineButtun: true,
+        ShowRowSelectionCheckboxColumn: false,
         ShowRowNumberColumn: true
     };
 

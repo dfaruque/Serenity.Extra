@@ -299,9 +299,12 @@ namespace _Ext {
                 });
             }
 
-            let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
-            rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
-            columns.unshift(rowSelectionCol);
+            if (extOptions.ShowRowSelectionCheckboxColumn == true
+                || this.element[0].id.indexOf('RowSelectionCheckGrid') > 0) {
+                let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+                rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+                columns.unshift(rowSelectionCol);
+            }
 
             return columns;
         }
