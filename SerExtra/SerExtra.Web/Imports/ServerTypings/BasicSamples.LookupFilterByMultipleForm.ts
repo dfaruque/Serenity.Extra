@@ -3,7 +3,7 @@
         ProductName: Serenity.StringEditor;
         ProductImage: Serenity.ImageUploadEditor;
         Discontinued: Serenity.BooleanEditor;
-        SupplierID: Serenity.LookupEditor;
+        SupplierID: _Ext.GridItemPickerEditor;
         CategoryID: ProduceSeafoodCategoryEditor;
         QuantityPerUnit: Serenity.StringEditor;
         UnitPrice: Serenity.DecimalEditor;
@@ -26,7 +26,7 @@
                 var w0 = s.StringEditor;
                 var w1 = s.ImageUploadEditor;
                 var w2 = s.BooleanEditor;
-                var w3 = s.LookupEditor;
+                var w3 = _Ext.GridItemPickerEditor;
                 var w4 = ProduceSeafoodCategoryEditor;
                 var w5 = s.DecimalEditor;
                 var w6 = s.IntegerEditor;

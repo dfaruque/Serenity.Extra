@@ -47,7 +47,8 @@ namespace SerExtra.Northwind.Entities
         }
 
         [DisplayName("Supplier"), ForeignKey(typeof(SupplierRow)), LeftJoin("sup")]
-        [LookupEditor(typeof(SupplierRow), InplaceAdd = true)]
+        //[LookupEditor(typeof(SupplierRow), InplaceAdd = true)]
+        [_Ext.GridItemPickerEditor(GridType = "SerExtra.Northwind.SupplierGrid")]
         public Int32? SupplierID
         {
             get { return Fields.SupplierID[this]; }
