@@ -9,7 +9,7 @@
     @RenderSection("Head", false)
     <title>@ViewData["Title"]</title>
 
-    <script>
+    <script type="text/javascript">
         var pdfInfo = {};
         var x = document.location.search.substring(1).split('&');
         for (var i in x) { var z = x[i].split('=', 2); pdfInfo[z[0]] = unescape(z[1]); }
@@ -23,7 +23,7 @@
         function ExcelExport(fileName) {
             var textRange; var j = 0;
             //var tab_text = document.body.innerHTML;
-            var myTables = document.getElementsByTagName('table');
+            var myTables = document.getElementsByClassName('table-excel-exportable');
 
             var tab_text = fileName;
             tab_text += "<table style='margin-bottom:20px' border='1px'><tr>";
@@ -91,7 +91,7 @@
 
             <div class="col-xs-10">
                 <div class="no-print pull-right">
-                    <button id="btn-excel-export" class="btn btn-info" title="Excel Export" onclick="ExcelExport('@ViewData["Title"]');"><i class="fa fa-file-excel-o margin-r-5"></i> Export to Excel</button>
+                    <button id="btn-excel-export" class="btn btn-info hidden" title="Excel Export" onclick="ExcelExport('@ViewData["Title"]');"><i class="fa fa-file-excel-o margin-r-5"></i> Export to Excel</button>
                     <button class="btn btn-primary" title="Print" onclick="PrintDocument();"><i class="fa fa-print margin-r-5"></i> Print</button>
                 </div>
 
@@ -118,6 +118,15 @@
         </div>
     </section>
 
+    <script type="text/javascript">
+        $(function () {
+             var excelExportableTables = document.getElementsByClassName('table-excel-exportable');
+
+             if (excelExportableTables.length > 0) {
+                 $('#btn-excel-export').removeClass('hidden');
+             }
+        });
+    </script>
 </body>
 
 
