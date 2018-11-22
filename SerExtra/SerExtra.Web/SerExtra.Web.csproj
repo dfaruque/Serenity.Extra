@@ -1173,12 +1173,12 @@
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
-    <TypeScriptCompile Include="Modules\_Ext\Bases\GridItemPickerDialog.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportPanelBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\Sergen\SergenPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\AutoCompleteEditor.ts" />
-    <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPickerEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\ColorEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\DateTimePickerEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\EditorDialogBase.ts" />
@@ -2266,7 +2266,7 @@
     <Compile Include="Modules\Common\Reporting\GridExport\CommonReportRequest.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\DynamicDataReport.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ExcelReportGenerator.cs" />
-    <Compile Include="Modules\_Ext\Editors\GridItemPickerEditorAttribute.cs" />
+    <Compile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerEditorAttribute.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ReportGenerator.cs" />
