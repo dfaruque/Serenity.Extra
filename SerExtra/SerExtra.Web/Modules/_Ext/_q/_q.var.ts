@@ -1,7 +1,7 @@
 ﻿
 var isPageRefreshRequired: boolean;
 //const nameof = <T>(name: keyof T) => name;
-const nameofFactory = <T>() => (name: keyof T) => name;
+//const nameofFactory = <T>() => (name: keyof T) => name;
 //usage const nameof = nameofFactory<Edoc.RevenueReportModel>();
 
 namespace q {
