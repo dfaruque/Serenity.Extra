@@ -20,7 +20,6 @@ namespace _Ext {
 
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
-            this.options = options;
             this.slickContainer.fadeTo(0, 0);
         }
 

@@ -10,8 +10,8 @@ namespace {{RootNamespace}}{{DotModule}} {
         protected getLocalTextPrefix() { return {{RowClassName}}.localTextPrefix; }
         protected getService() { return {{ClassName}}Service.baseUrl; }
 
-        constructor(container: JQuery) {
-            super(container);
+        constructor(container: JQuery, options) {
+            super(container, options);
         }
     }
 }

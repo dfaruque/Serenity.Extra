@@ -9,6 +9,7 @@
         protected getService() { return SupplierService.baseUrl; }
 
         constructor(container: JQuery, options) {
+            options.SomeProp = 15;
             super(container, options);
         }
     }
