@@ -8,8 +8,8 @@
         protected getLocalTextPrefix() { return SupplierRow.localTextPrefix; }
         protected getService() { return SupplierService.baseUrl; }
 
-        constructor(container: JQuery) {
-            super(container);
+        constructor(container: JQuery, options) {
+            super(container, options);
         }
     }
 }

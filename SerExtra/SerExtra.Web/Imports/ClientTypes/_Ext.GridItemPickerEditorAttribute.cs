@@ -22,6 +22,12 @@ namespace _Ext
             set { SetOption("gridType", value); }
         }
 
+        public Boolean Multiple
+        {
+            get { return GetOption<Boolean>("multiple"); }
+            set { SetOption("multiple", value); }
+        }
+
         public String NameFieldInGridRow
         {
             get { return GetOption<String>("nameFieldInGridRow"); }

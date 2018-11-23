@@ -22,7 +22,7 @@
             setTimeout(() => {
                 this.element.find('.btn').click(e => {
                     var gridType = Q.typeByFullName(options.gridType);
-                    var pickerDialog = new _Ext.GridItemPickerDialog(gridType);
+                    var pickerDialog = new _Ext.GridItemPickerDialog(gridType, options);
 
                     pickerDialog.onSuccess = (selectedItems: any[]) => {
                         this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys()[0];
@@ -61,5 +61,8 @@
 
         rowType: string;
         nameFieldInGridRow: string;
+
+        multiple: boolean;
+
     }
 }

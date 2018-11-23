@@ -16,9 +16,11 @@ namespace _Ext {
         public autoColumnSizePlugin;
 
         public rowSelection = new Serenity.GridRowSelectionMixin(this);
+        public pickerDialog: GridItemPickerDialog;
 
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
+            this.options = options;
             this.slickContainer.fadeTo(0, 0);
         }
 
@@ -299,11 +301,31 @@ namespace _Ext {
                 });
             }
 
-            if (extOptions.ShowRowSelectionCheckboxColumn == true
-                || this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
+            if (extOptions.ShowRowSelectionCheckboxColumn == true) {
                 let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
                 rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
                 columns.unshift(rowSelectionCol);
+            }
+
+            if (this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
+
+                if ((this.options as any).multiple == true) {
+                    let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+                    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+                    columns.unshift(rowSelectionCol);
+                } else {
+                    columns.unshift({
+                        field: 'row-selection',
+                        name: '',
+                        cssClass: 'inline-actions-column',
+                        width: 66,
+                        minWidth: 66,
+                        maxWidth: 66,
+                        format: ctx => '<a class="inline-actions select-row"><i class="select-row fa fa-check"></i> Select</a>'
+                    });
+
+                }
+
             }
 
             return columns;
@@ -500,6 +522,11 @@ namespace _Ext {
             else if (target.hasClass('view-details')) {
                 this.editItem(recordId);
             }
+            else if (target.hasClass('select-row')) { 
+                this.rowSelection.setSelectedKeys([recordId]);
+                this.pickerDialog.onSuccess(this.selectedItems);
+                this.pickerDialog.dialogClose();
+            }
         }
 
         protected resetRowNumber() {
@@ -557,7 +584,7 @@ namespace _Ext {
         }
 
         get selectedItems() {
-            return this.rowSelection.getSelectedAsInt64().map(m => {
+            return this.rowSelection.getSelectedKeys().map(m => {
                 return this.view.getItemById(m)
             })
         }
