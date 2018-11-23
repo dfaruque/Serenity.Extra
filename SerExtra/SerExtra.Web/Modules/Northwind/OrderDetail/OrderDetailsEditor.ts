@@ -58,8 +58,7 @@ namespace SerExtra.Northwind {
                 title: "Pick Products",
                 cssClass: "add-button",
                 onClick: () => {
-                    //var pickerDialog = new ProductPickerDialog();
-                    var pickerDialog = new _Ext.GridItemPickerDialog(ProductGrid);
+                    var pickerDialog = new _Ext.GridItemPickerDialog({ gridType: ProductGrid, multiple: true });
 
                     pickerDialog.onSuccess = (selectedItems: any[]) => {
                         let selectedItems2 = selectedItems.filter(t => { return !Q.any(this.view.getItems(), n => n.ProductID == t.ProductID) });

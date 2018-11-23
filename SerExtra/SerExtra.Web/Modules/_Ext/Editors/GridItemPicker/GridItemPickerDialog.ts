@@ -4,7 +4,7 @@
     export class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPickerEditorOptions> {
         getTemplate() {
             return `<div id="~_RowSelectionCheckGrid" 
-                class="RowSelectionCheckGrid ${this.options.multiple == true ? 'multi-select':'single-select'}" 
+                class="RowSelectionCheckGrid ${this.options.multiple == true ? 'multi-select' : 'single-select'}" 
                 style = "margin: 15px 15px 0 15px;" >
             </div>`
         }
@@ -12,8 +12,14 @@
         checkGrid: GridBase<any, GridItemPickerEditorOptions>;
         get selectedItems() { return this.checkGrid.selectedItems }
 
-        constructor(gridType, options: GridItemPickerEditorOptions) {
+        constructor(options: GridItemPickerEditorOptions) {
             super(options);
+
+            var gridType = options.gridType;
+
+            if (!gridType.prototype)
+                gridType = Q.typeByFullName(options.gridType);
+
 
             this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
 

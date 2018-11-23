@@ -21,12 +21,11 @@
 
             setTimeout(() => {
                 this.element.find('.btn').click(e => {
-                    var gridType = Q.typeByFullName(options.gridType);
-                    var pickerDialog = new _Ext.GridItemPickerDialog(gridType, options);
+                    var pickerDialog = new _Ext.GridItemPickerDialog(options);
 
                     pickerDialog.onSuccess = (selectedItems: any[]) => {
-                        this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys()[0];
-                        this.text = selectedItems[0][options.nameFieldInGridRow]
+                        this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
+                        this.text = selectedItems.map(m => m[options.nameFieldInGridRow]).join(', ');
                     }
                     pickerDialog.dialogOpen();
                 });
@@ -56,11 +55,11 @@
     }
 
     export interface GridItemPickerEditorOptions {
-        gridType: string;
-        nameFieldInThisRow: string;
+        gridType: any;
+        nameFieldInThisRow?: string;
 
-        rowType: string;
-        nameFieldInGridRow: string;
+        rowType?: string;
+        nameFieldInGridRow?: string;
 
         multiple: boolean;
 

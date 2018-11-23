@@ -307,6 +307,11 @@ namespace _Ext {
             }
 
             if (this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
+                let options = (this.options as any) as GridItemPickerEditorOptions;
+                if (!options.multiple && !options.gridType)
+                {
+                    Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
+                }
 
                 if ((this.options as any).multiple == true) {
                     let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
@@ -461,7 +466,7 @@ namespace _Ext {
                 opt.forceFitColumns = true;
             }
 
-            opt.enableTextSelectionOnCells = true;
+            //opt.enableTextSelectionOnCells = true;
             opt.enableCellNavigation = true;
             opt.asyncEditorLoading = false;
             opt.autoEdit = true;
