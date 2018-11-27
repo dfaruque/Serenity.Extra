@@ -13,7 +13,7 @@
 
         private pendingChanges: Q.Dictionary<any> = {};
 
-        constructor(container: JQuery, options) {
+        constructor(container: JQuery, options?) {
             super(container, options);
 
             this.slickContainer.on('change', '.edit:input', (e) => this.inputsChange(e));

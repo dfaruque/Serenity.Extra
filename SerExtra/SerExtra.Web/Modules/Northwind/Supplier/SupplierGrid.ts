@@ -8,7 +8,7 @@
         protected getLocalTextPrefix() { return SupplierRow.localTextPrefix; }
         protected getService() { return SupplierService.baseUrl; }
 
-        constructor(container: JQuery, options) {
+        constructor(container: JQuery, options?) {
             options.SomeProp = 15;
             super(container, options);
         }
