@@ -2733,7 +2733,7 @@
   <Target Name="CompileTSC" AfterTargets="AfterBuild" Inputs="@(CompileTSCInputs)" Outputs="Scripts\site\SerExtra.Web.js">
     <Message Text="Executing TypeScript compiler..." Importance="high">
     </Message>
-    <Exec Command="&quot;$(TscToolPath.Replace('build\\..\tools\', 'tools\'))\tsc&quot; -p ./tsconfig.json" ContinueOnError="true" />
+    <Exec Command="&quot;$(TscToolPath.Replace('build\\..\tools\', 'tools\'))\tsc&quot; -p ./tsconfig.json" ContinueOnError="false" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
