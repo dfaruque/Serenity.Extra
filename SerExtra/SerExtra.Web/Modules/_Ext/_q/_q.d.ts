@@ -43,6 +43,7 @@ interface ExtDialogOptions {
     HideCategoyLinksBar: boolean,
     PendingChangesConfirmation: boolean,
     ShowCloseButtonInToolbar: boolean,
+    ShowSaveAndNewButtonInToolbar: boolean,
     ShowRefreshButtonInToolbar: boolean,
     ShowChangeLogButtonInToolbar: boolean,
     ShowReplaceRowButtonInToolbar: boolean

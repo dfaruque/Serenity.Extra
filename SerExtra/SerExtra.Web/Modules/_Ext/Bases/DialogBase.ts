@@ -57,6 +57,7 @@
                 this.deleteButton.toggleClass('disabled', this.isReadOnly);
                 this.cloneButton.toggleClass('disabled', this.isReadOnly);
                 this.undeleteButton.toggleClass('disabled', this.isReadOnly);
+                this.toolbar.findButton('btn-save-and-close').addClass('disabled');
                 this.toolbar.findButton('btn-replace-row').addClass('disabled');
 
                 // remove required asterisk (*)
@@ -75,10 +76,23 @@
             let buttons = super.getToolbarButtons();
             let extOptions = this.get_ExtDialogOptions();
 
+            if (extOptions.ShowSaveAndNewButtonInToolbar == true)
+                buttons.push({
+                    title: 'Save & New',
+                    icon: 'fa fa-save',
+                    cssClass: 'btn-save-and-close',
+                    onClick: () => {
+                        this.save(response => {
+                            this.loadEntity({} as any);
+                        });
+                    }
+                });
+
             if (extOptions.ShowCloseButtonInToolbar == true)
                 buttons.push({
                     title: 'Close',
                     icon: 'fa fa-close',
+                    cssClass: 'btn-close',
                     onClick: () => {
                         this.dialogClose();
                     }
