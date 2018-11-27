@@ -28,11 +28,13 @@
             @foreach (var field in TableComparisonInfo.FieldComparisonInfos.FindAll(f => f.HasIssue))
             {
                 <div>
-                    @field.Name
+                    <b>@field.Name</b>
+                    field in Database it is <b> @(field.DBField.IsNullable == true ? "NULLABLE " : "NOT NULLABLE") @field.DBField.DataType.ToUpper()</b>
+                    But in Row it is <b>@(field.RowField.Flags.HasFlag(Serenity.Data.FieldFlags.NotNull) == true ? "[NotNull]" : "Nullable") @field.RowField.Type</b>
 
                     @foreach (var issue in field.Issues)
                     {
-                        <span class="label label-warning">@issue.GetEnumDescription()</span>
+                        <span class="label label-@issue.GetCssClass("default")">@issue.GetEnumDescription()</span>
                     }
                 </div>
             }

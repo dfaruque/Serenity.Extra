@@ -31,16 +31,16 @@ public static class EnumUtil
             return value.ToString();
     }
 
-    public static string GetCssClass(this Enum value)
+    public static string GetCssClass(this Enum value, string defaultClass = "")
     {
         if (value == null)
-            return "";
+            return defaultClass;
 
         FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
 
         var attribute = (CssClassAttribute)fieldInfo.GetCustomAttribute(typeof(CssClassAttribute));
 
-        return attribute?.CssClass ?? "";
+        return attribute?.CssClass ?? defaultClass;
     }
 
     public static string GetColumnName(this Enum value)

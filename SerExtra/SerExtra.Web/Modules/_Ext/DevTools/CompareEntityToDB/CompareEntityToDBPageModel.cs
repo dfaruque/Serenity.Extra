@@ -5,6 +5,7 @@ using Serenity.Data.Mapping;
 using Serenity.Web;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -169,9 +170,13 @@ namespace _Ext.DevTools.Model
 
     public enum FieldComparisonIssue
     {
+        [Description("DataType"), CssClass("danger")]
         DataTypeMismatch = 1,
+        [Description("Nullable"), CssClass("warning")]
         NullableMismatch = 2,
+        [Description("SizeType"), CssClass("danger")]
         SizeMismatch = 3,
+        [Description("Not Found In DB"), CssClass("danger")]
         NotFoundInDB = 4
     }
 }
