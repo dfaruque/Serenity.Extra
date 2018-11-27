@@ -20,9 +20,11 @@
             if (!gridType.prototype)
                 gridType = Q.typeByFullName(options.gridType);
 
-
-            this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
-
+            try {
+                this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
+            } catch (ex) {
+                Q.notifyError('Could not intialize ' + options.gridType);
+            }
             this.dialogTitle = "Select " + this.checkGrid.getTitle();
             this.checkGrid.setTitle(null);
             this.checkGrid.pickerDialog = this;
