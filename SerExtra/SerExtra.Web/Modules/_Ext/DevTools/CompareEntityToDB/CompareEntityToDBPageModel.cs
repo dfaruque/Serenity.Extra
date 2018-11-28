@@ -66,7 +66,20 @@ namespace _Ext.DevTools.Model
 
                             }
                         }
+                        //query test
+                        try
+                        {
+                            var query = new SqlQuery()
+                                .From(rowFields)
+                                .SelectTableFields(row)
+                                .SelectForeignFields(row)
+                                .Take(1);
+
+                            connection.Query(query);
+                        }
+                        catch (Exception ex) { TableComparisonInfo.Issues += " Error while executing query: " + ex.Message; }
                     }
+
 
                 }
 
@@ -126,6 +139,29 @@ namespace _Ext.DevTools.Model
         public string Issues { get; set; } = String.Empty;
 
         public List<FieldComparisonInfo> FieldComparisonInfos { get; set; } = new List<FieldComparisonInfo>();
+
+        public string CssClass
+        {
+            get
+            {
+                if (Issues.Length > 0) return "danger";
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "danger"))) return "danger";
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "warning"))) return "warning";
+                else return "default";
+            }
+        }
+
+        public int SortOrder
+        {
+            get
+            {
+                if (Issues.Length > 0) return 1;
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "danger"))) return 2;
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "warning"))) return 3;
+                else return 4;
+            }
+        }
+
 
     }
 

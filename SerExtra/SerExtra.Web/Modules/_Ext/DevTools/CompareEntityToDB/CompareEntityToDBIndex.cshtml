@@ -7,36 +7,51 @@
 
 }
 
-@section ContentHeader {
-    <h1>Compare Entity To DB<small></small></h1>
-}
+<div class="panel panel-primary">
+    <div class="panel-heading"><h4>Compare Entity To DB <small style="color:white">Summery</small> </h4></div>
+    <div class="panel-body">
+        <h4>Total Rows/Entities: @Model.TableComparisonInfos.Count</h4>
 
-<div class="row">
-    <div class="col-md-12">
-        Total Entities/Rows: @Model.TableComparisonInfos.Count
-        <br />
-        Contains Issues in @Model.TableComparisonInfos.Count(c => c.HasIssue)
+        <h4>Contains Issues in <strong> @Model.TableComparisonInfos.Count(c => c.HasIssue) </strong> Rows/Entities</h4>
     </div>
 </div>
-@foreach (var TableComparisonInfo in Model.TableComparisonInfos.FindAll(f => f.HasIssue))
+<hr />
+@foreach (var TableComparisonInfo in Model.TableComparisonInfos.FindAll(f => f.HasIssue).OrderBy(o => o.SortOrder))
 {
-    <hr />
-    <div class="row">
-        <div class="col-md-12">
-            <h4> @TableComparisonInfo.RowClassName <small>@TableComparisonInfo.TableName</small></h4>
-            @TableComparisonInfo.Issues
-            @foreach (var field in TableComparisonInfo.FieldComparisonInfos.FindAll(f => f.HasIssue))
+    <div class="panel panel-@TableComparisonInfo.CssClass">
+        <div class="panel-heading">
+            <h4> @TableComparisonInfo.RowClassName <small>Table Name: @TableComparisonInfo.TableName</small></h4>
+        </div>
+        <div class="panel-body">
+            @if (TableComparisonInfo.Issues.Length > 0)
             {
-                <div>
-                    <b>@field.Name</b>
-                    field in Database it is <b> @(field.DBField.IsNullable == true ? "NULLABLE " : "NOT NULLABLE") @field.DBField.DataType.ToUpper()</b>
-                    But in Row it is <b>@(field.RowField.Flags.HasFlag(Serenity.Data.FieldFlags.NotNull) == true ? "[NotNull]" : "Nullable") @field.RowField.Type</b>
+                <div class="alert alert-danger">@TableComparisonInfo.Issues</div>
+            }
 
-                    @foreach (var issue in field.Issues)
+            @if (TableComparisonInfo.FieldComparisonInfos.Exists(f => f.HasIssue))
+            {
+                <table class="table table-striped">
+                    <tr>
+                        <th>Field Name</th>
+                        <th>In Database</th>
+                        <th>In Row/Entity</th>
+                        <th>Issues</th>
+                    </tr>
+                    @foreach (var field in TableComparisonInfo.FieldComparisonInfos.FindAll(f => f.HasIssue))
                     {
-                        <span class="label label-@issue.GetCssClass("default")">@issue.GetEnumDescription()</span>
+                        <tr>
+                            <td>@field.Name</td>
+                            <td> @(field.DBField.IsNullable == true ? "NULLABLE " : "NOT NULLABLE") @field.DBField.DataType.ToUpper()</td>
+                            <td>@(field.RowField.Flags.HasFlag(Serenity.Data.FieldFlags.NotNull) == true ? "[NotNull]" : "Nullable") @field.RowField.Type</td>
+                            <td>
+                                @foreach (var issue in field.Issues)
+                                {
+                                    <span class="label label-@issue.GetCssClass("default")">@issue.GetEnumDescription()</span>
+                                }
+                            </td>
+                        </tr>
                     }
-                </div>
+                </table>
             }
         </div>
     </div>
