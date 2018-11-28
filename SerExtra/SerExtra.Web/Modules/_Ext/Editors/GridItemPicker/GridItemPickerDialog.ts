@@ -22,12 +22,15 @@
 
             try {
                 this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
+                if (options.preSelectedKeys)
+                    this.checkGrid.selectedKeys = options.preSelectedKeys;
+
+                this.dialogTitle = "Select " + this.checkGrid.getTitle();
+                this.checkGrid.setTitle(null);
+                this.checkGrid.pickerDialog = this;
             } catch (ex) {
                 Q.notifyError('Could not intialize ' + options.gridType);
             }
-            this.dialogTitle = "Select " + this.checkGrid.getTitle();
-            this.checkGrid.setTitle(null);
-            this.checkGrid.pickerDialog = this;
         }
 
         onSuccess = (selectedItems) => { }

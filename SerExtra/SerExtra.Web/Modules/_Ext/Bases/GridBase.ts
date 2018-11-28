@@ -313,7 +313,7 @@ namespace _Ext {
                     Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
                 }
 
-                if ((this.options as any).multiple == true) {
+                if (options.multiple == true) {
                     let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
                     rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
                     columns.unshift(rowSelectionCol);
@@ -592,7 +592,14 @@ namespace _Ext {
                 return this.view.getItemById(m)
             })
         }
+        set selectedKeys(value: any[]) {
+            let options = (this.options as any) as GridItemPickerEditorOptions;
+            if (options.multiple == true) {
+                this.rowSelection.setSelectedKeys(value);
+            } else {
 
+            }
+        }
 
     }
 }

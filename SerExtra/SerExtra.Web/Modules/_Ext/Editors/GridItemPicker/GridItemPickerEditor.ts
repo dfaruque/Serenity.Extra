@@ -62,6 +62,6 @@
         nameFieldInGridRow?: string;
 
         multiple: boolean;
-
+        preSelectedKeys?: any[]
     }
 }
