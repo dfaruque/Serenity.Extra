@@ -16,9 +16,9 @@ namespace _Ext
         {
         }
 
-        public String GridType
+        public object GridType
         {
-            get { return GetOption<String>("gridType"); }
+            get { return GetOption<object>("gridType"); }
             set { SetOption("gridType", value); }
         }
 
@@ -38,6 +38,12 @@ namespace _Ext
         {
             get { return GetOption<String>("nameFieldInThisRow"); }
             set { SetOption("nameFieldInThisRow", value); }
+        }
+
+        public object PreSelectedKeys
+        {
+            get { return GetOption<object>("preSelectedKeys"); }
+            set { SetOption("preSelectedKeys", value); }
         }
 
         public String RowType
