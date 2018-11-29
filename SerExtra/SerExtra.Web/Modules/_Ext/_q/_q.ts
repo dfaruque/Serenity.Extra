@@ -3,6 +3,10 @@
         return document.body.className.indexOf('cosmic') >= 0;
     }
 
+    export function getSelectedLanguage(): string {
+        return (document.getElementById('LanguageSelect') as HTMLSelectElement).value;
+    }
+
     export function formatDecimal(value) {
         let title = Serenity.NumberFormatter.format(value, '#,##0.00');
         return title;
