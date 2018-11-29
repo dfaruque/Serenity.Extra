@@ -2275,6 +2275,7 @@
     <Compile Include="Modules\_Ext\Utils\DbConnectionExtentions.cs" />
     <Compile Include="Modules\_Ext\Utils\EnumHelper.cs" />
     <Compile Include="Modules\_Ext\Utils\Enums.cs" />
+    <Compile Include="Modules\_Ext\Utils\ExcelWorksheetHelper.cs" />
     <Compile Include="Modules\_Ext\Utils\NumberToWords.cs" />
     <Compile Include="Modules\_Ext\Utils\ObjectExtentions.cs" />
     <Compile Include="Modules\_Ext\Utils\Q.cs" />
