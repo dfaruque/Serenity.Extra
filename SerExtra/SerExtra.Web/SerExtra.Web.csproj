@@ -1001,6 +1001,7 @@
     <Content Include="Fonts\fontawesome-webfont.woff" />
     <Content Include="Fonts\fontawesome-webfont.ttf" />
     <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Modules\_Ext\DevTools\CodeSnippets\CodeSnippetsIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1173,6 +1174,7 @@
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\GridWithAllOverridableMethods.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportPanelBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
@@ -2253,6 +2255,7 @@
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRow.cs" />
     <Compile Include="Modules\_Ext\Behaviours\AuditLogBehaviour.cs" />
     <Compile Include="Modules\_Ext\Behaviours\MultiScopeBehaviour.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CodeSnippets\CodeSnippetsPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />

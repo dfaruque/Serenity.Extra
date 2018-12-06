@@ -13,6 +13,11 @@ namespace MVC
 
             public static class DevTools
             {
+                public static class CodeSnippets
+                {
+                    public const string CodeSnippetsIndex = "~/Modules/_Ext/DevTools/CodeSnippets/CodeSnippetsIndex.cshtml";
+                }
+
                 public static class CompareEntityToDB
                 {
                     public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
