@@ -1,10 +1,12 @@
 ﻿namespace SerExtra.ExtraSamples {
 
     export class Profile extends React.Component<any> {
-        
+
         render(): React.ReactNode {
+            var welcomeStyle: React.CSSProperties = { color: 'red' };
             return (
-                <div>Welcome to react
+                <div style={welcomeStyle}>
+                    Welcome to react
                 </div>
             );
         }
