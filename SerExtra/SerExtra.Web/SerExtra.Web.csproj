@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
     <Use64BitIISExpress />
     <NuGetPackageImportStamp>
@@ -47,6 +47,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile>Scripts\site\SerExtra.Web.js</TypeScriptOutFile>
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -1003,6 +1016,10 @@
     <Content Include="Fonts\fontawesome-webfont.eot" />
     <Content Include="Modules\_Ext\DevTools\CodeSnippets\CodeSnippetsIndex.cshtml" />
     <Content Include="Modules\ExtraSamples\MainGridMultiEditing\Index.cshtml" />
+    <Content Include="Modules\ExtraSamples\ReactSamplePage\Index.cshtml" />
+    <Content Include="node_modules\%40types\react-dom\LICENSE" />
+    <Content Include="node_modules\%40types\react-dom\package.json" />
+    <Content Include="node_modules\%40types\react-dom\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1174,6 +1191,7 @@
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditPanel.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditStore.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditWidgetBase.ts" />
+    <TypeScriptCompile Include="Modules\ExtraSamples\ReactSamplePage\Profile.tsx" />
     <TypeScriptCompile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReportPanel.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.ts" />
     <TypeScriptCompile Include="Modules\_Ext\AuditLogViewer\AuditLogViewerDialog.ts" />
@@ -1221,6 +1239,10 @@
     <TypeScriptCompile Include="node_modules\%40types\jquery.cookie\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery.validation\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jspdf\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react-dom\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react-dom\node-stream\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react-dom\server\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\react-dom\test-utils\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\react\global.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\react\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\sortablejs\index.d.ts" />
@@ -2727,7 +2749,7 @@
     <NpmPath Condition="'$(NpmCmd)' == '' AND Exists('$(PROGRAMFILES)nodejs\npm.cmd')">$(PROGRAMFILES)nodejs\</NpmPath>
   </PropertyGroup>
   <Target Name="CreateInputsOutputs" BeforeTargets="BeforeBuild">
-    <CreateItem Include="Modules\**\*.ts;Imports\**\*.ts">
+    <CreateItem Include="Modules\**\*.ts;Modules\**\*.tsx;Imports\**\*.ts">
       <Output TaskParameter="Include" ItemName="CompileTSCInputs" />
     </CreateItem>
     <CreateItem Include="Content\**\*.less">

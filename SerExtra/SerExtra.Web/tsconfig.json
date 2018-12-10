@@ -6,6 +6,7 @@
     "declaration": true,
     "emitBOM": true,
     "noEmitHelpers": true,
+    "jsx": "react",
     "sourceMap": true,
     "outFile": "Scripts/site/SerExtra.Web.js",
     "target": "es5",
