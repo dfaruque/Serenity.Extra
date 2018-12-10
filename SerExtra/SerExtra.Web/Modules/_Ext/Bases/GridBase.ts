@@ -466,7 +466,8 @@ namespace _Ext {
                 opt.forceFitColumns = true;
             }
 
-            //opt.enableTextSelectionOnCells = true;
+            opt.enableTextSelectionOnCells = true;
+
             opt.enableCellNavigation = true;
             opt.asyncEditorLoading = false;
             opt.autoEdit = true;
