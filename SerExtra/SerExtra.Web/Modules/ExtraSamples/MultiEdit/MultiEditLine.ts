@@ -1,4 +1,4 @@
-﻿declare namespace Serenity {
+﻿declare namespace _Ext {
 
     interface MultiEditLine {
         field?: string;

@@ -1,9 +1,9 @@
-﻿namespace Serenity {
+﻿namespace _Ext {
 
-    @Decorators.registerClass('MultiEditStore')
+    @Serenity.Decorators.registerClass('MultiEditStore')
     export class MultiEditStore {
 
-        constructor(fields: PropertyItem[]) {
+        constructor(fields: Serenity.PropertyItem[]) {
 
             this.items = [];
 
@@ -113,7 +113,7 @@
                 }
 
                 if (displayText.length > 0) {
-                    displayText += ' ' + Q.text('Controls.MultiEditPanel.' +
+                    displayText += ' ' + Q.text('Controls.FilterPanel.' +
                         (line.isOr ? 'Or' : 'And')) + ' ';
                 }
 
@@ -134,15 +134,15 @@
 
         private changed: any;
         private displayText: string;
-        private fields: PropertyItem[];
-        private fieldByName: Q.Dictionary<PropertyItem>
+        private fields: Serenity.PropertyItem[];
+        private fieldByName: Q.Dictionary<Serenity.PropertyItem>
         private items: MultiEditLine[];
 
-        get_fields(): PropertyItem[] {
+        get_fields(): Serenity.PropertyItem[] {
             return this.fields;
         }
 
-        get_fieldByName(): Q.Dictionary<PropertyItem> {
+        get_fieldByName(): Q.Dictionary<Serenity.PropertyItem> {
             return this.fieldByName;
         }
 

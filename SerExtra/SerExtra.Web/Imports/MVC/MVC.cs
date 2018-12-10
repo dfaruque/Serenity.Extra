@@ -333,6 +333,11 @@ namespace MVC
                 public const string Index = "~/Modules/ExtraSamples/MainGridInlineEditing/Index.cshtml";
             }
 
+            public static class MainGridMultiEditing
+            {
+                public const string Index = "~/Modules/ExtraSamples/MainGridMultiEditing/Index.cshtml";
+            }
+
             public static class Reports
             {
                 public static class OrdersByCustomer

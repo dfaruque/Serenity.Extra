@@ -1002,6 +1002,7 @@
     <Content Include="Fonts\fontawesome-webfont.ttf" />
     <Content Include="Fonts\fontawesome-webfont.eot" />
     <Content Include="Modules\_Ext\DevTools\CodeSnippets\CodeSnippetsIndex.cshtml" />
+    <Content Include="Modules\ExtraSamples\MainGridMultiEditing\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1165,12 +1166,11 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\_references.ts" />
+    <TypeScriptCompile Include="Modules\ExtraSamples\MainGridMultiEditing\MainGridMultiEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditDialog.ts" />
-    <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditDisplayBar.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditing.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditLine.ts" />
-    <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditOperator.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditPanel.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditStore.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditWidgetBase.ts" />
@@ -2093,6 +2093,7 @@
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesRepository.cs" />
     <Compile Include="Modules\ExtraSamples\ExtraSamplesPage.cs" />
     <Compile Include="Modules\ExtraSamples\ExtraSamplesNavigation.cs" />
+    <Compile Include="Modules\ExtraSamples\MainGridMultiEditing\MainGridMultiEditingColumns.cs" />
     <Compile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingColumns.cs" />
     <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerPage.cs" />
     <Compile Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cs" />

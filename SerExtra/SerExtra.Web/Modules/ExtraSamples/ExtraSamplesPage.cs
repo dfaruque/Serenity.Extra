@@ -12,5 +12,10 @@ namespace SerExtra.ExtraSamples.Pages
             return View(Views.ExtraSamples.MainGridInlineEditing.Index);
         }
 
+        public ActionResult MainGridMultiEditing()
+        {
+            return View(Views.ExtraSamples.MainGridMultiEditing.Index);
+        }
+
     }
 }

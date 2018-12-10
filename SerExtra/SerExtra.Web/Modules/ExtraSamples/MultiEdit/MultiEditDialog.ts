@@ -1,7 +1,7 @@
-﻿namespace Serenity {
+﻿namespace _Ext {
 
-    @Decorators.registerClass('Serenity.MultiEditDialog')
-    export class MultiEditDialog extends TemplatedDialog<any> {
+    @Serenity.Decorators.registerClass('Serenity.MultiEditDialog')
+    export class MultiEditDialog extends Serenity.TemplatedDialog<any> {
 
         private filterPanel: MultiEditPanel;
 
@@ -10,7 +10,6 @@
 
             this.filterPanel = new MultiEditPanel(this.byId('MultiEditPanel'));
             this.filterPanel.set_showInitialLine(true);
-            this.filterPanel.set_showSearchButton(false);
             this.filterPanel.set_updateStoreOnReset(false);
         }
 
@@ -29,9 +28,8 @@
                 {
                     text: Q.text('Dialogs.OkButton'),
                     click: () => {
-                        this.filterPanel.search();
                         if (this.filterPanel.get_hasErrors()) {
-                            Q.notifyError(Q.text('Controls.MultiEditPanel.FixErrorsMessage'), '', null);
+                            Q.notifyError(Q.text('Controls.FilterPanel.FixErrorsMessage'), '', null);
                             return;
                         }
 
@@ -44,7 +42,7 @@
                 }
             ];
 
-            opt.title = Q.text('Controls.MultiEditPanel.DialogTitle');
+            opt.title = Q.text('Controls.FilterPanel.DialogTitle');
 
             return opt;
         }

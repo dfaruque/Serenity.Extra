@@ -1,8 +1,8 @@
-﻿namespace Serenity {
+﻿namespace _Ext {
 
-    @Decorators.registerClass('Serenity.MultiEditWidgetBase')
-    export class MultiEditWidgetBase<TOptions> extends TemplatedWidget<TOptions> {
-        private store: Serenity.MultiEditStore;
+    @Serenity.Decorators.registerClass('Serenity.MultiEditWidgetBase')
+    export class MultiEditWidgetBase<TOptions> extends Serenity.TemplatedWidget<TOptions> {
+        private store: _Ext.MultiEditStore; 
 
         private onMultiEditStoreChanged: () => void;
 

@@ -1,19 +1,19 @@
-﻿namespace Serenity {
+﻿namespace _Ext {
     export interface IMultiEditing {
         createEditor(): void;
         getCriteria(): CriteriaWithText;
-        getOperators(): MultiEditOperator[];
-        loadState(state: any): void;
+        getOperators(): Serenity.FilterOperator[];
+        loadState(state: any): void; 
         saveState(): any;
-        get_field(): PropertyItem;
-        set_field(value: PropertyItem): void;
+        get_field(): Serenity.PropertyItem;
+        set_field(value: Serenity.PropertyItem): void;
         get_container(): JQuery;
         set_container(value: JQuery): void;
-        get_operator(): MultiEditOperator;
-        set_operator(value: MultiEditOperator): void;
+        get_operator(): Serenity.FilterOperator;
+        set_operator(value: Serenity.FilterOperator): void;
     }
 
-    @Decorators.registerInterface('Serenity.IMultiEditing')
+    @Serenity.Decorators.registerInterface('Serenity.IMultiEditing')
     export class IMultiEditing {
     }
 
@@ -22,19 +22,19 @@
         displayText?: string;
     }
 
-    import Operators = MultiEditOperators;
-    import Option = Decorators.option
+    import Operators = Serenity.FilterOperators;
+    import Option = Serenity.Decorators.option
 
-    @Serenity.Decorators.registerClass('Serenity.BaseMultiEditing', [IMultiEditing, IQuickFiltering])
-    export abstract class BaseMultiEditing implements IMultiEditing, IQuickFiltering {
+    @Serenity.Decorators.registerClass('Serenity.BaseMultiEditing', [IMultiEditing, Serenity.IQuickFiltering])
+    export abstract class BaseMultiEditing implements IMultiEditing, Serenity.IQuickFiltering {
 
-        private field: PropertyItem;
+        private field: Serenity.PropertyItem;
 
         public get_field() {
             return this.field;
         }
 
-        set_field(value: PropertyItem) {
+        set_field(value: Serenity.PropertyItem) {
             this.field = value;
         }
 
@@ -48,34 +48,34 @@
             this.container = value;
         }
 
-        private operator: MultiEditOperator;
+        private operator: Serenity.FilterOperator;
 
         get_operator() {
             return this.operator;
         }
 
-        set_operator(value: MultiEditOperator) {
+        set_operator(value: Serenity.FilterOperator) {
             this.operator = value;
         }
 
-        abstract getOperators(): MultiEditOperator[];
+        abstract getOperators(): Serenity.FilterOperator[];
 
-        protected appendNullableOperators(list: MultiEditOperator[]) {
+        protected appendNullableOperators(list: Serenity.FilterOperator[]) {
             if (!this.isNullable()) {
                 return list;
             }
-            list.push({ key: Serenity.MultiEditOperators.isNotNull });
-            list.push({ key: Serenity.MultiEditOperators.isNull });
+            list.push({ key: Serenity.FilterOperators.isNotNull });
+            list.push({ key: Serenity.FilterOperators.isNull });
             return list;
         }
 
-        protected appendComparisonOperators(list: MultiEditOperator[]) {
-            list.push({ key: Serenity.MultiEditOperators.EQ });
-            list.push({ key: Serenity.MultiEditOperators.NE });
-            list.push({ key: Serenity.MultiEditOperators.LT });
-            list.push({ key: Serenity.MultiEditOperators.LE });
-            list.push({ key: Serenity.MultiEditOperators.GT });
-            list.push({ key: Serenity.MultiEditOperators.GE });
+        protected appendComparisonOperators(list: Serenity.FilterOperator[]) {
+            list.push({ key: Serenity.FilterOperators.EQ });
+            list.push({ key: Serenity.FilterOperators.NE });
+            list.push({ key: Serenity.FilterOperators.LT });
+            list.push({ key: Serenity.FilterOperators.LE });
+            list.push({ key: Serenity.FilterOperators.GT });
+            list.push({ key: Serenity.FilterOperators.GE });
             return list;
         }
 
@@ -108,16 +108,16 @@
                 (ss as any).getTypeName((ss as any).getInstanceType(this)), this.get_operator().key));
         }
 
-        protected operatorFormat(op: MultiEditOperator) {
+        protected operatorFormat(op: Serenity.FilterOperator) {
             return Q.coalesce(op.format, Q.coalesce(Q.tryGetText(
-                'Controls.MultiEditPanel.OperatorFormats.' + op.key), op.key));
+                'Controls.FilterPanel.OperatorFormats.' + op.key), op.key));
         }
 
-        protected getTitle(field: PropertyItem) {
+        protected getTitle(field: Serenity.PropertyItem) {
             return Q.coalesce(Q.tryGetText(field.title), Q.coalesce(field.title, field.name));
         }
 
-        protected displayText(op: MultiEditOperator, values?: any[]) {
+        protected displayText(op: Serenity.FilterOperator, values?: any[]) {
             if (!values || values.length === 0) {
                 return Q.format(this.operatorFormat(op), this.getTitle(this.field));
             }
@@ -183,7 +183,7 @@
                 case 'ge': {
                     text = this.getEditorText();
                     result.displayText = this.displayText(this.get_operator(), [text]);
-                    result.criteria = [[this.getCriteriaField()], Serenity.MultiEditOperators.toCriteriaOperator[
+                    result.criteria = [[this.getCriteriaField()], Serenity.FilterOperators.toCriteriaOperator[
                         this.get_operator().key], this.getEditorValue()];
                     return result;
                 }
@@ -216,7 +216,7 @@
         }
 
         protected argumentNull() {
-            return new (ss as any).ArgumentNullException('value', Q.text('Controls.MultiEditPanel.ValueRequired'));
+            return new (ss as any).ArgumentNullException('value', Q.text('Controls.FilterPanel.ValueRequired'));
         }
 
         validateEditorValue(value: string) {
@@ -261,7 +261,7 @@
             return value;
         }
 
-        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
+        initQuickFilter(filter: Serenity.QuickFilter<Serenity.Widget<any>, any>) {
             filter.field = this.getCriteriaField();
             filter.type = Serenity.StringEditor;
             filter.title = this.getTitle(this.field);
@@ -270,26 +270,17 @@
     }
 
     function MultiEditing(name: string) {
-        return Decorators.registerClass('Serenity.' + name + 'MultiEditing')
+        return Serenity.Decorators.registerClass('Serenity.' + name + 'MultiEditing')
     }
 
     @MultiEditing('BaseEditor')
-    export abstract class BaseEditorMultiEditing<TEditor extends Widget<any>> extends BaseMultiEditing {
+    export abstract class BaseEditorMultiEditing<TEditor extends Serenity.Widget<any>> extends BaseMultiEditing {
         constructor(public editorType: any) {
             super();
         }
 
         protected useEditor() {
-            switch (this.get_operator().key) {
-                case 'eq':
-                case 'ne':
-                case 'lt':
-                case 'le':
-                case 'gt':
-                case 'ge':
-                    return true;
-            }
-            return false;
+            return true;
         }
 
         protected editor: TEditor;
@@ -363,7 +354,7 @@
             return super.getEditorValue();
         }
 
-        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
+        initQuickFilter(filter: Serenity.QuickFilter<Serenity.Widget<any>, any>) {
             super.initQuickFilter(filter);
 
             filter.type = this.editorType;
@@ -374,13 +365,13 @@
     }
 
     @MultiEditing('Date')
-    export class DateMultiEditing extends BaseEditorMultiEditing<DateEditor> {
+    export class DateMultiEditing extends BaseEditorMultiEditing<Serenity.DateEditor> {
 
         constructor() {
-            super(DateEditor)
+            super(Serenity.DateEditor)
         }
 
-        getOperators(): MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             return this.appendNullableOperators(this.appendComparisonOperators([]));
         }
     }
@@ -389,20 +380,20 @@
     export class BooleanMultiEditing extends BaseMultiEditing {
         getOperators() {
             return this.appendNullableOperators([
-                { key: Serenity.MultiEditOperators.isTrue },
-                { key: Serenity.MultiEditOperators.isFalse }
+                { key: Serenity.FilterOperators.isTrue },
+                { key: Serenity.FilterOperators.isFalse }
             ]);
         }
     }
 
     @MultiEditing('DateTime')
-    export class DateTimeMultiEditing extends BaseEditorMultiEditing<DateEditor> {
+    export class DateTimeMultiEditing extends BaseEditorMultiEditing<Serenity.DateEditor> {
 
         constructor() {
-            super(DateTimeEditor)
+            super(Serenity.DateTimeEditor)
         }
 
-        getOperators(): MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             return this.appendNullableOperators(
                 this.appendComparisonOperators([]));
         }
@@ -428,11 +419,11 @@
                         var nextValue = Q.formatDate(next, 'yyyy-MM-dd');
                         switch (this.get_operator().key) {
                             case 'eq': {
-                                result.criteria = Criteria.join([criteria, '>=', dateValue], 'and', [criteria, '<', nextValue]);
+                                result.criteria = Serenity.Criteria.join([criteria, '>=', dateValue], 'and', [criteria, '<', nextValue]);
                                 return result;
                             }
                             case 'ne': {
-                                result.criteria = Criteria.paren(Criteria.join([criteria, '<', dateValue], 'or', [criteria, '>', nextValue]));
+                                result.criteria = Serenity.Criteria.paren(Serenity.Criteria.join([criteria, '<', dateValue], 'or', [criteria, '>', nextValue]));
                                 return result;
                             }
                             case 'lt': {
@@ -462,12 +453,12 @@
     }
 
     @MultiEditing('Decimal')
-    export class DecimalMultiEditing extends BaseEditorMultiEditing<DecimalEditor> {
+    export class DecimalMultiEditing extends BaseEditorMultiEditing<Serenity.DecimalEditor> {
         constructor() {
-            super(DecimalEditor);
+            super(Serenity.DecimalEditor);
         }
 
-        getOperators(): Serenity.MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             return this.appendNullableOperators(
                 this.appendComparisonOperators([]));
         }
@@ -477,7 +468,7 @@
     export class EditorMultiEditing extends BaseEditorMultiEditing<Serenity.Widget<any>> {
 
         constructor() {
-            super(Widget)
+            super(Serenity.Widget)
         }
 
         @Option()
@@ -489,7 +480,7 @@
         @Option()
         useLike: boolean;
 
-        getOperators(): Serenity.MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             var list = [];
 
             list.push({ key: Operators.EQ });
@@ -538,7 +529,7 @@
                 var editorType = Serenity.EditorTypeRegistry.get(this.editorType);
 
                 this.editor = Serenity.Widget.create({
-                    type: editorType ,
+                    type: editorType,
                     element: e => e.appendTo(this.get_container()),
                     options: this.getEditorOptions()
                 });
@@ -553,7 +544,7 @@
             return this.useEditor();
         }
 
-        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
+        initQuickFilter(filter: Serenity.QuickFilter<Serenity.Widget<any>, any>) {
             super.initQuickFilter(filter);
 
             filter.type = Serenity.EditorTypeRegistry.get(this.editorType);
@@ -561,9 +552,9 @@
     }
 
     @MultiEditing('Enum')
-    export class EnumMultiEditing extends BaseEditorMultiEditing<EnumEditor> {
+    export class EnumMultiEditing extends BaseEditorMultiEditing<Serenity.EnumEditor> {
         constructor() {
-            super(EnumEditor);
+            super(Serenity.EnumEditor);
         }
 
         getOperators() {
@@ -573,24 +564,24 @@
     }
 
     @MultiEditing('Integer')
-    export class IntegerMultiEditing extends BaseEditorMultiEditing<IntegerEditor> {
+    export class IntegerMultiEditing extends BaseEditorMultiEditing<Serenity.IntegerEditor> {
         constructor() {
-            super(IntegerEditor);
+            super(Serenity.IntegerEditor);
         }
 
-        getOperators(): MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             return this.appendNullableOperators(this.appendComparisonOperators([]));
         }
     }
 
     @MultiEditing('Lookup')
-    export class LookupMultiEditing extends BaseEditorMultiEditing<LookupEditor> {
+    export class LookupMultiEditing extends BaseEditorMultiEditing<Serenity.LookupEditor> {
 
         constructor() {
-            super(LookupEditor);
+            super(Serenity.LookupEditor);
         }
 
-        getOperators(): MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             var ops = [{ key: Operators.EQ }, { key: Operators.NE }, { key: Operators.contains }, { key: Operators.startsWith }]
             return this.appendNullableOperators(ops);
         }
@@ -616,10 +607,10 @@
     @MultiEditing('String')
     export class StringMultiEditing extends BaseMultiEditing {
 
-        getOperators(): Serenity.MultiEditOperator[] {
+        getOperators(): Serenity.FilterOperator[] {
             var ops = [
-                { key: Operators.contains }, 
-                { key: Operators.startsWith }, 
+                { key: Operators.contains },
+                { key: Operators.startsWith },
                 { key: Operators.EQ },
                 { key: Operators.NE }
             ];
@@ -644,14 +635,14 @@
 
             if (knownTypes != null)
                 return;
-            
+
             knownTypes = {};
 
             for (var assembly of (ss as any).getAssemblies()) {
                 for (var type of (ss as any).getAssemblyTypes(assembly)) {
-                    if (!(ss as any).isAssignableFrom(Serenity.IMultiEditing, type))
+                    if (!(ss as any).isAssignableFrom(_Ext.IMultiEditing, type))
                         continue;
-                    
+
                     if ((ss as any).isGenericTypeDefinition(type))
                         continue;
 
@@ -676,18 +667,18 @@
 
         function setTypeKeysWithoutMultiEditHandlerSuffix() {
             var suffix = 'filtering';
-            
+
             for (var k of Object.keys(knownTypes)) {
                 if (!Q.endsWith(k, suffix))
                     continue;
-                
+
                 var p = k.substr(0, k.length - suffix.length);
                 if (Q.isEmptyOrNull(p))
                     continue;
 
                 if (knownTypes[p] != null)
                     continue;
-                
+
                 knownTypes[p] = knownTypes[k];
             }
         }
@@ -703,9 +694,9 @@
 
             initialize();
             var formatterType = knownTypes[key.toLowerCase()];
-            if (formatterType == null)
-                throw new ss.Exception(Q.format(
-                    "Can't find {0} filter handler type!", key));
+            //if (formatterType == null)
+            //    throw new ss.Exception(Q.format(
+            //        "Can't find {0} filter handler type!", key));
 
             return formatterType;
         }
