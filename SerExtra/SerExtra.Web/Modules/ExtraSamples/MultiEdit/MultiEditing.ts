@@ -22,19 +22,11 @@
         displayText?: string;
     }
 
-    export interface IQuickMultiEditing {
-        initQuickMultiEdit(filter: QuickMultiEdit<Widget<any>, any>): void;
-    }
-
-    @Decorators.registerInterface('Serenity.IQuickMultiEditing')
-    export class IQuickMultiEditing {
-    }
-
     import Operators = MultiEditOperators;
     import Option = Decorators.option
 
-    @Serenity.Decorators.registerClass('Serenity.BaseMultiEditing', [IMultiEditing, IQuickMultiEditing])
-    export abstract class BaseMultiEditing implements IMultiEditing, IQuickMultiEditing {
+    @Serenity.Decorators.registerClass('Serenity.BaseMultiEditing', [IMultiEditing, IQuickFiltering])
+    export abstract class BaseMultiEditing implements IMultiEditing, IQuickFiltering {
 
         private field: PropertyItem;
 
@@ -269,11 +261,11 @@
             return value;
         }
 
-        initQuickMultiEdit(filter: QuickMultiEdit<Widget<any>, any>) {
+        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
             filter.field = this.getCriteriaField();
             filter.type = Serenity.StringEditor;
             filter.title = this.getTitle(this.field);
-            filter.options = Q.deepClone({}, this.get_field().quickMultiEditParams);
+            filter.options = Q.deepClone({}, this.get_field().quickFilterParams);
         }
     }
 
@@ -371,13 +363,13 @@
             return super.getEditorValue();
         }
 
-        initQuickMultiEdit(filter: QuickMultiEdit<Widget<any>, any>) {
-            super.initQuickMultiEdit(filter);
+        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
+            super.initQuickFilter(filter);
 
             filter.type = this.editorType;
             filter.options = Q.deepClone({},
                 this.getEditorOptions(),
-                this.get_field().quickMultiEditParams);
+                this.get_field().quickFilterParams);
         }
     }
 
@@ -561,8 +553,8 @@
             return this.useEditor();
         }
 
-        initQuickMultiEdit(filter: QuickMultiEdit<Widget<any>, any>) {
-            super.initQuickMultiEdit(filter);
+        initQuickFilter(filter: QuickFilter<Widget<any>, any>) {
+            super.initQuickFilter(filter);
 
             filter.type = Serenity.EditorTypeRegistry.get(this.editorType);
         }
