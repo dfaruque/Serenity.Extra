@@ -2,7 +2,7 @@
     @Serenity.Decorators.filterable()
     export class GridSnippets extends _Ext.GridBase<AuditLogRow, any> {
         protected getColumnsKey() { return '_Ext.AuditLog'; }
-        protected getDialogType() { return AuditLogDialog; }
+        protected getDialogType() { return DialogWithAllOverridableMethods; }
         protected getIdProperty() { return AuditLogRow.idProperty; }
         protected getLocalTextPrefix() { return AuditLogRow.localTextPrefix; }
         protected getService() { return AuditLogService.baseUrl; }
@@ -24,7 +24,7 @@
             let buttons = super.getButtons();
 
             //To remove Add button
-            buttons = buttons.filter(f => f.cssClass != 'add-button');
+            //buttons = buttons.filter(f => f.cssClass != 'add-button');
 
             //To create a new button
             buttons.push({

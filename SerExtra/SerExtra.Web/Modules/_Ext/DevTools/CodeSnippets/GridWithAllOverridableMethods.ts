@@ -1,7 +1,7 @@
 ﻿namespace _Ext {
     @Serenity.Decorators.filterable()
     export class GridWithAllOverridableMethods extends _Ext.GridBase<AuditLogRow, any> {
-        protected getDialogType() { console.log('getDialogType'); return AuditLogDialog; }
+        protected getDialogType() { console.log('getDialogType'); return DialogWithAllOverridableMethods; }
 
 
 
