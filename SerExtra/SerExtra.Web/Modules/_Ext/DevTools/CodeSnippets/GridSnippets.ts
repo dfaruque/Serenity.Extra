@@ -2,7 +2,7 @@
     @Serenity.Decorators.filterable()
     export class GridSnippets extends _Ext.GridBase<AuditLogRow, any> {
         protected getColumnsKey() { return '_Ext.AuditLog'; }
-        protected getDialogType() { return DialogWithAllOverridableMethods; }
+        protected getDialogType() { return DialogSnippets; }
         protected getIdProperty() { return AuditLogRow.idProperty; }
         protected getLocalTextPrefix() { return AuditLogRow.localTextPrefix; }
         protected getService() { return AuditLogService.baseUrl; }

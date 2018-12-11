@@ -1200,6 +1200,7 @@
     <TypeScriptCompile Include="Modules\_Ext\AuditLog\AuditLogGrid.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\DialogBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\GridBase.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\DialogSnippets.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\GridSnippets.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\DialogWithAllOverridableMethods.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\GridWithAllOverridableMethods.ts" />
