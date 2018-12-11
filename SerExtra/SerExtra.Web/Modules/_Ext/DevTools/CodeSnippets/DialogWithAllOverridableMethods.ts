@@ -173,3 +173,95 @@
 // handleResponsive
 // onDialogOpen
 // arrange
+
+//dialog closing cycle-----------------
+//getSaveEntity
+//isEditMode
+//get_entityId
+// onDialogClose
+//destroy
+
+//save cycle---------------------------
+//save(callback?: (response: SaveResponse) => void
+//validateBeforeSave
+//save_submitHandler(callback: (response: SaveResponse) => void
+//getSaveOptions(callback: (response: SaveResponse) => void
+//isEditMode
+//get_entityId
+//isCloneMode
+//getSaveRequest
+//getSaveEntity
+//isEditMode
+//get_entityId
+//isCloneMode
+//get_entityId
+//isEditMode
+//get_entityId
+//isCloneMode
+//get_entityId
+//saveHandler(options: ServiceOptions<SaveResponse>, callback: (response: SaveResponse) => void
+//onSaveSuccess(response: SaveResponse
+// isEditMode
+//get_entityId
+//isCloneMode
+//loadById
+//getLoadByIdRequest(id: any
+//getLoadByIdOptions(id: any, callback: (response: RetrieveResponse<AuditLogRow>) => void
+//loadByIdHandler(options: ServiceOptions<RetrieveResponse<AuditLogRow>>, callback: (response: RetrieveResponse<AuditLogRow>) => void, fail: () => void
+//showSaveSuccessMessage(response: SaveResponse
+//isEditMode
+//get_entityId
+//isCloneMode
+//isEditMode
+//get_entityId
+//isCloneMode
+//get_entityId
+//loadResponse(data: any
+//onLoadingData(data: RetrieveResponse<AuditLogRow>
+//beforeLoadEntity(entity: AuditLogRow
+//loadEntity(entity: AuditLogRow
+//set_entityId(value: any
+//set_entity(entity: any
+//isEditMode
+//get_entityId
+//isCloneMode
+//set_entity(entity: any
+//afterLoadEntity
+//updateInterface
+//isDeleted
+//get_entityId
+//getIsDeletedProperty
+//get_entity
+//getIsActiveProperty
+//isLocalizationMode
+//isLocalizationMode
+//isEditMode
+//get_entityId
+//isCloneMode
+//isEditMode
+//get_entityId
+//isCloneMode
+//isNew
+//get_entityId
+//updateTitle
+//getEntityTitle
+//isEditMode
+//get_entityId
+//isCloneMode
+//getEntityNameFieldValue
+//get_entity
+//getEntitySingular
+//getSaveEntity
+//isEditMode
+//get_entityId
+//isCloneMode
+//get_entityId
+
+//delete entity ------------------------
+//doDelete(callback: (response: DeleteResponse) => void
+//get_entityId
+//getDeleteOptions(callback: (response: DeleteResponse) => void
+//deleteHandler(options: ServiceOptions<DeleteResponse>, callback: (response: DeleteResponse) => void
+//onDeleteSuccess(response: DeleteResponse
+// onDialogClose
+//destroy
