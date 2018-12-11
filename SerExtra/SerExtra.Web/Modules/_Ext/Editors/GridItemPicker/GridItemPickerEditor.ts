@@ -5,34 +5,40 @@
     export class GridItemPickerEditor extends Serenity.TemplatedWidget<GridItemPickerEditorOptions>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         protected getTemplate() {
-            return `<div class="input-group">
-                        <input type="hidden" class="value" />
-                        <input type="text" class="form-control text" disabled/>
-                          <span class="input-group-btn">
-                            <button class="btn btn-default" style="height: 27px; padding-top: 3px;" type="button"><i class="fa fa-search"></i></button>
-                          </span>
-                    </div>`;
+            return `<input type="hidden" class="value" />
+                    <span class="display-text select2-choice" style="user-select: text;"></span>
+                    `;
         };
-        public getEditValue(property, target) { target[property.name] = this.value; }
-        public setEditValue(source, property) { this.value = source[property.name]; this.text = source[this.options.nameFieldInThisRow]; }
 
         constructor(container: JQuery, options: GridItemPickerEditorOptions) {
             super(container, options);
 
-            setTimeout(() => {
-                this.element.find('.btn').click(e => {
-                    var pickerDialog = new _Ext.GridItemPickerDialog(options);
-
-                    pickerDialog.onSuccess = (selectedItems: any[]) => {
-                        this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
-                        this.text = selectedItems.map(m => m[options.nameFieldInGridRow]).join(', ');
-                    }
-                    pickerDialog.dialogOpen();
-                });
-            }, 500);
+            this.addInplaceSearch();
         }
 
-        protected
+        protected addInplaceSearch(): void {
+            var self = this;
+            this.element.addClass('select2-container has-inplace-button');
+
+            $('<a style="padding-top: 2px;"><i class="fa fa-search"></i></a>')
+                .addClass('inplace-button inplace-search align-center') .attr('title', 'search')
+                .insertAfter(this.element)
+                .click(function (e) {
+                    self.inplaceSearchClick(e);
+                });
+
+        }
+
+        protected inplaceSearchClick(e: any): void {
+            var pickerDialog = new _Ext.GridItemPickerDialog(this.options);
+
+            pickerDialog.onSuccess = (selectedItems: any[]) => {
+                this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
+                this.text = selectedItems.map(m => m[this.options.nameFieldInGridRow]).join(', ');
+            }
+            pickerDialog.dialogOpen();
+
+        }
 
         public get value(): string {
             let editVal = this.element.find('input.value').val();
@@ -44,14 +50,16 @@
         }
 
         public get text(): string {
-            let editVal = this.element.find('input.text').val();
+            let editVal = this.element.find('span.display-text').text();
             return editVal;
         }
 
         public set text(val: string) {
-            this.element.find('input.text').val(val);
+            this.element.find('span.display-text').text(val);
         }
 
+        public getEditValue(property, target) { target[property.name] = this.value; }
+        public setEditValue(source, property) { this.value = source[property.name]; this.text = source[this.options.nameFieldInThisRow]; }
     }
 
     export interface GridItemPickerEditorOptions {
