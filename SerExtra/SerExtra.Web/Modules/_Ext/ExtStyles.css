@@ -169,6 +169,12 @@ input, textarea {
     }
 }
 
+.ui-widget-overlay {
+    background-color:#000;
+    opacity: 0.2;
+    cursor:not-allowed;
+}
+
 /* Grid Styles ---------------------------------------*/
 .slick-header-column {
     text-align: center;
