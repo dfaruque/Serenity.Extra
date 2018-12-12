@@ -7,6 +7,14 @@
         protected getLocalTextPrefix() { return AuditLogRow.localTextPrefix; }
         protected getService() { return AuditLogService.baseUrl; }
 
+        protected get_ExtGridOptions(): ExtGridOptions {
+            let opt = Q.deepClone(super.get_ExtGridOptions());
+
+            //make some changes here
+
+            return opt;
+        }
+
         constructor(container: JQuery, options?) {
             super(container, options);
         }
@@ -62,15 +70,7 @@
         protected getEntityType(): string { return super.getEntityType() }
         //getIdProperty
         protected getSlickOptions(): Slick.GridOptions { return super.getSlickOptions() }
-        protected get_ExtGridOptions(): ExtGridOptions {
 
-            let opt = Q.deepClone(super.get_ExtGridOptions());
-            //change some options here
-
-            opt.ShowRowSelectionCheckboxColumn = true;
-            return opt;
-
-        }
         protected postProcessColumns(columns: Slick.Column[]): Slick.Column[] { return super.postProcessColumns(columns) }
         protected setInitialSortOrder(): void { super.setInitialSortOrder() }
 
