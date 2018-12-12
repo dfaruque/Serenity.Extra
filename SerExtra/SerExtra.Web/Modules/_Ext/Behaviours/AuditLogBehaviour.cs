@@ -142,7 +142,7 @@ namespace _Ext
     /// <summary>
     /// Any field which does not required to log in audit table. For Example InsertUserId, InsertDate etc
     /// </summary>
-    public class IgnoreAuditLogAttribute : Attribute
-    {
-    }
-    
+    //public class IgnoreAuditLogAttribute : Attribute
+    //{
+    //}
+}
