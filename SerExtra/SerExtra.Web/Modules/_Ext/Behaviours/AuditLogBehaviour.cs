@@ -19,12 +19,11 @@ namespace _Ext
     {
         public bool ActivateFor(Row row)
         {
-            var auditLog = row as IAuditLog;
-            if (auditLog == null)
+            if (row is IAuditLog)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
 
@@ -73,13 +72,12 @@ namespace _Ext
                     .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
                     .OrderBy(fld.Id, desc: true));
 
-                    //var jsonSerializerSettings = new JsonSerializerSettings
-                    //{
-                    //    ContractResolver = new DynamicContractResolver("IDate", "IUser", "EDate", "EUser")
-                    //};
+                    //we don't want to serialize id field
+                    var pkField = (oldRow as IIdRow).IdField as Field;
+                    oldRow.ClearAssignment(pkField);
 
-                    var rowJson = JsonConvert.SerializeObject(row);//, jsonSerializerSettings);
-                    var oldrowJson = JsonConvert.SerializeObject(oldRow);//, jsonSerializerSettings);
+                    var oldrowJson = JsonConvert.SerializeObject(oldRow);
+                    var rowJson = JsonConvert.SerializeObject(row);
 
                     if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
                     {
@@ -144,36 +142,7 @@ namespace _Ext
     /// <summary>
     /// Any field which does not required to log in audit table. For Example InsertUserId, InsertDate etc
     /// </summary>
-    public class IgnoreAuditLog : Attribute
+    public class IgnoreAuditLogAttribute : Attribute
     {
     }
-
-    public class DynamicContractResolver : DefaultContractResolver
-    {
-        private readonly string[] props;
-
-        public DynamicContractResolver(params string[] prop)
-        {
-            this.props = prop;
-        }
-
-        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            IList<JsonProperty> retval = base.CreateProperties(type, memberSerialization);
-
-            // retorna todas as propriedades que não estão na lista para ignorar
-            retval = retval.Where(p => !this.props.Contains(p.PropertyName)).ToList();
-
-            return retval;
-        }
-
-        protected override List<MemberInfo> GetSerializableMembers(Type objectType)
-        {
-            var retval = base.GetSerializableMembers(objectType);
-            // retorna todas as propriedades que não estão na lista para ignorar
-            retval = retval.Where(p => !this.props.Contains(p.Name)).ToList();
-            return retval;
-        }
-
-    }
-}
+    
