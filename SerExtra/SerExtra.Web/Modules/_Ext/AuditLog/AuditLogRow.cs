@@ -29,7 +29,7 @@ namespace _Ext.Entities
         [AuditLogActionTypeFormatter]
         public AuditActionType? ActionType { get { return (AuditActionType?)Fields.ActionType[this]; } set { Fields.ActionType[this] = (int?)value; } }
 
-        [DisplayName("Action Date"), NotNull, QuickFilter]
+        [DisplayName("Action Date"), NotNull, QuickFilter, SortOrder(1, true)]
         [DateTimeEditor, DateTimeFiltering, DateTimeFormatter]
         public DateTime? ActionDate { get { return Fields.ActionDate[this]; } set { Fields.ActionDate[this] = value; } }
 
