@@ -1,0 +1,10 @@
+﻿{
+  "RootNamespace": "SereneXtra",
+  "ServerTypings": {
+    "Assemblies": [],
+    "LocalTexts": true
+  },
+  "Connections": [],
+  "BaseRowClasses": [],
+  "RemoveForeignFields": []
+}
