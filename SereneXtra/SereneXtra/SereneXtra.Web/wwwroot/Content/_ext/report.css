@@ -1,0 +1,114 @@
+﻿ol {
+    list-style-position: inside;
+}
+
+.table {
+    border: 1px solid #000000 !important;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th {
+    text-align: center;
+    vertical-align: top;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border: 1px solid #000000 !important;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border-top: 1px solid #bbb;
+}
+
+.panel-title {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.report-body .row {
+    padding-top: 10px;
+}
+
+.report-label {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+    .report-label label {
+        font-weight: bold;
+        width: 180px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+.report-label-caption {
+    font-weight: bold;
+    width: 180px;
+    display: inline-block;
+}
+
+
+
+.rpt-id {
+    text-align: center;
+}
+
+.rpt-text {
+    text-align: left;
+}
+
+.rpt-date {
+    text-align: center;
+    min-width: 80px;
+}
+
+.rpt-number {
+    text-align: right;
+}
+
+.rpt-status {
+    text-align: center;
+}
+
+.rpt-sign-line {
+    border-top: 1px solid black; 
+    margin-left: 20px;
+    text-align: center;
+}
+/* style sheet for "A4" printing 
+@media print and (width: 21cm) and (height: 29.7cm) {
+     @page {
+        margin: 3cm;
+     }
+}*/
+
+/* style sheet for "letter" printing 
+@media print and (width: 8.5in) and (height: 11in) {
+    @page {
+        margin: 1in;
+    }
+}*/
+
+/*@page {
+    size: A4;
+}*/
+
+/*@media print {
+    h1 {page-break-before: always;}
+}*/
+
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+} 

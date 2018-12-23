@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Sergen";
+}
+
+@section Head {
+@Html.Script("~/Scripts/vue.js")
+}
+
+<h2 class="text-danger">[Under development] Sorry this is not ready yet.</h2>
+<div id="PanelDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new _Ext.DevTools.SergenPanel($('#PanelDiv'), {}).init();
+    });
+</script>

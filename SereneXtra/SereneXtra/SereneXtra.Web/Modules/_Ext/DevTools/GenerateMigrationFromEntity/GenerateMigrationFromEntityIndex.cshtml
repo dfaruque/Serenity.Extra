@@ -1,0 +1,19 @@
+﻿@model _Ext.DevTools.Model.GenerateMigrationFromEntityPageModel
+@{
+    ViewData["Title"] = "Generate Migration from Entity";
+}
+@section ContentHeader {
+    <h1>Generate Migration from Entity/Row <small class="text-danger">Beta!</small></h1>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="well lead bold">
+            @Html.ActionLink("Generate Single File", "GenerateSingleFile")
+            |
+            @Html.ActionLink("Generate File for each Table", "GenerateFileForEachTable")
+            |
+            @Html.ActionLink("Preview Migrations", "MigrationViewer")
+        </div>
+
+    </div>
+</div>

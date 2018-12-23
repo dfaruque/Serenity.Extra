@@ -11,6 +11,23 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <Content Remove="wwwroot\Content\_ext\ExtStyles.css" />
+    <Content Remove="wwwroot\Content\_ext\report.css" />
+    <Content Remove="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick-headerfilters.css" />
+    <Content Remove="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <Content Remove="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.editors.js" />
+    <Content Remove="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.headerfilters.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\formatters-styles\annotated.css" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\formatters-styles\html.css" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.min.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.min.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.min.map" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.min.js" />
+    <Content Remove="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.min.map" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -84,5 +101,24 @@
   </Target>
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Content\_ext\ExtStyles.css" />
+    <None Include="wwwroot\Content\_ext\report.css" />
+    <None Include="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick-headerfilters.css" />
+    <None Include="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <None Include="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.editors.js" />
+    <None Include="wwwroot\Scripts\_ext\CustomSlickGridPlugin\slick.headerfilters.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\formatters-styles\annotated.css" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\formatters-styles\html.css" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.min.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.min.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch-full.min.map" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.min.js" />
+    <None Include="wwwroot\Scripts\_ext\jsondiffpatch\jsondiffpatch.min.map" />
   </ItemGroup>
 </Project>

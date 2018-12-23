@@ -3,6 +3,7 @@
 namespace SereneXtra.ScriptInitialization {
     Q.Config.responsiveDialogs = true;
     Q.Config.rootNamespaces.push('SereneXtra');
+    Q.Config.rootNamespaces.push('_Ext');
     Serenity.EntityDialog.defaultLanguageList = LanguageList.getValue;
 
     if ($.fn['colorbox']) {

@@ -4,6 +4,41 @@ namespace MVC
 {
     public static class Views
     {
+        public static class _Ext
+        {
+            public static class AuditLog
+            {
+                public const string AuditLogIndex = "~/Modules/_Ext/AuditLog/AuditLogIndex.cshtml";
+            }
+
+            public static class DevTools
+            {
+                public static class CodeSnippets
+                {
+                    public const string CodeSnippetsIndex = "~/Modules/_Ext/DevTools/CodeSnippets/CodeSnippetsIndex.cshtml";
+                }
+
+                public static class CompareEntityToDB
+                {
+                    public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static class GenerateMigrationFromEntity
+                {
+                    public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
+                    public const string GenerateMigrationFromEntityMigrationViewer = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityMigrationViewer.cshtml";
+                    public const string GenerateMigrationFromEntitySuccessMsg = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntitySuccessMsg.cshtml";
+                }
+
+                public static class Sergen
+                {
+                    public const string SergenError = "~/Modules/_Ext/DevTools/Sergen/SergenError.cshtml";
+                    public const string SergenIndex = "~/Modules/_Ext/DevTools/Sergen/SergenIndex.cshtml";
+                }
+            }
+
+        }
+
         public static class Administration
         {
             public static class Language
