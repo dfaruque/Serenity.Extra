@@ -5,10 +5,7 @@
 
 <h2>Lets Chat</h2>
 
-<div class="form-group col-xl-12">
-    <label class="control-label">Your connection Id</label><br />
-    <input type="text" class="col-lg-12 text-primary" id="displayname" placeholder="display name" /><br /><br />
-    <label class="control-label">Your Message</label><br />
+<div class="form-group">
     <textarea type="text" class="col-lg-10 text-primary" id="message"></textarea>
 
     <input type="button" class="btn btn-primary" id="sendmessage" value="Send" /><br /><br />
@@ -44,7 +41,7 @@
 
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    chat.server.send($('#displayname').val(), $('#message').val());
+                    chat.server.send(Q.Authorization.userDefinition.DisplayName, $('#message').val());
 
                     $('#message').val('').focus();
                 });
