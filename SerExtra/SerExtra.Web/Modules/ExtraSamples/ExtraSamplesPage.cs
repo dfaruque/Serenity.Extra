@@ -22,5 +22,10 @@ namespace SerExtra.ExtraSamples.Pages
             return View(Views.ExtraSamples.ReactSamplePage.Index);
         }
 
+        public ActionResult ChatSamplePage()
+        {
+            return View(Views.ExtraSamples.Chat.ChatPage);
+        }
+
     }
 }

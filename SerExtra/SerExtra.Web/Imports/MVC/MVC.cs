@@ -328,6 +328,11 @@ namespace MVC
 
         public static class ExtraSamples
         {
+            public static class Chat
+            {
+                public const string ChatPage = "~/Modules/ExtraSamples/Chat/ChatPage.cshtml";
+            }
+
             public static class MainGridInlineEditing
             {
                 public const string Index = "~/Modules/ExtraSamples/MainGridInlineEditing/Index.cshtml";

@@ -89,7 +89,22 @@
       <HintPath>..\..\packages\FluentMigrator.Runner.1.6.2\lib\40\FluentMigrator.Runner.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
@@ -105,6 +120,9 @@
     </Reference>
     <Reference Include="NUglify, Version=1.5.11.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUglify.1.5.11\lib\net40\NUglify.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <!---->
     <Reference Include="Serenity.Core, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -865,6 +883,8 @@
     <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.scrollintoview.js" />
     <Content Include="Scripts\jquery.scrollintoview.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jspdf.js" />
@@ -1020,6 +1040,7 @@
     <Content Include="node_modules\%40types\react-dom\LICENSE" />
     <Content Include="node_modules\%40types\react-dom\package.json" />
     <Content Include="node_modules\%40types\react-dom\README.md" />
+    <Content Include="Modules\ExtraSamples\Chat\ChatPage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2118,6 +2139,8 @@
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesListRequest.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesEndpoint.cs" />
     <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesRepository.cs" />
+    <Compile Include="Modules\ExtraSamples\Chat\ChatHub.cs" />
+    <Compile Include="Modules\ExtraSamples\Chat\ChatStartup.cs" />
     <Compile Include="Modules\ExtraSamples\ExtraSamplesPage.cs" />
     <Compile Include="Modules\ExtraSamples\ExtraSamplesNavigation.cs" />
     <Compile Include="Modules\ExtraSamples\MainGridMultiEditing\MainGridMultiEditingColumns.cs" />
@@ -2418,6 +2441,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Modules\Common\Notification\" />
     <Folder Include="Modules\ExtraSamples\Mixins\" />
   </ItemGroup>
   <ItemGroup>
