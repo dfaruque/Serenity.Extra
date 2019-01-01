@@ -11,8 +11,6 @@ namespace SerExtra.Northwind.Forms
     [BasedOnRow(typeof(Entities.OrderRow), CheckNames = true)]
     public class OrderForm
     {
-        [Tab("General")]
-        [Category("Order")]
         [CustomerTemplatedLookupEditor]
         public String CustomerID { get; set; }
         [DefaultValue("now")]
@@ -20,7 +18,7 @@ namespace SerExtra.Northwind.Forms
         public DateTime RequiredDate { get; set; }
         public Int32? EmployeeID { get; set; }
 
-        [Category("Order Details")]
+        [Tab("Order Details")]
         [OrderDetailsEditor]
         public List<Entities.OrderDetailRow> DetailList { get; set; }
 
