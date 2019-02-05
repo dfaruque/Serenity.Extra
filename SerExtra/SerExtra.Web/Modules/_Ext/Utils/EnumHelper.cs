@@ -1,4 +1,5 @@
-﻿using Serenity.ComponentModel;
+﻿using Serenity;
+using Serenity.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,17 +19,9 @@ public static class EnumUtil
     public static string GetEnumDescription(this Enum value)
     {
         if (value == null)
-            return null;
+            return string.Empty;
 
-        FieldInfo fi = value.GetType().GetField(value.ToString());
-
-        DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-        if (attributes != null &&
-            attributes.Length > 0)
-            return attributes[0].Description;
-        else
-            return value.ToString();
+        return EnumMapper.FormatEnum(value.GetType(), value);
     }
 
     public static string GetCssClass(this Enum value, string defaultClass = "")
