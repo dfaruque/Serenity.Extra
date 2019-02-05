@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace _Ext
 {
-    public partial class EmptyLookupEditorAttribute : CustomEditorAttribute
+    public partial class EmptyLookupEditorAttribute : LookupEditorBaseAttribute
     {
         public const string Key = "_Ext.EmptyLookupEditor";
 

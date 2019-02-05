@@ -1,7 +1,8 @@
 ﻿namespace _Ext {
 
     @Serenity.Decorators.registerEditor()
-    export class EmptyLookupEditor extends Serenity.Select2Editor<any, any> {
+    export class EmptyLookupEditor extends Serenity.LookupEditorBase<Serenity.LookupEditorOptions, any> {
+
         public setSelect2Items(items: Serenity.Select2Item[]) {
             this.clearItems();
             items.forEach(item => { this.addItem(item); });
