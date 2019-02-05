@@ -7,7 +7,7 @@ using System.Web;
 
 namespace _Ext //enums must have namespace otherwise it transforms to wrong typescript code
 {
-    [LookupScript("EmptyLookup")]
+    [LookupScript("EmptyLookup", Permission = "*")]
     public class EmptyLookup : LookupScript
     {
         public EmptyLookup()
