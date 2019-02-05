@@ -160,6 +160,23 @@ namespace q {
         tabAnchor.closest('li').hide();
     }
 
+    export function disableEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
+        let tabId = editor.element.closest('.tab-pane').attr('id');
+
+        let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
+        let tabLi = tabAnchor.closest('li');
+
+        if (value == true) {
+            tabAnchor.hide();
+            tabLi.closest('li').addClass('disabled').prepend(`<a class="disabled">${tabAnchor.text()}</label>`);
+        } else {
+            tabAnchor.show();
+            tabLi.closest('li').removeClass('disabled').find('.disabled').remove();
+
+        }
+
+    }
+
     export function readOnlyEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
         let $editors = editor.element.closest('.tab-pane').find('.editor');
 
