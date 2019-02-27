@@ -102,7 +102,7 @@ namespace _Ext {
                 request.Sort = sortBy;
 
             var gridColumns = g.slickGrid.getColumns();
-            gridColumns = gridColumns.filter(x => x.id !== "__select__" && x.name.length > 0);
+            gridColumns = gridColumns.filter(x => x.id !== "__select__" && x.cssClass !== "not-exportable" && x.name.length > 0);
 
             request.IncludeColumns = [];
             for (var column of gridColumns)

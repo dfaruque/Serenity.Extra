@@ -6,7 +6,7 @@ namespace _Ext {
         //this comment is for preventing replacement 
         extends Serenity.EntityGrid<TItem, TOptions> {
 
-        protected get_ExtGridOptions(): ExtGridOptions { return q.DefaultMainGridOptions; }
+        protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultEditorGridOptions); }
 
         isReadOnly: boolean;
         isRequired: boolean;
@@ -525,6 +525,8 @@ namespace _Ext {
                 }
             }
             else if (target.hasClass('view-details')) {
+                (this.slickGrid as any).getEditController().commitCurrentEdit();
+
                 this.editItem(recordId);
             }
             else if (target.hasClass('select-row')) { 

@@ -29,7 +29,7 @@
                     return;
                 }
 
-                _Ext.ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'html' });
+                _Ext.ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'pdf' });
 
             });
 

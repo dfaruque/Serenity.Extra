@@ -433,6 +433,11 @@
             });
 
             $input.width($input.width() - 18);
+
+            if (args.column.seletedDate) {
+                //$input.datepicker({ defaultDate: new Date() });
+                $input.datepicker("setDate", args.column.seletedDate);
+            }
         };
 
         this.destroy = function () {

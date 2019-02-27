@@ -195,6 +195,8 @@ namespace q {
         endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
         startDateTextBox.datetimepicker('option', 'onSelect', function (selectedDateTime) {
             endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
+            onChangeHandler(selectedDateTime);
+
         });
 
 
@@ -214,14 +216,15 @@ namespace q {
         startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
         endDateTextBox.datetimepicker('option', 'onSelect', function (selectedDateTime) {
             startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
+            onChangeHandler(selectedDateTime);
         });
 
 
-        setTimeout(() => {
-            fromDateTimeEditor.change(onChangeHandler);
+        //setTimeout(() => {
+        //    fromDateTimeEditor.change(onChangeHandler);
 
-            toDateTimeEditor.change(onChangeHandler);
-        }, 500);
+        //    toDateTimeEditor.change(onChangeHandler);
+        //}, 500);
 
     }
 
