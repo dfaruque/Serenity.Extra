@@ -69,3 +69,5 @@ protected getSlickOptions() {
    > Make sure that you have declared form in parent/master dialog as public
  
  ### Please explore the code to know more...
+ 
+ #### Online demo (by @edwardch) https://serenity-extra.azurewebsites.net
