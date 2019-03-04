@@ -849,10 +849,6 @@
     <Content Include="Scripts\flot\jquery.flot.threshold.min.js" />
     <Content Include="Scripts\flot\jquery.flot.time.js" />
     <Content Include="Scripts\flot\jquery.flot.time.min.js" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="Scripts\jquery-ui-i18n.js" />
@@ -1025,10 +1021,6 @@
     <Content Include="Fonts\ionicons.woff" />
     <Content Include="Fonts\ionicons.ttf" />
     <Content Include="Fonts\ionicons.eot" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Fonts\FontAwesome.otf" />
     <Content Include="Fonts\fontawesome-webfont.woff2" />
     <Content Include="Fonts\fontawesome-webfont.woff" />
@@ -1041,6 +1033,14 @@
     <Content Include="node_modules\%40types\react-dom\package.json" />
     <Content Include="node_modules\%40types\react-dom\README.md" />
     <Content Include="Modules\ExtraSamples\Chat\ChatPage.cshtml" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
