@@ -34,7 +34,7 @@ namespace SerExtra.BasicSamples {
 
         protected getColumns() {
             var columns = super.getColumns();
-            //columns.splice(0, 0, Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
+            columns.splice(0, 0, Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
             return columns;
         }
 
