@@ -28,6 +28,8 @@
             if (this.get_ExtDialogOptions().HideCategoyLinksBar == true) {
                 this.element.find('.category-links').hide();
             }
+
+            this.element.fadeTo(100, 1);
         }
         protected onDialogOpen() {
             super.onDialogOpen();
@@ -39,7 +41,6 @@
             //temporary fix for set grid editor height
             setTimeout(() => { this.onAfterSetDialogSize(); }, 200)
 
-            this.element.fadeTo(100, 1);
         }
 
         protected onDialogClose() {
