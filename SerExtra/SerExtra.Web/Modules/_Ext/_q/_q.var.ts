@@ -30,6 +30,7 @@ namespace q {
         ShowDeleteInlineButtun: true,
         ShowEditInlineButtun: true,
         ShowRowSelectionCheckboxColumn: false,
+        EnableQuickSearch: true,
         ShowRowNumberColumn: true
     };
 

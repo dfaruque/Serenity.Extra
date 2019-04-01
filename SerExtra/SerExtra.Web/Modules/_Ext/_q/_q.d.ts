@@ -35,6 +35,7 @@ interface ExtGridOptions {
     ShowEditInlineButtun: boolean,
     ShowDeleteInlineButtun: boolean,
     ShowRowSelectionCheckboxColumn: boolean,
+    EnableQuickSearch?: boolean,
     RowsPerPage?: number
 }
 

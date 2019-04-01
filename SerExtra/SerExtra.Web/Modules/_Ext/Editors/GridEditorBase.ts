@@ -184,10 +184,12 @@ namespace _Ext {
 
         protected createToolbarExtensions(): void {
             //super.createToolbarExtensions();
-            Serenity.GridUtils.addQuickSearchInputCustom(this.toolbar.element, (field, text) => {
-                this.searchText = Select2.util.stripDiacritics(Q.trimToNull(text) || '').toLowerCase();
-                this.view.setItems(this.view.getItems(), true);
-            });
+            if (this.get_ExtGridOptions().EnableQuickSearch) {
+                Serenity.GridUtils.addQuickSearchInputCustom(this.toolbar.element, (field, text) => {
+                    this.searchText = Select2.util.stripDiacritics(Q.trimToNull(text) || '').toLowerCase();
+                    this.view.setItems(this.view.getItems(), true);
+                });
+            }
         }
 
         protected onViewFilter(row): boolean {
