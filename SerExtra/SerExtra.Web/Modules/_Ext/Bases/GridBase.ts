@@ -308,8 +308,7 @@ namespace _Ext {
 
             if (this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
                 let options = (this.options as any) as GridItemPickerEditorOptions;
-                if (!options.multiple && !options.gridType)
-                {
+                if (!options.multiple && !options.gridType) {
                     Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
                 }
 
@@ -529,7 +528,7 @@ namespace _Ext {
 
                 this.editItem(recordId);
             }
-            else if (target.hasClass('select-row')) { 
+            else if (target.hasClass('select-row')) {
                 this.rowSelection.setSelectedKeys([recordId]);
                 this.pickerDialog.onSuccess(this.selectedItems);
                 this.pickerDialog.dialogClose();
@@ -592,7 +591,14 @@ namespace _Ext {
 
         get selectedItems() {
             return this.rowSelection.getSelectedKeys().map(m => {
-                return this.view.getItemById(m)
+                let item = this.view.getItemById(m);
+
+                if (!item) {
+                    item = {} as any;
+                    item[this.getIdProperty()] = m
+                }
+
+                return item
             })
         }
         set selectedKeys(value: any[]) {
