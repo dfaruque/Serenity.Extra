@@ -27,6 +27,8 @@
 
                 this.dialogTitle = "Select " + this.checkGrid.getTitle();
                 this.checkGrid.setTitle(null);
+                this.checkGrid.element.height(500);
+
                 this.checkGrid.pickerDialog = this;
             } catch (ex) {
                 Q.notifyError('Could not intialize ' + options.gridType);
@@ -55,6 +57,7 @@
                 }
             }];
 
+            opt.height = 500;
             return opt
         }
 

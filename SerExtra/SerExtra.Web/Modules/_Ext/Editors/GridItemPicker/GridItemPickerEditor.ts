@@ -6,7 +6,10 @@
         implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         protected getTemplate() {
             return `<input type="hidden" class="value" />
-                    <span class="display-text select2-choice" style="user-select: text;"></span>
+                    <span class="select2-choice">
+                        <span class="display-text" style="user-select: text;"></span>
+                        <a class="select2-search-choice-close" style="margin-top: 2px; cursor: pointer"></a>
+                    </span>
                     `;
         };
 
@@ -21,11 +24,20 @@
             this.element.addClass('select2-container has-inplace-button');
 
             $('<a style="padding-top: 2px;"><i class="fa fa-search"></i></a>')
-                .addClass('inplace-button inplace-search align-center') .attr('title', 'search')
+                .addClass('inplace-button inplace-search align-center').attr('title', 'search')
                 .insertAfter(this.element)
                 .click(function (e) {
                     self.inplaceSearchClick(e);
                 });
+
+            this.element.find('.select2-search-choice-close').click(e => {
+                this.value = null;
+                this.text = '';
+                $(e.target).hide();
+
+                this.element.trigger('change');
+                this.element.triggerHandler('change');
+            });
 
         }
 
@@ -35,6 +47,11 @@
             pickerDialog.onSuccess = (selectedItems: any[]) => {
                 this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
                 this.text = selectedItems.map(m => m[this.options.nameFieldInGridRow]).join(', ');
+
+
+                this.element.trigger('change');
+                this.element.triggerHandler('change');
+
             }
             pickerDialog.dialogOpen();
 
@@ -47,6 +64,10 @@
 
         public set value(val: string) {
             this.element.find('input.value').val(val);
+
+            if (val && val.length > 0)
+                this.element.find('.select2-search-choice-close').show()
+
         }
 
         public get text(): string {
