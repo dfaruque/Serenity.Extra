@@ -19,7 +19,7 @@ namespace q {
         ShowEditInlineButtun: true,
         ShowRowNumberColumn: true,
         ShowRowSelectionCheckboxColumn: false,
-        RowsPerPage: 100
+        RowsPerPage: 20
     };
 
     export var DefaultEditorGridOptions: ExtGridOptions = {
