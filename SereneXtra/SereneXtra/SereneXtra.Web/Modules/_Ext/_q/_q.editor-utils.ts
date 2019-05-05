@@ -153,11 +153,15 @@ namespace q {
     }
 
     export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
-        let tabId = editor.element.closest('.tab-pane').hide().attr('id');
-
-        let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
-
-        tabAnchor.closest('li').hide();
+        if (value) {
+            let tabId = editor.element.closest('.tab-pane').hide().attr('id');
+            let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
+            tabAnchor.closest('li').hide();
+        } else {
+            let tabId = editor.element.closest('.tab-pane').show().attr('id');
+            let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
+            tabAnchor.closest('li').show();
+        }
     }
 
     export function readOnlyEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
