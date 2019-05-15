@@ -197,6 +197,15 @@ namespace q {
         Serenity.EditorUtils.setReadonly($editors, value);
     }
 
+    export function readOnlyEditorPropertyGrid(editor: Serenity.Widget<any>, value: boolean = true) {
+        let $editors = editor.element.closest('.s-PropertyGrid').find('.editor');
+        Serenity.EditorUtils.setReadonly($editors, value);
+    }
+    export function readonlyEditorPropertyGrid($editor: JQuery, value: boolean = true) {
+        let $editors = $editor.closest('.s-PropertyGrid').find('.editor');
+        Serenity.EditorUtils.setReadonly($editors, value);
+    }
+
     export function readOnlyEditor(editor: Serenity.Widget<any>, value: boolean = true) {
         Serenity.EditorUtils.setReadOnly(editor, value);
     }
