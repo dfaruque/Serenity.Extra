@@ -26,7 +26,7 @@
         <template v-for="item in entityVersions">
             <tr>
                 <th>{{item.VersionNo}}</th>
-                <th>{{item.VersionDate | formatDateTimeReadable}}</th>
+                <th>{{item.ActionDate | formatDateTimeReadable}}</th>
                 <th>{{item.UserId}} - {{item.UserName}}</th>
                 <td>
                     <input type="checkbox" class="btn btn-xs btn-info" v-model="item.isShowed" />
