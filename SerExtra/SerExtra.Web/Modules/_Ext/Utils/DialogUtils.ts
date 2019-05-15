@@ -6,7 +6,8 @@
             }
 
             e.preventDefault();
-            Q.confirm('You have pending changes. Save them?',
+
+            Q.confirm(q.text('Controls.EntityDialog.PendingChangesConfirmation', 'You have pending changes. Save them?'),
                 () => element.find('div.save-and-close-button').click(),
                 {
                     onNo: function () {
