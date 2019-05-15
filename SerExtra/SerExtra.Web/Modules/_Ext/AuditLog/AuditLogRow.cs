@@ -15,7 +15,7 @@ namespace _Ext.Entities
     [ModifyPermission("Administration:AuditLog")]
     public sealed class AuditLogRow : Row, IIdRow, INameRow
     {
-        [DisplayName("Id"), PrimaryKey]
+        [DisplayName("Id"), PrimaryKey, NotNull]
         public Int64? Id { get { return Fields.Id[this]; } set { Fields.Id[this] = value; } }
 
         [DisplayName("Version No."), Size(20), NotNull]
