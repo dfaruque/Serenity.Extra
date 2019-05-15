@@ -27,6 +27,12 @@
 
             if (this.get_ExtDialogOptions().HideCategoyLinksBar == true) {
                 this.element.find('.category-links').hide();
+
+                let $FirstCategory = this.element.find('.first-category > .category-title');
+
+                if (Q.isEmptyOrNull($FirstCategory.find('.category-anchor').text()))
+                    $FirstCategory.hide();
+
             }
 
             this.element.fadeTo(100, 1);
@@ -60,6 +66,7 @@
                 this.undeleteButton.toggleClass('disabled', this.isReadOnly);
                 this.toolbar.findButton('btn-save-and-close').addClass('disabled');
                 this.toolbar.findButton('btn-replace-row').addClass('disabled');
+                this.toolbar.findButton('btn-history').addClass('disabled');
 
                 // remove required asterisk (*)
                 this.element.find('sup').toggle(this.isReadOnly);
@@ -152,7 +159,7 @@
                 if (extOptions.ShowChangeLogButtonInToolbar == true && Q.Authorization.hasPermission('Administration:AuditLog')) {
 
                     buttons.push({
-                        title: 'Change Log',
+                        cssClass: 'btn-history',
                         icon: 'fa fa-history',
                         onClick: () => {
                             let entityId = this.entity[this.getIdProperty()];
