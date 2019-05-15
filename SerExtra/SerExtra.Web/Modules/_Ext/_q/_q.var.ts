@@ -19,6 +19,7 @@ namespace q {
         ShowEditInlineButtun: true,
         ShowRowNumberColumn: true,
         ShowRowSelectionCheckboxColumn: false,
+        EnableQuickSearch: true,
         RowsPerPage: 20
     };
 
@@ -30,7 +31,7 @@ namespace q {
         ShowDeleteInlineButtun: true,
         ShowEditInlineButtun: true,
         ShowRowSelectionCheckboxColumn: false,
-        EnableQuickSearch: true,
+        EnableQuickSearch: false,
         ShowRowNumberColumn: true
     };
 
@@ -41,7 +42,7 @@ namespace q {
         ShowSaveAndNewButtonInToolbar: false,
         ShowCloseButtonInToolbar: false,
         ShowRefreshButtonInToolbar: false,
-        ShowChangeLogButtonInToolbar: false,
+        ShowChangeLogButtonInToolbar: true,
         ShowReplaceRowButtonInToolbar: false
 
     };
