@@ -7,7 +7,7 @@ namespace _Ext {
     export class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
 
-        protected get_ExtGridOptions(): ExtGridOptions { return q.DefaultEditorGridOptions; }
+        protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultEditorGridOptions); }
 
         protected getIdProperty() { return "__id"; }
 
@@ -87,7 +87,7 @@ namespace _Ext {
 
         protected getButtons(): Serenity.ToolButton[] {
             return [{
-                title: 'Add ' + this.getItemName(),
+                title: /*'Add ' +*/ this.getItemName(),
                 cssClass: 'add-button',
                 onClick: () => { this.addButtonClick() }
             }];
