@@ -271,7 +271,7 @@
                 let tabBarHeight = dialogElement.find('.nav.nav-tabs.property-tabs').height() || 0;
                 let categoryLinkHeight = dialogElement.find('.category-links').height() || 0;
 
-                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 40);
+                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 50);
 
                 dialogElement.css({
                     left: $content.position().left + (left || 0),
