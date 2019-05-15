@@ -6,7 +6,7 @@ namespace _Ext {
         //this comment is for preventing replacement 
         extends Serenity.EntityGrid<TItem, TOptions> {
 
-        protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultEditorGridOptions); }
+        protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
 
         isReadOnly: boolean;
         isRequired: boolean;
@@ -282,12 +282,13 @@ namespace _Ext {
 
                 if (extOptions.ShowEditInlineButtun == true) {
                     inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += '<a class="inline-actions view-details" title="edit/view details" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>';
+                    var title = this.isReadOnly ? q.text('Controls.View', 'View Details') : q.text('Controls.Edit', 'Edit');
+                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
                 }
 
                 if (extOptions.ShowDeleteInlineButtun == true) {
                     inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += '<a class="inline-actions delete-row" title="delete"><i class="delete-row fa fa-trash-o text-red"></i></a>';
+                    inlineActionsColumnContent += `<a class="inline-actions delete-row" title="${q.text('Controls.Delete', 'Delete')}"><i class="delete-row fa fa-trash-o text-red"></i></a>`;
                 }
                 columns.unshift({
                     field: 'inline-actions',
@@ -449,7 +450,14 @@ namespace _Ext {
                     .forEach(e => resizableColumnsWidth += e);
 
                 resizableColumns.forEach(c => {
-                    c.width = c.width * (stretchableGridAreaWidth / resizableColumnsWidth);
+                    let widthMultiplyingFactor = stretchableGridAreaWidth / resizableColumnsWidth;
+                    let newWidth = c.width * widthMultiplyingFactor;
+                    let increment = newWidth - c.width;
+
+                    //if (increment <= 200) // maximum streching is 200
+                        c.width = newWidth;
+                    //else c.width = c.width + 200;
+
                 });
 
                 this.slickGrid.setColumns(allVisibleColumns);
