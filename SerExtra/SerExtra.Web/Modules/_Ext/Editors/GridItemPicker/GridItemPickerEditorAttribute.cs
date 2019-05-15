@@ -33,6 +33,7 @@ namespace _Ext
             }
 
             SetOption("gridType", gridType);
+            SetOption("dialogType", gridType.Replace("Grid", "Dialog"));
             SetOption("nameFieldInGridRow", nameField);
 
             var kk = propertyName;

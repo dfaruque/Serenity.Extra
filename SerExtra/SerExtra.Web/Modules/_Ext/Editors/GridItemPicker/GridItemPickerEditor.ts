@@ -1,42 +1,60 @@
 ﻿namespace _Ext {
-    @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue])
+    @Serenity.Decorators.registerClass([Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired])
     @Serenity.Decorators.editor()
-    @Serenity.Decorators.element("<div/>")
+    @Serenity.Decorators.element('<div/>')
     export class GridItemPickerEditor extends Serenity.TemplatedWidget<GridItemPickerEditorOptions>
-        implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
         protected getTemplate() {
-            return `<input type="hidden" class="value" />
+            return `<input type="text" class="value select2-offscreen" />
                     <span class="select2-choice">
                         <span class="display-text" style="user-select: text;"></span>
-                        <a class="select2-search-choice-close" style="margin-top: 2px; cursor: pointer"></a>
+                        <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer"></a>
                     </span>
                     `;
         };
 
-        constructor(container: JQuery, options: GridItemPickerEditorOptions) {
+        inplaceSearchButton: JQuery;
+        inplaceViewButton: JQuery;
+        clearSelectionButton: JQuery;
+
+        constructor(container: JQuery, public options: GridItemPickerEditorOptions) {
             super(container, options);
 
-            this.addInplaceSearch();
+            this.addInplaceButtons();
         }
 
-        protected addInplaceSearch(): void {
+        protected addInplaceButtons(): void {
             var self = this;
             this.element.addClass('select2-container has-inplace-button');
 
-            $('<a style="padding-top: 2px;"><i class="fa fa-search"></i></a>')
+            this.inplaceSearchButton = $('<a style="padding-top: 2px;"><i class="fa fa-search"></i></a>')
                 .addClass('inplace-button inplace-search align-center').attr('title', 'search')
                 .insertAfter(this.element)
                 .click(function (e) {
                     self.inplaceSearchClick(e);
                 });
 
-            this.element.find('.select2-search-choice-close').click(e => {
+            this.inplaceViewButton = $('<a style="padding-top: 2px;"><i class="fa fa-eye"></i></a>')
+                .addClass('inplace-button inplace-view align-center').attr('title', 'view')
+                .click(function (e) {
+                    self.inplaceViewClick(e);
+                });
+
+            if (this.options.inplaceView != false && !this.options.multiple) {
+                this.inplaceViewButton.insertAfter(this.element);
+            }
+
+            this.clearSelectionButton = this.element.find('.select2-search-choice-close').click(e => {
                 this.value = null;
                 this.text = '';
+
+                this.selectedItem = null;
+                this.selectedItems = [];
+
                 $(e.target).hide();
 
                 this.element.trigger('change');
-                this.element.triggerHandler('change');
+                //this.element.triggerHandler('change');
             });
 
         }
@@ -48,13 +66,38 @@
                 this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
                 this.text = selectedItems.map(m => m[this.options.nameFieldInGridRow]).join(', ');
 
+                if (Q.isEmptyOrNull(this.text)) {
+                    console.warn('nameFieldInGridRow might be wrong in ' + this.widgetName);
+                }
+
+                this.selectedItem = selectedItems[0];
+                this.selectedItems = selectedItems;
 
                 this.element.trigger('change');
-                this.element.triggerHandler('change');
+                //this.element.triggerHandler('change');
 
             }
             pickerDialog.dialogOpen();
 
+        }
+
+        protected inplaceViewClick(e: any): void {
+            var val = this.value;
+
+            if (!Q.isEmptyOrNull(val)) {
+                var dialogType = this.options.dialogType;
+
+                if (!dialogType.prototype)
+                    dialogType = Q.typeByFullName(this.options.dialogType);
+
+                try {
+                    var dlg = new dialogType() as DialogBase<any, any>;
+                    dlg.isReadOnly = true;
+                    dlg.loadByIdAndOpenDialog(this.value, false);
+                } catch (ex) {
+                    Q.notifyError('Could not intialize ' + this.options.dialogType);
+                }
+            }
         }
 
         public get value(): string {
@@ -65,8 +108,13 @@
         public set value(val: string) {
             this.element.find('input.value').val(val);
 
-            if (val && val.length > 0)
-                this.element.find('.select2-search-choice-close').show()
+            if (Q.isEmptyOrNull(val)) {
+                this.clearSelectionButton.hide()
+                this.inplaceViewButton.hide()
+            } else {
+                this.clearSelectionButton.show()
+                this.inplaceViewButton.show()
+            }
 
         }
 
@@ -81,6 +129,39 @@
 
         public getEditValue(property, target) { target[property.name] = this.value; }
         public setEditValue(source, property) { this.value = source[property.name]; this.text = source[this.options.nameFieldInThisRow]; }
+
+        get_value() {
+            return this.value;
+        }
+
+        set_value(value: string) {
+            this.value = value;
+        }
+
+        get_readOnly(): boolean {
+            return this.inplaceSearchButton.hasClass('disabled');;
+        }
+        set_readOnly(value: boolean): void {
+            if (value) {
+                this.inplaceSearchButton.addClass('disabled');
+                this.clearSelectionButton.addClass('disabled');
+                var field = this.getGridField();
+                field.find('*').off();
+            }
+        }
+
+        get_required(): boolean {
+            return this.element.find('input.value').hasClass('required');
+        }
+        set_required(value: boolean): void {
+            if (value) {
+                this.element.find('input.value, .select2-choice, span.display-text').addClass('required');
+            };
+        }
+
+        public selectedItem: any;
+        public selectedItems: any[];
+
     }
 
     export interface GridItemPickerEditorOptions {
@@ -90,7 +171,13 @@
         rowType?: string;
         nameFieldInGridRow?: string;
 
-        multiple: boolean;
-        preSelectedKeys?: any[]
+        inplaceView?: boolean;
+
+        multiple?: boolean;
+        preSelectedKeys?: any[];
+
+        filteringCriteria?: any;
+
+        dialogType?: any;
     }
 }
