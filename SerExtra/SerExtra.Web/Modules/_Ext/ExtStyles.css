@@ -36,7 +36,11 @@ input, textarea {
 }
 
 .field > .caption > sup {
-    display: none;
+    display: none !important;
+}
+
+.field > .s-MonthYearEditor {
+    padding-left: 6px;
 }
 
 /* Dialog Styles ---------------------------------------*/
@@ -204,9 +208,23 @@ input, textarea {
     border-bottom: none;*/
 }
 
-/*.quick-filter-item .inplace-button {
+.quick-filter-item .inplace-button {
+}
+
+.quick-filter-item .has-inplace-button {
+    margin-right: 0;
+}
+
+.quick-filter-item .inplace-search {
+    float: right;
+    padding-top: 2px;
+    vertical-align: top;
+    margin-top: 3px;
+}
+
+.quick-filter-item .inplace-create {
     display: none;
-}*/
+}
 
 .quick-filter-item .s-LookupEditor {
     width: 230px;
