@@ -1,4 +1,11 @@
 ﻿namespace q {
+    export function text(key: string, fallback: string): string {
+        var result = Q.text(key);
+
+        if (result == key) return fallback;
+        else return result;
+    }
+
     export function isCosmicThemeApplied(): boolean {
         return document.body.className.indexOf('cosmic') >= 0;
     }
