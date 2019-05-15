@@ -16,10 +16,28 @@ namespace _Ext
         {
         }
 
+        public object DialogType
+        {
+            get { return GetOption<object>("dialogType"); }
+            set { SetOption("dialogType", value); }
+        }
+
+        public object FilteringCriteria
+        {
+            get { return GetOption<object>("filteringCriteria"); }
+            set { SetOption("filteringCriteria", value); }
+        }
+
         public object GridType
         {
             get { return GetOption<object>("gridType"); }
             set { SetOption("gridType", value); }
+        }
+
+        public Boolean InplaceView
+        {
+            get { return GetOption<Boolean>("inplaceView"); }
+            set { SetOption("inplaceView", value); }
         }
 
         public Boolean Multiple
