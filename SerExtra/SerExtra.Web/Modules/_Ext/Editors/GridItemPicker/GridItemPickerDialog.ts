@@ -31,7 +31,7 @@
 
                 this.checkGrid.pickerDialog = this;
             } catch (ex) {
-                Q.notifyError('Could not intialize ' + options.gridType);
+                console.warn('Could not intialize ' + options.gridType);
             }
         }
 

@@ -48,7 +48,7 @@
                 this.value = null;
                 this.text = '';
 
-                this.selectedItem = null;
+                this._selectedItem = null;
                 this.selectedItems = [];
 
                 $(e.target).hide();
@@ -70,7 +70,7 @@
                     console.warn('nameFieldInGridRow might be wrong in ' + this.widgetName);
                 }
 
-                this.selectedItem = selectedItems[0];
+                this._selectedItem = selectedItems[0];
                 this.selectedItems = selectedItems;
 
                 this.element.trigger('change');
@@ -85,18 +85,23 @@
             var val = this.value;
 
             if (!Q.isEmptyOrNull(val)) {
-                var dialogType = this.options.dialogType;
+                var dlg = this.getDialogInstance();
+                dlg.isReadOnly = true;
+                dlg.loadByIdAndOpenDialog(val, false);
+            }
+        }
 
-                if (!dialogType.prototype)
-                    dialogType = Q.typeByFullName(this.options.dialogType);
+        private getDialogInstance(): DialogBase<any, any> {
+            var dialogType = this.options.dialogType;
 
-                try {
-                    var dlg = new dialogType() as DialogBase<any, any>;
-                    dlg.isReadOnly = true;
-                    dlg.loadByIdAndOpenDialog(this.value, false);
-                } catch (ex) {
-                    Q.notifyError('Could not intialize ' + this.options.dialogType);
-                }
+            if (!dialogType.prototype)
+                dialogType = Q.typeByFullName(this.options.dialogType);
+
+            try {
+                var dlg = new dialogType() as DialogBase<any, any>;
+                return dlg;
+            } catch (ex) {
+                console.warn('Could not intialize ' + this.options.dialogType);
             }
         }
 
@@ -159,7 +164,27 @@
             };
         }
 
-        public selectedItem: any;
+        private _selectedItem;
+
+        public get selectedItem() {
+            if (this._selectedItem)
+                return this._selectedItem;
+            else if (!Q.isEmptyOrNull(this.value)) {
+                var dlg = this.getDialogInstance();
+
+                Q.serviceCall<Serenity.RetrieveResponse<any>>({
+                    service: dlg['getService']() + '/Retrieve',
+                    request: { EntityId: this.value },
+                    async: false,
+                    onSuccess: (response) => {
+                        this._selectedItem = response.Entity;
+                    }
+                });
+
+                return this._selectedItem;
+            }
+        }
+
         public selectedItems: any[];
 
     }
