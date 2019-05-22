@@ -23,6 +23,12 @@
         private updateElementContent() {
             var text = Q.coalesce(this.options.text, this._value);
 
+            if (this.options.isDate)
+                text = Q.formatDate(text);
+
+            if (this.options.isDateTime)
+                text = Q.formatDate(text, Q.Culture.dateTimeFormat);
+
             // if isLocalText is set, text is actually a local text key
             if (this.options.isLocalText)
                 text = Q.text(text);
@@ -61,6 +67,8 @@
         isHtml: boolean;
         isLocalText: boolean;
         hideLabel: boolean;
+        isDate: boolean;
+        isDateTime: boolean;
     }
     
 }
