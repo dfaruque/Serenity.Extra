@@ -609,6 +609,7 @@ namespace _Ext {
                 return item
             })
         }
+
         set selectedKeys(value: any[]) {
             let options = (this.options as any) as GridItemPickerEditorOptions;
             if (options.multiple == true) {
@@ -616,6 +617,22 @@ namespace _Ext {
             } else {
 
             }
+        }
+
+        protected onViewSubmit() {
+            if (!super.onViewSubmit()) {
+                return false;
+            }
+
+            let options = (this.options as any) as GridItemPickerEditorOptions;
+
+            if (options.filteringCriteria) {
+
+                var request = this.view.params as Serenity.ListRequest;
+
+                request.Criteria = Serenity.Criteria.and(request.Criteria, options.filteringCriteria);
+            }
+            return true;
         }
 
     }
