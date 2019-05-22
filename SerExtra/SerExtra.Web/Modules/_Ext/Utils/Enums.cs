@@ -21,7 +21,7 @@ namespace _Ext //enums must have namespace otherwise it transforms to wrong type
         September = 8,
         October = 9,
         November = 10,
-        December = 11,
+        December = 11
     }
 
     [EnumKey("TimeUoM"), ScriptInclude]
