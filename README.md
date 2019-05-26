@@ -11,6 +11,7 @@ It is just some useful utilities and some extra functionalities like
 - Audit Log in a single Table and a nice viewer.
 - Replace Row (useful for deleting a record and replace the dependants records with another record)
 - Added some editors
+   - Grid Item Picker Editor
    - AutoCompleteEditor
    - ColorEditor
    - DateTimePickerEditor
