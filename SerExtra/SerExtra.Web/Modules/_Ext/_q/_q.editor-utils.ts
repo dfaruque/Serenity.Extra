@@ -145,6 +145,12 @@ namespace q {
                 editor.element.closest('.field').hide();
         }
     }
+
+    export function showAndEnableField(editor: Serenity.Widget<any>) {
+        q.showField(editor);
+        Serenity.EditorUtils.setReadOnly(editor, false);
+
+    }
         
     export function showFieldAndCategory(editor: Serenity.Widget<any>, value: boolean = true) {
         showField(editor, value);
