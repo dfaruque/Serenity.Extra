@@ -16,10 +16,34 @@ namespace _Ext
         {
         }
 
+        public String CascadeField
+        {
+            get { return GetOption<String>("cascadeField"); }
+            set { SetOption("cascadeField", value); }
+        }
+
+        public String CascadeFrom
+        {
+            get { return GetOption<String>("cascadeFrom"); }
+            set { SetOption("cascadeFrom", value); }
+        }
+
+        public object CascadeValue
+        {
+            get { return GetOption<object>("cascadeValue"); }
+            set { SetOption("cascadeValue", value); }
+        }
+
         public object DialogType
         {
             get { return GetOption<object>("dialogType"); }
             set { SetOption("dialogType", value); }
+        }
+
+        public String FilterField
+        {
+            get { return GetOption<String>("filterField"); }
+            set { SetOption("filterField", value); }
         }
 
         public object FilteringCriteria
@@ -28,10 +52,22 @@ namespace _Ext
             set { SetOption("filteringCriteria", value); }
         }
 
+        public object FilterValue
+        {
+            get { return GetOption<object>("filterValue"); }
+            set { SetOption("filterValue", value); }
+        }
+
         public object GridType
         {
             get { return GetOption<object>("gridType"); }
             set { SetOption("gridType", value); }
+        }
+
+        public String IdFieldInGridRow
+        {
+            get { return GetOption<String>("idFieldInGridRow"); }
+            set { SetOption("idFieldInGridRow", value); }
         }
 
         public Boolean InplaceView
@@ -68,6 +104,12 @@ namespace _Ext
         {
             get { return GetOption<String>("rowType"); }
             set { SetOption("rowType", value); }
+        }
+
+        public String ServiceUrl
+        {
+            get { return GetOption<String>("serviceUrl"); }
+            set { SetOption("serviceUrl", value); }
         }
     }
 }

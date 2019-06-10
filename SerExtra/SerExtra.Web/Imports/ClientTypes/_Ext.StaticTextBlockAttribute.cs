@@ -22,6 +22,18 @@ namespace _Ext
             set { SetOption("hideLabel", value); }
         }
 
+        public Boolean IsDate
+        {
+            get { return GetOption<Boolean>("isDate"); }
+            set { SetOption("isDate", value); }
+        }
+
+        public Boolean IsDateTime
+        {
+            get { return GetOption<Boolean>("isDateTime"); }
+            set { SetOption("isDateTime", value); }
+        }
+
         public Boolean IsHtml
         {
             get { return GetOption<Boolean>("isHtml"); }
