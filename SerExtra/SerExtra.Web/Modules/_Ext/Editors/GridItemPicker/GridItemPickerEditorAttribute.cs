@@ -23,26 +23,23 @@ namespace _Ext
             var idField = ((Field)(row as IIdRow).IdField).Name;
             var nameField = ((Field)(row as INameRow).NameField).Name;
 
-            SetOption("rowType", rowType.FullName);
+            var rowClientType = rowType.FullName.Replace(".Entities", "");
+            SetOption("rowType", rowClientType);
 
-            var gridType = rowType.FullName.Replace(".Entities", "");
-            if (gridType.EndsWith("Row"))
-            {
-                gridType = gridType.Substring(0, gridType.Length - 3);
-                gridType += "Grid";
-            }
+            string rowClientTypeWithoutRowSuffix = rowClientType.EndsWith("Row") ? rowClientType.Substring(0, rowClientType.Length - 3) : rowClientType;
 
-            SetOption("gridType", gridType);
-            SetOption("dialogType", gridType.Replace("Grid", "Dialog"));
+            SetOption("gridType", rowClientTypeWithoutRowSuffix + "Grid");
+            SetOption("dialogType", rowClientTypeWithoutRowSuffix + "Dialog");
+            SetOption("idFieldInGridRow", idField);
             SetOption("nameFieldInGridRow", nameField);
 
-            var kk = propertyName;
+            var propertyNameWithoutIdSuffix = propertyName;
             if (propertyName.EndsWith("Id", StringComparison.OrdinalIgnoreCase))
             {
-                kk = propertyName.Substring(0, propertyName.Length - 2);
+                propertyNameWithoutIdSuffix = propertyName.Substring(0, propertyName.Length - 2);
             }
 
-            SetOption("nameFieldInThisRow", kk + nameField);
+            SetOption("nameFieldInThisRow", propertyNameWithoutIdSuffix + nameField);
 
 
         }

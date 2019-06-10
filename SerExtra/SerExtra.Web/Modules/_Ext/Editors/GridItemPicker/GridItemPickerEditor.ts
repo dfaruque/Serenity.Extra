@@ -21,6 +21,9 @@
             super(container, options);
 
             this.addInplaceButtons();
+
+            this.setCascadeFrom((this.options as Serenity.Select2EditorOptions).cascadeFrom);
+
         }
 
         protected addInplaceButtons(): void {
@@ -114,6 +117,7 @@
             this.element.find('input.value').val(val);
 
             if (Q.isEmptyOrNull(val)) {
+                this.text = '';
                 this.clearSelectionButton.hide()
                 this.inplaceViewButton.hide()
             } else {
@@ -133,7 +137,16 @@
         }
 
         public getEditValue(property, target) { target[property.name] = this.value; }
-        public setEditValue(source, property) { this.value = source[property.name]; this.text = source[this.options.nameFieldInThisRow]; }
+        public setEditValue(source, property) {
+            this.value = source[property.name];
+            this.text = source[this.options.nameFieldInThisRow];
+
+            if (source[property.name] && source[this.options.nameFieldInThisRow]) {
+                this._selectedItem = {};
+                this._selectedItem[this.options.idFieldInGridRow] = source[property.name];
+                this._selectedItem[this.options.nameFieldInGridRow] = source[this.options.nameFieldInThisRow];
+            }
+        }
 
         get_value() {
             return this.value;
@@ -148,10 +161,8 @@
         }
         set_readOnly(value: boolean): void {
             if (value) {
-                this.inplaceSearchButton.addClass('disabled');
-                this.clearSelectionButton.addClass('disabled');
-                var field = this.getGridField();
-                field.find('*').off();
+                this.inplaceSearchButton.addClass('disabled').hide();
+                this.clearSelectionButton.addClass('disabled').hide();
             }
         }
 
@@ -164,17 +175,17 @@
             };
         }
 
+
         private _selectedItem;
 
         public get selectedItem() {
-            if (this._selectedItem)
+            if (this._selectedItem && this._selectedItem[this.options.nameFieldInGridRow])
                 return this._selectedItem;
             else if (!Q.isEmptyOrNull(this.value)) {
-                var dlg = this.getDialogInstance();
 
                 Q.serviceCall<Serenity.RetrieveResponse<any>>({
-                    service: dlg['getService']() + '/Retrieve',
-                    request: { EntityId: this.value },
+                    service: this.serviceUrl + '/Retrieve',
+                    request: { EntityId: this.value, ColumnSelection: Serenity.RetrieveColumnSelection.list } as Serenity.RetrieveRequest,
                     async: false,
                     onSuccess: (response) => {
                         this._selectedItem = response.Entity;
@@ -187,13 +198,154 @@
 
         public selectedItems: any[];
 
+        private _serviceUrl: string;
+        get serviceUrl(): string {
+            if (Q.isEmptyOrNull(this._serviceUrl)) {
+                var dlg = this.getDialogInstance();
+                this._serviceUrl = dlg['getService']();
+            }
+            return this._serviceUrl;
+        }
+
+        setValueAndText(value, text) {
+            this.value = value;
+            this.text = text;
+        }
+
+        //-------------------------------cascading and filtering -----------------------------------
+        protected getCascadeFromValue(parent: Serenity.Widget<any>) {
+            return Serenity.EditorUtils.getValue(parent);
+        }
+
+        protected cascadeLink: Serenity.CascadedWidgetLink<Serenity.Widget<any>>;
+
+        protected setCascadeFrom(value: string) {
+
+            if (Q.isEmptyOrNull(value)) {
+                if (this.cascadeLink != null) {
+                    this.cascadeLink.set_parentID(null);
+                    this.cascadeLink = null;
+                }
+                (this.options as Serenity.Select2EditorOptions).cascadeFrom = null;
+                return;
+            }
+
+            this.cascadeLink = new Serenity.CascadedWidgetLink<Serenity.Widget<any>>(Serenity.Widget, this, p => {
+                this.set_cascadeValue(this.getCascadeFromValue(p));
+            });
+
+            this.cascadeLink.set_parentID(value);
+            (this.options as Serenity.Select2EditorOptions).cascadeFrom = value;
+        }
+
+        protected get_cascadeFrom(): string {
+            return (this.options as Serenity.Select2EditorOptions).cascadeFrom;
+        }
+
+        get cascadeFrom(): string {
+            return this.get_cascadeFrom();
+        }
+
+        protected set_cascadeFrom(value: string) {
+            if (value !== (this.options as Serenity.Select2EditorOptions).cascadeFrom) {
+                this.setCascadeFrom(value);
+                this.updateItems();
+            }
+        }
+
+        set cascadeFrom(value: string) {
+            this.set_cascadeFrom(value);
+        }
+
+        protected get_cascadeField() {
+            return Q.coalesce((this.options as Serenity.Select2EditorOptions).cascadeField, (this.options as Serenity.Select2EditorOptions).cascadeFrom);
+        }
+
+        get cascadeField(): string {
+            return this.get_cascadeField();
+        }
+
+        protected set_cascadeField(value: string) {
+            (this.options as Serenity.Select2EditorOptions).cascadeField = value;
+        }
+
+        set cascadeField(value: string) {
+            this.set_cascadeField(value);
+        }
+
+        protected get_cascadeValue(): any {
+            return (this.options as Serenity.Select2EditorOptions).cascadeValue;
+        }
+
+        get cascadeValue(): any {
+            return this.get_cascadeValue();
+        }
+
+        protected set_cascadeValue(value: any) {
+            if ((this.options as Serenity.Select2EditorOptions).cascadeValue !== value) {
+                (this.options as Serenity.Select2EditorOptions).cascadeValue = value;
+                this.set_value(null);
+                this.updateItems();
+
+                this.options.filteringCriteria = [[this.cascadeField], '=', value];
+            }
+        }
+
+        set cascadeValue(value: any) {
+            this.set_cascadeValue(value);
+        }
+
+        protected get_filterField() {
+            return (this.options as Serenity.Select2EditorOptions).filterField;
+        }
+
+        get filterField(): string {
+            return this.get_filterField();
+        }
+
+        protected set_filterField(value: string) {
+            (this.options as Serenity.Select2EditorOptions).filterField = value;
+        }
+
+        set filterField(value: string) {
+            this.set_filterField(value);
+        }
+
+        protected get_filterValue(): any {
+            return (this.options as Serenity.Select2EditorOptions).filterValue;
+        }
+
+        get filterValue(): any {
+            return this.get_filterValue();
+        }
+
+        protected set_filterValue(value: any) {
+            if ((this.options as Serenity.Select2EditorOptions).filterValue !== value) {
+                (this.options as Serenity.Select2EditorOptions).filterValue = value;
+                this.set_value(null);
+                this.updateItems();
+
+                this.options.filteringCriteria = [[this.cascadeField], '=', value];
+
+            }
+        }
+
+        set filterValue(value: any) {
+            this.set_filterValue(value);
+        }
+
+        protected updateItems() {
+        }
+
     }
 
-    export interface GridItemPickerEditorOptions {
+    export interface GridItemPickerEditorOptions extends Serenity.Select2FilterOptions {
         gridType: any;
         nameFieldInThisRow?: string;
+        serviceUrl?: string;
 
         rowType?: string;
+        idFieldInGridRow?: string;
         nameFieldInGridRow?: string;
 
         inplaceView?: boolean;
@@ -204,5 +356,13 @@
         filteringCriteria?: any;
 
         dialogType?: any;
+
+        //from Serenity.Select2FilterOptions
+        cascadeFrom?: string;
+        cascadeField?: string;
+        cascadeValue?: any;
+        filterField?: string;
+        filterValue?: any;
+
     }
 }
