@@ -25,7 +25,7 @@
                 if (options.preSelectedKeys)
                     this.checkGrid.selectedKeys = options.preSelectedKeys;
 
-                this.dialogTitle = "Select " + this.checkGrid.getTitle();
+                this.dialogTitle = q.text('Controls.Select', "Select") + " - " + this.checkGrid.getTitle();
                 this.checkGrid.setTitle(null);
                 this.checkGrid.element.height(500);
 
