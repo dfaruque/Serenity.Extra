@@ -11,6 +11,8 @@ namespace _Ext {
 
         protected getIdProperty() { return "__id"; }
 
+        isChildGrid = true;
+
         protected nextId = 1;
 
         constructor(container: JQuery) {

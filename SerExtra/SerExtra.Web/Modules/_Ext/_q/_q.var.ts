@@ -31,8 +31,8 @@ namespace q {
         ShowDeleteInlineButtun: true,
         ShowEditInlineButtun: true,
         ShowRowSelectionCheckboxColumn: false,
-        EnableQuickSearch: false,
-        ShowRowNumberColumn: true
+        ShowRowNumberColumn: true,
+        EnableQuickSearch: false
     };
 
     export var DefaultEntityDialogOptions: ExtDialogOptions = {
