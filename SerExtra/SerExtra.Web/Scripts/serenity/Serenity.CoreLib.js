@@ -6080,8 +6080,8 @@ var Serenity;
         LookupEditorBase.prototype.getDialogTypeKey = function () {
             var dialogTypeKey = _super.prototype.getDialogTypeKey.call(this);
             if (dialogTypeKey)
-                return this.getLookupKey();
-            return dialogTypeKey;
+                return dialogTypeKey;
+            return this.getLookupKey();
         };
         LookupEditorBase.prototype.setCreateTermOnNewEntity = function (entity, term) {
             entity[this.getLookup().textField] = term;
@@ -10481,6 +10481,8 @@ var Serenity;
             }
         };
         PropertyGrid.prototype.save = function (target) {
+            if (target == null)
+                target = Object.create(null);
             for (var i = 0; i < this.editors.length; i++) {
                 var item = this.items[i];
                 if (item.oneWay !== true && this.canModifyItem(item)) {
@@ -10488,7 +10490,20 @@ var Serenity;
                     Serenity.EditorUtils.saveValue(editor, item, target);
                 }
             }
+            return target;
         };
+        Object.defineProperty(PropertyGrid.prototype, "value", {
+            get: function () {
+                return this.save();
+            },
+            set: function (val) {
+                if (val == null)
+                    val = Object.create(null);
+                this.load(val);
+            },
+            enumerable: true,
+            configurable: true
+        });
         PropertyGrid.prototype.canModifyItem = function (item) {
             if (this.get_mode() === 1 /* insert */) {
                 if (item.insertable === false) {
@@ -12677,7 +12692,8 @@ var Serenity;
             return (this.filterBar == null) ? null : this.filterBar.get_store();
         };
         DataGrid = __decorate([
-            Serenity.Decorators.registerClass('Serenity.DataGrid', [IDataGrid])
+            Serenity.Decorators.registerClass('Serenity.DataGrid', [IDataGrid]),
+            Serenity.Decorators.element("<div/>")
         ], DataGrid);
         return DataGrid;
     }(Serenity.Widget));
@@ -15015,9 +15031,11 @@ var Serenity;
                 return response;
             };
             if (options.toggleField) {
-                var col = Q.first(dg.getGrid().getColumns(), function (x) { return x.field == options.toggleField; });
-                col.format = Serenity.SlickFormatting.treeToggle(function () { return dg.view; }, getId, col.format || (function (ctx) { return Q.htmlEncode(ctx.value); }));
-                col.formatter = Serenity.SlickHelper.convertToFormatter(col.format);
+                var col = Q.tryFirst(dg['allColumns'] || dg.slickGrid.getColumns() || [], function (x) { return x.field == options.toggleField; });
+                if (col) {
+                    col.format = Serenity.SlickFormatting.treeToggle(function () { return dg.view; }, getId, col.format || (function (ctx) { return Q.htmlEncode(ctx.value); }));
+                    col.formatter = Serenity.SlickHelper.convertToFormatter(col.format);
+                }
             }
         }
         /**
