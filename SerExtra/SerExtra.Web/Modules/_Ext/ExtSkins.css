@@ -1,9 +1,6 @@
 ﻿
 
 /*---------------------------------Extra Skins ------------------------------*/
-.main-header .logo {
-    width: unset !important;
-}
 
 .skin-azure .ui-dialog .ui-dialog-titlebar, .skin-azure-light .ui-dialog .ui-dialog-titlebar {
     background-color: #1f7dce
