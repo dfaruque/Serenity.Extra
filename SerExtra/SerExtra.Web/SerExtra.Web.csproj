@@ -1243,6 +1243,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\HardCodedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\HtmlTemplateEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\MonthYearEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\PrefixedStringEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\MonthYearFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
