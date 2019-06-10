@@ -442,7 +442,7 @@ namespace _Ext {
                 let fixedSizeColumnsWidth = 0;
                 fixedSizeColumns.map(m => m.width).forEach(e => fixedSizeColumnsWidth += e);
 
-                let stretchableGridAreaWidth = gridContainerWidth - fixedSizeColumnsWidth - 18;
+                let stretchableGridAreaWidth = gridContainerWidth - fixedSizeColumnsWidth - (this.isChildGrid ? 48 : 18);
 
                 let resizableColumnsWidth = 0;
                 resizableColumns
@@ -455,7 +455,7 @@ namespace _Ext {
                     let increment = newWidth - c.width;
 
                     //if (increment <= 200) // maximum streching is 200
-                        c.width = newWidth;
+                    c.width = newWidth;
                     //else c.width = c.width + 200;
 
                 });
