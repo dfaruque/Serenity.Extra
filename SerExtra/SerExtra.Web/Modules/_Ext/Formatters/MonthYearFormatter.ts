@@ -6,7 +6,7 @@
             if (ctx.value) {
                 let val = Q.parseISODateTime(ctx.value);
 
-                return Months[val.getMonth()] + '-' + val.getFullYear();
+                return q.getEnumText('Months', val.getMonth()) + '-' + val.getFullYear();
             } else return '';
         }
 
