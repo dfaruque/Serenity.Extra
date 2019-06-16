@@ -151,111 +151,116 @@ namespace _Ext {
         protected getColumns(): Slick.Column[] {
             let columns = super.getColumns();
 
-            let isEditable = this.getSlickOptions().editable
+            let isEditable = this.getSlickOptions().editable;
             let extOptions = this.get_ExtGridOptions();
 
-            columns.forEach(c => {
+            if (isEditable == true) {
+                usingSlickGridEditors();
+            }
+
+            columns.forEach(column => {
                 if (extOptions.AutoColumnSize == true) {
-                    c.width = c.minWidth || c.width || 50;
-                    c.cssClass = c.cssClass || '';
-
-                } else {
-                    c.cssClass += ' align-left';
-                    c.width = c.minWidth > 99 ? c.minWidth : 99;
+                    column.width = column.minWidth || column.width || 50;
+                    column.cssClass = column.cssClass || '';
                 }
 
-                //editor
-                if (isEditable == true && c.sourceItem && c.sourceItem.readOnly != true) {
-                    usingSlickGridEditors();
+                if (column.sourceItem) {
+                    let formatterType = column.sourceItem.formatterType;
+                    //width and cssClass
+                    if (column.sourceItem.filteringType == "Lookup") {
+                        column.cssClass += ' align-left';
+                        column.width = column.minWidth > 100 ? column.minWidth : 100;
+                    } else if (formatterType == "Enum") {
+                        column.width = column.minWidth > 100 ? column.minWidth : 100;
+                    } else if (formatterType == "Date") {
+                        column.cssClass += ' align-center';
+                        column.width = column.minWidth > 99 ? column.minWidth : 99;
+                    } else if (formatterType == "DateTime") {
+                        column.cssClass += ' align-center';
+                        column.width = column.minWidth > 140 ? column.minWidth : 140;
+                    } else if (formatterType == "Number") {
+                        column.cssClass += ' align-right';
 
-                    if (q.useSerenityInlineEditors) {
-                        c.editor = SerenityInlineEditor;
+                    } else if (formatterType == "Checkbox") {
+                        column.cssClass += ' align-center';
                     } else {
-                        if (c.sourceItem.editorType == "Lookup" || c.sourceItem.editorType == "Enum") {
-                            c.editor = Slick['Editors']['Select2'];
-                            c.width = c.minWidth > 160 ? c.minWidth : 160;
-                        } else if (c.sourceItem.editorType == "Date") {
-                            c.editor = Slick['Editors']['Date'];
-                        } else if (c.sourceItem.editorType == "Boolean") {
-                            c.editor = Slick['Editors']['Checkbox'];
-                        } else if (c.sourceItem.editorType == "Integer") {
-                            c.editor = Slick['Editors']['Integer'];
-                        } else if (c.sourceItem.editorType == "Decimal") {
-                            c.editor = Slick['Editors']['Float'];
-                        } else if (c.sourceItem.editorType == "YesNoSelect") {
-                            c.editor = Slick['Editors']['YesNoSelect'];
-                        } else if (c.sourceItem.editorType == "PercentComplete") {
-                            c.editor = Slick['Editors']['PercentComplete'];
-                        } else if (c.sourceItem.editorType == "LongText") {
-                            c.editor = Slick['Editors']['LongText'];
-                        } else {
-                            c.editor = Slick['Editors']['Text'];
-                        }
+                        column.cssClass += ' align-left';
+                        column.width = column.minWidth > 99 ? column.minWidth : 99;
                     }
-                }
-                if (c.sourceItem) {
-                    if (c.sourceItem.filteringType == "Lookup") {
-                        c.cssClass += ' align-left';
-                        if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
-                            (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
-                            c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+
+                    //formatter
+                    if (column.sourceItem.editorType == "Lookup") {
+                        if (!column.sourceItem.editorParams.autoComplete) {
+                            (column as any).lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey)
+                            column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                                 let item = columnDef.lookup.itemById[value];
                                 if (item) return item[columnDef.lookup.textField];
                                 else return '-';
                             };
                         }
-                        c.width = c.minWidth > 100 ? c.minWidth : 100;
-                    } else if (c.sourceItem.formatterType == "Enum") {
-                        //c.cssClass += ' align-center';
+                    } else if (formatterType == "Enum") {
 
-                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                        column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                             let enumKey = columnDef.sourceItem.editorParams.enumKey
                             let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
                             if (text) return text;
                             else return '-';
                         };
-                    } else if (c.sourceItem.formatterType == "Date") {
-                        c.cssClass += ' align-center';
-                        c.width = c.minWidth > 99 ? c.minWidth : 99;
-                    } else if (c.sourceItem.formatterType == "DateTime") {
-                        c.cssClass += ' align-center';
-                        c.width = c.minWidth > 140 ? c.minWidth : 140;
-                    } else if (c.sourceItem.formatterType == "Number") {
-                        c.cssClass += ' align-right';
-                        if (c.sourceItem.editorType == "Decimal") {
+                    } else if (column.sourceItem.editorType == "Decimal") {
 
-                            let formatSrt = '#,##0.00';
+                        let formatSrt = '#,##0.00';
 
-                            if (c.sourceItem.editorParams) {
-                                let decimals = c.sourceItem.editorParams['decimals'];
-                                if (decimals) {
-                                    formatSrt = '#,##0.'
-                                    for (let i = 0; i < decimals; i++) {
-                                        formatSrt += '0'
-                                    }
-                                }
-                                else if (c.sourceItem.editorParams['minValue']) {
-                                    let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
-                                    if (splitedMinValue.length > 1) {
-                                        formatSrt = '#,##0.' + splitedMinValue[1];
-                                    } else {
-                                        formatSrt = '#,##0';
-
-                                    }
+                        if (column.sourceItem.editorParams) {
+                            let decimals = column.sourceItem.editorParams['decimals'];
+                            if (decimals) {
+                                formatSrt = '#,##0.'
+                                for (let i = 0; i < decimals; i++) {
+                                    formatSrt += '0'
                                 }
                             }
+                            else if (column.sourceItem.editorParams['minValue']) {
+                                let splitedMinValue = (column.sourceItem.editorParams['minValue'] as string).split('.');
+                                if (splitedMinValue.length > 1) {
+                                    formatSrt = '#,##0.' + splitedMinValue[1];
+                                } else {
+                                    formatSrt = '#,##0';
 
-                            c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
+                                }
+                            }
                         }
 
-                    } else if (c.sourceItem.formatterType == "Checkbox") {
-                        c.cssClass += ' align-center';
-                    } else {
-                        c.cssClass += ' align-left';
-                        c.width = c.minWidth > 99 ? c.minWidth : 99;
+                        column.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
                     }
 
+                    //editor
+                    if (isEditable == true && column.sourceItem.readOnly != true) {
+                        if (q.useSerenityInlineEditors) {
+                            column.editor = SerenityInlineEditor;
+                        } else {
+                            let editorType = column.sourceItem.editorType;
 
+                            if (editorType == "Lookup" || editorType == "Enum") {
+                                column.editor = Slick['Editors']['Select2'];
+                                column.width = column.minWidth > 160 ? column.minWidth : 160;
+                            } else if (editorType == "Date") {
+                                column.editor = Slick['Editors']['Date'];
+                            } else if (editorType == "Boolean") {
+                                column.editor = Slick['Editors']['Checkbox'];
+                            } else if (editorType == "Integer") {
+                                column.editor = Slick['Editors']['Integer'];
+                            } else if (editorType == "Decimal") {
+                                column.editor = Slick['Editors']['Float'];
+                            } else if (editorType == "YesNoSelect") {
+                                column.editor = Slick['Editors']['YesNoSelect'];
+                            } else if (editorType == "PercentComplete") {
+                                column.editor = Slick['Editors']['PercentComplete'];
+                            } else if (editorType == "LongText") {
+                                column.editor = Slick['Editors']['LongText'];
+                            } else {
+                                column.editor = Slick['Editors']['Text'];
+                            }
+                        }
+                    }
                 }
             });
 
