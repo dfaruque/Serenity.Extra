@@ -158,73 +158,10 @@ namespace _Ext {
                 if (extOptions.AutoColumnSize == true) {
                     c.width = c.minWidth || c.width || 50;
                     c.cssClass = c.cssClass || '';
-                    if (c.sourceItem) {
-                        if (c.sourceItem.filteringType == "Lookup") {
-                            c.cssClass += ' align-left';
-                            if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
-                                (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
-                                c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                                    let item = columnDef.lookup.itemById[value];
-                                    if (item) return item[columnDef.lookup.textField];
-                                    else return '-';
-                                };
-                            }
-                            c.width = c.minWidth > 100 ? c.minWidth : 100;
-                        } else if (c.sourceItem.formatterType == "Enum") {
-                            //c.cssClass += ' align-center';
 
-                            c.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                                let enumKey = columnDef.sourceItem.editorParams.enumKey
-                                let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
-                                if (text) return text;
-                                else return '-';
-                            };
-                        } else if (c.sourceItem.formatterType == "Date") {
-                            c.cssClass += ' align-center';
-                            c.width = c.minWidth > 99 ? c.minWidth : 99;
-                        } else if (c.sourceItem.formatterType == "DateTime") {
-                            c.cssClass += ' align-center';
-                            c.width = c.minWidth > 140 ? c.minWidth : 140;
-                        } else if (c.sourceItem.formatterType == "Number") {
-                            c.cssClass += ' align-right';
-                            if (c.sourceItem.editorType == "Decimal") {
-
-                                let formatSrt = '#,##0.00';
-
-                                if (c.sourceItem.editorParams) {
-                                    let decimals = c.sourceItem.editorParams['decimals'];
-                                    if (decimals) {
-                                        formatSrt = '#,##0.'
-                                        for (let i = 0; i < decimals; i++) {
-                                            formatSrt += '0'
-                                        }
-                                    }
-                                    else if (c.sourceItem.editorParams['minValue']) {
-                                        let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
-                                        if (splitedMinValue.length > 1) {
-                                            formatSrt = '#,##0.' + splitedMinValue[1];
-                                        } else {
-                                            formatSrt = '#,##0';
-
-                                        }
-                                    }
-                                }
-
-                                c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
-                            }
-
-                        } else if (c.sourceItem.formatterType == "Checkbox") {
-                            c.cssClass += ' align-center';
-                        } else {
-                            c.cssClass += ' align-left';
-                            c.width = c.minWidth > 99 ? c.minWidth : 99;
-                        }
-
-
-                    } else {
-                        c.cssClass += ' align-left';
-                        c.width = c.minWidth > 99 ? c.minWidth : 99;
-                    }
+                } else {
+                    c.cssClass += ' align-left';
+                    c.width = c.minWidth > 99 ? c.minWidth : 99;
                 }
 
                 //editor
@@ -256,7 +193,70 @@ namespace _Ext {
                         }
                     }
                 }
+                if (c.sourceItem) {
+                    if (c.sourceItem.filteringType == "Lookup") {
+                        c.cssClass += ' align-left';
+                        if (c.sourceItem.editorType == "Lookup" && !c.sourceItem.editorParams.autoComplete) {
+                            (c as any).lookup = Q.getLookup(c.sourceItem.editorParams.lookupKey)
+                            c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                                let item = columnDef.lookup.itemById[value];
+                                if (item) return item[columnDef.lookup.textField];
+                                else return '-';
+                            };
+                        }
+                        c.width = c.minWidth > 100 ? c.minWidth : 100;
+                    } else if (c.sourceItem.formatterType == "Enum") {
+                        //c.cssClass += ' align-center';
 
+                        c.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                            let enumKey = columnDef.sourceItem.editorParams.enumKey
+                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                            if (text) return text;
+                            else return '-';
+                        };
+                    } else if (c.sourceItem.formatterType == "Date") {
+                        c.cssClass += ' align-center';
+                        c.width = c.minWidth > 99 ? c.minWidth : 99;
+                    } else if (c.sourceItem.formatterType == "DateTime") {
+                        c.cssClass += ' align-center';
+                        c.width = c.minWidth > 140 ? c.minWidth : 140;
+                    } else if (c.sourceItem.formatterType == "Number") {
+                        c.cssClass += ' align-right';
+                        if (c.sourceItem.editorType == "Decimal") {
+
+                            let formatSrt = '#,##0.00';
+
+                            if (c.sourceItem.editorParams) {
+                                let decimals = c.sourceItem.editorParams['decimals'];
+                                if (decimals) {
+                                    formatSrt = '#,##0.'
+                                    for (let i = 0; i < decimals; i++) {
+                                        formatSrt += '0'
+                                    }
+                                }
+                                else if (c.sourceItem.editorParams['minValue']) {
+                                    let splitedMinValue = (c.sourceItem.editorParams['minValue'] as string).split('.');
+                                    if (splitedMinValue.length > 1) {
+                                        formatSrt = '#,##0.' + splitedMinValue[1];
+                                    } else {
+                                        formatSrt = '#,##0';
+
+                                    }
+                                }
+                            }
+
+                            c.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
+                        }
+
+                    } else if (c.sourceItem.formatterType == "Checkbox") {
+                        c.cssClass += ' align-center';
+                    } else {
+                        c.cssClass += ' align-left';
+                        c.width = c.minWidth > 99 ? c.minWidth : 99;
+                    }
+
+
+                }
             });
 
             columns.unshift({
