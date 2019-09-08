@@ -126,6 +126,14 @@ input, textarea {
     display: none;
 }
 
+.field-only > field {
+    width: 90% !important;
+}
+
+.field-only > label {
+    display: none;
+}
+
 .offset-field {
 }
 
