@@ -163,6 +163,9 @@
             if (value) {
                 this.inplaceSearchButton.addClass('disabled').hide();
                 this.clearSelectionButton.addClass('disabled').hide();
+            } else {
+                this.inplaceSearchButton.removeClass('disabled').show();
+                this.clearSelectionButton.removeClass('disabled').show();
             }
         }
 
