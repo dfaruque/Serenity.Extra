@@ -73,7 +73,9 @@
                 for (let editor in this.form) {
                     if (this.form[editor].widgetName) {
 
-                        Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
+                        try {
+                            Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
+                        } catch{ }
                     }
                 }
 
