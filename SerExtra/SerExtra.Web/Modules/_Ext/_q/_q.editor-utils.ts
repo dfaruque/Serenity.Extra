@@ -48,7 +48,7 @@ namespace q {
             .height(heightInPx);
     }
 
-    export function addNotificationIcon(editor: Serenity.StringEditor, isSuccess: boolean): void {
+    export function addNotificationIcon(editor: Serenity.Widget<any>, isSuccess: boolean): void {
 
         let isAddOnInitialized = editor.element.data('isAddOnInitialized');
 
@@ -67,6 +67,21 @@ namespace q {
                 .children().switchClass('fa-check', 'fa-times');
 
         }
+    }
+
+    export function addPopoverIcon(editor: Serenity.Widget<any>, isSuccess: boolean, popoverOptions: any): void { // popoverOptions: Bootstrap.PopoverOptions
+        addNotificationIcon(editor, isSuccess);
+
+        //(editor.element as any).popover('destroy');
+        (editor.element.siblings('.text') as any).popover('destroy');
+
+        setTimeout(h => {
+            //(editor.element as any).popover(popoverOptions);
+            (editor.element.siblings('.text') as any)
+                .popover(popoverOptions)
+                .on("show.bs.popover", function () { $(this).data("bs.popover").tip().css("width", "600px"); });;
+        }, 100)
+
     }
 
     export function setEditorLabel(editor: Serenity.Widget<any>, value: string) {
@@ -151,7 +166,7 @@ namespace q {
         Serenity.EditorUtils.setReadOnly(editor, false);
 
     }
-        
+
     export function showFieldAndCategory(editor: Serenity.Widget<any>, value: boolean = true) {
         showField(editor, value);
         if (value == true)
