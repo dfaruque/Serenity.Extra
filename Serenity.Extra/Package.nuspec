@@ -23,6 +23,6 @@
     <file src="..\SerExtra\SerExtra.Web\Modules\_Ext\**\*.*" target="content\Modules\_Ext" />
 	<file src="..\SerExtra\SerExtra.Web\Imports\ClientTypes\_Ext*.*" target="content\Imports\ClientTypes" />
 	<file src="..\SerExtra\SerExtra.Web\Imports\ServerTypings\_Ext*.*" target="content\Imports\ServerTypings" />
-
+	<file src="..\SerExtra\SerExtra.Web\Imports\_references.ts" target="content\Imports" />
   </files>
 </package>
