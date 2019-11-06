@@ -1,5 +1,17 @@
 ﻿
 namespace q {
+    export function sum(xs: any[], key) {
+        let initObj = {};
+        initObj[key] = 0;
+
+        let sumObj = xs.reduce(function (rv, x) {
+            (rv[key] += x[key] || 0);
+            return rv;
+        }, initObj)
+
+        return sumObj[key];
+    }
+
     export function groupBy(xs: any[], key) {
         return xs.reduce(function (rv, x) {
             (rv[x[key]] = rv[x[key]] || []).push(x);
