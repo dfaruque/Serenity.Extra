@@ -29,6 +29,7 @@
                 this.element.attr("disabled");
             } else {
                 this.element.removeClass('readonly');
+                this.element.removeAttr("readonly");
                 this.element.removeAttr("disabled");
             }
         }
