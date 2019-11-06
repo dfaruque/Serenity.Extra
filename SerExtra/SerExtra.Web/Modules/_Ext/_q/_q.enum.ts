@@ -1,16 +1,21 @@
 ﻿
 namespace q {
 
-    export function getEnumText(enumKey, value) {
+    export function getEnumText(enumTypeOrKey, value) {
+        let enumKey = enumTypeOrKey.__typeName ? enumTypeOrKey.__typeName : enumTypeOrKey;
         let title = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
         return title;
     }
 
-    export function getEnumValues(enumType): string[] {
-        let items: string[] = [];
+    export function isNumber(value): boolean {
+        return !isNaN(Number(value))
+    }
+
+    export function getEnumValues(enumType): number[] {
+        let items: number[] = [];
         for (let item in enumType) {
-            if (!isNaN(Number(item))) {
-                items.push(enumType[item]);
+            if (q.isNumber(item)) {
+                items.push(Number(item));
             }
         }
 
@@ -18,14 +23,7 @@ namespace q {
     }
 
     export function getEnumKeys(enumType): string[] {
-        let items: string[] = [];
-        for (let item in enumType) {
-            if (!isNaN(Number(item))) {
-                items.push(item);
-            }
-        }
-
-        return items;
+        return q.getEnumValues(enumType).map(m => enumType[m]);
     }
 
 }
