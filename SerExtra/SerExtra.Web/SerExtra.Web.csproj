@@ -1244,6 +1244,7 @@
     <TypeScriptCompile Include="Modules\ExtraSamples\CustomizedEditors\CustomerTemplatedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\HardCodedLookupEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\HtmlTemplateEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\JsonGridEditorBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\MonthYearEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\PrefixedStringEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
