@@ -17,6 +17,7 @@ namespace q {
         ShowInlineActionsColumn: true,
         ShowDeleteInlineButtun: false,
         ShowEditInlineButtun: true,
+        ShowPrintInlineButtun: false,
         ShowRowNumberColumn: true,
         ShowRowSelectionCheckboxColumn: false,
         EnableQuickSearch: true,
@@ -30,6 +31,7 @@ namespace q {
         ShowInlineActionsColumn: true,
         ShowDeleteInlineButtun: true,
         ShowEditInlineButtun: true,
+        ShowPrintInlineButtun: false,
         ShowRowSelectionCheckboxColumn: false,
         ShowRowNumberColumn: true,
         EnableQuickSearch: false
