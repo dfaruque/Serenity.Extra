@@ -7,6 +7,7 @@ namespace _Ext {
         extends Serenity.EntityGrid<TItem, TOptions> {
 
         protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
+        protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
 
         isReadOnly: boolean;
         isRequired: boolean;
@@ -63,7 +64,9 @@ namespace _Ext {
                     title: 'View as Report',
                     icon: 'fa fa-html5',
                     onClick: () => {
-                        ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: this.getReportRequest() }, extension: 'html' });
+                        let request = this.getReportRequest();
+                        if (request)
+                            ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: request }, extension: 'html' });
                     }
                 });
 
@@ -90,8 +93,7 @@ namespace _Ext {
             return buttons;
         }
 
-        protected getReportRequest()//: _Ext.ReportRequest
-        {
+        protected getReportRequest(): _Ext.ListReportRequest {
             let view = this.getView();
 
             var request = Q.deepClone(view ? view.params : {}) //as _Ext.ReportRequest;
@@ -115,7 +117,11 @@ namespace _Ext {
                             let enumValue = Q.toId(filterValue);
                             request.EqualityFilterWithTextValue[quickFilter.title] = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), enumValue);
                         }
+                        else if (quickFilter.type == GridItemPickerEditor) {
+                            var customFilter = this.findQuickFilter(GridItemPickerEditor, quickFilter.field);
+                            request.EqualityFilterWithTextValue[quickFilter.title] = customFilter.text;
 
+                        }
                         else {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterValue;
                         }
@@ -127,19 +133,19 @@ namespace _Ext {
                         let filterText = '';
 
                         if (!Q.isEmptyOrNull(dateFrom))
-                            filterText = 'From ' + dateFrom
+                            filterText = Q.format(q.text('Controls.FromDate', 'From {0}'), dateFrom) + ' ';
 
                         if (!Q.isEmptyOrNull(dateTo))
-                            filterText = filterText + ' To ' + dateTo
+                            filterText = filterText + Q.format(q.text('Controls.ToDate', 'To {0}'), dateTo);
 
                         if (!Q.isEmptyOrNull(filterText)) {
                             request.EqualityFilterWithTextValue[quickFilter.title] = filterText
                         }
                         else if (this.get_ExtGridOptions().ShowAnyInEqualityFilterWithTextValue == true) {
-                            request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
+                            request.EqualityFilterWithTextValue[quickFilter.title] = q.text('Controls.All', 'all')
                         }
                     } else if (this.get_ExtGridOptions().ShowAnyInEqualityFilterWithTextValue == true) {
-                        request.EqualityFilterWithTextValue[quickFilter.title] = 'all'
+                        request.EqualityFilterWithTextValue[quickFilter.title] = q.text('Controls.All', 'all')
                     }
                 }
 
@@ -286,15 +292,21 @@ namespace _Ext {
                 let inlineActionsColumnContent = '';
 
                 if (extOptions.ShowEditInlineButtun == true) {
-                    inlineActionsColumnWidth += 25;
+                    inlineActionsColumnWidth += 32;
                     var title = this.isReadOnly ? q.text('Controls.View', 'View Details') : q.text('Controls.Edit', 'Edit');
-                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="padding-right: 10px;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
+                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="padding: 0 5px;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
                 }
 
                 if (extOptions.ShowDeleteInlineButtun == true) {
-                    inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += `<a class="inline-actions delete-row" title="${q.text('Controls.Delete', 'Delete')}"><i class="delete-row fa fa-trash-o text-red"></i></a>`;
+                    inlineActionsColumnWidth += 22;
+                    inlineActionsColumnContent += `<a class="inline-actions delete-row" title="${q.text('Controls.Delete', 'Delete')}" style="padding-left: 5px;"><i class="delete-row fa fa-trash-o text-red"></i></a>`;
                 }
+
+                if (extOptions.ShowPrintInlineButtun == true) {
+                    inlineActionsColumnWidth += 25;
+                    inlineActionsColumnContent += `<a class="inline-actions print-row" title="${q.text('Controls.Print', 'Print')}" style="padding-left: 5px;"><i class="print-row fa fa-print"></i></a>`;
+                }
+
                 columns.unshift({
                     field: 'inline-actions',
                     name: '',
@@ -312,11 +324,17 @@ namespace _Ext {
                 columns.unshift(rowSelectionCol);
             }
 
-            if (this.element.hasClass('RowSelectionCheckGrid')) { //show checkbox column in picker mode
+            if (this.isPickerMode()) { //show checkbox column in picker mode
                 let options = (this.options as any) as GridItemPickerEditorOptions;
                 if (!options.multiple && !options.gridType) {
                     Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
                 }
+
+                //remove edit link in picker mode
+                columns.forEach(column => {
+                    if (column.sourceItem && column.sourceItem.editLink)
+                        column.format = undefined;
+                });
 
                 if (options.multiple == true) {
                     let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
@@ -496,6 +514,8 @@ namespace _Ext {
             return opt;
         }
 
+        protected getPrintRowServiceMethod() { return 'Print' }
+
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);
 
@@ -540,6 +560,11 @@ namespace _Ext {
                 (this.slickGrid as any).getEditController().commitCurrentEdit();
 
                 this.editItem(recordId);
+            }
+            else if (target.hasClass('print-row')) {
+                let request: Serenity.RetrieveRequest = { EntityId: recordId };
+
+                Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + this.getPrintRowServiceMethod()), request: request, target: '_blank' });
             }
             else if (target.hasClass('select-row')) {
                 this.rowSelection.setSelectedKeys([recordId]);
