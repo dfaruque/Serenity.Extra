@@ -20,8 +20,8 @@ namespace _Ext
 
             Row row = (Row)Activator.CreateInstance(rowType);
 
-            var idField = ((Field)(row as IIdRow).IdField).Name;
-            var nameField = ((Field)(row as INameRow).NameField).Name;
+            var idField = ((Field)(row as IIdRow).IdField).ColumnAlias;
+            var nameField = ((Field)(row as INameRow).NameField).ColumnAlias;
 
             var rowClientType = rowType.FullName.Replace(".Entities", "");
             SetOption("rowType", rowClientType);
