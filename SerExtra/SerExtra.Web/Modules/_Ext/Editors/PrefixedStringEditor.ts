@@ -86,7 +86,7 @@
     export interface PrefixedStringEditorOptions {
         prefixLength: number;
         inputMaxLength: number;
-        prefixFormatterType: string;
+        prefixFormatterType?: string;
     }
 
 }
