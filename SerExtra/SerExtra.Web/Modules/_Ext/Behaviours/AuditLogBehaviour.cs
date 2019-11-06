@@ -73,8 +73,9 @@ namespace _Ext
                     .OrderBy(fld.Id, desc: true));
 
                     //we don't want to serialize id field
-                    var pkField = (oldRow as IIdRow).IdField as Field;
-                    oldRow.ClearAssignment(pkField);
+                    var pkField = (oldRow as IIdRow)?.IdField as Field;
+                    if (!(pkField is null))
+                        oldRow.ClearAssignment(pkField);
 
                     var oldrowJson = JsonConvert.SerializeObject(oldRow);
                     var rowJson = JsonConvert.SerializeObject(row);
