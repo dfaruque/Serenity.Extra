@@ -7,7 +7,7 @@
         protected getTemplate() {
             return `<input type="text" class="value select2-offscreen" />
                     <span class="select2-choice">
-                        <span class="display-text" style="user-select: text;"></span>
+                        <span class="display-text" style="user-select: text; padding-right: 20px;"></span>
                         <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer"></a>
                     </span>
                     `;
@@ -41,24 +41,27 @@
                 .addClass('inplace-button inplace-view align-center').attr('title', 'view')
                 .click(function (e) {
                     self.inplaceViewClick(e);
-                });
+                })
+                .hide();
 
             if (this.options.inplaceView != false && !this.options.multiple) {
                 this.inplaceViewButton.insertAfter(this.element);
             }
 
-            this.clearSelectionButton = this.element.find('.select2-search-choice-close').click(e => {
-                this.value = null;
-                this.text = '';
+            this.clearSelectionButton = this.element.find('.select2-search-choice-close')
+                .click(e => {
+                    this.value = null;
+                    this.text = '';
 
-                this._selectedItem = null;
-                this.selectedItems = [];
+                    this._selectedItem = null;
+                    this.selectedItems = [];
 
-                $(e.target).hide();
+                    $(e.target).hide();
 
-                this.element.trigger('change');
-                //this.element.triggerHandler('change');
-            });
+                    this.element.trigger('change');
+                    //this.element.triggerHandler('change');
+                })
+                .hide();
 
         }
 
@@ -118,11 +121,12 @@
 
             if (Q.isEmptyOrNull(val)) {
                 this.text = '';
-                this.clearSelectionButton.hide()
                 this.inplaceViewButton.hide()
+                this.clearSelectionButton.hide()
             } else {
-                this.clearSelectionButton.show()
                 this.inplaceViewButton.show()
+                if (this.get_readOnly() == false)
+                    this.clearSelectionButton.show()
             }
 
         }
@@ -157,13 +161,15 @@
         }
 
         get_readOnly(): boolean {
-            return this.inplaceSearchButton.hasClass('disabled');;
+            return this.element.hasClass('readonly');
         }
         set_readOnly(value: boolean): void {
             if (value) {
+                this.element.addClass('select2-container-disabled readonly');
                 this.inplaceSearchButton.addClass('disabled').hide();
                 this.clearSelectionButton.addClass('disabled').hide();
             } else {
+                this.element.removeClass('select2-container-disabled readonly')
                 this.inplaceSearchButton.removeClass('disabled').show();
                 this.clearSelectionButton.removeClass('disabled').show();
             }
@@ -180,15 +186,23 @@
 
 
         private _selectedItem;
+        public selectedItemIncludeColumns: string[] = [];
 
         public get selectedItem() {
-            if (this._selectedItem && this._selectedItem[this.options.nameFieldInGridRow])
+            if (this._selectedItem
+                && this._selectedItem[this.options.nameFieldInGridRow]
+                && this.selectedItemIncludeColumns.every(e => this._selectedItem[e])
+            )
                 return this._selectedItem;
             else if (!Q.isEmptyOrNull(this.value)) {
 
                 Q.serviceCall<Serenity.RetrieveResponse<any>>({
                     service: this.serviceUrl + '/Retrieve',
-                    request: { EntityId: this.value, ColumnSelection: Serenity.RetrieveColumnSelection.list } as Serenity.RetrieveRequest,
+                    request: {
+                        EntityId: this.value,
+                        ColumnSelection: Serenity.RetrieveColumnSelection.list,
+                        IncludeColumns: this.selectedItemIncludeColumns
+                    } as Serenity.RetrieveRequest,
                     async: false,
                     onSuccess: (response) => {
                         this._selectedItem = response.Entity;
