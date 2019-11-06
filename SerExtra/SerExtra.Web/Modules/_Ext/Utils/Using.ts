@@ -183,8 +183,11 @@ function usingChartjs() {
     if (window['Chart']) {
         return;
     } else {
-        loadScript(Q.resolveUrl('~/Scripts/chartjs/Chart.js'))
+        loadScript(Q.resolveUrl('~/Scripts/chartjs/Chart.min.js'))
     }
+
+    window['Chart'].defaults.global.defaultFontFamily = $('body').css('font-family');
+    window['Chart'].defaults.global.maintainAspectRatio = false;
 }
 
 function includeCustomMarkerCss() {
