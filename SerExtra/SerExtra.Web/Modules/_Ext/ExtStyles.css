@@ -1,17 +1,21 @@
 ﻿/* bengali language ---------------------------------------*/
 @font-face {
-    font-family: 'SiyamRupali';
+    font-family: 'Siyam Rupali';
     src: url('../../fonts/Siyamrupali.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'SiyamRupaliANSI';
+    font-family: 'Siyam Rupali ANSI';
     src: url('../../fonts/Siyam Rupali ANSI.ttf') format('truetype');
     unicode-range: U+30-39;
 }
 
 body:lang(bn) {
-    font-family: 'SiyamRupaliANSI', 'SiyamRupali', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Siyam Rupali ANSI', 'Siyam Rupali', Helvetica, Tahoma, Arial, sans-serif !important;
+}
+
+.do-not-change-ANSI-font {
+    font-family: 'Siyam Rupali', Helvetica, Tahoma, Arial, sans-serif !important;
 }
 
 .ui-dialog .ui-dialog-title:lang(bn) {
@@ -49,9 +53,9 @@ input, textarea {
     border-left-width: 5px !important;
 }
 
-.required,
-.required > .select2-choice,
-.required > .select2-choices {
+.required:not(.readonly),
+.required:not(.readonly) > .select2-choice,
+.required:not(.readonly) > .select2-choices {
     border-left-color: #f77 !important;
 }
 
@@ -110,11 +114,11 @@ input, textarea {
     flex-direction: row-reverse;
 }
 
-.no-label {
+.no-label, .field-only {
     padding-left: 5px;
 }
 
-    .no-label label.caption {
+    .no-label label.caption,.field-only label.caption {
         display: none;
     }
 
@@ -123,14 +127,6 @@ input, textarea {
 }
 
 .label-only > input {
-    display: none;
-}
-
-.field-only > field {
-    width: 90% !important;
-}
-
-.field-only > label {
     display: none;
 }
 
@@ -450,6 +446,13 @@ ul.list-inline {
         top: 5px;
         color: #800000;
     }
+
+/*To show scroll on left navigation*/
+.slimScrollBar {
+    background: none repeat scroll 0 0 #ddd !important;
+    width: 10px !important;
+}
+
 /* Misc. ---------------------------------------*/
 .info-window dt {
     float: left;
