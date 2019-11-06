@@ -83,6 +83,15 @@ public static class DateTimeHelper
         return inputValue.ToString("dd MMMM yyyy");
     }
 
+    public static string ToMonthYear(this DateTime inputValue)
+    {
+        return inputValue.ToString("MMM-yyyy");
+    }
+    public static string ToMonthYear(this DateTime? inputValue)
+    {
+        return inputValue?.ToString("MMM-yyyy");
+    }
+
     public static int GetMonths(DateTime fromDate, DateTime toDate)
     {
         int months;
