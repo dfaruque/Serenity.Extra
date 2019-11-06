@@ -74,11 +74,12 @@ public static partial class ObjectExtentions
         return input.ToString("#,##0" + d);
 
     }
-    public static string ToRound(this decimal? input, int decimalPlace = 2)
+    public static string ToRound(this decimal? input, int decimalPlace = 2, bool showZeroIfNull = true)
     {
-
-        return (input ?? 0).ToRound(decimalPlace);
-
+        if (input == null && !showZeroIfNull)
+            return string.Empty;
+        else
+            return (input ?? 0).ToRound(decimalPlace);
     }
 
 
