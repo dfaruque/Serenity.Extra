@@ -1,10 +1,14 @@
-﻿ol {
+﻿_body:lang(bn) * {
+    font-family: /*'Siyam Rupali ANSI', 'Siyam Rupali',*/ Helvetica, Tahoma, Arial, sans-serif !important;
+}
+
+ol {
     list-style-position: inside;
 }
 
 .table {
     border: 1px solid #000000 !important;
-    font-size: 11px;
+    font-size: 10px;
     margin-bottom: 10px;
 }
 
