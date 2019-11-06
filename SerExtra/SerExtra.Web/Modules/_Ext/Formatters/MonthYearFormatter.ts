@@ -2,16 +2,17 @@
 
     @Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter])
     export class MonthYearFormatter implements Slick.Formatter {
-        static format(ctx: Slick.FormatterContext) {
-            if (ctx.value) {
-                let val = Q.parseISODateTime(ctx.value);
+        static format(val: string) {
+            if (val) {
+                if (val.length == 7) val += '-01';
+                let valDate = Q.parseISODateTime(val);
 
-                return q.getEnumText('Months', val.getMonth()) + '-' + val.getFullYear();
+                return q.getEnumText('Months', valDate.getMonth()) + '-' + valDate.getFullYear();
             } else return '';
         }
 
         format(ctx: Slick.FormatterContext) {
-            return MonthYearFormatter.format(ctx);
+            return MonthYearFormatter.format(ctx.value);
         }
     }
 
