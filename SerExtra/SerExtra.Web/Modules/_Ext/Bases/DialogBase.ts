@@ -5,7 +5,7 @@
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
 
-        protected get_ExtDialogOptions(): ExtDialogOptions { return q.DefaultEntityDialogOptions; }
+        protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
 
         private loadedState: string;
         isReadOnly: boolean = false;
