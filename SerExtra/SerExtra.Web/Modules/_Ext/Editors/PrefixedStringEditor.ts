@@ -48,7 +48,7 @@
             }
         }
 
-        private _prefix;
+        private _prefix = '';
         public get prefix(): string {
             return this._prefix;
         }

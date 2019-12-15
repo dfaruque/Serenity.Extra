@@ -84,13 +84,21 @@ public static partial class Q
             return connection.TryFirstByName<TRow>(name);
     }
 
-    public static void CopyNonNullFieldValues(Row target, Row source)
+    public static void CopyFieldValues(Row target, Row source, bool copyIfTargetValueIsNull = true)
     {
         foreach (var field in target.GetFields())
         {
-            var value = source[field.Name];
-            if (value != null)
-                target[field.Name] = value;
+            var sourceValue = source[field.Name];
+            var targetValue = target[field.Name];
+
+            if (copyIfTargetValueIsNull)
+            {
+                target[field.Name] = targetValue ?? sourceValue;
+            }
+            else
+            {
+                target[field.Name] = sourceValue;
+            }
         }
     }
 

@@ -667,7 +667,6 @@
     <Content Include="tools\Node\node.exe" />
     <Content Include="Views\Templates\ReportPanel.Template.html" />
     <Content Include="wkhtmltopdf-license.txt" />
-    <Content Include="Modules\_Ext\CodeGeneratorTemplates\Row.scriban" />
     <Content Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
     <Content Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
     <Content Include="Modules\_Ext\DevTools\Sergen\SergenError.cshtml" />
@@ -2146,6 +2145,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Modules\Common\Notification\" />
     <Folder Include="Modules\ExtraSamples\Mixins\" />
+    <Folder Include="Modules\_Ext\CodeGeneratorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
