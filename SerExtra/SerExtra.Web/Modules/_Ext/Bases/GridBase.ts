@@ -80,11 +80,11 @@ namespace _Ext {
                 });
 
             } else {
-                buttons.push(PdfExportHelper.createToolButton({
-                    grid: this,
-                    tableOptions: { theme: 'grid' },
-                    onViewSubmit: () => this.onViewSubmit()
-                }));
+                //buttons.push(PdfExportHelper.createToolButton({
+                //    grid: this,
+                //    tableOptions: { theme: 'grid' },
+                //    onViewSubmit: () => this.onViewSubmit()
+                //}));
             }
 
 
@@ -199,9 +199,18 @@ namespace _Ext {
                         if (!column.sourceItem.editorParams.autoComplete) {
                             (column as any).lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey)
                             column.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                                let item = columnDef.lookup.itemById[value];
-                                if (item) return item[columnDef.lookup.textField];
-                                else return '-';
+                                if (columnDef.sourceItem.editorParams.multiple == true) {
+                                    if (value) {
+                                        let items = value.map(m => columnDef.lookup.itemById[m]);
+                                        let texts = items.map(m => m[columnDef.lookup.textField]);
+
+                                        return texts.length > 0 ? texts.join(', ') : '-';;
+                                    }
+                                } else {
+                                    let item = columnDef.lookup.itemById[value];
+                                    if (item) return item[columnDef.lookup.textField];
+                                    else return '-';
+                                }
                             };
                         }
                     } else if (formatterType == "Enum") {
