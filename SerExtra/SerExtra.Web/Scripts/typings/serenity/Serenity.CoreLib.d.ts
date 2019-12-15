@@ -13,6 +13,7 @@ declare const __skipExtends: {
 declare var __extends: any;
 declare var __assign: any;
 declare var __rest: (s: any, e: any) => {};
+declare var __spreadArrays: () => any[];
 declare class RSVP<TResult> {
     constructor(constructor: (p1: (p1: any) => void, p2: any) => void);
 }
@@ -734,6 +735,15 @@ declare namespace Serenity {
     type ServiceOptions<TResponse extends ServiceResponse> = Q.ServiceOptions<TResponse>;
 }
 declare namespace Q {
+    namespace LayoutTimer {
+        function on(key: string, handler: () => void): () => void;
+        function onSizeChange(key: string, element: HTMLElement, handler: () => void): () => void;
+        function onWidthChange(key: string, element: HTMLElement, handler: () => void): () => void;
+        function onHeightChange(key: string, element: HTMLElement, handler: () => void): () => void;
+        function off(key: string, handler?: () => void): void;
+    }
+}
+declare namespace Q {
     function autoFullHeight(element: JQuery): void;
     function initFullHeightGridPage(gridDiv: JQuery): void;
     function layoutFillHeightValue(element: JQuery): number;
@@ -993,6 +1003,26 @@ declare namespace Serenity {
         function paren(c: any[]): any[];
         function and(c1: any[], c2: any[], ...rest: any[][]): any[];
         function or(c1: any[], c2: any[], ...rest: any[][]): any[];
+        const enum Operator {
+            paren = "()",
+            not = "not",
+            isNull = "is null",
+            isNotNull = "is not null",
+            exists = "exists",
+            and = "and",
+            or = "or",
+            xor = "xor",
+            eq = "=",
+            ne = "!=",
+            gt = ">",
+            ge = ">=",
+            lt = "<",
+            le = "<=",
+            in = "in",
+            notIn = "not in",
+            like = "like",
+            notLike = "not like"
+        }
     }
 }
 declare namespace Serenity {
@@ -1000,11 +1030,15 @@ declare namespace Serenity {
         name: string;
         title: string;
     }
+    interface GridRowSelectionMixinOptions {
+        selectable?: (item: any) => boolean;
+    }
     class GridRowSelectionMixin {
         private idField;
         private include;
         private grid;
-        constructor(grid: IDataGrid);
+        private options;
+        constructor(grid: IDataGrid, options?: GridRowSelectionMixinOptions);
         updateSelectAll(): void;
         clear(): void;
         resetCheckedAndRefresh(): void;
@@ -1013,6 +1047,7 @@ declare namespace Serenity {
         getSelectedAsInt32(): number[];
         getSelectedAsInt64(): number[];
         setSelectedKeys(keys: string[]): void;
+        private isSelectable;
         static createSelectColumn(getMixin: () => GridRowSelectionMixin): Slick.Column;
     }
     class GridRadioSelectionMixin {
@@ -1088,6 +1123,7 @@ declare namespace Serenity {
 declare namespace Serenity {
     namespace TabsExtensions {
         function setDisabled(tabs: JQuery, tabKey: string, isDisabled: boolean): void;
+        function toggle(tabs: JQuery, tabKey: string, visible: boolean): void;
         function activeTabKey(tabs: JQuery): string;
         function indexByKey(tabs: JQuery): any;
         function selectTab(tabs: JQuery, tabKey: string): void;
@@ -1552,6 +1588,7 @@ declare namespace Serenity {
         function setReadonly(elements: JQuery, isReadOnly: boolean): JQuery;
         function setReadOnly(widget: Serenity.Widget<any>, isReadOnly: boolean): void;
         function setRequired(widget: Serenity.Widget<any>, isRequired: boolean): void;
+        function setContainerReadOnly(container: JQuery, readOnly: boolean): void;
     }
     class BooleanEditor extends Widget<any> {
         constructor(input: JQuery);
@@ -2333,6 +2370,8 @@ declare namespace Serenity {
         hotkeyAllowDefault?: boolean;
         hotkeyContext?: any;
         separator?: (false | true | 'left' | 'right' | 'both');
+        visible?: boolean | (() => boolean);
+        disabled?: boolean | (() => boolean);
     }
     interface PopupMenuButtonOptions {
         menu?: JQuery;
@@ -2359,6 +2398,7 @@ declare namespace Serenity {
         protected mouseTrap: any;
         protected createButton(container: JQuery, b: ToolButton): void;
         findButton(className: string): JQuery;
+        updateInterface(): void;
     }
 }
 declare namespace Serenity {
@@ -2471,6 +2511,38 @@ declare namespace Serenity {
     }
 }
 declare namespace Serenity {
+    interface QuickFilterBarOptions {
+        filters: QuickFilter<Widget<any>, any>[];
+        getTitle?: (filter: QuickFilter<Widget<any>, any>) => string;
+        idPrefix?: string;
+    }
+    class QuickFilterBar extends Widget<QuickFilterBarOptions> {
+        constructor(container: JQuery, options?: QuickFilterBarOptions);
+        addSeparator(): void;
+        add<TWidget extends Widget<any>, TOptions>(opt: QuickFilter<TWidget, TOptions>): TWidget;
+        addDateRange(field: string, title?: string): Serenity.DateEditor;
+        static dateRange(field: string, title?: string): QuickFilter<DateEditor, DateTimeEditorOptions>;
+        addDateTimeRange(field: string, title?: string): DateTimeEditor;
+        static dateTimeRange(field: string, title?: string): QuickFilter<DateTimeEditor, DateTimeEditorOptions>;
+        addBoolean(field: string, title?: string, yes?: string, no?: string): SelectEditor;
+        static boolean(field: string, title?: string, yes?: string, no?: string): QuickFilter<SelectEditor, SelectEditorOptions>;
+        static propertyItemToQuickFilter(item: PropertyItem): any;
+        onChange: (e: JQueryEventObject) => void;
+        private submitHandlers;
+        destroy(): void;
+        onSubmit(request: Serenity.ListRequest): void;
+        protected add_submitHandlers(action: (request: Serenity.ListRequest) => void): void;
+        protected remove_submitHandlers(action: (request: Serenity.ListRequest) => void): void;
+        protected clear_submitHandlers(): void;
+        find<TWidget>(type: {
+            new (...args: any[]): TWidget;
+        }, field: string): TWidget;
+        tryFind<TWidget>(type: {
+            new (...args: any[]): TWidget;
+        }, field: string): TWidget;
+    }
+}
+declare namespace Serenity {
     interface IDataGrid {
         getElement(): JQuery;
         getGrid(): Slick.Grid;
@@ -2479,11 +2551,12 @@ declare namespace Serenity {
     }
     class IDataGrid {
     }
-    class DataGrid<TItem, TOptions> extends Widget<TOptions> implements IDataGrid {
+    class DataGrid<TItem, TOptions> extends Widget<TOptions> implements IDataGrid, IReadOnly {
         protected titleDiv: JQuery;
         protected toolbar: Toolbar;
         protected filterBar: FilterDisplayBar;
         protected quickFiltersDiv: JQuery;
+        protected quickFiltersBar: QuickFilterBar;
         protected slickContainer: JQuery;
         protected allColumns: Slick.Column[];
         protected initialSettings: PersistedGridSettings;
@@ -2492,7 +2565,6 @@ declare namespace Serenity {
         private isActiveProperty;
         private localTextDbPrefix;
         private isDisabled;
-        private submitHandlers;
         private rows;
         private slickGridOnSort;
         private slickGridOnClick;
@@ -2506,12 +2578,11 @@ declare namespace Serenity {
         protected attrs<TAttr>(attrType: {
             new (...args: any[]): TAttr;
         }): TAttr[];
-        protected add_submitHandlers(action: () => void): void;
-        protected remove_submitHandlers(action: () => void): void;
         protected layout(): void;
         protected getInitialTitle(): string;
         protected createToolbarExtensions(): void;
-        protected createQuickFilters(): void;
+        protected ensureQuickFilterBar(): QuickFilterBar;
+        protected createQuickFilters(filters?: QuickFilter<Widget<any>, any>[]): void;
         protected getQuickFilters(): QuickFilter<Widget<any>, any>[];
         protected findQuickFilter<TWidget>(type: {
             new (...args: any[]): TWidget;
@@ -2532,7 +2603,7 @@ declare namespace Serenity {
         protected initializeAsync(): PromiseLike<void>;
         protected createSlickGrid(): Slick.Grid;
         protected setInitialSortOrder(): void;
-        itemAt(row: number): any;
+        itemAt(row: number): TItem;
         rowCount(): number;
         getItems(): TItem[];
         setItems(value: TItem[]): void;
@@ -2583,6 +2654,11 @@ declare namespace Serenity {
         protected refreshIfNeeded(): void;
         protected internalRefresh(): void;
         setIsDisabled(value: boolean): void;
+        private _readonly;
+        readOnly: boolean;
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        protected updateInterface(): void;
         protected getLocalTextDbPrefix(): string;
         protected getLocalTextPrefix(): string;
         protected getIdProperty(): string;
@@ -2640,6 +2716,9 @@ declare namespace Serenity {
         protected getViewOptions(): Slick.RemoteViewOptions;
         protected getItemType(): string;
         protected routeDialog(itemType: string, dialog: Widget<any>): void;
+        protected getInsertPermission(): string;
+        protected hasInsertPermission(): boolean;
+        protected transferDialogReadOnly(dialog: Widget<any>): void;
         protected initDialog(dialog: Widget<any>): void;
         protected initEntityDialog(itemType: string, dialog: Widget<any>): void;
         protected createEntityDialog(itemType: string, callback?: (dlg: Widget<any>) => void): Widget<any>;
@@ -2788,7 +2867,7 @@ declare namespace Serenity {
     interface IEditDialog {
         load(entityOrId: any, done: () => void, fail: (p1: any) => void): void;
     }
-    class EntityDialog<TItem, TOptions> extends TemplatedDialog<TOptions> implements IEditDialog {
+    class EntityDialog<TItem, TOptions> extends TemplatedDialog<TOptions> implements IEditDialog, IReadOnly {
         protected entity: TItem;
         protected entityId: any;
         protected propertyGrid: PropertyGrid;
@@ -2798,6 +2877,7 @@ declare namespace Serenity {
         protected deleteButton: JQuery;
         protected undeleteButton: JQuery;
         protected cloneButton: JQuery;
+        protected editButton: JQuery;
         protected localizationGrid: PropertyGrid;
         protected localizationButton: JQuery;
         protected localizationPendingValue: any;
@@ -2891,6 +2971,20 @@ declare namespace Serenity {
         protected getUndeleteOptions(callback?: (response: UndeleteResponse) => void): ServiceOptions<UndeleteResponse>;
         protected undeleteHandler(options: ServiceOptions<UndeleteResponse>, callback: (response: UndeleteResponse) => void): void;
         protected undelete(callback?: (response: UndeleteResponse) => void): void;
+        private _readonly;
+        readOnly: boolean;
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected getDeletePermission(): string;
+        protected hasDeletePermission(): boolean;
+        protected hasInsertPermission(): boolean;
+        protected hasUpdatePermission(): boolean;
+        protected hasSavePermission(): boolean;
+        protected editClicked: boolean;
+        protected isViewMode(): boolean;
+        protected useViewMode(): boolean;
     }
 }
 declare namespace Serenity {

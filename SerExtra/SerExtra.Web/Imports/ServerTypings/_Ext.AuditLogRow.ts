@@ -17,6 +17,10 @@
         export const idProperty = 'Id';
         export const nameProperty = 'EntityTableName';
         export const localTextPrefix = '_Ext.AuditLog';
+        export const deletePermission = 'Administration:AuditLog';
+        export const insertPermission = 'Administration:AuditLog';
+        export const readPermission = 'Administration:AuditLog';
+        export const updatePermission = 'Administration:AuditLog';
 
         export declare const enum Fields {
             Id = "Id",

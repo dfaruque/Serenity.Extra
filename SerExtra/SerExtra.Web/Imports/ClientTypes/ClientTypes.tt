@@ -14,18 +14,6 @@
 
     var generator = new ClientTypesGenerator();
     generator.RootNamespaces.Add("SerExtra");
-
-    if (System.IO.File.Exists(solutionDir + @"SerExtra\SerExtra.Script\SerExtra.Script.csproj"))
-    {
-        var ssDir = solutionDir + @"SerExtra\SerExtra.Script\bin\debug\";
-        var ssTypeLister = new SSTypeLister(
-            ssDir + "Serenity.Script.Imports.dll",
-            ssDir + "Serenity.Script.UI.dll",
-            ssDir + "SerExtra.Script.dll");
-        var ssTypes = ssTypeLister.List();
-        foreach (var type in ssTypes)
-            generator.AddSSType(type);
-    }
    
     var tsTypeLister = new TSTypeLister(webDir);
     var tsTypes = tsTypeLister.List();

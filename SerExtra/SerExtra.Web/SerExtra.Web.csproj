@@ -109,35 +109,31 @@
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.8.7\lib\net45\Mono.Cecil.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Serenity.Web.3.9.13\lib\net45\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="MsieJavaScriptEngine, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a3a2846a37ac0d3e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MsieJavaScriptEngine.2.2.5\lib\net45\MsieJavaScriptEngine.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NUglify, Version=1.5.11.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUglify.1.5.11\lib\net40\NUglify.dll</HintPath>
+    <Reference Include="NUglify, Version=1.5.12.0, Culture=neutral, PublicKeyToken=15bc7810aec21b5e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUglify.1.5.12\lib\net40\NUglify.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Core, Version=3.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Core.3.8.7\lib\net45\Serenity.Core.dll</HintPath>
+    <Reference Include="Serenity.Core, Version=3.9.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Core.3.9.13\lib\net45\Serenity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data, Version=3.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.3.8.7\lib\net45\Serenity.Data.dll</HintPath>
+    <Reference Include="Serenity.Data, Version=3.9.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.3.9.13\lib\net45\Serenity.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data.Entity, Version=3.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.Entity.3.8.7\lib\net45\Serenity.Data.Entity.dll</HintPath>
+    <Reference Include="Serenity.Data.Entity, Version=3.9.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.Entity.3.9.13\lib\net45\Serenity.Data.Entity.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Services, Version=3.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Services.3.8.7\lib\net45\Serenity.Services.dll</HintPath>
+    <Reference Include="Serenity.Services, Version=3.9.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Services.3.9.13\lib\net45\Serenity.Services.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Web, Version=3.8.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.8.7\lib\net45\Serenity.Web.dll</HintPath>
+    <Reference Include="Serenity.Web, Version=3.9.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Web.3.9.13\lib\net45\Serenity.Web.dll</HintPath>
     </Reference>
     <!---->
     <!--
@@ -171,26 +167,26 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -237,320 +233,6 @@
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\pace.css" />
-    <Content Include="Content\serenity\images\32px.png" />
-    <Content Include="Content\serenity\images\accessright.png" />
-    <Content Include="Content\serenity\images\accordion-down.png" />
-    <Content Include="Content\serenity\images\accordion-left.png" />
-    <Content Include="Content\serenity\images\accordion-right.png" />
-    <Content Include="Content\serenity\images\add.png" />
-    <Content Include="Content\serenity\images\add2.png" />
-    <Content Include="Content\serenity\images\address-book-open.png" />
-    <Content Include="Content\serenity\images\address-book.png" />
-    <Content Include="Content\serenity\images\agenda.png" />
-    <Content Include="Content\serenity\images\alarm-clock-exclamation.png" />
-    <Content Include="Content\serenity\images\alarm-clock.png" />
-    <Content Include="Content\serenity\images\application-resize-actual.png" />
-    <Content Include="Content\serenity\images\application-resize-full.png" />
-    <Content Include="Content\serenity\images\application-resize.png" />
-    <Content Include="Content\serenity\images\apply-button.png" />
-    <Content Include="Content\serenity\images\apply-changes-button.png" />
-    <Content Include="Content\serenity\images\arrow-circle-135.png" />
-    <Content Include="Content\serenity\images\arrow-circle-double.png" />
-    <Content Include="Content\serenity\images\arrow-continue.png" />
-    <Content Include="Content\serenity\images\arrow-curve-left.png" />
-    <Content Include="Content\serenity\images\arrow-down.png" />
-    <Content Include="Content\serenity\images\arrow-step-over.png" />
-    <Content Include="Content\serenity\images\arrow-stop.png" />
-    <Content Include="Content\serenity\images\arrow-up.png" />
-    <Content Include="Content\serenity\images\asterisk.png" />
-    <Content Include="Content\serenity\images\auction-hammer.png" />
-    <Content Include="Content\serenity\images\back-arrow-black.png" />
-    <Content Include="Content\serenity\images\back-arrow-white.png" />
-    <Content Include="Content\serenity\images\balance.png" />
-    <Content Include="Content\serenity\images\balloon.png" />
-    <Content Include="Content\serenity\images\balloons.png" />
-    <Content Include="Content\serenity\images\barcode.png" />
-    <Content Include="Content\serenity\images\bell.png" />
-    <Content Include="Content\serenity\images\bin-exclamation.png" />
-    <Content Include="Content\serenity\images\bin-minus.png" />
-    <Content Include="Content\serenity\images\bin.png" />
-    <Content Include="Content\serenity\images\binocular.png" />
-    <Content Include="Content\serenity\images\blank.gif" />
-    <Content Include="Content\serenity\images\block.png" />
-    <Content Include="Content\serenity\images\blog.png" />
-    <Content Include="Content\serenity\images\bomb.png" />
-    <Content Include="Content\serenity\images\book-open.png" />
-    <Content Include="Content\serenity\images\book.png" />
-    <Content Include="Content\serenity\images\bookmark.png" />
-    <Content Include="Content\serenity\images\box.png" />
-    <Content Include="Content\serenity\images\briefcase.png" />
-    <Content Include="Content\serenity\images\brightness-small-low.png" />
-    <Content Include="Content\serenity\images\brightness-small.png" />
-    <Content Include="Content\serenity\images\bug.png" />
-    <Content Include="Content\serenity\images\building-arrow.png" />
-    <Content Include="Content\serenity\images\building-medium.png" />
-    <Content Include="Content\serenity\images\building-old.png" />
-    <Content Include="Content\serenity\images\building.png" />
-    <Content Include="Content\serenity\images\calculator.png" />
-    <Content Include="Content\serenity\images\calculator2.png" />
-    <Content Include="Content\serenity\images\calculator3.png" />
-    <Content Include="Content\serenity\images\calendar-blue.png" />
-    <Content Include="Content\serenity\images\calendar-day.png" />
-    <Content Include="Content\serenity\images\calendar-task.png" />
-    <Content Include="Content\serenity\images\calendar.png" />
-    <Content Include="Content\serenity\images\card-small.png" />
-    <Content Include="Content\serenity\images\categories.png" />
-    <Content Include="Content\serenity\images\category.png" />
-    <Content Include="Content\serenity\images\certificate-fail.png" />
-    <Content Include="Content\serenity\images\certificate-fail2.png" />
-    <Content Include="Content\serenity\images\certificate-ok.png" />
-    <Content Include="Content\serenity\images\certificate-ok2.png" />
-    <Content Include="Content\serenity\images\chain-small.png" />
-    <Content Include="Content\serenity\images\check2.png" />
-    <Content Include="Content\serenity\images\checkbox-gray.png" />
-    <Content Include="Content\serenity\images\checkbox-no.png" />
-    <Content Include="Content\serenity\images\checkbox-null.png" />
-    <Content Include="Content\serenity\images\checkbox-states.png" />
-    <Content Include="Content\serenity\images\checkbox-yes.png" />
-    <Content Include="Content\serenity\images\clipboard-list.png" />
-    <Content Include="Content\serenity\images\clipboard-task.png" />
-    <Content Include="Content\serenity\images\clock.png" />
-    <Content Include="Content\serenity\images\column-picker.png" />
-    <Content Include="Content\serenity\images\construction.png" />
-    <Content Include="Content\serenity\images\control-record-small.png" />
-    <Content Include="Content\serenity\images\counter.png" />
-    <Content Include="Content\serenity\images\credit-card.png" />
-    <Content Include="Content\serenity\images\cross-script.png" />
-    <Content Include="Content\serenity\images\cross.png" />
-    <Content Include="Content\serenity\images\csv.png" />
-    <Content Include="Content\serenity\images\currency.png" />
-    <Content Include="Content\serenity\images\cv.png" />
-    <Content Include="Content\serenity\images\data-sync.png" />
-    <Content Include="Content\serenity\images\datepicker.gif" />
-    <Content Include="Content\serenity\images\datepicker.png" />
-    <Content Include="Content\serenity\images\delete.png" />
-    <Content Include="Content\serenity\images\delete2.png" />
-    <Content Include="Content\serenity\images\dialog-alert.png" />
-    <Content Include="Content\serenity\images\dialog-confirm.png" />
-    <Content Include="Content\serenity\images\dialog-information.png" />
-    <Content Include="Content\serenity\images\dialog-warning.png" />
-    <Content Include="Content\serenity\images\direction.png" />
-    <Content Include="Content\serenity\images\disk-arrow.png" />
-    <Content Include="Content\serenity\images\disk-black-accept.png" />
-    <Content Include="Content\serenity\images\disk-black.png" />
-    <Content Include="Content\serenity\images\disk.png" />
-    <Content Include="Content\serenity\images\doc.png" />
-    <Content Include="Content\serenity\images\document-copy.png" />
-    <Content Include="Content\serenity\images\document-print-preview.png" />
-    <Content Include="Content\serenity\images\document-small-list.png" />
-    <Content Include="Content\serenity\images\document-small.png" />
-    <Content Include="Content\serenity\images\document-task.png" />
-    <Content Include="Content\serenity\images\document.png" />
-    <Content Include="Content\serenity\images\documents-stack.png" />
-    <Content Include="Content\serenity\images\docx.png" />
-    <Content Include="Content\serenity\images\door.png" />
-    <Content Include="Content\serenity\images\down.gif" />
-    <Content Include="Content\serenity\images\drawer.png" />
-    <Content Include="Content\serenity\images\dropdown.png" />
-    <Content Include="Content\serenity\images\edit.png" />
-    <Content Include="Content\serenity\images\envelope.png" />
-    <Content Include="Content\serenity\images\eraser-plus.png" />
-    <Content Include="Content\serenity\images\eraser.png" />
-    <Content Include="Content\serenity\images\exclamation.png" />
-    <Content Include="Content\serenity\images\eye.png" />
-    <Content Include="Content\serenity\images\feed.png" />
-    <Content Include="Content\serenity\images\file-import.png" />
-    <Content Include="Content\serenity\images\fingerprint.png" />
-    <Content Include="Content\serenity\images\folder-arrow.png" />
-    <Content Include="Content\serenity\images\folder-close.png" />
-    <Content Include="Content\serenity\images\folder-horizontal.png" />
-    <Content Include="Content\serenity\images\folder-import.png" />
-    <Content Include="Content\serenity\images\folder-open-document.png" />
-    <Content Include="Content\serenity\images\full-screen-2.png" />
-    <Content Include="Content\serenity\images\funnel.png" />
-    <Content Include="Content\serenity\images\gear.png" />
-    <Content Include="Content\serenity\images\get-products.png" />
-    <Content Include="Content\serenity\images\get.png" />
-    <Content Include="Content\serenity\images\globe-small.png" />
-    <Content Include="Content\serenity\images\grid-title-bg.gif" />
-    <Content Include="Content\serenity\images\gtk-print-preview.png" />
-    <Content Include="Content\serenity\images\hammer-screwdriver.png" />
-    <Content Include="Content\serenity\images\hammer.png" />
-    <Content Include="Content\serenity\images\header-columns-bg.gif" />
-    <Content Include="Content\serenity\images\header-columns-over-bg.gif" />
-    <Content Include="Content\serenity\images\home.png" />
-    <Content Include="Content\serenity\images\hourglass.png" />
-    <Content Include="Content\serenity\images\icon_sprite.png" />
-    <Content Include="Content\serenity\images\inbox-document-text.png" />
-    <Content Include="Content\serenity\images\inbox-document.png" />
-    <Content Include="Content\serenity\images\inbox.png" />
-    <Content Include="Content\serenity\images\information-frame.png" />
-    <Content Include="Content\serenity\images\item.png" />
-    <Content Include="Content\serenity\images\jpg.png" />
-    <Content Include="Content\serenity\images\key.png" />
-    <Content Include="Content\serenity\images\keyboard.png" />
-    <Content Include="Content\serenity\images\layer-small.png" />
-    <Content Include="Content\serenity\images\license-key.png" />
-    <Content Include="Content\serenity\images\lifebuoy.png" />
-    <Content Include="Content\serenity\images\light-bulb.png" />
-    <Content Include="Content\serenity\images\list-delete.png" />
-    <Content Include="Content\serenity\images\loading.gif" />
-    <Content Include="Content\serenity\images\location.png" />
-    <Content Include="Content\serenity\images\lock.png" />
-    <Content Include="Content\serenity\images\luggage.png" />
-    <Content Include="Content\serenity\images\magnifier-left.png" />
-    <Content Include="Content\serenity\images\magnifier-medium-left.png" />
-    <Content Include="Content\serenity\images\magnifier-medium.png" />
-    <Content Include="Content\serenity\images\magnifier-zoom.png" />
-    <Content Include="Content\serenity\images\magnifier.png" />
-    <Content Include="Content\serenity\images\mail-open.png" />
-    <Content Include="Content\serenity\images\mail.png" />
-    <Content Include="Content\serenity\images\maximize-button.png" />
-    <Content Include="Content\serenity\images\maximize-button2.png" />
-    <Content Include="Content\serenity\images\medal.png" />
-    <Content Include="Content\serenity\images\meeting.png" />
-    <Content Include="Content\serenity\images\mhtml.png" />
-    <Content Include="Content\serenity\images\money.png" />
-    <Content Include="Content\serenity\images\new.png" />
-    <Content Include="Content\serenity\images\newspaper.png" />
-    <Content Include="Content\serenity\images\node-insert-next.png" />
-    <Content Include="Content\serenity\images\node-select-all.png" />
-    <Content Include="Content\serenity\images\notebook-pencil.png" />
-    <Content Include="Content\serenity\images\notebook-share.png" />
-    <Content Include="Content\serenity\images\notebook.png" />
-    <Content Include="Content\serenity\images\notebooks.png" />
-    <Content Include="Content\serenity\images\odata.png" />
-    <Content Include="Content\serenity\images\ok.png" />
-    <Content Include="Content\serenity\images\open-share.png" />
-    <Content Include="Content\serenity\images\order.png" />
-    <Content Include="Content\serenity\images\organization-tree.png" />
-    <Content Include="Content\serenity\images\outlook.png" />
-    <Content Include="Content\serenity\images\pager-bg.gif" />
-    <Content Include="Content\serenity\images\pager-buttons.png" />
-    <Content Include="Content\serenity\images\pager-load.gif" />
-    <Content Include="Content\serenity\images\paper-bag.png" />
-    <Content Include="Content\serenity\images\paper-clip.png" />
-    <Content Include="Content\serenity\images\payment.png" />
-    <Content Include="Content\serenity\images\pda.png" />
-    <Content Include="Content\serenity\images\pdf.png" />
-    <Content Include="Content\serenity\images\pencil.png" />
-    <Content Include="Content\serenity\images\picture-delete.png" />
-    <Content Include="Content\serenity\images\picture.png" />
-    <Content Include="Content\serenity\images\pill.png" />
-    <Content Include="Content\serenity\images\pin.png" />
-    <Content Include="Content\serenity\images\pipette.png" />
-    <Content Include="Content\serenity\images\place-empty.png" />
-    <Content Include="Content\serenity\images\plug.png" />
-    <Content Include="Content\serenity\images\plus-button.png" />
-    <Content Include="Content\serenity\images\plus-circle-false.png" />
-    <Content Include="Content\serenity\images\plus-circle.png" />
-    <Content Include="Content\serenity\images\plus-octagon-frame.png" />
-    <Content Include="Content\serenity\images\plus.png" />
-    <Content Include="Content\serenity\images\png.png" />
-    <Content Include="Content\serenity\images\price-tag.png" />
-    <Content Include="Content\serenity\images\printer.png" />
-    <Content Include="Content\serenity\images\product.png" />
-    <Content Include="Content\serenity\images\project-logs.png" />
-    <Content Include="Content\serenity\images\project-module.png" />
-    <Content Include="Content\serenity\images\project-version.png" />
-    <Content Include="Content\serenity\images\project.png" />
-    <Content Include="Content\serenity\images\projection-screen-presentation.png" />
-    <Content Include="Content\serenity\images\projection-screen.png" />
-    <Content Include="Content\serenity\images\property-blue.png" />
-    <Content Include="Content\serenity\images\property.png" />
-    <Content Include="Content\serenity\images\question-frame.png" />
-    <Content Include="Content\serenity\images\quick-search-loading.gif" />
-    <Content Include="Content\serenity\images\receipt.png" />
-    <Content Include="Content\serenity\images\report-arrow.png" />
-    <Content Include="Content\serenity\images\report-excel.png" />
-    <Content Include="Content\serenity\images\report-minus.png" />
-    <Content Include="Content\serenity\images\report-pencil.png" />
-    <Content Include="Content\serenity\images\report-plus.png" />
-    <Content Include="Content\serenity\images\report.png" />
-    <Content Include="Content\serenity\images\ruby.png" />
-    <Content Include="Content\serenity\images\ruler.png" />
-    <Content Include="Content\serenity\images\safe.png" />
-    <Content Include="Content\serenity\images\sale.png" />
-    <Content Include="Content\serenity\images\scissors.png" />
-    <Content Include="Content\serenity\images\script.png" />
-    <Content Include="Content\serenity\images\scripts-text.png" />
-    <Content Include="Content\serenity\images\sitemap-application-blue.png" />
-    <Content Include="Content\serenity\images\sitemap.png" />
-    <Content Include="Content\serenity\images\slash.png" />
-    <Content Include="Content\serenity\images\slick-header-columns-over-bg.gif" />
-    <Content Include="Content\serenity\images\slides.png" />
-    <Content Include="Content\serenity\images\sofa.png" />
-    <Content Include="Content\serenity\images\sort-order.png" />
-    <Content Include="Content\serenity\images\spreadsheet-template.png" />
-    <Content Include="Content\serenity\images\spreadsheet.png" />
-    <Content Include="Content\serenity\images\sprites.png" />
-    <Content Include="Content\serenity\images\star-pencil.png" />
-    <Content Include="Content\serenity\images\sticky-note-plus.png" />
-    <Content Include="Content\serenity\images\sticky-note-small-pin.png" />
-    <Content Include="Content\serenity\images\sticky-note-small.png" />
-    <Content Include="Content\serenity\images\sticky-notes-pin.png" />
-    <Content Include="Content\serenity\images\sticky-notes-stack.png" />
-    <Content Include="Content\serenity\images\sticky-notes.png" />
-    <Content Include="Content\serenity\images\stock.png" />
-    <Content Include="Content\serenity\images\store.png" />
-    <Content Include="Content\serenity\images\table-chart.png" />
-    <Content Include="Content\serenity\images\table-header.gif" />
-    <Content Include="Content\serenity\images\table-select-all.png" />
-    <Content Include="Content\serenity\images\table.png" />
-    <Content Include="Content\serenity\images\tag--arrow.png" />
-    <Content Include="Content\serenity\images\tag--exclamation.png" />
-    <Content Include="Content\serenity\images\tag-label.png" />
-    <Content Include="Content\serenity\images\tag-plus.png" />
-    <Content Include="Content\serenity\images\tag-small.png" />
-    <Content Include="Content\serenity\images\tag.png" />
-    <Content Include="Content\serenity\images\tags-label.png" />
-    <Content Include="Content\serenity\images\tags.png" />
-    <Content Include="Content\serenity\images\thumb-file-72.png" />
-    <Content Include="Content\serenity\images\tick-empty.png" />
-    <Content Include="Content\serenity\images\tick-green.png" />
-    <Content Include="Content\serenity\images\tick-red.png" />
-    <Content Include="Content\serenity\images\ticket-arrow.png" />
-    <Content Include="Content\serenity\images\ticket-exclamation.png" />
-    <Content Include="Content\serenity\images\ticket-plus.png" />
-    <Content Include="Content\serenity\images\ticket-stub.png" />
-    <Content Include="Content\serenity\images\ticket-user.png" />
-    <Content Include="Content\serenity\images\toggle-expand.png" />
-    <Content Include="Content\serenity\images\toggle-small-expand.png" />
-    <Content Include="Content\serenity\images\toggle-small.png" />
-    <Content Include="Content\serenity\images\toggle.png" />
-    <Content Include="Content\serenity\images\toolbar-bg.gif" />
-    <Content Include="Content\serenity\images\toolbox.png" />
-    <Content Include="Content\serenity\images\trash.gif" />
-    <Content Include="Content\serenity\images\trash.png" />
-    <Content Include="Content\serenity\images\tree-item.png" />
-    <Content Include="Content\serenity\images\truck.png" />
-    <Content Include="Content\serenity\images\ui-check-box-uncheck.png" />
-    <Content Include="Content\serenity\images\ui-radio-button-uncheck.png" />
-    <Content Include="Content\serenity\images\unchecked.gif" />
-    <Content Include="Content\serenity\images\universal.png" />
-    <Content Include="Content\serenity\images\unlock-disable.png" />
-    <Content Include="Content\serenity\images\unlock.png" />
-    <Content Include="Content\serenity\images\user-arrow.png" />
-    <Content Include="Content\serenity\images\user-business.png" />
-    <Content Include="Content\serenity\images\user-female.png" />
-    <Content Include="Content\serenity\images\user-share.png" />
-    <Content Include="Content\serenity\images\user-worker.png" />
-    <Content Include="Content\serenity\images\user.png" />
-    <Content Include="Content\serenity\images\users.png" />
-    <Content Include="Content\serenity\images\viewtree.png" />
-    <Content Include="Content\serenity\images\wall-brick.png" />
-    <Content Include="Content\serenity\images\wand-plus.png" />
-    <Content Include="Content\serenity\images\wand.png" />
-    <Content Include="Content\serenity\images\warning.png" />
-    <Content Include="Content\serenity\images\wheel.png" />
-    <Content Include="Content\serenity\images\wooden-box.png" />
-    <Content Include="Content\serenity\images\wrench-screwdriver.png" />
-    <Content Include="Content\serenity\images\wrench.png" />
-    <Content Include="Content\serenity\images\xls.png" />
-    <Content Include="Content\serenity\images\xlsx.png" />
-    <Content Include="Content\serenity\images\xml.png" />
-    <Content Include="Content\serenity\images\zones-stack.png" />
-    <Content Include="Content\serenity\images\zoom.png" />
     <Content Include="Content\serenity\serenity.css" />
     <Content Include="Content\simple-line-icons.css" />
     <Content Include="Content\slick-default-theme.css" />
@@ -935,10 +617,6 @@
     <Content Include="tools\JsEngine\json2.min.js" />
     <Content Include="tools\JsEngine\MsieJavaScriptEngine.dll" />
     <Content Include="tools\JsEngine\typescriptServices.js" />
-    <Content Include="tools\Mono.Cecil\Mono.Cecil.dll" />
-    <Content Include="tools\Mono.Cecil\Mono.Cecil.Mdb.dll" />
-    <Content Include="tools\Mono.Cecil\Mono.Cecil.Pdb.dll" />
-    <Content Include="tools\Mono.Cecil\Mono.Cecil.Rocks.dll" />
     <Content Include="tools\Node\less\lib\lessc.js" />
     <Content Include="tools\Node\less\lib\less\colors.js" />
     <Content Include="tools\Node\less\lib\less\encoder.js" />
@@ -1016,6 +694,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\Siyam Rupali ANSI.ttf" />
+    <Content Include="fonts\Siyamrupali.ttf" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
@@ -1041,8 +721,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\Siyam Rupali ANSI.ttf" />
-    <Content Include="fonts\Siyamrupali.ttf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1124,6 +802,9 @@
     <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
     <Content Include="Scripts\serenity\Serenity.CoreLib.js.map" />
     <None Include="tsconfig.json" />
+    <TypeScriptCompile Include="Imports\ServerTypings\Administration.PermissionKeys.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\ExtraSamples.OrdersByCustomerReportRequest.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1134,6 +815,12 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Northwind.MainGridMultiEditingColumns.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.PermissionKeys.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\Texts.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditActionType.ts">
@@ -2062,7 +1749,58 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\Administration.PermissionCheckEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Administration.RoleCheckEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\BasicSamples.ChangingLookupTextEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\BasicSamples.FilteredLookupDetailEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\BasicSamples.HardcodedValuesEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\BasicSamples.InlineImageFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\BasicSamples.ProduceSeafoodCategoryEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Common.EnumSelectFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\CustomerTemplatedLookupEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.CustomerEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.EmployeeFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.EmployeeListFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.FreightFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.NotesEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.OrderDetailsEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.PhoneEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\Northwind.ShipperFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\StaticTextBlockAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.AuditLogActionTypeFormatterAttribute.cs">
@@ -2175,57 +1913,6 @@
     <Compile Include="Modules\Common\Dashboard\DashboardPageModel.cs" />
     <Compile Include="Modules\Common\File\FilePage.cs" />
     <Compile Include="Modules\Common\Helpers\DetailListSaveHandler.cs" />
-    <Compile Include="Imports\ClientTypes\Administration.PermissionCheckEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Administration.RoleCheckEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\BasicSamples.ChangingLookupTextEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\BasicSamples.FilteredLookupDetailEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\BasicSamples.HardcodedValuesEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\BasicSamples.InlineImageFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\BasicSamples.ProduceSeafoodCategoryEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Common.EnumSelectFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.CustomerEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.EmployeeFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.EmployeeListFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.FreightFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.NotesEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.OrderDetailsEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.PhoneEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.ShipperFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\StaticTextBlockAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\DefaultDB\DefaultDB_20160515_072600_UserPreferences.cs" />
     <Compile Include="Migrations\DefaultDB\DefaultDB_20161029_130000_ExceptionLog.cs" />
     <Compile Include="Migrations\MigrationUtils.cs" />

@@ -88,7 +88,7 @@
 
         //call for each quick filter
         protected addQuickFilter<TWidget extends Serenity.Widget<any>, TOptions>(opt: Serenity.QuickFilter<TWidget, TOptions>): TWidget { console.log('addQuickFilter<TWidget extends Serenity.Widget<any>, TOptions>'); return super.addQuickFilter(opt) }
-        protected add_submitHandlers(action: () => void): void { console.log('add_submitHandlers(action: '); super.add_submitHandlers(action) }
+        //protected add_submitHandlers(action: () => void): void { console.log('add_submitHandlers(action: '); super.add_submitHandlers(action) }
 
         protected updateDisabledState(): void { console.log('updateDisabledState'); super.updateDisabledState() }
 
@@ -188,7 +188,7 @@
         //Inherited from Serenity.DataGrid ______________________________________________________________________
 
 
-        protected remove_submitHandlers(action: () => void): void { console.log('remove_submitHandlers(action: '); super.remove_submitHandlers(action) }
+        //protected remove_submitHandlers(action: () => void): void { console.log('remove_submitHandlers(action: '); super.remove_submitHandlers(action) }
 
 
         //protected getInitialTitle(): string;
