@@ -23,6 +23,8 @@ namespace SerExtra.Northwind {
 
                 if (this.validateEntity(item, item[this.getIdProperty()])) {
                     grid.updateRow(row);
+                    // call the following to update footer summery
+                    //this.setItems(this.getItems())
                 }
                 else {
                     //e.stopPropagation();

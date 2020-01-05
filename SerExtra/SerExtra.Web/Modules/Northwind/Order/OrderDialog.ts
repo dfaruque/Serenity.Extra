@@ -13,6 +13,23 @@
 
         constructor() {
             super();
+
+            (this.form.DetailList.view as any).onDataChanged.subscribe(() => {
+                this.calculateTotal();
+            });
+
+            //the following event will handle delete case
+            (this.form.DetailList.view as any).onRowCountChanged.subscribe(() => {
+                this.calculateTotal();
+            });
+        }
+
+        calculateTotal() {
+            var total = 0;
+            for (var k of this.form.DetailList.getItems()) {
+                total += k.LineTotal || 0;
+            }
+            Q.notifySuccess(total.toString());
         }
 
         getToolbarButtons() {
