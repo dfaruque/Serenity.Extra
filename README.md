@@ -40,10 +40,6 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 ```Q.Config.rootNamespaces.push('_Ext');```
 
 ## Examples
-  #### Setting the field's width in a dialog
-  
-  simply use `[CssClass("width6")]` on top of the property in Form.cs.
-  here "width6" is similar to "col-xx-6" in bootstrap
 
   #### To make a detail grid inline editable 
   add the following code to Grid.ts
