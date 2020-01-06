@@ -14,7 +14,7 @@
         constructor() {
             super();
 
-            (this.form.DetailList.view as any).onDataChanged.subscribe(() => {
+            this.form.DetailList.view.onDataChanged.subscribe(() => {
                 this.calculateTotal();
             });
 
