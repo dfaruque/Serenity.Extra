@@ -6,8 +6,7 @@ namespace {{RootNamespace}}{{DotModule}} {
     export class {{ClassName}}Grid extends _Ext.GridBase<{{RowClassName}}, any> {
         protected getColumnsKey() { return '{{ModuleDot}}{{ClassName}}'; }
         protected getDialogType() { return {{ClassName}}Dialog; }{{if Identity}}
-        protected getIdProperty() { return {{RowClassName}}.idProperty; }{{end}}
-        protected getLocalTextPrefix() { return {{RowClassName}}.localTextPrefix; }
+        protected getRowType() { return {{RowClassName}}; }
         protected getService() { return {{ClassName}}Service.baseUrl; }
 
         constructor(container: JQuery, options) {

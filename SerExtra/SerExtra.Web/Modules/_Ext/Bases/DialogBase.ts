@@ -4,6 +4,13 @@
     export class DialogBase<TEntity, TOptions>
         //this comment is for preventing replacement 
         extends Serenity.EntityDialog<TEntity, TOptions> {
+        protected getRowType(): { idProperty?: string, localTextPrefix?: string, nameProperty?: string, insertPermission?: string, updatePermission?: string, deletePermission?: string, } { return {}; }
+        protected getIdProperty() { return this.getRowType().idProperty; }
+        protected getLocalTextPrefix() { return this.getRowType().localTextPrefix; }
+        protected getNameProperty() { return this.getRowType().nameProperty; }
+        protected getInsertPermission() { return this.getRowType().insertPermission; }
+        protected getUpdatePermission() { return this.getRowType().updatePermission; }
+        protected getDeletePermission() { return this.getRowType().deletePermission; }
 
         protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
 
@@ -88,19 +95,17 @@
 
             if (extOptions.ShowSaveAndNewButtonInToolbar == true)
                 buttons.push({
-                    title: 'Save & New',
+                    title: q.text('Controls.EntityDialog.SaveAndNew', 'Save & New'),
                     icon: 'fa fa-save',
-                    cssClass: 'btn-save-and-close',
+                    cssClass: 'btn-save-and-new',
                     onClick: () => {
-                        this.save(response => {
-                            this.loadEntity({} as any);
-                        });
+                        this.onSaveAndNewButtonClick();
                     }
                 });
 
             if (extOptions.ShowCloseButtonInToolbar == true)
                 buttons.push({
-                    title: 'Close',
+                    title: q.text('Controls.EntityDialog.Close', 'Close'),
                     icon: 'fa fa-close',
                     cssClass: 'btn-close',
                     onClick: () => {
@@ -110,7 +115,7 @@
 
             if (extOptions.ShowRefreshButtonInToolbar == true)
                 buttons.push({
-                    title: 'Refresh',
+                    title: q.text('Controls.EntityDialog.Refresh', 'Refresh'),
                     icon: 'fa fa-refresh',
                     onClick: () => {
                         this.onRefreshClick();
@@ -202,8 +207,14 @@
             return buttons;
         }
 
-        onRefreshClick() {
+        protected onRefreshClick() {
             this.reloadById();
+        }
+
+        protected onSaveAndNewButtonClick() {
+            this.save(response => {
+                this.loadEntity({} as any);
+            });
         }
 
         protected getSaveState() {
@@ -237,11 +248,12 @@
 
                 let dialogHeight = dialogElement.height();
                 let titleBarHeight = dialogElement.find('.ui-dialog-title').height() || 20;
-                let toolBarHeight = dialogElement.find('.s-DialogToolbar.s-Toolbar').height() || 0;
-                let tabBarHeight = dialogElement.find('.nav.nav-tabs.property-tabs').height() || 0;
-                let categoryLinkHeight = dialogElement.find('.category-links').height() || 0;
 
-                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 40);
+                let $categories = this.element.find('.categories');
+                let categoriesTop = $categories.position().top;
+
+                $categories.height(dialogHeight - titleBarHeight - categoriesTop - 20);
+
             }, 100);
 
         }
@@ -269,11 +281,11 @@
                 this.element.dialog("option", "height", dialogHeight);
 
                 let titleBarHeight = dialogElement.find('.ui-dialog-title').height() || 20;
-                let toolBarHeight = dialogElement.find('.s-DialogToolbar.s-Toolbar').height() || 0;
-                let tabBarHeight = dialogElement.find('.nav.nav-tabs.property-tabs').height() || 0;
-                let categoryLinkHeight = dialogElement.find('.category-links').height() || 0;
 
-                this.element.find('.categories').height(dialogHeight - titleBarHeight - toolBarHeight - tabBarHeight - categoryLinkHeight - 55);
+                let $categories = this.element.find('.categories');
+                let categoriesTop = $categories.position().top;
+
+                $categories.height(dialogHeight - titleBarHeight - categoriesTop - 20);
 
                 dialogElement.css({
                     left: $content.position().left + (left || 0),

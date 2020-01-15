@@ -5,9 +5,17 @@ namespace _Ext {
     export class GridBase<TItem, TOptions>
         //this comment is for preventing replacement 
         extends Serenity.EntityGrid<TItem, TOptions> {
+        protected getRowType(): { idProperty?: string, localTextPrefix?: string, nameProperty?: string, insertPermission?: string, updatePermission?: string, deletePermission?: string, } { return {}; }
+        protected getIdProperty() { return this.getRowType().idProperty; }
+        protected getLocalTextPrefix() { return this.getRowType().localTextPrefix; }
+        protected getNameProperty() { return this.getRowType().nameProperty; }
+        protected getInsertPermission() { return this.getRowType().insertPermission; }
+        protected getUpdatePermission() { return this.getRowType().updatePermission; }
+        protected getDeletePermission() { return this.getRowType().deletePermission; }
 
         protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
         protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
+        protected getGrouping(): Slick.GroupInfo<TItem>[] { return []; }
 
         isReadOnly: boolean;
         isRequired: boolean;
@@ -22,6 +30,11 @@ namespace _Ext {
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
             this.slickContainer.fadeTo(0, 0);
+
+            let grouping = this.getGrouping();
+            if (grouping.length > 0)
+                this.setGrouping(grouping);
+
         }
 
         protected markupReady(): void {
@@ -329,7 +342,7 @@ namespace _Ext {
 
             if (extOptions.ShowRowSelectionCheckboxColumn == true) {
                 let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
-                rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+                rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
                 columns.unshift(rowSelectionCol);
             }
 
@@ -347,7 +360,7 @@ namespace _Ext {
 
                 if (options.multiple == true) {
                     let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
-                    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 25
+                    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
                     columns.unshift(rowSelectionCol);
                 } else {
                     columns.unshift({
@@ -619,6 +632,24 @@ namespace _Ext {
         protected setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
+        }
+
+        protected getIncludeColumns(include: { [key: string]: boolean; }) {
+            super.getIncludeColumns(include);
+            let grouping = this.getGrouping();
+
+            if (grouping.length > 0)
+                grouping.forEach(f => include[f.getter] = true);
+        }
+
+        protected getDefaultSortBy() {
+            let sortBy = super.getDefaultSortBy();
+            let grouping = this.getGrouping();
+
+            if (grouping.length > 0)
+                grouping.forEach(f => sortBy.unshift(f.getter));
+
+            return sortBy;
         }
 
         protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {

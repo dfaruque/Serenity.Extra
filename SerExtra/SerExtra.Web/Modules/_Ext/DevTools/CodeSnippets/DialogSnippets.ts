@@ -2,9 +2,7 @@
 
     export class DialogSnippets extends DialogBase<AuditLogRow, any> {
         protected getFormKey() { return AuditLogForm.formKey; }
-        protected getIdProperty() { return AuditLogRow.idProperty; }
-        protected getLocalTextPrefix() { return AuditLogRow.localTextPrefix; }
-        protected getNameProperty() { return AuditLogRow.nameProperty; }
+        protected getRowType() { return AuditLogRow; }
         protected getService() { return AuditLogService.baseUrl; }
 
         protected form = new AuditLogForm(this.idPrefix);

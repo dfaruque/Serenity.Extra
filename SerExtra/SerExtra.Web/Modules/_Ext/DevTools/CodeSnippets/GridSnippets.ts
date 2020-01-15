@@ -3,8 +3,7 @@
     export class GridSnippets extends _Ext.GridBase<AuditLogRow, any> {
         protected getColumnsKey() { return '_Ext.AuditLog'; }
         protected getDialogType() { return DialogSnippets; }
-        protected getIdProperty() { return AuditLogRow.idProperty; }
-        protected getLocalTextPrefix() { return AuditLogRow.localTextPrefix; }
+        protected getRowType() { return AuditLogRow; }
         protected getService() { return AuditLogService.baseUrl; }
 
         protected get_ExtGridOptions(): ExtGridOptions {

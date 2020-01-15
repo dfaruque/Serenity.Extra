@@ -6,9 +6,7 @@ namespace {{RootNamespace}}{{DotModule}} {
     @Serenity.Decorators.maximizable(){{end}}
     export class {{ClassName}}Dialog extends _Ext.DialogBase<{{RowClassName}}, any> {
         protected getFormKey() { return {{ClassName}}Form.formKey; }{{if Identity}}
-        protected getIdProperty() { return {{RowClassName}}.idProperty; }{{end}}
-        protected getLocalTextPrefix() { return {{RowClassName}}.localTextPrefix; }{{if NameField}}
-        protected getNameProperty() { return {{RowClassName}}.nameProperty; }{{end}}
+        protected getRowType() { return {{RowClassName}}; }
         protected getService() { return {{ClassName}}Service.baseUrl; }
 
         protected form = new {{ClassName}}Form(this.idPrefix);
