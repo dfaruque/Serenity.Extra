@@ -56,7 +56,7 @@ namespace _Ext.DevTools.Model
                         {
                             Field rowfield = rowFields[i];
 
-                            if (EntityFieldExtensions.IsTableField(rowfield))
+                            if (EntityFieldExtensions.IsTableField(rowfield) && rowfield.Flags != FieldFlags.Reflective)
                             {
                                 var dbField = dbFields.FirstOrDefault(f => f.FieldName == rowfield.Name);
 
