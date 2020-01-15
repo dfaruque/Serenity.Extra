@@ -50,7 +50,7 @@
 
             this.clearSelectionButton = this.element.find('.select2-search-choice-close')
                 .click(e => {
-                    this.value = null;
+                    this.value = '';
                     this.text = '';
 
                     this._selectedItem = null;
@@ -66,6 +66,7 @@
         }
 
         protected inplaceSearchClick(e: any): void {
+            this.options.preSelectedKeys = this.values;
             var pickerDialog = new _Ext.GridItemPickerDialog(this.options);
 
             pickerDialog.onSuccess = (selectedItems: any[]) => {
@@ -131,6 +132,18 @@
 
         }
 
+        public get values(): string[] {
+            let valCVS = this.value;
+            if (Q.isEmptyOrNull(valCVS))
+                return [];
+            else
+                return valCVS.split(',');
+        }
+
+        public set values(val: string[]) {
+            this.value = val.join(',');
+        }
+
         public get text(): string {
             let editVal = this.element.find('span.display-text').text();
             return editVal;
@@ -140,9 +153,16 @@
             this.element.find('span.display-text').text(val);
         }
 
-        public getEditValue(property, target) { target[property.name] = this.value; }
+        public getEditValue(property, target) {
+            if (this.options.multiple == true) {
+                target[property.name] = this.values;
+            } else {
+                target[property.name] = this.value;
+            }
+        }
         public setEditValue(source, property) {
             this.value = source[property.name];
+
             this.text = source[this.options.nameFieldInThisRow];
 
             if (source[property.name] && source[this.options.nameFieldInThisRow]) {
@@ -342,7 +362,7 @@
                 this.set_value(null);
                 this.updateItems();
 
-                this.options.filteringCriteria = [[this.cascadeField], '=', value];
+                this.options.filteringCriteria = [[this.filterField], '=', value];
 
             }
         }
@@ -371,6 +391,7 @@
         preSelectedKeys?: any[];
 
         filteringCriteria?: any;
+        customPrams?: any;
 
         dialogType?: any;
 
