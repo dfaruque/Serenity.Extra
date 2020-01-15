@@ -34,6 +34,12 @@ namespace _Ext
             set { SetOption("cascadeValue", value); }
         }
 
+        public object CustomPrams
+        {
+            get { return GetOption<object>("customPrams"); }
+            set { SetOption("customPrams", value); }
+        }
+
         public object DialogType
         {
             get { return GetOption<object>("dialogType"); }
