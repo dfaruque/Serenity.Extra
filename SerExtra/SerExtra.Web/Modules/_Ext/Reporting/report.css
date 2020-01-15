@@ -77,7 +77,7 @@ hr {
 }
 
 .rpt-number {
-    text-align: right;
+    text-align: right !important;
 }
 
 .rpt-status {
