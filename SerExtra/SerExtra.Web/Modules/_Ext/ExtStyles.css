@@ -250,8 +250,12 @@ input, textarea {
     display: none;
 }
 
-.quick-filter-item .s-LookupEditor {
+/*.quick-filter-item .s-LookupEditor {
     width: 230px;
+}*/
+
+.quick-filter-item .s-DateEditor.dateQ {
+    width: 100px;
 }
 
 .inline-actions {
