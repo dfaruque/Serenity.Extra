@@ -29,7 +29,8 @@
             for (var k of this.form.DetailList.getItems()) {
                 total += k.LineTotal || 0;
             }
-            Q.notifySuccess(total.toString());
+
+            this.form.TotalAmount.value = total;
         }
 
         getToolbarButtons() {

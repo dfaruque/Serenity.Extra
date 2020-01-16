@@ -21,6 +21,8 @@ namespace SerExtra.Northwind.Forms
         [Tab("Order Details")]
         [OrderDetailsEditor]
         public List<Entities.OrderDetailRow> DetailList { get; set; }
+        [OneWay, IgnoreName]
+        public Decimal? TotalAmount { get; set; }
 
         [Tab("Shipping")]
         [Category("Info")]

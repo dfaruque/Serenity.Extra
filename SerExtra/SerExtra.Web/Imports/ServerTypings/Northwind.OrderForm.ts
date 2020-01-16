@@ -5,6 +5,7 @@
         RequiredDate: Serenity.DateEditor;
         EmployeeID: Serenity.LookupEditor;
         DetailList: OrderDetailsEditor;
+        TotalAmount: Serenity.DecimalEditor;
         ShippedDate: Serenity.DateEditor;
         ShipVia: Serenity.LookupEditor;
         Freight: Serenity.DecimalEditor;
@@ -40,6 +41,7 @@
                     'RequiredDate', w1,
                     'EmployeeID', w2,
                     'DetailList', w3,
+                    'TotalAmount', w4,
                     'ShippedDate', w1,
                     'ShipVia', w2,
                     'Freight', w4,
