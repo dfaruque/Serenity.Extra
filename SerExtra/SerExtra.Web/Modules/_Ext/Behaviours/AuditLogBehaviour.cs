@@ -72,10 +72,7 @@ namespace _Ext
                     .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
                     .OrderBy(fld.Id, desc: true));
 
-                    //we don't want to serialize id field
-                    var pkField = (oldRow as IIdRow)?.IdField as Field;
-                    if (!(pkField is null))
-                        oldRow.ClearAssignment(pkField);
+                    ClearAssignment(oldRow);
 
                     var oldrowJson = JsonConvert.SerializeObject(oldRow);
                     var rowJson = JsonConvert.SerializeObject(row);
@@ -105,6 +102,33 @@ namespace _Ext
             catch (Exception ex)
             {
                 Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
+            }
+        }
+
+        private static void ClearAssignment(Row row)
+        {
+            if (row is IIdRow idRow)
+            {
+                if (idRow.IdField is Field idField)
+                    row.ClearAssignment(idField);
+            }
+
+            if (row is IInsertLogRow iInsertLogRow)
+            {
+                if (iInsertLogRow.InsertDateField is Field idateField)
+                    row.ClearAssignment(idateField);
+
+                if (iInsertLogRow.InsertUserIdField is Field iuserField)
+                    row.ClearAssignment(iuserField);
+            }
+
+            if (row is IUpdateLogRow iUpdateLogRow)
+            {
+                if (iUpdateLogRow.UpdateDateField is Field udateField)
+                    row.ClearAssignment(udateField);
+
+                if (iUpdateLogRow.UpdateUserIdField is Field uuserField)
+                    row.ClearAssignment(uuserField);
             }
         }
 
