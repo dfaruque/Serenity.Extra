@@ -20,7 +20,7 @@
 
         constructor(opt?) {
             super(opt);
-            this.element.fadeTo(0, 0);
+            //this.element.fadeTo(0, 0);
 
             if (this.get_ExtDialogOptions().PendingChangesConfirmation == true) {
                 _Ext.DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
@@ -42,7 +42,7 @@
 
             }
 
-            this.element.fadeTo(100, 1);
+            //this.element.fadeTo(100, 1);
         }
         protected onDialogOpen() {
             super.onDialogOpen();
@@ -59,7 +59,7 @@
         protected onDialogClose() {
             super.onDialogClose();
 
-            this.onAfterDialogClose(this.entity);
+            this.onAfterDialogClose(this.getSaveEntity());
         }
 
         protected setReadOnly(value: boolean) {
