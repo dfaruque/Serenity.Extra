@@ -5,7 +5,7 @@ namespace {{RootNamespace}}{{DotModule}} {
     @Serenity.Decorators.registerClass(){{if CustomSettings.MaximizableDialog}}
     @Serenity.Decorators.maximizable(){{end}}
     export class {{ClassName}}Dialog extends _Ext.DialogBase<{{RowClassName}}, any> {
-        protected getFormKey() { return {{ClassName}}Form.formKey; }{{if Identity}}
+        protected getFormKey() { return {{ClassName}}Form.formKey; }
         protected getRowType() { return {{RowClassName}}; }
         protected getService() { return {{ClassName}}Service.baseUrl; }
 

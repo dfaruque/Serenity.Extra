@@ -5,7 +5,7 @@ namespace {{RootNamespace}}{{DotModule}} {
     @Serenity.Decorators.registerClass()
     export class {{ClassName}}Grid extends _Ext.GridBase<{{RowClassName}}, any> {
         protected getColumnsKey() { return '{{ModuleDot}}{{ClassName}}'; }
-        protected getDialogType() { return {{ClassName}}Dialog; }{{if Identity}}
+        protected getDialogType() { return {{ClassName}}Dialog; }
         protected getRowType() { return {{RowClassName}}; }
         protected getService() { return {{ClassName}}Service.baseUrl; }
 
