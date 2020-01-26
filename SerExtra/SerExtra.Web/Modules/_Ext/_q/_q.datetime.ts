@@ -162,13 +162,14 @@ namespace q {
             startDateTextBox.datepicker('option', 'maxDate', endDateTextBox.datepicker('getDate'));
         });
 
+        if (onChangeHandler) {
+            setTimeout(() => {
+                fromDateEditor.change(onChangeHandler);
 
-        setTimeout(() => {
-            fromDateEditor.change(onChangeHandler);
+                toDateEditor.change(onChangeHandler);
+            }, 500);
 
-            toDateEditor.change(onChangeHandler);
-        }, 500);
-
+        }
     }
 
     export function initDateTimeRangeEditor(fromDateTimeEditor: _Ext.DateTimePickerEditor, toDateTimeEditor: _Ext.DateTimePickerEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
@@ -195,8 +196,7 @@ namespace q {
         endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
         startDateTextBox.datetimepicker('option', 'onSelect', function (selectedDateTime) {
             endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
-            onChangeHandler(selectedDateTime);
-
+            if (onChangeHandler) onChangeHandler(selectedDateTime);
         });
 
 
@@ -216,15 +216,8 @@ namespace q {
         startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
         endDateTextBox.datetimepicker('option', 'onSelect', function (selectedDateTime) {
             startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
-            onChangeHandler(selectedDateTime);
+            if (onChangeHandler) onChangeHandler(selectedDateTime);
         });
-
-
-        //setTimeout(() => {
-        //    fromDateTimeEditor.change(onChangeHandler);
-
-        //    toDateTimeEditor.change(onChangeHandler);
-        //}, 500);
 
     }
 
