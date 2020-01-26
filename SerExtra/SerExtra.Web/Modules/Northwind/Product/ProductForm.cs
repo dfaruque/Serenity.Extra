@@ -2,6 +2,7 @@
 namespace SerExtra.Northwind.Forms
 {
     using Serenity.ComponentModel;
+    using SerExtra.Northwind.Entities;
     using System;
     using System.ComponentModel;
 
@@ -13,6 +14,7 @@ namespace SerExtra.Northwind.Forms
         public String ProductName { get; set; }
         public String ProductImage { get; set; }
         public Boolean Discontinued { get; set; }
+        [_Ext.GridItemPickerEditor(typeof(SupplierRow))]
         public Int32 SupplierID { get; set; }
         public Int32 CategoryID { get; set; }
         [Category("Pricing")]
