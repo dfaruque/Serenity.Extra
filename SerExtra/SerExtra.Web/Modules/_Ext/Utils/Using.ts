@@ -174,7 +174,7 @@ function usingBabylonjs() {
     if (window['BABYLON'] && window['BABYLON']['Engine']) {
         return;
     } else {
-        loadScript(Q.resolveUrl("~/Scripts/babylonjs/babylon.js"))
+        loadScript(Q.resolveUrl("~/Scripts/babylon.js"))
     }
 }
 
