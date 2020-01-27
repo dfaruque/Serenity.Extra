@@ -11,7 +11,8 @@
     }
 
     export function getSelectedLanguage(): string {
-        return (document.getElementById('LanguageSelect') as HTMLSelectElement).value;
+        var lang = (document.getElementById('LanguageSelect') as HTMLSelectElement).value || document.getElementsByTagName('html')[0].getAttribute('lang');
+        return lang;
     }
 
     export function formatDecimal(value) {
