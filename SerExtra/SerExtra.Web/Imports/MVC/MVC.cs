@@ -23,6 +23,11 @@ namespace MVC
                     public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
                 }
 
+                public static class DatabaseExplorer
+                {
+                    public const string DatabaseExplorerIndex = "~/Modules/_Ext/DevTools/DatabaseExplorer/DatabaseExplorerIndex.cshtml";
+                }
+
                 public static class GenerateMigrationFromEntity
                 {
                     public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";

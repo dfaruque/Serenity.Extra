@@ -720,6 +720,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerIndex.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -846,6 +847,21 @@
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.AuditLogViewerService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.DatabaseExplorerConnection.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.DatabaseExplorerListRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.DatabaseExplorerListTablesRequest.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.DatabaseExplorerService.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.DatabaseExplorerTable.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\_Ext.DevTools.SergenConnection.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -916,6 +932,9 @@
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\GridSnippets.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\DialogWithAllOverridableMethods.ts" />
     <TypeScriptCompile Include="Modules\_Ext\DevTools\CodeSnippets\GridWithAllOverridableMethods.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseConnectionEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerGrid.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseTableEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerDialog.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportPanelBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Bases\ReportGridBase.ts" />
@@ -933,6 +952,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\JsonGridEditorBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\MonthYearEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\PrefixedStringEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Editors\ServiceEditorBase.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\MonthYearFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
@@ -1814,6 +1834,12 @@
     <Compile Include="Imports\ClientTypes\_Ext.DateTimePickerEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.DevTools.DataConnectionEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.DevTools.DataTableEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.EmptyLookupEditorAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
@@ -2019,6 +2045,10 @@
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
+    <Compile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerConfig.cs" />
+    <Compile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerEndpoint.cs" />
+    <Compile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerModels.cs" />
+    <Compile Include="Modules\_Ext\DevTools\DatabaseExplorer\DatabaseExplorerPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenEndpoint.cs" />
