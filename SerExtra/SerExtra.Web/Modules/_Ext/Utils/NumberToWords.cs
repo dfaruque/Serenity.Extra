@@ -89,7 +89,7 @@ public static class NumberToWords
     #region DecimalToWordsTk
     public static string DecimalToWordsTk(decimal number, int decimals = 2)
     {
-        number = Math.Round(number, decimals);
+        number = Q.Round(number, decimals);
 
         if (number == 0)
             return "Zero";
@@ -126,7 +126,7 @@ public static class NumberToWords
     #region DecimalToWords
     public static string DecimalToWords(decimal number, int decimals = 2)
     {
-        number = Math.Round(number, decimals);
+        number = Q.Round(number, decimals);
 
         if (number == 0)
             return "Zero";

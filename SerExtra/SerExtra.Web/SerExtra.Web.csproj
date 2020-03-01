@@ -2045,6 +2045,7 @@
     <Compile Include="Modules\_Ext\Utils\Q.cs" />
     <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowEndpoint.cs" />
     <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowForm.cs" />
+    <Compile Include="Modules\_Ext\Utils\Q.Math.cs" />
     <Compile Include="Modules\_Ext\Utils\Q.Sql.cs" />
     <Compile Include="Modules\_Ext\_ExtNavigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
