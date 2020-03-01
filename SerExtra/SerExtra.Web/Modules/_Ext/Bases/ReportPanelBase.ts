@@ -7,7 +7,7 @@
 
         protected getReportRequest() { return this.getSaveEntity(); }
 
-        constructor(container: JQuery, opt) {
+        constructor(container: JQuery, opt?) {
             super(container, opt);
 
             this.byId('PanelTitle').text(this.getReportTitle());

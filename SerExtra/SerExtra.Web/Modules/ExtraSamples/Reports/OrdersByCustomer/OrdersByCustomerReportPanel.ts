@@ -8,8 +8,8 @@
 
         private form: OrdersByCustomerReportRequestForm = new OrdersByCustomerReportRequestForm(this.idPrefix);
 
-        constructor(container: JQuery) {
-            super(container);
+        constructor(container: JQuery, opt) {
+            super(container, opt);
 
         }
     }
