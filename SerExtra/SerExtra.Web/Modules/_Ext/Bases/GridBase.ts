@@ -702,14 +702,21 @@ namespace _Ext {
                 return false;
             }
 
+            var request = this.view.params as Serenity.ListRequest;
+
             let options = (this.options as any) as GridItemPickerEditorOptions;
 
             if (options.filteringCriteria) {
-
-                var request = this.view.params as Serenity.ListRequest;
-
                 request.Criteria = Serenity.Criteria.and(request.Criteria, options.filteringCriteria);
             }
+
+            if (options.filterField && options.filterValue)
+                request.Criteria = Serenity.Criteria.and(request.Criteria, [[options.filterField], '=', options.filterValue]);
+
+            let cascadeField = options.cascadeField || options.cascadeFrom;
+            if (cascadeField && options.cascadeValue)
+                request.Criteria = Serenity.Criteria.and(request.Criteria, [[cascadeField], '=', options.cascadeValue]);
+
             return true;
         }
 
