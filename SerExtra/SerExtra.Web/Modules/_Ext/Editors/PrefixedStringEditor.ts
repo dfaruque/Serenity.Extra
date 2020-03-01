@@ -16,7 +16,7 @@
             let prefixInputWidth = options.prefixLength * fontSize;
 
             this.prefixInput = $('<input type="text"/>')
-                .addClass('readonly')
+                .addClass('prefix readonly')
                 .attr('style', `width:${prefixInputWidth}px;`)
                 .attr('disabled', 'disabled')
                 .insertBefore(this.element);
