@@ -226,6 +226,14 @@ namespace _Ext {
                                 }
                             };
                         }
+                    } else if (column.sourceItem.editorType == "ServiceLookup") {
+                        if (!column.sourceItem.editorParams.autoComplete) {
+                            (column as any).textFieldInThisRow = column.sourceItem.editorParams.textFieldInThisRow || column.sourceItem.editorParams.textField;
+                            column.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                                if (dataContext) return dataContext[columnDef.textFieldInThisRow];
+                                else return '-';
+                            };
+                        }
                     } else if (formatterType == "Enum") {
 
                         column.formatter = (row, cell, value, columnDef: any, dataContext) => {

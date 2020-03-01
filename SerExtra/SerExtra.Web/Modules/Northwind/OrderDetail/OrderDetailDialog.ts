@@ -14,9 +14,10 @@ namespace SerExtra.Northwind {
             this.form = new OrderDetailForm(this.idPrefix);
 
             this.form.ProductID.changeSelect2(e => {
-                var productID = Q.toId(this.form.ProductID.value);
-                if (productID != null) {
-                    this.form.UnitPrice.value = ProductRow.getLookup().itemById[productID].UnitPrice;
+                var product = q.getSelectedRow<ProductRow>(e);
+                if (product) {
+                    this.form.UnitPrice.value = product.UnitPrice;
+                    
                 }
             });
 
@@ -29,6 +30,15 @@ namespace SerExtra.Northwind {
                     return "Discount can't be higher than total price!";
                 }
             });
+        }
+
+        protected getSaveEntity() {
+            let entity = super.getSaveEntity();
+
+            entity.ProductName = this.form.ProductID.text;
+            entity.LineTotal = (entity.Quantity || 0) * (entity.UnitPrice || 0) - (entity.Discount || 0);
+
+            return entity;
         }
     }
 }
