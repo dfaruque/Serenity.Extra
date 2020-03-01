@@ -102,10 +102,6 @@ input, textarea {
         font-size: 15px;
     }
 
-.s-Form .category .field {
-    padding-left: 20px;
-}
-
 .emaildomain {
     width: 200px;
 }
@@ -118,7 +114,7 @@ input, textarea {
     padding-left: 5px;
 }
 
-    .no-label label.caption,.field-only label.caption {
+    .no-label label.caption, .field-only label.caption {
         display: none;
     }
 
@@ -128,6 +124,23 @@ input, textarea {
 
 .label-only > input {
     display: none;
+}
+
+.label-subcategory {
+    margin: 0px 10px 8px 10px;
+    border-bottom: 1px dotted #7380C4;
+    width: 100%;
+}
+
+.label-subcategory > input {
+    display: none;
+}
+
+.label-subcategory > label.caption {
+    font-weight: bold !important;
+    color: cornflowerblue;
+    padding-left: 0px;
+    width: 90% !important;
 }
 
 .offset-field {
