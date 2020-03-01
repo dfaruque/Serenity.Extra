@@ -22,7 +22,7 @@
 
             this.addInplaceButtons();
 
-            this.setCascadeFrom((this.options as Serenity.Select2EditorOptions).cascadeFrom);
+            this.setCascadeFrom(this.options.cascadeFrom);
 
         }
 
@@ -324,7 +324,6 @@
                 this.set_value(null);
                 this.updateItems();
 
-                this.options.filteringCriteria = [[this.cascadeField], '=', value];
             }
         }
 
@@ -361,8 +360,6 @@
                 (this.options as Serenity.Select2EditorOptions).filterValue = value;
                 this.set_value(null);
                 this.updateItems();
-
-                this.options.filteringCriteria = [[this.filterField], '=', value];
 
             }
         }
