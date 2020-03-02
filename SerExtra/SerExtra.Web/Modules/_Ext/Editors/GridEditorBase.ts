@@ -75,7 +75,10 @@ namespace _Ext {
 
         protected deleteEntity(id: number) {
             this.view.deleteItem(id);
-            setTimeout(() => { this.onItemsChanged() });
+            setTimeout(() => {
+                this.onItemsChanged();
+                this.resetRowNumber();
+            });
             return true;
         }
 
