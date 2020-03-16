@@ -188,6 +188,8 @@ namespace _Ext.DevTools.Model
                     {
                         var rowfieldTypeName = RowField.Type.ToString();
 
+                        if (rowfieldTypeName == "Object") rowfieldTypeName = "String";
+
                         if (rowfieldTypeName != SchemaHelper.SqlTypeNameToFieldType(DBField.DataType, DBField.Size))
                             _Issues.Add(FieldComparisonIssue.DataTypeMismatch);
 
