@@ -11,6 +11,7 @@
 
     [ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}")]
     [DisplayName("{{Title}}"), InstanceName("{{Title}}"), TwoLevelCached]
+	[NavigationPermission("{{Module}}:{{ClassName}}:Navigation")]
     [ReadPermission("{{Module}}:{{ClassName}}:Read")]
     [InsertPermission("{{Module}}:{{ClassName}}:Insert")]
     [UpdatePermission("{{Module}}:{{ClassName}}:Update")]

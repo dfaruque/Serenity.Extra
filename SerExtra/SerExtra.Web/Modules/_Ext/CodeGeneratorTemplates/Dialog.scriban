@@ -10,11 +10,10 @@ namespace {{RootNamespace}}{{DotModule}} {
         protected getService() { return {{ClassName}}Service.baseUrl; }
 
         protected form = new {{ClassName}}Form(this.idPrefix);
-{{if CustomSettings.MaximizableDialog}}
 
-        onDialogOpen() {
-            super.onDialogOpen();
-            this.element.closest(".ui-dialog").find(".ui-icon-maximize-window").click();
-        }{{end}}
+        constructor(options) {
+            super(options);
+        }
+
     }
 }
