@@ -2030,6 +2030,7 @@
     <Compile Include="Modules\Common\Reporting\GridExport\DynamicDataReport.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ExcelReportGenerator.cs" />
     <Compile Include="Modules\_Ext\Editors\GridItemPicker\GridItemPickerEditorAttribute.cs" />
+    <Compile Include="Modules\_Ext\Editors\SortedLookupScript.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportBase.cs" />
     <Compile Include="Modules\_Ext\Reporting\ReportModelBase.cs" />
     <Compile Include="Modules\Common\Reporting\GridExport\ReportGenerator.cs" />
