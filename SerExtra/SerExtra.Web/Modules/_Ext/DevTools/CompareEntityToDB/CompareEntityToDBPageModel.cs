@@ -145,8 +145,8 @@ namespace _Ext.DevTools.Model
             get
             {
                 if (Issues.Length > 0) return "danger";
-                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "danger"))) return "danger";
-                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "warning"))) return "warning";
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i => i.GetCssClass() == "danger"))) return "danger";
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i => i.GetCssClass() == "warning"))) return "warning";
                 else return "default";
             }
         }
@@ -156,8 +156,8 @@ namespace _Ext.DevTools.Model
             get
             {
                 if (Issues.Length > 0) return 1;
-                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "danger"))) return 2;
-                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i=>i.GetCssClass() == "warning"))) return 3;
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i => i.GetCssClass() == "danger"))) return 2;
+                else if (FieldComparisonInfos.Any(f => f.Issues.Exists(i => i.GetCssClass() == "warning"))) return 3;
                 else return 4;
             }
         }

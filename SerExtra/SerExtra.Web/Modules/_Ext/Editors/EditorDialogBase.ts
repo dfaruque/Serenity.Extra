@@ -28,7 +28,7 @@ namespace _Ext {
                 this.applyChangesButton.hide();
             }
 
-            if (this.parentEditor.isReadOnly == true) {
+            if (this.parentEditor && this.parentEditor.isReadOnly == true) {
                 this.saveAndCloseButton.addClass('disabled');
                 this.deleteButton.addClass('disabled');
 

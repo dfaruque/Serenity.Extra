@@ -56,7 +56,7 @@ public static class EnumUtil
 
         FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
 
-        var attribute = fieldInfo.GetCustomAttribute<T>();
+        var attribute = fieldInfo?.GetCustomAttribute<T>();
 
         return attribute;
     }

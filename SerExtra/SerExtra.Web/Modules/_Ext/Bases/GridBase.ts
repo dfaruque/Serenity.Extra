@@ -710,11 +710,11 @@ namespace _Ext {
                 request.Criteria = Serenity.Criteria.and(request.Criteria, options.filteringCriteria);
             }
 
-            if (options.filterField && options.filterValue)
+            if (options.filterField && Q.isValue(options.filterValue))
                 request.Criteria = Serenity.Criteria.and(request.Criteria, [[options.filterField], '=', options.filterValue]);
 
             let cascadeField = options.cascadeField || options.cascadeFrom;
-            if (cascadeField && options.cascadeValue)
+            if (cascadeField && Q.isValue(options.cascadeValue))
                 request.Criteria = Serenity.Criteria.and(request.Criteria, [[cascadeField], '=', options.cascadeValue]);
 
             return true;

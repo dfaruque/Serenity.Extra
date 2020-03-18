@@ -63,6 +63,7 @@
         }
 
         protected setReadOnly(value: boolean) {
+            this.readOnly = value;
             this.isReadOnly = value;
 
             if (this.isReadOnly == true) {
@@ -72,8 +73,10 @@
                 this.cloneButton.toggleClass('disabled', this.isReadOnly);
                 this.undeleteButton.toggleClass('disabled', this.isReadOnly);
                 this.toolbar.findButton('btn-save-and-close').addClass('disabled');
+                this.toolbar.findButton('btn-save-and-new').addClass('disabled');
                 this.toolbar.findButton('btn-replace-row').addClass('disabled');
                 this.toolbar.findButton('btn-history').addClass('disabled');
+                this.toolbar.findButton('btn-custom').addClass('disabled');
 
                 // remove required asterisk (*)
                 this.element.find('sup').toggle(this.isReadOnly);

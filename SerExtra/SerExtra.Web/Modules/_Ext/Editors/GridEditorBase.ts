@@ -27,7 +27,7 @@ namespace _Ext {
                 (args.grid as Slick.Grid).render();
                 (args.grid as Slick.Grid).resizeCanvas();
             });
-            
+
         }
 
         private sortGridFunction(grid: Slick.Grid, column: any, field: any) {
