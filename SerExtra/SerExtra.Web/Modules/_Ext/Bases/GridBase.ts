@@ -114,6 +114,7 @@ namespace _Ext {
             request.ReportKey = null;                   // if some value found in this property then "export to pdf" button will appear
             request.ListExcelServiceMethodName = null;  // if some value found in this property then "export to xls" button will appear
             request.EqualityFilterWithTextValue = {};
+            request.CustomParameters = {};
 
             if (view) {
                 let quickFilters = this.getQuickFilters();

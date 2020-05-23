@@ -20,6 +20,7 @@ namespace _Ext
         public string ReportDesignPath { get; set; } //"~/Modules/.../.../Report/...ReportDesign.cshtml";
 
         public Dictionary<string, string> EqualityFilterWithTextValue { get; set; }
+        public Dictionary<string, object> CustomParameters { get; set; }
     }
 
     public partial class EntityReportRequest : RetrieveRequest
