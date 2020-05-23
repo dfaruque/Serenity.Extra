@@ -26,8 +26,12 @@
     }
 
     // Check numeric or not then return value, if NAN then return zero(0)
-    export function ToNumber(value) {
+    export function ToNumber(value): number {
         return isNaN(value) ? 0 : value;
+    }
+
+    export function ToFixed(value, fractionDigits = 2): string {
+        return ToNumber(value).toFixed(fractionDigits);
     }
 
     export function ToBool(value) {
