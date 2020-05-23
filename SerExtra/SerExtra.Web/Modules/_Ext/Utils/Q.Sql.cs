@@ -4,4 +4,9 @@
     {
         return $"ROUND({fieldExp}, {precision})";
     }
+    
+    public static string SqlDistinctCount(string exp)
+    {
+        return $"COUNT(DISTINCT {exp})";
+    }
 }
