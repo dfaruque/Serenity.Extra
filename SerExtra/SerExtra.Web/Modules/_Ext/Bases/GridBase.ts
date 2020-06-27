@@ -638,7 +638,8 @@ namespace _Ext {
             this.setItems(items);
         }
 
-        protected setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
+        //override getGrouping instead of calling setGrouping
+        private setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }
