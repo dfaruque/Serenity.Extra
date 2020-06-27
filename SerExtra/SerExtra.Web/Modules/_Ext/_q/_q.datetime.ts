@@ -71,12 +71,12 @@ namespace q {
         return result;
     }
 
-        export function addYear(date: Date, years: number): Date {
+    export function addYear(date: Date, years: number): Date {
         var result = new Date(date as any);
         result.setFullYear(result.getFullYear() + years);
         return result;
     }
-    
+
     export function getPeriods(fromDate: Date, toDate: Date, periodUnit: _Ext.TimeUoM): number {
         if (periodUnit == _Ext.TimeUoM.Day) {
             let days = q.getDays(fromDate, toDate);
@@ -120,6 +120,18 @@ namespace q {
         editor.change(handler);
         editor.element.closest('.field').find('.time').change(handler);
         editor.element.closest('.field').find('.inplace-now').click(handler);
+    }
+
+    export function setMinDate(editor: Serenity.DateEditor, value: Date): void {
+        editor.element.datepicker("option", "minDate", value);
+        editor.set_minDate(value);
+    }
+
+    export function setMaxDate(editor: Serenity.DateEditor, value: Date): void {
+        editor.element.datepicker("option", "maxDate", value);
+        let today = new Date();
+        let tomorrow = today.setDate(today.getDate() + 1); //to allow selection of today, without this line validation error is occured. why? may be a bug
+        editor.set_maxDate(new Date(tomorrow));
     }
 
     export function initDateRangeEditor(fromDateEditor: Serenity.DateEditor, toDateEditor: Serenity.DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
