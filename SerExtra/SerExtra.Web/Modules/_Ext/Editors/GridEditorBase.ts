@@ -77,6 +77,7 @@ namespace _Ext {
             this.view.deleteItem(id);
             setTimeout(() => {
                 this.onItemsChanged();
+                this.element.trigger('change');
                 this.resetRowNumber();
             });
             return true;
@@ -169,7 +170,10 @@ namespace _Ext {
 
             let r = this.onViewProcessData({ Entities: items })
             this.view.setItems(r.Entities, true);
-            setTimeout(() => { this.onItemsChanged(); });
+            setTimeout(() => {
+                this.onItemsChanged();
+                this.element.trigger('change');
+            });
             this.resetRowNumber(); // to generate serial no.
         }
 
