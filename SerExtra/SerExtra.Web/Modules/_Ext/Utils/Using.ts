@@ -188,6 +188,7 @@ function usingChartjs() {
 
     window['Chart'].defaults.global.defaultFontFamily = $('body').css('font-family');
     window['Chart'].defaults.global.maintainAspectRatio = false;
+    window['Chart'].defaults.global.tooltips.mode = 'index';
 }
 
 function includeCustomMarkerCss() {
