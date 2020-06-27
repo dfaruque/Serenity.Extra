@@ -37,7 +37,8 @@ public static partial class DbConnectionExtentions
         var query = new SqlQuery()
             .From(row)
             .Select((Field)row.IdField)
-            .Where(((Field)row.NameField).Name + "=" + name.Trim().ToSql());
+            .Where(((Field)row.NameField).Name + "=" + name.Trim().ToSql())
+            .Take(1);
 
         using (var reader = SqlHelper.ExecuteReader(connection, query))
             while (reader.Read())
@@ -95,7 +96,8 @@ public static partial class DbConnectionExtentions
         var query = new SqlQuery()
             .From(row)
             .Select((Field)row.IdField)
-            .Where(criteria);
+            .Where(criteria)
+            .Take(1);
 
         using (var reader = SqlHelper.ExecuteReader(connection, query))
             while (reader.Read())
