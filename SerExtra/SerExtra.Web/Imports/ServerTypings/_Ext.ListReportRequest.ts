@@ -5,6 +5,7 @@
         ListExcelServiceMethodName?: string;
         ReportDesignPath?: string;
         EqualityFilterWithTextValue?: { [key: string]: string };
+        CustomParameters?: { [key: string]: any };
     }
 }
 
