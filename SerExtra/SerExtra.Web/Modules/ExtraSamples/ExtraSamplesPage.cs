@@ -17,6 +17,11 @@ namespace SerExtra.ExtraSamples.Pages
             return View(Views.ExtraSamples.MainGridMultiEditing.Index);
         }
 
+        public ActionResult CustomTemplatedGrid()
+        {
+            return View(Views.ExtraSamples.CustomTemplatedGrid.Index);
+        }
+
         public ActionResult ReactSamplePage()
         {
             return View(Views.ExtraSamples.ReactSamplePage.Index);

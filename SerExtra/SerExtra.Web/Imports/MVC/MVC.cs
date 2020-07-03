@@ -333,6 +333,11 @@ namespace MVC
                 public const string ChatPage = "~/Modules/ExtraSamples/Chat/ChatPage.cshtml";
             }
 
+            public static class CustomTemplatedGrid
+            {
+                public const string Index = "~/Modules/ExtraSamples/CustomTemplatedGrid/Index.cshtml";
+            }
+
             public static class MainGridInlineEditing
             {
                 public const string Index = "~/Modules/ExtraSamples/MainGridInlineEditing/Index.cshtml";

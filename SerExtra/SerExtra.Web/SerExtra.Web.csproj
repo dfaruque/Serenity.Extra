@@ -720,6 +720,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Modules\ExtraSamples\CustomTemplatedGrid\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -895,6 +896,7 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\_references.ts" />
+    <TypeScriptCompile Include="Modules\ExtraSamples\CustomTemplatedGrid\CustomTemplatedGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MainGridMultiEditing\MainGridMultiEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MainGridInlineEditing\MainGridInlineEditingGrid.ts" />
     <TypeScriptCompile Include="Modules\ExtraSamples\MultiEdit\MultiEditDialog.ts" />
