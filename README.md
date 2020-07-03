@@ -42,7 +42,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 ## How to use (for .net core)
 1. Copy the Modules/_Ext folder from the SerExtraCore project and place it accordingly.
 2. Copy the wwwroot/Modules folder from the SerExtraCore project
-
+3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
 
 ## Examples
 
