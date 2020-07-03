@@ -18,7 +18,7 @@ It is just some useful utilities and some extra functionalities like
    - EmptyLookupEditor
    - StaticTextBlock
    
-## How to use
+## How to use (for .net old framework)
 1. Install NuGet Package Serenity.Extra
 2. Include the following lines in _LayoutHead.cshtml
 ```C#
@@ -38,6 +38,11 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 4. Add [LookupScript("Administration.User")] on UserRow
 5. Add following line in ScriptInitialization.ts
 ```Q.Config.rootNamespaces.push('_Ext');```
+
+## How to use (for .net core)
+1. Copy the Modules/_Ext folder from the SerExtraCore project and place it accordingly.
+2. Copy the wwwroot/Modules folder from the SerExtraCore project
+
 
 ## Examples
 
