@@ -2,15 +2,21 @@
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.filterable()
-    export class CustomTemplateGrid extends Northwind.CategoryGrid {
+    export class CustomTemplatedGrid extends Northwind.CategoryGrid {
 
-        private customHtml: JQuery = $('<div/>');
+        private customHtmlDiv: JQuery = $('<div/>');
 
         constructor(container: JQuery) {
             super(container);
-
             this.slickContainer.hide();
-            this.customHtml.insertAfter(this.slickContainer);
+            this.customHtmlDiv.insertAfter(this.slickContainer);
+
+            setTimeout(() => {
+                this.customHtmlDiv.css({
+                    'overflow-y': 'auto',
+                    height: this.slickContainer.height()
+                });
+            });
         }
 
         setItems(items: Northwind.CategoryRow[]) {
@@ -19,7 +25,7 @@
                         <th>Description</th>
                       </tr>`;
 
-            items.forEach(item => tr += 
+            items.forEach(item => tr +=
                 `<tr>
                     <td>${item.CategoryName}</td>
                     <td>${item.Description}</td>
@@ -30,7 +36,7 @@
                         <table>
                         `;
 
-            this.customHtml.html(html);
+            this.customHtmlDiv.html(html);
         }
     }
 }
