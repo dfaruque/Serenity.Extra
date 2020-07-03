@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Northwind.Product.EntityPlural");
+}
+
+@section Head {
+@Html.Script("dynamic://Lookup.Northwind.Category")
+@Html.Script("dynamic://Lookup.Northwind.Supplier")
+}
+<div id="GridDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new SerExtraCore.Northwind.ProductGrid($('#GridDiv'), {}).init();
+
+        Q.initFullHeightGridPage($('#GridDiv'));
+    });
+</script>

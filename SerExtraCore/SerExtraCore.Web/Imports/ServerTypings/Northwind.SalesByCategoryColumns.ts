@@ -1,0 +1,3 @@
+﻿namespace SerExtraCore.Northwind {
+}
+
