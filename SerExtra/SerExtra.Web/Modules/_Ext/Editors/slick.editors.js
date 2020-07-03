@@ -909,7 +909,15 @@ function SerenityInlineEditor(args) {
         if (args.column.sourceItem.editorType == 'Boolean')
             $input.attr('type', 'checkbox');
 
-        editor = new editorType($input, args.column.sourceItem.editorParams);
+        let editorParams = Q.deepClone(args.column.sourceItem.editorParams);
+        if (editorParams.cascadeFrom != undefined)
+        {
+            let cascadeFrom = editorParams.cascadeFrom;
+            editorParams.cascadeFrom = null;
+            editorParams.cascadeValue = args.item[cascadeFrom]
+        }
+
+        editor = new editorType($input, editorParams);
 
         if (args.column.sourceItem.editorType != 'Boolean')
             $input.addClass('editor-text');
