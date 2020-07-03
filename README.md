@@ -20,12 +20,8 @@ It is just some useful utilities and some extra functionalities like
    
 ## How to use (for .net old framework)
 1. Install NuGet Package Serenity.Extra
-2. Include the following lines in _LayoutHead.cshtml
-```C#
-@Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
-@Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
-@Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
-```
+4. If want to apply Serenity.Extra css then you could add line in Content\site\CssBundles.json
+`"~/Modules/_Ext/ExtStyles.css"`
 3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
 
 Serenity Default  |  _Ext
