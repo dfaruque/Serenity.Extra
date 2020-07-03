@@ -1,5 +1,7 @@
-﻿/// <reference types="jquery" />
+﻿/// <reference path="../../../Modules/_Ext/_q/_q.d.ts" />
+/// <reference types="jquery" />
 /// <reference types="jqueryui" />
+/// <reference types="jquery.validation" />
 declare namespace SerExtraCore.Administration {
 }
 declare namespace SerExtraCore.Administration {
@@ -2038,6 +2040,191 @@ declare namespace SerExtraCore {
 }
 declare namespace SerExtraCore.Texts {
 }
+declare namespace _Ext {
+    enum AuditActionType {
+        Insert = 1,
+        Update = 2,
+        Delete = 3
+    }
+}
+declare namespace _Ext {
+}
+declare namespace _Ext {
+    interface AuditLogForm {
+        EntityTableName: Serenity.StringEditor;
+        VersionNo: Serenity.IntegerEditor;
+        UserId: Serenity.LookupEditor;
+        ActionType: Serenity.EnumEditor;
+        ActionDate: Serenity.DateTimeEditor;
+        EntityId: Serenity.IntegerEditor;
+        OldEntity: Serenity.StringEditor;
+        NewEntity: Serenity.StringEditor;
+        Differences: StaticTextBlock;
+        IpAddress: Serenity.StringEditor;
+        SessionId: Serenity.StringEditor;
+    }
+    class AuditLogForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace _Ext {
+    interface AuditLogRow {
+        Id?: number;
+        VersionNo?: number;
+        UserId?: number;
+        ActionType?: AuditActionType;
+        ActionDate?: string;
+        EntityTableName?: string;
+        EntityId?: number;
+        OldEntity?: string;
+        NewEntity?: string;
+        IpAddress?: string;
+        SessionId?: string;
+    }
+    namespace AuditLogRow {
+        const idProperty = "Id";
+        const nameProperty = "EntityTableName";
+        const localTextPrefix = "_Ext.AuditLog";
+        const deletePermission = "Administration:AuditLog";
+        const insertPermission = "Administration:AuditLog";
+        const readPermission = "Administration:AuditLog";
+        const updatePermission = "Administration:AuditLog";
+        const enum Fields {
+            Id = "Id",
+            VersionNo = "VersionNo",
+            UserId = "UserId",
+            ActionType = "ActionType",
+            ActionDate = "ActionDate",
+            EntityTableName = "EntityTableName",
+            EntityId = "EntityId",
+            OldEntity = "OldEntity",
+            NewEntity = "NewEntity",
+            IpAddress = "IpAddress",
+            SessionId = "SessionId"
+        }
+    }
+}
+declare namespace _Ext {
+    namespace AuditLogService {
+        const baseUrl = "_Ext/AuditLog";
+        function Create(request: Serenity.SaveRequest<AuditLogRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<AuditLogRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<AuditLogRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "_Ext/AuditLog/Create",
+            Update = "_Ext/AuditLog/Update",
+            Delete = "_Ext/AuditLog/Delete",
+            Retrieve = "_Ext/AuditLog/Retrieve",
+            List = "_Ext/AuditLog/List"
+        }
+    }
+}
+declare namespace _Ext {
+    interface AuditLogViewerRequest extends Serenity.ServiceRequest {
+        FormKey?: string;
+        EntityId?: number;
+    }
+}
+declare namespace _Ext {
+    interface AuditLogViewerResponse extends Serenity.ServiceResponse {
+        EntityVersions?: AuditLogRow[];
+    }
+}
+declare namespace _Ext {
+    namespace AuditLogViewerService {
+        const baseUrl = "AuditLogViewer";
+        function List(request: AuditLogViewerRequest, onSuccess?: (response: AuditLogViewerResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            List = "AuditLogViewer/List"
+        }
+    }
+}
+declare namespace _Ext {
+    interface EntityReportRequest extends Serenity.RetrieveRequest {
+        ReportKey?: string;
+        ReportServiceMethodName?: string;
+        ReportDesignPath?: string;
+    }
+}
+declare namespace _Ext {
+    interface ListReportRequest extends Serenity.ListRequest {
+        ReportKey?: string;
+        ReportServiceMethodName?: string;
+        ListExcelServiceMethodName?: string;
+        ReportDesignPath?: string;
+        EqualityFilterWithTextValue?: {
+            [key: string]: string;
+        };
+        CustomParameters?: {
+            [key: string]: any;
+        };
+    }
+}
+declare namespace _Ext {
+    enum Months {
+        January = 0,
+        February = 1,
+        March = 2,
+        April = 3,
+        May = 4,
+        June = 5,
+        July = 6,
+        August = 7,
+        September = 8,
+        October = 9,
+        November = 10,
+        December = 11
+    }
+}
+declare namespace _Ext {
+    interface ReplaceRowForm {
+        DeletedEntityName: Serenity.StringEditor;
+        ReplaceWithEntityId: EmptyLookupEditor;
+    }
+    class ReplaceRowForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace _Ext {
+    interface ReplaceRowRequest extends Serenity.ServiceRequest {
+        FormKey?: string;
+        IdProperty?: string;
+        NameProperty?: string;
+        EntityTypeTitle?: string;
+        DeletedEntityId?: number;
+        DeletedEntityName?: string;
+        ReplaceWithEntityId?: number;
+    }
+}
+declare namespace _Ext {
+    interface ReplaceRowResponse extends Serenity.ServiceResponse {
+    }
+}
+declare namespace _Ext {
+    namespace ReplaceRowService {
+        const baseUrl = "ReplaceRow";
+        function Replace(request: ReplaceRowRequest, onSuccess?: (response: ReplaceRowResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Replace = "ReplaceRow/Replace"
+        }
+    }
+}
+declare namespace _Ext {
+    enum TimeUoM {
+        Hour = 1,
+        Day = 2,
+        Week = 3,
+        Month = 4,
+        CalenderMonth = 5,
+        Year = 6
+    }
+}
 declare namespace SerExtraCore.Administration {
     class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
         protected getFormKey(): string;
@@ -3524,4 +3711,1129 @@ declare namespace SerExtraCore.Northwind {
         protected getService(): string;
         constructor(container: JQuery);
     }
+}
+declare namespace _Ext {
+    class AuditLogActionTypeFormatter implements Slick.Formatter {
+        static format(ctx: Slick.FormatterContext): string;
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace _Ext {
+    class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity, TOptions> {
+        protected getRowType(): {
+            idProperty?: string;
+            localTextPrefix?: string;
+            nameProperty?: string;
+            insertPermission?: string;
+            updatePermission?: string;
+            deletePermission?: string;
+        };
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected getDeletePermission(): string;
+        protected get_ExtDialogOptions(): ExtDialogOptions;
+        private loadedState;
+        isReadOnly: boolean;
+        protected form: any;
+        constructor(opt?: any);
+        protected updateInterface(): void;
+        protected onDialogOpen(): void;
+        protected onDialogClose(): void;
+        protected setReadOnly(value: boolean): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected onRefreshClick(): void;
+        protected onSaveAndNewButtonClick(): void;
+        protected getSaveState(): string;
+        protected onSaveSuccess(response: any): void;
+        loadResponse(data: any): void;
+        maximize(): void;
+        fullContentArea(): void;
+        setDialogSize(width?: any, height?: any, top?: any, left?: any, $content?: any): void;
+        onAfterSetDialogSize(): void;
+        onAfterDialogClose(entity: TEntity): void;
+        parentGrid: GridBase<TEntity, any>;
+    }
+}
+declare namespace _Ext {
+    class AuditLogDialog extends DialogBase<AuditLogRow, any> {
+        protected getFormKey(): string;
+        protected getRowType(): typeof AuditLogRow;
+        protected getService(): string;
+        protected form: AuditLogForm;
+        protected afterLoadEntity(): void;
+    }
+}
+declare namespace _Ext {
+    class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
+        protected getRowType(): {
+            idProperty?: string;
+            localTextPrefix?: string;
+            nameProperty?: string;
+            insertPermission?: string;
+            updatePermission?: string;
+            deletePermission?: string;
+        };
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected getDeletePermission(): string;
+        protected get_ExtGridOptions(): ExtGridOptions;
+        protected isPickerMode(): boolean;
+        protected getGrouping(): Slick.GroupInfo<TItem>[];
+        isReadOnly: boolean;
+        isRequired: boolean;
+        isAutosized: boolean;
+        isChildGrid: boolean;
+        nextRowNumber: number;
+        autoColumnSizePlugin: any;
+        rowSelection: Serenity.GridRowSelectionMixin;
+        pickerDialog: GridItemPickerDialog;
+        constructor(container: JQuery, options?: TOptions);
+        protected markupReady(): void;
+        protected getButtons(): Serenity.ToolButton[];
+        protected getReportRequest(): _Ext.ListReportRequest;
+        protected getColumns(): Slick.Column[];
+        protected createSlickGrid(): Slick.Grid;
+        resetColumns(columns: Slick.Column[]): void;
+        resizeAllCulumn(): void;
+        protected getSlickOptions(): Slick.GridOptions;
+        protected getViewOptions(): Slick.RemoteViewOptions;
+        protected getPrintRowServiceMethod(): string;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+        protected onInlineActionClick(target: JQuery, recordId: any, item: TItem): void;
+        protected resetRowNumber(): void;
+        private setGrouping;
+        protected getIncludeColumns(include: {
+            [key: string]: boolean;
+        }): void;
+        protected getDefaultSortBy(): any[];
+        protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem>;
+        initDialog(dialog: DialogBase<TItem, any>): void;
+        get selectedItems(): TItem[];
+        set selectedKeys(value: any[]);
+        protected onViewSubmit(): boolean;
+    }
+}
+declare namespace _Ext {
+    class AuditLogGrid extends GridBase<AuditLogRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof AuditLogDialog;
+        protected getRowType(): typeof AuditLogRow;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare var jsondiffpatch: any;
+declare namespace _Ext {
+    class AuditLogViewer {
+        el: string;
+        data: {
+            entityVersions: any[];
+        };
+        entity: any;
+        entityId: any;
+        constructor(el: string, entityVersions: AuditLogRow[]);
+        mounted: () => void;
+        computed: {
+            test: () => string;
+        };
+        filters: {
+            filterByYardId: () => any[];
+        };
+        methods: {
+            showDiff: (versionInfo: AuditLogRow) => void;
+            getDiff: (versionInfo: AuditLogRow) => any;
+        };
+        destroyed(): void;
+    }
+}
+declare namespace _Ext {
+    class AuditLogViewerDialog extends Serenity.TemplatedDialog<any> {
+        request: AuditLogViewerRequest;
+        constructor(request: AuditLogViewerRequest);
+        protected getTemplateName(): string;
+    }
+}
+declare namespace _Ext {
+    class ReportGridBase<TItem, TOptions> extends _Ext.GridBase<TItem, TOptions> {
+        protected getButtons(): Serenity.ToolButton[];
+        protected getColumns(): Slick.Column[];
+    }
+}
+declare namespace _Ext {
+    class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, any> {
+        protected getReportTitle(): string;
+        protected getReportKey(): string;
+        protected getReportRequest(): TRequest;
+        constructor(container: JQuery, opt?: any);
+        protected getTemplate(): string;
+    }
+}
+declare namespace _Ext {
+    class DialogSnippets extends DialogBase<AuditLogRow, any> {
+        protected getFormKey(): string;
+        protected getRowType(): typeof AuditLogRow;
+        protected getService(): string;
+        protected form: AuditLogForm;
+        protected addCssClass(): void;
+        protected getTemplate(): string;
+        protected getTemplateName(): string;
+        protected getFallbackTemplate(): string;
+        protected initValidator(): void;
+        protected getValidatorOptions(): JQueryValidation.ValidationOptions;
+        protected initTabs(): void;
+        protected initToolbar(): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected initPropertyGrid(): void;
+        protected initPropertyGridAsync(): PromiseLike<void>;
+        protected getPropertyGridOptions(): Serenity.PropertyGridOptions;
+        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions>;
+        protected initLocalizationGrid(): void;
+        protected initLocalizationGridAsync(): PromiseLike<void>;
+        protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void;
+        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void;
+        loadResponse(data: any): void;
+        protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void;
+        protected beforeLoadEntity(entity: AuditLogRow): void;
+        protected loadEntity(entity: AuditLogRow): void;
+        protected set_entityId(value: any): void;
+        protected set_entity(entity: any): void;
+        protected isEditMode(): boolean;
+        protected get_entityId(): any;
+        protected get_entity(): AuditLogRow;
+        protected afterLoadEntity(): void;
+        protected updateInterface(): void;
+        protected isDeleted(): boolean;
+        protected isLocalizationMode(): boolean;
+        protected isNew(): boolean;
+        protected updateTitle(): void;
+        protected getEntityTitle(): string;
+        protected getEntitySingular(): string;
+        protected getSaveEntity(): AuditLogRow;
+        protected initDialog(): void;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getDialogTitle(): string;
+        protected handleResponsive(): void;
+        protected onDialogOpen(): void;
+        protected arrange(): void;
+        protected save(callback?: (response: Serenity.SaveResponse) => void): void | boolean;
+        protected validateBeforeSave(): boolean;
+        protected save_submitHandler(callback: (response: Serenity.SaveResponse) => void): void;
+        protected getSaveOptions(callback: (response: Serenity.SaveResponse) => void): Serenity.ServiceOptions<Serenity.SaveResponse>;
+        protected getSaveRequest(): Serenity.SaveRequest<AuditLogRow>;
+        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        loadById(id: any, callback?: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail?: () => void): void;
+        protected getLoadByIdRequest(id: any): Serenity.RetrieveRequest;
+        protected getLoadByIdOptions(id: any, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void): Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>;
+        protected loadByIdHandler(options: Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail: () => void): void;
+        protected showSaveSuccessMessage(response: Serenity.SaveResponse): void;
+        protected initializeAsync(): PromiseLike<void>;
+        protected getEntityNameFieldValue(): any;
+        protected isCloneMode(): boolean;
+        protected isNewOrDeleted(): boolean;
+        protected getDeleteOptions(callback: (response: Serenity.DeleteResponse) => void): Serenity.ServiceOptions<Serenity.DeleteResponse>;
+        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
+        protected doDelete(callback: (response: Serenity.DeleteResponse) => void): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
+        protected getEntityType(): string;
+        protected getLocalTextDbPrefix(): string;
+        protected getIsActiveProperty(): string;
+        protected getIsDeletedProperty(): string;
+        loadNewAndOpenDialog(asPanel?: boolean): void;
+        loadEntityAndOpenDialog(entity: AuditLogRow, asPanel?: boolean): void;
+        loadByIdAndOpenDialog(entityId: any, asPanel?: boolean): void;
+        protected reloadById(): void;
+        protected isLocalizationModeAndChanged(): boolean;
+        protected localizationButtonClick(): void;
+        protected getLanguages(): any[];
+        protected loadLocalization(): void;
+        protected setLocalizationGridCurrentValues(): void;
+        protected getLocalizationGridValue(): any;
+        protected getPendingLocalizations(): any;
+        protected getPropertyItems(): Serenity.PropertyItem[];
+        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
+        protected getCloningEntity(): AuditLogRow;
+        protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse>;
+        protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void;
+        protected undelete(callback?: (response: Serenity.UndeleteResponse) => void): void;
+        protected resetValidation(): void;
+        protected validateForm(): boolean;
+        protected onDialogClose(): void;
+        destroy(): void;
+    }
+}
+declare namespace _Ext {
+    class DialogWithAllOverridableMethods extends DialogBase<AuditLogRow, any> {
+        protected getFormKey(): string;
+        protected getRowType(): typeof AuditLogRow;
+        protected getService(): string;
+        protected form: AuditLogForm;
+        protected addCssClass(): void;
+        protected getTemplate(): string;
+        protected getTemplateName(): string;
+        protected getFallbackTemplate(): string;
+        protected initValidator(): void;
+        protected getValidatorOptions(): JQueryValidation.ValidationOptions;
+        protected initTabs(): void;
+        protected initToolbar(): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected initPropertyGrid(): void;
+        protected initPropertyGridAsync(): PromiseLike<void>;
+        protected getPropertyGridOptions(): Serenity.PropertyGridOptions;
+        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions>;
+        protected initLocalizationGrid(): void;
+        protected initLocalizationGridAsync(): PromiseLike<void>;
+        protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void;
+        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void;
+        loadResponse(data: any): void;
+        protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void;
+        protected beforeLoadEntity(entity: AuditLogRow): void;
+        protected loadEntity(entity: AuditLogRow): void;
+        protected set_entityId(value: any): void;
+        protected set_entity(entity: any): void;
+        protected isEditMode(): boolean;
+        protected get_entityId(): any;
+        protected get_entity(): AuditLogRow;
+        protected afterLoadEntity(): void;
+        protected updateInterface(): void;
+        protected isDeleted(): boolean;
+        protected isLocalizationMode(): boolean;
+        protected isNew(): boolean;
+        protected updateTitle(): void;
+        protected getEntityTitle(): string;
+        protected getEntitySingular(): string;
+        protected getSaveEntity(): AuditLogRow;
+        protected initDialog(): void;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getDialogTitle(): string;
+        protected handleResponsive(): void;
+        protected onDialogOpen(): void;
+        protected arrange(): void;
+        protected save(callback?: (response: Serenity.SaveResponse) => void): void | boolean;
+        protected validateBeforeSave(): boolean;
+        protected save_submitHandler(callback: (response: Serenity.SaveResponse) => void): void;
+        protected getSaveOptions(callback: (response: Serenity.SaveResponse) => void): Serenity.ServiceOptions<Serenity.SaveResponse>;
+        protected getSaveRequest(): Serenity.SaveRequest<AuditLogRow>;
+        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        loadById(id: any, callback?: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail?: () => void): void;
+        protected getLoadByIdRequest(id: any): Serenity.RetrieveRequest;
+        protected getLoadByIdOptions(id: any, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void): Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>;
+        protected loadByIdHandler(options: Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail: () => void): void;
+        protected showSaveSuccessMessage(response: Serenity.SaveResponse): void;
+        protected initializeAsync(): PromiseLike<void>;
+        protected getEntityNameFieldValue(): any;
+        protected isCloneMode(): boolean;
+        protected isNewOrDeleted(): boolean;
+        protected getDeleteOptions(callback: (response: Serenity.DeleteResponse) => void): Serenity.ServiceOptions<Serenity.DeleteResponse>;
+        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
+        protected doDelete(callback: (response: Serenity.DeleteResponse) => void): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
+        protected getEntityType(): string;
+        protected getLocalTextDbPrefix(): string;
+        protected getIsActiveProperty(): string;
+        protected getIsDeletedProperty(): string;
+        loadNewAndOpenDialog(asPanel?: boolean): void;
+        loadEntityAndOpenDialog(entity: AuditLogRow, asPanel?: boolean): void;
+        loadByIdAndOpenDialog(entityId: any, asPanel?: boolean): void;
+        protected reloadById(): void;
+        protected isLocalizationModeAndChanged(): boolean;
+        protected localizationButtonClick(): void;
+        protected getLanguages(): any[];
+        protected loadLocalization(): void;
+        protected setLocalizationGridCurrentValues(): void;
+        protected getLocalizationGridValue(): any;
+        protected getPendingLocalizations(): any;
+        protected getPropertyItems(): Serenity.PropertyItem[];
+        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
+        protected getCloningEntity(): AuditLogRow;
+        protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse>;
+        protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void;
+        protected undelete(callback?: (response: Serenity.UndeleteResponse) => void): void;
+        protected resetValidation(): void;
+        protected validateForm(): boolean;
+        protected onDialogClose(): void;
+        destroy(): void;
+    }
+}
+declare namespace _Ext {
+    class GridSnippets extends _Ext.GridBase<AuditLogRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof DialogSnippets;
+        protected getRowType(): typeof AuditLogRow;
+        protected getService(): string;
+        protected get_ExtGridOptions(): ExtGridOptions;
+        constructor(container: JQuery, options?: any);
+        protected getInitialTitle(): string;
+        protected getDisplayName(): string;
+        setTitle(value: string): void;
+        getTitle(): string;
+        protected layout(): void;
+        protected getButtons(): Serenity.ToolButton[];
+        protected getAddButtonCaption(): string;
+        protected getItemName(): string;
+        protected newRefreshButton(noText?: boolean): Serenity.ToolButton;
+        getView(): Slick.RemoteView<AuditLogRow>;
+        protected createToolbar(buttons: Serenity.ToolButton[]): void;
+        protected createSlickContainer(): JQuery;
+        protected createView(): Slick.RemoteView<AuditLogRow>;
+        protected getViewOptions(): Slick.RemoteViewOptions;
+        protected getDefaultSortBy(): any[];
+        protected usePager(): boolean;
+        protected createSlickGrid(): Slick.Grid;
+        protected getColumns(): Slick.Column[];
+        protected getPropertyItems(): Serenity.PropertyItem[];
+        protected propertyItemsToSlickColumns(propertyItems: Serenity.PropertyItem[]): Slick.Column[];
+        protected itemLink(itemType?: string, idField?: string, text?: (ctx: Slick.FormatterContext) => string, cssClass?: (ctx: Slick.FormatterContext) => string, encode?: boolean): Slick.Format;
+        protected getItemType(): string;
+        protected getEntityType(): string;
+        protected getSlickOptions(): Slick.GridOptions;
+        protected postProcessColumns(columns: Slick.Column[]): Slick.Column[];
+        protected setInitialSortOrder(): void;
+        protected enableFiltering(): boolean;
+        protected createFilterBar(): void;
+        protected initializeFilterBar(): void;
+        protected canFilterColumn(column: Slick.Column): boolean;
+        protected createPager(): void;
+        protected getPagerOptions(): Slick.PagerOptions;
+        protected bindToSlickEvents(): void;
+        protected bindToViewEvents(): void;
+        protected createToolbarExtensions(): void;
+        protected createIncludeDeletedButton(): void;
+        protected createQuickSearchInput(): void;
+        protected getQuickSearchFields(): Serenity.QuickSearchField[];
+        protected createQuickFilters(): void;
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
+        protected dateTimeRangeQuickFilter(field: string, title?: string): Serenity.QuickFilter<Serenity.DateTimeEditor, Serenity.DateTimeEditorOptions>;
+        protected addQuickFilter<TWidget extends Serenity.Widget<any>, TOptions>(opt: Serenity.QuickFilter<TWidget, TOptions>): TWidget;
+        protected updateDisabledState(): void;
+        protected getCurrentSettings(flags?: Serenity.GridPersistanceFlags): Serenity.PersistedGridSettings;
+        protected gridPersistanceFlags(): Serenity.GridPersistanceFlags;
+        protected restoreSettings(settings?: Serenity.PersistedGridSettings, flags?: Serenity.GridPersistanceFlags): void;
+        protected getPersistedSettings(): Serenity.PersistedGridSettings;
+        protected getPersistanceStorage(): Serenity.SettingStorage;
+        getGrid(): Slick.Grid;
+        protected initialPopulate(): void;
+        protected populateWhenVisible(): boolean;
+        protected onViewSubmit(): boolean;
+        protected getGridCanLoad(): boolean;
+        protected setCriteriaParameter(): void;
+        protected setIncludeColumnsParameter(): void;
+        protected getIncludeColumns(include: {
+            [key: string]: boolean;
+        }): void;
+        protected invokeSubmitHandlers(): void;
+        protected onViewProcessData(response: Serenity.ListResponse<AuditLogRow>): Serenity.ListResponse<AuditLogRow>;
+        protected getItemMetadata(item: AuditLogRow, index: number): any;
+        protected getItemCssClass(item: AuditLogRow, index: number): string;
+        protected getIsActiveProperty(): string;
+        protected getIsDeletedProperty(): string;
+        protected onViewFilter(item: AuditLogRow): boolean;
+        getElement(): JQuery;
+        protected viewDataChanged(e: any, rows: AuditLogRow[]): void;
+        protected markupReady(): void;
+        getItems(): AuditLogRow[];
+        setItems(value: AuditLogRow[]): void;
+        protected addButtonClick(): void;
+        protected editItem(entityOrId: any): void;
+        protected editItemOfType(itemType: string, entityOrId: any): void;
+        protected routeDialog(itemType: string, dialog: Serenity.Widget<any>): void;
+        protected initEntityDialog(itemType: string, dialog: Serenity.Widget<any>): void;
+        protected createEntityDialog(itemType: string, callback?: (dlg: Serenity.Widget<any>) => void): Serenity.Widget<any>;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getDialogOptionsFor(itemType: string): JQueryUI.DialogOptions;
+        destroy(): void;
+        protected initializeAsync(): PromiseLike<void>;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+        protected setEquality(field: string, value: any): void;
+        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
+        protected getColumnsAsync(): PromiseLike<Slick.Column[]>;
+        protected populateLock(): void;
+        protected populateUnlock(): void;
+        refresh(): void;
+        protected refreshIfNeeded(): void;
+        protected internalRefresh(): void;
+        setIsDisabled(value: boolean): void;
+        protected resizeCanvas(): void;
+        protected subDialogDataChange(): void;
+        protected addFilterSeparator(): void;
+        protected determineText(getKey: (prefix: string) => string): string;
+        protected addDateRangeFilter(field: string, title?: string): Serenity.DateEditor;
+        protected dateRangeQuickFilter(field: string, title?: string): Serenity.QuickFilter<Serenity.DateEditor, Serenity.DateTimeEditorOptions>;
+        protected addDateTimeRangeFilter(field: string, title?: string): Serenity.DateTimeEditor;
+        protected addBooleanFilter(field: string, title?: string, yes?: string, no?: string): Serenity.SelectEditor;
+        protected booleanQuickFilter(field: string, title?: string, yes?: string, no?: string): Serenity.QuickFilter<Serenity.SelectEditor, Serenity.SelectEditorOptions>;
+        protected quickFilterChange(e: JQueryEventObject): void;
+        protected getPersistanceKey(): string;
+        protected canShowColumn(column: Slick.Column): boolean;
+        protected persistSettings(flags?: Serenity.GridPersistanceFlags): void;
+        getFilterStore(): Serenity.FilterStore;
+    }
+}
+declare namespace _Ext {
+    class GridWithAllOverridableMethods extends _Ext.GridBase<AuditLogRow, any> {
+        protected getDialogType(): typeof DialogWithAllOverridableMethods;
+        constructor(container: JQuery, options?: any);
+        protected getInitialTitle(): string;
+        protected getDisplayName(): string;
+        protected getLocalTextPrefix(): string;
+        setTitle(value: string): void;
+        getTitle(): string;
+        protected layout(): void;
+        protected getButtons(): Serenity.ToolButton[];
+        protected getAddButtonCaption(): string;
+        protected getItemName(): string;
+        protected newRefreshButton(noText?: boolean): Serenity.ToolButton;
+        getView(): Slick.RemoteView<AuditLogRow>;
+        protected createToolbar(buttons: Serenity.ToolButton[]): void;
+        protected createSlickContainer(): JQuery;
+        protected createView(): Slick.RemoteView<AuditLogRow>;
+        protected getViewOptions(): Slick.RemoteViewOptions;
+        protected getIdProperty(): string;
+        protected getDefaultSortBy(): any[];
+        protected usePager(): boolean;
+        protected getService(): string;
+        protected createSlickGrid(): Slick.Grid;
+        protected getColumns(): Slick.Column[];
+        protected getPropertyItems(): Serenity.PropertyItem[];
+        protected getColumnsKey(): string;
+        protected propertyItemsToSlickColumns(propertyItems: Serenity.PropertyItem[]): Slick.Column[];
+        protected itemLink(itemType?: string, idField?: string, text?: (ctx: Slick.FormatterContext) => string, cssClass?: (ctx: Slick.FormatterContext) => string, encode?: boolean): Slick.Format;
+        protected getItemType(): string;
+        protected getEntityType(): string;
+        protected getSlickOptions(): Slick.GridOptions;
+        protected get_ExtGridOptions(): ExtGridOptions;
+        protected postProcessColumns(columns: Slick.Column[]): Slick.Column[];
+        protected setInitialSortOrder(): void;
+        protected enableFiltering(): boolean;
+        protected createFilterBar(): void;
+        protected initializeFilterBar(): void;
+        protected canFilterColumn(column: Slick.Column): boolean;
+        protected createPager(): void;
+        protected getPagerOptions(): Slick.PagerOptions;
+        protected bindToSlickEvents(): void;
+        protected bindToViewEvents(): void;
+        protected createToolbarExtensions(): void;
+        protected createIncludeDeletedButton(): void;
+        protected createQuickSearchInput(): void;
+        protected getQuickSearchFields(): Serenity.QuickSearchField[];
+        protected createQuickFilters(): void;
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
+        protected dateTimeRangeQuickFilter(field: string, title?: string): Serenity.QuickFilter<Serenity.DateTimeEditor, Serenity.DateTimeEditorOptions>;
+        protected addQuickFilter<TWidget extends Serenity.Widget<any>, TOptions>(opt: Serenity.QuickFilter<TWidget, TOptions>): TWidget;
+        protected updateDisabledState(): void;
+        protected getCurrentSettings(flags?: Serenity.GridPersistanceFlags): Serenity.PersistedGridSettings;
+        protected gridPersistanceFlags(): Serenity.GridPersistanceFlags;
+        protected restoreSettings(settings?: Serenity.PersistedGridSettings, flags?: Serenity.GridPersistanceFlags): void;
+        protected getPersistedSettings(): Serenity.PersistedGridSettings;
+        protected getPersistanceStorage(): Serenity.SettingStorage;
+        getGrid(): Slick.Grid;
+        protected initialPopulate(): void;
+        protected populateWhenVisible(): boolean;
+        protected onViewSubmit(): boolean;
+        protected getGridCanLoad(): boolean;
+        protected setCriteriaParameter(): void;
+        protected setIncludeColumnsParameter(): void;
+        protected getIncludeColumns(include: {
+            [key: string]: boolean;
+        }): void;
+        protected invokeSubmitHandlers(): void;
+        protected onViewProcessData(response: Serenity.ListResponse<AuditLogRow>): Serenity.ListResponse<AuditLogRow>;
+        protected getItemMetadata(item: AuditLogRow, index: number): any;
+        protected getItemCssClass(item: AuditLogRow, index: number): string;
+        protected getIsActiveProperty(): string;
+        protected getIsDeletedProperty(): string;
+        protected onViewFilter(item: AuditLogRow): boolean;
+        getElement(): JQuery;
+        protected viewDataChanged(e: any, rows: AuditLogRow[]): void;
+        protected markupReady(): void;
+        getItems(): AuditLogRow[];
+        setItems(value: AuditLogRow[]): void;
+        protected addButtonClick(): void;
+        protected editItem(entityOrId: any): void;
+        protected editItemOfType(itemType: string, entityOrId: any): void;
+        protected routeDialog(itemType: string, dialog: Serenity.Widget<any>): void;
+        protected initEntityDialog(itemType: string, dialog: Serenity.Widget<any>): void;
+        protected createEntityDialog(itemType: string, callback?: (dlg: Serenity.Widget<any>) => void): Serenity.Widget<any>;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getDialogOptionsFor(itemType: string): JQueryUI.DialogOptions;
+        destroy(): void;
+        protected initializeAsync(): PromiseLike<void>;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+        protected setEquality(field: string, value: any): void;
+        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
+        protected getColumnsAsync(): PromiseLike<Slick.Column[]>;
+        protected populateLock(): void;
+        protected populateUnlock(): void;
+        refresh(): void;
+        protected refreshIfNeeded(): void;
+        protected internalRefresh(): void;
+        setIsDisabled(value: boolean): void;
+        protected resizeCanvas(): void;
+        protected subDialogDataChange(): void;
+        protected addFilterSeparator(): void;
+        protected determineText(getKey: (prefix: string) => string): string;
+        protected addDateRangeFilter(field: string, title?: string): Serenity.DateEditor;
+        protected dateRangeQuickFilter(field: string, title?: string): Serenity.QuickFilter<Serenity.DateEditor, Serenity.DateTimeEditorOptions>;
+        protected addDateTimeRangeFilter(field: string, title?: string): Serenity.DateTimeEditor;
+        protected addBooleanFilter(field: string, title?: string, yes?: string, no?: string): Serenity.SelectEditor;
+        protected booleanQuickFilter(field: string, title?: string, yes?: string, no?: string): Serenity.QuickFilter<Serenity.SelectEditor, Serenity.SelectEditorOptions>;
+        protected quickFilterChange(e: JQueryEventObject): void;
+        protected getPersistanceKey(): string;
+        protected canShowColumn(column: Slick.Column): boolean;
+        protected persistSettings(flags?: Serenity.GridPersistanceFlags): void;
+        getFilterStore(): Serenity.FilterStore;
+    }
+}
+declare namespace _Ext {
+    class ReplaceRowDialog extends _Ext.DialogBase<any, any> {
+        request: ReplaceRowRequest;
+        entityList: Array<any>;
+        protected getFormKey(): string;
+        protected form: ReplaceRowForm;
+        constructor(request: ReplaceRowRequest, entityList: Array<any>);
+        protected getToolbarButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace _Ext {
+    class AutoCompleteEditor extends Serenity.StringEditor {
+        constructor(input: JQuery, options: AutoCompleteOptions);
+        protected bindAutoComplete(input: any): void;
+    }
+    interface AutoCompleteOptions {
+        lookupKey: string;
+        sourceArray: string[];
+        sourceCSV: string;
+        minSearchLength: number;
+    }
+}
+declare namespace _Ext {
+    class ColorEditor extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        protected getTemplate(): string;
+        constructor(container: JQuery);
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+    }
+}
+declare namespace _Ext {
+    class DateTimePickerEditor extends Serenity.Widget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        constructor(container: JQuery);
+        get value(): string;
+        set value(val: string);
+        get valueAsDate(): Date;
+        set valueAsDate(val: Date);
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        set_minDate(date: Date): void;
+        set_maxDate(date: Date): void;
+        set_minDateTime(date: Date): void;
+        set_maxDateTime(date: Date): void;
+    }
+}
+declare namespace _Ext {
+    class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
+        protected get_ExtDialogOptions(): ExtDialogOptions;
+        protected getIdProperty(): string;
+        onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
+        onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
+        destroy(): void;
+        protected updateInterface(): void;
+        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
+        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
+        parentEditor: GridEditorBase<TEntity>;
+    }
+}
+declare namespace _Ext {
+    class EmptyLookupEditor extends Serenity.LookupEditorBase<Serenity.LookupEditorOptions, any> {
+        setSelect2Items(items: Serenity.Select2Item[]): void;
+        setLookupItems(lookup: Q.Lookup<any>): void;
+    }
+}
+declare namespace _Ext {
+    class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+        protected get_ExtGridOptions(): ExtGridOptions;
+        protected getIdProperty(): string;
+        isChildGrid: boolean;
+        protected nextId: number;
+        constructor(container: JQuery);
+        private sortGridFunction;
+        protected getQuickFilters(): any[];
+        protected id(entity: TEntity): any;
+        protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void): void;
+        protected deleteEntity(id: number): boolean;
+        protected validateEntity(row: TEntity, id: number): boolean;
+        protected getNewEntity(): TEntity;
+        protected getButtons(): Serenity.ToolButton[];
+        protected addButtonClick(): void;
+        protected editItem(entityOrId: any): void;
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        get value(): TEntity[];
+        set value(value: TEntity[]);
+        protected getGridCanLoad(): boolean;
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        private searchText;
+        protected createToolbarExtensions(): void;
+        protected onViewFilter(row: any): boolean;
+        private matchContains;
+        protected enableFiltering(): boolean;
+        protected onViewSubmit(): boolean;
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        protected getSlickOptions(): Slick.GridOptions;
+        parentDialog: DialogBase<any, any>;
+        onItemsChanged(): void;
+        onBeforeGetValue(items: TEntity[]): void;
+    }
+}
+declare namespace _Ext {
+    class HardCodedLookupEditor extends Serenity.Select2Editor<any, any> {
+        constructor(container: JQuery, options: HardCodedLookupEditorOptions);
+        protected getSelect2Options(): Select2Options;
+    }
+    interface HardCodedLookupEditorOptions {
+        sourceArray: string[];
+        sourceCSV: string;
+        allowOtherValue: boolean;
+    }
+}
+declare namespace _Ext {
+    class HtmlTemplateEditor extends Serenity.HtmlContentEditor {
+        constructor(textArea: JQuery, opt?: HtmlTemplateEditorOptions);
+        protected getConfig(): Serenity.CKEditorConfig;
+    }
+    interface HtmlTemplateEditorOptions extends Serenity.HtmlContentEditorOptions {
+        cols?: any;
+        rows?: any;
+        placeholders?: any;
+    }
+}
+declare namespace _Ext {
+    class JsonGridEditorBase<TEntity> extends _Ext.GridEditorBase<TEntity> {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+    }
+}
+declare namespace _Ext {
+    class JsonViewer extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        protected getTemplate(): string;
+        private _value;
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        get value(): any;
+        set value(val: any);
+    }
+}
+declare namespace _Ext {
+    class MonthYearEditor extends Serenity.Widget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        constructor(container: JQuery);
+        get value(): string;
+        set value(val: string);
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+    }
+}
+declare namespace _Ext {
+    class PrefixedStringEditor extends Serenity.Widget<PrefixedStringEditorOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        private prefixInput;
+        constructor(container: JQuery, options: PrefixedStringEditorOptions);
+        get value(): string;
+        set value(val: string);
+        private _prefix;
+        get prefix(): string;
+        set prefix(val: string);
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+    }
+    interface PrefixedStringEditorOptions {
+        prefixLength: number;
+        inputMaxLength: number;
+        prefixFormatterType?: string;
+    }
+}
+declare namespace _Ext {
+    class StaticTextBlock extends Serenity.Widget<StaticTextBlockOptions> implements Serenity.ISetEditValue {
+        private _value;
+        constructor(container: JQuery, options: StaticTextBlockOptions);
+        private updateElementContent;
+        /**
+         * By implementing ISetEditValue interface, we allow this editor to display its field value.
+         * But only do this when our text content is not explicitly set in options
+         */
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+        get value(): string;
+        set value(value: string);
+    }
+    interface StaticTextBlockOptions {
+        text: string;
+        isHtml: boolean;
+        isLocalText: boolean;
+        hideLabel: boolean;
+        isDate: boolean;
+        isDateTime: boolean;
+    }
+}
+declare namespace _Ext {
+    class YesNoEditor extends Serenity.Select2Editor<any, any> {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        constructor(container: JQuery);
+        get valueAsBoolean(): boolean;
+        set valueAsBoolean(val: boolean);
+    }
+}
+declare namespace _Ext {
+    class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPickerEditorOptions> {
+        getTemplate(): string;
+        checkGrid: GridBase<any, GridItemPickerEditorOptions>;
+        get selectedItems(): any[];
+        constructor(options: GridItemPickerEditorOptions);
+        onSuccess: (selectedItems: any) => void;
+        getDialogOptions(): JQueryUI.DialogOptions;
+    }
+}
+declare namespace _Ext {
+    class GridItemPickerEditor extends Serenity.TemplatedWidget<GridItemPickerEditorOptions> implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
+        options: GridItemPickerEditorOptions;
+        protected getTemplate(): string;
+        inplaceSearchButton: JQuery;
+        inplaceViewButton: JQuery;
+        clearSelectionButton: JQuery;
+        constructor(container: JQuery, options: GridItemPickerEditorOptions);
+        protected addInplaceButtons(): void;
+        protected inplaceSearchClick(e: any): void;
+        protected inplaceViewClick(e: any): void;
+        private getDialogInstance;
+        get value(): string;
+        set value(val: string);
+        get values(): string[];
+        set values(val: string[]);
+        get text(): string;
+        set text(val: string);
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        get_value(): string;
+        set_value(value: string): void;
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        get_required(): boolean;
+        set_required(value: boolean): void;
+        private _selectedItem;
+        selectedItemIncludeColumns: string[];
+        get selectedItem(): any;
+        selectedItems: any[];
+        private _serviceUrl;
+        get serviceUrl(): string;
+        setValueAndText(value: any, text: any): void;
+        protected getCascadeFromValue(parent: Serenity.Widget<any>): any;
+        protected cascadeLink: Serenity.CascadedWidgetLink<Serenity.Widget<any>>;
+        protected setCascadeFrom(value: string): void;
+        protected get_cascadeFrom(): string;
+        get cascadeFrom(): string;
+        protected set_cascadeFrom(value: string): void;
+        set cascadeFrom(value: string);
+        protected get_cascadeField(): any;
+        get cascadeField(): string;
+        protected set_cascadeField(value: string): void;
+        set cascadeField(value: string);
+        protected get_cascadeValue(): any;
+        get cascadeValue(): any;
+        protected set_cascadeValue(value: any): void;
+        set cascadeValue(value: any);
+        protected get_filterField(): string;
+        get filterField(): string;
+        protected set_filterField(value: string): void;
+        set filterField(value: string);
+        protected get_filterValue(): any;
+        get filterValue(): any;
+        protected set_filterValue(value: any): void;
+        set filterValue(value: any);
+        protected updateItems(): void;
+    }
+    interface GridItemPickerEditorOptions extends Serenity.Select2FilterOptions {
+        gridType: any;
+        nameFieldInThisRow?: string;
+        serviceUrl?: string;
+        rowType?: string;
+        idFieldInGridRow?: string;
+        nameFieldInGridRow?: string;
+        inplaceView?: boolean;
+        multiple?: boolean;
+        preSelectedKeys?: any[];
+        filteringCriteria?: any;
+        customPrams?: any;
+        dialogType?: any;
+        cascadeFrom?: string;
+        cascadeField?: string;
+        cascadeValue?: any;
+        filterField?: string;
+        filterValue?: any;
+    }
+}
+declare namespace _Ext {
+    class MonthYearFormatter implements Slick.Formatter {
+        static format(val: string): string;
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace _Ext {
+    class CardViewMixin<TItem> {
+        private options;
+        private dataGrid;
+        private getId;
+        private vm;
+        private cardContainer;
+        viewType: ('list' | 'card');
+        constructor(options: CardViewMixinOptions<TItem>);
+        switchView(viewType: ('grid' | 'card')): void;
+        updateCardItems(): void;
+        resizeCardView(): void;
+    }
+    interface CardViewMixinOptions<TItem> {
+        grid: Serenity.DataGrid<TItem, any>;
+        containerTemplate?: string;
+        itemTemplate?: string;
+        methods?: any;
+        itemCssClass?: string;
+        defaultViewType?: ('list' | 'card');
+        itemsCssStyle?: string;
+        itemCssStyle?: string;
+    }
+}
+declare namespace _Ext {
+    /**
+     * A mixin that can be applied to a DataGrid for excel style filtering functionality
+     */
+    class HeaderFiltersMixin<TItem> {
+        private options;
+        private dataGrid;
+        constructor(options: HeaderFiltersMixinOptions<TItem>);
+    }
+    interface HeaderFiltersMixinOptions<TItem> {
+        grid: Serenity.DataGrid<TItem, any>;
+    }
+}
+declare namespace _Ext {
+    /**
+     * A mixin that can be applied to a DataGrid for tree functionality
+     */
+    class TreeGridMixin<TItem> {
+        private options;
+        private dataGrid;
+        private getId;
+        constructor(options: TreeGridMixinOptions<TItem>);
+        /**
+         * Expands / collapses all rows in a grid automatically
+         */
+        toggleAll(): void;
+        expandAll(): void;
+        collapsedAll(): void;
+        /**
+         * Reorders a set of items so that parents comes before their children.
+         * This method is required for proper tree ordering, as it is not so easy to perform with SQL.
+         * @param items list of items to be ordered
+         * @param getId a delegate to get ID of a record (must return same ID with grid identity field)
+         * @param getParentId a delegate to get parent ID of a record
+         */
+        static applyTreeOrdering<TItem>(items: TItem[], getId: (item: TItem) => any, getParentId: (item: TItem) => any): TItem[];
+        static filterById<TItem>(item: TItem, view: Slick.RemoteView<TItem>, idProperty: any, getParentId: (x: TItem) => any): boolean;
+        static treeToggle<TItem>(getView: () => Slick.RemoteView<TItem>, getId: (x: TItem) => any, formatter: Slick.Format): Slick.Format;
+        static toggleClick<TItem>(e: JQueryEventObject, row: number, cell: number, view: Slick.RemoteView<TItem>, getId: (x: TItem) => any): void;
+    }
+    interface TreeGridMixinOptions<TItem> {
+        grid: Serenity.DataGrid<TItem, any>;
+        idField?: string;
+        getParentId: (item: TItem) => any;
+        toggleField: string;
+        initialCollapse?: () => boolean;
+    }
+}
+declare namespace _Ext {
+    interface ExcelExportOptions {
+        grid: Serenity.DataGrid<any, any>;
+        service: string;
+        onViewSubmit: () => boolean;
+        title?: string;
+        hint?: string;
+        separator?: boolean;
+    }
+    namespace ExcelExportHelper {
+        function createToolButton(options: ExcelExportOptions): Serenity.ToolButton;
+    }
+}
+declare var jsPDF: any;
+declare namespace _Ext {
+    interface PdfExportOptions {
+        grid: Serenity.DataGrid<any, any>;
+        onViewSubmit: () => boolean;
+        title?: string;
+        hint?: string;
+        separator?: boolean;
+        reportTitle?: string;
+        titleTop?: number;
+        titleFontSize?: number;
+        fileName?: string;
+        pageNumbers?: boolean;
+        columnTitles?: {
+            [key: string]: string;
+        };
+        tableOptions?: jsPDF.AutoTableOptions;
+        output?: string;
+        autoPrint?: boolean;
+    }
+    namespace PdfExportHelper {
+        function exportToPdf(options: PdfExportOptions): void;
+        function createToolButton(options: PdfExportOptions): Serenity.ToolButton;
+    }
+}
+declare namespace Slick {
+    interface RemoteView<TEntity> {
+        getGroups(): Slick.Group<TEntity>[];
+        getGrouping(): Slick.GroupInfo<TEntity>[];
+    }
+}
+declare namespace _Ext {
+    interface ReportExecuteOptions {
+        reportKey: string;
+        download?: boolean;
+        extension?: 'pdf' | 'htm' | 'html' | 'xlsx' | 'docx';
+        getParams?: () => any;
+        params?: {
+            [key: string]: any;
+        };
+        target?: string;
+    }
+    interface ReportButtonOptions extends ReportExecuteOptions {
+        title?: string;
+        cssClass?: string;
+        icon?: string;
+    }
+    namespace ReportHelper {
+        function createToolButton(options: ReportButtonOptions): Serenity.ToolButton;
+        function execute(options: ReportExecuteOptions): void;
+    }
+}
+declare namespace _Ext.DialogUtils {
+    function pendingChangesConfirmation(element: JQuery, hasPendingChanges: () => boolean): void;
+}
+declare function loadScriptAsync(url: any, callback: any): void;
+declare function loadScript(url: any): void;
+declare function usingVuejs(): void;
+declare function includeBootstrapColorPickerCss(): void;
+declare function usingBootstrapColorPicker(): void;
+declare function includeJqueryUITimepickerAddonCss(): void;
+declare function usingJqueryUITimepickerAddon(): void;
+declare function usingBabylonjs(): void;
+declare function usingChartjs(): void;
+declare function includeCustomMarkerCss(): void;
+declare function usingCustomMarker(): void;
+declare function includeGoogleMap(callback?: Function, callbackFullName?: string): void;
+declare function includeMarkerWithLabel(): void;
+declare function includeVisCss(): void;
+declare function usingVisjs(): void;
+declare function usingJsonDiffPatch(): void;
+declare function usingSlickGridEditors(): void;
+declare function usingSlickAutoColumnSize(): void;
+declare function usingSlickHeaderFilters(): void;
+declare namespace q {
+    function sum(xs: any[], key: any): any;
+    function groupBy(xs: any[], key: any): any;
+    function sortBy<T>(xs: T[], key: any): T[];
+    function sortByDesc<T>(xs: T[], key: any): T[];
+}
+declare namespace q {
+    function nextTick(date: any): Date;
+    function addMinutes(date: Date, minutes: number): Date;
+    function addHours(date: Date, hours: number): Date;
+    function getHours(fromDate: Date, toDate: Date): number;
+    function getDays24HourPulse(fromDate: Date, toDate: Date): number;
+    function getDays(pFromDate: Date, pToDate: Date): number;
+    function getMonths(fromDate: Date, toDate: Date): number;
+    function getCalenderMonths(fromDate: Date, toDate: Date): number;
+    function getCalenderMonthsCeil(fromDate: Date, toDate: Date): number;
+    function addDays(date: Date, days: number): Date;
+    function addMonths(date: Date, months: number): Date;
+    function addYear(date: Date, years: number): Date;
+    function getPeriods(fromDate: Date, toDate: Date, periodUnit: _Ext.TimeUoM): number;
+    function addPeriod(date: Date, period: number, periodUnit: _Ext.TimeUoM): Date;
+    function formatISODate(date: Date): string;
+    function bindDateTimeEditorChange(editor: any, handler: any): void;
+    function setMinDate(editor: Serenity.DateEditor, value: Date): void;
+    function setMaxDate(editor: Serenity.DateEditor, value: Date): void;
+    function initDateRangeEditor(fromDateEditor: Serenity.DateEditor, toDateEditor: Serenity.DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void;
+    function initDateTimeRangeEditor(fromDateTimeEditor: _Ext.DateTimePickerEditor, toDateTimeEditor: _Ext.DateTimePickerEditor, onChangeHandler?: (e: JQueryEventObject) => void): void;
+    function formatDate(d: Date | string, format?: string): string;
+}
+declare namespace q {
+    function initDetailEditor(dialog: _Ext.DialogBase<any, any>, editor: _Ext.GridEditorBase<any>, options?: ExtGridEditorOptions): void;
+    function setGridEditorHeight(editor: JQuery, heightInPx: number): void;
+    function addNotificationIcon(editor: Serenity.Widget<any>, isSuccess: boolean): void;
+    function addPopoverIcon(editor: Serenity.Widget<any>, isSuccess: boolean, popoverOptions: any): void;
+    function setEditorLabel(editor: Serenity.Widget<any>, value: string): void;
+    function hideEditorLabel(editor: Serenity.Widget<any>): void;
+    function setEditorCategoryLabel(editor: Serenity.Widget<any>, value: string): void;
+    function hideEditorCategory(editor: Serenity.Widget<any>, value?: boolean): void;
+    function hideCategories(containerElement: JQuery, value?: boolean): void;
+    function hideFields(containerElement: JQuery, value?: boolean): void;
+    function hideFieldsAndCategories(containerElement: JQuery, value?: boolean): void;
+    function hideField(editor: Serenity.Widget<any>, value?: boolean): void;
+    function showField(editor: Serenity.Widget<any>, value?: boolean): void;
+    function showAndEnableField(editor: Serenity.Widget<any>): void;
+    function showFieldAndCategory(editor: Serenity.Widget<any>, value?: boolean): void;
+    function hideEditorTab(editor: Serenity.Widget<any>, value?: boolean): void;
+    function disableEditorTab(editor: Serenity.Widget<any>, value?: boolean): void;
+    function readOnlyEditorTab(editor: Serenity.Widget<any>, value?: boolean): void;
+    function readOnlyEditorCategory(editor: Serenity.Widget<any>, value?: boolean): void;
+    function readonlyEditorCategory($editor: JQuery, value?: boolean): void;
+    function readOnlyEditorPropertyGrid(editor: Serenity.Widget<any>, value?: boolean): void;
+    function readonlyEditorPropertyGrid($editor: JQuery, value?: boolean): void;
+    function readOnlyEditor(editor: Serenity.Widget<any>, value?: boolean): void;
+    function readonlyEditor($editor: JQuery, value?: boolean): void;
+    function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend?: boolean): void;
+    function moveEditorCategoryFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend?: boolean): void;
+    function selectEditorTab(editor: Serenity.Widget<any>): void;
+    function getSelectedRow<TRow>(e: JQueryEventObject): TRow;
+}
+declare namespace q {
+    function getEnumText(enumTypeOrKey: any, value: any): string;
+    function isNumber(value: any): boolean;
+    function getEnumValues(enumType: any): number[];
+    function getEnumKeys(enumType: any): string[];
+}
+declare namespace q {
+    function text(key: string, fallback: string): string;
+    function isCosmicThemeApplied(): boolean;
+    function getSelectedLanguage(): string;
+    function formatDecimal(value: any): string;
+    function formatInt(value: any): string;
+    function ToNumber(value: any): number;
+    function ToFixed(value: any, fractionDigits?: number): string;
+    function ToBool(value: any): boolean;
+    function getRandomColor(hexLetters: any): string;
+}
+declare var isPageRefreshRequired: boolean;
+declare namespace q {
+    var queryString: {};
+    var jsPDFHeaderImageData: string;
+    var jsPDFHeaderTitle: string;
+    var useSerenityInlineEditors: boolean;
+    var DefaultMainGridOptions: ExtGridOptions;
+    var DefaultEditorGridOptions: ExtGridOptions;
+    var DefaultEntityDialogOptions: ExtDialogOptions;
+    var DefaultEditorDialogOptions: ExtDialogOptions;
+    var fiscalYearMonths: number[];
 }

@@ -1,0 +1,19 @@
+﻿
+namespace {{RootNamespace}}{{DotModule}} {
+    import fld = {{RowClassName}}.Fields;
+
+    @Serenity.Decorators.registerClass(){{if CustomSettings.MaximizableDialog}}
+    @Serenity.Decorators.maximizable(){{end}}
+    export class {{ClassName}}Dialog extends _Ext.DialogBase<{{RowClassName}}, any> {
+        protected getFormKey() { return {{ClassName}}Form.formKey; }
+        protected getRowType() { return {{RowClassName}}; }
+        protected getService() { return {{ClassName}}Service.baseUrl; }
+
+        protected form = new {{ClassName}}Form(this.idPrefix);
+
+        constructor(options) {
+            super(options);
+        }
+
+    }
+}
