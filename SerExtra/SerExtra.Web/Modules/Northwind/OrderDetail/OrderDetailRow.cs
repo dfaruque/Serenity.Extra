@@ -28,7 +28,7 @@ namespace SerExtra.Northwind.Entities
         }
 
         [DisplayName("Product"), PrimaryKey, ForeignKey(typeof(ProductRow)), LeftJoin("p")]
-        [LookupEditor(typeof(ProductRow))]
+        [LookupEditor(typeof(ProductRow), CascadeFrom = nameof(ProductCategoryID), CascadeField = nameof(ProductRow.CategoryID))]
         public Int32? ProductID
         {
             get { return Fields.ProductID[this]; }
@@ -135,6 +135,15 @@ namespace SerExtra.Northwind.Entities
         }
 
         [Origin("p")]
+        [LookupEditor(typeof(CategoryRow))]
+        [MinSelectLevel(SelectLevel.List)]
+        public Int32? ProductCategoryID
+        {
+            get { return Fields.ProductCategoryID[this]; }
+            set { Fields.ProductCategoryID[this] = value; }
+        }
+
+        [Origin("p")]
         public String ProductQuantityPerUnit
         {
             get { return Fields.ProductQuantityPerUnit[this]; }
@@ -181,6 +190,7 @@ namespace SerExtra.Northwind.Entities
             public StringField ProductName;
             public BooleanField ProductDiscontinued;
             public Int32Field ProductSupplierID;
+            public Int32Field ProductCategoryID;
             public StringField ProductQuantityPerUnit;
             public DecimalField ProductUnitPrice;
 

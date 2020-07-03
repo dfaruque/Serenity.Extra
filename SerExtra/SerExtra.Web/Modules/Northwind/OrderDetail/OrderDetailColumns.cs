@@ -8,6 +8,7 @@ namespace SerExtra.Northwind.Forms
     [BasedOnRow(typeof(Entities.OrderDetailRow), CheckNames = true)]
     public class OrderDetailColumns
     {
+        public Int32? ProductCategoryID { get; set; }
         [EditLink, Width(200)]
         public String ProductID { get; set; }
         [Width(100)]
