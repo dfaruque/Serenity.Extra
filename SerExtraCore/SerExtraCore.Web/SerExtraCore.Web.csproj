@@ -10,6 +10,22 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <Compile Remove="Modules\ExtraSamples\Chat\**" />
+    <Compile Remove="Modules\ExtraSamples\ReactSamplePage\**" />
+    <Content Remove="Modules\ExtraSamples\Chat\**" />
+    <Content Remove="Modules\ExtraSamples\ReactSamplePage\**" />
+    <EmbeddedResource Remove="Modules\ExtraSamples\Chat\**" />
+    <EmbeddedResource Remove="Modules\ExtraSamples\ReactSamplePage\**" />
+    <None Remove="Modules\ExtraSamples\Chat\**" />
+    <None Remove="Modules\ExtraSamples\ReactSamplePage\**" />
+    <TypeScriptCompile Remove="Modules\ExtraSamples\Chat\**" />
+    <TypeScriptCompile Remove="Modules\ExtraSamples\ReactSamplePage\**" />
+    <TypeScriptCompile Remove="Imports\_references.ts" />
+    <None Include="Modules\ExtraSamples\CustomTemplatedGrid\Index.cshtml" />
+    <None Include="Modules\ExtraSamples\MainGridInlineEditing\Index.cshtml" />
+    <None Include="Modules\ExtraSamples\MainGridMultiEditing\Index.cshtml" />
+    <None Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerIndex.cshtml" />
+    <None Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cshtml" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
