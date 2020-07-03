@@ -29,7 +29,7 @@ namespace _Ext {
 
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
-            this.slickContainer.fadeTo(0, 0);
+            //this.slickContainer.fadeTo(0, 0);
 
             let grouping = this.getGrouping();
             if (grouping.length > 0)
@@ -45,7 +45,7 @@ namespace _Ext {
                     if (this.get_ExtGridOptions().AutoColumnSize == true) {
                         this.resizeAllCulumn();
                     }
-                    this.slickContainer.fadeTo(100, 1);
+                    //this.slickContainer.fadeTo(100, 1);
                 }
             }, 100);
 
