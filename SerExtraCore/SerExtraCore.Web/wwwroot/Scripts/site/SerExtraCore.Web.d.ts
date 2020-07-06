@@ -5,6 +5,192 @@
 /// <reference types="jqueryui" />
 /// <reference types="react" />
 /// <reference types="jquery.validation" />
+declare var isPageRefreshRequired: boolean;
+declare namespace q {
+    var queryString: {};
+    var jsPDFHeaderImageData: string;
+    var jsPDFHeaderTitle: string;
+    var useSerenityInlineEditors: boolean;
+    var DefaultMainGridOptions: ExtGridOptions;
+    var DefaultEditorGridOptions: ExtGridOptions;
+    var DefaultEntityDialogOptions: ExtDialogOptions;
+    var DefaultEditorDialogOptions: ExtDialogOptions;
+    var fiscalYearMonths: number[];
+}
+declare namespace _Ext {
+    class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
+        protected getRowType(): {
+            idProperty?: string;
+            localTextPrefix?: string;
+            nameProperty?: string;
+            insertPermission?: string;
+            updatePermission?: string;
+            deletePermission?: string;
+        };
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected getDeletePermission(): string;
+        protected get_ExtGridOptions(): ExtGridOptions;
+        protected isPickerMode(): boolean;
+        protected getGrouping(): Slick.GroupInfo<TItem>[];
+        isReadOnly: boolean;
+        isRequired: boolean;
+        isAutosized: boolean;
+        isChildGrid: boolean;
+        nextRowNumber: number;
+        autoColumnSizePlugin: any;
+        rowSelection: Serenity.GridRowSelectionMixin;
+        pickerDialog: GridItemPickerDialog;
+        constructor(container: JQuery, options?: TOptions);
+        protected markupReady(): void;
+        protected getButtons(): Serenity.ToolButton[];
+        protected getReportRequest(): _Ext.ListReportRequest;
+        protected getColumns(): Slick.Column[];
+        protected createSlickGrid(): Slick.Grid;
+        resetColumns(columns: Slick.Column[]): void;
+        resizeAllCulumn(): void;
+        protected getSlickOptions(): Slick.GridOptions;
+        protected getViewOptions(): Slick.RemoteViewOptions;
+        protected getPrintRowServiceMethod(): string;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+        protected onInlineActionClick(target: JQuery, recordId: any, item: TItem): void;
+        protected resetRowNumber(): void;
+        private setGrouping;
+        protected getIncludeColumns(include: {
+            [key: string]: boolean;
+        }): void;
+        protected getDefaultSortBy(): any[];
+        protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem>;
+        initDialog(dialog: DialogBase<TItem, any>): void;
+        get selectedItems(): TItem[];
+        set selectedKeys(value: any[]);
+        protected onViewSubmit(): boolean;
+    }
+}
+declare namespace _Ext {
+    class ReportGridBase<TItem, TOptions> extends _Ext.GridBase<TItem, TOptions> {
+        protected getButtons(): Serenity.ToolButton[];
+        protected getColumns(): Slick.Column[];
+    }
+}
+declare namespace _Ext {
+    class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, any> {
+        protected getReportTitle(): string;
+        protected getReportKey(): string;
+        protected getReportRequest(): TRequest;
+        constructor(container: JQuery, opt?: any);
+        protected getTemplate(): string;
+    }
+}
+declare namespace _Ext {
+    class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity, TOptions> {
+        protected getRowType(): {
+            idProperty?: string;
+            localTextPrefix?: string;
+            nameProperty?: string;
+            insertPermission?: string;
+            updatePermission?: string;
+            deletePermission?: string;
+        };
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected getDeletePermission(): string;
+        protected get_ExtDialogOptions(): ExtDialogOptions;
+        private loadedState;
+        isReadOnly: boolean;
+        protected form: any;
+        constructor(opt?: any);
+        protected updateInterface(): void;
+        protected onDialogOpen(): void;
+        protected onDialogClose(): void;
+        protected setReadOnly(value: boolean): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected onRefreshClick(): void;
+        protected onSaveAndNewButtonClick(): void;
+        protected getSaveState(): string;
+        protected onSaveSuccess(response: any): void;
+        loadResponse(data: any): void;
+        maximize(): void;
+        fullContentArea(): void;
+        setDialogSize(width?: any, height?: any, top?: any, left?: any, $content?: any): void;
+        onAfterSetDialogSize(): void;
+        onAfterDialogClose(entity: TEntity): void;
+        parentGrid: GridBase<TEntity, any>;
+    }
+}
+declare namespace _Ext {
+    class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPickerEditorOptions> {
+        getTemplate(): string;
+        checkGrid: GridBase<any, GridItemPickerEditorOptions>;
+        get selectedItems(): any[];
+        constructor(options: GridItemPickerEditorOptions);
+        onSuccess: (selectedItems: any) => void;
+        getDialogOptions(): JQueryUI.DialogOptions;
+    }
+}
+declare namespace _Ext {
+    class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
+        protected get_ExtDialogOptions(): ExtDialogOptions;
+        protected getIdProperty(): string;
+        onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
+        onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
+        destroy(): void;
+        protected updateInterface(): void;
+        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
+        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
+        parentEditor: GridEditorBase<TEntity>;
+    }
+}
+declare namespace _Ext {
+    class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+        protected get_ExtGridOptions(): ExtGridOptions;
+        protected getIdProperty(): string;
+        isChildGrid: boolean;
+        protected nextId: number;
+        constructor(container: JQuery);
+        private sortGridFunction;
+        protected getQuickFilters(): any[];
+        protected id(entity: TEntity): any;
+        protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void): void;
+        protected deleteEntity(id: number): boolean;
+        protected validateEntity(row: TEntity, id: number): boolean;
+        protected getNewEntity(): TEntity;
+        protected getButtons(): Serenity.ToolButton[];
+        protected addButtonClick(): void;
+        protected editItem(entityOrId: any): void;
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        get value(): TEntity[];
+        set value(value: TEntity[]);
+        protected getGridCanLoad(): boolean;
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        private searchText;
+        protected createToolbarExtensions(): void;
+        protected onViewFilter(row: any): boolean;
+        private matchContains;
+        protected enableFiltering(): boolean;
+        protected onViewSubmit(): boolean;
+        get_readOnly(): boolean;
+        set_readOnly(value: boolean): void;
+        protected getSlickOptions(): Slick.GridOptions;
+        parentDialog: DialogBase<any, any>;
+        onItemsChanged(): void;
+        onBeforeGetValue(items: TEntity[]): void;
+    }
+}
+declare namespace _Ext {
+    class JsonGridEditorBase<TEntity> extends _Ext.GridEditorBase<TEntity> {
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+    }
+}
 declare namespace SerExtraCore.Administration {
 }
 declare namespace SerExtraCore.Administration {
@@ -708,6 +894,21 @@ declare namespace SerExtraCore {
         ErrorList?: string[];
     }
 }
+declare namespace SerExtraCore.ExtraSamples {
+    interface OrdersByCustomerReportRequest extends Serenity.ServiceRequest {
+        CustomerId?: string;
+    }
+}
+declare namespace SerExtraCore.ExtraSamples {
+    interface OrdersByCustomerReportRequestForm {
+        CustomerId: Serenity.LookupEditor;
+    }
+    class OrdersByCustomerReportRequestForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
 declare namespace SerExtraCore {
     interface GetNextNumberRequest extends Serenity.ServiceRequest {
         Prefix?: string;
@@ -1329,6 +1530,10 @@ declare namespace SerExtraCore.Northwind {
         Male = 1,
         Female = 2
     }
+}
+declare namespace SerExtraCore.Northwind {
+}
+declare namespace SerExtraCore.Northwind {
 }
 declare namespace SerExtraCore.Northwind {
     interface NoteRow {
@@ -3538,192 +3743,6 @@ declare namespace SerExtraCore {
         getSelect2Options(): Select2Options;
     }
 }
-declare var isPageRefreshRequired: boolean;
-declare namespace q {
-    var queryString: {};
-    var jsPDFHeaderImageData: string;
-    var jsPDFHeaderTitle: string;
-    var useSerenityInlineEditors: boolean;
-    var DefaultMainGridOptions: ExtGridOptions;
-    var DefaultEditorGridOptions: ExtGridOptions;
-    var DefaultEntityDialogOptions: ExtDialogOptions;
-    var DefaultEditorDialogOptions: ExtDialogOptions;
-    var fiscalYearMonths: number[];
-}
-declare namespace _Ext {
-    class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
-        protected getRowType(): {
-            idProperty?: string;
-            localTextPrefix?: string;
-            nameProperty?: string;
-            insertPermission?: string;
-            updatePermission?: string;
-            deletePermission?: string;
-        };
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getInsertPermission(): string;
-        protected getUpdatePermission(): string;
-        protected getDeletePermission(): string;
-        protected get_ExtGridOptions(): ExtGridOptions;
-        protected isPickerMode(): boolean;
-        protected getGrouping(): Slick.GroupInfo<TItem>[];
-        isReadOnly: boolean;
-        isRequired: boolean;
-        isAutosized: boolean;
-        isChildGrid: boolean;
-        nextRowNumber: number;
-        autoColumnSizePlugin: any;
-        rowSelection: Serenity.GridRowSelectionMixin;
-        pickerDialog: GridItemPickerDialog;
-        constructor(container: JQuery, options?: TOptions);
-        protected markupReady(): void;
-        protected getButtons(): Serenity.ToolButton[];
-        protected getReportRequest(): _Ext.ListReportRequest;
-        protected getColumns(): Slick.Column[];
-        protected createSlickGrid(): Slick.Grid;
-        resetColumns(columns: Slick.Column[]): void;
-        resizeAllCulumn(): void;
-        protected getSlickOptions(): Slick.GridOptions;
-        protected getViewOptions(): Slick.RemoteViewOptions;
-        protected getPrintRowServiceMethod(): string;
-        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
-        protected onInlineActionClick(target: JQuery, recordId: any, item: TItem): void;
-        protected resetRowNumber(): void;
-        private setGrouping;
-        protected getIncludeColumns(include: {
-            [key: string]: boolean;
-        }): void;
-        protected getDefaultSortBy(): any[];
-        protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem>;
-        initDialog(dialog: DialogBase<TItem, any>): void;
-        get selectedItems(): TItem[];
-        set selectedKeys(value: any[]);
-        protected onViewSubmit(): boolean;
-    }
-}
-declare namespace _Ext {
-    class ReportGridBase<TItem, TOptions> extends _Ext.GridBase<TItem, TOptions> {
-        protected getButtons(): Serenity.ToolButton[];
-        protected getColumns(): Slick.Column[];
-    }
-}
-declare namespace _Ext {
-    class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, any> {
-        protected getReportTitle(): string;
-        protected getReportKey(): string;
-        protected getReportRequest(): TRequest;
-        constructor(container: JQuery, opt?: any);
-        protected getTemplate(): string;
-    }
-}
-declare namespace _Ext {
-    class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity, TOptions> {
-        protected getRowType(): {
-            idProperty?: string;
-            localTextPrefix?: string;
-            nameProperty?: string;
-            insertPermission?: string;
-            updatePermission?: string;
-            deletePermission?: string;
-        };
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getInsertPermission(): string;
-        protected getUpdatePermission(): string;
-        protected getDeletePermission(): string;
-        protected get_ExtDialogOptions(): ExtDialogOptions;
-        private loadedState;
-        isReadOnly: boolean;
-        protected form: any;
-        constructor(opt?: any);
-        protected updateInterface(): void;
-        protected onDialogOpen(): void;
-        protected onDialogClose(): void;
-        protected setReadOnly(value: boolean): void;
-        protected getToolbarButtons(): Serenity.ToolButton[];
-        protected onRefreshClick(): void;
-        protected onSaveAndNewButtonClick(): void;
-        protected getSaveState(): string;
-        protected onSaveSuccess(response: any): void;
-        loadResponse(data: any): void;
-        maximize(): void;
-        fullContentArea(): void;
-        setDialogSize(width?: any, height?: any, top?: any, left?: any, $content?: any): void;
-        onAfterSetDialogSize(): void;
-        onAfterDialogClose(entity: TEntity): void;
-        parentGrid: GridBase<TEntity, any>;
-    }
-}
-declare namespace _Ext {
-    class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPickerEditorOptions> {
-        getTemplate(): string;
-        checkGrid: GridBase<any, GridItemPickerEditorOptions>;
-        get selectedItems(): any[];
-        constructor(options: GridItemPickerEditorOptions);
-        onSuccess: (selectedItems: any) => void;
-        getDialogOptions(): JQueryUI.DialogOptions;
-    }
-}
-declare namespace _Ext {
-    class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
-        protected get_ExtDialogOptions(): ExtDialogOptions;
-        protected getIdProperty(): string;
-        onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
-        onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
-        destroy(): void;
-        protected updateInterface(): void;
-        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
-        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
-        parentEditor: GridEditorBase<TEntity>;
-    }
-}
-declare namespace _Ext {
-    class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
-        protected get_ExtGridOptions(): ExtGridOptions;
-        protected getIdProperty(): string;
-        isChildGrid: boolean;
-        protected nextId: number;
-        constructor(container: JQuery);
-        private sortGridFunction;
-        protected getQuickFilters(): any[];
-        protected id(entity: TEntity): any;
-        protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void): void;
-        protected deleteEntity(id: number): boolean;
-        protected validateEntity(row: TEntity, id: number): boolean;
-        protected getNewEntity(): TEntity;
-        protected getButtons(): Serenity.ToolButton[];
-        protected addButtonClick(): void;
-        protected editItem(entityOrId: any): void;
-        getEditValue(property: any, target: any): void;
-        setEditValue(source: any, property: any): void;
-        get value(): TEntity[];
-        set value(value: TEntity[]);
-        protected getGridCanLoad(): boolean;
-        protected usePager(): boolean;
-        protected getInitialTitle(): any;
-        private searchText;
-        protected createToolbarExtensions(): void;
-        protected onViewFilter(row: any): boolean;
-        private matchContains;
-        protected enableFiltering(): boolean;
-        protected onViewSubmit(): boolean;
-        get_readOnly(): boolean;
-        set_readOnly(value: boolean): void;
-        protected getSlickOptions(): Slick.GridOptions;
-        parentDialog: DialogBase<any, any>;
-        onItemsChanged(): void;
-        onBeforeGetValue(items: TEntity[]): void;
-    }
-}
-declare namespace _Ext {
-    class JsonGridEditorBase<TEntity> extends _Ext.GridEditorBase<TEntity> {
-        getEditValue(property: any, target: any): void;
-        setEditValue(source: any, property: any): void;
-    }
-}
 declare namespace SerExtraCore.ExtraSamples {
     class MainGridInlineEditingGrid extends _Ext.GridBase<Northwind.ProductRow, any> {
         protected getColumnsKey(): string;
@@ -5093,23 +5112,4 @@ declare namespace q {
     function ToFixed(value: any, fractionDigits?: number): string;
     function ToBool(value: any): boolean;
     function getRandomColor(hexLetters: any): string;
-}
-declare namespace SerExtraCore.ExtraSamples {
-    interface OrdersByCustomerReportRequest extends Serenity.ServiceRequest {
-        CustomerId?: string;
-    }
-}
-declare namespace SerExtraCore.ExtraSamples {
-    interface OrdersByCustomerReportRequestForm {
-        CustomerId: Serenity.LookupEditor;
-    }
-    class OrdersByCustomerReportRequestForm extends Serenity.PrefixedContext {
-        static formKey: string;
-        private static init;
-        constructor(prefix: string);
-    }
-}
-declare namespace SerExtraCore.Northwind {
-}
-declare namespace SerExtraCore.Northwind {
 }
