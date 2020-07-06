@@ -18,6 +18,11 @@
                 this.calculateTotal();
             });
 
+            //the following event will handle inline editing
+            this.form.DetailList.slickGrid.onCellChange.subscribe(() => {
+                this.calculateTotal();
+            });
+
             //the following event will handle delete case
             (this.form.DetailList.view as any).onRowCountChanged.subscribe(() => {
                 this.calculateTotal();

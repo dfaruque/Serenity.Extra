@@ -93,7 +93,7 @@ namespace SerExtra.Northwind {
             return buttons;
         }
 
-        validateEntity(row, id) {
+        validateEntity(row: OrderDetailRow, id) {
             row.ProductID = Q.toId(row.ProductID);
 
             var sameProduct = Q.tryFirst(this.view.getItems(), x => x.ProductID === row.ProductID);
@@ -101,6 +101,8 @@ namespace SerExtra.Northwind {
                 Q.alert('This product is already in order details!');
                 return false;
             }
+
+            row.LineTotal = row.Quantity * row.UnitPrice;
 
             return true;
         }
