@@ -18,14 +18,10 @@ It is just some useful utilities and some extra functionalities like
    - EmptyLookupEditor
    - StaticTextBlock
    
-## How to use
+## How to use (for .net old framework)
 1. Install NuGet Package Serenity.Extra
-2. Include the following lines in _LayoutHead.cshtml
-```C#
-@Html.Stylesheet("~/Modules/_Ext/ExtStyles.css")
-@Html.Script("~/Modules/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js")
-@Html.Script("~/Modules/_Ext/Editors/slick.editors.js") 
-```
+4. If want to apply Serenity.Extra css then you could add line in Content\site\CssBundles.json
+`"~/Modules/_Ext/ExtStyles.css"`
 3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
 
 Serenity Default  |  _Ext
@@ -38,6 +34,13 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 4. Add [LookupScript("Administration.User")] on UserRow
 5. Add following line in ScriptInitialization.ts
 ```Q.Config.rootNamespaces.push('_Ext');```
+
+## How to use (for .net core)
+1. Copy the Modules/_Ext folder from the SerExtraCore project and place it accordingly.
+2. Copy the wwwroot/Modules folder from the SerExtraCore project
+3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
+4. If want to apply Serenity.Extra css then you could add line in wwwroot\Content\site\CssBundles.json
+`"~/Modules/_Ext/ExtStyles.css"`
 
 ## Examples
 
