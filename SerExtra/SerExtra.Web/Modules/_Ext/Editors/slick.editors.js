@@ -913,6 +913,7 @@ function SerenityInlineEditor(args) {
         if (editorParams.cascadeFrom != undefined)
         {
             let cascadeFrom = editorParams.cascadeFrom;
+            editorParams.cascadeField = editorParams.cascadeField || cascadeFrom;
             editorParams.cascadeFrom = null;
             editorParams.cascadeValue = args.item[cascadeFrom]
         }
