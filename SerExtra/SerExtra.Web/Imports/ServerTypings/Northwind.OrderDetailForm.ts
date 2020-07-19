@@ -1,5 +1,6 @@
 ﻿namespace SerExtra.Northwind {
     export interface OrderDetailForm {
+        ProductCategoryID: Serenity.LookupEditor;
         ProductID: Serenity.LookupEditor;
         UnitPrice: Serenity.DecimalEditor;
         Quantity: Serenity.IntegerEditor;
@@ -22,6 +23,7 @@
                 var w2 = s.IntegerEditor;
 
                 Q.initFormType(OrderDetailForm, [
+                    'ProductCategoryID', w0,
                     'ProductID', w0,
                     'UnitPrice', w1,
                     'Quantity', w2,

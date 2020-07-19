@@ -14,9 +14,9 @@ namespace SerExtra.Membership
         [PasswordEditor, Placeholder("default password for 'admin' is 'serenity'"), Required(true)]
         public string Password { get; set; }
 
-        [Recaptcha(SiteKey = "6Lfts2kUAAAAACa-8L6yESiVZBFHWWRI-0PqCkXh")]
-        [DisplayName(""), Hidden]
-        public string ReCaptcha { get; set; }
+        //[Recaptcha(SiteKey = "6Lfts2kUAAAAACa-8L6yESiVZBFHWWRI-0PqCkXh")]
+        //[DisplayName(""), Hidden]
+        //public string ReCaptcha { get; set; }
 
     }
 }

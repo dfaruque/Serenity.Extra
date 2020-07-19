@@ -109,7 +109,7 @@
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.11.1.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.12.3\lib\net45\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\packages\Serenity.Web.3.13.5\lib\net45\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -120,20 +120,20 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Core, Version=3.12.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Core.3.12.3\lib\net45\Serenity.Core.dll</HintPath>
+    <Reference Include="Serenity.Core, Version=3.13.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Core.3.13.5\lib\net45\Serenity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data, Version=3.12.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.3.12.3\lib\net45\Serenity.Data.dll</HintPath>
+    <Reference Include="Serenity.Data, Version=3.13.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.3.13.5\lib\net45\Serenity.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Data.Entity, Version=3.12.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Data.Entity.3.12.3\lib\net45\Serenity.Data.Entity.dll</HintPath>
+    <Reference Include="Serenity.Data.Entity, Version=3.13.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Data.Entity.3.13.5\lib\net45\Serenity.Data.Entity.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Services, Version=3.12.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Services.3.12.3\lib\net45\Serenity.Services.dll</HintPath>
+    <Reference Include="Serenity.Services, Version=3.13.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Services.3.13.5\lib\net45\Serenity.Services.dll</HintPath>
     </Reference>
-    <Reference Include="Serenity.Web, Version=3.12.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serenity.Web.3.12.3\lib\net45\Serenity.Web.dll</HintPath>
+    <Reference Include="Serenity.Web, Version=3.13.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serenity.Web.3.13.5\lib\net45\Serenity.Web.dll</HintPath>
     </Reference>
     <!---->
     <!--
@@ -233,7 +233,10 @@
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\pace.css" />
+    <Content Include="Content\serenity\serenity.bootstrap.messagedialogs.css" />
     <Content Include="Content\serenity\serenity.css" />
+    <Content Include="Content\serenity\serenity.editors.css" />
+    <Content Include="Content\serenity\serenity.jquery-ui.messagedialogs.css" />
     <Content Include="Content\simple-line-icons.css" />
     <Content Include="Content\slick-default-theme.css" />
     <Content Include="Content\slick.columnpicker.css" />
@@ -583,10 +586,28 @@
     <Content Include="Scripts\saltarelle\linq.min.js" />
     <Content Include="Scripts\saltarelle\mscorlib.js" />
     <Content Include="Scripts\saltarelle\mscorlib.min.js" />
+    <Content Include="Scripts\serenity\core\serenity-core.js" />
+    <Content Include="Scripts\serenity\core\serenity-core.min.js" />
+    <Content Include="Scripts\serenity\dialogs\serenity-dialogs.js" />
+    <Content Include="Scripts\serenity\dialogs\serenity-dialogs.min.js" />
+    <Content Include="Scripts\serenity\editors\serenity-editors.js" />
+    <Content Include="Scripts\serenity\editors\serenity-editors.min.js" />
+    <Content Include="Scripts\serenity\filterpanel\serenity-filterpanel.js" />
+    <Content Include="Scripts\serenity\filterpanel\serenity-filterpanel.min.js" />
+    <Content Include="Scripts\serenity\forms\serenity-forms.js" />
+    <Content Include="Scripts\serenity\forms\serenity-forms.min.js" />
+    <Content Include="Scripts\serenity\grids\serenity-grids.js" />
+    <Content Include="Scripts\serenity\grids\serenity-grids.min.js" />
+    <Content Include="Scripts\serenity\quickfilter\serenity-quickfilter.js" />
+    <Content Include="Scripts\serenity\quickfilter\serenity-quickfilter.min.js" />
     <Content Include="Scripts\serenity\Serenity.CoreLib.js" />
     <Content Include="Scripts\serenity\Serenity.CoreLib.min.js" />
     <Content Include="Scripts\serenity\Serenity.Script.UI.js" />
     <Content Include="Scripts\serenity\Serenity.Script.UI.min.js" />
+    <Content Include="Scripts\serenity\slick\serenity-slick.js" />
+    <Content Include="Scripts\serenity\slick\serenity-slick.min.js" />
+    <Content Include="Scripts\serenity\widget\serenity-widget.js" />
+    <Content Include="Scripts\serenity\widget\serenity-widget.min.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
     <Content Include="Scripts\SlickGrid\MIT-LICENSE.txt" />
@@ -789,6 +810,7 @@
     <Content Include="tools\Node\lessc.cmd" />
     <Content Include="tools\JsEngine\lib.d.ts_" />
     <Content Include="Scripts\SlickGrid\README.md" />
+    <Content Include="Scripts\serenity\widget\serenity-widget.js.map" />
     <Content Include="Scripts\serenity\texts\serenity.texts.zh-CN.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.vi-VN.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.tr.json" />
@@ -800,7 +822,15 @@
     <Content Include="Scripts\serenity\texts\serenity.texts.es.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.de.json" />
     <Content Include="Scripts\serenity\texts\serenity.texts.bn.json" />
+    <Content Include="Scripts\serenity\slick\serenity-slick.js.map" />
     <Content Include="Scripts\serenity\Serenity.CoreLib.js.map" />
+    <Content Include="Scripts\serenity\quickfilter\serenity-quickfilter.js.map" />
+    <Content Include="Scripts\serenity\grids\serenity-grids.js.map" />
+    <Content Include="Scripts\serenity\forms\serenity-forms.js.map" />
+    <Content Include="Scripts\serenity\filterpanel\serenity-filterpanel.js.map" />
+    <Content Include="Scripts\serenity\editors\serenity-editors.js.map" />
+    <Content Include="Scripts\serenity\dialogs\serenity-dialogs.js.map" />
+    <Content Include="Scripts\serenity\core\serenity-core.js.map" />
     <None Include="tsconfig.json" />
     <TypeScriptCompile Include="Imports\ServerTypings\Administration.PermissionKeys.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
@@ -1734,7 +1764,6 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleGrid.ts" />
     <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleDialog.ts" />
-    <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -2462,6 +2491,16 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\Common\Reporting\PdfExportHelper.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\core\serenity-core.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\dialogs\serenity-dialogs.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\editors\serenity-editors.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\filterpanel\serenity-filterpanel.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\forms\serenity-forms.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\grids\serenity-grids.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\quickfilter\serenity-quickfilter.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\Serenity.CoreLib.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\slick\serenity-slick.d.ts" />
+    <TypeScriptCompile Include="Scripts\serenity\widget\serenity-widget.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jspdf\jspdf.autotable.d.ts" />
   </ItemGroup>
   <PropertyGroup>

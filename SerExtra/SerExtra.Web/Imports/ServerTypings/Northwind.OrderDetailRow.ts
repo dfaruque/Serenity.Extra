@@ -16,6 +16,7 @@
         ProductName?: string;
         ProductDiscontinued?: boolean;
         ProductSupplierID?: number;
+        ProductCategoryID?: number;
         ProductQuantityPerUnit?: string;
         ProductUnitPrice?: number;
         LineTotal?: number;
@@ -46,6 +47,7 @@
             ProductName = "ProductName",
             ProductDiscontinued = "ProductDiscontinued",
             ProductSupplierID = "ProductSupplierID",
+            ProductCategoryID = "ProductCategoryID",
             ProductQuantityPerUnit = "ProductQuantityPerUnit",
             ProductUnitPrice = "ProductUnitPrice",
             LineTotal = "LineTotal"

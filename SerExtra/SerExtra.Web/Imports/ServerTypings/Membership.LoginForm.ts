@@ -2,7 +2,6 @@
     export interface LoginForm {
         Username: Serenity.StringEditor;
         Password: Serenity.PasswordEditor;
-        ReCaptcha: Serenity.Recaptcha;
     }
 
     export class LoginForm extends Serenity.PrefixedContext {
@@ -18,12 +17,10 @@
                 var s = Serenity;
                 var w0 = s.StringEditor;
                 var w1 = s.PasswordEditor;
-                var w2 = s.Recaptcha;
 
                 Q.initFormType(LoginForm, [
                     'Username', w0,
-                    'Password', w1,
-                    'ReCaptcha', w2
+                    'Password', w1
                 ]);
             }
         }
