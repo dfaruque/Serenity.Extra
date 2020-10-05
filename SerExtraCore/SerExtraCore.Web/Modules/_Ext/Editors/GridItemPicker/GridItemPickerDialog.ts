@@ -18,7 +18,7 @@
             var gridType = options.gridType;
 
             if (!gridType.prototype)
-                gridType = Q.typeByFullName(options.gridType);
+                gridType = Q.getType(options.gridType);
 
             try {
                 this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);

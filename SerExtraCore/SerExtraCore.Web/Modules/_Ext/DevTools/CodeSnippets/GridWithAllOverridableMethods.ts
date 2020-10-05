@@ -214,7 +214,7 @@
         destroy(): void { console.log('destroy'); super.destroy() }
 
 
-        protected initializeAsync(): PromiseLike<void> { console.log('initializeAsync'); return super.initializeAsync() }
+        //protected initializeAsync(): PromiseLike<void> { console.log('initializeAsync'); return super.initializeAsync() }
 
 
 
@@ -246,10 +246,10 @@
 
         //protected getColumnsKey(): string;
 
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync() }
+        //protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync() }
 
 
-        protected getColumnsAsync(): PromiseLike<Slick.Column[]> { console.log('getColumnsAsync'); return super.getColumnsAsync() }
+        //protected getColumnsAsync(): PromiseLike<Slick.Column[]> { console.log('getColumnsAsync'); return super.getColumnsAsync() }
 
         protected populateLock(): void { console.log('populateLock'); super.populateLock() }
 

@@ -4,7 +4,6 @@
 /// <reference types="jquery" />
 /// <reference types="jqueryui" />
 /// <reference types="react" />
-/// <reference types="jquery.validation" />
 declare var isPageRefreshRequired: boolean;
 declare namespace q {
     var queryString: {};
@@ -3470,7 +3469,10 @@ declare namespace SerExtraCore.BasicSamples {
         private form;
         constructor();
         protected getDialogTitle(): string;
-        protected getDialogButtons(): Serenity.DialogButton[];
+        protected getDialogButtons(): {
+            text: string;
+            click: () => void;
+        }[];
     }
 }
 declare namespace SerExtraCore.BasicSamples {
@@ -3910,7 +3912,7 @@ declare namespace _Ext {
         createEditor(): void;
         protected useIdField(): boolean;
         getCriteriaField(): string;
-        getEditorOptions(): any;
+        getEditorOptions(): {};
         loadState(state: any): void;
         saveState(): any;
         getEditorValue(): any;
@@ -3939,7 +3941,7 @@ declare namespace _Ext {
         useLike: boolean;
         getOperators(): Serenity.FilterOperator[];
         protected useEditor(): boolean;
-        getEditorOptions(): any;
+        getEditorOptions(): {};
         createEditor(): void;
         protected useIdField(): boolean;
         initQuickFilter(filter: Serenity.QuickFilter<Serenity.Widget<any>, any>): void;
@@ -4246,13 +4248,10 @@ declare namespace _Ext {
         protected initToolbar(): void;
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected initPropertyGrid(): void;
-        protected initPropertyGridAsync(): PromiseLike<void>;
         protected getPropertyGridOptions(): Serenity.PropertyGridOptions;
-        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions>;
         protected initLocalizationGrid(): void;
-        protected initLocalizationGridAsync(): PromiseLike<void>;
         protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void;
-        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void;
+        load(entityOrId: any, done: () => void, fail: (ex: Q.Exception) => void): void;
         loadResponse(data: any): void;
         protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void;
         protected beforeLoadEntity(entity: AuditLogRow): void;
@@ -4289,7 +4288,6 @@ declare namespace _Ext {
         protected getLoadByIdOptions(id: any, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void): Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>;
         protected loadByIdHandler(options: Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail: () => void): void;
         protected showSaveSuccessMessage(response: Serenity.SaveResponse): void;
-        protected initializeAsync(): PromiseLike<void>;
         protected getEntityNameFieldValue(): any;
         protected isCloneMode(): boolean;
         protected isNewOrDeleted(): boolean;
@@ -4313,7 +4311,6 @@ declare namespace _Ext {
         protected getLocalizationGridValue(): any;
         protected getPendingLocalizations(): any;
         protected getPropertyItems(): Serenity.PropertyItem[];
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
         protected getCloningEntity(): AuditLogRow;
         protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse>;
         protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void;
@@ -4340,13 +4337,10 @@ declare namespace _Ext {
         protected initToolbar(): void;
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected initPropertyGrid(): void;
-        protected initPropertyGridAsync(): PromiseLike<void>;
         protected getPropertyGridOptions(): Serenity.PropertyGridOptions;
-        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions>;
         protected initLocalizationGrid(): void;
-        protected initLocalizationGridAsync(): PromiseLike<void>;
         protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void;
-        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void;
+        load(entityOrId: any, done: () => void, fail: (ex: Q.Exception) => void): void;
         loadResponse(data: any): void;
         protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void;
         protected beforeLoadEntity(entity: AuditLogRow): void;
@@ -4383,7 +4377,6 @@ declare namespace _Ext {
         protected getLoadByIdOptions(id: any, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void): Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>;
         protected loadByIdHandler(options: Serenity.ServiceOptions<Serenity.RetrieveResponse<AuditLogRow>>, callback: (response: Serenity.RetrieveResponse<AuditLogRow>) => void, fail: () => void): void;
         protected showSaveSuccessMessage(response: Serenity.SaveResponse): void;
-        protected initializeAsync(): PromiseLike<void>;
         protected getEntityNameFieldValue(): any;
         protected isCloneMode(): boolean;
         protected isNewOrDeleted(): boolean;
@@ -4505,11 +4498,8 @@ declare namespace _Ext {
         protected getDialogOptions(): JQueryUI.DialogOptions;
         protected getDialogOptionsFor(itemType: string): JQueryUI.DialogOptions;
         destroy(): void;
-        protected initializeAsync(): PromiseLike<void>;
         protected onClick(e: JQueryEventObject, row: number, cell: number): void;
         protected setEquality(field: string, value: any): void;
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
-        protected getColumnsAsync(): PromiseLike<Slick.Column[]>;
         protected populateLock(): void;
         protected populateUnlock(): void;
         refresh(): void;
@@ -4620,11 +4610,8 @@ declare namespace _Ext {
         protected getDialogOptions(): JQueryUI.DialogOptions;
         protected getDialogOptionsFor(itemType: string): JQueryUI.DialogOptions;
         destroy(): void;
-        protected initializeAsync(): PromiseLike<void>;
         protected onClick(e: JQueryEventObject, row: number, cell: number): void;
         protected setEquality(field: string, value: any): void;
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
-        protected getColumnsAsync(): PromiseLike<Slick.Column[]>;
         protected populateLock(): void;
         protected populateUnlock(): void;
         refresh(): void;

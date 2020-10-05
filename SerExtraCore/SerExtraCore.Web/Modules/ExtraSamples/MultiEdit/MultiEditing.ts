@@ -104,8 +104,8 @@
                 }
             }
 
-            throw new ss.Exception(Q.format("MultiEditing '{0}' has no editor for '{1}' operator",
-                (ss as any).getTypeName((ss as any).getInstanceType(this)), this.get_operator().key));
+            throw new Q.Exception(Q.format("MultiEditing '{0}' has no editor for '{1}' operator",
+                Q.getTypeName(Q.getInstanceType(this)), this.get_operator().key));
         }
 
         protected operatorFormat(op: Serenity.FilterOperator) {

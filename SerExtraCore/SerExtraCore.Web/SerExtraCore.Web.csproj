@@ -47,8 +47,8 @@
     </PackageReference>
     <PackageReference Include="StackExchange.Exceptional.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Scripts" Version="3.12.6" />
-    <PackageReference Include="Serenity.Web" Version="3.12.6" />
+    <PackageReference Include="Serenity.Scripts" Version="3.14.1" />
+    <PackageReference Include="Serenity.Web" Version="3.14.1" />
     <PackageReference Include="Serenity.Web.Assets" Version="3.9.2" />
   </ItemGroup>
   <PropertyGroup>

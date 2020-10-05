@@ -196,7 +196,7 @@
                     var cloneEntity = this.getCloningEntity();
 
                     Serenity.Widget.create({
-                        type: (ss as any).getInstanceType(this),
+                        type: Q.getInstanceType(this),
                         init: (dlg: DialogBase<any, any>) => {
                             this.parentGrid.initDialog(dlg);
                             dlg.loadEntityAndOpenDialog(cloneEntity, null);
