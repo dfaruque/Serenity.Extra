@@ -32,13 +32,18 @@ namespace _Ext
 
         public string GetBaseUrl()
         {
+            var baseUrl = string.Empty;
+#if COREFX
+
+#else
             var httpRequest = System.Web.HttpContext.Current.Request;
             var appUrl = System.Web.HttpRuntime.AppDomainAppVirtualPath;
 
             if (appUrl != "/")
                 appUrl = "/" + appUrl + "/";
 
-            var baseUrl = string.Format("{0}://{1}{2}", httpRequest.Url.Scheme, httpRequest.Url.Authority, appUrl);
+            baseUrl = string.Format("{0}://{1}{2}", httpRequest.Url.Scheme, httpRequest.Url.Authority, appUrl);
+#endif
 
             return baseUrl;
         }

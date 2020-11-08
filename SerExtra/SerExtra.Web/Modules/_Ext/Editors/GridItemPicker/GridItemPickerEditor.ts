@@ -102,7 +102,7 @@
             var dialogType = this.options.dialogType;
 
             if (!dialogType.prototype)
-                dialogType = Q.typeByFullName(this.options.dialogType);
+                dialogType = Q.getType(this.options.dialogType);
 
             try {
                 var dlg = new dialogType() as DialogBase<any, any>;

@@ -12,7 +12,7 @@ namespace _Ext {
         protected getInsertPermission() { return this.getRowType().insertPermission; }
         protected getUpdatePermission() { return this.getRowType().updatePermission; }
         protected getDeletePermission() { return this.getRowType().deletePermission; }
-
+        
         protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
         protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
         protected getGrouping(): Slick.GroupInfo<TItem>[] { return []; }
@@ -639,7 +639,7 @@ namespace _Ext {
         }
 
         //override getGrouping instead of calling setGrouping
-        private setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
+        protected setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }

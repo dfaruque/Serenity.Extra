@@ -14,7 +14,7 @@ namespace _Ext {
             this.dialogTitle = 'Replace Row'
 
             this.form.DeletedEntityName.value = request.DeletedEntityName
-            this.form.ReplaceWithEntityId.items = entityList.map<Serenity.Select2Item>(m => { return { id: String(m[request.IdProperty]), text: m[request.NameProperty], source: m } });
+            this.form.ReplaceWithEntityId.items = entityList.map<Select2Item>(m => { return { id: String(m[request.IdProperty]), text: m[request.NameProperty], source: m } });
         }
 
         protected getToolbarButtons(): Serenity.ToolButton[] {

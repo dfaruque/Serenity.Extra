@@ -10,7 +10,7 @@
         }
 
 
-        private select2Formatter(item: Serenity.Select2Item) {
+        private select2Formatter(item: Select2Item) {
             if (item)
                 return `<div style="color:red">${item.text}</div>`;
         }

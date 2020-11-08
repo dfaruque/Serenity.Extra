@@ -223,7 +223,7 @@
         destroy(): void { super.destroy() }
 
 
-        protected initializeAsync(): PromiseLike<void> { return super.initializeAsync() }
+        //protected initializeAsync(): PromiseLike<void> { return super.initializeAsync() }
 
 
 
@@ -255,10 +255,10 @@
 
         //protected getColumnsKey(): string;
 
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { return super.getPropertyItemsAsync() }
+        //protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { return super.getPropertyItemsAsync() }
 
 
-        protected getColumnsAsync(): PromiseLike<Slick.Column[]> { return super.getColumnsAsync() }
+        //protected getColumnsAsync(): PromiseLike<Slick.Column[]> { return super.getColumnsAsync() }
 
         protected populateLock(): void { super.populateLock() }
 

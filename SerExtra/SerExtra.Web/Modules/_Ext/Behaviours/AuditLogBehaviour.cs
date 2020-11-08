@@ -91,8 +91,12 @@ namespace _Ext
                             EntityId = entityId,
                             OldEntity = oldrowJson,
                             NewEntity = rowJson,
+#if COREFX
+
+#else
                             IpAddress = HttpContext.Current.Request.UserHostAddress,
                             SessionId = HttpContext.Current.Session.SessionID
+#endif
                         };
 
                         auditLogConnection.Insert<AuditLogRow>(auditLogRow);
@@ -135,6 +139,9 @@ namespace _Ext
         string GetPageUrl()
         {
             string pageUrl = "";
+#if COREFX
+
+#else
             if (HttpContext.Current != null && HttpContext.Current.Request != null)
             {
                 var httpRequest = HttpContext.Current.Request;
@@ -143,6 +150,8 @@ namespace _Ext
                 else if (httpRequest.Url != null)
                     pageUrl = httpRequest.Url.PathAndQuery;
             }
+#endif
+
             return pageUrl;
         }
     }

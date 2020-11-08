@@ -1,4 +1,4 @@
-﻿/// <reference path="../Scripts/typings/serenity/Serenity.CoreLib.d.ts" />
+﻿/// <reference path="../Scripts/serenity/Serenity.CoreLib.d.ts" />
 /// <reference path="../Scripts/typings/jspdf/jspdf.autotable.d.ts" />
 
 /// <reference path="../Modules/_Ext/_q/_q.var.ts" />

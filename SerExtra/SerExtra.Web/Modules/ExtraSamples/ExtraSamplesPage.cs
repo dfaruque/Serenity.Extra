@@ -14,7 +14,7 @@ namespace SerExtra.ExtraSamples.Pages
 
         public ActionResult MainGridMultiEditing()
         {
-            return View(Views.ExtraSamples.MainGridMultiEditing.Index);
+            return null;
         }
 
         public ActionResult CustomTemplatedGrid()

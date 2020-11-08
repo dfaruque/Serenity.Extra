@@ -4,25 +4,34 @@ namespace _Ext.DevTools.Pages
     using Serenity;
     using Serenity.Data;
     using System;
-    using System.Web.Mvc;
     using System.Linq;
     using System.Reflection;
     using Serenity.Data.Mapping;
     using Serenity.Web;
     using System.IO;
     using System.Web.Hosting;
-
+#if COREFX
+    using Microsoft.AspNetCore.Mvc;
+#else
+    using System.Web.Mvc;
     [RoutePrefix("GenerateMigrationFromEntity"), Route("{action=index}")]
+#endif
     [PageAuthorize("DevTools:GenerateMigrationFromEntity")]
     public class GenerateMigrationFromEntityController : Controller
     {
-        [Authorize, HttpGet]
+#if COREFX
+        [Route("GenerateMigrationFromEntity")]
+#endif
+        [HttpGet]
         public ActionResult Index()
         {
             return View("~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml");
         }
 
-        [Authorize, HttpGet]
+#if COREFX
+        [Route("GenerateMigrationFromEntity/MigrationViewer")]
+#endif
+        [HttpGet]
         public ActionResult MigrationViewer()
         {
             var model = new Model.GenerateMigrationFromEntityPageModel();
@@ -30,6 +39,9 @@ namespace _Ext.DevTools.Pages
             return View("~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityMigrationViewer.cshtml", model);
         }
 
+#if COREFX
+        [Route("GenerateMigrationFromEntity/GenerateSingleFile")]
+#endif
         public ActionResult GenerateSingleFile()
         {
             var model = new Model.GenerateMigrationFromEntityPageModel();
@@ -49,6 +61,9 @@ namespace _Ext.DevTools.Pages
             return View("~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntitySuccessMsg.cshtml", model);
         }
 
+#if COREFX
+        [Route("GenerateMigrationFromEntity/GenerateFileForEachTable")]
+#endif
         public ActionResult GenerateFileForEachTable()
         {
             var model = new Model.GenerateMigrationFromEntityPageModel();

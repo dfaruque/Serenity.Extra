@@ -21,14 +21,14 @@
         protected initToolbar(): void { super.initToolbar(); }
         protected getToolbarButtons(): Serenity.ToolButton[] { return super.getToolbarButtons(); }
         protected initPropertyGrid(): void { super.initPropertyGrid(); }
-        protected initPropertyGridAsync(): PromiseLike<void> { return super.initPropertyGridAsync(); }
+        //protected initPropertyGridAsync(): PromiseLike<void> { return super.initPropertyGridAsync(); }
         protected getPropertyGridOptions(): Serenity.PropertyGridOptions { return super.getPropertyGridOptions(); }
-        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions> { return super.getPropertyGridOptionsAsync(); }
+        //protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions> { return super.getPropertyGridOptionsAsync(); }
         protected initLocalizationGrid(): void { super.initLocalizationGrid(); }
-        protected initLocalizationGridAsync(): PromiseLike<void> { return super.initLocalizationGridAsync(); }
+        //protected initLocalizationGridAsync(): PromiseLike<void> { return super.initLocalizationGridAsync(); }
         protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void { super.initLocalizationGridCommon(pgOptions); }
 
-        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void { super.load(entityOrId, done, fail); }
+        load(entityOrId: any, done: () => void, fail: (ex: Q.Exception) => void): void { super.load(entityOrId, done, fail); }
         loadResponse(data: any): void { super.loadResponse(data); }
         protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void { super.onLoadingData(data); }
         protected beforeLoadEntity(entity: AuditLogRow): void { super.beforeLoadEntity(entity); }
@@ -84,7 +84,7 @@
 
 
 
-        protected initializeAsync(): PromiseLike<void> { return super.initializeAsync(); }
+        //protected initializeAsync(): PromiseLike<void> { return super.initializeAsync(); }
         protected getEntityNameFieldValue(): any { return super.getEntityNameFieldValue(); }
         protected isCloneMode(): boolean { return super.isCloneMode(); }
         protected isNewOrDeleted(): boolean { return super.isNewOrDeleted(); }
@@ -117,7 +117,7 @@
         protected getLocalizationGridValue(): any { return super.getLocalizationGridValue(); }
         protected getPendingLocalizations(): any { return super.getPendingLocalizations(); }
         protected getPropertyItems(): Serenity.PropertyItem[] { return super.getPropertyItems(); }
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { return super.getPropertyItemsAsync(); }
+        //protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { return super.getPropertyItemsAsync(); }
         protected getCloningEntity(): AuditLogRow { return super.getCloningEntity(); }
         protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse> { return super.getUndeleteOptions(callback); }
         protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void { super.undeleteHandler(options, callback); }

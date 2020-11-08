@@ -70,6 +70,14 @@ interface Select2Item {
     source?: any;
     disabled?: boolean;
 }
+declare namespace Serenity {
+    interface Select2Item {
+        id: string;
+        text: string;
+        source?: any;
+        disabled?: boolean;
+    }
+}
 interface Select2Result {
     results: any;
     more: boolean;
@@ -687,7 +695,8 @@ declare namespace JQueryValidation {
     }
 }
 declare namespace Q {
-    function validateTooltip(form: JQuery, opt: JQueryValidation.ValidationOptions): JQueryValidation.Validator;
+    function baseValidateOptions(): JQueryValidation.ValidationOptions;
+    function validateForm(form: JQuery, opt: JQueryValidation.ValidationOptions): JQueryValidation.Validator;
     function addValidationRule(element: JQuery, eventClass: string, rule: (p1: JQuery) => string): JQuery;
     function removeValidationRule(element: JQuery, eventClass: string): JQuery;
 }

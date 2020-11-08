@@ -1451,7 +1451,7 @@ var Q;
         var res = s.match(isoRegexp);
         if (typeof (res) == "undefined" || res === null)
             return null;
-        return new Date(s);
+        return new Date(s + (s.length == 10 ? "T00:00:00" : ""));
     }
     Q.parseISODateTime = parseISODateTime;
     function parseHourAndMin(value) {
@@ -2368,7 +2368,7 @@ var Q;
         if (typeof document !== 'undefined') {
             var pathLink = document.querySelector('link#ApplicationPath');
             if (pathLink != null) {
-                Config.applicationPath = pathLink.href;
+                Config.applicationPath = pathLink.getAttribute('href');
             }
         }
         /**
@@ -2921,32 +2921,76 @@ var Q;
             el.attr('title', val || '').tooltip('_fixTitle');
         return el;
     }
-    var valOpt = {
-        ignore: ':hidden, .no-validate',
-        showErrors: function (errorMap, errorList) {
-            $.each(this.validElements(), function (index, element) {
-                var $element = $(element);
-                setTooltip($element
-                    .removeClass("error")
-                    .addClass("valid"), '')
-                    .tooltip('hide');
-            });
-            $.each(errorList, function (index, error) {
-                var $element = $(error.element);
-                setTooltip($element
-                    .addClass("error"), error.message);
-                if (index == 0)
-                    $element.tooltip('show');
-            });
-        },
-        normalizer: function (value) {
-            return $.trim(value);
-        }
-    };
-    function validateTooltip(form, opt) {
-        return form.validate(Q.extend(Q.extend({}, valOpt), opt));
+    function baseValidateOptions() {
+        return {
+            errorClass: 'error',
+            ignore: ':hidden, .no-validate',
+            ignoreTitle: true,
+            normalizer: function (value) {
+                return $.trim(value);
+            },
+            highlight: function (element, errorClass, validClass) {
+                if (element.type === "radio") {
+                    this.findByName(element.name).addClass(errorClass).removeClass(validClass);
+                }
+                else {
+                    var $el = $(element);
+                    $el.addClass(errorClass).removeClass(validClass);
+                    if ($el.hasClass('select2-offscreen') &&
+                        element.id) {
+                        $('#s2id_' + element.id).addClass(errorClass).removeClass(validClass);
+                    }
+                }
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                if (element.type === "radio") {
+                    this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+                }
+                else {
+                    var $el = $(element);
+                    $el.removeClass(errorClass).addClass(validClass);
+                    if ($el.hasClass('select2-offscreen') &&
+                        element.id) {
+                        $('#s2id_' + element.id).removeClass(errorClass).addClass(validClass);
+                    }
+                }
+            },
+            showErrors: function (errorMap, errorList) {
+                var _this = this;
+                $.each(this.validElements(), function (index, element) {
+                    var $el = $(element);
+                    $el.removeClass(_this.settings.errorClass).addClass(_this.settings.validClass);
+                    if ($el.hasClass('select2-offscreen') &&
+                        $el.id) {
+                        $el = $('#s2id_' + element.id)
+                            .removeClass(_this.settings.errorClass)
+                            .addClass(_this.settings.validClass);
+                        if (!$el.length)
+                            $el = $(element);
+                    }
+                    setTooltip($el, '')
+                        .tooltip('hide');
+                });
+                $.each(errorList, function (index, error) {
+                    var $el = $(error.element).addClass(_this.settings.errorClass);
+                    if ($el.hasClass('select2-offscreen') &&
+                        error.element.id) {
+                        $el = $('#s2id_' + error.element.id).addClass(_this.settings.errorClass);
+                        if (!$el.length)
+                            $el = $(error.element);
+                    }
+                    setTooltip($el, error.message);
+                    if (index == 0)
+                        $el.tooltip('show');
+                });
+            }
+        };
     }
-    Q.validateTooltip = validateTooltip;
+    Q.baseValidateOptions = baseValidateOptions;
+    function validateForm(form, opt) {
+        return form.validate(Q.extend(Q.baseValidateOptions(), opt));
+    }
+    Q.validateForm = validateForm;
     function addValidationRule(element, eventClass, rule) {
         if (!element.length)
             return element;

@@ -21,14 +21,14 @@
         protected initToolbar(): void { console.log('initToolbar'); super.initToolbar(); }
         protected getToolbarButtons(): Serenity.ToolButton[] { console.log('getToolbarButtons'); return super.getToolbarButtons(); }
         protected initPropertyGrid(): void { console.log('initPropertyGrid'); super.initPropertyGrid(); }
-        protected initPropertyGridAsync(): PromiseLike<void> { console.log('initPropertyGridAsync'); return super.initPropertyGridAsync(); }
+        //protected initPropertyGridAsync(): PromiseLike<void> { console.log('initPropertyGridAsync'); return super.initPropertyGridAsync(); }
         protected getPropertyGridOptions(): Serenity.PropertyGridOptions { console.log('getPropertyGridOptions'); return super.getPropertyGridOptions(); }
-        protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions> { console.log('getPropertyGridOptionsAsync'); return super.getPropertyGridOptionsAsync(); }
+        //protected getPropertyGridOptionsAsync(): PromiseLike<Serenity.PropertyGridOptions> { console.log('getPropertyGridOptionsAsync'); return super.getPropertyGridOptionsAsync(); }
         protected initLocalizationGrid(): void { console.log('initLocalizationGrid'); super.initLocalizationGrid(); }
-        protected initLocalizationGridAsync(): PromiseLike<void> { console.log('initLocalizationGridAsync'); return super.initLocalizationGridAsync(); }
+        //protected initLocalizationGridAsync(): PromiseLike<void> { console.log('initLocalizationGridAsync'); return super.initLocalizationGridAsync(); }
         protected initLocalizationGridCommon(pgOptions: Serenity.PropertyGridOptions): void { console.log('initLocalizationGridCommon(pgOptions: PropertyGridOptions'); super.initLocalizationGridCommon(pgOptions); }
 
-        load(entityOrId: any, done: () => void, fail: (ex: ss.Exception) => void): void { console.log('load'); super.load(entityOrId, done, fail); }
+        load(entityOrId: any, done: () => void, fail: (ex: Q.Exception) => void): void { console.log('load'); super.load(entityOrId, done, fail); }
         loadResponse(data: any): void { console.log('loadResponse(data: any'); super.loadResponse(data); }
         protected onLoadingData(data: Serenity.RetrieveResponse<AuditLogRow>): void { console.log('onLoadingData(data: RetrieveResponse<AuditLogRow>'); super.onLoadingData(data); }
         protected beforeLoadEntity(entity: AuditLogRow): void { console.log('beforeLoadEntity(entity: AuditLogRow'); super.beforeLoadEntity(entity); }
@@ -94,7 +94,7 @@
 
 
 
-        protected initializeAsync(): PromiseLike<void> { console.log('initializeAsync'); return super.initializeAsync(); }
+        //protected initializeAsync(): PromiseLike<void> { console.log('initializeAsync'); return super.initializeAsync(); }
         protected getEntityNameFieldValue(): any { console.log('getEntityNameFieldValue'); return super.getEntityNameFieldValue(); }
         protected isCloneMode(): boolean { console.log('isCloneMode'); return super.isCloneMode(); }
         protected isNewOrDeleted(): boolean { console.log('isNewOrDeleted'); return super.isNewOrDeleted(); }
@@ -127,7 +127,7 @@
         protected getLocalizationGridValue(): any { console.log('getLocalizationGridValue'); return super.getLocalizationGridValue(); }
         protected getPendingLocalizations(): any { console.log('getPendingLocalizations'); return super.getPendingLocalizations(); }
         protected getPropertyItems(): Serenity.PropertyItem[] { console.log('getPropertyItems'); return super.getPropertyItems(); }
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync(); }
+        //protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync(); }
         protected getCloningEntity(): AuditLogRow { console.log('getCloningEntity'); return super.getCloningEntity(); }
         protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse> { console.log('getUndeleteOptions(callback?: (response: UndeleteResponse) => void'); return super.getUndeleteOptions(callback); }
         protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void { console.log('undeleteHandler(options: ServiceOptions<UndeleteResponse>, callback: (response: UndeleteResponse) => void'); super.undeleteHandler(options, callback); }

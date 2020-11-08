@@ -8,9 +8,14 @@ namespace _Ext.Endpoints
     using System.Configuration;
     using System.Data;
     using System.Linq;
-    using System.Web.Mvc;
 
+#if COREFX
+    using Microsoft.AspNetCore.Mvc;
+    [Route("Services/AuditLogViewer/[action]")]
+#else
+    using System.Web.Mvc;
     [RoutePrefix("Services/AuditLogViewer"), Route("{action}")]
+#endif
     [ConnectionKey(typeof(AuditLogRow))]
     public partial class AuditLogViewerController : ServiceEndpoint
     {

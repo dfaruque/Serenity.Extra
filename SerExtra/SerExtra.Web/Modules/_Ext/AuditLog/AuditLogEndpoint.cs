@@ -5,11 +5,17 @@ namespace _Ext.Endpoints
     using Serenity.Data;
     using Serenity.Services;
     using System.Data;
-    using System.Web.Mvc;
+
     using MyRepository = Repositories.AuditLogRepository;
     using MyRow = Entities.AuditLogRow;
 
+#if COREFX
+    using Microsoft.AspNetCore.Mvc;
+    [Route("Services/_Ext/AuditLog/[action]")]
+#else
+    using System.Web.Mvc;
     [RoutePrefix("Services/_Ext/AuditLog"), Route("{action}")]
+#endif
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class AuditLogController : ServiceEndpoint
     {
@@ -24,7 +30,7 @@ namespace _Ext.Endpoints
         {
             return new MyRepository().Update(uow, request);
         }
- 
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {

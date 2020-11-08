@@ -11,7 +11,7 @@
         protected getInsertPermission() { return this.getRowType().insertPermission; }
         protected getUpdatePermission() { return this.getRowType().updatePermission; }
         protected getDeletePermission() { return this.getRowType().deletePermission; }
-
+        
         protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
 
         private loadedState: string;
@@ -196,7 +196,7 @@
                     var cloneEntity = this.getCloningEntity();
 
                     Serenity.Widget.create({
-                        type: (ss as any).getInstanceType(this),
+                        type: Q.getInstanceType(this),
                         init: (dlg: DialogBase<any, any>) => {
                             this.parentGrid.initDialog(dlg);
                             dlg.loadEntityAndOpenDialog(cloneEntity, null);

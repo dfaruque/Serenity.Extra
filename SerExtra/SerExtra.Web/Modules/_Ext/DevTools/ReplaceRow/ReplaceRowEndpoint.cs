@@ -3,9 +3,13 @@ namespace _Ext.Endpoints
 {
     using Serenity.Data;
     using Serenity.Services;
+#if COREFX
+    using Microsoft.AspNetCore.Mvc;
+    [Route("Services/ReplaceRow/[action]")]
+#else
     using System.Web.Mvc;
-
     [RoutePrefix("Services/ReplaceRow"), Route("{action}")]
+#endif
     public partial class ReplaceRowController : ServiceEndpoint
     {
         public ReplaceRowResponse Replace(ReplaceRowRequest request)
