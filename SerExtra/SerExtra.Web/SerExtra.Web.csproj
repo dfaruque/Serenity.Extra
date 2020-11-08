@@ -1157,9 +1157,6 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Northwind.MainGridInlineEditingColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.MainGridMultiEditingColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Northwind.PermissionKeys.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -2080,7 +2077,6 @@
     <TypeScriptCompile Include="Scripts\serenity\Serenity.CoreLib.d.ts" />
     <TypeScriptCompile Include="Scripts\serenity\slick\serenity-slick.d.ts" />
     <TypeScriptCompile Include="Scripts\serenity\widget\serenity-widget.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\serenity\Serenity.CoreLib.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

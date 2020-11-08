@@ -343,11 +343,6 @@ namespace MVC
                 public const string Index = "~/Modules/ExtraSamples/MainGridInlineEditing/Index.cshtml";
             }
 
-            public static class MainGridMultiEditing
-            {
-                public const string Index = "~/Modules/ExtraSamples/MainGridMultiEditing/Index.cshtml";
-            }
-
             public static class ReactSamplePage
             {
                 public const string Index = "~/Modules/ExtraSamples/ReactSamplePage/Index.cshtml";
