@@ -13,6 +13,7 @@
   "Site": [
     "~/Content/jquery.fileupload.css",
     "~/Content/colorbox/jquery.colorbox.css",
+    "~/Modules/_Ext/ExtStyles.css",
     "~/Content/site/site.css"
   ],
   "Pages/Dashboard": [
