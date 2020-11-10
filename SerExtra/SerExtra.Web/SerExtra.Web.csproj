@@ -1271,7 +1271,10 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\PrefixedStringEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\YesNoEditor.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Formatters\InlineImageFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\MonthYearFormatter.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Formatters\YesNoColoredFormatter.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Formatters\YesNoFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\CardViewMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\HeaderFiltersMixin.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Mixins\TreeGridMixin.ts" />
@@ -1286,6 +1289,7 @@
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.datetime.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.editor-utils.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.enum.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\_q\_q.keyboard-layout.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.ts" />
     <TypeScriptCompile Include="Modules\_Ext\_q\_q.var.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
@@ -2392,8 +2396,11 @@
     <Compile Include="Modules\_Ext\Utils\Lookups.cs" />
     <Compile Include="Modules\_Ext\Utils\Enums.cs" />
     <Compile Include="Modules\_Ext\Utils\ExcelWorksheetHelper.cs" />
+    <Compile Include="Modules\_Ext\Utils\NumberToWords.Bengali.cs" />
     <Compile Include="Modules\_Ext\Utils\NumberToWords.cs" />
+    <Compile Include="Modules\_Ext\Utils\NumberToWords.English.cs" />
     <Compile Include="Modules\_Ext\Utils\ObjectExtentions.cs" />
+    <Compile Include="Modules\_Ext\Utils\Q.Check.cs" />
     <Compile Include="Modules\_Ext\Utils\Q.cs" />
     <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowEndpoint.cs" />
     <Compile Include="Modules\_Ext\DevTools\ReplaceRow\ReplaceRowForm.cs" />
