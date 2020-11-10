@@ -43,12 +43,15 @@
                 var headerWidth = getElementWidth(el);
                 var colIndex = grid.getColumnIndex(columnDef.id);
                 var column = allColumns[colIndex];
-                var autoSizeWidth = Math.max(headerWidth, getMaxColumnTextWidth(columnDef, colIndex)) + 1;
+                var cssClass = column.cssClass || '';
 
-                // *** John Ranger 2016-03-23: Remarked as this causes some problems with some columns ***
-                //autoSizeWidth = Math.min(maxWidth, autoSizeWidth);
+                if (!cssClass.includes("no-auto-size")) {
+                    var autoSizeWidth = Math.max(headerWidth, getMaxColumnTextWidth(columnDef, colIndex)) + 1;
 
-                column.width = Math.max(column.width, autoSizeWidth);
+                    autoSizeWidth = Math.min(column.maxWidth || maxWidth, autoSizeWidth);
+
+                    column.width = Math.max(column.width, autoSizeWidth);
+                }
             });
             grid.setColumns(allColumns);
             grid.onColumnsResized.notify();

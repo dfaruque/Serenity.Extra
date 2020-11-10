@@ -208,7 +208,9 @@ namespace _Ext {
                         column.width = column.minWidth > 99 ? column.minWidth : 99;
                     }
 
-                    //formatter
+                    //formatter                    
+                    let emptyText = column.sourceItem.placeholder == 'Controls.All' ? Q.text('Controls.All') : '-';
+
                     if (column.sourceItem.editorType == "Lookup") {
                         if (!column.sourceItem.editorParams.autoComplete) {
                             (column as any).lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey)
@@ -218,12 +220,12 @@ namespace _Ext {
                                         let items = value.map(m => columnDef.lookup.itemById[m]);
                                         let texts = items.map(m => m[columnDef.lookup.textField]);
 
-                                        return texts.length > 0 ? texts.join(', ') : '-';;
+                                        return texts.length > 0 ? texts.join(', ') : emptyText;;
                                     }
                                 } else {
                                     let item = columnDef.lookup.itemById[value];
                                     if (item) return item[columnDef.lookup.textField];
-                                    else return '-';
+                                    else return emptyText;
                                 }
                             };
                         }
@@ -232,16 +234,22 @@ namespace _Ext {
                             (column as any).textFieldInThisRow = column.sourceItem.editorParams.textFieldInThisRow || column.sourceItem.editorParams.textField;
                             column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                                 if (dataContext) return dataContext[columnDef.textFieldInThisRow];
-                                else return '-';
+                                else return emptyText;
                             };
                         }
+                    } else if (column.sourceItem.filteringType == "Lookup") {
+                        column.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                            if (Q.isEmptyOrNull(value)) return emptyText;
+                            else return value;
+                        };
+
                     } else if (formatterType == "Enum") {
 
                         column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                             let enumKey = columnDef.sourceItem.editorParams.enumKey
                             let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
                             if (text) return text;
-                            else return '-';
+                            else return emptyText;
                         };
                     } else if (column.sourceItem.editorType == "Decimal") {
 
@@ -449,6 +457,8 @@ namespace _Ext {
                     if (c.minWidth == c.maxWidth) {
                         fixedSizeColumns.push(c);
                         c.width = c.maxWidth;
+                    } else if (c.cssClass && c.cssClass.indexOf("no-auto-size") >= 0) {
+                        fixedSizeColumns.push(c);
                     } else if (c.sourceItem) {
                         if (c.sourceItem.formatterType == String("Number")) {
                             fixedSizeColumns.push(c);
@@ -639,7 +649,7 @@ namespace _Ext {
         }
 
         //override getGrouping instead of calling setGrouping
-        protected setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
+        public setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }
