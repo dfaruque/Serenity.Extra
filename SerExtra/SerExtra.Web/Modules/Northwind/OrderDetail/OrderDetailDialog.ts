@@ -14,7 +14,7 @@ namespace SerExtra.Northwind {
             this.form = new OrderDetailForm(this.idPrefix);
 
             this.form.ProductID.changeSelect2(e => {
-                var product = q.getSelectedRow<ProductRow>(e);
+                var product = this.form.ProductID.selectedItem;
                 if (product) {
                     this.form.UnitPrice.value = product.UnitPrice;
                     

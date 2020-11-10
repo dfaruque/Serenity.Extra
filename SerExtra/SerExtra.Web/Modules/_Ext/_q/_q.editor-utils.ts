@@ -268,12 +268,4 @@ namespace q {
         (tabAnchor as any).tab('show');
     }
 
-    // for select2 lookup editor
-    export function getSelectedRow<TRow>(e: JQueryEventObject) {
-        let selectedItem: Select2Item = (e as any).added;
-        let selectedRow: TRow = selectedItem.source;
-
-        return selectedRow;
-    }
-
 }
