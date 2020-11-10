@@ -2,6 +2,8 @@
 using Serenity.Data.Schema;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -47,6 +49,7 @@ namespace _Ext.DevTools
                 { "ntext", "String" },
                 { "numeric", "Decimal" },
                 { "nvarchar", "String" },
+                { "NVARCHAR2", "String" },
                 { "real", "Single" },
                 { "rowversion", "ByteArray" },
                 { "smalldatetime", "DateTime" },
@@ -54,15 +57,18 @@ namespace _Ext.DevTools
                 { "text", "String" },
                 { "time", "TimeSpan" },
                 { "timestamp", "DateTime" },
+                { "TIMESTAMP(4)", "DateTime" },
                 { "timestamp without time zone", "DateTime" },
                 { "timestamp with time zone", "DateTimeOffset" },
                 { "tinyint", "Int16" },
                 { "uniqueidentifier", "Guid" },
                 { "varbinary", "Stream" },
-                { "varchar", "String" }
+                { "varchar", "String" },
+                { "NCLOB", "String" },
+
             };
 
-        public static string SqlTypeNameToFieldType(string sqlTypeName, int size)
+        public static string SqlTypeNameToFieldType(string sqlTypeName, int size, int scale)
         {
             string fieldType;
             sqlTypeName = sqlTypeName.ToLowerInvariant();
@@ -78,6 +84,19 @@ namespace _Ext.DevTools
             {
                 return "ByteArray";
             }
+            else if (sqlTypeName == "number")
+            {
+                if (scale > 0)
+                    return "Decimal";
+                else
+                {
+                    if (size == 1) return "Boolean";
+                    else if (size == 5) return "Int32";
+                    else if (size == 10) return "Int32";
+                    else if (size == 19) return "Int64";
+                    else return "Int32";
+                }
+            }
             else if (SqlTypeToFieldTypeMap.TryGetValue(sqlTypeName, out fieldType))
                 return fieldType;
             else
@@ -85,6 +104,27 @@ namespace _Ext.DevTools
         }
 
         public static char[] Quotes = new char[] { '[', ']', '`', '"' };
+
+        public static string GetTableNameOnly(IDbConnection connection, string tableName)
+        {
+            if (tableName.IndexOf('.') > 0)
+            {
+                tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim(SchemaHelper.Quotes);
+            }
+            else
+            {
+                tableName = tableName.Trim(SchemaHelper.Quotes);
+            }
+
+            var dialect = connection.GetDialect();
+
+            if (dialect is OracleDialect)
+            {
+                return tableName.ToUpper();
+            }
+
+            return tableName;
+        }
 
         public static string GetTableNameOnly(string tableName)
         {
@@ -100,9 +140,37 @@ namespace _Ext.DevTools
             return tableName;
         }
 
+        public static string GetSchemaName(IDbConnection connection, string tableName)
+        {
+            var dialect = connection.GetDialect();
+
+            string schema = null;
+
+            if (dialect is SqlServer2012Dialect) schema = "dbo";
+            else if (dialect is OracleDialect)
+            {
+
+                DbConnectionStringBuilder dbConnectionStringBuilder = new DbConnectionStringBuilder();
+                dbConnectionStringBuilder.ConnectionString = connection.ConnectionString;
+                schema = dbConnectionStringBuilder["User Id"].ToString();
+            }
+
+            if (tableName.IndexOf('.') > 0)
+            {
+                schema = tableName.Substring(0, tableName.IndexOf('.')).Trim(SchemaHelper.Quotes);
+                //tableName = tableName.Substring(tableName.IndexOf('.') + 1).Trim(SchemaHelper.Quotes);
+            }
+            else
+            {
+                //tableName = tableName.Trim(SchemaHelper.Quotes);
+            }
+            return schema;
+        }
+
         public static string GetSchemaName(string tableName)
         {
-            string schema = "dbo"; //Todo: temporary fix
+            string schema = null;
+
             if (tableName.IndexOf('.') > 0)
             {
                 schema = tableName.Substring(0, tableName.IndexOf('.')).Trim(SchemaHelper.Quotes);

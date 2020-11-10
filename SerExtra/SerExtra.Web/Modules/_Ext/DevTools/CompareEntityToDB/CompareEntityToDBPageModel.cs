@@ -6,6 +6,7 @@ using Serenity.Web;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 
@@ -42,8 +43,8 @@ namespace _Ext.DevTools.Model
                     var dialect = connection.GetDialect();
                     var schemaProvider = SchemaHelper.GetSchemaProvider(dialect.ServerType);
 
-                    var tableName = SchemaHelper.GetTableNameOnly(row.Table);
-                    string schema = SchemaHelper.GetSchemaName(row.Table);
+                    var tableName = SchemaHelper.GetTableNameOnly(connection, row.Table);
+                    string schema = SchemaHelper.GetSchemaName(connection, row.Table);
 
                     var dbFields = schemaProvider.GetFieldInfos(connection, schema, tableName);
                     if (dbFields == null || dbFields.Count() == 0)
@@ -58,7 +59,7 @@ namespace _Ext.DevTools.Model
 
                             if (EntityFieldExtensions.IsTableField(rowfield) && rowfield.Flags != FieldFlags.Reflective)
                             {
-                                var dbField = dbFields.FirstOrDefault(f => f.FieldName == rowfield.Name);
+                                var dbField = dbFields.FirstOrDefault(f => f.FieldName.Equals(rowfield.Name, StringComparison.OrdinalIgnoreCase));
 
                                 var FieldComparisonInfo = new FieldComparisonInfo { RowField = rowfield, DBField = dbField };
                                 TableComparisonInfo.FieldComparisonInfos.Add(FieldComparisonInfo);
@@ -69,7 +70,7 @@ namespace _Ext.DevTools.Model
                         //query test
                         try
                         {
-                            var query = new SqlQuery()
+                            var query = new SqlQuery().Dialect(dialect)
                                 .From(rowFields)
                                 .SelectTableFields(row)
                                 .SelectForeignFields(row)
@@ -190,7 +191,7 @@ namespace _Ext.DevTools.Model
 
                         if (rowfieldTypeName == "Object") rowfieldTypeName = "String";
 
-                        if (rowfieldTypeName != SchemaHelper.SqlTypeNameToFieldType(DBField.DataType, DBField.Size))
+                        if (rowfieldTypeName != SchemaHelper.SqlTypeNameToFieldType(DBField.DataType, DBField.Size, DBField.Scale))
                             _Issues.Add(FieldComparisonIssue.DataTypeMismatch);
 
 
