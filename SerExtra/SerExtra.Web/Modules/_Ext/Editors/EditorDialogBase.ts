@@ -4,7 +4,7 @@ namespace _Ext {
     @Serenity.Decorators.registerClass()
     export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
 
-        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEditorDialogOptions; }
+        protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEditorDialogOptions); }
 
         protected getIdProperty() { return "__id"; }
 
