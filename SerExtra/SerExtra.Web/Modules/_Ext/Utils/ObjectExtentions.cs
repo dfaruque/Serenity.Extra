@@ -22,7 +22,7 @@ public static partial class ObjectExtentions
 
     public static string ToYesNo(this bool? inputValue)
     {
-        return inputValue == true ? "Yes" : "No";
+        return inputValue == true ? LocalText.TryGet("Dialogs.YesButton") ?? "Yes" : LocalText.TryGet("Dialogs.NoButton") ?? "No";
     }
 
     public static string ToStringTk(this decimal input)
