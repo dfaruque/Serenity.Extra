@@ -11,8 +11,14 @@
     }
 
     export function getSelectedLanguage(): string {
-        var lang = (document.getElementById('LanguageSelect') as HTMLSelectElement).value || document.getElementsByTagName('html')[0].getAttribute('lang');
+        var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
         return lang;
+    }
+
+    export function isBanglaMode(): boolean {
+        var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
+        if (lang) return lang.toLowerCase().indexOf('bn') >= 0;
+        return false;
     }
 
     export function formatDecimal(value) {

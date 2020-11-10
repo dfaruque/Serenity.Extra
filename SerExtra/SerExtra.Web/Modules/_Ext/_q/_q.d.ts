@@ -48,7 +48,8 @@ interface ExtDialogOptions {
     ShowSaveAndNewButtonInToolbar: boolean,
     ShowRefreshButtonInToolbar: boolean,
     ShowChangeLogButtonInToolbar: boolean,
-    ShowReplaceRowButtonInToolbar: boolean
+    ShowReplaceRowButtonInToolbar: boolean,
+    ShowKeyboardLayoutButtonInToolbar: boolean
 }
 
 

@@ -45,7 +45,8 @@ namespace q {
         ShowCloseButtonInToolbar: false,
         ShowRefreshButtonInToolbar: false,
         ShowChangeLogButtonInToolbar: true,
-        ShowReplaceRowButtonInToolbar: false
+        ShowReplaceRowButtonInToolbar: false,
+        ShowKeyboardLayoutButtonInToolbar: false
 
     };
 
@@ -57,7 +58,8 @@ namespace q {
         ShowCloseButtonInToolbar: false,
         ShowRefreshButtonInToolbar: false,
         ShowChangeLogButtonInToolbar: false,
-        ShowReplaceRowButtonInToolbar: false
+        ShowReplaceRowButtonInToolbar: false,
+        ShowKeyboardLayoutButtonInToolbar: false,
     };
 
     //date time
