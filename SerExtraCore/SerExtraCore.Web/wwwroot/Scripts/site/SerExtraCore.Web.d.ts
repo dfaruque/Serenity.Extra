@@ -3898,7 +3898,7 @@ declare namespace _Ext {
         getCriteria(): CriteriaWithText;
         loadState(state: any): void;
         saveState(): any;
-        protected argumentNull(): any;
+        protected argumentNull(): Q.ArgumentNullException;
         validateEditorValue(value: string): string;
         getEditorValue(): string;
         getEditorText(): any;

@@ -3,7 +3,7 @@
         createEditor(): void;
         getCriteria(): CriteriaWithText;
         getOperators(): Serenity.FilterOperator[];
-        loadState(state: any): void; 
+        loadState(state: any): void;
         saveState(): any;
         get_field(): Serenity.PropertyItem;
         set_field(value: Serenity.PropertyItem): void;
@@ -189,8 +189,8 @@
                 }
             }
 
-            throw new ss.Exception(Q.format("MultiEditing '{0}' has no handler for '{1}' operator",
-                (ss as any).getTypeName((ss as any).getInstanceType(this)), this.get_operator().key));
+            throw new Q.Exception(Q.format("MultiEditing '{0}' has no handler for '{1}' operator",
+                Q.getTypeName(Q.getInstanceType(this)), this.get_operator().key));
         }
 
         loadState(state: any) {
@@ -216,7 +216,7 @@
         }
 
         protected argumentNull() {
-            return new (ss as any).ArgumentNullException('value', Q.text('Controls.FilterPanel.ValueRequired'));
+            return new Q.ArgumentNullException('value', Q.text('Controls.FilterPanel.ValueRequired'));
         }
 
         validateEditorValue(value: string) {
@@ -229,7 +229,7 @@
         getEditorValue() {
             var input = this.get_container().find(':input').not('.select2-focusser').first();
             if (input.length !== 1) {
-                throw new ss.Exception(Q.format("Couldn't find input in filter container for {0}",
+                throw new Q.Exception(Q.format("Couldn't find input in filter container for {0}",
                     Q.coalesce(this.field.title, this.field.name)));
             }
 
@@ -638,25 +638,20 @@
 
             knownTypes = {};
 
-            for (var assembly of (ss as any).getAssemblies()) {
-                for (var type of (ss as any).getAssemblyTypes(assembly)) {
-                    if (!(ss as any).isAssignableFrom(_Ext.IMultiEditing, type))
-                        continue;
+            for (var type of Q.getTypes()) {
+                if (!Q.isAssignableFrom(_Ext.IMultiEditing, type))
+                    continue;
 
-                    if ((ss as any).isGenericTypeDefinition(type))
-                        continue;
+                var fullName = Q.getTypeFullName(type).toLowerCase();
 
-                    var fullName = (ss as any).getTypeFullName(type).toLowerCase();
+                knownTypes[fullName] = type;
 
-                    knownTypes[fullName] = type;
+                for (var k of Q.Config.rootNamespaces) {
+                    if (Q.startsWith(fullName, k.toLowerCase() + '.')) {
+                        var kx = fullName.substr(k.length + 1).toLowerCase();
 
-                    for (var k of Q.Config.rootNamespaces) {
-                        if (Q.startsWith(fullName, k.toLowerCase() + '.')) {
-                            var kx = fullName.substr(k.length + 1).toLowerCase();
-
-                            if (knownTypes[kx] == null) {
-                                knownTypes[kx] = type;
-                            }
+                        if (knownTypes[kx] == null) {
+                            knownTypes[kx] = type;
                         }
                     }
                 }
@@ -690,7 +685,7 @@
         export function get(key: string): Function {
 
             if (Q.isEmptyOrNull(key))
-                throw new (ss as any).ArgumentNullException('key');
+                throw new Q.ArgumentNullException('key');
 
             initialize();
             var formatterType = knownTypes[key.toLowerCase()];

@@ -105,7 +105,7 @@ namespace _Ext {
 
             if (this.get_updateStoreOnReset()) {
                 if (this.get_store().get_items().length > 0) {
-                    (ss as any).clear(this.get_store().get_items());
+                    Q.clearKeys(this.get_store().get_items());
                     this.get_store().raiseChanged();
                 }
             }
@@ -223,7 +223,7 @@ namespace _Ext {
             if (field == null)
                 return null;
 
-            var filtering = (ss as any).cast(row.data('MultiEditing'), IMultiEditing);
+            var filtering = Q.cast(row.data('MultiEditing'), IMultiEditing);
 
             if (filtering != null)
                 return filtering;
@@ -232,7 +232,7 @@ namespace _Ext {
                 Q.coalesce(field.filteringType, 'String'));
 
             var editorDiv = row.children('div.v');
-            filtering = (ss as any).cast((ss as any).createInstance(filteringType), IMultiEditing);
+            filtering = new (filteringType as any)() as IMultiEditing;
             Serenity.ReflectionOptionsSetter.set(filtering, field.filteringParams);
             filtering.set_container(editorDiv);
             filtering.set_field(field);
