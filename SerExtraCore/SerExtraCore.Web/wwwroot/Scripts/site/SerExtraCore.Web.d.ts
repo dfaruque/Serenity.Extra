@@ -4400,7 +4400,6 @@ declare namespace _Ext {
         protected getLocalizationGridValue(): any;
         protected getPendingLocalizations(): any;
         protected getPropertyItems(): Serenity.PropertyItem[];
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]>;
         protected getCloningEntity(): AuditLogRow;
         protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse>;
         protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void;

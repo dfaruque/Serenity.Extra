@@ -127,7 +127,7 @@
         protected getLocalizationGridValue(): any { console.log('getLocalizationGridValue'); return super.getLocalizationGridValue(); }
         protected getPendingLocalizations(): any { console.log('getPendingLocalizations'); return super.getPendingLocalizations(); }
         protected getPropertyItems(): Serenity.PropertyItem[] { console.log('getPropertyItems'); return super.getPropertyItems(); }
-        protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync(); }
+        //protected getPropertyItemsAsync(): PromiseLike<Serenity.PropertyItem[]> { console.log('getPropertyItemsAsync'); return super.getPropertyItemsAsync(); }
         protected getCloningEntity(): AuditLogRow { console.log('getCloningEntity'); return super.getCloningEntity(); }
         protected getUndeleteOptions(callback?: (response: Serenity.UndeleteResponse) => void): Serenity.ServiceOptions<Serenity.UndeleteResponse> { console.log('getUndeleteOptions(callback?: (response: UndeleteResponse) => void'); return super.getUndeleteOptions(callback); }
         protected undeleteHandler(options: Serenity.ServiceOptions<Serenity.UndeleteResponse>, callback: (response: Serenity.UndeleteResponse) => void): void { console.log('undeleteHandler(options: ServiceOptions<UndeleteResponse>, callback: (response: UndeleteResponse) => void'); super.undeleteHandler(options, callback); }
