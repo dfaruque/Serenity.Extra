@@ -88,8 +88,8 @@ public static partial class DbConnectionExtentions
             return null;
     }
 
-    public static object TryGetId<TRow>(this IDbConnection connection, ICriteria criteria)
-        where TRow : Row, IIdRow, INameRow, new()
+    public static object TryGetId<TRow>(this IDbConnection connection, ICriteria criteria, IField orderByField = null, bool desc = false)
+        where TRow : Row, IIdRow, new()
     {
         var row = new TRow();
 
@@ -98,6 +98,8 @@ public static partial class DbConnectionExtentions
             .Select((Field)row.IdField)
             .Where(criteria)
             .Take(1);
+
+        if (orderByField != null) query.OrderBy(orderByField, desc);
 
         using (var reader = SqlHelper.ExecuteReader(connection, query))
             while (reader.Read())
