@@ -163,6 +163,12 @@ namespace _Ext {
                     }
                 }
 
+                if (this.filterBar) {
+                    let filterBarDisplayText = this.filterBar.get_store().get_displayText();
+                    if (!Q.isEmptyOrNull(filterBarDisplayText))
+                        request.EqualityFilterWithTextValue[Q.text('Controls.FilterPanel.EditFilter')] = filterBarDisplayText;
+                }
+
             }
 
             return request;
@@ -208,7 +214,9 @@ namespace _Ext {
                         column.width = column.minWidth > 99 ? column.minWidth : 99;
                     }
 
-                    //formatter
+                    //formatter                    
+                    let emptyText = column.sourceItem.placeholder == 'Controls.All' ? Q.text('Controls.All') : '-';
+
                     if (column.sourceItem.editorType == "Lookup") {
                         if (!column.sourceItem.editorParams.autoComplete) {
                             (column as any).lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey)
@@ -218,12 +226,12 @@ namespace _Ext {
                                         let items = value.map(m => columnDef.lookup.itemById[m]);
                                         let texts = items.map(m => m[columnDef.lookup.textField]);
 
-                                        return texts.length > 0 ? texts.join(', ') : '-';;
+                                        return texts.length > 0 ? texts.join(', ') : emptyText;;
                                     }
                                 } else {
                                     let item = columnDef.lookup.itemById[value];
                                     if (item) return item[columnDef.lookup.textField];
-                                    else return '-';
+                                    else return emptyText;
                                 }
                             };
                         }
@@ -232,16 +240,35 @@ namespace _Ext {
                             (column as any).textFieldInThisRow = column.sourceItem.editorParams.textFieldInThisRow || column.sourceItem.editorParams.textField;
                             column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                                 if (dataContext) return dataContext[columnDef.textFieldInThisRow];
-                                else return '-';
+                                else return emptyText;
                             };
                         }
+                    } else if (column.sourceItem.filteringType == "Lookup") {
+                        column.formatter = (row, cell, value, columnDef: any, dataContext) => {
+                            if (Q.isEmptyOrNull(value)) return emptyText;
+                            else return value;
+                        };
+
                     } else if (formatterType == "Enum") {
 
                         column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                             let enumKey = columnDef.sourceItem.editorParams.enumKey
-                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
-                            if (text) return text;
-                            else return '-';
+                            if (columnDef.sourceItem.editorParams.multiple == true) {
+                                let texts = '';
+
+                                let vals = value as number[];
+                                if (vals && vals.length > 0) {
+                                    texts = vals.map(m => Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(m))).join(', ');
+                                }
+                                if (texts) return texts;
+                                else return emptyText;
+
+                            }
+                            else {
+                                let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                                if (text) return text;
+                                else return emptyText;
+                            }
                         };
                     } else if (column.sourceItem.editorType == "Decimal") {
 
@@ -345,7 +372,9 @@ namespace _Ext {
                     width: inlineActionsColumnWidth,
                     minWidth: inlineActionsColumnWidth,
                     maxWidth: inlineActionsColumnWidth,
-                    format: ctx => inlineActionsColumnContent
+                    formatter: (row, cell, value, columnDef, dataContext) => {
+                        return inlineActionsColumnContent;
+                    }
                 });
             }
 
@@ -449,6 +478,8 @@ namespace _Ext {
                     if (c.minWidth == c.maxWidth) {
                         fixedSizeColumns.push(c);
                         c.width = c.maxWidth;
+                    } else if (c.cssClass && c.cssClass.indexOf("no-auto-size") >= 0) {
+                        fixedSizeColumns.push(c);
                     } else if (c.sourceItem) {
                         if (c.sourceItem.formatterType == String("Number")) {
                             fixedSizeColumns.push(c);
@@ -574,7 +605,7 @@ namespace _Ext {
                 if (this.isReadOnly == true) {
                     Q.notifyWarning('Read only records could not be deleted!');
                 } else {
-                    Q.confirm('Delete record?', () => {
+                    Q.confirm(q.text('Db.Administration.Translation.DeleteWarning', 'Delete record?'), () => {
                         let o = this as any;
                         if (o.deleteEntity) { //for in-memory grid
                             o.deleteEntity(recordId);
@@ -639,7 +670,7 @@ namespace _Ext {
         }
 
         //override getGrouping instead of calling setGrouping
-        private setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
+        public setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void {
             this.view.setGrouping(groupInfo);
             this.resetRowNumber();
         }
