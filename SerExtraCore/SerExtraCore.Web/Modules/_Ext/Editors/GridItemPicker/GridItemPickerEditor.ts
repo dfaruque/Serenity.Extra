@@ -163,12 +163,13 @@
         public setEditValue(source, property) {
             this.value = source[property.name];
 
-            this.text = source[this.options.nameFieldInThisRow];
+            let text = source[this.options.nameFieldInThisRow] || source[this.options.nameFieldInGridRow]
+            this.text = text;
 
-            if (source[property.name] && source[this.options.nameFieldInThisRow]) {
+            if (source[property.name]) {
                 this._selectedItem = {};
                 this._selectedItem[this.options.idFieldInGridRow] = source[property.name];
-                this._selectedItem[this.options.nameFieldInGridRow] = source[this.options.nameFieldInThisRow];
+                this._selectedItem[this.options.nameFieldInGridRow] = text;
             }
         }
 
