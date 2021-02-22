@@ -57,7 +57,7 @@ declare namespace _Ext {
         protected onClick(e: JQueryEventObject, row: number, cell: number): void;
         protected onInlineActionClick(target: JQuery, recordId: any, item: TItem): void;
         protected resetRowNumber(): void;
-        private setGrouping;
+        setGrouping(groupInfo: Slick.GroupInfo<TItem>[]): void;
         protected getIncludeColumns(include: {
             [key: string]: boolean;
         }): void;
@@ -152,7 +152,7 @@ declare namespace _Ext {
         protected getIdProperty(): string;
         isChildGrid: boolean;
         protected nextId: number;
-        constructor(container: JQuery);
+        constructor(container: JQuery, options?: any);
         private sortGridFunction;
         protected getQuickFilters(): any[];
         protected id(entity: TEntity): any;
@@ -4682,7 +4682,7 @@ declare namespace _Ext {
 }
 declare namespace _Ext {
     class EmptyLookupEditor extends Serenity.LookupEditorBase<Serenity.LookupEditorOptions, any> {
-        setSelect2Items(items: Serenity.Select2Item[]): void;
+        setSelect2Items(items: Select2Item[]): void;
         setLookupItems(lookup: Q.Lookup<any>): void;
     }
 }
@@ -4710,12 +4710,12 @@ declare namespace _Ext {
 }
 declare namespace _Ext {
     class JsonViewer extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
-        protected getTemplate(): string;
-        private _value;
         getEditValue(property: any, target: any): void;
         setEditValue(source: any, property: any): void;
-        get value(): any;
-        set value(val: any);
+        protected getTemplate(): string;
+        private _value;
+        set value(val: string);
+        get value(): string;
     }
 }
 declare namespace _Ext {
@@ -4859,8 +4859,43 @@ declare namespace _Ext {
     }
 }
 declare namespace _Ext {
+    class InlineImageFormatter implements Slick.Formatter, Serenity.IInitializeColumn {
+        format(ctx: Slick.FormatterContext): string;
+        initializeColumn(column: Slick.Column): void;
+        fileProperty: string;
+        thumb: boolean;
+        defaultImage: string;
+        maxHeight: string;
+        maxWidth: string;
+    }
+}
+declare namespace _Ext {
+    class InlineMultipleImageFormatter implements Slick.Formatter, Serenity.IInitializeColumn {
+        format(ctx: Slick.FormatterContext): string;
+        initializeColumn(column: Slick.Column): void;
+        fileProperty: string;
+        thumb: boolean;
+        inlineUpload: boolean;
+        defaultImage: string;
+        maxHeight: string;
+        maxWidth: string;
+    }
+}
+declare namespace _Ext {
     class MonthYearFormatter implements Slick.Formatter {
         static format(val: string): string;
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace _Ext {
+    class YesNoColoredFormatter implements Slick.Formatter {
+        static format(val: any): string;
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace _Ext {
+    class YesNoFormatter implements Slick.Formatter {
+        static format(val: any): string;
         format(ctx: Slick.FormatterContext): string;
     }
 }
@@ -5080,7 +5115,6 @@ declare namespace q {
     function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend?: boolean): void;
     function moveEditorCategoryFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend?: boolean): void;
     function selectEditorTab(editor: Serenity.Widget<any>): void;
-    function getSelectedRow<TRow>(e: JQueryEventObject): TRow;
 }
 declare namespace q {
     function getEnumText(enumTypeOrKey: any, value: any): string;
@@ -5089,9 +5123,13 @@ declare namespace q {
     function getEnumKeys(enumType: any): string[];
 }
 declare namespace q {
+    function switchKeybordLayout($container: any, layout: any): void;
+}
+declare namespace q {
     function text(key: string, fallback: string): string;
     function isCosmicThemeApplied(): boolean;
     function getSelectedLanguage(): string;
+    function isBanglaMode(): boolean;
     function formatDecimal(value: any): string;
     function formatInt(value: any): string;
     function ToNumber(value: any): number;
