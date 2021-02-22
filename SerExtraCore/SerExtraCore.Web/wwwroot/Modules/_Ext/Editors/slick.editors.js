@@ -19,7 +19,7 @@
                 "PercentComplete": PercentCompleteEditor,
                 "LongText": LongTextEditor,
                 "TextArea": TextAreaEditor
-            }
+           }
         }
     });
     //-------------------------onChange----------------------------
@@ -910,7 +910,8 @@ function SerenityInlineEditor(args) {
             $input.attr('type', 'checkbox');
 
         let editorParams = Q.deepClone(args.column.sourceItem.editorParams);
-        if (editorParams.cascadeFrom != undefined) {
+        if (editorParams && editorParams.cascadeFrom)
+        {
             let cascadeFrom = editorParams.cascadeFrom;
             editorParams.cascadeField = editorParams.cascadeField || cascadeFrom;
             editorParams.cascadeFrom = null;
