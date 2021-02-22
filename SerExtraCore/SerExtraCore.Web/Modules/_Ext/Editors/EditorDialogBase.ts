@@ -4,7 +4,7 @@ namespace _Ext {
     @Serenity.Decorators.registerClass()
     export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
 
-        protected get_ExtDialogOptions() : ExtDialogOptions { return q.DefaultEditorDialogOptions; }
+        protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEditorDialogOptions); }
 
         protected getIdProperty() { return "__id"; }
 
@@ -21,6 +21,9 @@ namespace _Ext {
         }
 
         protected updateInterface() {
+            if (this.parentEditor && this.parentEditor.isReadOnly == true) {
+                this.isReadOnly = true
+            }
             super.updateInterface();
             this.saveAndCloseButton.find('.button-inner').text(this.isNew() ? (Q.tryGetText('Controls.AddButton') || 'Add') : (Q.tryGetText('Controls.ApplyButton') || 'Apply'));
             // apply changes button doesn't work properly with in-memory grids yet
@@ -28,16 +31,6 @@ namespace _Ext {
                 this.applyChangesButton.hide();
             }
 
-            if (this.parentEditor && this.parentEditor.isReadOnly == true) {
-                this.saveAndCloseButton.addClass('disabled');
-                this.deleteButton.addClass('disabled');
-
-                Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
-
-                // remove required asterisk (*)
-                this.element.find('sup').hide();
-
-            }
         }
 
         protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>,
