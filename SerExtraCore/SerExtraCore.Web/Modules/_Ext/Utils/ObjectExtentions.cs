@@ -20,9 +20,14 @@ public static partial class ObjectExtentions
         else return false;
     }
 
+    public static string ToYesNo(this bool inputValue)
+    {
+        return inputValue == true ? LocalText.TryGet("Dialogs.YesButton") ?? "Yes" : LocalText.TryGet("Dialogs.NoButton") ?? "No";
+    }
+
     public static string ToYesNo(this bool? inputValue)
     {
-        return inputValue == true ? "Yes" : "No";
+        return ToYesNo(inputValue ?? false);
     }
 
     public static string ToStringTk(this decimal input)
@@ -82,5 +87,31 @@ public static partial class ObjectExtentions
             return (input ?? 0).ToRound(decimalPlace);
     }
 
+    public static string ToNegativeFormat(this decimal input)
+    {
+
+        if (input < 0)
+        {
+            input = Math.Abs(input);
+            return String.Concat("(", input.ToString("N", new System.Globalization.CultureInfo("en-US")), ")");
+        }
+        else
+            return input.ToString("N", new System.Globalization.CultureInfo("en-US"));
+    }
+    public static string ToNegativeFormat(this decimal? input)
+    {
+        return (input ?? 0).ToNegativeFormat();
+    }
+
+    public static string ToUSFormat(this decimal? input)
+    {
+        return (input ?? 0).ToString("N", new System.Globalization.CultureInfo("en-US"));
+
+    }
+    public static string ToUSFormat(this decimal input)
+    {
+        return input.ToString("N", new System.Globalization.CultureInfo("en-US"));
+
+    }
 
 }
