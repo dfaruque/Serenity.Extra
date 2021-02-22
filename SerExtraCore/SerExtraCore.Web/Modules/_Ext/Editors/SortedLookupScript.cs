@@ -4,7 +4,7 @@ using Serenity.Web;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ICBS_BREB
+namespace _Ext
 {
     public class SortedLookupScript<TRow> : RowLookupScript<TRow>
         where TRow : Row, new()
