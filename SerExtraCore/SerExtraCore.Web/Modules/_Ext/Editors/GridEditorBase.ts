@@ -15,8 +15,8 @@ namespace _Ext {
 
         protected nextId = 1;
 
-        constructor(container: JQuery) {
-            super(container);
+        constructor(container: JQuery, options?) {
+            super(container, options);
 
             this.slickGrid.onSort.subscribe((e, args) => {
                 this.sortGridFunction((args.grid as Slick.Grid), args.sortCols[0], args.sortCols[0].sortCol.field);
