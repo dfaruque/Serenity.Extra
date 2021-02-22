@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 
 public static partial class Q
@@ -84,21 +85,28 @@ public static partial class Q
             return connection.TryFirstByName<TRow>(name);
     }
 
-    public static void CopyFieldValues(Row target, Row source, bool copyIfTargetValueIsNull = true)
+    public static void CopyFieldValues(Row target, Row source, bool copyIfTargetValueIsNull = true, ICollection<Field> fields = null)
     {
-        foreach (var field in target.GetFields())
-        {
-            var sourceValue = source[field.Name];
-            var targetValue = target[field.Name];
+        if (fields == null) fields = target.GetFields();
 
-            if (copyIfTargetValueIsNull)
+        foreach (var field in fields)
+        {
+            if (field.Flags.HasFlag(FieldFlags.Identity)) continue;
+            try
             {
-                target[field.Name] = targetValue ?? sourceValue;
+                var sourceValue = source[field.Name];
+                var targetValue = target[field.Name];
+
+                if (copyIfTargetValueIsNull)
+                {
+                    target[field.Name] = targetValue ?? sourceValue;
+                }
+                else
+                {
+                    target[field.Name] = sourceValue;
+                }
             }
-            else
-            {
-                target[field.Name] = sourceValue;
-            }
+            catch { }
         }
     }
 
@@ -119,5 +127,16 @@ public static partial class Q
     public static List<Int64> DelimitedToInt64List(string delimitedIds)
     {
         return delimitedIds?.Split(',')?.Select(s => Convert.ToInt64(s))?.ToList() ?? new List<Int64>();
+    }
+
+    public static string GeneratePassword(int length = 8, string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*_+=-")
+    {
+        StringBuilder res = new StringBuilder();
+        Random rnd = new Random();
+        while (0 < length--)
+        {
+            res.Append(valid[rnd.Next(valid.Length)]);
+        }
+        return res.ToString();
     }
 }
