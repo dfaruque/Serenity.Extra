@@ -32,6 +32,16 @@
 
             this.setReadOnly(this.isReadOnly);
 
+            //this.element.fadeTo(100, 1);
+        }
+
+        protected onDialogOpen() {
+            super.onDialogOpen();
+
+            if (this.get_ExtDialogOptions().AutoFitContentArea == true) {
+                this.fullContentArea();
+            }
+
             if (this.get_ExtDialogOptions().HideCategoyLinksBar == true) {
                 this.element.find('.category-links').hide();
 
@@ -42,13 +52,43 @@
 
             }
 
-            //this.element.fadeTo(100, 1);
-        }
-        protected onDialogOpen() {
-            super.onDialogOpen();
+            if (this.get_ExtDialogOptions().ShowKeyboardLayoutButtonInToolbar == true) {
+                let $thisElement = this.element;
 
-            if (this.get_ExtDialogOptions().AutoFitContentArea == true) {
-                this.fullContentArea();
+                //if (q.isBanglaMode())
+                //    q.switchKeybordLayout($thisElement, 'phonetic')
+
+                this.toolbar.element.append(`<div class="dropdown pull-right" style="padding: 5px 10px;">
+                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}">
+                        <i class="fa fa-keyboard-o"></i> <span class="selected-layout"> </span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right choose-keyboard">
+                        <li class="dropdown-header">${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}</li>
+                        <li data-kb="phonetic"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaPhonetic', 'Bangla-Phonetic')}</a></li>
+                        <li data-kb="probhat"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaProbhat', 'Bangla-Probhat')}</a></li>
+                        <li data-kb="unijoy"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaUnijoy', 'Bangla-Unijoy')}</a></li>
+                        <li data-kb="english"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.English', 'English')}</a></li>
+                    </ul>
+                </div>`);
+
+                let selected_layout_display_span = this.toolbar.element.find('.selected-layout');
+                let keyboard_choice_ul = this.toolbar.element.find('.choose-keyboard');
+                let keyboard_choice_li = keyboard_choice_ul.find('li');
+
+                keyboard_choice_li.on('click', function () {
+                    let select_choice = $(this);
+                    let selected_val = select_choice.data('kb');
+
+                    if (selected_val) {
+                        selected_layout_display_span.text(select_choice.text());
+
+                        q.switchKeybordLayout($thisElement, selected_val);
+
+                        keyboard_choice_li.removeClass('active');
+                        keyboard_choice_ul.find('[data-kb="' + selected_val + '"]').addClass('active');
+                    }
+                });
+
             }
 
             //temporary fix for set grid editor height
