@@ -58,7 +58,7 @@
             if (this.options.prefixFormatterType) {
                 let formatterType = Q.getType(this.options.prefixFormatterType);
                 if (formatterType)
-                    this.prefixInput.val(formatterType.format(val));
+                    this.prefixInput.val((formatterType as any).format(val));
                 else
                     this.prefixInput.val(val);
             } else {
