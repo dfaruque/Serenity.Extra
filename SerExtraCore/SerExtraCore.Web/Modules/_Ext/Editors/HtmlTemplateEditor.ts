@@ -9,29 +9,21 @@
         protected getConfig(): Serenity.CKEditorConfig {
             var config = super.getConfig() as any;
 
+            config.extraPlugins = config.extraPlugins || '';
+
             var placehorders = (this.options as any).placeholders as string;
             if (placehorders) {
                 config.placeholder_select = {
                     placeholders: placehorders.split(',')
                 }
                 config.extraPlugins += ',richcombo,placeholder_select';
-
             }
 
             config.allowedContent = true;
             config.enterMode = window['CKEDITOR'].ENTER_BR;
-            config.extraPlugins += ',showborders';
-            config.removePlugins += ',uploadimage';
+            config.extraPlugins += ',showborders,font,justify';
 
-            //config.forcePasteAsPlainText = true;
-
-            //config.toolbar = [['placeholder_select']];
-
-            config.removeButtons += ',Cut,Copy,Paste,PasteText,PasteFromWord' +
-                ',SpecialChar,Subscript,Superscript,Styles,' +
-                'Link,Unlink,CreatePlaceholder,' +
-                'Image,Anchor,Blockquote,BGColor,' +
-                'Superscript,RemoveFormat';
+            config.removeButtons = '';
 
             return config;
         }
