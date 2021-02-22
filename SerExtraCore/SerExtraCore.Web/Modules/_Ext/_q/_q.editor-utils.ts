@@ -21,7 +21,7 @@ namespace q {
                 editor.slickGrid.setOptions({ autoHeight: false });
                 $gridContainer.height(options.height);
 
-            } else {
+            } else if (options.autoHeight) {
                 let top = $gridContainer.position().top;
                 let height = dialog.element.innerHeight() - top - 40;
 
@@ -38,7 +38,6 @@ namespace q {
             editor.slickGrid.resizeCanvas();
 
         }
-
     }
 
     export function setGridEditorHeight(editor: JQuery, heightInPx: number) {
@@ -266,14 +265,6 @@ namespace q {
         let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
 
         (tabAnchor as any).tab('show');
-    }
-
-    // for select2 lookup editor
-    export function getSelectedRow<TRow>(e: JQueryEventObject) {
-        let selectedItem: Serenity.Select2Item = (e as any).added;
-        let selectedRow: TRow = selectedItem.source;
-
-        return selectedRow;
     }
 
 }
