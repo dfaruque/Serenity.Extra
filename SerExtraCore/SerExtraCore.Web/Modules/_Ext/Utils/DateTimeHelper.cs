@@ -91,6 +91,11 @@ public static class DateTimeHelper
     {
         return inputValue?.ToString("MMM-yyyy");
     }
+    public static string ToMonthYearNumeric(this DateTime? inputValue)
+    {
+        if (inputValue is null) return string.Empty;
+        return inputValue.Value.Month.ToString().PadLeft(2, '0') + "/" + inputValue.Value.Year.ToString().Substring(2);
+    }
 
     public static int GetMonths(DateTime fromDate, DateTime toDate)
     {
