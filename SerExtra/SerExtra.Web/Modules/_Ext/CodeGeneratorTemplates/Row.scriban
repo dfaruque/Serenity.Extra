@@ -20,14 +20,14 @@
     {
 {{~for x in Fields}}
         [{{x.Attributes}}]
-        public {{x.PropertyType}} {{x.Ident}} { get { return Fields.{{x.Ident}}[this]; } set { Fields.{{x.Ident}}[this] = value; } }
+        public {{x.PropertyType}} {{x.Ident}} { get => Fields.{{x.Ident}}[this]; set => Fields.{{x.Ident}}[this] = value; }
 		public partial class RowFields { public {{x.FieldType}}Field {{x.Ident}}; }
 {{end}}
         #region Foreign Fields
 {{~for j in Joins}}
 {{~for k in j.Fields}}
         [{{k.Attributes}}, ReadOnly(true)]
-        public {{k.PropertyType}} {{k.Ident}} { get { return Fields.{{k.Ident}}[this]; } set { Fields.{{k.Ident}}[this] = value; } }
+        public {{k.PropertyType}} {{k.Ident}} { get => Fields.{{k.Ident}}[this]; set => Fields.{{k.Ident}}[this] = value; }
 		public partial class RowFields { public {{k.FieldType}}Field {{k.Ident}}; }
 {{~end}}
 {{~end}}
