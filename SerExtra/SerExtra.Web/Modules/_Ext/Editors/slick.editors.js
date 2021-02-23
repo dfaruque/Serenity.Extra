@@ -30,7 +30,7 @@
         if (args.column.onChange) {
             setTimeout(() => {
                 args.column.onChange(e, args.item, val);
-            }, 1); 
+            }, 1);
             //args.grid.render();
         }
     }
@@ -808,7 +808,7 @@
         this.init();
     }
 
-        function TextAreaEditor(args) {
+    function TextAreaEditor(args) {
         var $input;
         var defaultValue;
         var scope = this;
@@ -910,7 +910,7 @@ function SerenityInlineEditor(args) {
             $input.attr('type', 'checkbox');
 
         let editorParams = Q.deepClone(args.column.sourceItem.editorParams);
-        if (editorParams.cascadeFrom != undefined)
+        if (editorParams && editorParams.cascadeFrom)
         {
             let cascadeFrom = editorParams.cascadeFrom;
             editorParams.cascadeField = editorParams.cascadeField || cascadeFrom;
