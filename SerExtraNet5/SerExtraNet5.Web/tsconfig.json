@@ -1,0 +1,26 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "emitBOM": true,
+    "jsx": "react",
+    "noEmitHelpers": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "outFile": "wwwroot/Scripts/site/SerExtraNet5.Web.js",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "target": "es5",
+    "typeRoots": [
+      "./node_modules/@types/"
+    ]
+  },
+  "include": [
+    "./typings/serenity/Serenity.CoreLib.d.ts",
+    "./typings/jspdf/jspdf.autotable.d.ts",
+    "./Imports/**/*",
+    "./Modules/**/*"
+  ]
+}

@@ -1,0 +1,21 @@
+﻿@model SerExtraNet5.Membership.ActivateEmailModel
+
+<html>
+<head>
+    <title>Activate your SerExtraNet5 account</title>
+</head>
+<body>
+    <p>@Model.DisplayName,</p>
+
+    <p>We received a request to create a new account on SerExtraNet5 with your e-mail address.</p>
+
+    <p>Click the link below to activate your account:</p>
+
+    <p><a href="@Model.ActivateLink">@Model.ActivateLink</a></p>
+
+    <p>If it wasn't you who requested this, you can ignore this email.</p>
+
+    Thanks,
+    The "SerExtraNet5" Team
+</body>
+</html>
