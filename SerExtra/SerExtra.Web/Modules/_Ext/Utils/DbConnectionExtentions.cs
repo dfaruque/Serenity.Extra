@@ -89,7 +89,7 @@ public static partial class DbConnectionExtentions
     }
 
     public static object TryGetId<TRow>(this IDbConnection connection, ICriteria criteria, IField orderByField = null, bool desc = false)
-        where TRow : Row, IIdRow, INameRow, new()
+        where TRow : Row, IIdRow, new()
     {
         var row = new TRow();
 
