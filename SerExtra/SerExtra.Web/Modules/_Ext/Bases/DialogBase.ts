@@ -11,7 +11,7 @@
         protected getInsertPermission() { return this.getRowType().insertPermission; }
         protected getUpdatePermission() { return this.getRowType().updatePermission; }
         protected getDeletePermission() { return this.getRowType().deletePermission; }
-        
+
         protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
 
         private loadedState: string;
