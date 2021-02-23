@@ -91,9 +91,9 @@ namespace _Ext.DevTools
                 else
                 {
                     if (size == 1) return "Boolean";
-                    else if (size == 5) return "Int32";
-                    else if (size == 10) return "Int32";
-                    else if (size == 19) return "Int64";
+                    else if (size > 1 && size <= 5) return "Int16";
+                    else if (size > 5 && size <= 9) return "Int32";
+                    else if (size > 10) return "Int64";
                     else return "Int32";
                 }
             }
