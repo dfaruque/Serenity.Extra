@@ -33,7 +33,7 @@
 
     // Check numeric or not then return value, if NAN then return zero(0)
     export function ToNumber(value): number {
-        return isNaN(value) ? 0 : value;
+        return isNaN(value) ? 0 : Number(value);
     }
 
     export function ToFixed(value, fractionDigits = 2): string {
