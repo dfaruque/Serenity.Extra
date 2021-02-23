@@ -12,7 +12,7 @@ namespace _Ext {
         protected getInsertPermission() { return this.getRowType().insertPermission; }
         protected getUpdatePermission() { return this.getRowType().updatePermission; }
         protected getDeletePermission() { return this.getRowType().deletePermission; }
-        
+
         protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
         protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
         protected getGrouping(): Slick.GroupInfo<TItem>[] { return []; }
@@ -29,7 +29,7 @@ namespace _Ext {
 
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
-            //this.slickContainer.fadeTo(0, 0);
+            this.slickContainer.fadeTo(0, 0);
 
             let grouping = this.getGrouping();
             if (grouping.length > 0)
@@ -45,7 +45,7 @@ namespace _Ext {
                     if (this.get_ExtGridOptions().AutoColumnSize == true) {
                         this.resizeAllCulumn();
                     }
-                    //this.slickContainer.fadeTo(100, 1);
+                    this.slickContainer.fadeTo(100, 1);
                 }
             }, 100);
 
@@ -163,6 +163,12 @@ namespace _Ext {
                     }
                 }
 
+                if (this.filterBar) {
+                    let filterBarDisplayText = this.filterBar.get_store().get_displayText();
+                    if (!Q.isEmptyOrNull(filterBarDisplayText))
+                        request.EqualityFilterWithTextValue[Q.text('Controls.FilterPanel.EditFilter')] = filterBarDisplayText;
+                }
+
             }
 
             return request;
@@ -247,9 +253,22 @@ namespace _Ext {
 
                         column.formatter = (row, cell, value, columnDef: any, dataContext) => {
                             let enumKey = columnDef.sourceItem.editorParams.enumKey
-                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
-                            if (text) return text;
-                            else return emptyText;
+                            if (columnDef.sourceItem.editorParams.multiple == true) {
+                                let texts = '';
+
+                                let vals = value as number[];
+                                if (vals && vals.length > 0) {
+                                    texts = vals.map(m => Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(m))).join(', ');
+                                }
+                                if (texts) return texts;
+                                else return emptyText;
+
+                            }
+                            else {
+                                let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                                if (text) return text;
+                                else return emptyText;
+                            }
                         };
                     } else if (column.sourceItem.editorType == "Decimal") {
 
@@ -353,7 +372,9 @@ namespace _Ext {
                     width: inlineActionsColumnWidth,
                     minWidth: inlineActionsColumnWidth,
                     maxWidth: inlineActionsColumnWidth,
-                    format: ctx => inlineActionsColumnContent
+                    formatter: (row, cell, value, columnDef, dataContext) => {
+                        return inlineActionsColumnContent;
+                    }
                 });
             }
 
@@ -584,7 +605,7 @@ namespace _Ext {
                 if (this.isReadOnly == true) {
                     Q.notifyWarning('Read only records could not be deleted!');
                 } else {
-                    Q.confirm('Delete record?', () => {
+                    Q.confirm(q.text('Db.Administration.Translation.DeleteWarning', 'Delete record?'), () => {
                         let o = this as any;
                         if (o.deleteEntity) { //for in-memory grid
                             o.deleteEntity(recordId);
