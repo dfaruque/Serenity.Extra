@@ -21,7 +21,7 @@ namespace q {
                 editor.slickGrid.setOptions({ autoHeight: false });
                 $gridContainer.height(options.height);
 
-            } else {
+            } else if (options.autoHeight) {
                 let top = $gridContainer.position().top;
                 let height = dialog.element.innerHeight() - top - 40;
 
@@ -38,7 +38,6 @@ namespace q {
             editor.slickGrid.resizeCanvas();
 
         }
-
     }
 
     export function setGridEditorHeight(editor: JQuery, heightInPx: number) {
