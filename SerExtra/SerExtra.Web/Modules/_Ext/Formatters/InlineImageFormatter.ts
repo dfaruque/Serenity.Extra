@@ -3,7 +3,7 @@
     @Serenity.Decorators.registerFormatter()
     export class InlineImageFormatter
         implements Slick.Formatter, Serenity.IInitializeColumn {
-            
+
         format(ctx: Slick.FormatterContext): string {
 
             var file = (this.fileProperty ? ctx.item[this.fileProperty] : ctx.value) as string;
@@ -11,10 +11,10 @@
             let href = '';
             let src = '';
 
-            if (!file || !file.length){
+            if (!file || !file.length) {
                 href = Q.resolveUrl(this.defaultImage)
                 src = href
-            } else{
+            } else {
                 href = Q.resolveUrl("~/upload/" + file);
 
                 if (this.thumb) {
@@ -26,7 +26,7 @@
             }
 
             return `<a class="inline-image" target='_blank' href="${href}">` +
-                `<img src="${src}" style='max-height: 145px; max-width: 100%;' /></a>`;
+                `<img src="${src}" style='max-height: ${this.maxHeight}; max-width: ${this.maxWidth};' /></a>`;
         }
 
         initializeColumn(column: Slick.Column): void {
@@ -44,5 +44,11 @@
 
         @Serenity.Decorators.option()
         public defaultImage: string;
+
+        @Serenity.Decorators.option()
+        public maxHeight: string = '144px';
+
+        @Serenity.Decorators.option()
+        public maxWidth: string = '100%';
     }
 }
