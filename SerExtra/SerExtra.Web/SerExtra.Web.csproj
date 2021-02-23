@@ -1272,6 +1272,7 @@
     <TypeScriptCompile Include="Modules\_Ext\Editors\StaticTextBlock.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Editors\YesNoEditor.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\InlineImageFormatter.ts" />
+    <TypeScriptCompile Include="Modules\_Ext\Formatters\InlineMultipleImageFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\MonthYearFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\YesNoColoredFormatter.ts" />
     <TypeScriptCompile Include="Modules\_Ext\Formatters\YesNoFormatter.ts" />
