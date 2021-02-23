@@ -1,6 +1,8 @@
 ﻿
 namespace q {
     export function sum(xs: any[], key) {
+        if (!xs) return null;
+
         let initObj = {};
         initObj[key] = 0;
 
