@@ -5,7 +5,6 @@ namespace SerExtraNet5.BasicSamples {
 
     @Serenity.Decorators.registerClass()
     export class CancellableBulkActionGrid extends Northwind.OrderGrid {
-        private rowSelection: Serenity.GridRowSelectionMixin;
 
         constructor(container: JQuery) {
             super(container);
