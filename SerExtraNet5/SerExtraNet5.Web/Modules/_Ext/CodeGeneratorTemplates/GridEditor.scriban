@@ -1,0 +1,15 @@
+﻿
+namespace {{RootNamespace}}{{DotModule}} {
+    import fld = {{RowClassName}}.Fields;
+
+    @Serenity.Decorators.registerClass()
+    export class {{ClassName}}GridEditor extends _Ext.GridEditorBase<{{RowClassName}}> {
+        protected getColumnsKey() { return '{{ModuleDot}}{{ClassName}}Editor'; }
+        protected getDialogType() { return {{ClassName}}EditorDialog; }
+        protected getLocalTextPrefix() { return {{RowClassName}}.localTextPrefix; }
+
+        constructor(container: JQuery) {
+            super(container);
+        }
+    }
+}
