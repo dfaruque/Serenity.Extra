@@ -78,6 +78,20 @@
     <None Remove="Modules\_Ext\_q\_q.keyboard-layout.ts" />
     <None Remove="Modules\_Ext\_q\_q.ts" />
     <None Remove="Modules\_Ext\_q\_q.var.ts" />
+    <TypeScriptCompile Remove="Imports\_references.ts" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.js" />
+    <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
+    <None Include="wwwroot\Modules\_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <None Include="wwwroot\Modules\_Ext\CustomSlickGridPlugin\slick.headerfilters.js" />
+    <None Include="wwwroot\Modules\_Ext\Editors\SerenityInlineEditors.js" />
+    <None Include="wwwroot\Modules\_Ext\Editors\slick.editors.js" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
