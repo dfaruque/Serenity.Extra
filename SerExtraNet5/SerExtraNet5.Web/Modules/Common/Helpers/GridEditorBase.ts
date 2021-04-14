@@ -3,7 +3,7 @@
     @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue])
     @Serenity.Decorators.editor()
     @Serenity.Decorators.element("<div/>")
-    export class GridEditorBase<TEntity> extends Serenity.EntityGrid<TEntity, any>
+    export class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue {
 
         protected getIdProperty() { return "__id"; }

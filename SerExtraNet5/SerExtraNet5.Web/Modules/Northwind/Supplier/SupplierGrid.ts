@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class SupplierGrid extends Serenity.EntityGrid<SupplierRow, any> {
+    export class SupplierGrid extends _Ext.GridBase<SupplierRow, any> {
         protected getColumnsKey() { return "Northwind.Supplier"; }
         protected getDialogType() { return <any>SupplierDialog; }
         protected getIdProperty() { return SupplierRow.idProperty; }

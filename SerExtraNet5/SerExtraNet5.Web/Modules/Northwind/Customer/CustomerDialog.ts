@@ -2,7 +2,7 @@
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.panel()
-    export class CustomerDialog extends Serenity.EntityDialog<CustomerRow, any> {
+    export class CustomerDialog extends _Ext.DialogBase<CustomerRow, any> {
         protected getFormKey() { return CustomerForm.formKey; }
         protected getIdProperty() { return CustomerRow.idProperty; }
         protected getLocalTextPrefix() { return CustomerRow.localTextPrefix; }

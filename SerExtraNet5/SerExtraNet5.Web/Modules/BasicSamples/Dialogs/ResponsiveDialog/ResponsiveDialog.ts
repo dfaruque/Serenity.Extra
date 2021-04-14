@@ -6,7 +6,7 @@
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.responsive()
     @Serenity.Decorators.maximizable()
-    export class ResponsiveDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    export class ResponsiveDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey() { return Northwind.OrderForm.formKey; }
         protected getIdProperty() { return Northwind.OrderRow.idProperty; }
         protected getLocalTextPrefix() { return Northwind.OrderRow.localTextPrefix; }

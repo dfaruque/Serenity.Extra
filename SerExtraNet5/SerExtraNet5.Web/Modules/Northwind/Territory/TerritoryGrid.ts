@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class TerritoryGrid extends Serenity.EntityGrid<TerritoryRow, any> {
+    export class TerritoryGrid extends _Ext.GridBase<TerritoryRow, any> {
         protected getColumnsKey() { return "Northwind.Territory"; }
         protected getDialogType() { return <any>TerritoryDialog; }
         protected getIdProperty() { return TerritoryRow.idProperty; }

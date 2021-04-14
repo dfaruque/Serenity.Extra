@@ -4,7 +4,7 @@
      * Basic order dialog with a category selection
      */
     @Serenity.Decorators.registerClass()
-    export class FilteredLookupInDetailDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    export class FilteredLookupInDetailDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
 
         protected getFormKey() { return FilteredLookupInDetailForm.formKey; }
         protected getIdProperty() { return Northwind.OrderRow.idProperty; }

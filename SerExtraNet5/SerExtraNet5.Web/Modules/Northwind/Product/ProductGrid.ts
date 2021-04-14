@@ -4,7 +4,7 @@
 
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.filterable()
-    export class ProductGrid extends Serenity.EntityGrid<ProductRow, any> {
+    export class ProductGrid extends _Ext.GridBase<ProductRow, any> {
         protected getColumnsKey() { return "Northwind.Product"; }
         protected getDialogType() { return <any>ProductDialog; }
         protected getIdProperty() { return ProductRow.idProperty; }

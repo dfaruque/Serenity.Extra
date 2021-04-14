@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class TranslationGrid extends Serenity.EntityGrid<TranslationItem, any> {
+    export class TranslationGrid extends _Ext.GridBase<TranslationItem, any> {
         protected getIdProperty() { return "Key"; }
         protected getLocalTextPrefix() { return "Administration.Translation"; }
         protected getService() { return TranslationService.baseUrl; }

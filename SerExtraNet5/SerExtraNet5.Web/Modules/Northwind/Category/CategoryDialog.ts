@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class CategoryDialog extends Serenity.EntityDialog<CategoryRow, any> {
+    export class CategoryDialog extends _Ext.DialogBase<CategoryRow, any> {
         protected getFormKey() { return CategoryForm.formKey; }
         protected getIdProperty() { return CategoryRow.idProperty; }
         protected getLocalTextPrefix() { return CategoryRow.localTextPrefix; }

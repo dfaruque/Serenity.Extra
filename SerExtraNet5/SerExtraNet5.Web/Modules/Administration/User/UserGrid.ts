@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class UserGrid extends Serenity.EntityGrid<UserRow, any> {
+    export class UserGrid extends _Ext.GridBase<UserRow, any> {
         protected getColumnsKey() { return "Administration.User"; }
         protected getDialogType() { return UserDialog; }
         protected getIdProperty() { return UserRow.idProperty; }

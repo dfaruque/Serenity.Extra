@@ -6,7 +6,7 @@ namespace SerExtraNet5.BasicSamples {
     import fld = Northwind.OrderRow.Fields;
 
     @Serenity.Decorators.registerClass()
-    export class QuickFilterCustomization extends Serenity.EntityGrid<Northwind.OrderRow, any> {
+    export class QuickFilterCustomization extends _Ext.GridBase<Northwind.OrderRow, any> {
 
         protected getColumnsKey() { return "Northwind.Order"; }
         protected getDialogType() { return Northwind.OrderDialog; }

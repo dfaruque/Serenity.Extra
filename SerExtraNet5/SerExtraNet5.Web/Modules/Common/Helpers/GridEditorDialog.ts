@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Common {
 
     @Serenity.Decorators.registerClass()
-    export class GridEditorDialog<TEntity> extends Serenity.EntityDialog<TEntity, any> {
+    export class GridEditorDialog<TEntity> extends _Ext.DialogBase<TEntity, any> {
         protected getIdProperty() { return "__id"; }
 
         public onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>,

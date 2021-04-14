@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class ShipperDialog extends Serenity.EntityDialog<ShipperRow, any> {
+    export class ShipperDialog extends _Ext.DialogBase<ShipperRow, any> {
         protected getFormKey() { return ShipperForm.formKey; }
         protected getIdProperty() { return ShipperRow.idProperty; }
         protected getLocalTextPrefix() { return ShipperRow.localTextPrefix; }

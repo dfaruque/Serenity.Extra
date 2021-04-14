@@ -1994,7 +1994,7 @@ declare namespace SerExtraNet5 {
 declare namespace SerExtraNet5.Texts {
 }
 declare namespace SerExtraNet5.Administration {
-    class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
+    class LanguageDialog extends _Ext.DialogBase<LanguageRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2004,7 +2004,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class LanguageGrid extends Serenity.EntityGrid<LanguageRow, any> {
+    class LanguageGrid extends _Ext.GridBase<LanguageRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof LanguageDialog;
         protected getIdProperty(): string;
@@ -2015,7 +2015,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class RoleDialog extends Serenity.EntityDialog<RoleRow, any> {
+    class RoleDialog extends _Ext.DialogBase<RoleRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2027,7 +2027,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class RoleGrid extends Serenity.EntityGrid<RoleRow, any> {
+    class RoleGrid extends _Ext.GridBase<RoleRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof RoleDialog;
         protected getIdProperty(): string;
@@ -2050,7 +2050,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class TranslationGrid extends Serenity.EntityGrid<TranslationItem, any> {
+    class TranslationGrid extends _Ext.GridBase<TranslationItem, any> {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
@@ -2072,7 +2072,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class UserDialog extends Serenity.EntityDialog<UserRow, any> {
+    class UserDialog extends _Ext.DialogBase<UserRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getIsActiveProperty(): string;
@@ -2087,7 +2087,7 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
-    class UserGrid extends Serenity.EntityGrid<UserRow, any> {
+    class UserGrid extends _Ext.GridBase<UserRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof UserDialog;
         protected getIdProperty(): string;
@@ -2187,7 +2187,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class ProductDialog extends Serenity.EntityDialog<ProductRow, any> {
+    class ProductDialog extends _Ext.DialogBase<ProductRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2206,7 +2206,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class ProductGrid extends Serenity.EntityGrid<ProductRow, any> {
+    class ProductGrid extends _Ext.GridBase<ProductRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2245,7 +2245,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class OrderGrid extends Serenity.EntityGrid<OrderRow, any> {
+    class OrderGrid extends _Ext.GridBase<OrderRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2278,7 +2278,7 @@ declare namespace SerExtraNet5.BasicSamples.DialogBoxes {
     function initializePage(): void;
 }
 declare namespace SerExtraNet5.Northwind {
-    class OrderDialog extends Serenity.EntityDialog<OrderRow, any> {
+    class OrderDialog extends _Ext.DialogBase<OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2301,7 +2301,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class CategoryDialog extends Serenity.EntityDialog<CategoryRow, any> {
+    class CategoryDialog extends _Ext.DialogBase<CategoryRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2322,7 +2322,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class CategoryGrid extends Serenity.EntityGrid<CategoryRow, any> {
+    class CategoryGrid extends _Ext.GridBase<CategoryRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2410,7 +2410,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class PopulateLinkedDataDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    class PopulateLinkedDataDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2437,7 +2437,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class SupplierDialog extends Serenity.EntityDialog<SupplierRow, any> {
+    class SupplierDialog extends _Ext.DialogBase<SupplierRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2480,7 +2480,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class SupplierGrid extends Serenity.EntityGrid<SupplierRow, any> {
+    class SupplierGrid extends _Ext.GridBase<SupplierRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2506,7 +2506,7 @@ declare namespace SerExtraNet5.BasicSamples {
     /**
      * Adding Responsive attribute makes this dialog use full screen in mobile devices.
      */
-    class ResponsiveDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    class ResponsiveDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2525,7 +2525,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class CustomerDialog extends Serenity.EntityDialog<CustomerRow, any> {
+    class CustomerDialog extends _Ext.DialogBase<CustomerRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2549,7 +2549,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class CustomerGrid extends Serenity.EntityGrid<CustomerRow, any> {
+    class CustomerGrid extends _Ext.GridBase<CustomerRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2569,7 +2569,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Common {
-    class GridEditorDialog<TEntity> extends Serenity.EntityDialog<TEntity, any> {
+    class GridEditorDialog<TEntity> extends _Ext.DialogBase<TEntity, any> {
         protected getIdProperty(): string;
         onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
         onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
@@ -2622,7 +2622,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Common {
-    class GridEditorBase<TEntity> extends Serenity.EntityGrid<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+    class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         protected getIdProperty(): string;
         protected nextId: number;
         constructor(container: JQuery);
@@ -2678,7 +2678,7 @@ declare namespace SerExtraNet5.BasicSamples {
     /**
      * Basic order dialog with a category selection
      */
-    class FilteredLookupInDetailDialog extends Serenity.EntityDialog<Northwind.OrderRow, any> {
+    class FilteredLookupInDetailDialog extends _Ext.DialogBase<Northwind.OrderRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2856,7 +2856,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class ConditionalFormattingGrid extends Serenity.EntityGrid<Northwind.ProductRow, any> {
+    class ConditionalFormattingGrid extends _Ext.GridBase<Northwind.ProductRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -2900,7 +2900,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class DragDropSampleDialog extends Serenity.EntityDialog<DragDropSampleRow, any> {
+    class DragDropSampleDialog extends _Ext.DialogBase<DragDropSampleRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -2910,7 +2910,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class DragDropSampleGrid extends Serenity.EntityGrid<DragDropSampleRow, any> {
+    class DragDropSampleGrid extends _Ext.GridBase<DragDropSampleRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof DragDropSampleDialog;
         protected getIdProperty(): string;
@@ -2936,7 +2936,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5 {
-    class SelectableEntityGrid<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
+    class SelectableEntityGrid<TItem, TOptions> extends _Ext.GridBase<TItem, TOptions> {
         protected getSlickOptions(): Slick.GridOptions;
         protected createSlickGrid(): Slick.Grid;
     }
@@ -3009,7 +3009,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class InlineImageInGrid extends Serenity.EntityGrid<Northwind.ProductRow, any> {
+    class InlineImageInGrid extends _Ext.GridBase<Northwind.ProductRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -3040,7 +3040,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class QuickFilterCustomization extends Serenity.EntityGrid<Northwind.OrderRow, any> {
+    class QuickFilterCustomization extends _Ext.GridBase<Northwind.OrderRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof Northwind.OrderDialog;
         protected getIdProperty(): string;
@@ -3065,7 +3065,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class CustomerGrossSalesGrid extends Serenity.EntityGrid<Northwind.CustomerGrossSalesRow, any> {
+    class CustomerGrossSalesGrid extends _Ext.GridBase<Northwind.CustomerGrossSalesRow, any> {
         protected getColumnsKey(): string;
         protected getIdProperty(): string;
         protected getNameProperty(): string;
@@ -3092,7 +3092,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
-    class ViewWithoutIDGrid extends Serenity.EntityGrid<Northwind.SalesByCategoryRow, any> {
+    class ViewWithoutIDGrid extends _Ext.GridBase<Northwind.SalesByCategoryRow, any> {
         protected getColumnsKey(): string;
         protected getIdProperty(): string;
         protected getNameProperty(): string;
@@ -3395,7 +3395,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class RegionDialog extends Serenity.EntityDialog<RegionRow, any> {
+    class RegionDialog extends _Ext.DialogBase<RegionRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3406,7 +3406,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class RegionGrid extends Serenity.EntityGrid<RegionRow, any> {
+    class RegionGrid extends _Ext.GridBase<RegionRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -3431,7 +3431,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class ShipperDialog extends Serenity.EntityDialog<ShipperRow, any> {
+    class ShipperDialog extends _Ext.DialogBase<ShipperRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3447,7 +3447,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class ShipperGrid extends Serenity.EntityGrid<ShipperRow, any> {
+    class ShipperGrid extends _Ext.GridBase<ShipperRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;
@@ -3457,7 +3457,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class TerritoryDialog extends Serenity.EntityDialog<TerritoryRow, any> {
+    class TerritoryDialog extends _Ext.DialogBase<TerritoryRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -3468,7 +3468,7 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class TerritoryGrid extends Serenity.EntityGrid<TerritoryRow, any> {
+    class TerritoryGrid extends _Ext.GridBase<TerritoryRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): any;
         protected getIdProperty(): string;

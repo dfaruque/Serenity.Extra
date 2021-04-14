@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5 {
 
     @Serenity.Decorators.registerClass()
-    export class SelectableEntityGrid<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
+    export class SelectableEntityGrid<TItem, TOptions> extends _Ext.GridBase<TItem, TOptions> {
 
         protected getSlickOptions(): Slick.GridOptions {
             var opt = super.getSlickOptions();

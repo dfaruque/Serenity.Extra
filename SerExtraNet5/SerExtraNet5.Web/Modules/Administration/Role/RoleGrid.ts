@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class RoleGrid extends Serenity.EntityGrid<RoleRow, any> {
+    export class RoleGrid extends _Ext.GridBase<RoleRow, any> {
         protected getColumnsKey() { return "Administration.Role"; }
         protected getDialogType() { return RoleDialog; }
         protected getIdProperty() { return RoleRow.idProperty; }

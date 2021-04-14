@@ -2,7 +2,7 @@
 namespace SerExtraNet5.BasicSamples {
 
     @Serenity.Decorators.registerClass()
-    export class DragDropSampleDialog extends Serenity.EntityDialog<DragDropSampleRow, any> {
+    export class DragDropSampleDialog extends _Ext.DialogBase<DragDropSampleRow, any> {
         protected getFormKey() { return DragDropSampleForm.formKey; }
         protected getIdProperty() { return DragDropSampleRow.idProperty; }
         protected getLocalTextPrefix() { return DragDropSampleRow.localTextPrefix; }

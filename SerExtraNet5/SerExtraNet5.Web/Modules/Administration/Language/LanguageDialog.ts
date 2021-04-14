@@ -1,7 +1,7 @@
 ﻿namespace SerExtraNet5.Administration {
 
     @Serenity.Decorators.registerClass()
-    export class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
+    export class LanguageDialog extends _Ext.DialogBase<LanguageRow, any> {
         protected getFormKey() { return LanguageForm.formKey; }
         protected getIdProperty() { return LanguageRow.idProperty; }
         protected getLocalTextPrefix() { return LanguageRow.localTextPrefix; }
