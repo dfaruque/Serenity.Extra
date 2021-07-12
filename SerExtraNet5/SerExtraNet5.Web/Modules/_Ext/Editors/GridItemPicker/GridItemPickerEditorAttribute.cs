@@ -1,27 +1,22 @@
-﻿using Serenity;
-using Serenity.ComponentModel;
+﻿using Serenity.ComponentModel;
 using Serenity.Data;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace _Ext
 {
     public partial class GridItemPickerEditorAttribute : CustomEditorAttribute
     {
-
         public GridItemPickerEditorAttribute(Type rowType, [CallerMemberName] string propertyName = null)
             : base(Key)
         {
             if (rowType == null)
                 throw new ArgumentNullException(nameof(rowType));
 
-            Row row = (Row)Activator.CreateInstance(rowType);
+            IRow row = (IRow)Activator.CreateInstance(rowType);
 
-            var idField = ((Field)(row as IIdRow).IdField).ColumnAlias;
-            var nameField = ((Field)(row as INameRow).NameField).ColumnAlias;
+            var idField = row.IdField.ColumnAlias;
+            var nameField = row.NameField.ColumnAlias;
 
             var rowClientType = rowType.FullName.Replace(".Entities", "");
             SetOption("rowType", rowClientType);
@@ -41,9 +36,7 @@ namespace _Ext
 
             SetOption("nameFieldInThisRow", propertyNameWithoutIdSuffix + nameField);
 
-
         }
-
     }
 }
 
