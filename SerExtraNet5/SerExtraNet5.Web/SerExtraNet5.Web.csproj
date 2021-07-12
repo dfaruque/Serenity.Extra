@@ -34,7 +34,6 @@
     <TypeScriptCompile Remove="Modules\_Ext\Behaviours\**" />
     <TypeScriptCompile Remove="Modules\_Ext\DevTools\**" />
     <Compile Remove="Modules\_Ext\Editors\GridItemPicker\GridItemPickerEditorAttribute.cs" />
-    <Compile Remove="Modules\_Ext\Editors\SortedLookupScript.cs" />
     <Compile Remove="Modules\_Ext\Utils\Q.Check.cs" />
     <None Remove="Modules\_Ext\Bases\DialogBase.ts" />
     <None Remove="Modules\_Ext\Bases\GridBase.ts" />
