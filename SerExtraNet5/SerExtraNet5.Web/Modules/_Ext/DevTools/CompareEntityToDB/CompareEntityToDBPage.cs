@@ -8,23 +8,16 @@ namespace _Ext.DevTools.Pages
     using System.Reflection;
     using Serenity.Data.Mapping;
     using Serenity.Web;
-#if COREFX
     using Microsoft.AspNetCore.Mvc;
-#else
-    using System.Web.Mvc;
-    [RoutePrefix("CompareEntityToDB"), Route("{action=index}")]
-#endif
 
     [PageAuthorize("DevTools:CompareEntityToDB")]
     public class CompareEntityToDBController : Controller
     {
-#if COREFX
         [Route("CompareEntityToDB")]
-#endif
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index([FromServices] ISqlConnections sqlConnections)
         {
-            var model = new Model.CompareEntityToDBPageModel();
+            var model = new Model.CompareEntityToDBPageModel(sqlConnections);
 
             return View("~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml", model);
         }

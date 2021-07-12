@@ -16,7 +16,7 @@ namespace _Ext.DevTools.Model
     {
         public List<TableComparisonInfo> TableComparisonInfos { get; set; } = new List<TableComparisonInfo>();
 
-        public CompareEntityToDBPageModel()
+        public CompareEntityToDBPageModel(ISqlConnections sqlConnections)
         {
             var assembly = Assembly.GetAssembly(typeof(CompareEntityToDBPageModel));
 
@@ -25,7 +25,7 @@ namespace _Ext.DevTools.Model
 
             foreach (var rowClass in rowClasses)
             {
-                Row row = (Row)Activator.CreateInstance(rowClass);
+                IRow row = (IRow)Activator.CreateInstance(rowClass);
                 var rowFields = row.GetFields();
 
                 var connectionKey = rowClass.GetCustomAttribute<ConnectionKeyAttribute>().Value;
@@ -38,7 +38,7 @@ namespace _Ext.DevTools.Model
                 };
                 TableComparisonInfos.Add(TableComparisonInfo);
 
-                using (var connection = SqlConnections.NewByKey(connectionKey))
+                using (var connection = sqlConnections.NewByKey(connectionKey))
                 {
                     var dialect = connection.GetDialect();
                     var schemaProvider = SchemaHelper.GetSchemaProvider(dialect.ServerType);
@@ -53,7 +53,7 @@ namespace _Ext.DevTools.Model
                     }
                     else
                     {
-                        for (int i = 0; i < row.FieldCount; i++)
+                        for (int i = 0; i < row.Fields.Count; i++)
                         {
                             Field rowfield = rowFields[i];
 
@@ -126,7 +126,7 @@ namespace _Ext.DevTools.Model
         public string RowClassName { get; set; }
         public string TableName { get; set; }
 
-        public Row Row { get; set; }
+        public IRow Row { get; set; }
 
         public bool HasIssue
         {

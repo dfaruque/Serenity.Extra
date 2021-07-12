@@ -1,4 +1,5 @@
 ﻿@model _Ext.DevTools.Model.CompareEntityToDBPageModel
+@inject ITextLocalizer localizer
 @{
     ViewData["Title"] = "Compare Entity To DB";
 }
@@ -57,7 +58,7 @@
                                     <td>
                                         @foreach (var issue in field.Issues)
                                         {
-                                            <span class="label label-@issue.GetCssClass("default")">@issue.GetEnumDescription()</span>
+                                            <span class="label label-@issue.GetCssClass("default")">@issue.GetText(localizer)</span>
                                         }
                                     </td>
                                 </tr>

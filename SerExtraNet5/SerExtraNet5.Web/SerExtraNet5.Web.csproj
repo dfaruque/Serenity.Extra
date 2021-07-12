@@ -36,7 +36,6 @@
     <Compile Remove="Modules\_Ext\Editors\GridItemPicker\GridItemPickerEditorAttribute.cs" />
     <Compile Remove="Modules\_Ext\Editors\SortedLookupScript.cs" />
     <Compile Remove="Modules\_Ext\Utils\Q.Check.cs" />
-    <Compile Remove="Modules\_Ext\_ExtNavigation.cs" />
     <None Remove="Modules\_Ext\Bases\DialogBase.ts" />
     <None Remove="Modules\_Ext\Bases\GridBase.ts" />
     <None Remove="Modules\_Ext\Bases\ReportGridBase.ts" />
@@ -79,6 +78,10 @@
     <None Remove="Modules\_Ext\_q\_q.ts" />
     <None Remove="Modules\_Ext\_q\_q.var.ts" />
     <TypeScriptCompile Remove="Imports\_references.ts" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
+    <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
+    <None Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
     <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.js" />
     <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.js" />
     <None Include="wwwroot\Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
