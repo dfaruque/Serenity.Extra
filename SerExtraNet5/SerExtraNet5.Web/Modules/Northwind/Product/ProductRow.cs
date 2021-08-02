@@ -1,4 +1,5 @@
-﻿using Serenity.ComponentModel;
+﻿using _Ext;
+using Serenity.ComponentModel;
 using Serenity.Data;
 using Serenity.Data.Mapping;
 using System;
@@ -14,7 +15,7 @@ namespace SerExtraNet5.Northwind.Entities
     [LookupScript]
     [CaptureLog(typeof(ProductLogRow))]
     [LocalizationRow(typeof(ProductLangRow))]
-    public sealed class ProductRow : Row<ProductRow.RowFields>, IIdRow, INameRow
+    public sealed class ProductRow : Row<ProductRow.RowFields>, IIdRow, INameRow, IAuditLog
     {
         [DisplayName("Product Id"), Identity, LookupInclude, IdProperty]
         public Int32? ProductID
