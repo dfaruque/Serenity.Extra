@@ -1,21 +1,16 @@
 ﻿using _Ext.Entities;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Serenity;
 using Serenity.ComponentModel;
 using Serenity.Data;
 using Serenity.Services;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Linq;
-using System.Reflection;
-using System.Web;
 
 namespace _Ext
 {
-    public class AuditRowBehavior : IImplicitBehavior, ISaveBehavior, IDeleteBehavior
+    public class AuditRowBehavior : BaseSaveDeleteBehavior, IImplicitBehavior
     {
         protected ISqlConnections SqlConnections { get; }
 
@@ -23,6 +18,7 @@ namespace _Ext
         {
             SqlConnections = sqlConnections;
         }
+
         public bool ActivateFor(IRow row)
         {
             if (row is IAuditLog)
@@ -32,9 +28,7 @@ namespace _Ext
             return false;
         }
 
-
-        public void OnAfterSave(ISaveRequestHandler handler) { }
-        public void OnAudit(ISaveRequestHandler handler)
+        public override void OnAudit(ISaveRequestHandler handler)
         {
             //if (handler.IsCreate)
             //{
@@ -47,21 +41,10 @@ namespace _Ext
             }
         }
 
-        public void OnBeforeSave(ISaveRequestHandler handler) { }
-        public void OnPrepareQuery(ISaveRequestHandler handler, SqlQuery query) { }
-        public void OnReturn(ISaveRequestHandler handler) { }
-        public void OnSetInternalFields(ISaveRequestHandler handler) { }
-        public void OnValidateRequest(ISaveRequestHandler handler) { }
-
-        public void OnAfterDelete(IDeleteRequestHandler handler) { }
-        public void OnAudit(IDeleteRequestHandler handler)
+        public override void OnAudit(IDeleteRequestHandler handler)
         {
             InsertNewLog(handler.Context, handler.Row, null, AuditActionType.Delete);
         }
-        public void OnBeforeDelete(IDeleteRequestHandler handler) { }
-        public void OnPrepareQuery(IDeleteRequestHandler handler, SqlQuery query) { }
-        public void OnReturn(IDeleteRequestHandler handler) { }
-        public void OnValidateRequest(IDeleteRequestHandler handler) { }
 
         private void InsertNewLog(IRequestContext context, IRow row, IRow oldRow, AuditActionType auditActionType)
         {
