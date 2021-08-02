@@ -71,7 +71,7 @@ namespace _Ext
                 {
                     var fld = AuditLogRow.Fields;
 
-                    var entityId = (Int64?)row.IdField.AsObject(row) ?? 0;
+                    var entityId = Convert.ToInt64(row.IdField.AsObject(row) ?? 0);
 
                     var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
                     .Select(fld.VersionNo, fld.NewEntity)
