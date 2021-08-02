@@ -17,6 +17,12 @@ namespace _Ext
 {
     public class AuditRowBehavior : IImplicitBehavior, ISaveBehavior, IDeleteBehavior
     {
+        protected ISqlConnections SqlConnections { get; }
+
+        public AuditRowBehavior(ISqlConnections sqlConnections)
+        {
+            SqlConnections = sqlConnections;
+        }
         public bool ActivateFor(IRow row)
         {
             if (row is IAuditLog)
@@ -37,7 +43,7 @@ namespace _Ext
 
             if (handler.IsUpdate)
             {
-                InsertNewLog(handler.UnitOfWork, handler.Row, handler.Old, AuditActionType.Update);
+                InsertNewLog(handler.Context, handler.Row, handler.Old, AuditActionType.Update);
             }
         }
 
@@ -50,14 +56,14 @@ namespace _Ext
         public void OnAfterDelete(IDeleteRequestHandler handler) { }
         public void OnAudit(IDeleteRequestHandler handler)
         {
-            InsertNewLog(handler.UnitOfWork, handler.Row, null, AuditActionType.Delete);
+            InsertNewLog(handler.Context, handler.Row, null, AuditActionType.Delete);
         }
         public void OnBeforeDelete(IDeleteRequestHandler handler) { }
         public void OnPrepareQuery(IDeleteRequestHandler handler, SqlQuery query) { }
         public void OnReturn(IDeleteRequestHandler handler) { }
         public void OnValidateRequest(IDeleteRequestHandler handler) { }
 
-        private void InsertNewLog(IUnitOfWork uow, IRow row, IRow oldRow, AuditActionType auditActionType)
+        private void InsertNewLog(IRequestContext context, IRow row, IRow oldRow, AuditActionType auditActionType)
         {
             try
             {
@@ -65,7 +71,7 @@ namespace _Ext
                 {
                     var fld = AuditLogRow.Fields;
 
-                    var entityId = (row as IIdRow).IdField[row] ?? 0;
+                    var entityId = (Int64?)row.IdField.AsObject(row) ?? 0;
 
                     var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
                     .Select(fld.VersionNo, fld.NewEntity)
@@ -84,19 +90,19 @@ namespace _Ext
                         var auditLogRow = new AuditLogRow
                         {
                             VersionNo = versionNo,
-                            UserId = int.Parse(Authorization.UserId),
+                            UserId = int.Parse(context.User.GetIdentifier()),
                             ActionType = auditActionType,
                             ActionDate = DateTime.Now,
                             EntityTableName = row.Table,
                             EntityId = entityId,
                             OldEntity = oldrowJson,
                             NewEntity = rowJson,
-#if COREFX
+//#if COREFX
 
-#else
-                            IpAddress = HttpContext.Current.Request.UserHostAddress,
-                            SessionId = HttpContext.Current.Session.SessionID
-#endif
+//#else
+//                            IpAddress = HttpContext.Current.Request.UserHostAddress,
+//                            SessionId = HttpContext.Current.Session.SessionID
+//#endif
                         };
 
                         auditLogConnection.Insert<AuditLogRow>(auditLogRow);
@@ -105,11 +111,11 @@ namespace _Ext
             }
             catch (Exception ex)
             {
-                Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
+                //Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
             }
         }
 
-        private static void ClearAssignment(Row row)
+        private static void ClearAssignment(IRow row)
         {
             if (row is IIdRow idRow)
             {
@@ -139,18 +145,18 @@ namespace _Ext
         string GetPageUrl()
         {
             string pageUrl = "";
-#if COREFX
+//#if COREFX
 
-#else
-            if (HttpContext.Current != null && HttpContext.Current.Request != null)
-            {
-                var httpRequest = HttpContext.Current.Request;
-                if (httpRequest.UrlReferrer != null)
-                    pageUrl = httpRequest.UrlReferrer.PathAndQuery;
-                else if (httpRequest.Url != null)
-                    pageUrl = httpRequest.Url.PathAndQuery;
-            }
-#endif
+//#else
+//            if (HttpContext.Current != null && HttpContext.Current.Request != null)
+//            {
+//                var httpRequest = HttpContext.Current.Request;
+//                if (httpRequest.UrlReferrer != null)
+//                    pageUrl = httpRequest.UrlReferrer.PathAndQuery;
+//                else if (httpRequest.Url != null)
+//                    pageUrl = httpRequest.Url.PathAndQuery;
+//            }
+//#endif
 
             return pageUrl;
         }

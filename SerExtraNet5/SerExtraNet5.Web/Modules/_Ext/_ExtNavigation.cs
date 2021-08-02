@@ -1,7 +1,7 @@
 ﻿using Serenity.Navigation;
 using MyPages = _Ext.DevTools.Pages;
 
-//[assembly: NavigationLink(int.MaxValue, "Administration/Audit Log", typeof(_Ext.Pages.AuditLogController), icon: "fa-history")]
+[assembly: NavigationLink(int.MaxValue, "Administration/Audit Log", typeof(_Ext.Pages.AuditLogController), icon: "fa-history")]
 
 [assembly: NavigationMenu(int.MaxValue, "DevTools", icon: "fa-code")]
 [assembly: NavigationLink(int.MaxValue, "DevTools/Compare Entity to DB", typeof(MyPages.CompareEntityToDBController), icon: null)]

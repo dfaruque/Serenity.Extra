@@ -3,6 +3,7 @@
 namespace SerExtraNet5.ScriptInitialization {
     Q.Config.responsiveDialogs = true;
     Q.Config.rootNamespaces.push('SerExtraNet5');
+    Q.Config.rootNamespaces.push('_Ext');
     Serenity.EntityDialog.defaultLanguageList = LanguageList.getValue;
     Serenity.HtmlContentEditor.CKEditorBasePath = "~/Serenity.Assets/Scripts/ckeditor/";
 
