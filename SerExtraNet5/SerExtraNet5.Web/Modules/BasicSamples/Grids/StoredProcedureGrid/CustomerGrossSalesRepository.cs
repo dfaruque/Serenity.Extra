@@ -8,10 +8,7 @@ namespace SerExtraNet5.BasicSamples.Repositories
 {
     public class CustomerGrossSalesRepository : BaseRepository
     {
-        public CustomerGrossSalesRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public CustomerGrossSalesRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 

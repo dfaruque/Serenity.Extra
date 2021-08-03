@@ -19,10 +19,7 @@ namespace SerExtraNet5.Administration.Repositories
 {
     public partial class UserRepository : BaseRepository
     {
-        public UserRepository(IRequestContext context)
-            : base(context)
-        {
-        }
+        public UserRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
         public static bool IsPublicDemo { get; set; }
@@ -96,10 +93,7 @@ namespace SerExtraNet5.Administration.Repositories
 
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
-            public MySaveHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MySaveHandler(IRequestContext context) : base(context) { }
 
             private string password;
 
@@ -262,10 +256,7 @@ namespace SerExtraNet5.Administration.Repositories
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>
         {
-            public MyDeleteHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyDeleteHandler(IRequestContext context) : base(context) { }
 
             protected override void ValidateRequest()
             {
@@ -294,26 +285,17 @@ namespace SerExtraNet5.Administration.Repositories
 
         private class MyUndeleteHandler : UndeleteRequestHandler<MyRow>
         {
-            public MyUndeleteHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyUndeleteHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
-            public MyRetrieveHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyRetrieveHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-            public MyListHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyListHandler(IRequestContext context) : base(context) { }
         }
     }
 }

@@ -10,10 +10,7 @@ namespace SerExtraNet5.Common.Repositories
 {
     public class UserPreferenceRepository : BaseRepository
     {
-        public UserPreferenceRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public UserPreferenceRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 

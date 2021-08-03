@@ -8,10 +8,7 @@ namespace SerExtraNet5.Northwind.Repositories
 {
     public class SupplierRepository : BaseRepository
     {
-        public SupplierRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public SupplierRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -47,42 +44,27 @@ namespace SerExtraNet5.Northwind.Repositories
 
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
-            public MySaveHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MySaveHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>
         {
-            public MyDeleteHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyDeleteHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyUndeleteHandler : UndeleteRequestHandler<MyRow>
         {
-            public MyUndeleteHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyUndeleteHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
-            public MyRetrieveHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyRetrieveHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-            public MyListHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyListHandler(IRequestContext context) : base(context) { }
         }
 
     }

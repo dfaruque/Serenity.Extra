@@ -11,10 +11,7 @@ namespace SerExtraNet5.Administration.Repositories
 {
     public class RolePermissionRepository : BaseRepository
     {
-        public RolePermissionRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public RolePermissionRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 

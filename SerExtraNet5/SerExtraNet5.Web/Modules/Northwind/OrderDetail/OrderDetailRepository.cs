@@ -7,10 +7,7 @@ namespace SerExtraNet5.Northwind.Repositories
 {
     public class OrderDetailRepository : BaseRepository
     {
-        public OrderDetailRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public OrderDetailRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -26,18 +23,12 @@ namespace SerExtraNet5.Northwind.Repositories
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
-            public MyRetrieveHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyRetrieveHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-            public MyListHandler(IRequestContext context)
-                 : base(context)
-            {
-            }
+            public MyListHandler(IRequestContext context) : base(context) { }
         }
 
     }

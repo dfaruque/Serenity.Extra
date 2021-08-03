@@ -12,10 +12,7 @@ namespace SerExtraNet5.Administration.Repositories
 {
     public class UserRoleRepository : BaseRepository
     {
-        public UserRoleRepository(IRequestContext context)
-             : base(context)
-        {
-        }
+        public UserRoleRepository(IRequestContext context) : base(context) { }
 
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
