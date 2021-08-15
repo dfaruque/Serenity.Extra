@@ -13,19 +13,14 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
-    <Compile Remove="Modules\_Ext\AuditLogViewer\**" />
     <Compile Remove="Modules\_Ext\Behaviours\**" />
     <Compile Remove="Modules\_Ext\DevTools\**" />
-    <Content Remove="Modules\_Ext\AuditLogViewer\**" />
     <Content Remove="Modules\_Ext\Behaviours\**" />
     <Content Remove="Modules\_Ext\DevTools\**" />
-    <EmbeddedResource Remove="Modules\_Ext\AuditLogViewer\**" />
     <EmbeddedResource Remove="Modules\_Ext\Behaviours\**" />
     <EmbeddedResource Remove="Modules\_Ext\DevTools\**" />
-    <None Remove="Modules\_Ext\AuditLogViewer\**" />
     <None Remove="Modules\_Ext\Behaviours\**" />
     <None Remove="Modules\_Ext\DevTools\**" />
-    <TypeScriptCompile Remove="Modules\_Ext\AuditLogViewer\**" />
     <TypeScriptCompile Remove="Modules\_Ext\Behaviours\**" />
     <TypeScriptCompile Remove="Modules\_Ext\DevTools\**" />
     <Compile Remove="Modules\_Ext\Utils\Q.Check.cs" />
