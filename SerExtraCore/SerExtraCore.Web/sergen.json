@@ -1,4 +1,4 @@
-﻿{
+{
   "RootNamespace": "SerExtraCore",
   "ServerTypings": {
     "Assemblies": [],
@@ -6,5 +6,8 @@
   },
   "Connections": [],
   "BaseRowClasses": [],
-  "RemoveForeignFields": []
+  "RemoveForeignFields": [],
+  "CustomTemplates": "D:\\Faruque\\Projects\\Serenity.Extra\\SerExtraCore\\SerExtraCore.Web\\Modules\\_Ext\\CodeGeneratorTemplates",
+  "CustomGenerate": {},
+  "CustomSettings": {}
 }
