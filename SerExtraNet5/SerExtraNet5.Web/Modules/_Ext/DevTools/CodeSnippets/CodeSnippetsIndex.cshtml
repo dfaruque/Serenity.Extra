@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = Serenity.LocalText.Get("Db._Ext.AuditLog.EntityPlural");
+﻿@inject Serenity.ITextLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer.Get("Db._Ext.AuditLog.EntityPlural");
 }
 
 <div id="GridDiv"></div>

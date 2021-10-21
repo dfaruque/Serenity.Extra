@@ -12,7 +12,7 @@
         protected form = new CustomerForm(this.idPrefix);
 
         private ordersGrid: CustomerOrdersGrid;
-        private loadedState: string;
+        //private loadedState: string;
 
         constructor() {
             super();

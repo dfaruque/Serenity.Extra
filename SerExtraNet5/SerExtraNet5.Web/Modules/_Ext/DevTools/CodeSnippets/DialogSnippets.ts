@@ -6,7 +6,7 @@
         protected getService() { return AuditLogService.baseUrl; }
 
         protected form = new AuditLogForm(this.idPrefix);
-
+        
 
         protected addCssClass(): void { super.addCssClass(); }
         protected getTemplate(): string { return super.getTemplate(); }

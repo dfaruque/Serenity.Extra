@@ -12,7 +12,7 @@
         protected getNameProperty() { return Northwind.OrderRow.nameProperty; }
         protected getService() { return Northwind.OrderService.baseUrl; }
 
-        private form: FilteredLookupInDetailForm;
+        protected form: FilteredLookupInDetailForm;
 
         constructor() {
             super();

@@ -3,16 +3,12 @@ namespace _Ext.Endpoints
 {
     using Serenity.Data;
     using Serenity.Services;
-#if COREFX
     using Microsoft.AspNetCore.Mvc;
+
     [Route("Services/ReplaceRow/[action]")]
-#else
-    using System.Web.Mvc;
-    [RoutePrefix("Services/ReplaceRow"), Route("{action}")]
-#endif
     public partial class ReplaceRowController : ServiceEndpoint
     {
-        public ReplaceRowResponse Replace(ReplaceRowRequest request)
+        public ReplaceRowResponse Replace([FromServices] ISqlConnections sqlConnections, ReplaceRowRequest request)
         {
             var response = new ReplaceRowResponse();
 
@@ -20,7 +16,7 @@ namespace _Ext.Endpoints
             string connectionKey = Q.GetConnectionKeyByRowType(rowType);
             string tableName = Q.GetTableNameByRowType(rowType);
 
-            var connection = SqlConnections.NewByKey(connectionKey);
+            var connection = sqlConnections.NewByKey(connectionKey);
 
             //EXEC ReplaceRow TebleName,'Id', ValueToBeDeleted, NewValue;  
             var data = connection.Execute($"ReplaceRow",

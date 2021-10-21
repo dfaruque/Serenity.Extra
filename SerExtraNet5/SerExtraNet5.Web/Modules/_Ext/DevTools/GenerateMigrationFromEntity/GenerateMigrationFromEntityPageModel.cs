@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Web.Hosting;
 
 namespace _Ext.DevTools.Model
 {
@@ -26,7 +25,7 @@ namespace _Ext.DevTools.Model
             var migrationNumber = 0;
             foreach (var rowClass in rowClasses)
             {
-                Row row = (Row)Activator.CreateInstance(rowClass);
+                IRow row = (IRow)Activator.CreateInstance(rowClass);
 
 
                 string tableName = SchemaHelper.GetTableNameOnly(row.Table);
@@ -49,7 +48,7 @@ namespace _Ext.DevTools.Model
                 if (!string.IsNullOrWhiteSpace(schema) && schema != "dbo")
                     sb.Append($@".InSchema(""{schema}"")");
 
-                for (int i = 0; i < row.FieldCount; i++)
+                for (int i = 0; i < row.Fields.Count; i++)
                 {
                     Field rowfield = rowFields[i];
                     if (EntityFieldExtensions.IsTableField(rowfield))

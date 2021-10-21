@@ -14,7 +14,7 @@
 
         protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
 
-        private loadedState: string;
+        protected loadedState: string;
         isReadOnly: boolean = false;
         protected form: any;
 

@@ -30,7 +30,7 @@ namespace _Ext {
                         (e as any).isShowed = false;
                     });
 
-                    new Vue(new AuditLogViewer('#' + this.idPrefix + 'dialogContent', response.EntityVersions));
+                    new window['Vue'](new AuditLogViewer('#' + this.idPrefix + 'dialogContent', response.EntityVersions));
 
 
                 })
