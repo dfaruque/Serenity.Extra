@@ -51,9 +51,9 @@
                         })
                     }
                 },
-                isFilterable: function (column) {
-                    return column.sourceItem != null && column.sortable && (column.sourceItem.notFilterable == null || !column.sourceItem.notFilterable)
-                }
+            //    isFilterable: function (column) {
+            //        return column.sourceItem != null && column.sortable && (column.sourceItem.notFilterable == null || !column.sourceItem.notFilterable)
+            //    }
             });
             headerFilters.onFilterApplied.subscribe(function () {
                 dg.refresh()
