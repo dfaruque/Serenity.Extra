@@ -16,10 +16,10 @@ public static class EnumUtil
     }
 
 
-    public static string GetEnumDescription(this Enum value)
+    public static string GetEnumDescription(this Enum value, string emptyText = "")
     {
         if (value == null)
-            return string.Empty;
+            return emptyText;
 
         return EnumMapper.FormatEnum(value.GetType(), value);
     }
