@@ -16,13 +16,13 @@ public static class EnumUtil
     }
 
 
-    //public static string GetEnumDescription(this Enum value)
-    //{
-    //    if (value == null)
-    //        return string.Empty;
-
-    //    return EnumMapper.FormatEnum(value.GetType(), value);
-    //}
+//    public static string GetEnumDescription(this Enum value, string emptyText = "")
+//    {
+//        if (value == null)
+//            return emptyText;
+//
+//        return EnumMapper.FormatEnum(value.GetType(), value);
+//    }
 
     public static string GetCssClass(this Enum value, string defaultClass = "")
     {

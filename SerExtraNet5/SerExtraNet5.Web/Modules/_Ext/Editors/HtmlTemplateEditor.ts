@@ -1,6 +1,5 @@
 ﻿namespace _Ext {
     @Serenity.Decorators.editor()
-    @Serenity.Decorators.element("<div/>")
     export class HtmlTemplateEditor extends Serenity.HtmlContentEditor {
         constructor(textArea: JQuery, opt?: HtmlTemplateEditorOptions) {
             super(textArea, opt);

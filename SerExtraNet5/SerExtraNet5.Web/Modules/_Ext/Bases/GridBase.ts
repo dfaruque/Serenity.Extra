@@ -495,7 +495,7 @@ namespace _Ext {
                         } else if (c.sourceItem.formatterType == String("DateTime")) {
                             fixedSizeColumns.push(c);
 
-                            if (c.width < 140) c.width = 140
+                            if (c.width < 150) c.width = 150
                         } else if (c.sourceItem.formatterType == String("Checkbox")) {
                             fixedSizeColumns.push(c);
                         } else {

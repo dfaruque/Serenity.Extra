@@ -46,20 +46,20 @@ public static class DateTimeHelper
     }
 
     /// <summary>
-    /// Gets date time string of "dd-MM-yyyy HH:mm" format for current culture.
+    /// Gets date time string of default date time format for current culture.
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
     public static string ToDateTimeFormat(this DateTime? inputValue)
     {
-        string format = "dd-MM-yyyy HH:mm";
-        string result = inputValue?.ToString(format).Replace('.', ':');
+        string format = DateHelper.CurrentDateTimeFormat;
+        string result = inputValue?.ToString(format);
         return result;
     }
     public static string ToDateTimeFormat(this DateTime inputValue)
     {
-        string format = "dd-MM-yyyy HH:mm";
-        string result = inputValue.ToString(format).Replace('.', ':');
+        string format = DateHelper.CurrentDateTimeFormat;
+        string result = inputValue.ToString(format);
         return result;
     }
 
@@ -129,6 +129,12 @@ public static class DateTimeHelper
             return (inputValue.Year - 1).ToString() + "-" + inputValue.Year.ToString();
 
         }
+    }
+
+    public static DateTime GetFinancialYearStartDate(this DateTime inputValue)
+    {
+        var year = inputValue.Month > 6 ? inputValue.Year : inputValue.Year - 1;
+        return new DateTime(year, 7, 1);
     }
 
 }

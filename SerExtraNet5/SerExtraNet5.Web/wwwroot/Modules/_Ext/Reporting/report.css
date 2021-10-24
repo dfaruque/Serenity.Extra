@@ -2,6 +2,10 @@
     font-family: /*'Siyam Rupali ANSI', 'Siyam Rupali',*/ Helvetica, Tahoma, Arial, sans-serif !important;
 }
 
+body {
+    overflow-x:auto !important;
+}
+
 ol {
     list-style-position: inside;
 }
@@ -85,7 +89,7 @@ hr {
 }
 
 .rpt-sign-line {
-    border-top: 1px solid black; 
+    border-top: 1px solid black;
     margin-left: 20px;
     text-align: center;
 }

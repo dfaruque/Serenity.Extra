@@ -128,10 +128,9 @@ namespace q {
     }
 
     export function setMaxDate(editor: Serenity.DateEditor, value: Date): void {
-        editor.element.datepicker("option", "maxDate", value);
-        let today = new Date();
-        let tomorrow = today.setDate(today.getDate() + 1); //to allow selection of today, without this line validation error is occured. why? may be a bug
-        editor.set_maxDate(new Date(tomorrow));
+        let date = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 23, 59, 59, 999); 
+        editor.element.datepicker("option", "maxDate", date);
+        editor.set_maxDate(value);
     }
 
     export function initDateRangeEditor(fromDateEditor: Serenity.DateEditor, toDateEditor: Serenity.DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
