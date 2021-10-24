@@ -2180,6 +2180,9 @@
     <Compile Include="Imports\ClientTypes\_Ext.InlineImageFormatterAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Imports\ClientTypes\_Ext.InlineMultipleImageFormatterAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Imports\ClientTypes\_Ext.JsonViewerAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>

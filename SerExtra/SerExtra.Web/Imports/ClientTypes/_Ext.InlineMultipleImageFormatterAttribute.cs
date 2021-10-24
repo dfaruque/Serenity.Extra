@@ -7,11 +7,11 @@ using System.ComponentModel;
 
 namespace _Ext
 {
-    public partial class InlineImageFormatterAttribute : CustomFormatterAttribute
+    public partial class InlineMultipleImageFormatterAttribute : CustomFormatterAttribute
     {
-        public const string Key = "_Ext.InlineImageFormatter";
+        public const string Key = "_Ext.InlineMultipleImageFormatter";
 
-        public InlineImageFormatterAttribute()
+        public InlineMultipleImageFormatterAttribute()
             : base(Key)
         {
         }
@@ -26,6 +26,12 @@ namespace _Ext
         {
             get { return GetOption<String>("fileProperty"); }
             set { SetOption("fileProperty", value); }
+        }
+
+        public Boolean InlineUpload
+        {
+            get { return GetOption<Boolean>("inlineUpload"); }
+            set { SetOption("inlineUpload", value); }
         }
 
         public String MaxHeight
