@@ -134,7 +134,7 @@ namespace _Ext {
                             valign: 'middle',
                             lineColor: 0
                         },
-                        headerStyles: { fillColor: 255, textColor: 0, lineWidth: 1, fillStyle: 'S', halign: 'center', valign: 'middle'  },
+                        headerStyles: { fillColor: 255, textColor: 0, lineWidth: 1, fillStyle: 'S', halign: 'center', valign: 'middle' },
                         columnStyles: columnStyles
                     }, options.tableOptions) as jsPDF.AutoTableOptions;
 
@@ -144,7 +144,7 @@ namespace _Ext {
                             doc.addImage(q.jsPDFHeaderImageData, 'PNG', 40, 40, 60, 60);
                         }
                         doc.autoTable([q.jsPDFHeaderTitle], [], {
-                            margin: { bottom: 10 , left: 110},
+                            margin: { bottom: 10, left: 110 },
                             startY: options.titleTop || 45,
                             headerStyles: { fillColor: 255, textColor: 0 },
                             styles: { halign: 'left', fontSize: 18 }
@@ -158,7 +158,7 @@ namespace _Ext {
                         reportTitle += " Report";
 
                         doc.autoTable([reportTitle], [], {
-                            margin: { top: 10, bottom: 10, left: 110},
+                            margin: { top: 10, bottom: 10, left: 110 },
                             startY: doc.autoTableEndPosY(),
                             headerStyles: { fillColor: 255, textColor: 0 },
                             styles: { halign: 'left', fontSize: 14 }
@@ -170,7 +170,7 @@ namespace _Ext {
                         var header = function (data) {
 
                         };
-                        autoOptions.beforePageContent = header;
+                        (autoOptions as any).beforePageContent = header;
                     }
 
                     ///region Footer
@@ -184,10 +184,10 @@ namespace _Ext {
                                 }
                                 doc.autoTableText(str, doc.internal.pageSize.width / 2,
                                     doc.internal.pageSize.height - autoOptions.margin.bottom, {
-                                        halign: 'center'
-                                    });
+                                    halign: 'center'
+                                });
                             };
-                            autoOptions.afterPageContent = footer;
+                            (autoOptions as any).afterPageContent = footer;
                         }
                     }
 

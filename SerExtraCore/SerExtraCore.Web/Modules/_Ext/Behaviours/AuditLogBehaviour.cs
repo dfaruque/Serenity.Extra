@@ -80,11 +80,12 @@ namespace _Ext
                     if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
                     {
                         int versionNo = (lastVersion?.VersionNo ?? 0) + 1;
+                        int.TryParse(Authorization.UserId, out int userID);
 
                         var auditLogRow = new AuditLogRow
                         {
                             VersionNo = versionNo,
-                            UserId = int.Parse(Authorization.UserId),
+                            UserId = userID,
                             ActionType = auditActionType,
                             ActionDate = DateTime.Now,
                             EntityTableName = row.Table,
@@ -94,8 +95,8 @@ namespace _Ext
 #if COREFX
 
 #else
-                            IpAddress = HttpContext.Current.Request.UserHostAddress,
-                            SessionId = HttpContext.Current.Session.SessionID
+                            IpAddress = HttpContext.Current?.Request?.UserHostAddress,
+                            SessionId = HttpContext.Current?.Session?.SessionID
 #endif
                         };
 

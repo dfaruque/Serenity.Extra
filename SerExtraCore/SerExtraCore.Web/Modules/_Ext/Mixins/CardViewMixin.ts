@@ -73,7 +73,7 @@
                 this.vm.items = this.dataGrid.getItems()
             else {
                 usingVuejs();
-                this.vm = new Vue({
+                this.vm = new window['Vue']({
                     el: this.cardContainer.children()[0],
                     template: this.options.containerTemplate ? `<div> ${this.options.containerTemplate} </div>`
                         : `<div class="card-items">
