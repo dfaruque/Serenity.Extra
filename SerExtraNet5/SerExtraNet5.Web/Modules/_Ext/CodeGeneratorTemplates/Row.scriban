@@ -1,4 +1,4 @@
-﻿namespace {{RootNamespace}}{{DotModule}}.Entities
+﻿namespace {{RootNamespace}}{{DotModule}}
 {
     using Serenity;
     using Serenity.ComponentModel;
