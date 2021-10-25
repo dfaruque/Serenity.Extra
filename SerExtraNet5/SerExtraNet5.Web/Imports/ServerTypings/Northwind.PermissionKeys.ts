@@ -1,5 +1,5 @@
 ﻿namespace SerExtraNet5.Northwind {
-    declare namespace PermissionKeys {
+    export namespace PermissionKeys {
         export const General = "Northwind:General";
 
         namespace Customer {

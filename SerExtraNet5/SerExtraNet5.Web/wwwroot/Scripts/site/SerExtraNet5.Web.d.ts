@@ -953,13 +953,9 @@ declare namespace SerExtraNet5.Northwind {
 }
 declare namespace SerExtraNet5.Northwind {
     interface CategoryForm {
-        CategoryName: Serenity.StringEditor;
-        Description: Serenity.StringEditor;
     }
     class CategoryForm extends Serenity.PrefixedContext {
         static formKey: string;
-        private static init;
-        constructor(prefix: string);
     }
 }
 declare namespace SerExtraNet5.Northwind {
@@ -1047,6 +1043,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class CustomerColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface CustomerCustomerDemoRow {
@@ -2193,17 +2192,7 @@ declare namespace _Ext {
 }
 declare namespace _Ext {
     interface AuditLogForm {
-        EntityTableName: Serenity.StringEditor;
-        VersionNo: Serenity.IntegerEditor;
-        UserId: Serenity.LookupEditor;
-        ActionType: Serenity.EnumEditor;
-        ActionDate: Serenity.DateTimeEditor;
-        EntityId: Serenity.IntegerEditor;
-        OldEntity: Serenity.StringEditor;
-        NewEntity: Serenity.StringEditor;
         Differences: StaticTextBlock;
-        IpAddress: Serenity.StringEditor;
-        SessionId: Serenity.StringEditor;
     }
     class AuditLogForm extends Serenity.PrefixedContext {
         static formKey: string;
