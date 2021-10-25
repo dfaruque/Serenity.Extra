@@ -101,7 +101,7 @@ declare namespace _Ext {
         protected getUpdatePermission(): string;
         protected getDeletePermission(): string;
         protected get_ExtDialogOptions(): ExtDialogOptions;
-        private loadedState;
+        protected loadedState: string;
         isReadOnly: boolean;
         protected form: any;
         constructor(opt?: any);

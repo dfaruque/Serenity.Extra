@@ -4,11 +4,11 @@ using System;
 
 public static partial class Q
 {
-    //public static void CheckNull(object value, string paramName)
-    //{
-    //    if (value == null)
-    //        throw new ValidationError(String.Format(LocalText.Get("Validation.FieldIsRequired"), paramName));
-    //}
+    public static void CheckNull(object value, string paramName)
+    {
+        if (value == null)
+            throw new ArgumentNullException(paramName);
+    }
 
     public static void CheckNullOrEmpty(string value, string paramName)
     {
