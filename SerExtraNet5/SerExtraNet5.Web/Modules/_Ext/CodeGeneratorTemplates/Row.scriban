@@ -33,15 +33,9 @@
 {{~end}}
         #endregion Foreign Fields
 
-{{~if Identity}}
-        IIdField IIdRow.IdField { get { return Fields.{{Identity}}; } }
-{{end~}}
-{{~if NameField}}
-        StringField INameRow.NameField { get { return Fields.{{NameField}}; } }
-{{end}}
-        public static readonly RowFields Fields = new RowFields().Init();
+        public {{RowClassName}}() : base() { }
 
-        public {{RowClassName}}() : base(Fields) { }
+        public {{RowClassName}}(RowFields fields) : base(fields) { }
 
 		public partial class RowFields : {{FieldsBaseClass}} { }
     }
