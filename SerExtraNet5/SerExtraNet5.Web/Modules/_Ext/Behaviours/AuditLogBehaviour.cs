@@ -92,7 +92,7 @@ namespace _Ext
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
             }
