@@ -1,8 +1,10 @@
-﻿{
+{
   "RootNamespace": "SerExtraNet5",
   "ServerTypings": {
     "LocalTexts": true
   },
+  "Connections": [],
+  "CustomTemplates": "D:\\Faruque\\Projects\\Serenity.Extra\\SerExtraNet5\\SerExtraNet5.Web\\Modules\\_Ext\\CodeGeneratorTemplates",
   "UpgradeInfo": {
     "InitialType": "Community",
     "InitialVersion": "5.0.24.0"
