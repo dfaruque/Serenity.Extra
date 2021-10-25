@@ -179,7 +179,7 @@ namespace SerExtraNet5
             return null;
         }
 
-        [HttpPost, JsonFilter]
+        [HttpPost, JsonRequest]
         public ActionResult Retrieve(ReportRetrieveRequest request,
             [FromServices] IPropertyItemProvider propertyItemProvider)
         {

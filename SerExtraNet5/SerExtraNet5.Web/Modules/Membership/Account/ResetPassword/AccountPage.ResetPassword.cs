@@ -54,7 +54,7 @@ namespace SerExtraNet5.Membership.Pages
 
         }
 
-        [HttpPost, JsonFilter]
+        [HttpPost, JsonRequest]
         public Result<ServiceResponse> ResetPassword(ResetPasswordRequest request, [FromServices] ISqlConnections sqlConnections)
         {
             return this.InTransaction("Default", uow =>

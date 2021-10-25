@@ -2285,6 +2285,51 @@ declare namespace _Ext {
         }
     }
 }
+declare namespace _Ext.DevTools {
+    interface SergenConnection {
+        Key?: string;
+    }
+}
+declare namespace _Ext.DevTools {
+    interface SergenGenerateOptions {
+        Row?: boolean;
+        Service?: boolean;
+        UI?: boolean;
+    }
+}
+declare namespace _Ext.DevTools {
+    interface SergenGenerateRequest extends Serenity.ServiceRequest {
+        ConnectionKey?: string;
+        Table?: SergenTable;
+        GenerateOptions?: SergenGenerateOptions;
+    }
+}
+declare namespace _Ext.DevTools {
+    interface SergenListTablesRequest extends Serenity.ServiceRequest {
+        ConnectionKey?: string;
+    }
+}
+declare namespace _Ext.DevTools {
+    namespace SergenService {
+        const baseUrl = "Administration/Sergen";
+        function ListConnections(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.ListResponse<SergenConnection>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function ListTables(request: SergenListTablesRequest, onSuccess?: (response: Serenity.ListResponse<SergenTable>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Generate(request: SergenGenerateRequest, onSuccess?: (response: Serenity.ServiceResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            ListConnections = "Administration/Sergen/ListConnections",
+            ListTables = "Administration/Sergen/ListTables",
+            Generate = "Administration/Sergen/Generate"
+        }
+    }
+}
+declare namespace _Ext.DevTools {
+    interface SergenTable {
+        Tablename?: string;
+        Identifier?: string;
+        Module?: string;
+        PermissionKey?: string;
+    }
+}
 declare namespace _Ext {
     interface EntityReportRequest extends Serenity.RetrieveRequest {
         ReportKey?: string;
@@ -4316,6 +4361,12 @@ declare namespace _Ext {
         protected getToolbarButtons(): Serenity.ToolButton[];
     }
 }
+declare var Vue: any;
+declare namespace _Ext.DevTools {
+    class SergenPanel extends Serenity.Widget<any> {
+        constructor(container: JQuery);
+    }
+}
 declare namespace _Ext {
     class AutoCompleteEditor extends Serenity.StringEditor {
         constructor(input: JQuery, options: AutoCompleteOptions);
@@ -4809,55 +4860,4 @@ declare namespace q {
     function ToFixed(value: any, fractionDigits?: number): string;
     function ToBool(value: any): boolean;
     function getRandomColor(hexLetters: any): string;
-}
-declare var Vue: any;
-declare namespace _Ext.DevTools {
-    class SergenPanel extends Serenity.Widget<any> {
-        constructor(container: JQuery);
-    }
-}
-declare namespace _Ext.DevTools {
-    interface SergenConnection {
-        Key?: string;
-    }
-}
-declare namespace _Ext.DevTools {
-    interface SergenGenerateOptions {
-        Row?: boolean;
-        Service?: boolean;
-        UI?: boolean;
-    }
-}
-declare namespace _Ext.DevTools {
-    interface SergenGenerateRequest extends Serenity.ServiceRequest {
-        ConnectionKey?: string;
-        Table?: SergenTable;
-        GenerateOptions?: SergenGenerateOptions;
-    }
-}
-declare namespace _Ext.DevTools {
-    interface SergenListTablesRequest extends Serenity.ServiceRequest {
-        ConnectionKey?: string;
-    }
-}
-declare namespace _Ext.DevTools {
-    namespace SergenService {
-        const baseUrl = "Administration/Sergen";
-        function ListConnections(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.ListResponse<SergenConnection>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function ListTables(request: SergenListTablesRequest, onSuccess?: (response: Serenity.ListResponse<SergenTable>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Generate(request: SergenGenerateRequest, onSuccess?: (response: Serenity.ServiceResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            ListConnections = "Administration/Sergen/ListConnections",
-            ListTables = "Administration/Sergen/ListTables",
-            Generate = "Administration/Sergen/Generate"
-        }
-    }
-}
-declare namespace _Ext.DevTools {
-    interface SergenTable {
-        Tablename?: string;
-        Identifier?: string;
-        Module?: string;
-        PermissionKey?: string;
-    }
 }

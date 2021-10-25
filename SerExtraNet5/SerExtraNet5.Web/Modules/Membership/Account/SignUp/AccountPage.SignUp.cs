@@ -25,7 +25,7 @@ namespace SerExtraNet5.Membership.Pages
                 return View(MVC.Views.Membership.Account.SignUp.AccountSignUp);
         }
 
-        [HttpPost, JsonFilter]
+        [HttpPost, JsonRequest]
         public Result<ServiceResponse> SignUp(SignUpRequest request,
             [FromServices] IEmailSender emailSender,
             [FromServices] IOptions<EnvironmentSettings> options = null)

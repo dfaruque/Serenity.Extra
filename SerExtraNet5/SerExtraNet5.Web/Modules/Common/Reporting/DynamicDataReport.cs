@@ -64,9 +64,9 @@ namespace Serenity.Reporting
                         var propertyItemProvider = serviceProvider.GetRequiredService<IPropertyItemProvider>();
                         var items = propertyItemProvider.GetPropertyItemsFor(columnsType).ToList();
 
-                        if (typeof(ICustomizedFormScript).IsAssignableFrom(columnsType))
+                        if (typeof(ICustomizePropertyItems).IsAssignableFrom(columnsType))
                         {
-                            var instance = ActivatorUtilities.CreateInstance(serviceProvider, columnsType) as ICustomizedFormScript;
+                            var instance = ActivatorUtilities.CreateInstance(serviceProvider, columnsType) as ICustomizePropertyItems;
                             instance.Customize(items);
                         }
 

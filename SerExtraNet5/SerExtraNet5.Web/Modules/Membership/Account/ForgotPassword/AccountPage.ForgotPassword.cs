@@ -23,7 +23,7 @@ namespace SerExtraNet5.Membership.Pages
                 return View(MVC.Views.Membership.Account.ForgotPassword.AccountForgotPassword);
         }
 
-        [HttpPost, JsonFilter]
+        [HttpPost, JsonRequest]
         public Result<ServiceResponse> ForgotPassword(ForgotPasswordRequest request,
             [FromServices] IEmailSender emailSender,
             [FromServices] IOptions<EnvironmentSettings> options = null)

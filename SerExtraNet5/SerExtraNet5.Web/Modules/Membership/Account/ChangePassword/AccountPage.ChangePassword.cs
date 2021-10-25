@@ -18,7 +18,7 @@ namespace SerExtraNet5.Membership.Pages
             return View(MVC.Views.Membership.Account.ChangePassword.AccountChangePassword);
         }
 
-        [HttpPost, JsonFilter, ServiceAuthorize]
+        [HttpPost, JsonRequest, ServiceAuthorize]
         public Result<ServiceResponse> ChangePassword(ChangePasswordRequest request,
             [FromServices] IUserPasswordValidator passwordValidator)
         {
