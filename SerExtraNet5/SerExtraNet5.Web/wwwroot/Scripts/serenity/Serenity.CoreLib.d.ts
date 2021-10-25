@@ -572,6 +572,8 @@ declare namespace Serenity {
         Code?: string;
         Arguments?: string;
         Message?: string;
+        Details?: string;
+        ErrorId?: string;
     }
     interface ServiceResponse {
         Error?: Serenity.ServiceError;
@@ -627,6 +629,7 @@ declare namespace Serenity {
         ColumnSelection?: ColumnSelection;
         IncludeColumns?: string[];
         ExcludeColumns?: string[];
+        ExportColumns?: string[];
         DistinctFields?: string[];
     }
     interface ListResponse<TEntity> extends ServiceResponse {
@@ -1125,7 +1128,7 @@ declare namespace Q {
     function notifySuccess(message: string, title?: string, options?: ToastrOptions): void;
     function notifyInfo(message: string, title?: string, options?: ToastrOptions): void;
     function notifyError(message: string, title?: string, options?: ToastrOptions): void;
-    function positionToastContainer(create: boolean): void;
+    function positionToastContainer(create: boolean, options?: ToastrOptions): void;
 
     namespace ScriptData {
         function bindToChange(name: string, regClass: string, onChange: () => void): void;
@@ -2497,7 +2500,7 @@ declare namespace Serenity {
         addDateRange(field: string, title?: string): DateEditor;
         static dateRange(field: string, title?: string): QuickFilter<DateEditor, DateTimeEditorOptions>;
         addDateTimeRange(field: string, title?: string): DateTimeEditor;
-        static dateTimeRange(field: string, title?: string): QuickFilter<DateTimeEditor, DateTimeEditorOptions>;
+        static dateTimeRange(field: string, title?: string, useUtc?: boolean): QuickFilter<DateTimeEditor, DateTimeEditorOptions>;
         addBoolean(field: string, title?: string, yes?: string, no?: string): SelectEditor;
         static boolean(field: string, title?: string, yes?: string, no?: string): QuickFilter<SelectEditor, SelectEditorOptions>;
         onChange: (e: JQueryEventObject) => void;
@@ -2629,6 +2632,7 @@ declare namespace Serenity {
         protected validateBeforeSave(): boolean;
         protected updateTitle(): void;
         protected propertyGrid: PropertyGrid;
+        protected getFallbackTemplate(): string;
     }
 
     class EntityDialog<TItem, TOptions> extends TemplatedDialog<TOptions> implements IEditDialog, IReadOnly {
@@ -2745,6 +2749,7 @@ declare namespace Serenity {
         protected editClicked: boolean;
         protected isViewMode(): boolean;
         protected useViewMode(): boolean;
+        protected getFallbackTemplate(): string;
     }
 
     interface FilterOperator {
