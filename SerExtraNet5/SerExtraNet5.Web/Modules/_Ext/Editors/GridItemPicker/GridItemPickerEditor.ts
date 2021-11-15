@@ -1,24 +1,26 @@
 ﻿namespace _Ext {
     @Serenity.Decorators.registerClass([Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired])
     @Serenity.Decorators.editor()
-    @Serenity.Decorators.element('<div/>')
-    export class GridItemPickerEditor extends Serenity.TemplatedWidget<GridItemPickerEditorOptions>
+    @Serenity.Decorators.element("<input type=\"text\" />")
+    export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOptions>
         implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
-        protected getTemplate() {
-            return `<input type="text" class="value select2-offscreen" />
-                    <span class="select2-choice">
-                        <span class="display-text" style="user-select: text; padding-right: 20px;"></span>
-                        <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer"></a>
-                    </span>
-                    `;
-        };
 
+        containerDiv: JQuery;
         inplaceSearchButton: JQuery;
         inplaceViewButton: JQuery;
         clearSelectionButton: JQuery;
 
         constructor(container: JQuery, public options: GridItemPickerEditorOptions) {
             super(container, options);
+
+            this.element.addClass('select2-offscreen');
+
+            this.containerDiv = $(`<div class="editor s-GridItemPickerEditor select2-container has-inplace-button">
+                        <span class="select2-choice">
+                            <span class="display-text" style="user-select: text; padding-right: 20px;"></span>
+                            <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer"></a>
+                        </span>
+                    </div>`).insertBefore(this.element);
 
             this.addInplaceButtons();
 
@@ -28,11 +30,10 @@
 
         protected addInplaceButtons(): void {
             var self = this;
-            this.element.addClass('select2-container has-inplace-button');
 
             this.inplaceSearchButton = $('<a style="padding-top: 2px;"><i class="fa fa-search"></i></a>')
                 .addClass('inplace-button inplace-search align-center').attr('title', 'search')
-                .insertAfter(this.element)
+                .insertAfter(this.containerDiv)
                 .click(function (e) {
                     self.inplaceSearchClick(e);
                 });
@@ -45,10 +46,10 @@
                 .hide();
 
             if (this.options.inplaceView != false && !this.options.multiple) {
-                this.inplaceViewButton.insertAfter(this.element);
+                this.inplaceViewButton.insertAfter(this.containerDiv);
             }
 
-            this.clearSelectionButton = this.element.find('.select2-search-choice-close')
+            this.clearSelectionButton = this.containerDiv.find('.select2-search-choice-close')
                 .click(e => {
                     this.value = '';
                     this.text = '';
@@ -113,12 +114,12 @@
         }
 
         public get value(): string {
-            let editVal = this.element.find('input.value').val();
+            let editVal = this.element.val();
             return editVal;
         }
 
         public set value(val: string) {
-            this.element.find('input.value').val(val);
+            this.element.val(val);
 
             if (Q.isEmptyOrNull(val)) {
                 this.text = '';
@@ -145,12 +146,12 @@
         }
 
         public get text(): string {
-            let editVal = this.element.find('span.display-text').text();
+            let editVal = this.containerDiv.find('span.display-text').text();
             return editVal;
         }
 
         public set text(val: string) {
-            this.element.find('span.display-text').text(val);
+            this.containerDiv.find('span.display-text').text(val);
         }
 
         public getEditValue(property, target) {
@@ -186,23 +187,31 @@
         }
         set_readOnly(value: boolean): void {
             if (value) {
-                this.element.addClass('select2-container-disabled readonly');
+                this.element.addClass('readonly');
+                this.containerDiv.addClass('select2-container-disabled');
                 this.inplaceSearchButton.addClass('disabled').hide();
                 this.clearSelectionButton.addClass('disabled').hide();
             } else {
-                this.element.removeClass('select2-container-disabled readonly')
+                this.element.removeClass('readonly')
+                this.containerDiv.removeClass('select2-container-disabled');
                 this.inplaceSearchButton.removeClass('disabled').show();
                 this.clearSelectionButton.removeClass('disabled').show();
             }
         }
 
         get_required(): boolean {
-            return this.element.find('input.value').hasClass('required');
+            return this.element.hasClass('required');
         }
         set_required(value: boolean): void {
             if (value) {
-                this.element.find('input.value, .select2-choice, span.display-text').addClass('required');
-            };
+                this.element.addClass('required');
+                this.containerDiv.addClass('required');
+                this.containerDiv.find('.select2-choice, span.display-text').addClass('required');
+            } else {
+                this.element.removeClass('required');
+                this.containerDiv.removeClass('required');
+                this.containerDiv.find('.select2-choice, span.display-text').removeClass('required');
+            }
         }
 
 
