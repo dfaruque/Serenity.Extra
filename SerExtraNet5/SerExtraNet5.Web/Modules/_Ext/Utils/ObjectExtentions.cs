@@ -20,14 +20,14 @@ public static partial class ObjectExtentions
         else return false;
     }
 
-    //public static string ToYesNo(this bool inputValue)
-    //{
-    //    return inputValue == true ? LocalText.TryGet("Dialogs.YesButton") ?? "Yes" : LocalText.TryGet("Dialogs.NoButton") ?? "No";
-    //}
-
-    public static string ToYesNo(this bool? inputValue)
+    public static string ToYesNo(this bool inputValue, ITextLocalizer localizer)
     {
-        return ToYesNo(inputValue ?? false);
+        return inputValue == true ? localizer.TryGet("Dialogs.YesButton") ?? "Yes" : localizer.TryGet("Dialogs.NoButton") ?? "No";
+    }
+
+    public static string ToYesNo(this bool? inputValue, ITextLocalizer localizer)
+    {
+        return ToYesNo(inputValue ?? false, localizer);
     }
 
     public static string ToStringTk(this decimal input)
@@ -108,10 +108,16 @@ public static partial class ObjectExtentions
         return (input ?? 0).ToString("N", new System.Globalization.CultureInfo("en-US"));
 
     }
+
     public static string ToUSFormat(this decimal input)
     {
         return input.ToString("N", new System.Globalization.CultureInfo("en-US"));
 
+    }
+
+    public static string ToKFormat(this decimal input)
+    {
+        return input.ToString("#,##0,", new System.Globalization.CultureInfo("en-US"));
     }
 
 }
