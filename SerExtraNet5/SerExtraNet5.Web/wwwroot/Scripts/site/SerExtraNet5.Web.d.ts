@@ -8,6 +8,7 @@ declare namespace q {
     var queryString: {};
     var jsPDFHeaderImageData: string;
     var jsPDFHeaderTitle: string;
+    var ListExcelServiceMethodName: string;
     var useSerenityInlineEditors: boolean;
     var DefaultMainGridOptions: ExtGridOptions;
     var DefaultEditorGridOptions: ExtGridOptions;
@@ -146,7 +147,7 @@ declare namespace _Ext {
     }
 }
 declare namespace _Ext {
-    class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+    class GridEditorBaseWithOption<TEntity, TOptions> extends _Ext.GridBase<TEntity, TOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
         protected get_ExtGridOptions(): ExtGridOptions;
         protected getIdProperty(): string;
         isChildGrid: boolean;
@@ -173,6 +174,7 @@ declare namespace _Ext {
         protected createToolbarExtensions(): void;
         protected onViewFilter(row: any): boolean;
         private matchContains;
+        getFilteredItems(): TEntity[];
         protected enableFiltering(): boolean;
         protected onViewSubmit(): boolean;
         get_readOnly(): boolean;
@@ -182,6 +184,12 @@ declare namespace _Ext {
         onItemsChanged(): void;
         onBeforeGetValue(items: TEntity[]): void;
     }
+    class GridEditorBase<TEntity> extends GridEditorBaseWithOption<TEntity, any> {
+    }
+    class GridEditorBaseForJsonField<TEntity> extends GridEditorBaseWithOption<TEntity, any> {
+        protected getRowIdField(): string;
+        getEditValue(property: any, target: any): void;
+    }
 }
 declare namespace _Ext {
     class JsonGridEditorBase<TEntity> extends _Ext.GridEditorBase<TEntity> {
@@ -190,6 +198,9 @@ declare namespace _Ext {
     }
 }
 declare namespace SerExtraNet5.Administration {
+    class LanguageColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Administration {
     interface LanguageForm {
@@ -243,8 +254,15 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
+    namespace PermissionKeys {
+        const Security = "Administration:Security";
+        const Translation = "Administration:Translation";
+    }
 }
 declare namespace SerExtraNet5.Administration {
+    class RoleColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Administration {
     interface RoleForm {
@@ -381,6 +399,9 @@ declare namespace SerExtraNet5.Administration {
     }
 }
 declare namespace SerExtraNet5.Administration {
+    class UserColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Administration {
     interface UserForm {
@@ -599,6 +620,9 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
+    class CustomerGrossSalesColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.BasicSamples {
     interface CustomerGrossSalesListRequest extends Serenity.ListRequest {
@@ -616,6 +640,9 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
+    class DragDropSampleColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.BasicSamples {
     interface DragDropSampleForm {
@@ -689,6 +716,9 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.BasicSamples {
+    class InlineImageInGridColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.BasicSamples {
     interface LookupFilterByMultipleForm {
@@ -950,12 +980,19 @@ declare namespace SerExtraNet5.Membership {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class CategoryColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface CategoryForm {
+        CategoryName: Serenity.StringEditor;
+        Description: Serenity.StringEditor;
     }
     class CategoryForm extends Serenity.PrefixedContext {
         static formKey: string;
+        private static init;
+        constructor(prefix: string);
     }
 }
 declare namespace SerExtraNet5.Northwind {
@@ -1498,8 +1535,14 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class OrderColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
+    class OrderDetailColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface OrderDetailForm {
@@ -1702,8 +1745,14 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    namespace PermissionKeys {
+        const General = "Northwind:General";
+    }
 }
 declare namespace SerExtraNet5.Northwind {
+    class ProductColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface ProductForm {
@@ -1895,6 +1944,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class RegionColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface RegionForm {
@@ -1946,6 +1998,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class SalesByCategoryColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface SalesByCategoryRow {
@@ -1979,6 +2034,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class ShipperColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface ShipperForm {
@@ -2032,6 +2090,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class SupplierColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface SupplierForm {
@@ -2112,6 +2173,9 @@ declare namespace SerExtraNet5.Northwind {
     }
 }
 declare namespace SerExtraNet5.Northwind {
+    class TerritoryColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace SerExtraNet5.Northwind {
     interface TerritoryForm {
@@ -2189,10 +2253,23 @@ declare namespace _Ext {
     }
 }
 declare namespace _Ext {
+    class AuditLogColumns {
+        static columnsKey: string;
+    }
 }
 declare namespace _Ext {
     interface AuditLogForm {
+        EntityTableName: Serenity.StringEditor;
+        VersionNo: Serenity.IntegerEditor;
+        UserId: Serenity.LookupEditor;
+        ActionType: Serenity.EnumEditor;
+        ActionDate: Serenity.DateTimeEditor;
+        EntityId: Serenity.IntegerEditor;
+        OldEntity: Serenity.StringEditor;
+        NewEntity: Serenity.StringEditor;
         Differences: StaticTextBlock;
+        IpAddress: Serenity.StringEditor;
+        SessionId: Serenity.StringEditor;
     }
     class AuditLogForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -4494,9 +4571,9 @@ declare namespace _Ext {
     }
 }
 declare namespace _Ext {
-    class GridItemPickerEditor extends Serenity.TemplatedWidget<GridItemPickerEditorOptions> implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
+    class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOptions> implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
         options: GridItemPickerEditorOptions;
-        protected getTemplate(): string;
+        containerDiv: JQuery;
         inplaceSearchButton: JQuery;
         inplaceViewButton: JQuery;
         clearSelectionButton: JQuery;
@@ -4689,6 +4766,7 @@ declare namespace _Ext {
         grid: Serenity.DataGrid<any, any>;
         service: string;
         onViewSubmit: () => boolean;
+        editRequest?: (request: Serenity.ListRequest) => Serenity.ListRequest;
         title?: string;
         hint?: string;
         separator?: boolean;
