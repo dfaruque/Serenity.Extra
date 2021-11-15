@@ -63,8 +63,8 @@ namespace _Ext
 
                     ClearAssignment(oldRow);
 
-                    var oldrowJson = JsonConvert.SerializeObject(oldRow);
-                    var rowJson = JsonConvert.SerializeObject(row);
+                    var oldrowJson = oldRow.ToJson();
+                    var rowJson = row.ToJson();
 
                     if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
                     {
