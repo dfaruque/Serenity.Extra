@@ -30,12 +30,12 @@ namespace q {
     }
 
     export function getDays(pFromDate: Date, pToDate: Date): number {
+        if (!pFromDate || !pToDate) return 1;
+
         let fromDate = new Date(pFromDate.getFullYear(), pFromDate.getMonth(), pFromDate.getDate());
         let toDate = new Date(pToDate.getFullYear(), pToDate.getMonth(), pToDate.getDate(), 23, 59, 59);
 
         let days = q.getHours(fromDate, toDate) / 24;
-
-        //days = days <= 0 ? 1 : days;
 
         return Math.ceil(days);
     }
@@ -128,7 +128,7 @@ namespace q {
     }
 
     export function setMaxDate(editor: Serenity.DateEditor, value: Date): void {
-        let date = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 23, 59, 59, 999); 
+        let date = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 23, 59, 59, 999);
         editor.element.datepicker("option", "maxDate", date);
         editor.set_maxDate(value);
     }
@@ -153,6 +153,7 @@ namespace q {
         endDateTextBox.datepicker('option', 'minDate', startDateTextBox.datepicker('getDate'));
         startDateTextBox.datepicker('option', 'onSelect', function (selectedDateTime) {
             endDateTextBox.datepicker('option', 'minDate', startDateTextBox.datepicker('getDate'));
+            if (onChangeHandler) onChangeHandler(selectedDateTime);
         });
 
 
@@ -171,15 +172,16 @@ namespace q {
         startDateTextBox.datepicker('option', 'maxDate', endDateTextBox.datepicker('getDate'));
         endDateTextBox.datepicker('option', 'onSelect', function (selectedDateTime) {
             startDateTextBox.datepicker('option', 'maxDate', endDateTextBox.datepicker('getDate'));
+            if (onChangeHandler) onChangeHandler(selectedDateTime);
         });
 
+        //to fire change event on keyboard input
         if (onChangeHandler) {
             setTimeout(() => {
                 fromDateEditor.change(onChangeHandler);
 
                 toDateEditor.change(onChangeHandler);
             }, 500);
-
         }
     }
 
@@ -230,6 +232,14 @@ namespace q {
             if (onChangeHandler) onChangeHandler(selectedDateTime);
         });
 
+        //to fire change event on keyboard input
+        if (onChangeHandler) {
+            setTimeout(() => {
+                fromDateTimeEditor.change(onChangeHandler);
+
+                toDateTimeEditor.change(onChangeHandler);
+            }, 500);
+        }
     }
 
     export function formatDate(d: Date | string, format?: string) {
