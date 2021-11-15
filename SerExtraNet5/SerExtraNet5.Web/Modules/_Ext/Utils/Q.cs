@@ -85,30 +85,30 @@ public static partial class Q
     //        return connection.TryFirstByName<TRow>(name);
     //}
 
-    //public static void CopyFieldValues(Row target, Row source, bool copyIfTargetValueIsNull = true, ICollection<Field> fields = null)
-    //{
-    //    if (fields == null) fields = target.GetFields();
+    public static void CopyFieldValues(IRow target, IRow source, bool copyIfTargetValueIsNull = true, ICollection<Field> fields = null)
+    {
+        if (fields == null) fields = target.GetFields();
 
-    //    foreach (var field in fields)
-    //    {
-    //        if (field.Flags.HasFlag(FieldFlags.Identity)) continue;
-    //        try
-    //        {
-    //            var sourceValue = source[field.Name];
-    //            var targetValue = target[field.Name];
+        foreach (var field in fields)
+        {
+            if (field.Flags.HasFlag(FieldFlags.Identity)) continue;
+            try
+            {
+                var sourceValue = source[field.Name];
+                var targetValue = target[field.Name];
 
-    //            if (copyIfTargetValueIsNull)
-    //            {
-    //                target[field.Name] = targetValue ?? sourceValue;
-    //            }
-    //            else
-    //            {
-    //                target[field.Name] = sourceValue;
-    //            }
-    //        }
-    //        catch { }
-    //    }
-    //}
+                if (copyIfTargetValueIsNull)
+                {
+                    target[field.Name] = targetValue ?? sourceValue;
+                }
+                else
+                {
+                    target[field.Name] = sourceValue;
+                }
+            }
+            catch { }
+        }
+    }
 
     public static void CopyNonNullPropertyValues<T>(T target, T source)
     {
