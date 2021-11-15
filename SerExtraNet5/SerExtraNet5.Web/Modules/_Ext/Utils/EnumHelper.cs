@@ -15,14 +15,25 @@ public static class EnumUtil
         return Enum.GetValues(typeof(T)).Cast<T>();
     }
 
+    public static string GetEnumDescription(this Enum value, ITextLocalizer localizer, string emptyText = "")
+    {
+        if (value == null)
+            return emptyText;
 
-//    public static string GetEnumDescription(this Enum value, string emptyText = "")
-//    {
-//        if (value == null)
-//            return emptyText;
-//
-//        return EnumMapper.FormatEnum(value.GetType(), value);
-//    }
+        return localizer.FormatEnum(value.GetType(), value);
+    }
+
+    public static string GetDescription(this Enum value, string emptyText = "")
+    {
+        if (value == null)
+            return emptyText;
+
+        FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
+
+        var attribute = (DescriptionAttribute)fieldInfo.GetCustomAttribute(typeof(DescriptionAttribute));
+
+        return attribute?.Description ?? emptyText;
+    }
 
     public static string GetCssClass(this Enum value, string defaultClass = "")
     {
