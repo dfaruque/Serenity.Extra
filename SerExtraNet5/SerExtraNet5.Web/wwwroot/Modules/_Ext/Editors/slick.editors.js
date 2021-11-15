@@ -972,9 +972,9 @@ function SerenityInlineEditor(args) {
     }
 
     this.isValueChanged = () => {
-        var isValueEmpty = editor.value == "" || editor.value == null || editor.value == undefined;
-        var isDefaultValueEmpty = defaultValue == "" || defaultValue == null || defaultValue == undefined;
-        return (!(isValueEmpty && isDefaultValueEmpty)) && (editor.value != defaultValue);
+        var isValueEmpty = editor.value === "" || editor.value === null || editor.value === undefined;
+        var isDefaultValueEmpty = defaultValue === "" || defaultValue === null || defaultValue === undefined;
+        return (!(isValueEmpty && isDefaultValueEmpty)) && (editor.value !== defaultValue);
     }
 
     this.validate = () => {
