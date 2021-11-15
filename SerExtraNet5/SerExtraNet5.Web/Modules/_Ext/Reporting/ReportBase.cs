@@ -1,5 +1,7 @@
 ﻿using Serenity;
+using Serenity.Data;
 using Serenity.Reporting;
+using Serenity.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,32 @@ namespace _Ext
     public partial class ListReportBase : ReportBase
     {
         public ListReportRequest Request { get; set; }
+
+        public ListReportBase(IRequestContext requestContext, ISqlConnections sqlConnections) : base(requestContext, sqlConnections)
+        {
+
+        }
     }
 
     public partial class EntityReportBase : ReportBase
     {
         public EntityReportRequest Request { get; set; }
+
+        public EntityReportBase(IRequestContext requestContext, ISqlConnections sqlConnections) : base(requestContext, sqlConnections)
+        {
+
+        }
     }
 
-    public abstract class ReportBase : ICustomizeHtmlToPdf
+    public abstract class ReportBase : BaseRepository, ICustomizeHtmlToPdf
     {
+        protected ISqlConnections SqlConnections { get; private set; }
+        protected IRequestContext RequestContext { get; private set; }
+        public ReportBase(IRequestContext requestContext, ISqlConnections sqlConnections) : base(requestContext)
+        {
+            SqlConnections = sqlConnections;
+            RequestContext = requestContext;
+        }
 
         public virtual void Customize(IHtmlToPdfOptions options)
         {
