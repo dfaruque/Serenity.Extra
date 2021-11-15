@@ -4,6 +4,7 @@
         grid: Serenity.DataGrid<any, any>;
         service: string;
         onViewSubmit: () => boolean;
+        editRequest?: (request: Serenity.ListRequest) => Serenity.ListRequest;
         title?: string;
         hint?: string;
         separator?: boolean;
@@ -14,8 +15,8 @@
         export function createToolButton(options: ExcelExportOptions): Serenity.ToolButton {
 
             return {
-                hint: Q.coalesce(options.title, 'Excel'),
-                title: Q.coalesce(options.hint, ''),
+                title: Q.coalesce(options.title, ''),
+                hint: Q.coalesce(options.hint, 'Excel'),
                 cssClass: 'export-xlsx-button',
                 onClick: function () {
                     if (!options.onViewSubmit()) {
@@ -32,11 +33,15 @@
                         request.Sort = sortBy;
                     }
 
-                    request.IncludeColumns = [];
+                    request.ExportColumns = [];
                     let columns = grid.getGrid().getColumns();
                     for (let column of columns) {
-                        request.IncludeColumns.push(column.id || column.field);
+                        request.ExportColumns.push(column.id || column.field);
                     }
+
+                    if (options.editRequest)
+                        request = options.editRequest(request);
+
                     Q.postToService({ service: options.service, request: request, target: '_blank' });
                 },
                 separator: options.separator
