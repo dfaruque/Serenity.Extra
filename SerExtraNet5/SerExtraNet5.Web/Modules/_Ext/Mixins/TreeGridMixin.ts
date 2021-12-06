@@ -124,6 +124,7 @@
             return function (ctx: Slick.FormatterContext) {
                 var text = formatter(ctx);
                 var view = getView();
+                if (!view) return;
                 var indent = Q.coalesce(ctx.item._indent, 0);
                 var spacer = '<span class="s-TreeIndent" style="width:' + 15 * indent + 'px"></span>';
                 var id = getId(ctx.item);
