@@ -352,7 +352,7 @@ namespace _Ext {
                 if (extOptions.ShowEditInlineButtun == true) {
                     inlineActionsColumnWidth += 32;
                     var title = this.isReadOnly ? q.text('Controls.View', 'View Details') : q.text('Controls.Edit', 'Edit');
-                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="padding: 0 5px;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
+                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="padding: 0 5px; font-size: 1.2em;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
                 }
 
                 if (extOptions.ShowDeleteInlineButtun == true) {
@@ -563,9 +563,9 @@ namespace _Ext {
             opt.enableCellNavigation = true;
             opt.asyncEditorLoading = false;
             opt.autoEdit = true;
+            opt.rowHeight = 27;
 
             return opt;
-
         }
 
         protected getViewOptions() {
