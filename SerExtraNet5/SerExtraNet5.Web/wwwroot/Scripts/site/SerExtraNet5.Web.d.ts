@@ -3076,7 +3076,7 @@ declare namespace SerExtraNet5.BasicSamples {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class OrderDetailDialog extends Common.GridEditorDialog<OrderDetailRow> {
+    class OrderDetailDialog extends _Ext.EditorDialogBase<OrderDetailRow> {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
         protected form: OrderDetailForm;
@@ -3127,7 +3127,7 @@ declare namespace SerExtraNet5.Common {
     }
 }
 declare namespace SerExtraNet5.Northwind {
-    class OrderDetailsEditor extends Common.GridEditorBase<OrderDetailRow> {
+    class OrderDetailsEditor extends _Ext.GridEditorBase<OrderDetailRow> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof OrderDetailDialog;
         protected getLocalTextPrefix(): string;
