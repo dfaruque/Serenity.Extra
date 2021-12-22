@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Serenity.Extra</id>
-    <version>3.9.0</version>
+    <version>3.9.1</version>
     <authors>dfaruque</authors>
     <owners>dfaruque</owners>
     <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is an EXTRA of my Beloved https://github.com/volkanceylan/Serenity platform</description>
     <releaseNotes>...</releaseNotes>
-    <copyright>Copyright 2019</copyright>
+    <copyright>Copyright 2021</copyright>
     <tags>Serenity</tags>
     <dependencies>
       <!--<dependency id="Serenity.Data.Entity" version="2.9.3" />-->
