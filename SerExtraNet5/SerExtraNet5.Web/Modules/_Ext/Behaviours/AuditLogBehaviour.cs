@@ -79,9 +79,9 @@ namespace _Ext
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                //Log.Debug("_Ext.AuditLog Failed.", ex, row.GetType());
+                ex.Log(null);
             }
         }
 
@@ -94,7 +94,7 @@ namespace _Ext
             {
                 if (row.IsAssigned(field))
                 {
-                    var oldValue = oldRow[field.Name];
+                    var oldValue = oldRow?[field.Name];
                     var newValue = row[field.Name];
                     if (!Equals(oldValue, newValue))
                     {
