@@ -14,36 +14,36 @@ namespace _Ext {
         protected afterLoadEntity() {
             super.afterLoadEntity();
 
-            usingJsonDiffPatch();
-
-            //showing diff visually
-            var left = JSON.parse(this.entity.OldEntity);
-            if (left) {
-                if (left.PlantJson) {
-                    left.PlantInfo = JSON.parse(left.PlantJson);
-                    delete (left.PlantJson);
-                }
-                delete (left.Id);
-                delete (left.IDate);
-                delete (left.IUser);
-                delete (left.EDate);
-                delete (left.EUser);
-            }
-
-            var right = JSON.parse(this.entity.NewEntity);
-            if (right) {
-                if (right.PlantJson) {
-                    right.PlantInfo = JSON.parse(right.PlantJson);
-                    delete (right.PlantJson);
-                }
-            }
-
-            var delta = jsondiffpatch.diff(left, right);
-
-            // beautiful html diff
-            this.form.Differences.value = jsondiffpatch.formatters.html.format(delta);
-
+            this.form.Changes.value = AuditLogDialog.getChangesInHtml(this.entity.Changes);
         }
 
+        static getChangesInHtml(changesInJson: string) {
+            if (!changesInJson) return '';
+
+            let changes = JSON.parse(changesInJson);
+
+            let changesHtml = '';
+            for (let field in changes) {
+                let fieldValues = changes[field];
+                changesHtml += `
+<tr>
+    <td>${field}</td>
+    <td>${fieldValues[0]}</td>
+    <td>${fieldValues[1]}</td>
+</tr>
+`;
+            }
+
+            return `
+<table class="table table-bordered table-condensed table-striped">
+    <tr>
+        <th>Field</th>
+        <th>Old Value</th>
+        <th>New Value</th>
+    </tr>
+    ${changesHtml}
+</table>
+`;;
+        }
     }
 }

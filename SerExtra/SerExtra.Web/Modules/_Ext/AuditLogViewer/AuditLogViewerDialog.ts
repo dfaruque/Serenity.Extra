@@ -13,26 +13,14 @@ namespace _Ext {
             this.onDialogOpen = () => {
 
                 AuditLogViewerService.List(this.request, response => {
-                    response.EntityVersions.forEach(e => {
-                        delete (e.Id)
 
-
-                        e.OldEntity = JSON.parse(e.OldEntity) as any;
-                        e.NewEntity = JSON.parse(e.NewEntity)
-
-                        delete ((e.OldEntity as any).Id);
-                        delete ((e.OldEntity as any).IDate);
-                        delete ((e.OldEntity as any).IUser);
-                        delete ((e.OldEntity as any).EDate);
-                        delete ((e.OldEntity as any).EUser);
-
+                    response.EntityVersions.forEach((e,i) => {
                         e.ActionType = AuditActionType[e.ActionType] as any;
+                        (e as any).VersionNo = i + 1;
                         (e as any).isShowed = false;
                     });
 
-                    new window['Vue'](new AuditLogViewer('#' + this.idPrefix + 'dialogContent', response.EntityVersions));
-
-
+                    new Vue(new AuditLogViewer('#' + this.idPrefix + 'dialogContent', response.EntityVersions));
                 })
 
             };
@@ -40,10 +28,7 @@ namespace _Ext {
 
         protected getTemplateName(): string {
             usingVuejs();
-            usingJsonDiffPatch();
             return '_Ext.AuditLogViewer'
         }
-
     }
-
 }

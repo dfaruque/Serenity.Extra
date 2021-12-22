@@ -1,14 +1,12 @@
 ﻿namespace _Ext {
     export interface AuditLogRow {
         Id?: number;
-        VersionNo?: number;
         UserId?: number;
         ActionType?: AuditActionType;
         ActionDate?: string;
         EntityTableName?: string;
         EntityId?: number;
-        OldEntity?: string;
-        NewEntity?: string;
+        Changes?: string;
         IpAddress?: string;
         SessionId?: string;
     }
@@ -24,14 +22,12 @@
 
         export declare const enum Fields {
             Id = "Id",
-            VersionNo = "VersionNo",
             UserId = "UserId",
             ActionType = "ActionType",
             ActionDate = "ActionDate",
             EntityTableName = "EntityTableName",
             EntityId = "EntityId",
-            OldEntity = "OldEntity",
-            NewEntity = "NewEntity",
+            Changes = "Changes",
             IpAddress = "IpAddress",
             SessionId = "SessionId"
         }
