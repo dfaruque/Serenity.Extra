@@ -3,7 +3,7 @@
 namespace SerExtraNet5.Northwind {
 
     @Serenity.Decorators.registerClass()
-    export class OrderDetailDialog extends Common.GridEditorDialog<OrderDetailRow> {
+    export class OrderDetailDialog extends _Ext.EditorDialogBase<OrderDetailRow> {
         protected getFormKey() { return OrderDetailForm.formKey; }
         protected getLocalTextPrefix() { return OrderDetailRow.localTextPrefix; }
 
