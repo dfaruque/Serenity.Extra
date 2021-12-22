@@ -11,7 +11,7 @@ namespace SerExtraNet5.Northwind.Entities
     [DisplayName("Orders"), InstanceName("Order")]
     [ReadPermission(PermissionKeys.General)]
     [ModifyPermission(PermissionKeys.General)]
-    public sealed class OrderRow : Row<OrderRow.RowFields>, IIdRow, INameRow
+    public sealed class OrderRow : Row<OrderRow.RowFields>, IIdRow, INameRow, _Ext.IAuditLog
     {
         [DisplayName("Order ID"), NotNull, Identity, QuickSearch, IdProperty]
         public Int32? OrderID
