@@ -607,14 +607,6 @@
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick.headerfilters.js" />
     <Content Include="Modules\_Ext\AuditLogViewer\AuditLogViewer.Template.html" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\formatters-styles\annotated.css" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\formatters-styles\html.css" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.js" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.js" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.js" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.js" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.js" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.js" />
     <Content Include="Modules\_Ext\AuditLog\dbo.AuditLog.sql" />
     <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
     <Content Include="Modules\_Ext\CustomSlickGridPlugin\slick-headerfilters.css" />
@@ -1042,9 +1034,6 @@
     <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerReport.cshtml" />
     <Content Include="Modules\ExtraSamples\Reports\OrdersByCustomer\OrdersByCustomerIndex.cshtml" />
     <Content Include="Modules\_Ext\AuditLog\AuditLogIndex.cshtml" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch.min.map" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-full.min.map" />
-    <Content Include="Modules\_Ext\AuditLogViewer\jsondiffpatch\jsondiffpatch-formatters.min.map" />
     <Content Include="node_modules\%40types\react\LICENSE" />
     <Content Include="node_modules\%40types\react\package.json" />
     <Content Include="node_modules\%40types\react\README.md" />
