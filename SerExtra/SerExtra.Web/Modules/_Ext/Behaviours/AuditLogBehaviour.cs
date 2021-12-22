@@ -82,7 +82,7 @@ namespace _Ext
 #endif
                         };
 
-                        auditLogConnection.Insert<AuditLogRow>(auditLogRow);
+                        auditLogConnection.Insert(auditLogRow);
                     }
                 }
             }

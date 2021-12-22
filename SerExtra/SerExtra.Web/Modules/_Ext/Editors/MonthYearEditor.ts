@@ -25,7 +25,7 @@
 
         set_readOnly(value: boolean): void {
             if (value == true) {
-                this.element.addClass('readonly');
+                this.element.addClass('readonly').attr('readonly', 'readonly');
                 this.element.attr("disabled");
             } else {
                 this.element.removeClass('readonly');

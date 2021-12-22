@@ -1,12 +1,10 @@
 ﻿using _Ext.Entities;
-using Newtonsoft.Json;
 using Serenity;
 using Serenity.ComponentModel;
 using Serenity.Data;
 using Serenity.Services;
 using System;
-using System.Data;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace _Ext
 {
@@ -56,30 +54,19 @@ namespace _Ext
 
                     var entityId = Convert.ToInt64(row.IdField.AsObject(row) ?? 0);
 
-                    var lastVersion = auditLogConnection.TryFirst<AuditLogRow>(q => q
-                    .Select(fld.VersionNo, fld.NewEntity)
-                    .Where(fld.EntityTableName == row.Table && fld.EntityId == entityId)
-                    .OrderBy(fld.Id, desc: true));
+                    var changes = GetChanges(row, oldRow);
 
-                    ClearAssignment(oldRow);
-
-                    var oldrowJson = oldRow.ToJson();
-                    var rowJson = row.ToJson();
-
-                    if (auditActionType == AuditActionType.Delete || lastVersion?.NewEntity != rowJson)
+                    if (changes.Count > 0)
                     {
-                        int versionNo = (lastVersion?.VersionNo ?? 0) + 1;
-
+                        int.TryParse(context.User.GetIdentifier(), out int userID);
                         var auditLogRow = new AuditLogRow
                         {
-                            VersionNo = versionNo,
-                            UserId = int.Parse(context.User.GetIdentifier()),
+                            UserId = userID,
                             ActionType = auditActionType,
                             ActionDate = DateTime.Now,
                             EntityTableName = row.Table,
                             EntityId = entityId,
-                            OldEntity = oldrowJson,
-                            NewEntity = rowJson,
+                            Changes = changes.ToJson(),
 //#if COREFX
 
 //#else
@@ -88,7 +75,7 @@ namespace _Ext
 //#endif
                         };
 
-                        auditLogConnection.Insert<AuditLogRow>(auditLogRow);
+                        auditLogConnection.Insert(auditLogRow);
                     }
                 }
             }
@@ -98,50 +85,26 @@ namespace _Ext
             }
         }
 
-        private static void ClearAssignment(IRow row)
+        private static Dictionary<string, object[]> GetChanges(IRow row, IRow oldRow)
         {
-            if (row is IIdRow idRow)
+            var changes = new Dictionary<string, object[]>();
+            var tableFields = row.EnumerateTableFields();
+
+            foreach (var field in tableFields)
             {
-                if (idRow.IdField is Field idField)
-                    row.ClearAssignment(idField);
+                if (row.IsAssigned(field))
+                {
+                    var oldValue = oldRow[field.Name];
+                    var newValue = row[field.Name];
+                    if (!Equals(oldValue, newValue))
+                    {
+                        var fieldChange = new object[] { oldValue, newValue };
+                        changes.Add(field.Name, fieldChange);
+                    }
+                }
             }
 
-            if (row is IInsertLogRow iInsertLogRow)
-            {
-                if (iInsertLogRow.InsertDateField is Field idateField)
-                    row.ClearAssignment(idateField);
-
-                if (iInsertLogRow.InsertUserIdField is Field iuserField)
-                    row.ClearAssignment(iuserField);
-            }
-
-            if (row is IUpdateLogRow iUpdateLogRow)
-            {
-                if (iUpdateLogRow.UpdateDateField is Field udateField)
-                    row.ClearAssignment(udateField);
-
-                if (iUpdateLogRow.UpdateUserIdField is Field uuserField)
-                    row.ClearAssignment(uuserField);
-            }
-        }
-
-        string GetPageUrl()
-        {
-            string pageUrl = "";
-//#if COREFX
-
-//#else
-//            if (HttpContext.Current != null && HttpContext.Current.Request != null)
-//            {
-//                var httpRequest = HttpContext.Current.Request;
-//                if (httpRequest.UrlReferrer != null)
-//                    pageUrl = httpRequest.UrlReferrer.PathAndQuery;
-//                else if (httpRequest.Url != null)
-//                    pageUrl = httpRequest.Url.PathAndQuery;
-//            }
-//#endif
-
-            return pageUrl;
+            return changes;
         }
     }
 

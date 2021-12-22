@@ -11,7 +11,6 @@ namespace _Ext
 {
     public partial class GridItemPickerEditorAttribute : CustomEditorAttribute
     {
-
         public GridItemPickerEditorAttribute(Type rowType, [CallerMemberName] string propertyName = null)
             : base(Key)
         {
@@ -41,9 +40,7 @@ namespace _Ext
 
             SetOption("nameFieldInThisRow", propertyNameWithoutIdSuffix + nameField);
 
-
         }
-
     }
 }
 

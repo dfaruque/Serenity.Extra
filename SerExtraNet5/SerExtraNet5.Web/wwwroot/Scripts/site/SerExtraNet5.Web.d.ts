@@ -2260,14 +2260,11 @@ declare namespace _Ext {
 declare namespace _Ext {
     interface AuditLogForm {
         EntityTableName: Serenity.StringEditor;
-        VersionNo: Serenity.IntegerEditor;
-        UserId: Serenity.LookupEditor;
         ActionType: Serenity.EnumEditor;
         ActionDate: Serenity.DateTimeEditor;
         EntityId: Serenity.IntegerEditor;
-        OldEntity: Serenity.StringEditor;
-        NewEntity: Serenity.StringEditor;
-        Differences: StaticTextBlock;
+        Changes: StaticTextBlock;
+        UserId: Serenity.LookupEditor;
         IpAddress: Serenity.StringEditor;
         SessionId: Serenity.StringEditor;
     }
@@ -2280,14 +2277,12 @@ declare namespace _Ext {
 declare namespace _Ext {
     interface AuditLogRow {
         Id?: number;
-        VersionNo?: number;
         UserId?: number;
         ActionType?: AuditActionType;
         ActionDate?: string;
         EntityTableName?: string;
         EntityId?: number;
-        OldEntity?: string;
-        NewEntity?: string;
+        Changes?: string;
         IpAddress?: string;
         SessionId?: string;
     }
@@ -2301,14 +2296,12 @@ declare namespace _Ext {
         const updatePermission = "Administration:AuditLog";
         const enum Fields {
             Id = "Id",
-            VersionNo = "VersionNo",
             UserId = "UserId",
             ActionType = "ActionType",
             ActionDate = "ActionDate",
             EntityTableName = "EntityTableName",
             EntityId = "EntityId",
-            OldEntity = "OldEntity",
-            NewEntity = "NewEntity",
+            Changes = "Changes",
             IpAddress = "IpAddress",
             SessionId = "SessionId"
         }
@@ -3973,6 +3966,7 @@ declare namespace _Ext {
         protected getService(): string;
         protected form: AuditLogForm;
         protected afterLoadEntity(): void;
+        static getChangesInHtml(changesInJson: string): string;
     }
 }
 declare namespace _Ext {
@@ -3985,7 +3979,6 @@ declare namespace _Ext {
         protected getButtons(): Serenity.ToolButton[];
     }
 }
-declare var jsondiffpatch: any;
 declare namespace _Ext {
     class AuditLogViewer {
         el: string;
@@ -4003,8 +3996,7 @@ declare namespace _Ext {
             filterByYardId: () => any[];
         };
         methods: {
-            showDiff: (versionInfo: AuditLogRow) => void;
-            getDiff: (versionInfo: AuditLogRow) => any;
+            getDiff: (versionInfo: AuditLogRow) => string;
         };
         destroyed(): void;
     }
@@ -4845,7 +4837,6 @@ declare function includeGoogleMap(callback?: Function, callbackFullName?: string
 declare function includeMarkerWithLabel(): void;
 declare function includeVisCss(): void;
 declare function usingVisjs(): void;
-declare function usingJsonDiffPatch(): void;
 declare function usingSlickGridEditors(): void;
 declare function usingSlickAutoColumnSize(): void;
 declare function usingSlickHeaderFilters(): void;

@@ -8,7 +8,7 @@ using System.Web;
 
 public static partial class DbConnectionExtentions
 {
-    public static string GetNameById<TRow>(this IDbConnection connection, object id)
+    public static string GetNameById<TRow>(this IDbConnection connection, object id, Field nameField = null)
         where TRow : Row, IIdRow, INameRow, new()
     {
         if (id == null) return null;
@@ -17,7 +17,7 @@ public static partial class DbConnectionExtentions
 
         var query = new SqlQuery()
             .From(row)
-            .Select(row.NameField)
+            .Select(nameField ?? row.NameField)
             .Where(((Field)row.IdField).Name + '=' + id);
 
         using (var reader = SqlHelper.ExecuteReader(connection, query))

@@ -18,18 +18,15 @@ namespace _Ext.Entities
         [DisplayName("Id"), Identity, NotNull, IdProperty]
         public Int64? Id { get { return Fields.Id[this]; } set { Fields.Id[this] = value; } }
 
-        [DisplayName("Version No."), Size(20), NotNull]
-        public Int32? VersionNo { get { return Fields.VersionNo[this]; } set { Fields.VersionNo[this] = value; } }
-
         [DisplayName("User"), NotNull, QuickFilter]
         [LookupEditor("Administration.User")]
-        public Int32? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
+        public Int64? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
 
         [DisplayName("Action Type"), NotNull, QuickFilter]
         [AuditLogActionTypeFormatter]
         public AuditActionType? ActionType { get { return (AuditActionType?)Fields.ActionType[this]; } set { Fields.ActionType[this] = (int?)value; } }
 
-        [DisplayName("Action Date"), NotNull, QuickFilter, SortOrder(1, true)]
+        [DisplayName("Action Date"), NotNull, QuickFilter]
         [DateTimeEditor, DateTimeFiltering, DateTimeFormatter]
         public DateTime? ActionDate { get { return Fields.ActionDate[this]; } set { Fields.ActionDate[this] = value; } }
 
@@ -38,12 +35,9 @@ namespace _Ext.Entities
 
         [DisplayName("Entity Id"), NotNull]
         public Int64? EntityId { get { return Fields.EntityId[this]; } set { Fields.EntityId[this] = value; } }
-
-        [DisplayName("Old Entity")]
-        public String OldEntity { get { return Fields.OldEntity[this]; } set { Fields.OldEntity[this] = value; } }
-
-        [DisplayName("New Entity")]
-        public String NewEntity { get { return Fields.NewEntity[this]; } set { Fields.NewEntity[this] = value; } }
+        
+        [DisplayName("Changes")]
+        public String Changes { get { return Fields.Changes[this]; } set { Fields.Changes[this] = value; } }
 
         [DisplayName("IP Address"), Size(100)]
         public String IpAddress { get { return Fields.IpAddress[this]; } set { Fields.IpAddress[this] = value; } }
@@ -58,14 +52,12 @@ namespace _Ext.Entities
         public class RowFields : RowFieldsBase
         {
             public Int64Field Id;
-            public Int32Field VersionNo;
-            public Int32Field UserId;
+            public Int64Field UserId;
             public Int32Field ActionType;
             public DateTimeField ActionDate;
             public StringField EntityTableName;
             public Int64Field EntityId;
-            public StringField OldEntity;
-            public StringField NewEntity;
+            public StringField Changes;
             public StringField IpAddress;
             public StringField SessionId;
 

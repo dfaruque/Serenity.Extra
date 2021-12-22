@@ -4,7 +4,7 @@ namespace _Ext {
     @Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
     @Serenity.Decorators.editor()
     @Serenity.Decorators.element("<div/>")
-    export class GridEditorBase<TEntity> extends _Ext.GridBase<TEntity, any>
+    export class GridEditorBaseWithOption<TEntity, TOptions> extends _Ext.GridBase<TEntity, TOptions>
         implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
 
         protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultEditorGridOptions); }
@@ -227,6 +227,10 @@ namespace _Ext {
             return result;
         }
 
+        getFilteredItems() {
+            return this.getItems().filter(item => this.matchContains(item));
+        }
+
         protected enableFiltering(): boolean { return false; }
 
         protected onViewSubmit() { return false; }
@@ -265,4 +269,29 @@ namespace _Ext {
 
         }
     }
+
+    export class GridEditorBase<TEntity> extends GridEditorBaseWithOption<TEntity, any>{
+
+    }
+
+    export class GridEditorBaseForJsonField<TEntity> extends GridEditorBaseWithOption<TEntity, any>{
+        protected getRowIdField() { return 'Id' }
+
+        public getEditValue(property, target) {
+            let val = this.value;
+
+            let idField = this.getRowIdField();
+            let idList = val.filter(f => f[idField]).map(m => m[idField]);
+            let maxId = Math.max(...idList);
+            if (maxId < 0) maxId = 0;
+
+            val.filter(f => !f[idField]).forEach(i => {
+                i[idField] = ++maxId;
+            });
+
+            target[property.name] = val;
+        }
+
+    }
+
 }

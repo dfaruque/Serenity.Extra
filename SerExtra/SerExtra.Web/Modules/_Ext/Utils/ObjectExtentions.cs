@@ -108,6 +108,7 @@ public static partial class ObjectExtentions
         return (input ?? 0).ToString("N", new System.Globalization.CultureInfo("en-US"));
 
     }
+
     public static string ToUSFormat(this decimal input)
     {
         return input.ToString("N", new System.Globalization.CultureInfo("en-US"));

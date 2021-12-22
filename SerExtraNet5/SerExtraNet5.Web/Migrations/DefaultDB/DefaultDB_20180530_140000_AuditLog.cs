@@ -19,8 +19,23 @@ namespace SerExtraNet5.Migrations.DefaultDB
                 .WithColumn("IpAddress").AsString(100).Nullable()
                 .WithColumn("SessionId").AsString(100).Nullable()
                 );
-
-
         }
+    }
+
+    [Migration(20211221140002)]
+    public class LogDB_20211221_140000_AuditLog_Changes : Migration
+    {
+        public override void Up()
+        {
+            Delete.Column("VersionNo")
+                .Column("OldEntity")
+                .Column("NewEntity")
+                .FromTable("AuditLog");
+
+            Alter.Table("AuditLog")
+                .AddColumn("Changes").AsString(int.MaxValue).Nullable();
+        }
+
+        public override void Down() { }
     }
 }

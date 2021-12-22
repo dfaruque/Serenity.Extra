@@ -30,9 +30,9 @@ public static class DateTimeHelper
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
-    public static string ToDateFormat(this DateTime? inputValue)
+    public static string ToDateFormat(this DateTime? inputValue, string format = null)
     {
-        return inputValue?.ToString(DateHelper.CurrentDateFormat);
+        return inputValue?.ToString(format ?? DateHelper.CurrentDateFormat);
     }
 
     /// <summary>
@@ -40,9 +40,9 @@ public static class DateTimeHelper
     /// </summary>
     /// <param name="inputValue"></param>
     /// <returns></returns>
-    public static string ToDateFormat(this DateTime inputValue)
+    public static string ToDateFormat(this DateTime inputValue, string format = null)
     {
-        return inputValue.ToString(DateHelper.CurrentDateFormat);
+        return inputValue.ToString(format ?? DateHelper.CurrentDateFormat);
     }
 
     /// <summary>

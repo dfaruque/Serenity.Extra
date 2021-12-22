@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[AuditLog] (
+﻿CREATE TABLE [AuditLog] (
     [Id]         BIGINT         IDENTITY (1, 1) NOT NULL,
     [UserId]     BIGINT            NOT NULL,
     [ActionType] INT            NOT NULL,
