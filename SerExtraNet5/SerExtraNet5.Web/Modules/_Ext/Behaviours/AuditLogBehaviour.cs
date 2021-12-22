@@ -1,4 +1,5 @@
 ﻿using _Ext.Entities;
+using Microsoft.AspNetCore.Http;
 using Serenity;
 using Serenity.ComponentModel;
 using Serenity.Data;
@@ -11,10 +12,12 @@ namespace _Ext
     public class AuditRowBehavior : BaseSaveDeleteBehavior, IImplicitBehavior
     {
         protected ISqlConnections SqlConnections { get; }
+        public HttpContext HttpContext { get; }
 
-        public AuditRowBehavior(ISqlConnections sqlConnections)
+        public AuditRowBehavior(ISqlConnections sqlConnections, IHttpContextAccessor httpContextAccessor)
         {
             SqlConnections = sqlConnections;
+            HttpContext = httpContextAccessor.HttpContext;
         }
 
         public bool ActivateFor(IRow row)
@@ -67,12 +70,8 @@ namespace _Ext
                             EntityTableName = row.Table,
                             EntityId = entityId,
                             Changes = changes.ToJson(),
-//#if COREFX
-
-//#else
-//                            IpAddress = HttpContext.Current.Request.UserHostAddress,
-//                            SessionId = HttpContext.Current.Session.SessionID
-//#endif
+                            IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
+                            SessionId = HttpContext.TraceIdentifier
                         };
 
                         auditLogConnection.Insert(auditLogRow);
