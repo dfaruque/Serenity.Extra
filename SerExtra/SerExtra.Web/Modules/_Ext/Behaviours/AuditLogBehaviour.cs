@@ -101,7 +101,7 @@ namespace _Ext
             {
                 if (row.IsAssigned(field))
                 {
-                    var oldValue = oldRow[field.Name];
+                    var oldValue = oldRow?[field.Name];
                     var newValue = row[field.Name];
                     if (!Equals(oldValue, newValue))
                     {
