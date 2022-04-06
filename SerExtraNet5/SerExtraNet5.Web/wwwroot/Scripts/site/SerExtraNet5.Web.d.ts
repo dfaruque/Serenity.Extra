@@ -2278,11 +2278,11 @@ declare namespace _Ext {
 declare namespace _Ext {
     interface AuditLogRow {
         Id?: number;
-        UserId?: number;
+        UserId?: string;
         ActionType?: AuditActionType;
         ActionDate?: string;
         EntityTableName?: string;
-        EntityId?: number;
+        EntityId?: string;
         Changes?: string;
         IpAddress?: string;
         SessionId?: string;

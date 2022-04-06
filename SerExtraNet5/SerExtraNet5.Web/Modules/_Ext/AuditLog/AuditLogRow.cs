@@ -20,7 +20,7 @@ namespace _Ext.Entities
 
         [DisplayName("User"), NotNull, QuickFilter]
         [LookupEditor("Administration.User")]
-        public Int64? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
+        public String UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
 
         [DisplayName("Action Type"), NotNull, QuickFilter]
         [AuditLogActionTypeFormatter]
@@ -34,7 +34,7 @@ namespace _Ext.Entities
         public String EntityTableName { get { return Fields.EntityTableName[this]; } set { Fields.EntityTableName[this] = value; } }
 
         [DisplayName("Entity Id"), NotNull]
-        public Int64? EntityId { get { return Fields.EntityId[this]; } set { Fields.EntityId[this] = value; } }
+        public String EntityId { get { return Fields.EntityId[this]; } set { Fields.EntityId[this] = value; } }
         
         [DisplayName("Changes")]
         public String Changes { get { return Fields.Changes[this]; } set { Fields.Changes[this] = value; } }
@@ -52,11 +52,11 @@ namespace _Ext.Entities
         public class RowFields : RowFieldsBase
         {
             public Int64Field Id;
-            public Int64Field UserId;
+            public StringField UserId;
             public Int32Field ActionType;
             public DateTimeField ActionDate;
             public StringField EntityTableName;
-            public Int64Field EntityId;
+            public StringField EntityId;
             public StringField Changes;
             public StringField IpAddress;
             public StringField SessionId;

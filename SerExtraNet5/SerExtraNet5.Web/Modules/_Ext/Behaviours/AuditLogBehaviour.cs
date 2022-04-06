@@ -1,11 +1,11 @@
-﻿using _Ext.Entities;
+﻿using System;
+using System.Collections.Generic;
+using _Ext.Entities;
 using Microsoft.AspNetCore.Http;
 using Serenity;
 using Serenity.ComponentModel;
 using Serenity.Data;
 using Serenity.Services;
-using System;
-using System.Collections.Generic;
 
 namespace _Ext
 {
@@ -22,11 +22,7 @@ namespace _Ext
 
         public bool ActivateFor(IRow row)
         {
-            if (row is IAuditLog)
-            {
-                return true;
-            }
-            return false;
+            return row is IAuditLog;
         }
 
         public override void OnAudit(ISaveRequestHandler handler)
@@ -51,31 +47,28 @@ namespace _Ext
         {
             try
             {
-                using (var auditLogConnection = SqlConnections.NewFor<AuditLogRow>())
+                using var auditLogConnection = SqlConnections.NewFor<AuditLogRow>();
+                var fld = AuditLogRow.Fields;
+
+                var entityId = row.IdField.AsObject(row);
+
+                var changes = GetChanges(row, oldRow);
+
+                if (changes.Count > 0)
                 {
-                    var fld = AuditLogRow.Fields;
-
-                    var entityId = Convert.ToInt64(row.IdField.AsObject(row) ?? 0);
-
-                    var changes = GetChanges(row, oldRow);
-
-                    if (changes.Count > 0)
+                    var auditLogRow = new AuditLogRow
                     {
-                        int.TryParse(context.User.GetIdentifier(), out int userID);
-                        var auditLogRow = new AuditLogRow
-                        {
-                            UserId = userID,
-                            ActionType = auditActionType,
-                            ActionDate = DateTime.Now,
-                            EntityTableName = row.Table,
-                            EntityId = entityId,
-                            Changes = changes.ToJson(),
-                            IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
-                            SessionId = HttpContext.TraceIdentifier
-                        };
+                        UserId = context.User.GetIdentifier(),
+                        ActionType = auditActionType,
+                        ActionDate = DateTime.Now,
+                        EntityTableName = row.Table,
+                        EntityId = entityId.ToString(),
+                        Changes = changes.ToJson(),
+                        IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
+                        SessionId = HttpContext.TraceIdentifier
+                    };
 
-                        auditLogConnection.Insert(auditLogRow);
-                    }
+                    auditLogConnection.Insert(auditLogRow);
                 }
             }
             catch (Exception ex)
@@ -109,7 +102,6 @@ namespace _Ext
 
     /// <summary>
     /// This interface is used to log the changes for Insert / Update and Delete.
-    /// This identify the Identity Column as Row Id (Unique Id) and save in Audit Table. If Identity column is not found then it use Id (Hard Coded) column.
     /// </summary>
     public interface IAuditLog
     {
