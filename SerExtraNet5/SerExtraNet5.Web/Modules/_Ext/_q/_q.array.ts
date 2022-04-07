@@ -1,6 +1,6 @@
 ﻿
 namespace q {
-    export function sum(xs: any[], key) {
+    export function sum(xs: any[], key): number {
         if (!xs) return null;
 
         let initObj = {};
@@ -12,13 +12,6 @@ namespace q {
         }, initObj)
 
         return sumObj[key];
-    }
-
-    export function groupBy(xs: any[], key) {
-        return xs.reduce(function (rv, x) {
-            (rv[x[key]] = rv[x[key]] || []).push(x);
-            return rv;
-        }, {});
     }
 
     export function sortBy<T>(xs: T[], key) {
