@@ -29,7 +29,10 @@ namespace _Ext {
 
         constructor(container: JQuery, options?: TOptions) {
             super(container, options);
-            this.slickContainer.fadeTo(0, 0);
+
+            if (this.get_ExtGridOptions().AutoColumnSize == true) {
+                this.slickContainer.fadeTo(0, 0);
+            }
 
             let grouping = this.getGrouping();
             if (grouping.length > 0)
@@ -66,7 +69,7 @@ namespace _Ext {
 
             if (reportRequest.ReportKey) {
                 buttons.push({
-                    title: 'Export to PDF',
+                    title: q.text('Controls.ExportToPDF', 'Export to PDF'),
                     icon: 'fa fa-file-pdf-o',
                     onClick: () => {
                         ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: this.getReportRequest() } });
@@ -74,7 +77,7 @@ namespace _Ext {
                 });
 
                 buttons.push({
-                    title: 'View as Report',
+                    title: q.text('Controls.ViewAsReport', 'View as Report'),
                     icon: 'fa fa-html5',
                     onClick: () => {
                         let request = this.getReportRequest();
@@ -85,7 +88,7 @@ namespace _Ext {
 
             } else if (reportRequest.ReportServiceMethodName) {
                 buttons.push({
-                    title: 'View as Report',
+                    title: q.text('Controls.ViewAsReport', 'View as Report'),
                     icon: 'fa fa-eye',
                     onClick: () => {
                         Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + reportRequest.ReportServiceMethodName), request: this.getReportRequest(), target: '_blank' });
@@ -99,9 +102,6 @@ namespace _Ext {
                 //    onViewSubmit: () => this.onViewSubmit()
                 //}));
             }
-
-
-
 
             return buttons;
         }
@@ -185,37 +185,35 @@ namespace _Ext {
             }
 
             columns.forEach(column => {
-                if (extOptions.AutoColumnSize == true) {
-                    column.width = column.minWidth || column.width || 50;
-                    column.cssClass = column.cssClass || '';
-                }
+                let columnCssClass = column.cssClass || '';
+                let columnWidth = column.minWidth || column.width || 50;
 
                 if (column.sourceItem) {
                     let formatterType = column.sourceItem.formatterType;
                     //width and cssClass
                     if (column.sourceItem.filteringType == "Lookup") {
-                        column.cssClass += ' align-left';
-                        column.width = column.minWidth > 100 ? column.minWidth : 100;
+                        columnCssClass = ' align-left';
+                        columnWidth = column.minWidth > 100 ? column.minWidth : 100;
                     } else if (formatterType == "Enum") {
-                        column.width = column.minWidth > 100 ? column.minWidth : 100;
+                        columnWidth = column.minWidth > 100 ? column.minWidth : 100;
                     } else if (formatterType == "Date") {
-                        column.cssClass += ' align-center';
-                        column.width = column.minWidth > 99 ? column.minWidth : 99;
+                        columnCssClass = ' align-center';
+                        columnWidth = column.minWidth > 99 ? column.minWidth : 99;
                     } else if (formatterType == "DateTime") {
-                        column.cssClass += ' align-center';
-                        column.width = column.minWidth > 140 ? column.minWidth : 140;
+                        columnCssClass = ' align-center';
+                        columnWidth = column.minWidth > 140 ? column.minWidth : 140;
                     } else if (formatterType == "Number") {
-                        column.cssClass += ' align-right';
+                        columnCssClass = ' align-right';
 
                     } else if (formatterType == "Checkbox") {
-                        column.cssClass += ' align-center';
+                        columnCssClass = ' align-center';
                     } else {
-                        column.cssClass += ' align-left';
-                        column.width = column.minWidth > 99 ? column.minWidth : 99;
+                        columnCssClass = ' align-left';
+                        columnWidth = column.minWidth > 99 ? column.minWidth : 99;
                     }
 
                     //formatter                    
-                    let emptyText = column.sourceItem.placeholder == 'Controls.All' ? Q.text('Controls.All') : '-';
+                    let emptyText = column.sourceItem.placeholder == 'Controls.All' ? q.text('Controls.All', 'All') : '-';
 
                     if (column.sourceItem.editorType == "Lookup") {
                         if (!column.sourceItem.editorParams.autoComplete) {
@@ -305,7 +303,7 @@ namespace _Ext {
 
                             if (editorType == "Lookup" || editorType == "Enum") {
                                 column.editor = Slick['Editors']['Select2'];
-                                column.width = column.minWidth > 160 ? column.minWidth : 160;
+                                columnWidth = column.minWidth > 160 ? column.minWidth : 160;
                             } else if (editorType == "Date") {
                                 column.editor = Slick['Editors']['Date'];
                             } else if (editorType == "Boolean") {
@@ -325,6 +323,11 @@ namespace _Ext {
                             }
                         }
                     }
+                }
+
+                column.cssClass += columnCssClass;
+                if (this.get_ExtGridOptions().AutoColumnSize == true) {
+                    column.width = columnWidth;
                 }
             });
 
