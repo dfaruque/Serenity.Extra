@@ -2,6 +2,7 @@ using OfficeOpenXml;
 using Serenity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -30,4 +31,23 @@ public static class ExcelWorksheetHelper
         return val;
     }
 
+    public static void ValidateByEnumColumn<T>(this ExcelWorksheet worksheet) where T : Enum
+    {
+        //public enum SampleExcelColumn
+        //{
+        //    [Description("Column Header 1")] Column1 = 1,
+        //    [Description("Column Header 2")] Column2 = 2,
+        //}
+
+        foreach (var column in EnumUtil.GetValues<T>())
+        {
+            var columnIndex = Convert.ToInt32(column);
+            var cell = worksheet.Cells[1, columnIndex];
+            var columnHeader = Convert.ToString(cell.Value ?? "").Trim();
+
+            if (columnHeader != column.GetDescription())
+                throw new Exception("Invalid sheet! The cell: " + cell.Address
+                    + " should have the text: " + column.GetDescription());
+        }
+    }
 }
