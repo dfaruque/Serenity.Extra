@@ -122,15 +122,16 @@ namespace q {
         editor.element.closest('.field').find('.inplace-now').click(handler);
     }
 
-    export function setMinDate(editor: Serenity.DateEditor, value: Date): void {
+    export function setMinDate(editor: Serenity.DateEditor | Serenity.DateTimeEditor, value: Date): void {
         editor.element.datepicker("option", "minDate", value);
         editor.set_minDate(value);
     }
 
-    export function setMaxDate(editor: Serenity.DateEditor, value: Date): void {
-        let date = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 23, 59, 59, 999);
+    export function setMaxDate(editor: Serenity.DateEditor | Serenity.DateTimeEditor, value: Date): void {
+        let date = new Date(value.getFullYear(), value.getMonth(), value.getDate() + 1);
+        date.setMilliseconds(-1);
         editor.element.datepicker("option", "maxDate", date);
-        editor.set_maxDate(value);
+        editor.set_maxDate(date);
     }
 
     export function initDateRangeEditor(fromDateEditor: Serenity.DateEditor, toDateEditor: Serenity.DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
