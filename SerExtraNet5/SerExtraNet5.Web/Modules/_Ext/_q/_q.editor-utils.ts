@@ -218,12 +218,16 @@ namespace q {
     }
 
     export function readOnlyEditorPropertyGrid(editor: Serenity.Widget<any>, value: boolean = true) {
-        let $editors = editor.element.closest('.s-PropertyGrid').find('.editor');
+        let $propertyGrid = editor.element.closest('.s-PropertyGrid');
+        let $editors = $propertyGrid.find('.editor');
         Serenity.EditorUtils.setReadonly($editors, value);
+        Serenity.EditorUtils.setContainerReadOnly($propertyGrid, value);
     }
     export function readonlyEditorPropertyGrid($editor: JQuery, value: boolean = true) {
-        let $editors = $editor.closest('.s-PropertyGrid').find('.editor');
+        let $propertyGrid = $editor.closest('.s-PropertyGrid');
+        let $editors = $propertyGrid.find('.editor');
         Serenity.EditorUtils.setReadonly($editors, value);
+        Serenity.EditorUtils.setContainerReadOnly($propertyGrid, value);
     }
 
     export function readOnlyEditor(editor: Serenity.Widget<any>, value: boolean = true) {
