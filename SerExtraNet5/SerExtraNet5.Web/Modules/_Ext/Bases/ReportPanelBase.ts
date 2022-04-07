@@ -51,8 +51,8 @@
         </form>
         <br />
         <div class="buttons align-center">
-            <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i> Show</button>
-            <button id="~_DownloadPdfButton" class="btn btn-default"><i class="fa fa-file-pdf-o margin-r-5"></i> Download PDF</button>
+            <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i> ${Q.text('Controls.View')}</button>
+            <button id="~_DownloadPdfButton" class="btn btn-default"><i class="fa fa-file-pdf-o margin-r-5"></i> ${Q.text('Controls.DownloadPDF')}</button>
         </div>
     </div>
 `;
