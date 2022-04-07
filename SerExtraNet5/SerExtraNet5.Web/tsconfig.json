@@ -3,7 +3,7 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "experimentalDecorators": true,
-    "declaration": true,
+    "declaration": false,
     "emitBOM": true,
     "jsx": "react",
     "noEmitHelpers": true,
@@ -12,7 +12,7 @@
     "outFile": "wwwroot/Scripts/site/SerExtraNet5.Web.js",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "target": "es5",
+    "target": "ES5",
     "typeRoots": [
       "./node_modules/@types/",
       "./typings/"
