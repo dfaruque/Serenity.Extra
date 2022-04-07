@@ -1,14 +1,13 @@
-﻿using Serenity;
-using Serenity.ComponentModel;
-using Serenity.Data;
-using Serenity.Data.Mapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Web;
+
+using Serenity.ComponentModel;
+using Serenity.Data;
+using Serenity.Data.Mapping;
 
 public static partial class Q
 {
@@ -91,9 +90,11 @@ public static partial class Q
 
         foreach (var field in fields)
         {
-            if (field.Flags.HasFlag(FieldFlags.Identity)) continue;
             try
             {
+                if (field.Flags.HasFlag(FieldFlags.Identity))
+                    continue;
+
                 var sourceValue = source[field.Name];
                 var targetValue = target[field.Name];
 
@@ -131,8 +132,8 @@ public static partial class Q
 
     public static string GeneratePassword(int length = 8, string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*_+=-")
     {
-        StringBuilder res = new StringBuilder();
-        Random rnd = new Random();
+        var res = new StringBuilder();
+        var rnd = new Random();
         while (0 < length--)
         {
             res.Append(valid[rnd.Next(valid.Length)]);
