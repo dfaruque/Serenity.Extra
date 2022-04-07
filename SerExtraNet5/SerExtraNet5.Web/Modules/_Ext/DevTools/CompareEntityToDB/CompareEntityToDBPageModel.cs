@@ -21,7 +21,9 @@ namespace _Ext.DevTools.Model
             var assembly = Assembly.GetAssembly(typeof(CompareEntityToDBPageModel));
 
             #region Entity
-            var rowClasses = assembly.GetTypes().Where(w => w.GetCustomAttribute<ConnectionKeyAttribute>() != null && w.IsSealed);
+            var rowClasses = assembly.GetTypes().Where(w => w.GetCustomAttribute<ConnectionKeyAttribute>() != null
+                                && w.GetCustomAttribute<TableNameAttribute>() != null
+                                && w.IsSealed);
 
             foreach (var rowClass in rowClasses)
             {
@@ -195,9 +197,13 @@ namespace _Ext.DevTools.Model
                             _Issues.Add(FieldComparisonIssue.DataTypeMismatch);
 
 
-                        if (DBField.IsNullable == false && RowField.Flags.HasFlag(FieldFlags.NotNull) == false)
+                        if (DBField.IsNullable == false 
+                            && RowField.Flags.HasFlag(FieldFlags.NotNull) == false 
+                            && !RowField.DefaultValue.HasValue())
                             _Issues.Add(FieldComparisonIssue.NullableMismatch);
 
+                        if (DBField.IsNullable && RowField.Type == FieldType.Boolean)
+                            _Issues.Add(FieldComparisonIssue.ShouldBeNotNullInDB);
                     }
                 }
 
@@ -213,9 +219,11 @@ namespace _Ext.DevTools.Model
         DataTypeMismatch = 1,
         [Description("Nullable"), CssClass("warning")]
         NullableMismatch = 2,
-        [Description("SizeType"), CssClass("danger")]
+        [Description("Size"), CssClass("danger")]
         SizeMismatch = 3,
+        [Description("Should be [NotNull, DefaultValue(1 OR 0)] in DB"), CssClass("default")]
+        ShouldBeNotNullInDB = 4,
         [Description("Not Found In DB"), CssClass("danger")]
-        NotFoundInDB = 4
+        NotFoundInDB = 5
     }
 }
