@@ -15,11 +15,11 @@
 
             this.element.addClass('select2-offscreen');
 
-            this.containerDiv = $(`<div class="editor s-GridItemPickerEditor select2-container has-inplace-button">
-                        <span class="select2-choice">
-                            <span class="display-text" style="user-select: text; padding-right: 20px;"></span>
-                            <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer"></a>
-                        </span>
+            this.containerDiv = $(`<div class="editor s-GridItemPickerEditor select2-container ${options.multiple ?'select2-container-multi':''} has-inplace-button">
+                        <div class="${options.multiple ? 'select2-choices' : 'select2-choice'}">
+                            <div class="display-text" style="user-select: text; padding-right: 20px;${options.multiple ? 'padding-left: 5px;' : ''}"></div>
+                            <a class="select2-search-choice-close btn-clear-selection" style="margin-top: 2px; cursor: pointer; left: unset;"></a>
+                        </div>
                     </div>`).insertBefore(this.element);
 
             this.addInplaceButtons();
@@ -146,12 +146,12 @@
         }
 
         public get text(): string {
-            let editVal = this.containerDiv.find('span.display-text').text();
+            let editVal = this.containerDiv.find('.display-text').text();
             return editVal;
         }
 
         public set text(val: string) {
-            this.containerDiv.find('span.display-text').text(val);
+            this.containerDiv.find('.display-text').text(val);
         }
 
         public getEditValue(property, target) {
@@ -206,11 +206,11 @@
             if (value) {
                 this.element.addClass('required');
                 this.containerDiv.addClass('required');
-                this.containerDiv.find('.select2-choice, span.display-text').addClass('required');
+                this.containerDiv.find('.select2-choice, display-text').addClass('required');
             } else {
                 this.element.removeClass('required');
                 this.containerDiv.removeClass('required');
-                this.containerDiv.find('.select2-choice, span.display-text').removeClass('required');
+                this.containerDiv.find('.select2-choice, display-text').removeClass('required');
             }
         }
 
