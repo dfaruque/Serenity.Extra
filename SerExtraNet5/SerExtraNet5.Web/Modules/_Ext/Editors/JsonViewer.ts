@@ -19,7 +19,7 @@
             this.element.text(JSON.stringify(val));
         }
 
-        public get value(): string {
+        public get value() {
             return this._value;
         }
 
