@@ -61,7 +61,6 @@ namespace SerExtraNet5.Common.Endpoints
                 DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture) + ".xlsx");
         }
 
-
         [HttpPost]
         public RetrieveResponse<ExcelMetadata> GetExcelMetadata(IDbConnection connection, ExcelImportRequest request,
             [FromServices] IUploadStorage uploadStorage)
@@ -97,6 +96,12 @@ namespace SerExtraNet5.Common.Endpoints
             }
 
             return new RetrieveResponse<ExcelMetadata> { Entity = excelMetadata };
+        }
+
+        [HttpPost]
+        public ListResponse<ExcelImportableTable> GetExcelImportableTables()
+        {
+            return new ListResponse<ExcelImportableTable> {  };
         }
 
     }
