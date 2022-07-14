@@ -11,7 +11,7 @@ namespace SerExtraNet5.Common.Pages
         [Route("Common/ExcelImport")]
         public ActionResult Index()
         {
-            return View("~/Modules/Common/ExcelImport/ExcelImportIndex.cshtml");
+            return View("~/Modules/Common/ExcelImporter/ExcelImport/ExcelImportIndex.cshtml");
         }
     }
 }
