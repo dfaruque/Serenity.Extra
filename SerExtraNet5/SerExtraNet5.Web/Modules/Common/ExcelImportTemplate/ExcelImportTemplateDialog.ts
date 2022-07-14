@@ -13,16 +13,15 @@ namespace SerExtraNet5.Common {
         constructor(options) {
             super(options);
 
-            let getExcelMetadataButton = $('<button>Get Excel Metadata</button>')
-                .css({ marginTop: 4, float: 'right' })
-                .click(e => {
-                    ExcelImportTemplateService.GetExcelMetadata({ FileName: this.form.TemplateExcelFile.value.Filename },
-                        response => {
-                            this.form.ExcelMetadata.value = response.Entity;
-                            this.loadExcelSheet(response.Entity);
-                        });
+            this.form.TemplateExcelFile.element.bind('fileuploadalways',
+                e => {
+                    this.getExcelMetadata(this.form.TemplateExcelFile.value?.Filename);
                 });
-            this.form.TemplateExcelFile.element.find('.tool-buttons').append(getExcelMetadataButton);
+
+            $('<button>Get Excel Metadata</button>')
+                .css({ marginTop: 4, float: 'right' })
+                .appendTo(this.form.TemplateExcelFile.element.find('.tool-buttons'))
+                .click(e => this.getExcelMetadata(this.form.TemplateExcelFile.value?.Filename));
         }
 
         protected afterLoadEntity() {
@@ -31,10 +30,18 @@ namespace SerExtraNet5.Common {
             this.loadExcelSheet(this.entity.ExcelMetadata);
         }
 
+        private getExcelMetadata(filename: string) {
+            ExcelImportTemplateService.GetExcelMetadata({ FileName: filename },
+                response => {
+                    this.form.ExcelMetadata.value = response.Entity;
+                    this.loadExcelSheet(response.Entity);
+                });
+        }
+
         private loadExcelSheet(excelMetadata: ExcelMetadata) {
             let selectedValue = this.form.ExcelSheet.value || this.entity.ExcelSheet;
 
-            let sheetSelect2Items = excelMetadata.Sheets.map<Select2Item>(m => {
+            let sheetSelect2Items = excelMetadata?.Sheets.map<Select2Item>(m => {
                 return {
                     id: m.SheetName,
                     text: m.SheetName
