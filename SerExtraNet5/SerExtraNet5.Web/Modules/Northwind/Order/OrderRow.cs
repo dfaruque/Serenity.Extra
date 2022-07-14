@@ -9,6 +9,7 @@ namespace SerExtraNet5.Northwind.Entities
 {
     [ConnectionKey("Northwind"), Module("Northwind"), TableName("Orders")]
     [DisplayName("Orders"), InstanceName("Order")]
+    [ExcelImportable]
     [ReadPermission(PermissionKeys.General)]
     [ModifyPermission(PermissionKeys.General)]
     public sealed class OrderRow : Row<OrderRow.RowFields>, IIdRow, INameRow, _Ext.IAuditLog
