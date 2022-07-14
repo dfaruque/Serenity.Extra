@@ -37,7 +37,7 @@ namespace SerExtraNet5.Common
         public String TemplateExcelFile { get => Fields.TemplateExcelFile[this]; set => Fields.TemplateExcelFile[this] = value; }
         public partial class RowFields { public StringField TemplateExcelFile; }
 
-        [DisplayName("Excel Metadata")]
+        [DisplayName("Excel Metadata"), _Ext.JsonViewer]
         public ExcelMetadata ExcelMetadata { get => Fields.ExcelMetadata[this]; set => Fields.ExcelMetadata[this] = value; }
         public partial class RowFields { public JsonField<ExcelMetadata> ExcelMetadata; }
 
