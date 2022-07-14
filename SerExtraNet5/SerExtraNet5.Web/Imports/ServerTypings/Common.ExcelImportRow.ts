@@ -5,7 +5,6 @@
         MasterTableName?: string;
         FieldMappings?: string;
         ImportedExcelFile?: string;
-        ImportedExcelSheet?: string;
         ExcelImportStatus?: number;
         ImportedData?: string;
         Remarks?: string;
@@ -33,7 +32,6 @@
             MasterTableName = "MasterTableName",
             FieldMappings = "FieldMappings",
             ImportedExcelFile = "ImportedExcelFile",
-            ImportedExcelSheet = "ImportedExcelSheet",
             ExcelImportStatus = "ExcelImportStatus",
             ImportedData = "ImportedData",
             Remarks = "Remarks",

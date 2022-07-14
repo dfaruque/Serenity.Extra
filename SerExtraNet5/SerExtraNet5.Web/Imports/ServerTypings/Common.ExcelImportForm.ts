@@ -4,7 +4,6 @@
         MasterTableName: Serenity.StringEditor;
         FieldMappings: Serenity.StringEditor;
         ImportedExcelFile: Serenity.StringEditor;
-        ImportedExcelSheet: Serenity.StringEditor;
         ExcelImportStatus: Serenity.IntegerEditor;
         ImportedData: Serenity.StringEditor;
         Remarks: Serenity.StringEditor;
@@ -29,7 +28,6 @@
                     'MasterTableName', w1,
                     'FieldMappings', w1,
                     'ImportedExcelFile', w1,
-                    'ImportedExcelSheet', w1,
                     'ExcelImportStatus', w0,
                     'ImportedData', w1,
                     'Remarks', w1

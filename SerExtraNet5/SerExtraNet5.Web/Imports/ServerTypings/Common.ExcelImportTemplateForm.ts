@@ -2,8 +2,8 @@
     export interface ExcelImportTemplateForm {
         TemplateName: Serenity.StringEditor;
         MasterTableName: Serenity.StringEditor;
-        TemplateExcelFile: Serenity.StringEditor;
-        TemplateExcelSheet: Serenity.StringEditor;
+        TemplateExcelFile: Serenity.ImageUploadEditor;
+        ExcelSheet: _Ext.EmptyLookupEditor;
         FieldMappings: Serenity.StringEditor;
         Remarks: Serenity.StringEditor;
     }
@@ -20,12 +20,14 @@
 
                 var s = Serenity;
                 var w0 = s.StringEditor;
+                var w1 = s.ImageUploadEditor;
+                var w2 = _Ext.EmptyLookupEditor;
 
                 Q.initFormType(ExcelImportTemplateForm, [
                     'TemplateName', w0,
                     'MasterTableName', w0,
-                    'TemplateExcelFile', w0,
-                    'TemplateExcelSheet', w0,
+                    'TemplateExcelFile', w1,
+                    'ExcelSheet', w2,
                     'FieldMappings', w0,
                     'Remarks', w0
                 ]);

@@ -40,10 +40,6 @@ namespace SerExtraNet5.Common
         public String ImportedExcelFile { get => Fields.ImportedExcelFile[this]; set => Fields.ImportedExcelFile[this] = value; }
         public partial class RowFields { public StringField ImportedExcelFile; }
 
-        [DisplayName("Imported Excel Sheet"), NotNull]
-        public String ImportedExcelSheet { get => Fields.ImportedExcelSheet[this]; set => Fields.ImportedExcelSheet[this] = value; }
-        public partial class RowFields { public StringField ImportedExcelSheet; }
-
         [DisplayName("Excel Import Status")]
         public Int32? ExcelImportStatus { get => Fields.ExcelImportStatus[this]; set => Fields.ExcelImportStatus[this] = value; }
         public partial class RowFields { public Int32Field ExcelImportStatus; }

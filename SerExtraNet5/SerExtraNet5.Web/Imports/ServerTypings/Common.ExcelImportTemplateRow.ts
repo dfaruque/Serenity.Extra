@@ -4,7 +4,8 @@
         TemplateName?: string;
         MasterTableName?: string;
         TemplateExcelFile?: string;
-        TemplateExcelSheet?: string;
+        ExcelMetadata?: ExcelMetadata;
+        ExcelSheet?: string;
         FieldMappings?: string;
         Remarks?: string;
         InsertUserId?: number;
@@ -27,7 +28,8 @@
             TemplateName = "TemplateName",
             MasterTableName = "MasterTableName",
             TemplateExcelFile = "TemplateExcelFile",
-            TemplateExcelSheet = "TemplateExcelSheet",
+            ExcelMetadata = "ExcelMetadata",
+            ExcelSheet = "ExcelSheet",
             FieldMappings = "FieldMappings",
             Remarks = "Remarks",
             InsertUserId = "InsertUserId",

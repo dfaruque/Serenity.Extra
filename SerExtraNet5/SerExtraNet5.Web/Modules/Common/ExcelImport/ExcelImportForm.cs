@@ -16,7 +16,6 @@ namespace SerExtraNet5.Common.Forms
         public String MasterTableName { get; set; }
         public String FieldMappings { get; set; }
         public String ImportedExcelFile { get; set; }
-        public String ImportedExcelSheet { get; set; }
         public Int32 ExcelImportStatus { get; set; }
         public String ImportedData { get; set; }
         public String Remarks { get; set; }
