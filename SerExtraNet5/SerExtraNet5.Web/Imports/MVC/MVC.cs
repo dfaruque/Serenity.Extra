@@ -259,6 +259,11 @@ namespace MVC
                 public const string DashboardIndex = "~/Modules/Common/Dashboard/DashboardIndex.cshtml";
             }
 
+            public static class ExcelImport
+            {
+                public const string ExcelImportIndex = "~/Modules/Common/ExcelImport/ExcelImportIndex.cshtml";
+            }
+
             public static class ExcelImportTemplate
             {
                 public const string ExcelImportTemplateIndex = "~/Modules/Common/ExcelImportTemplate/ExcelImportTemplateIndex.cshtml";

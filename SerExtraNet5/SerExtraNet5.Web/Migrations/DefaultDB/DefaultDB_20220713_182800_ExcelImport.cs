@@ -10,6 +10,8 @@ namespace SerExtraNet5.Migrations.DefaultDB
             this.CreateTableWithId64("ExcelImportTemplates", "Id", s => s
                 .WithColumn("TemplateName").AsString(100).NotNullable()
                 .WithColumn("MasterTableName").AsString(100).NotNullable()
+                .WithColumn("TemplateExcelFile").AsString(100).Nullable()
+                .WithColumn("TemplateExcelSheet").AsString(100).Nullable()
                 .WithColumn("FieldMappings").AsString(int.MaxValue).Nullable()
                 .WithColumn("Remarks").AsString(100).Nullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentDateTime)
@@ -23,6 +25,7 @@ namespace SerExtraNet5.Migrations.DefaultDB
                 .WithColumn("MasterTableName").AsString(100).NotNullable()
                 .WithColumn("FieldMappings").AsString(int.MaxValue).Nullable()
                 .WithColumn("ImportedExcelFile").AsString(100).NotNullable()
+                .WithColumn("ImportedExcelSheet").AsString(100).NotNullable()
                 .WithColumn("ExcelImportStatus").AsInt32().Nullable()
                 .WithColumn("ImportedData").AsString(int.MaxValue).Nullable()
                 .WithColumn("Remarks").AsString(100).Nullable()

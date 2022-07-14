@@ -32,6 +32,14 @@ namespace SerExtraNet5.Common
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
 
+        [DisplayName("Template Excel File")]
+        public String TemplateExcelFile { get => Fields.TemplateExcelFile[this]; set => Fields.TemplateExcelFile[this] = value; }
+        public partial class RowFields { public StringField TemplateExcelFile; }
+
+        [DisplayName("Template Excel Sheet")]
+        public String TemplateExcelSheet { get => Fields.TemplateExcelSheet[this]; set => Fields.TemplateExcelSheet[this] = value; }
+        public partial class RowFields { public StringField TemplateExcelSheet; }
+
         [DisplayName("Field Mappings")]
         public String FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
         public partial class RowFields { public StringField FieldMappings; }

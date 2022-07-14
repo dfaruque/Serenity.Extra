@@ -3,6 +3,8 @@
         Id?: number;
         TemplateName?: string;
         MasterTableName?: string;
+        TemplateExcelFile?: string;
+        TemplateExcelSheet?: string;
         FieldMappings?: string;
         Remarks?: string;
         InsertUserId?: number;
@@ -24,6 +26,8 @@
             Id = "Id",
             TemplateName = "TemplateName",
             MasterTableName = "MasterTableName",
+            TemplateExcelFile = "TemplateExcelFile",
+            TemplateExcelSheet = "TemplateExcelSheet",
             FieldMappings = "FieldMappings",
             Remarks = "Remarks",
             InsertUserId = "InsertUserId",

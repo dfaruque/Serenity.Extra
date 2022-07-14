@@ -8,6 +8,12 @@
       "Key": "Default",
       "Tables": [
         {
+          "Tablename": "ExcelImports",
+          "Identifier": "ExcelImport",
+          "Module": "Common",
+          "PermissionKey": "Administration:General"
+        },
+        {
           "Tablename": "ExcelImportTemplates",
           "Identifier": "ExcelImportTemplate",
           "Module": "Common",
