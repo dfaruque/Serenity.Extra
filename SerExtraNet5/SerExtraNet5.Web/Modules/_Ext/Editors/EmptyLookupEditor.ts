@@ -5,7 +5,7 @@
 
         public setSelect2Items(items: Select2Item[]) {
             this.clearItems();
-            items.forEach(item => { this.addItem(item); });
+            items?.forEach(item => { this.addItem(item); });
         }
 
         public setLookupItems(lookup: Q.Lookup<any>) {
