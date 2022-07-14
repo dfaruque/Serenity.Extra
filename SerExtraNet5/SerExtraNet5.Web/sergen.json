@@ -4,7 +4,51 @@
     "LocalTexts": true
   },
   "Connections": [],
+  "BaseRowClasses": [
+    {
+      "ClassName": "LoggingRow",
+      "Fields": [
+        "InsertUserId",
+        "InsertDate",
+        "UpdateUserId",
+        "UpdateDate"
+      ]
+    },
+    {
+      "ClassName": "RowBase",
+      "Fields": [
+        "IUser",
+        "IDate",
+        "EUser",
+        "EDate"
+      ]
+    }
+  ],
+  "RemoveForeignFields": [
+    "Remarks",
+    "SortOrder",
+    "IUser",
+    "EUser",
+    "IDate",
+    "EDate",
+    "PasswordHash",
+    "PasswordSalt",
+    "UserImage",
+    "LastDirectoryUpdate",
+    "Source",
+    "InsertDate",
+    "InsertUserId",
+    "UpdateDate",
+    "UpdateUserId",
+    "IsActive"
+  ],
   "CustomTemplates": "D:\\Faruque\\Projects\\Serenity.Extra\\SerExtraNet5\\SerExtraNet5.Web\\Modules\\_Ext\\CodeGeneratorTemplates",
+  "CustomGenerate": {
+    "EditorColumns": "{2}\\Editor\\{0}EditorColumns.cs",
+    "EditorForm": "{2}\\Editor\\{0}EditorForm.cs",
+    "GridEditor": "{2}\\Editor\\{0}GridEditor.ts",
+    "EditorDialog": "{2}\\Editor\\{0}EditorDialog.ts"
+  },
   "UpgradeInfo": {
     "InitialType": "Community",
     "InitialVersion": "5.0.24.0"
