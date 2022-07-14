@@ -3,7 +3,19 @@
   "ServerTypings": {
     "LocalTexts": true
   },
-  "Connections": [],
+  "Connections": [
+    {
+      "Key": "Default",
+      "Tables": [
+        {
+          "Tablename": "ExcelImportTemplates",
+          "Identifier": "ExcelImportTemplate",
+          "Module": "Common",
+          "PermissionKey": "Administration:General"
+        }
+      ]
+    }
+  ],
   "BaseRowClasses": [
     {
       "ClassName": "LoggingRow",
