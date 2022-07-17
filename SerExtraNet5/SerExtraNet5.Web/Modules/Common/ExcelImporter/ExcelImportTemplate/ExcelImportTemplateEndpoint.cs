@@ -65,17 +65,7 @@ namespace SerExtraNet5.Common.Endpoints
         public RetrieveResponse<ExcelMetadata> GetExcelMetadata(IDbConnection connection, ExcelImportRequest request,
             [FromServices] IUploadStorage uploadStorage)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            if (string.IsNullOrWhiteSpace(request.FileName))
-                throw new ArgumentNullException(nameof(request.FileName));
-
-            if (!uploadStorage.FileExists(request.FileName))
-                throw new ArgumentException("File not found in the server!");
-
-            if (!request.FileName.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
-                throw new ArgumentException("The file type not supported! Please save as the file type as .xlsx");
+            ExcelImportRequest.Validate(request, uploadStorage);
 
             var excelMetadata = new ExcelMetadata();
 
@@ -85,13 +75,12 @@ namespace SerExtraNet5.Common.Endpoints
 
             foreach (var worksheet in ep.Workbook.Worksheets)
             {
-                var excelSheet = new ExcelSheet { SheetName = worksheet.Name };
-
-                for (var column = 1; column <= worksheet.Dimension.End.Column; column++)
+                var excelSheet = new ExcelSheet
                 {
-                    var columnName = Convert.ToString(worksheet.Cells[1, column].Value);
-                    excelSheet.Columns.Add(columnName);
-                }
+                    SheetName = worksheet.Name,
+                    Columns = ExcelHelper.GetColumnHeaders(worksheet)
+                };
+
                 excelMetadata.Sheets.Add(excelSheet);
             }
 
