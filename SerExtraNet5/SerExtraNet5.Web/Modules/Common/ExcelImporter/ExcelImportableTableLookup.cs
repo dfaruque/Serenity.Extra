@@ -21,19 +21,19 @@ namespace SerExtraNet5.Common
         {
             var excelImportableTables = new List<ExcelImportableTable>();
 
-            var excelImportableRows = Assembly.GetExecutingAssembly().GetTypes()
+            var excelImportableRowTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(_ => _.GetAttribute<ExcelImportableAttribute>().HasValue()
-                && _.GetAttribute<TableNameAttribute>().HasValue());
+                        && _.GetAttribute<TableNameAttribute>().HasValue());
 
-            foreach (var row in excelImportableRows)
+            foreach (var rowType in excelImportableRowTypes)
             {
-                var tableName = row.GetAttribute<TableNameAttribute>();
+                var tableName = rowType.GetAttribute<TableNameAttribute>();
 
                 if (tableName is null) continue;
 
                 excelImportableTables.Add(new ExcelImportableTable
                 {
-                    RowType = row.Name,
+                    RowType = rowType.Name,
                     TableName = tableName.Name,
                     //ImportableFields
                 });
