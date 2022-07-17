@@ -30,6 +30,15 @@ namespace SerExtraNet5.Common {
 
                 this.form.FieldMappings.value = excelImportFieldMappings;
             });
+
+            this.form.MasterTableName.change(e => {
+                let selectedTable = this.form.MasterTableName.selectedItem as ExcelImportableTable;
+
+                Q.getLookup<ExcelImportableField>('Common.ExcelImportableField')
+                    .update(selectedTable?.ImportableFields);
+
+                //(this.form.FieldMappings.slickGrid as any).getEditController().commitCurrentEdit();
+            });
         }
 
         protected afterLoadEntity() {

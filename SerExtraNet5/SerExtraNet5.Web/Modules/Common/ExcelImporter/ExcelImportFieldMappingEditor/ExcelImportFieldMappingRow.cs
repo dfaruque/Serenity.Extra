@@ -23,6 +23,7 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public StringField ExcelColumnName; }
 
         [DisplayName("Table Column Name")]
+        [LookupEditor(typeof(ExcelImportableFieldLookup))]
         public string TableColumnName { get { return Fields.TableColumnName[this]; } set { Fields.TableColumnName[this] = value; } }
         public partial class RowFields { public StringField TableColumnName; }
 
