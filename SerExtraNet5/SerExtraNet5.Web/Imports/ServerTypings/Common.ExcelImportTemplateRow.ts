@@ -6,7 +6,7 @@
         TemplateExcelFile?: string;
         ExcelMetadata?: ExcelMetadata;
         ExcelSheet?: string;
-        FieldMappings?: string;
+        FieldMappings?: ExcelImportFieldMappingRow[];
         Remarks?: string;
         InsertUserId?: number;
         InsertDate?: string;

@@ -5,7 +5,7 @@
         TemplateExcelFile: Serenity.ImageUploadEditor;
         ExcelMetadata: _Ext.JsonViewer;
         ExcelSheet: _Ext.EmptyLookupEditor;
-        FieldMappings: Serenity.StringEditor;
+        FieldMappings: ExcelImportFieldMappingEditor;
         Remarks: Serenity.StringEditor;
     }
 
@@ -25,6 +25,7 @@
                 var w2 = s.ImageUploadEditor;
                 var w3 = _Ext.JsonViewer;
                 var w4 = _Ext.EmptyLookupEditor;
+                var w5 = ExcelImportFieldMappingEditor;
 
                 Q.initFormType(ExcelImportTemplateForm, [
                     'TemplateName', w0,
@@ -32,7 +33,7 @@
                     'TemplateExcelFile', w2,
                     'ExcelMetadata', w3,
                     'ExcelSheet', w4,
-                    'FieldMappings', w0,
+                    'FieldMappings', w5,
                     'Remarks', w0
                 ]);
             }

@@ -22,6 +22,14 @@ namespace SerExtraNet5.Common {
                 .css({ marginTop: 4, float: 'right' })
                 .appendTo(this.form.TemplateExcelFile.element.find('.tool-buttons'))
                 .click(e => this.getExcelMetadata(this.form.TemplateExcelFile.value?.Filename));
+
+            this.form.ExcelSheet.changeSelect2(e => {
+                let selectedSheet = this.form.ExcelSheet.selectedItem as ExcelSheet;
+
+                let excelImportFieldMappings = selectedSheet?.Columns?.map<ExcelImportFieldMappingRow>(m => { return { ExcelColumnName: m } });
+
+                this.form.FieldMappings.value = excelImportFieldMappings;
+            });
         }
 
         protected afterLoadEntity() {
@@ -44,7 +52,8 @@ namespace SerExtraNet5.Common {
             let sheetSelect2Items = excelMetadata?.Sheets.map<Select2Item>(m => {
                 return {
                     id: m.SheetName,
-                    text: m.SheetName
+                    text: m.SheetName,
+                    source: m
                 }
             });
 

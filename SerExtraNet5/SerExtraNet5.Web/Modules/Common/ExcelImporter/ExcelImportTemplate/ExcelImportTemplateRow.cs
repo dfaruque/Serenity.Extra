@@ -39,7 +39,7 @@ namespace SerExtraNet5.Common
         public String TemplateExcelFile { get => Fields.TemplateExcelFile[this]; set => Fields.TemplateExcelFile[this] = value; }
         public partial class RowFields { public StringField TemplateExcelFile; }
 
-        [DisplayName("Excel Metadata"), _Ext.JsonViewer]
+        [DisplayName("Excel Metadata"), JsonViewer]
         public ExcelMetadata ExcelMetadata { get => Fields.ExcelMetadata[this]; set => Fields.ExcelMetadata[this] = value; }
         public partial class RowFields { public JsonField<ExcelMetadata> ExcelMetadata; }
 
@@ -49,8 +49,9 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public StringField ExcelSheet; }
 
         [DisplayName("Field Mappings")]
-        public String FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
-        public partial class RowFields { public StringField FieldMappings; }
+        [ExcelImportFieldMappingEditor]
+        public List<ExcelImportFieldMappingRow> FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
+        public partial class RowFields { public JsonField<List<ExcelImportFieldMappingRow>> FieldMappings; }
 
         [DisplayName("Remarks")]
         public String Remarks { get => Fields.Remarks[this]; set => Fields.Remarks[this] = value; }
