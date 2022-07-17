@@ -935,12 +935,12 @@ function SerenityInlineEditor(args) {
 
     this.getValue = () => {
         var v = editor.value;
-        if (args.column.sourceItem.editorType == 'String' ||
-            args.column.sourceItem.editorType == 'Date')
-            return v;
+        //if (args.column.sourceItem.editorType == 'String' ||
+        //    args.column.sourceItem.editorType == 'Date')
+        //    return v;
 
-        if (isNaN(v))
-            return "";
+        //if (isNaN(v))
+        //    return "";
         return v;
     }
 
@@ -958,12 +958,12 @@ function SerenityInlineEditor(args) {
     this.serializeValue = () => {
         var v = editor.value;
 
-        if (args.column.sourceItem.editorType == 'String' ||
-            args.column.sourceItem.editorType == 'Date')
-            return v;
+        //if (args.column.sourceItem.editorType == 'String' ||
+        //    args.column.sourceItem.editorType == 'Date')
+        //    return v;
 
-        if (isNaN(v))
-            return "";
+        //if (isNaN(v))
+        //    return "";
         return v;
     }
 
