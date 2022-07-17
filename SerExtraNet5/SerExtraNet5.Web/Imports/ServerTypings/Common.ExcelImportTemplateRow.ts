@@ -18,6 +18,11 @@
         export const idProperty = 'Id';
         export const nameProperty = 'TemplateName';
         export const localTextPrefix = 'Common.ExcelImportTemplate';
+        export const lookupKey = 'Common.ExcelImportTemplate';
+
+        export function getLookup(): Q.Lookup<ExcelImportTemplateRow> {
+            return Q.getLookup<ExcelImportTemplateRow>('Common.ExcelImportTemplate');
+        }
         export const deletePermission = 'Common:ExcelImportTemplate:Delete';
         export const insertPermission = 'Common:ExcelImportTemplate:Insert';
         export const readPermission = 'Common:ExcelImportTemplate:Read';

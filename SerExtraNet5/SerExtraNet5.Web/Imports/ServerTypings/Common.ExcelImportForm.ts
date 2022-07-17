@@ -1,9 +1,7 @@
 ﻿namespace SerExtraNet5.Common {
     export interface ExcelImportForm {
-        TemplateId: Serenity.IntegerEditor;
-        MasterTableName: Serenity.StringEditor;
-        FieldMappings: Serenity.StringEditor;
-        ImportedExcelFile: Serenity.StringEditor;
+        TemplateId: Serenity.LookupEditor;
+        ImportedExcelFile: Serenity.ImageUploadEditor;
         ExcelImportStatus: Serenity.IntegerEditor;
         ImportedData: Serenity.StringEditor;
         Remarks: Serenity.StringEditor;
@@ -20,17 +18,17 @@
                 ExcelImportForm.init = true;
 
                 var s = Serenity;
-                var w0 = s.IntegerEditor;
-                var w1 = s.StringEditor;
+                var w0 = s.LookupEditor;
+                var w1 = s.ImageUploadEditor;
+                var w2 = s.IntegerEditor;
+                var w3 = s.StringEditor;
 
                 Q.initFormType(ExcelImportForm, [
                     'TemplateId', w0,
-                    'MasterTableName', w1,
-                    'FieldMappings', w1,
                     'ImportedExcelFile', w1,
-                    'ExcelImportStatus', w0,
-                    'ImportedData', w1,
-                    'Remarks', w1
+                    'ExcelImportStatus', w2,
+                    'ImportedData', w3,
+                    'Remarks', w3
                 ]);
             }
         }

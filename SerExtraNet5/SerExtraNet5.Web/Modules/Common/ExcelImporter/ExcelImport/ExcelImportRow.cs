@@ -25,18 +25,22 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public Int32Field Id; }
 
         [DisplayName("Template"), NotNull, ForeignKey("ExcelImportTemplates", "Id"), LeftJoin("jTemplate"), TextualField("TemplateTemplateName")]
+        [LookupEditor(typeof(ExcelImportTemplateRow))]
         public Int32? TemplateId { get => Fields.TemplateId[this]; set => Fields.TemplateId[this] = value; }
         public partial class RowFields { public Int32Field TemplateId; }
 
         [DisplayName("Master Table Name"), NotNull, QuickSearch, NameProperty]
+        [LookupEditor(typeof(ExcelImportableTableLookup))]
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
 
         [DisplayName("Field Mappings")]
-        public String FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
-        public partial class RowFields { public StringField FieldMappings; }
+        [ExcelImportFieldMappingEditor]
+        public List<ExcelImportFieldMappingRow> FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
+        public partial class RowFields { public JsonField<List<ExcelImportFieldMappingRow>> FieldMappings; }
 
         [DisplayName("Imported Excel File"), NotNull]
+        [FileUploadEditor]
         public String ImportedExcelFile { get => Fields.ImportedExcelFile[this]; set => Fields.ImportedExcelFile[this] = value; }
         public partial class RowFields { public StringField ImportedExcelFile; }
 

@@ -15,13 +15,13 @@ namespace SerExtraNet5.Common {
 
             this.form.TemplateExcelFile.element.bind('fileuploadalways',
                 e => {
-                    this.getExcelMetadata(this.form.TemplateExcelFile.value?.Filename);
+                    this.getExcelMetadata();
                 });
 
             $('<button>Get Excel Metadata</button>')
                 .css({ marginTop: 4, float: 'right' })
                 .appendTo(this.form.TemplateExcelFile.element.find('.tool-buttons'))
-                .click(e => this.getExcelMetadata(this.form.TemplateExcelFile.value?.Filename));
+                .click(e => this.getExcelMetadata());
 
             this.form.ExcelSheet.changeSelect2(e => {
                 let selectedSheet = this.form.ExcelSheet.selectedItem as ExcelSheet;
@@ -47,8 +47,8 @@ namespace SerExtraNet5.Common {
             this.loadExcelSheet(this.entity.ExcelMetadata);
         }
 
-        private getExcelMetadata(filename: string) {
-            ExcelImportTemplateService.GetExcelMetadata({ FileName: filename },
+        private getExcelMetadata() {
+            ExcelImportTemplateService.GetExcelMetadata({ FileName: this.form.TemplateExcelFile.value?.Filename },
                 response => {
                     this.form.ExcelMetadata.value = response.Entity;
                     this.loadExcelSheet(response.Entity);

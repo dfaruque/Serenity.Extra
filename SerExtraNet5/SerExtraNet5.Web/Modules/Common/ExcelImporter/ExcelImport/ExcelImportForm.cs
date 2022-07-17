@@ -13,8 +13,8 @@ namespace SerExtraNet5.Common.Forms
     public class ExcelImportForm
     {
         public Int32 TemplateId { get; set; }
-        public String MasterTableName { get; set; }
-        public String FieldMappings { get; set; }
+        //public String MasterTableName { get; set; }
+        //public String FieldMappings { get; set; }
         public String ImportedExcelFile { get; set; }
         public Int32 ExcelImportStatus { get; set; }
         public String ImportedData { get; set; }

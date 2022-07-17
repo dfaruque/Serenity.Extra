@@ -87,7 +87,7 @@ namespace SerExtraNet5.Common.Endpoints
 
             var excelData = new List<Dictionary<string, object>>();
 
-            for (var rowNumber = 1; rowNumber <= worksheet.Dimension.End.Row; rowNumber++)
+            for (var rowNumber = 2; rowNumber <= worksheet.Dimension.End.Row; rowNumber++)
             {
                 var excelRow = new Dictionary<string, object>();
 

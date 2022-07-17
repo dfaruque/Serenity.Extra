@@ -12,6 +12,27 @@ namespace SerExtraNet5.Common {
 
         constructor(options) {
             super(options);
+
+            this.form.ImportedExcelFile.element.bind('fileuploadalways',
+                e => {
+                    this.getExcelData();
+                });
+
+            $('<button>Get Excel Data</button>')
+                .css({ marginTop: 4, float: 'right' })
+                .appendTo(this.form.ImportedExcelFile.element.find('.tool-buttons'))
+                .click(e => this.getExcelData());
+
+        }
+
+        private getExcelData() {
+
+            ExcelImportService.GetExcelData({
+                ExcelImportTemplateId: Q.toId(this.form.TemplateId.value),
+                FileName: this.form.ImportedExcelFile.value?.Filename
+            }, response => {
+                console.log(response)
+            });
         }
 
     }

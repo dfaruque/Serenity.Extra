@@ -18,6 +18,7 @@ namespace SerExtraNet5.Common
     [InsertPermission("Common:ExcelImportTemplate:Insert")]
     [UpdatePermission("Common:ExcelImportTemplate:Update")]
     [DeletePermission("Common:ExcelImportTemplate:Delete")]
+    [LookupScript]
     public sealed class ExcelImportTemplateRow : LoggingRow<ExcelImportTemplateRow.RowFields>, IIdRow, INameRow
     {
 

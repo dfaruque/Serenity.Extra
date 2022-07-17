@@ -3,7 +3,7 @@
         Id?: number;
         TemplateId?: number;
         MasterTableName?: string;
-        FieldMappings?: string;
+        FieldMappings?: ExcelImportFieldMappingRow[];
         ImportedExcelFile?: string;
         ExcelImportStatus?: number;
         ImportedData?: string;
