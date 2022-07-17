@@ -15,6 +15,7 @@ namespace SerExtraNet5.Common.Forms
         public String TemplateName { get; set; }
         public String MasterTableName { get; set; }
         public String TemplateExcelFile { get; set; }
+        [Hidden]
         public ExcelMetadata ExcelMetadata { get; set; }
         public String ExcelSheet { get; set; }
         public String FieldMappings { get; set; }
