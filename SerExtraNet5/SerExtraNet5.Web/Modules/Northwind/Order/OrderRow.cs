@@ -9,7 +9,7 @@ namespace SerExtraNet5.Northwind.Entities
 {
     [ConnectionKey("Northwind"), Module("Northwind"), TableName("Orders")]
     [DisplayName("Orders"), InstanceName("Order")]
-    [ExcelImportable]
+    [ExcelImport]
     [ReadPermission(PermissionKeys.General)]
     [ModifyPermission(PermissionKeys.General)]
     public sealed class OrderRow : Row<OrderRow.RowFields>, IIdRow, INameRow, _Ext.IAuditLog
@@ -29,6 +29,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [Origin("c"), DisplayName("Customer"), QuickSearch]
+        [ExcelImportable]
         public String CustomerCompanyName
         {
             get => fields.CustomerCompanyName[this];
@@ -44,6 +45,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [Origin("e"), DisplayName("Employee")]
+        [ExcelImportable]
         public String EmployeeFullName
         {
             get => fields.EmployeeFullName[this];
@@ -65,6 +67,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Order Date"), NotNull]
+        [ExcelImportable]
         public DateTime? OrderDate
         {
             get => fields.OrderDate[this];

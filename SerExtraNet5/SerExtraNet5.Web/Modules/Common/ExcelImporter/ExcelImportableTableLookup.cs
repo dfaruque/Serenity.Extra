@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +11,7 @@ using Serenity.Web;
 namespace SerExtraNet5.Common
 {
     [LookupScript]
-    public class ExcelImportableTableLookup: LookupScript
+    public class ExcelImportableTableLookup : LookupScript
     {
         public ExcelImportableTableLookup()
         {
@@ -22,20 +23,42 @@ namespace SerExtraNet5.Common
             var excelImportableTables = new List<ExcelImportableTable>();
 
             var excelImportableRowTypes = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(_ => _.GetAttribute<ExcelImportableAttribute>().HasValue()
-                        && _.GetAttribute<TableNameAttribute>().HasValue());
+                .Where(_ => _.GetAttribute<ExcelImportAttribute>().HasValue());
 
             foreach (var rowType in excelImportableRowTypes)
             {
-                var tableName = rowType.GetAttribute<TableNameAttribute>();
+                var tableNameAttr = rowType.GetAttribute<TableNameAttribute>();
 
-                if (tableName is null) continue;
+                if (tableNameAttr is null) continue;
+
+                var rowProps = rowType.GetProperties();
+
+                var excelImportableFields = new List<ExcelImportableField>();
+
+                foreach (var prop in rowProps)
+                {
+                    var excelImportableAttr = prop.GetAttribute<ExcelImportableAttribute>();
+                    if (excelImportableAttr is null) continue;
+
+                    var propType = prop.PropertyType;
+                    if (propType.IsGenericType)
+                    {
+                        if (propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                            propType = propType.GetGenericArguments()[0];
+                    }
+
+                    excelImportableFields.Add(new ExcelImportableField
+                    {
+                        FieldName = prop.Name,
+                        FieldType = propType.Name
+                    });
+                }
 
                 excelImportableTables.Add(new ExcelImportableTable
                 {
                     RowType = rowType.Name,
-                    TableName = tableName.Name,
-                    //ImportableFields
+                    TableName = tableNameAttr.Name,
+                    ImportableFields = excelImportableFields
                 });
             }
 
