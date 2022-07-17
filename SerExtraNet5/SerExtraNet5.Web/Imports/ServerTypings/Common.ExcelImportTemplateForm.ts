@@ -1,10 +1,10 @@
 ﻿namespace SerExtraNet5.Common {
     export interface ExcelImportTemplateForm {
         TemplateName: Serenity.StringEditor;
-        MasterTableName: Serenity.LookupEditor;
         TemplateExcelFile: Serenity.ImageUploadEditor;
         ExcelMetadata: _Ext.JsonViewer;
         ExcelSheet: _Ext.EmptyLookupEditor;
+        MasterTableName: Serenity.LookupEditor;
         FieldMappings: ExcelImportFieldMappingEditor;
         Remarks: Serenity.StringEditor;
     }
@@ -21,18 +21,18 @@
 
                 var s = Serenity;
                 var w0 = s.StringEditor;
-                var w1 = s.LookupEditor;
-                var w2 = s.ImageUploadEditor;
-                var w3 = _Ext.JsonViewer;
-                var w4 = _Ext.EmptyLookupEditor;
+                var w1 = s.ImageUploadEditor;
+                var w2 = _Ext.JsonViewer;
+                var w3 = _Ext.EmptyLookupEditor;
+                var w4 = s.LookupEditor;
                 var w5 = ExcelImportFieldMappingEditor;
 
                 Q.initFormType(ExcelImportTemplateForm, [
                     'TemplateName', w0,
-                    'MasterTableName', w1,
-                    'TemplateExcelFile', w2,
-                    'ExcelMetadata', w3,
-                    'ExcelSheet', w4,
+                    'TemplateExcelFile', w1,
+                    'ExcelMetadata', w2,
+                    'ExcelSheet', w3,
+                    'MasterTableName', w4,
                     'FieldMappings', w5,
                     'Remarks', w0
                 ]);

@@ -34,7 +34,7 @@ namespace SerExtraNet5.Common
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
 
-        [DisplayName("Template Excel File")]
+        [DisplayName("Template Excel File"), Required]
         [FileUploadEditor]
         public String TemplateExcelFile { get => Fields.TemplateExcelFile[this]; set => Fields.TemplateExcelFile[this] = value; }
         public partial class RowFields { public StringField TemplateExcelFile; }
@@ -43,7 +43,7 @@ namespace SerExtraNet5.Common
         public ExcelMetadata ExcelMetadata { get => Fields.ExcelMetadata[this]; set => Fields.ExcelMetadata[this] = value; }
         public partial class RowFields { public JsonField<ExcelMetadata> ExcelMetadata; }
 
-        [DisplayName("Excel Sheet")]
+        [DisplayName("Excel Sheet"), Required]
         [EmptyLookupEditor]
         public String ExcelSheet { get => Fields.ExcelSheet[this]; set => Fields.ExcelSheet[this] = value; }
         public partial class RowFields { public StringField ExcelSheet; }
