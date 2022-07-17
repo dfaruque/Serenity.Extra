@@ -73,6 +73,7 @@ namespace SerExtraNet5.Common.Endpoints
                 throw new ArgumentNullException(nameof(request.ExcelImportTemplateId));
 
             var excelImportTemplate = templateRetriveHandler.Retrieve(connection, new RetrieveRequest { EntityId = request.ExcelImportTemplateId }).Entity;
+            var excelImportFieldMapping = excelImportTemplate.FieldMappings;
             var excelImportTemplateSheet = excelImportTemplate.ExcelMetadata.Sheets.Find(f => f.SheetName == excelImportTemplate.ExcelSheet);
 
             using var ep = new ExcelPackage();
@@ -81,9 +82,20 @@ namespace SerExtraNet5.Common.Endpoints
 
             var worksheet = ep.Workbook.Worksheets[excelImportTemplate.ExcelSheet];
 
-            var inportedExcelColumnHeaders = ExcelHelper.GetColumnHeaders(worksheet);
+            if (worksheet == default)
+                throw new ValidationError($"Imported excel file does not have the correct sheet.\n" +
+                    $"Expected sheet name: {excelImportTemplate.ExcelSheet}");
 
-            //todo: validate excelColumnHeaders with excelImportTemplateSheet
+            var importedExcelColumnHeaders = ExcelHelper.GetColumnHeaders(worksheet);
+
+            for (var column = 0; column < excelImportTemplateSheet.Columns.Count; column++)
+            {
+                if (excelImportTemplateSheet.Columns[column] != importedExcelColumnHeaders[column])
+                    throw new ValidationError($"Imported excel sheet column headers does not match with the template!\n" +
+                        $"Mismatched column name: {importedExcelColumnHeaders[column]} at position {column}\n" +
+                        $"Expected column name: {excelImportTemplateSheet.Columns[column]}\n\n" +
+                        $"Please uplaod excel file with the following columns: {excelImportTemplateSheet.Columns.ToJson()}");
+            }
 
             var excelData = new List<Dictionary<string, object>>();
 
@@ -93,10 +105,12 @@ namespace SerExtraNet5.Common.Endpoints
 
                 for (var column = 1; column <= excelImportTemplateSheet.Columns.Count; column++)
                 {
-                    var columnName = excelImportTemplateSheet.Columns[column - 1];
                     var cellValue = worksheet.Cells[rowNumber, column].Value;
 
-                    excelRow.Add(columnName, cellValue);
+                    var columnName = excelImportTemplateSheet.Columns[column - 1];
+                    var fieldMapping = excelImportTemplate.FieldMappings.Find(f => f.ExcelColumnName == columnName);
+
+                    excelRow.Add(fieldMapping.TableColumnName, cellValue);
                 }
 
                 excelData.Add(excelRow);
