@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 using SerExtraNet5.Administration.Entities;
+using _Ext;
 
 namespace SerExtraNet5.Common
 {
@@ -29,6 +30,7 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public StringField TemplateName; }
 
         [DisplayName("Master Table Name"), NotNull]
+        [LookupEditor(typeof(ExcelImportableTableLookup))]
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
 
@@ -42,7 +44,7 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public JsonField<ExcelMetadata> ExcelMetadata; }
 
         [DisplayName("Excel Sheet")]
-        [_Ext.EmptyLookupEditor()]
+        [EmptyLookupEditor]
         public String ExcelSheet { get => Fields.ExcelSheet[this]; set => Fields.ExcelSheet[this] = value; }
         public partial class RowFields { public StringField ExcelSheet; }
 

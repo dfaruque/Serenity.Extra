@@ -97,12 +97,5 @@ namespace SerExtraNet5.Common.Endpoints
 
             return new RetrieveResponse<ExcelMetadata> { Entity = excelMetadata };
         }
-
-        [HttpPost]
-        public ListResponse<ExcelImportableTable> GetExcelImportableTables()
-        {
-            return new ListResponse<ExcelImportableTable> {  };
-        }
-
     }
 }

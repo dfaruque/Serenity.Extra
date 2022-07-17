@@ -259,16 +259,16 @@ namespace MVC
                 public const string DashboardIndex = "~/Modules/Common/Dashboard/DashboardIndex.cshtml";
             }
 
-            public static class ExcelImporting
+            public static class ExcelImporter
             {
                 public static class ExcelImport
                 {
-                    public const string ExcelImportIndex = "~/Modules/Common/ExcelImporting/ExcelImport/ExcelImportIndex.cshtml";
+                    public const string ExcelImportIndex = "~/Modules/Common/ExcelImporter/ExcelImport/ExcelImportIndex.cshtml";
                 }
 
                 public static class ExcelImportTemplate
                 {
-                    public const string ExcelImportTemplateIndex = "~/Modules/Common/ExcelImporting/ExcelImportTemplate/ExcelImportTemplateIndex.cshtml";
+                    public const string ExcelImportTemplateIndex = "~/Modules/Common/ExcelImporter/ExcelImportTemplate/ExcelImportTemplateIndex.cshtml";
                 }
             }
 
