@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using Serenity;
 using Serenity.Data;
 using Serenity.Reporting;
 using Serenity.Services;
 using Serenity.Web;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using MyRow = SerExtraNet5.Common.ExcelImportRow;
@@ -28,7 +30,7 @@ namespace SerExtraNet5.Common.Endpoints
         {
             return handler.Update(uow, request);
         }
- 
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request,
             [FromServices] IExcelImportDeleteHandler handler)
@@ -59,5 +61,49 @@ namespace SerExtraNet5.Common.Endpoints
             return ExcelContentResult.Create(bytes, "ExcelImportList_" +
                 DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture) + ".xlsx");
         }
+
+        [HttpPost]
+        public ListResponse<Dictionary<string, object>> GetExcelData(IDbConnection connection, ExcelImportRequest request,
+            [FromServices] IExcelImportTemplateRetrieveHandler templateRetriveHandler,
+            [FromServices] IUploadStorage uploadStorage)
+        {
+            ExcelImportRequest.Validate(request, uploadStorage);
+
+            if (request.ExcelImportTemplateId == default)
+                throw new ArgumentNullException(nameof(request.ExcelImportTemplateId));
+
+            var excelImportTemplate = templateRetriveHandler.Retrieve(connection, new RetrieveRequest { EntityId = request.ExcelImportTemplateId }).Entity;
+            var excelImportTemplateSheet = excelImportTemplate.ExcelMetadata.Sheets.Find(f => f.SheetName == excelImportTemplate.ExcelSheet);
+
+            using var ep = new ExcelPackage();
+            using (var fs = uploadStorage.OpenFile(request.FileName))
+                ep.Load(fs);
+
+            var worksheet = ep.Workbook.Worksheets[excelImportTemplate.ExcelSheet];
+
+            var inportedExcelColumnHeaders = ExcelHelper.GetColumnHeaders(worksheet);
+
+            //todo: validate excelColumnHeaders with excelImportTemplateSheet
+
+            var excelData = new List<Dictionary<string, object>>();
+
+            for (var rowNumber = 1; rowNumber <= worksheet.Dimension.End.Row; rowNumber++)
+            {
+                var excelRow = new Dictionary<string, object>();
+
+                for (var column = 1; column <= excelImportTemplateSheet.Columns.Count; column++)
+                {
+                    var columnName = excelImportTemplateSheet.Columns[column - 1];
+                    var cellValue = worksheet.Cells[rowNumber, column].Value;
+
+                    excelRow.Add(columnName, cellValue);
+                }
+
+                excelData.Add(excelRow);
+            }
+
+            return new ListResponse<Dictionary<string, object>> { Entities = excelData };
+        }
+
     }
 }
