@@ -8,6 +8,7 @@
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ExcelImportRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ExcelImportRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function GetExcelData(request: ExcelImportRequest, onSuccess?: (response: Serenity.ListResponse<{ [key: string]: any }>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function ImportExcelData(request: Serenity.SaveRequest<ExcelImportRow>, onSuccess?: (response: ExcelImportResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
             Create = "Common/ExcelImport/Create",
@@ -15,7 +16,8 @@
             Delete = "Common/ExcelImport/Delete",
             Retrieve = "Common/ExcelImport/Retrieve",
             List = "Common/ExcelImport/List",
-            GetExcelData = "Common/ExcelImport/GetExcelData"
+            GetExcelData = "Common/ExcelImport/GetExcelData",
+            ImportExcelData = "Common/ExcelImport/ImportExcelData"
         }
 
         [
@@ -24,7 +26,8 @@
             'Delete', 
             'Retrieve', 
             'List', 
-            'GetExcelData'
+            'GetExcelData', 
+            'ImportExcelData'
         ].forEach(x => {
             (<any>ExcelImportService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);

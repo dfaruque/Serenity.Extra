@@ -26,7 +26,16 @@ namespace SerExtraNet5.Common {
                 .click(e => this.getExcelData());
 
             this.form.ImportedData.onImportButtonClick = () => {
-                Q.notifyInfo('Import button clicked!');
+                ExcelImportService.ImportExcelData(this.getSaveRequest(), response => {
+                    Q.notifyInfo(
+                        'Inserted: ' + (response.Inserted || 0) +
+                        ', Updated: ' + (response.Updated || 0));
+
+                    if (response.ErrorList != null && response.ErrorList.length > 0) {
+                        Q.notifyError(response.ErrorList.join(',\r\n '));
+                    }
+
+                });
             };
         }
 

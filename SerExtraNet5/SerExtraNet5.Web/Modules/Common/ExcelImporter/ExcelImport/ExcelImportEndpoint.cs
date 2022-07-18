@@ -119,5 +119,13 @@ namespace SerExtraNet5.Common.Endpoints
             return new ListResponse<Dictionary<string, object>> { Entities = excelData };
         }
 
+        [HttpPost]
+        public ExcelImportResponse ImportExcelData(IUnitOfWork uow, SaveRequest<MyRow> request,
+            [FromServices] IExcelImportSaveHandler handler)
+        {
+
+            return new ExcelImportResponse { };
+        }
+
     }
 }
