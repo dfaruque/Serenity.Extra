@@ -23,7 +23,7 @@ namespace SerExtraNet5.Migrations.DefaultDB
 
             this.CreateTableWithId64("ExcelImports", "Id", s => s
                 .WithColumn("TemplateId").AsInt64().NotNullable().ForeignKey("ExcelImportTemplates", "Id")
-                .WithColumn("MasterTableName").AsString(100).NotNullable()
+                .WithColumn("MasterTableName").AsString(100).Nullable()
                 .WithColumn("FieldMappings").AsString(int.MaxValue).Nullable()
                 .WithColumn("ImportedExcelFile").AsString(100).NotNullable()
                 .WithColumn("ExcelImportStatus").AsInt32().Nullable()

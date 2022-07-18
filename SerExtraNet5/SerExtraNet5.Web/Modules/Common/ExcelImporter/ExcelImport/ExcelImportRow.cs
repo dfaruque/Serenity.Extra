@@ -29,7 +29,7 @@ namespace SerExtraNet5.Common
         public Int32? TemplateId { get => Fields.TemplateId[this]; set => Fields.TemplateId[this] = value; }
         public partial class RowFields { public Int32Field TemplateId; }
 
-        [DisplayName("Master Table Name"), NotNull, QuickSearch, NameProperty]
+        [DisplayName("Master Table Name"), QuickSearch, NameProperty]
         [LookupEditor(typeof(ExcelImportableTableLookup))]
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
