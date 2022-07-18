@@ -13,6 +13,11 @@ namespace SerExtraNet5.Common {
         constructor(options) {
             super(options);
 
+            this.form.TemplateId.changeSelect2(e => {
+                let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
+                this.getExcelData();
+            });
+
             this.form.ImportedExcelFile.element.bind('fileuploadalways',
                 e => {
                     this.getExcelData();
@@ -27,12 +32,18 @@ namespace SerExtraNet5.Common {
 
         private getExcelData() {
 
-            ExcelImportService.GetExcelData({
-                ExcelImportTemplateId: Q.toId(this.form.TemplateId.value),
-                FileName: this.form.ImportedExcelFile.value?.Filename
-            }, response => {
-                console.log(response)
-            });
+            let templateId = Q.toId(this.form.TemplateId.value)
+            let importedExcelFile = this.form.ImportedExcelFile.value?.Filename;
+
+            if (templateId && importedExcelFile) {
+
+                ExcelImportService.GetExcelData({
+                    ExcelImportTemplateId: templateId,
+                    FileName: importedExcelFile
+                }, response => {
+                    console.log(response)
+                });
+            }
         }
 
     }
