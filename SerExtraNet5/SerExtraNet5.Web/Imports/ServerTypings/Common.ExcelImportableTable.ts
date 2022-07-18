@@ -2,6 +2,6 @@
     export interface ExcelImportableTable {
         TableName?: string;
         RowType?: string;
-        ImportableFields?: ExcelImportableField[];
+        ImportableFields?: Serenity.PropertyItem[];
     }
 }

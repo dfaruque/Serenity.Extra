@@ -15,7 +15,8 @@ namespace SerExtraNet5.Common
     {
         public ExcelImportableFieldLookup()
         {
-            IdField = TextField = nameof(ExcelImportableField.FieldName);
+            IdField = nameof(PropertyItem.Name).ToLower();
+            TextField = nameof(PropertyItem.Title).ToLower();
         }
 
         protected override IEnumerable GetItems()

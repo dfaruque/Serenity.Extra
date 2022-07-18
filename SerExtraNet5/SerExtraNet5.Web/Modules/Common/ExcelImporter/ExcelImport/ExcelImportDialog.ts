@@ -36,12 +36,16 @@ namespace SerExtraNet5.Common {
             if (templateId) {
                 let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
 
-                let columns = selectedTemplate.FieldMappings.map<Slick.Column>(m => {
-                    return {
-                        field: m.TableColumnName,
-                        name: m.TableColumnName
-                    }
-                })
+                let tableLookup = Q.getLookup<ExcelImportableTable>('Common.ExcelImportableTable');
+                let propertyItems = tableLookup.itemById[selectedTemplate.MasterTableName].ImportableFields;
+
+                let mappedPropertyItems = selectedTemplate.FieldMappings.map<Serenity.PropertyItem>(m => {
+                    let propertyItem = propertyItems.filter(f => f.name == m.TableColumnName)[0]
+                    return propertyItem;
+                });
+
+                let columns = this.form.ImportedData['propertyItemsToSlickColumns'](mappedPropertyItems);
+                columns = this.form.ImportedData['postProcessColumns'](columns);
                 this.form.ImportedData.slickGrid.setColumns(columns);
             }
         }

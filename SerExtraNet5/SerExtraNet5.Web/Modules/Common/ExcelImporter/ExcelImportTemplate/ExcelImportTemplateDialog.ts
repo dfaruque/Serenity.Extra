@@ -34,7 +34,7 @@ namespace SerExtraNet5.Common {
             this.form.MasterTableName.change(e => {
                 let selectedTable = this.form.MasterTableName.selectedItem as ExcelImportableTable;
 
-                Q.getLookup<ExcelImportableField>('Common.ExcelImportableField')
+                Q.getLookup<Serenity.PropertyItem>('Common.ExcelImportableField')
                     .update(selectedTable?.ImportableFields);
 
                 //(this.form.FieldMappings.slickGrid as any).getEditController().commitCurrentEdit();

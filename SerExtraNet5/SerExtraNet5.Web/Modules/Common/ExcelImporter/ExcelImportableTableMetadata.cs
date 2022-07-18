@@ -8,13 +8,6 @@ namespace SerExtraNet5.Common
     {
         public string TableName { get; set; }
         public string RowType { get; set; }
-        public List<ExcelImportableField> ImportableFields { get; set; }
-    }
-
-    [ScriptInclude]
-    public class ExcelImportableField
-    {
-        public string FieldName { get; set; }
-        public string FieldType { get; set; }
+        public List<PropertyItem> ImportableFields { get; set; }
     }
 }
