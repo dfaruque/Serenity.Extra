@@ -14,7 +14,7 @@ namespace SerExtraNet5.Common {
             super(options);
 
             this.form.TemplateId.changeSelect2(e => {
-                let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
+                this.setExcelDataGridColumns();
                 this.getExcelData();
             });
 
@@ -30,6 +30,22 @@ namespace SerExtraNet5.Common {
 
         }
 
+        private setExcelDataGridColumns() {
+            let templateId = Q.toId(this.form.TemplateId.value)
+
+            if (templateId) {
+                let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
+
+                let columns = selectedTemplate.FieldMappings.map<Slick.Column>(m => {
+                    return {
+                        field: m.TableColumnName,
+                        name: m.TableColumnName
+                    }
+                })
+                this.form.ImportedData.slickGrid.setColumns(columns);
+            }
+        }
+
         private getExcelData() {
 
             let templateId = Q.toId(this.form.TemplateId.value)
@@ -41,9 +57,15 @@ namespace SerExtraNet5.Common {
                     ExcelImportTemplateId: templateId,
                     FileName: importedExcelFile
                 }, response => {
-                    console.log(response)
+                    this.form.ImportedData.value = response.Entities;
                 });
             }
+        }
+
+        protected afterLoadEntity() {
+            super.afterLoadEntity();
+
+            this.setExcelDataGridColumns();
         }
 
     }

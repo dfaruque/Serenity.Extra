@@ -31,7 +31,7 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public StringField TemplateName; }
 
         [DisplayName("Master Table Name"), NotNull]
-        [LookupEditor(typeof(ExcelImportableTableLookup))]
+        [LookupEditor(typeof(ExcelImportableTableLookup)), LookupInclude]
         public String MasterTableName { get => Fields.MasterTableName[this]; set => Fields.MasterTableName[this] = value; }
         public partial class RowFields { public StringField MasterTableName; }
 
@@ -49,7 +49,7 @@ namespace SerExtraNet5.Common
         public String ExcelSheet { get => Fields.ExcelSheet[this]; set => Fields.ExcelSheet[this] = value; }
         public partial class RowFields { public StringField ExcelSheet; }
 
-        [DisplayName("Field Mappings")]
+        [DisplayName("Field Mappings"), LookupInclude]
         [ExcelImportFieldMappingEditor]
         public List<ExcelImportFieldMappingRow> FieldMappings { get => Fields.FieldMappings[this]; set => Fields.FieldMappings[this] = value; }
         public partial class RowFields { public JsonField<List<ExcelImportFieldMappingRow>> FieldMappings; }

@@ -49,6 +49,7 @@ namespace SerExtraNet5.Common
         public partial class RowFields { public Int32Field ExcelImportStatus; }
 
         [DisplayName("Imported Data")]
+        [ExcelImportDataEditor]
         public String ImportedData { get => Fields.ImportedData[this]; set => Fields.ImportedData[this] = value; }
         public partial class RowFields { public StringField ImportedData; }
 

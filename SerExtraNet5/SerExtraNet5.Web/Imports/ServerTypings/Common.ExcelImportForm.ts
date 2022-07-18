@@ -3,7 +3,7 @@
         TemplateId: Serenity.LookupEditor;
         ImportedExcelFile: Serenity.ImageUploadEditor;
         ExcelImportStatus: Serenity.IntegerEditor;
-        ImportedData: Serenity.StringEditor;
+        ImportedData: ExcelImportDataEditor;
         Remarks: Serenity.StringEditor;
     }
 
@@ -21,14 +21,15 @@
                 var w0 = s.LookupEditor;
                 var w1 = s.ImageUploadEditor;
                 var w2 = s.IntegerEditor;
-                var w3 = s.StringEditor;
+                var w3 = ExcelImportDataEditor;
+                var w4 = s.StringEditor;
 
                 Q.initFormType(ExcelImportForm, [
                     'TemplateId', w0,
                     'ImportedExcelFile', w1,
                     'ExcelImportStatus', w2,
                     'ImportedData', w3,
-                    'Remarks', w3
+                    'Remarks', w4
                 ]);
             }
         }
