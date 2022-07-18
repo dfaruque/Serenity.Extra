@@ -59,7 +59,7 @@ namespace SerExtraNet5.Common
         #region Foreign Fields
 
 
-        [DisplayName("Template Name"), Expression("jTemplate.[TemplateName]"), ReadOnly(true)]
+        [DisplayName("Template Name"), Expression("jTemplate.[TemplateName]"), ReadOnly(true), QuickSearch]
         public String TemplateTemplateName { get => Fields.TemplateTemplateName[this]; set => Fields.TemplateTemplateName[this] = value; }
         public partial class RowFields { public StringField TemplateTemplateName; }
 
