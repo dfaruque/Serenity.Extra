@@ -13,10 +13,7 @@ namespace SerExtraNet5.Common {
         constructor(options) {
             super(options);
 
-            this.form.TemplateExcelFile.element.bind('fileuploadalways',
-                e => {
-                    this.getExcelMetadata();
-                });
+            this.form.TemplateExcelFile.element.bind('fileuploadalways', e => this.getExcelMetadata());
 
             $('<button>Get Excel Metadata</button>')
                 .css({ marginTop: 4, float: 'right' })
@@ -26,7 +23,11 @@ namespace SerExtraNet5.Common {
             this.form.ExcelSheet.changeSelect2(e => {
                 let selectedSheet = this.form.ExcelSheet.selectedItem as ExcelSheet;
 
-                let excelImportFieldMappings = selectedSheet?.Columns?.map<ExcelImportFieldMappingRow>(m => { return { ExcelColumnName: m } });
+                let excelImportFieldMappings = selectedSheet?.Columns?.map<ExcelImportFieldMappingRow>(m => {
+                    return {
+                        ExcelColumnName: m
+                    }
+                });
 
                 this.form.FieldMappings.value = excelImportFieldMappings;
             });
