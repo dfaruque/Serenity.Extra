@@ -26,7 +26,7 @@ namespace SerExtraNet5.Migrations.DefaultDB
                 .WithColumn("MasterTableName").AsString(100).Nullable()
                 .WithColumn("FieldMappings").AsString(int.MaxValue).Nullable()
                 .WithColumn("ImportedExcelFile").AsString(100).NotNullable()
-                .WithColumn("ExcelImportStatus").AsInt32().Nullable()
+                .WithColumn("ExcelImportStatus").AsInt32().NotNullable().WithDefaultValue(0)
                 .WithColumn("ImportedData").AsString(int.MaxValue).Nullable()
                 .WithColumn("Remarks").AsString(100).Nullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable().WithDefault(SystemMethods.CurrentDateTime)

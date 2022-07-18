@@ -44,9 +44,9 @@ namespace SerExtraNet5.Common
         public String ImportedExcelFile { get => Fields.ImportedExcelFile[this]; set => Fields.ImportedExcelFile[this] = value; }
         public partial class RowFields { public StringField ImportedExcelFile; }
 
-        [DisplayName("Excel Import Status")]
-        public Int32? ExcelImportStatus { get => Fields.ExcelImportStatus[this]; set => Fields.ExcelImportStatus[this] = value; }
-        public partial class RowFields { public Int32Field ExcelImportStatus; }
+        [DisplayName("Excel Import Status"), NotNull, DefaultValue(0)]
+        public ExcelImportStatus? ExcelImportStatus { get => Fields.ExcelImportStatus[this]; set => Fields.ExcelImportStatus[this] = value; }
+        public partial class RowFields { public EnumField<ExcelImportStatus> ExcelImportStatus; }
 
         [DisplayName("Imported Data")]
         [ExcelImportDataEditor]
@@ -80,5 +80,11 @@ namespace SerExtraNet5.Common
         public ExcelImportRow(RowFields fields) : base(fields) { }
 
         public partial class RowFields : LoggingRowFields { }
+    }
+
+    public enum ExcelImportStatus
+    {
+        Pending = 0,
+        Success = 1,
     }
 }

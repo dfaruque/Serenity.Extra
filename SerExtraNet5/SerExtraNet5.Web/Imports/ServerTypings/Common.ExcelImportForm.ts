@@ -2,7 +2,7 @@
     export interface ExcelImportForm {
         TemplateId: Serenity.LookupEditor;
         ImportedExcelFile: Serenity.ImageUploadEditor;
-        ExcelImportStatus: Serenity.IntegerEditor;
+        ExcelImportStatus: Serenity.EnumEditor;
         ImportedData: ExcelImportDataEditor;
         Remarks: Serenity.StringEditor;
     }
@@ -20,7 +20,7 @@
                 var s = Serenity;
                 var w0 = s.LookupEditor;
                 var w1 = s.ImageUploadEditor;
-                var w2 = s.IntegerEditor;
+                var w2 = s.EnumEditor;
                 var w3 = ExcelImportDataEditor;
                 var w4 = s.StringEditor;
 

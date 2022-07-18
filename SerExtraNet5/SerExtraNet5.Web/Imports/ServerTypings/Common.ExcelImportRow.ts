@@ -5,7 +5,7 @@
         MasterTableName?: string;
         FieldMappings?: ExcelImportFieldMappingRow[];
         ImportedExcelFile?: string;
-        ExcelImportStatus?: number;
+        ExcelImportStatus?: ExcelImportStatus;
         ImportedData?: string;
         Remarks?: string;
         TemplateTemplateName?: string;
