@@ -2,8 +2,8 @@
     export interface ExcelImportForm {
         TemplateId: Serenity.LookupEditor;
         ImportedExcelFile: Serenity.ImageUploadEditor;
-        ExcelImportStatus: Serenity.EnumEditor;
         ImportedData: ExcelImportDataEditor;
+        ExcelImportStatus: Serenity.EnumEditor;
         Remarks: Serenity.StringEditor;
     }
 
@@ -20,15 +20,15 @@
                 var s = Serenity;
                 var w0 = s.LookupEditor;
                 var w1 = s.ImageUploadEditor;
-                var w2 = s.EnumEditor;
-                var w3 = ExcelImportDataEditor;
+                var w2 = ExcelImportDataEditor;
+                var w3 = s.EnumEditor;
                 var w4 = s.StringEditor;
 
                 Q.initFormType(ExcelImportForm, [
                     'TemplateId', w0,
                     'ImportedExcelFile', w1,
-                    'ExcelImportStatus', w2,
-                    'ImportedData', w3,
+                    'ImportedData', w2,
+                    'ExcelImportStatus', w3,
                     'Remarks', w4
                 ]);
             }
