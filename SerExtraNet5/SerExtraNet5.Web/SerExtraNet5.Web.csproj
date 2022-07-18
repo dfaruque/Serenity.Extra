@@ -14,7 +14,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
     <None Remove="Modules\Common\ExcelImporter\ExcelImportTemplate\ExcelImportFieldMappingEditor.ts" />
-    <TypeScriptCompile Remove="Modules\Common\ExcelImporter\ExcelImportFieldMappingEditor\ExcelImportFieldMappingEditorDialog.ts" />
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
