@@ -12,12 +12,15 @@ namespace SerExtraNet5.Common {
         protected getButtons(): Serenity.ToolButton[] {
             return [{
                 title: 'Import',
-                icon: 'fa-import',
+                icon: 'fa-arrow-right',
                 onClick: () => {
-
+                    if (this.onImportButtonClick)
+                        this.onImportButtonClick();
                 }
             }];
         }
+
+        onImportButtonClick: Function;
 
         protected getSlickOptions() {
             let options = super.getSlickOptions();

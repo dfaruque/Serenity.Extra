@@ -18,16 +18,16 @@ namespace SerExtraNet5.Common {
                 this.getExcelData();
             });
 
-            this.form.ImportedExcelFile.element.bind('fileuploadalways',
-                e => {
-                    this.getExcelData();
-                });
+            this.form.ImportedExcelFile.element.bind('fileuploadalways', e => this.getExcelData());
 
             $('<button>Get Excel Data</button>')
                 .css({ marginTop: 4, float: 'right' })
                 .appendTo(this.form.ImportedExcelFile.element.find('.tool-buttons'))
                 .click(e => this.getExcelData());
 
+            this.form.ImportedData.onImportButtonClick = () => {
+                Q.notifyInfo('Import button clicked!');
+            };
         }
 
         private setExcelDataGridColumns() {
