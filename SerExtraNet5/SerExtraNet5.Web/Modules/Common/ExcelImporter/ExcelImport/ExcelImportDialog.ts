@@ -26,6 +26,8 @@ namespace SerExtraNet5.Common {
                 .click(e => this.getExcelData());
 
             this.form.ImportedData.onImportButtonClick = () => {
+                Q.reloadLookup('Common.ExcelImportableTable');
+
                 ExcelImportService.ImportExcelData(this.getSaveRequest(), response => {
                     Q.notifyInfo(
                         'Inserted: ' + (response.Inserted || 0) +

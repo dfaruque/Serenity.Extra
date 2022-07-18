@@ -14,6 +14,8 @@ namespace SerExtraNet5.Common
     [LookupScript]
     public class ExcelImportableTableLookup : LookupScript
     {
+        public static List<ExcelImportableTable> Items = new();
+
         public IPropertyItemProvider PropertyProvider { get; }
         public IServiceProvider ServiceProvider { get; }
 
@@ -26,8 +28,6 @@ namespace SerExtraNet5.Common
 
         protected override IEnumerable GetItems()
         {
-            var excelImportableTables = new List<ExcelImportableTable>();
-
             var excelImportableRowTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(_ => _.GetAttribute<ExcelImportAttribute>().HasValue());
 
@@ -52,15 +52,15 @@ namespace SerExtraNet5.Common
                     excelImportableFields.Add(propertyItem);
                 }
 
-                excelImportableTables.Add(new ExcelImportableTable
+                Items.Add(new ExcelImportableTable
                 {
-                    RowType = rowType.Name,
+                    RowType = rowType.FullName,
                     TableName = tableNameAttr.Name,
                     ImportableFields = excelImportableFields
                 });
             }
 
-            return excelImportableTables;
+            return Items;
         }
     }
 }
