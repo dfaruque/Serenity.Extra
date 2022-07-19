@@ -13,6 +13,7 @@ namespace SerExtraNet5.Common {
             return [{
                 title: 'Import',
                 icon: 'fa-arrow-right',
+                cssClass: 'btn-custom',
                 onClick: () => {
                     if (this.onImportButtonClick)
                         this.onImportButtonClick();
