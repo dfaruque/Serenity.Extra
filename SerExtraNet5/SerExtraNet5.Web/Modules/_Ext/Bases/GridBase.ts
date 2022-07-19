@@ -177,8 +177,102 @@ namespace _Ext {
         protected getColumns(): Slick.Column[] {
             let columns = super.getColumns();
 
-            let isEditable = this.getSlickOptions().editable;
             let extOptions = this.get_ExtGridOptions();
+
+            columns.unshift({
+                field: 'RowNum',
+                name: '#',
+                cssClass: 'rownum-column',
+                headerCssClass: 'align-center',
+                width: 40,
+                minWidth: 40,
+                maxWidth: 40,
+                visible: extOptions.ShowRowNumberColumn,
+                format: ctx => {
+                    if (!ctx.item.RowNum) {
+                        ctx.item.RowNum = this.nextRowNumber++;
+                    }
+                    return String(ctx.item.RowNum);
+                }
+            });
+
+            if (extOptions.ShowInlineActionsColumn == true) {
+                let inlineActionsColumnWidth = 0;
+                let inlineActionsColumnContent = '';
+
+                if (extOptions.ShowEditInlineButtun == true) {
+                    inlineActionsColumnWidth += 32;
+                    var title = this.isReadOnly ? q.text('Controls.View', 'View Details') : q.text('Controls.Edit', 'Edit');
+                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="font-size: 1.2em;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
+                }
+
+                if (extOptions.ShowDeleteInlineButtun == true) {
+                    inlineActionsColumnWidth += 22;
+                    inlineActionsColumnContent += `<a class="inline-actions delete-row" title="${q.text('Controls.Delete', 'Delete')}" style="padding-left: 5px;"><i class="delete-row fa fa-trash-o text-red"></i></a>`;
+                }
+
+                if (extOptions.ShowPrintInlineButtun == true) {
+                    inlineActionsColumnWidth += 25;
+                    inlineActionsColumnContent += `<a class="inline-actions print-row" title="${q.text('Controls.Print', 'Print')}" style="padding-left: 5px;"><i class="print-row fa fa-print"></i></a>`;
+                }
+
+                columns.unshift({
+                    field: 'inline-actions',
+                    name: '',
+                    cssClass: 'inline-actions-column',
+                    width: inlineActionsColumnWidth,
+                    minWidth: inlineActionsColumnWidth,
+                    maxWidth: inlineActionsColumnWidth,
+                    formatter: (row, cell, value, columnDef, dataContext) => {
+                        return inlineActionsColumnContent;
+                    }
+                });
+            }
+
+            if (extOptions.ShowRowSelectionCheckboxColumn == true) {
+                let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+                rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
+                columns.unshift(rowSelectionCol);
+            }
+
+            if (this.isPickerMode()) { //show checkbox column in picker mode
+                let options = (this.options as any) as GridItemPickerEditorOptions;
+                if (!options.multiple && !options.gridType) {
+                    Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
+                }
+
+                //remove edit link in picker mode
+                columns.forEach(column => {
+                    if (column.sourceItem && column.sourceItem.editLink)
+                        column.format = undefined;
+                });
+
+                if (options.multiple == true) {
+                    let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+                    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
+                    columns.unshift(rowSelectionCol);
+                } else {
+                    columns.unshift({
+                        field: 'row-selection',
+                        name: '',
+                        cssClass: 'inline-actions-column',
+                        width: 66,
+                        minWidth: 66,
+                        maxWidth: 66,
+                        format: ctx => '<a class="inline-actions select-row"><i class="select-row fa fa-check"></i> Select</a>'
+                    });
+
+                }
+
+            }
+
+            return columns;
+        }
+
+        public postProcessColumns(columns: Slick.Column[]): Slick.Column[] {
+            super.postProcessColumns(columns);
+
+            let isEditable = this.getSlickOptions().editable;
 
             if (isEditable == true) {
                 usingSlickGridEditors();
@@ -330,93 +424,6 @@ namespace _Ext {
                     column.width = columnWidth;
                 }
             });
-
-            columns.unshift({
-                field: 'RowNum',
-                name: '#',
-                cssClass: 'rownum-column',
-                headerCssClass: 'align-center',
-                width: 40,
-                minWidth: 40,
-                maxWidth: 40,
-                visible: extOptions.ShowRowNumberColumn,
-                format: ctx => {
-                    if (!ctx.item.RowNum) {
-                        ctx.item.RowNum = this.nextRowNumber++;
-                    }
-                    return String(ctx.item.RowNum);
-                }
-            });
-
-            if (extOptions.ShowInlineActionsColumn == true) {
-                let inlineActionsColumnWidth = 0;
-                let inlineActionsColumnContent = '';
-
-                if (extOptions.ShowEditInlineButtun == true) {
-                    inlineActionsColumnWidth += 32;
-                    var title = this.isReadOnly ? q.text('Controls.View', 'View Details') : q.text('Controls.Edit', 'Edit');
-                    inlineActionsColumnContent += `<a class="inline-actions view-details" title="${title}" style="font-size: 1.2em;"><i class="view-details fa fa-pencil-square-o"></i></a>`;
-                }
-
-                if (extOptions.ShowDeleteInlineButtun == true) {
-                    inlineActionsColumnWidth += 22;
-                    inlineActionsColumnContent += `<a class="inline-actions delete-row" title="${q.text('Controls.Delete', 'Delete')}" style="padding-left: 5px;"><i class="delete-row fa fa-trash-o text-red"></i></a>`;
-                }
-
-                if (extOptions.ShowPrintInlineButtun == true) {
-                    inlineActionsColumnWidth += 25;
-                    inlineActionsColumnContent += `<a class="inline-actions print-row" title="${q.text('Controls.Print', 'Print')}" style="padding-left: 5px;"><i class="print-row fa fa-print"></i></a>`;
-                }
-
-                columns.unshift({
-                    field: 'inline-actions',
-                    name: '',
-                    cssClass: 'inline-actions-column',
-                    width: inlineActionsColumnWidth,
-                    minWidth: inlineActionsColumnWidth,
-                    maxWidth: inlineActionsColumnWidth,
-                    formatter: (row, cell, value, columnDef, dataContext) => {
-                        return inlineActionsColumnContent;
-                    }
-                });
-            }
-
-            if (extOptions.ShowRowSelectionCheckboxColumn == true) {
-                let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
-                rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
-                columns.unshift(rowSelectionCol);
-            }
-
-            if (this.isPickerMode()) { //show checkbox column in picker mode
-                let options = (this.options as any) as GridItemPickerEditorOptions;
-                if (!options.multiple && !options.gridType) {
-                    Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
-                }
-
-                //remove edit link in picker mode
-                columns.forEach(column => {
-                    if (column.sourceItem && column.sourceItem.editLink)
-                        column.format = undefined;
-                });
-
-                if (options.multiple == true) {
-                    let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
-                    rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
-                    columns.unshift(rowSelectionCol);
-                } else {
-                    columns.unshift({
-                        field: 'row-selection',
-                        name: '',
-                        cssClass: 'inline-actions-column',
-                        width: 66,
-                        minWidth: 66,
-                        maxWidth: 66,
-                        format: ctx => '<a class="inline-actions select-row"><i class="select-row fa fa-check"></i> Select</a>'
-                    });
-
-                }
-
-            }
 
             return columns;
         }
