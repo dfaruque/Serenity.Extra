@@ -5,7 +5,9 @@ using Serenity.Data;
 using Serenity.Reporting;
 using Serenity.Services;
 using Serenity.Web;
+using SerExtraNet5.Administration.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -120,11 +122,43 @@ namespace SerExtraNet5.Common.Endpoints
         }
 
         [HttpPost]
-        public ExcelImportResponse ImportExcelData(IUnitOfWork uow, SaveRequest<MyRow> request,
-            [FromServices] IExcelImportSaveHandler handler)
+        public ExcelImportResponse ImportExcelData(SaveRequest<MyRow> request,
+            [FromServices] ISqlConnections sqlConnections,
+            [FromServices] IExcelImportTemplateRetrieveHandler templateRetriveHandler,
+            [FromServices] IDefaultHandlerFactory handlerFactory)
         {
+            var excelImportEntity = request.Entity;
 
-            return new ExcelImportResponse { };
+            var excelImportTemplate = templateRetriveHandler.Retrieve(sqlConnections.NewFor<ExcelImportTemplateRow>(), new RetrieveRequest { EntityId = excelImportEntity.TemplateId }).Entity;
+            var excelImportFieldMapping = excelImportTemplate.FieldMappings;
+
+            var excelImportableTable = ExcelImportableTableLookup.Items.Find(f => f.TableName == excelImportTemplate.MasterTableName);
+
+            var rowType = Type.GetType(excelImportableTable.RowType);
+            var rowInstance = Activator.CreateInstance(rowType) as IRow;
+
+            var rowListType = typeof(List<>).MakeGenericType(rowType);
+            var rowList = JSON.Parse(excelImportEntity.ImportedData, rowListType) as IList;
+
+            var rowSaveHandlerType = typeof(ISaveHandler<>).MakeGenericType(rowType);
+
+            var rowSaveHandler = handlerFactory.CreateHandler(rowType, rowSaveHandlerType) as dynamic;
+
+            var saveRequestType = typeof(SaveRequest<>).MakeGenericType(rowType);
+
+            var connectionKey = rowType.GetAttribute<ConnectionKeyAttribute>().Value;
+            using var importUOW = new UnitOfWork(sqlConnections.NewByKey(connectionKey));
+
+            foreach (var row in rowList)
+            {
+                var saveRequest = Activator.CreateInstance(saveRequestType) as ISaveRequest;
+                saveRequest.Entity = row;
+                rowSaveHandler.Create(importUOW, saveRequest as dynamic);
+            }
+
+            importUOW.Commit();
+
+            return new ExcelImportResponse { Inserted = rowList.Count };
         }
 
     }
