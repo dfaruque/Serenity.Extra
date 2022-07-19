@@ -8,7 +8,7 @@ namespace SerExtraNet5.Common {
         protected getRowType() { return ExcelImportRow; }
         protected getService() { return ExcelImportService.baseUrl; }
 
-        protected form = new ExcelImportForm(this.idPrefix);
+        public form = new ExcelImportForm(this.idPrefix);
 
         constructor(options) {
             super(options);
@@ -22,10 +22,12 @@ namespace SerExtraNet5.Common {
 
             this.form.ImportedExcelFile.element.bind('fileuploadalways', e => this.getExcelData());
 
-            $('<button>Get Excel Data</button>')
+            $('<button class="btn-custom">Get Excel Data</button>')
                 .css({ marginTop: 4, float: 'right' })
                 .appendTo(this.form.ImportedExcelFile.element.find('.tool-buttons'))
                 .click(e => this.getExcelData());
+
+            q.initDetailEditor(this, this.form.ImportedData);
 
             this.form.ImportedData.onImportButtonClick = () => {
                 Q.reloadLookup('Common.ExcelImportableTable');
@@ -97,6 +99,10 @@ namespace SerExtraNet5.Common {
             super.afterLoadEntity();
 
             this.setExcelDataGridColumns();
+
+            if (this.entity.ExcelImportStatus == ExcelImportStatus.Completed) {
+                this.setReadOnly(true);
+            }
         }
 
     }
