@@ -13,6 +13,8 @@ namespace SerExtraNet5.Common {
         constructor(options) {
             super(options);
 
+            usingSlickGridEditors();
+
             this.form.TemplateId.changeSelect2(e => {
                 this.setExcelDataGridColumns();
                 this.getExcelData();
@@ -50,14 +52,26 @@ namespace SerExtraNet5.Common {
                 let tableLookup = Q.getLookup<ExcelImportableTable>('Common.ExcelImportableTable');
                 let propertyItems = tableLookup.itemById[selectedTemplate.MasterTableName].ImportableFields;
 
-                let mappedPropertyItems = selectedTemplate.FieldMappings.map<Serenity.PropertyItem>(m => {
-                    let propertyItem = propertyItems.filter(f => f.name == m.TableColumnName)[0]
-                    return propertyItem;
+                let mappedPropertyItems: Serenity.PropertyItem[] = [];
+
+                selectedTemplate.FieldMappings.forEach(field => {
+                    let propertyItem = propertyItems.filter(f => f.name == field.TableColumnName)[0];
+                    propertyItem.readOnly = true;
+                    mappedPropertyItems.push(propertyItem);
+
+                    if (propertyItem.editLinkIdField) {
+                        propertyItem.title += ' (in Excel)';
+
+                        let editLinkIdPropertyItem = propertyItems.filter(f => f.name == propertyItem.editLinkIdField)[0];
+                        editLinkIdPropertyItem.title += ' (in DB)';
+                        editLinkIdPropertyItem.readOnly = false;
+                        mappedPropertyItems.push(editLinkIdPropertyItem);
+                    }
                 });
 
                 let columns = this.form.ImportedData['propertyItemsToSlickColumns'](mappedPropertyItems);
-                columns = this.form.ImportedData['postProcessColumns'](columns);
-                this.form.ImportedData.slickGrid.setColumns(columns);
+                columns = this.form.ImportedData.postProcessColumns(columns);
+                this.form.ImportedData.resetColumns(columns);
             }
         }
 
