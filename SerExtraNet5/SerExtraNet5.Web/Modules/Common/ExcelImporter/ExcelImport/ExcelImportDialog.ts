@@ -30,15 +30,17 @@ namespace SerExtraNet5.Common {
             this.form.ImportedData.onImportButtonClick = () => {
                 Q.reloadLookup('Common.ExcelImportableTable');
 
-                ExcelImportService.ImportExcelData(this.getSaveRequest(), response => {
-                    Q.notifyInfo(
-                        'Inserted: ' + (response.Inserted || 0) +
-                        ', Updated: ' + (response.Updated || 0));
+                var saveRequest = this.getSaveRequest();
+
+                ExcelImportService.ImportExcelData(saveRequest, response => {
+                    Q.notifyInfo('Imported records: ' + (response.Inserted || 0));
 
                     if (response.ErrorList != null && response.ErrorList.length > 0) {
                         Q.notifyError(response.ErrorList.join(',\r\n '));
+                    } else {
+                        this.form.ExcelImportStatus.value = ExcelImportStatus.Completed.toString();
+                        this.save();
                     }
-
                 });
             };
         }

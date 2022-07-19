@@ -70,7 +70,7 @@
         //getIdProperty
         protected getSlickOptions(): Slick.GridOptions { return super.getSlickOptions() }
 
-        protected postProcessColumns(columns: Slick.Column[]): Slick.Column[] { return super.postProcessColumns(columns) }
+        public postProcessColumns(columns: Slick.Column[]): Slick.Column[] { return super.postProcessColumns(columns) }
         protected setInitialSortOrder(): void { super.setInitialSortOrder() }
 
         protected enableFiltering(): boolean { return super.enableFiltering() }

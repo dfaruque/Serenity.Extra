@@ -85,6 +85,6 @@ namespace SerExtraNet5.Common
     public enum ExcelImportStatus
     {
         Pending = 0,
-        Success = 1,
+        Completed = 1,
     }
 }

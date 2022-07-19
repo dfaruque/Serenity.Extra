@@ -61,7 +61,7 @@
             return opt;
 
         }
-        protected postProcessColumns(columns: Slick.Column[]): Slick.Column[] { console.log('postProcessColumns'); return super.postProcessColumns(columns) }
+        public postProcessColumns(columns: Slick.Column[]): Slick.Column[] { console.log('postProcessColumns'); return super.postProcessColumns(columns) }
         protected setInitialSortOrder(): void { console.log('setInitialSortOrder'); super.setInitialSortOrder() }
 
         protected enableFiltering(): boolean { console.log('enableFiltering'); return super.enableFiltering() }
