@@ -116,7 +116,9 @@
                 this.toolbar.findButton('btn-save-and-new').addClass('disabled');
                 this.toolbar.findButton('btn-replace-row').addClass('disabled');
                 this.toolbar.findButton('btn-history').addClass('disabled');
-                this.toolbar.findButton('btn-custom').addClass('disabled');
+
+                this.element.find('.btn-custom').addClass('disabled')
+                    .attr('disabled', 'disabled');
 
                 // remove required asterisk (*)
                 this.element.find('sup').toggle(this.isReadOnly);
@@ -125,7 +127,7 @@
 
                         try {
                             Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
-                        } catch{ }
+                        } catch { }
                     }
                 }
 
