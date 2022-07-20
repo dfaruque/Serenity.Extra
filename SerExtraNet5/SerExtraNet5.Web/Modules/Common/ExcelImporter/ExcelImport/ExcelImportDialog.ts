@@ -42,6 +42,7 @@ namespace SerExtraNet5.Common {
                     } else {
                         this.form.ExcelImportStatus.value = ExcelImportStatus.Completed.toString();
                         this.save();
+                        this.setReadOnly(true);
                     }
                 });
             };
@@ -54,7 +55,7 @@ namespace SerExtraNet5.Common {
                 let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
 
                 let tableLookup = Q.getLookup<ExcelImportableTable>('Common.ExcelImportableTable');
-                let propertyItems = tableLookup.itemById[selectedTemplate.MasterTableName].ImportableFields;
+                let propertyItems = Q.deepClone(tableLookup.itemById[selectedTemplate.MasterTableName].ImportableFields);
 
                 let mappedPropertyItems: Serenity.PropertyItem[] = [];
 
