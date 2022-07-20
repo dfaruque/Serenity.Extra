@@ -49,12 +49,15 @@ namespace SerExtraNet5.Common
                     var excelImportableAttr = prop.GetAttribute<ExcelImportableAttribute>();
                     if (excelImportableAttr is null) continue;
 
-                    excelImportableFields.Add(propertyItem);
-
-                    //add ForeignIdField if this property is a ForeignField
                     var row = Activator.CreateInstance(rowType) as IRow;
                     var field = row.FindField(propertyItem.Name);
 
+                    if (field.Flags.HasFlag(FieldFlags.NotNull)) //NotNull fiels not marked as Required! why?
+                        propertyItem.Required = true;
+
+                    excelImportableFields.Add(propertyItem);
+
+                    //add ForeignIdField if this property is a ForeignField
                     if (field.Flags.HasFlag(FieldFlags.Foreign))
                     {
                         var foreignIdField = row.Fields.FirstOrDefault(f => f.TextualField == field.Name);
@@ -63,6 +66,8 @@ namespace SerExtraNet5.Common
                             propertyItem.EditLinkIdField = foreignIdField.Name;
 
                             var foreignPropertyItem = propertyItems.First(f => f.Name == foreignIdField.Name);
+                            if (foreignIdField.Flags.HasFlag(FieldFlags.NotNull))
+                                foreignPropertyItem.Required = true;
                             excelImportableFields.Add(foreignPropertyItem);
                         }
                     }
