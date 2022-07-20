@@ -65,10 +65,7 @@ namespace SerExtraNet5.Common {
                     mappedPropertyItems.push(propertyItem);
 
                     if (propertyItem.editLinkIdField) {
-                        propertyItem.title += ' (in Excel)';
-
                         let editLinkIdPropertyItem = propertyItems.filter(f => f.name == propertyItem.editLinkIdField)[0];
-                        editLinkIdPropertyItem.title += ' (in DB)';
                         editLinkIdPropertyItem.readOnly = false;
                         mappedPropertyItems.push(editLinkIdPropertyItem);
                     }

@@ -29,6 +29,9 @@ namespace SerExtraNet5.Common
 
         protected override IEnumerable GetItems()
         {
+            if (Items.Count > 0)
+                return Items;
+
             var excelImportableRowTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(_ => _.GetAttribute<ExcelImportAttribute>().HasValue());
 
@@ -64,10 +67,14 @@ namespace SerExtraNet5.Common
                         if (foreignIdField.GetAttribute<ExcelImportableAttribute>() is null)
                         {
                             propertyItem.EditLinkIdField = foreignIdField.Name;
+                            propertyItem.Title = propertyItem.Title + " [" + propertyItem.Name + "]";
 
                             var foreignPropertyItem = propertyItems.First(f => f.Name == foreignIdField.Name);
+                            foreignPropertyItem.Title = foreignPropertyItem.Title + " [" + foreignPropertyItem.Name + "]";
+                            
                             if (foreignIdField.Flags.HasFlag(FieldFlags.NotNull))
                                 foreignPropertyItem.Required = true;
+
                             excelImportableFields.Add(foreignPropertyItem);
                         }
                     }
