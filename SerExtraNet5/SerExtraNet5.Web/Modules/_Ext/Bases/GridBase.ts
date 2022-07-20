@@ -446,6 +446,7 @@ namespace _Ext {
 
             this.slickContainer.fadeTo(0, 0);
 
+            this.allColumns = columns;
             this.slickGrid.setColumns(columns);
 
             setTimeout(() => {
