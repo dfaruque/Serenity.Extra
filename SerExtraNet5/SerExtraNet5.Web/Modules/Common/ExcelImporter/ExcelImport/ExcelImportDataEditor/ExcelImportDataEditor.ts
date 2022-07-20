@@ -47,6 +47,14 @@ namespace SerExtraNet5.Common {
 
         onImportButtonClick: Function;
 
+        protected getItemCssClass(item, index): string {
+            for (let column of this.allColumns) {
+                if (column.sourceItem?.required && !item[column.field])
+                    return 'bg-yellow-gradient';
+            }
+            return '';
+        }
+
         protected getSlickOptions() {
             let options = super.getSlickOptions();
 
