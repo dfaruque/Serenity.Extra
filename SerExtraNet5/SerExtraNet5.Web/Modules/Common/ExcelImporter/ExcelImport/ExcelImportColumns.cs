@@ -12,7 +12,7 @@ namespace SerExtraNet5.Common.Columns
     [BasedOnRow(typeof(ExcelImportRow), CheckNames = true)]
     public class ExcelImportColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight, Hidden]
+        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 Id { get; set; }
         [EditLink]
         public String TemplateTemplateName { get; set; }
