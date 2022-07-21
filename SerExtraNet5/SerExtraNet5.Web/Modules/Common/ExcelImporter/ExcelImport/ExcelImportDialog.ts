@@ -82,40 +82,38 @@ namespace SerExtraNet5.Common {
 
             let groupByMasterFields = {};
 
-            let flatRecordsWithMasterKeyGen = flatRecords;
-
             let masterRecords = [];
 
-            for (let flatRecord of flatRecordsWithMasterKeyGen) {
-                let recordKey = '';
+            for (let flatRecord of flatRecords) {
+                let masterKey = '';
                 let masterRecord = {};
 
                 for (let field in masterDetailModel) {
-                    recordKey += flatRecord[field];
+                    masterKey += flatRecord[field];
                     masterRecord[field] = flatRecord[field];
                 }
 
-                flatRecord.recordKey = recordKey;
-                masterRecord['recordKey'] = recordKey;
+                flatRecord.masterKey = masterKey;
+                masterRecord['masterKey'] = masterKey;
 
-                if (!groupByMasterFields.hasOwnProperty(recordKey)) {
-                    groupByMasterFields[recordKey] = [];
+                if (!groupByMasterFields.hasOwnProperty(masterKey)) {
+                    groupByMasterFields[masterKey] = [];
                     masterRecords.push(masterRecord);
                 }
-                groupByMasterFields[recordKey].push(flatRecord);
+                groupByMasterFields[masterKey].push(flatRecord);
             }
 
             let masterDetailRecords = [];
 
             for (let masterKey in groupByMasterFields) {
-                let masterRecord = masterRecords.filter(f => f.recordKey == masterKey)[0];
-                delete masterRecord['recordKey'];
+                let masterRecord = masterRecords.filter(f => f.masterKey == masterKey)[0];
+                delete masterRecord['masterKey'];
                 let detailFieldInMaster = detailFields[0];
 
                 let detailRecords = groupByMasterFields[masterKey];
 
                 for (let detailRecord of detailRecords) {
-                    delete detailRecord['recordKey'];
+                    delete detailRecord['masterKey'];
 
                     for (let masterField in masterDetailModel) {
                         delete detailRecord[masterField];
