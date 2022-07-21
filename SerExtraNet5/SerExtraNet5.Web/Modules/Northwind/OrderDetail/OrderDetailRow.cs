@@ -26,7 +26,7 @@ namespace SerExtraNet5.Northwind.Entities
             set => fields.OrderID[this] = value;
         }
 
-        [DisplayName("Product"), PrimaryKey, ForeignKey(typeof(ProductRow)), LeftJoin("p")]
+        [DisplayName("Product"), NotNull, PrimaryKey, ForeignKey(typeof(ProductRow)), LeftJoin("p")]
         [LookupEditor(typeof(ProductRow))]
         public Int32? ProductID
         {
@@ -35,6 +35,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Unit Price"), Scale(4), NotNull, AlignRight, DisplayFormat("#,##0.00")]
+        [ExcelImportable]
         public Decimal? UnitPrice
         {
             get => fields.UnitPrice[this];
@@ -42,6 +43,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Quantity"), NotNull, DefaultValue(1), AlignRight]
+        [ExcelImportable]
         public Int16? Quantity
         {
             get => fields.Quantity[this];
@@ -49,6 +51,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Discount"), NotNull, DefaultValue(0), AlignRight, DisplayFormat("#,##0.00")]
+        [ExcelImportable]
         public Single? Discount
         {
             get => fields.Discount[this];
@@ -113,6 +116,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [Origin("p"), MinSelectLevel(SelectLevel.List)]
+        [ExcelImportable]
         public String ProductName
         {
             get => fields.ProductName[this];

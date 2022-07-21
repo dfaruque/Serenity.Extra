@@ -215,6 +215,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Details"), MasterDetailRelation(foreignKey: "OrderID"), NotMapped]
+        [ExcelImportable]
         public List<OrderDetailRow> DetailList
         {
             get => fields.DetailList[this];
