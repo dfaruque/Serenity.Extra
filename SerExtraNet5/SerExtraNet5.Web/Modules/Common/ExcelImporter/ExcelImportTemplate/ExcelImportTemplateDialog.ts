@@ -52,7 +52,7 @@ namespace SerExtraNet5.Common {
             let fieldMappings = this.form.FieldMappings.value;
             let selectedTable = this.form.MasterTableName.selectedItem as ExcelImportableTable;
             let importableFields = selectedTable.ImportableFields;
-            let requiredFields = importableFields.filter(f => f.required && !f.editLinkCssClass);
+            let requiredFields = importableFields.filter(f => f.required && String(f.editLinkCssClass).indexOf('IsEditLink') == -1);
 
             let missingMappingOfRequiredField: Serenity.PropertyItem[] = [];
             requiredFields.forEach(importableField => {

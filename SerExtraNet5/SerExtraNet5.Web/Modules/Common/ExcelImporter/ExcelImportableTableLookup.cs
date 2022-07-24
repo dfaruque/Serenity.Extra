@@ -101,13 +101,14 @@ namespace SerExtraNet5.Common
                     {
                         propertyItem.EditLinkIdField = sourceFieldPrefix + editLinkIdField.Name;
                         propertyItem.Title += " [" + propertyItem.Name + "]";
+                        propertyItem.EditLinkCssClass += "HasEditLink";
 
                         var editLinkIdPropertyItem = propertyItems.First(f => f.Name == editLinkIdField.Name);
-                        editLinkIdPropertyItem.Title = editLinkIdPropertyItem.Title + " [" + editLinkIdPropertyItem.Name + "]";
+                        editLinkIdPropertyItem.Title += " [" + editLinkIdPropertyItem.Name + "]";
+                        editLinkIdPropertyItem.EditLinkCssClass += "IsEditLink";
 
                         if (editLinkIdField.Flags.HasFlag(FieldFlags.NotNull))
                         {
-                            editLinkIdPropertyItem.EditLinkCssClass += "EditLink";
                             editLinkIdPropertyItem.Required = true;
                             propertyItem.Required = true;
                         }
