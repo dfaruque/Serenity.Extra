@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using Serenity;
@@ -72,7 +73,10 @@ namespace SerExtraNet5.Common
                 var field = row.FindField(propertyItem.Name);
 
                 if (field.Flags.HasFlag(FieldFlags.NotNull)) //NotNull fiels not marked as Required! why?
-                    propertyItem.Required = true;
+                {
+                    if (field.GetAttribute<DefaultValueAttribute>() is null)
+                        propertyItem.Required = true;
+                }
 
                 if (prop.GetAttribute<MasterDetailRelationAttribute>() is MasterDetailRelationAttribute masterDetailRelation)
                 {
@@ -89,22 +93,26 @@ namespace SerExtraNet5.Common
                 else
                     excelImportableFields.Add(propertyItem);
 
-                //add ForeignIdField if this property is a ForeignField
+                //add EditLinkIdField if this property is a ForeignField
                 if (field.Flags.HasFlag(FieldFlags.Foreign))
                 {
-                    var foreignIdField = row.Fields.FirstOrDefault(f => f.TextualField == field.Name);
-                    if (foreignIdField.GetAttribute<ExcelImportableAttribute>() is null)
+                    var editLinkIdField = row.Fields.FirstOrDefault(f => f.TextualField == field.Name);
+                    if (editLinkIdField.GetAttribute<ExcelImportableAttribute>() is null)
                     {
-                        propertyItem.EditLinkIdField = sourceFieldPrefix + foreignIdField.Name;
-                        propertyItem.Title = propertyItem.Title + " [" + propertyItem.Name + "]";
+                        propertyItem.EditLinkIdField = sourceFieldPrefix + editLinkIdField.Name;
+                        propertyItem.Title += " [" + propertyItem.Name + "]";
 
-                        var foreignPropertyItem = propertyItems.First(f => f.Name == foreignIdField.Name);
-                        foreignPropertyItem.Title = foreignPropertyItem.Title + " [" + foreignPropertyItem.Name + "]";
+                        var editLinkIdPropertyItem = propertyItems.First(f => f.Name == editLinkIdField.Name);
+                        editLinkIdPropertyItem.Title = editLinkIdPropertyItem.Title + " [" + editLinkIdPropertyItem.Name + "]";
 
-                        if (foreignIdField.Flags.HasFlag(FieldFlags.NotNull))
-                            foreignPropertyItem.Required = true;
+                        if (editLinkIdField.Flags.HasFlag(FieldFlags.NotNull))
+                        {
+                            editLinkIdPropertyItem.EditLinkCssClass += "EditLink";
+                            editLinkIdPropertyItem.Required = true;
+                            propertyItem.Required = true;
+                        }
 
-                        excelImportableFields.Add(foreignPropertyItem);
+                        excelImportableFields.Add(editLinkIdPropertyItem);
                     }
                 }
             }
