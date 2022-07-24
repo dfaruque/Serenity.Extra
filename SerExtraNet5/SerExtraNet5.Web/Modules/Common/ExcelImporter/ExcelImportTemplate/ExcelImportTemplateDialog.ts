@@ -48,6 +48,30 @@ namespace SerExtraNet5.Common {
             this.loadExcelSheet(this.entity.ExcelMetadata);
         }
 
+        protected validateBeforeSave() {
+            let fieldMappings = this.form.FieldMappings.value;
+            let selectedTable = this.form.MasterTableName.selectedItem as ExcelImportableTable;
+            let importableFields = selectedTable.ImportableFields;
+            let requiredFields = importableFields.filter(f => f.required && !f.editLinkCssClass);
+
+            let missingMappingOfRequiredField: Serenity.PropertyItem[] = [];
+            requiredFields.forEach(importableField => {
+                let fieldMapping = fieldMappings.filter(f => f.TableColumnName == importableField.name)[0];
+                if (!fieldMapping) {
+                    missingMappingOfRequiredField.push(importableField)
+                }
+            });
+
+            if (missingMappingOfRequiredField.length > 0) {
+                let validationMsg = 'Following field(s) are required in the database table but not mapped with excel column!\n\n'
+                    + missingMappingOfRequiredField.map(m => m.title).join('\n');
+                Q.alert(validationMsg);
+                return false;
+            }
+
+            return super.validateBeforeSave();
+        }
+
         private getExcelMetadata() {
             ExcelImportTemplateService.GetExcelMetadata({ FileName: this.form.TemplateExcelFile.value?.Filename },
                 response => {
