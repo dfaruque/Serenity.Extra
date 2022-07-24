@@ -55,16 +55,30 @@ namespace SerExtraNet5.Common {
             let requiredFields = importableFields.filter(f => f.required && String(f.editLinkCssClass).indexOf('IsEditLink') == -1);
 
             let missingMappingOfRequiredFields: Serenity.PropertyItem[] = [];
-            requiredFields.forEach(importableField => {
-                let fieldMapping = fieldMappings.filter(f => f.TableColumnName == importableField.name)[0];
-                if (!fieldMapping) {
+            let duplicateMappings: Serenity.PropertyItem[] = [];
+
+            importableFields.forEach(importableField => {
+                let fieldMappingsForThisCol = fieldMappings.filter(f => f.TableColumnName == importableField.name);
+
+                if (importableField.required && String(importableField.editLinkCssClass).indexOf('IsEditLink') == -1
+                    && !fieldMappingsForThisCol[0]) {
                     missingMappingOfRequiredFields.push(importableField)
                 }
+
+                if (fieldMappingsForThisCol.length > 1)
+                    duplicateMappings.push(importableField);
             });
 
             if (missingMappingOfRequiredFields.length > 0) {
                 let validationMsg = 'Following field(s) are required in the database table but not mapped with excel column!\n\n'
                     + missingMappingOfRequiredFields.map(m => m.title).join('\n');
+                Q.alert(validationMsg);
+                return false;
+            }
+
+            if (duplicateMappings.length > 0) {
+                let validationMsg = 'Following field(s) are mapped multiple times!\n\n'
+                    + duplicateMappings.map(m => m.title).join('\n');
                 Q.alert(validationMsg);
                 return false;
             }
