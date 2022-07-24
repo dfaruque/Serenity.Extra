@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export interface ExcelImportRow {
         Id?: number;
         TemplateId?: number;
@@ -20,7 +20,7 @@
     export namespace ExcelImportRow {
         export const idProperty = 'Id';
         export const nameProperty = 'MasterTableName';
-        export const localTextPrefix = 'Common.ExcelImport';
+        export const localTextPrefix = 'ExcelImporter.ExcelImport';
         export const deletePermission = 'Common:ExcelImport:Delete';
         export const insertPermission = 'Common:ExcelImport:Insert';
         export const readPermission = 'Common:ExcelImport:Read';

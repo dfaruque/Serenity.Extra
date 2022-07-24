@@ -1,5 +1,5 @@
 ﻿
-namespace SerExtraNet5.Common {
+namespace _Ext.ExcelImporter {
     import fld = ExcelImportRow.Fields;
 
     @Serenity.Decorators.registerClass()
@@ -30,7 +30,7 @@ namespace SerExtraNet5.Common {
             q.initDetailEditor(this, this.form.ImportedData);
 
             this.form.ImportedData.onImportButtonClick = () => {
-                Q.reloadLookup('Common.ExcelImportableTable');
+                Q.reloadLookup('ExcelImporter.ExcelImportableTable');
 
                 var saveRequest = this.getSaveRequest();
 
@@ -57,7 +57,7 @@ namespace SerExtraNet5.Common {
             if (templateId) {
                 let selectedTemplate = this.form.TemplateId.selectedItem as ExcelImportTemplateRow;
 
-                let tableLookup = Q.getLookup<ExcelImportableTable>('Common.ExcelImportableTable');
+                let tableLookup = Q.getLookup<ExcelImportableTable>('ExcelImporter.ExcelImportableTable');
                 let propertyItems = Q.deepClone(tableLookup.itemById[selectedTemplate.MasterTableName].ImportableFields);
 
                 let mappedPropertyItems: Serenity.PropertyItem[] = [];

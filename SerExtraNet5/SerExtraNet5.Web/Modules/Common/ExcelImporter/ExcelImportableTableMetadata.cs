@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Serenity.ComponentModel;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     [ScriptInclude]
     public class ExcelImportableTable

@@ -6,9 +6,8 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
-using SerExtraNet5.Administration.Entities;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     [ConnectionKey("Default"), TableName("ExcelImports")]
     [DisplayName("Excel Import"), InstanceName("Excel Import"), TwoLevelCached]

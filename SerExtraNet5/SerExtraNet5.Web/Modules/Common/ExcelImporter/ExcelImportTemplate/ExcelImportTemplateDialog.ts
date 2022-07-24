@@ -1,5 +1,5 @@
 ﻿
-namespace SerExtraNet5.Common {
+namespace _Ext.ExcelImporter {
     import fld = ExcelImportTemplateRow.Fields;
 
     @Serenity.Decorators.registerClass()
@@ -35,7 +35,7 @@ namespace SerExtraNet5.Common {
             this.form.MasterTableName.change(e => {
                 let selectedTable = this.form.MasterTableName.selectedItem as ExcelImportableTable;
 
-                Q.getLookup<Serenity.PropertyItem>('Common.ExcelImportableField')
+                Q.getLookup<Serenity.PropertyItem>('ExcelImporter.ExcelImportableField')
                     .update(selectedTable?.ImportableFields);
 
                 //(this.form.FieldMappings.slickGrid as any).getEditController().commitCurrentEdit();

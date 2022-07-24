@@ -11,7 +11,7 @@ using Serenity.Data.Mapping;
 using Serenity.PropertyGrid;
 using Serenity.Web;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     [LookupScript]
     public class ExcelImportableTableLookup : LookupScript

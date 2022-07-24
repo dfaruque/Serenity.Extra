@@ -1,5 +1,5 @@
 ﻿
-namespace SerExtraNet5.Common {
+namespace _Ext.ExcelImporter {
 
     @Serenity.Decorators.registerClass()
     export class ExcelImportDataEditor extends _Ext.JsonGridEditorBase<any> {

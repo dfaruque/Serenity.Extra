@@ -3,7 +3,7 @@ using Serenity.Web;
 using System;
 using System.Collections.Generic;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public class ExcelImportRequest : ServiceRequest
     {
@@ -26,5 +26,12 @@ namespace SerExtraNet5.Common
 
             return true;
         }
+    }
+
+    public class ExcelImportResponse : ServiceResponse
+    {
+        public int Inserted { get; set; }
+        public int Updated { get; set; }
+        public List<string> ErrorList { get; set; }
     }
 }

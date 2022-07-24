@@ -5,15 +5,14 @@ using Serenity.Data;
 using Serenity.Reporting;
 using Serenity.Services;
 using Serenity.Web;
-using SerExtraNet5.Administration.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using MyRow = SerExtraNet5.Common.ExcelImportRow;
+using MyRow = _Ext.ExcelImporter.ExcelImportRow;
 
-namespace SerExtraNet5.Common.Endpoints
+namespace _Ext.ExcelImporter.Endpoints
 {
     [Route("Services/Common/ExcelImport/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]

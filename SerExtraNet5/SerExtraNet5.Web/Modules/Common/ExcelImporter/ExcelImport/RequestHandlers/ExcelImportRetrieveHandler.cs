@@ -4,10 +4,10 @@ using Serenity.Services;
 using System;
 using System.Data;
 using MyRequest = Serenity.Services.RetrieveRequest;
-using MyResponse = Serenity.Services.RetrieveResponse<SerExtraNet5.Common.ExcelImportRow>;
-using MyRow = SerExtraNet5.Common.ExcelImportRow;
+using MyResponse = Serenity.Services.RetrieveResponse<_Ext.ExcelImporter.ExcelImportRow>;
+using MyRow = _Ext.ExcelImporter.ExcelImportRow;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public interface IExcelImportRetrieveHandler : IRetrieveHandler<MyRow, MyRequest, MyResponse> {}
 

@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export interface ExcelImportFieldMappingRow {
         Id?: number;
         ExcelColumnName?: string;
@@ -8,7 +8,7 @@
 
     export namespace ExcelImportFieldMappingRow {
         export const idProperty = 'Id';
-        export const localTextPrefix = 'Common.ExcelImportFieldMapping';
+        export const localTextPrefix = 'ExcelImporter.ExcelImportFieldMapping';
         export const deletePermission = null;
         export const insertPermission = null;
         export const readPermission = '';

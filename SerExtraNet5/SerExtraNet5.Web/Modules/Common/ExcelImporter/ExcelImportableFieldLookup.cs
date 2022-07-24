@@ -8,7 +8,7 @@ using Serenity.ComponentModel;
 using Serenity.Data.Mapping;
 using Serenity.Web;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     [LookupScript]
     public class ExcelImportableFieldLookup : LookupScript

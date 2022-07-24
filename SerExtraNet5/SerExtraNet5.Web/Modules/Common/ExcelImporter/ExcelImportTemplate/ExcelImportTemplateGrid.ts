@@ -1,5 +1,5 @@
 ﻿
-namespace SerExtraNet5.Common {
+namespace _Ext.ExcelImporter {
     import fld = ExcelImportTemplateRow.Fields;
 
     @Serenity.Decorators.registerClass()

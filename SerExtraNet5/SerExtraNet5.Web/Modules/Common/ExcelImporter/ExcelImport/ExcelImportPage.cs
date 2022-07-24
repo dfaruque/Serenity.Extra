@@ -2,7 +2,7 @@
 using Serenity.Web;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SerExtraNet5.Common.Pages
+namespace _Ext.ExcelImporter.Pages
 {
 
     [PageAuthorize(typeof(ExcelImportRow))]

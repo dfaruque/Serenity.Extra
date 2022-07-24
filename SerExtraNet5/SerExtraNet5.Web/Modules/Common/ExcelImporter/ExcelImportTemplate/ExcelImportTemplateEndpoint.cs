@@ -8,9 +8,9 @@ using Serenity.Web;
 using System;
 using System.Data;
 using System.Globalization;
-using MyRow = SerExtraNet5.Common.ExcelImportTemplateRow;
+using MyRow = _Ext.ExcelImporter.ExcelImportTemplateRow;
 
-namespace SerExtraNet5.Common.Endpoints
+namespace _Ext.ExcelImporter.Endpoints
 {
     [Route("Services/Common/ExcelImportTemplate/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]

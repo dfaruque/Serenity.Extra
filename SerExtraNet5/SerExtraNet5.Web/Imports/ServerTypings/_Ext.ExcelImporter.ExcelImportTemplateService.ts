@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export namespace ExcelImportTemplateService {
         export const baseUrl = 'Common/ExcelImportTemplate';
 

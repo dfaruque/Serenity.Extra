@@ -3,11 +3,11 @@ using Serenity.Data;
 using Serenity.Services;
 using System;
 using System.Data;
-using MyRequest = Serenity.Services.SaveRequest<SerExtraNet5.Common.ExcelImportTemplateRow>;
+using MyRequest = Serenity.Services.SaveRequest<_Ext.ExcelImporter.ExcelImportTemplateRow>;
 using MyResponse = Serenity.Services.SaveResponse;
-using MyRow = SerExtraNet5.Common.ExcelImportTemplateRow;
+using MyRow = _Ext.ExcelImporter.ExcelImportTemplateRow;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public interface IExcelImportTemplateSaveHandler : ISaveHandler<MyRow, MyRequest, MyResponse> {}
 

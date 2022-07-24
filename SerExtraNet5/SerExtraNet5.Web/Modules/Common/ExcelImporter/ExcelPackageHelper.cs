@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using OfficeOpenXml;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public static class ExcelHelper
     {

@@ -5,9 +5,9 @@ using System;
 using System.Data;
 using MyRequest = Serenity.Services.DeleteRequest;
 using MyResponse = Serenity.Services.DeleteResponse;
-using MyRow = SerExtraNet5.Common.ExcelImportRow;
+using MyRow = _Ext.ExcelImporter.ExcelImportRow;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public interface IExcelImportDeleteHandler : IDeleteHandler<MyRow, MyRequest, MyResponse> {}
 

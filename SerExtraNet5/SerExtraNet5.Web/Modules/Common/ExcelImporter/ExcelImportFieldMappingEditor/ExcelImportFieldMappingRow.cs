@@ -6,10 +6,9 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
-using SerExtraNet5.Administration.Entities;
 using _Ext;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public sealed class ExcelImportFieldMappingRow : Row<ExcelImportFieldMappingRow.RowFields>
     {

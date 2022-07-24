@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export interface ExcelImportTemplateRow {
         Id?: number;
         TemplateName?: string;
@@ -17,11 +17,11 @@
     export namespace ExcelImportTemplateRow {
         export const idProperty = 'Id';
         export const nameProperty = 'TemplateName';
-        export const localTextPrefix = 'Common.ExcelImportTemplate';
-        export const lookupKey = 'Common.ExcelImportTemplate';
+        export const localTextPrefix = 'ExcelImporter.ExcelImportTemplate';
+        export const lookupKey = 'ExcelImporter.ExcelImportTemplate';
 
         export function getLookup(): Q.Lookup<ExcelImportTemplateRow> {
-            return Q.getLookup<ExcelImportTemplateRow>('Common.ExcelImportTemplate');
+            return Q.getLookup<ExcelImportTemplateRow>('ExcelImporter.ExcelImportTemplate');
         }
         export const deletePermission = 'Common:ExcelImportTemplate:Delete';
         export const insertPermission = 'Common:ExcelImportTemplate:Insert';

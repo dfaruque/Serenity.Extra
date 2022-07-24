@@ -3,7 +3,7 @@ using Serenity.Data;
 using Serenity.Data.Mapping;
 using System;
 
-namespace SerExtraNet5.Administration.Entities
+namespace _Ext
 {
     /// <summary>
     /// This is a sample base class for rows that does insert/update date and user audit logging automatically.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SerExtraNet5.Common
+namespace _Ext.ExcelImporter
 {
     public class ExcelMetadata
     {

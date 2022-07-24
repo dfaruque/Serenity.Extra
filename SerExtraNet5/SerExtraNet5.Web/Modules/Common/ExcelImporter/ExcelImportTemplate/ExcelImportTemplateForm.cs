@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SerExtraNet5.Common.Forms
+namespace _Ext.ExcelImporter.Forms
 {
     [FormScript("Common.ExcelImportTemplate")]
     [BasedOnRow(typeof(ExcelImportTemplateRow), CheckNames = true)]

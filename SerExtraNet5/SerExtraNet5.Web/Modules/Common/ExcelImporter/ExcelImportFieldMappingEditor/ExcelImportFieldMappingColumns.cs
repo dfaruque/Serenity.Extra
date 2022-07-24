@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SerExtraNet5.Common.Columns
+namespace _Ext.ExcelImporter.Columns
 {
     [ColumnsScript("Common.ExcelImportFieldMapping")]
     [BasedOnRow(typeof(ExcelImportFieldMappingRow), CheckNames = true)]

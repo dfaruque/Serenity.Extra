@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export class ExcelImportFieldMappingColumns {
         static columnsKey = 'Common.ExcelImportFieldMapping';
     }

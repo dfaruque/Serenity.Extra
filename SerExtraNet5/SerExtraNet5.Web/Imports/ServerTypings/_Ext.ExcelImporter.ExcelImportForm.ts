@@ -1,4 +1,4 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export interface ExcelImportForm {
         TemplateId: Serenity.LookupEditor;
         ImportedExcelFile: Serenity.ImageUploadEditor;

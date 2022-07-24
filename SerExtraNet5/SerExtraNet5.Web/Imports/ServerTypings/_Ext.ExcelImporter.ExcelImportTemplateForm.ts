@@ -1,9 +1,9 @@
-﻿namespace SerExtraNet5.Common {
+﻿namespace _Ext.ExcelImporter {
     export interface ExcelImportTemplateForm {
         TemplateName: Serenity.StringEditor;
         TemplateExcelFile: Serenity.ImageUploadEditor;
-        ExcelMetadata: _Ext.JsonViewer;
-        ExcelSheet: _Ext.EmptyLookupEditor;
+        ExcelMetadata: JsonViewer;
+        ExcelSheet: EmptyLookupEditor;
         MasterTableName: Serenity.LookupEditor;
         FieldMappings: ExcelImportFieldMappingEditor;
         Remarks: Serenity.StringEditor;
@@ -22,8 +22,8 @@
                 var s = Serenity;
                 var w0 = s.StringEditor;
                 var w1 = s.ImageUploadEditor;
-                var w2 = _Ext.JsonViewer;
-                var w3 = _Ext.EmptyLookupEditor;
+                var w2 = JsonViewer;
+                var w3 = EmptyLookupEditor;
                 var w4 = s.LookupEditor;
                 var w5 = ExcelImportFieldMappingEditor;
 

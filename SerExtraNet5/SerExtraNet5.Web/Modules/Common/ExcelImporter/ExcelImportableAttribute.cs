@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SerExtraNet5
+namespace _Ext
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ExcelImportAttribute : Attribute
