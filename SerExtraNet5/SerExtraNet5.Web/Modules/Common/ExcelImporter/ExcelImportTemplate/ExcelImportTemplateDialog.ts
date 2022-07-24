@@ -54,17 +54,17 @@ namespace SerExtraNet5.Common {
             let importableFields = selectedTable.ImportableFields;
             let requiredFields = importableFields.filter(f => f.required && String(f.editLinkCssClass).indexOf('IsEditLink') == -1);
 
-            let missingMappingOfRequiredField: Serenity.PropertyItem[] = [];
+            let missingMappingOfRequiredFields: Serenity.PropertyItem[] = [];
             requiredFields.forEach(importableField => {
                 let fieldMapping = fieldMappings.filter(f => f.TableColumnName == importableField.name)[0];
                 if (!fieldMapping) {
-                    missingMappingOfRequiredField.push(importableField)
+                    missingMappingOfRequiredFields.push(importableField)
                 }
             });
 
-            if (missingMappingOfRequiredField.length > 0) {
+            if (missingMappingOfRequiredFields.length > 0) {
                 let validationMsg = 'Following field(s) are required in the database table but not mapped with excel column!\n\n'
-                    + missingMappingOfRequiredField.map(m => m.title).join('\n');
+                    + missingMappingOfRequiredFields.map(m => m.title).join('\n');
                 Q.alert(validationMsg);
                 return false;
             }
