@@ -139,6 +139,10 @@ namespace SerExtraNet5.Common {
             return masterDetailRecords;
         }
 
+        public getAllColumns() {
+            return this.allColumns;
+        }
+
         protected getSlickOptions() {
             let options = super.getSlickOptions();
 
