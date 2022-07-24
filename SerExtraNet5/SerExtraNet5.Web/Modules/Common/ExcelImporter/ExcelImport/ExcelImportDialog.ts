@@ -34,7 +34,7 @@ namespace SerExtraNet5.Common {
 
                 var saveRequest = this.getSaveRequest();
 
-                let transformedData = ExcelImportDialog.getTransformedDataFlatToMasterDetail(this.form.ImportedData.value);
+                let transformedData = this.form.ImportedData.getTransformedDataFlatToMasterDetail();
                 saveRequest.Entity.ImportedData = JSON.stringify(transformedData);
 
                 ExcelImportService.ImportExcelData(saveRequest, response => {
@@ -49,89 +49,6 @@ namespace SerExtraNet5.Common {
                     }
                 });
             };
-        }
-
-        static getTransformedDataFlatToMasterDetail(flatRecords: any[]): any[] {
-            let firstRecord = flatRecords[0];
-            let flatColumns: string[] = [];
-
-            for (let field in firstRecord) {
-                flatColumns.push(field)
-            }
-
-            let masterDetailModel = {};
-            let detailFields: string[] = []
-
-            for (let columnName of flatColumns) {
-                let dotIndex = columnName.indexOf('.');
-                if (dotIndex < 0) {
-                    masterDetailModel[columnName] = columnName;
-                } else {
-                    let detailField = columnName.substr(0, dotIndex);
-                    if (!masterDetailModel.hasOwnProperty(detailField)) {
-                        masterDetailModel[detailField] = {};
-                        detailFields.push(detailField)
-                    }
-
-                    masterDetailModel[detailField][columnName.substr(dotIndex + 1)] = columnName;
-                }
-            }
-
-            if (detailFields.length == 0) //recursion termination
-                return flatRecords;
-
-            let groupByMasterFields = {};
-
-            let masterRecords = [];
-
-            for (let flatRecord of flatRecords) {
-                let masterKey = '';
-                let masterRecord = {};
-
-                for (let field in masterDetailModel) {
-                    masterKey += flatRecord[field];
-                    masterRecord[field] = flatRecord[field];
-                }
-
-                flatRecord.masterKey = masterKey;
-                masterRecord['masterKey'] = masterKey;
-
-                if (!groupByMasterFields.hasOwnProperty(masterKey)) {
-                    groupByMasterFields[masterKey] = [];
-                    masterRecords.push(masterRecord);
-                }
-                groupByMasterFields[masterKey].push(flatRecord);
-            }
-
-            let masterDetailRecords = [];
-
-            for (let masterKey in groupByMasterFields) {
-                let masterRecord = masterRecords.filter(f => f.masterKey == masterKey)[0];
-                delete masterRecord['masterKey'];
-                let detailFieldInMaster = detailFields[0];
-
-                let detailRecords = groupByMasterFields[masterKey];
-
-                for (let detailRecord of detailRecords) {
-                    delete detailRecord['masterKey'];
-
-                    for (let masterField in masterDetailModel) {
-                        delete detailRecord[masterField];
-                    }
-
-                    for (let detailFeild in detailRecord) {
-                        let detailFeildWithoutPrefix = detailFeild.substr(detailFieldInMaster.length + 1)
-                        detailRecord[detailFeildWithoutPrefix] = detailRecord[detailFeild];
-                        delete detailRecord[detailFeild];
-                    }
-                }
-
-                masterRecord[detailFieldInMaster] = ExcelImportDialog.getTransformedDataFlatToMasterDetail(detailRecords);
-
-                masterDetailRecords.push(masterRecord);
-            }
-
-            return masterDetailRecords;
         }
 
         private setExcelDataGridColumns() {
