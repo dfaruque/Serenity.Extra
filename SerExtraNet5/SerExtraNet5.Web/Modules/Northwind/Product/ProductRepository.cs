@@ -43,13 +43,9 @@ namespace SerExtraNet5.Northwind.Repositories
             return new MyListHandler(Context).Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow, SaveRequest<MyRow>, SaveResponse>
+        private class MySaveHandler : SaveRequestHandler<MyRow>
         {
-            public MySaveHandler(IRequestContext context)
-                : base(context)
-            {
-
-            }
+            public MySaveHandler(IRequestContext context) : base(context) { }
         }
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>

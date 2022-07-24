@@ -26,6 +26,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Product Name"), Size(40), NotNull, QuickSearch, LookupInclude, NameProperty]
+        [ExcelImportable]
         public String ProductName
         {
             get => fields.ProductName[this];
@@ -40,7 +41,7 @@ namespace SerExtraNet5.Northwind.Entities
             set => fields.ProductImage[this] = value;
         }
 
-        [DisplayName("Discontinued"), NotNull]
+        [DisplayName("Discontinued"), NotNull, DefaultValue(false)]
         public Boolean? Discontinued
         {
             get => fields.Discontinued[this];
@@ -71,6 +72,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [DisplayName("Unit Price"), Scale(4), LookupInclude]
+        [ExcelImportable]
         public Decimal? UnitPrice
         {
             get => fields.UnitPrice[this];
@@ -99,6 +101,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [Origin("sup"), DisplayName("Supplier"), LookupInclude]
+        [ExcelImportable]
         public String SupplierCompanyName
         {
             get => fields.SupplierCompanyName[this];
@@ -176,6 +179,7 @@ namespace SerExtraNet5.Northwind.Entities
         }
 
         [Origin("cat"), DisplayName("Category")]
+        [ExcelImportable]
         public String CategoryName
         {
             get => fields.CategoryName[this];
