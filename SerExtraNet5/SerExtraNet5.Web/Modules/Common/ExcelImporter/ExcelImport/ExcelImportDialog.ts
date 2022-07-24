@@ -70,6 +70,10 @@ namespace SerExtraNet5.Common {
                     if (propertyItem.editLinkIdField) {
                         let editLinkIdPropertyItem = propertyItems.filter(f => f.name == propertyItem.editLinkIdField)[0];
                         editLinkIdPropertyItem.readOnly = false;
+                        let editorType = Serenity.EditorTypeRegistry.get(editLinkIdPropertyItem.editorType);
+                        let editor = new editorType($('<input/>'), editLinkIdPropertyItem.editorParams);
+                        editLinkIdPropertyItem['editor'] = editor;
+
                         mappedPropertyItems.push(editLinkIdPropertyItem);
                     }
                 });
@@ -91,6 +95,22 @@ namespace SerExtraNet5.Common {
                     ExcelImportTemplateId: templateId,
                     FileName: importedExcelFile
                 }, response => {
+                    let allColumns = this.form.ImportedData.getAllColumns();
+                    let columnsWithEditLinkId = allColumns.filter(f => f.sourceItem.editLinkIdField);
+
+                    response.Entities.forEach(entity => {
+                        columnsWithEditLinkId.forEach(column => {
+                            let editLinkIdColumn = allColumns.filter(f => f.field == column.sourceItem.editLinkIdField)[0];
+                            let editLinkEditor = editLinkIdColumn.sourceItem['editor'];
+                            let lookup = editLinkEditor?.lookup;
+                            if (lookup) {
+                                let lookupItemByTextField = lookup.items.filter(f => f[lookup.textField] == entity[column.field])[0];
+                                entity[editLinkIdColumn.field] = lookupItemByTextField?.[lookup.idField];
+                            }
+
+                        });
+                    });
+
                     this.form.ImportedData.value = response.Entities;
                 });
             }
