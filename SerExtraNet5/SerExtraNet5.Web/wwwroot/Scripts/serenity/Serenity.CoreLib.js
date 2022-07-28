@@ -1,3 +1,321 @@
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global global, define, System, Reflect, Promise */
+var __extends;
+var __assign;
+var __rest;
+var __decorate;
+var __param;
+var __metadata;
+var __awaiter;
+var __generator;
+var __exportStar;
+var __values;
+var __read;
+var __spread;
+var __spreadArrays;
+var __spreadArray;
+var __await;
+var __asyncGenerator;
+var __asyncDelegator;
+var __asyncValues;
+var __makeTemplateObject;
+var __importStar;
+var __importDefault;
+var __classPrivateFieldGet;
+var __classPrivateFieldSet;
+var __classPrivateFieldIn;
+var __createBinding;
+(function (factory) {
+    var root = typeof global === "object" ? global : typeof self === "object" ? self : typeof this === "object" ? this : {};
+    if (typeof define === "function" && define.amd) {
+        define("tslib", ["exports"], function (exports) { factory(createExporter(root, createExporter(exports))); });
+    }
+    else if (typeof module === "object" && typeof module.exports === "object") {
+        factory(createExporter(root, createExporter(module.exports)));
+    }
+    else {
+        factory(createExporter(root));
+    }
+    function createExporter(exports, previous) {
+        if (exports !== root) {
+            if (typeof Object.create === "function") {
+                Object.defineProperty(exports, "__esModule", { value: true });
+            }
+            else {
+                exports.__esModule = exports.__esModule || true;
+            }
+        }
+        return function (id, v) { return exports[id] = previous ? previous(id, v) : v; };
+    }
+})
+(function (exporter) {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+
+    __extends = function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+
+    __assign = Object.assign || function (t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+
+    __rest = function (s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    };
+
+    __decorate = function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+
+    __param = function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+
+    __metadata = function (metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    };
+
+    __awaiter = function (thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    __generator = function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+
+    __exportStar = function(m, o) {
+        for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+    };
+
+    __createBinding = Object.create ? (function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        var desc = Object.getOwnPropertyDescriptor(m, k);
+        if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+            desc = { enumerable: true, get: function() { return m[k]; } };
+        }
+        Object.defineProperty(o, k2, desc);
+    }) : (function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+    });
+
+    __values = function (o) {
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m) return m.call(o);
+        if (o && typeof o.length === "number") return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    };
+
+    __read = function (o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
+    };
+
+    /** @deprecated */
+    __spread = function () {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    };
+
+    /** @deprecated */
+    __spreadArrays = function () {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+        for (var r = Array(s), k = 0, i = 0; i < il; i++)
+            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+                r[k] = a[j];
+        return r;
+    };
+
+    __spreadArray = function (to, from, pack) {
+        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+            if (ar || !(i in from)) {
+                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                ar[i] = from[i];
+            }
+        }
+        return to.concat(ar || Array.prototype.slice.call(from));
+    };
+
+    __await = function (v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    };
+
+    __asyncGenerator = function (thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);  }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+    };
+
+    __asyncDelegator = function (o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    };
+
+    __asyncValues = function (o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    };
+
+    __makeTemplateObject = function (cooked, raw) {
+        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        return cooked;
+    };
+
+    var __setModuleDefault = Object.create ? (function(o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function(o, v) {
+        o["default"] = v;
+    };
+
+    __importStar = function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+
+    __importDefault = function (mod) {
+        return (mod && mod.__esModule) ? mod : { "default": mod };
+    };
+
+    __classPrivateFieldGet = function (receiver, state, kind, f) {
+        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    };
+
+    __classPrivateFieldSet = function (receiver, state, value, kind, f) {
+        if (kind === "m") throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+    };
+
+    __classPrivateFieldIn = function (state, receiver) {
+        if (receiver === null || (typeof receiver !== "object" && typeof receiver !== "function")) throw new TypeError("Cannot use 'in' operator on non-object");
+        return typeof state === "function" ? receiver === state : state.has(receiver);
+    };
+
+    exporter("__extends", __extends);
+    exporter("__assign", __assign);
+    exporter("__rest", __rest);
+    exporter("__decorate", __decorate);
+    exporter("__param", __param);
+    exporter("__metadata", __metadata);
+    exporter("__awaiter", __awaiter);
+    exporter("__generator", __generator);
+    exporter("__exportStar", __exportStar);
+    exporter("__createBinding", __createBinding);
+    exporter("__values", __values);
+    exporter("__read", __read);
+    exporter("__spread", __spread);
+    exporter("__spreadArrays", __spreadArrays);
+    exporter("__spreadArray", __spreadArray);
+    exporter("__await", __await);
+    exporter("__asyncGenerator", __asyncGenerator);
+    exporter("__asyncDelegator", __asyncDelegator);
+    exporter("__asyncValues", __asyncValues);
+    exporter("__makeTemplateObject", __makeTemplateObject);
+    exporter("__importStar", __importStar);
+    exporter("__importDefault", __importDefault);
+    exporter("__classPrivateFieldGet", __classPrivateFieldGet);
+    exporter("__classPrivateFieldSet", __classPrivateFieldSet);
+    exporter("__classPrivateFieldIn", __classPrivateFieldIn);
+});
+
 (function (exports) {
     'use strict';
 
@@ -350,223 +668,6 @@
         };
         return LT;
     }());
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-
-    exports.__assign = function() {
-        exports.__assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return exports.__assign.apply(this, arguments);
-    };
-
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
-    }
-
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-    }
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
-                }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-
-    function __createBinding(o, m, k, k2) {
-        if (k2 === undefined) k2 = k;
-        o[k2] = m[k];
-    }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-
-    function __values(o) {
-        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-        if (m) return m.call(o);
-        if (o && typeof o.length === "number") return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-    }
-
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-        }
-        catch (error) { e = { error: error }; }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
-            }
-            finally { if (e) throw e.error; }
-        }
-        return ar;
-    }
-
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    }
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-    }
-
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-    }
-
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-        return cooked;
-    }
-    function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
-        return result;
-    }
-
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
-
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
-    }
-
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
-    }
 
     function coalesce(a, b) {
         return a != null ? a : b;
@@ -1325,11 +1426,18 @@
         return $('<div>' + message + '</div>').dialog(opt);
     }
     var _isBS3;
+    var _isBS5Plus;
     function isBS3() {
         if (_isBS3 != null)
             return _isBS3;
         // @ts-ignore
         return (_isBS3 = !!($.fn.modal && $.fn.modal.Constructor && $.fn.modal.Constructor.VERSION && ($.fn.modal.Constructor.VERSION + "").charAt(0) == '3'));
+    }
+    function isBS5Plus() {
+        if (_isBS5Plus != null)
+            return _isBS5Plus;
+        // @ts-ignore
+        return (_isBS5Plus = typeof bootstrap !== "undefined" && (!bootstrap.Modal || !bootstrap.Modal.VERSION || (!bootstrap.Modal.VERSION + "").charAt(0) != '4'));
     }
     var defaultTxt = {
         AlertTitle: 'Alert',
@@ -1347,8 +1455,8 @@
         return (_a = tryGetText("Dialogs." + k)) !== null && _a !== void 0 ? _a : defaultTxt[k];
     }
     function bsModalMarkup(title, body, modalClass) {
-        var closeButton = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"" + txt('CloseButton') + "\">" +
-            "<span aria-hidden=\"true\">&times;</span></button>";
+        var closeButton = "<button type=\"button\" class=\"" + (isBS5Plus() ? "btn-" : "") + "close\" data-" + (isBS5Plus() ? "bs-" : "") + "dismiss=\"modal\" aria-label=\"" + txt('CloseButton') + "\">" +
+            ((isBS5Plus() ? "" : '<span aria-hidden="true">&times;</span>') + "</button>");
         return ("<div class=\"modal " + modalClass + "\" tabindex=\"-1\" role=\"dialog\">\n<div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header\">\n            " + (isBS3() ? closeButton : "") + "<h5 class=\"modal-title\">" + title + "</h5>" + (isBS3() ? "" : closeButton) + "\n        </div>\n        <div class=\"modal-body\">" + body + "</div>\n        <div class=\"modal-footer\"></div>\n    </div>\n</div>\n</div>");
     }
     function dialogButtonToBS(x) {
@@ -1376,8 +1484,14 @@
         var div = $(markup).eq(0).appendTo(document.body);
         if (options.onOpen)
             div.one('shown.bs.modal', options.onOpen);
-        if (options.onClose)
-            div.one('hidden.bs.modal', function (e) { return options.onClose(options.result); });
+        div.one('hidden.bs.modal', function (e) {
+            try {
+                options.onClose && options.onClose(options.result);
+            }
+            finally {
+                div.remove();
+            }
+        });
         var footer = div.find('.modal-footer');
         function createButton(x) {
             var _this = this;
@@ -1394,10 +1508,20 @@
                 var button = _a[_i];
                 createButton(button);
             }
-        div.modal({
-            backdrop: false,
-            show: true
-        });
+        if (isBS5Plus()) {
+            div.modal({
+                backdrop: false,
+            });
+            div.modal('show');
+        }
+        else {
+            div.modal({
+                backdrop: false,
+                show: true
+            });
+        }
+        if (isBS5Plus())
+            div.modal('show');
     }
     var _useBrowserDialogs;
     function useBrowserDialogs() {
@@ -1417,7 +1541,7 @@
         return '<div class="message"' + (preWrap ? ' style="white-space: pre-wrap">' : '>') + message + '</div>';
     }
     function alert$1(message, options) {
-        var _a, _b;
+        var _a, _b, _c;
         if (useBrowserDialogs()) {
             window.alert(message);
             return;
@@ -1433,19 +1557,19 @@
             if (options.okButton == null || options.okButton) {
                 options.buttons.push({
                     text: typeof options.okButton == "boolean" ? txt('OkButton') : options.okButton,
-                    cssClass: useBS ? 'btn-default' : undefined,
+                    cssClass: (_a = options.okButtonClass) !== null && _a !== void 0 ? _a : (useBS ? 'btn-danger' : undefined),
                     result: 'ok'
                 });
             }
         }
         message = messageHtml(message, options);
         if (useBS)
-            bsModalMessage(options, message, (_a = options.modalClass) !== null && _a !== void 0 ? _a : "s-AlertModal");
+            bsModalMessage(options, message, (_b = options.modalClass) !== null && _b !== void 0 ? _b : "s-AlertModal");
         else
-            uiDialogMessage(options, message, (_b = options.dialogClass) !== null && _b !== void 0 ? _b : "s-AlertDialog");
+            uiDialogMessage(options, message, (_c = options.dialogClass) !== null && _c !== void 0 ? _c : "s-AlertDialog");
     }
     function confirm(message, onYes, options) {
-        var _a, _b;
+        var _a, _b, _c;
         if (useBrowserDialogs()) {
             if (window.confirm(message))
                 onYes && onYes();
@@ -1463,7 +1587,7 @@
             if (options.yesButton == null || options.yesButton) {
                 options.buttons.push({
                     text: typeof options.yesButton == "boolean" ? txt('YesButton') : options.yesButton,
-                    cssClass: useBS ? 'btn-primary' : undefined,
+                    cssClass: (_a = options.yesButtonClass) !== null && _a !== void 0 ? _a : (useBS ? 'btn-primary' : undefined),
                     result: 'yes',
                     click: onYes
                 });
@@ -1471,7 +1595,7 @@
             if (options.noButton == null || options.noButton) {
                 options.buttons.push({
                     text: typeof options.noButton == "boolean" ? txt('NoButton') : options.noButton,
-                    cssClass: useBS ? 'btn-default' : undefined,
+                    cssClass: useBS ? (isBS5Plus() ? 'btn-danger' : 'btn-default') : undefined,
                     result: 'no',
                     click: options.onNo
                 });
@@ -1479,7 +1603,7 @@
             if (options.cancelButton) {
                 options.buttons.push({
                     text: typeof options.cancelButton == "boolean" ? txt('CancelButton') : options.cancelButton,
-                    cssClass: useBS ? 'btn-default' : undefined,
+                    cssClass: useBS ? (isBS5Plus() ? 'btn-secondary' : 'btn-default') : undefined,
                     result: 'cancel',
                     click: options.onCancel
                 });
@@ -1487,9 +1611,9 @@
         }
         message = messageHtml(message, options);
         if (useBS)
-            bsModalMessage(options, message, (_a = options.modalClass) !== null && _a !== void 0 ? _a : "s-ConfirmModal");
+            bsModalMessage(options, message, (_b = options.modalClass) !== null && _b !== void 0 ? _b : "s-ConfirmModal");
         else
-            uiDialogMessage(options, message, (_b = options.dialogClass) !== null && _b !== void 0 ? _b : "s-ConfirmDialog");
+            uiDialogMessage(options, message, (_c = options.dialogClass) !== null && _c !== void 0 ? _c : "s-ConfirmDialog");
     }
     function iframeDialog(options) {
         if (useBrowserDialogs()) {
@@ -1551,6 +1675,22 @@
             dialogClass: "s-InformationDialog",
             modalClass: "s-InformationModal",
             yesButton: txt("OkButton"),
+            yesButtonClass: 'btn-info',
+            noButton: false,
+        }, options));
+    }
+    function success(message, onOk, options) {
+        if (useBrowserDialogs()) {
+            window.alert(message);
+            onOk && onOk();
+            return;
+        }
+        confirm(message, onOk, extend({
+            title: txt("SuccessTitle"),
+            dialogClass: "s-SuccessDialog",
+            modalClass: "s-SuccessModal",
+            yesButton: txt("OkButton"),
+            yesButtonClass: 'btn-success',
             noButton: false,
         }, options));
     }
@@ -1558,7 +1698,8 @@
         alert$1(message, extend({
             title: txt("WarningTitle"),
             dialogClass: "s-WarningDialog",
-            modalClass: "s-WarningModal"
+            modalClass: "s-WarningModal",
+            okButtonClass: 'btn-warning'
         }, options));
     }
     function closePanel(element, e) {
@@ -1576,7 +1717,7 @@
         $('.' + klass).removeClass(klass).removeClass('panel-hidden');
         $(window).triggerHandler('resize');
         $('.require-layout:visible').triggerHandler('layout');
-        var e = $.Event(e);
+        e = $.Event(e);
         e.type = 'panelclose';
         e.target = element[0];
         element.trigger(e);
@@ -1692,10 +1833,12 @@
                 return ca[i].replace(name, '');
     }
     typeof $ != 'undefined' && $.ajaxSetup && $.ajaxSetup({
-        beforeSend: function (xhr) {
-            var token = getCookie('CSRF-TOKEN');
-            if (token)
-                xhr.setRequestHeader('X-CSRF-TOKEN', token);
+        beforeSend: function (xhr, opt) {
+            if (!opt || !opt.crossDomain) {
+                var token = getCookie('CSRF-TOKEN');
+                if (token)
+                    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
         }
     });
     function serviceCall(options) {
@@ -1715,7 +1858,7 @@
         };
         var url = options.service;
         if (url && url.length && url.charAt(0) != '~' && url.charAt(0) != '/' && url.indexOf('://') < 0)
-            url = resolveUrl("~/services/") + url;
+            url = resolveUrl("~/Services/") + url;
         options = extend({
             dataType: 'json',
             contentType: 'application/json',
@@ -1818,7 +1961,7 @@
     function postToService(options) {
         var form = $('<form/>')
             .attr('method', 'POST')
-            .attr('action', options.url ? (resolveUrl(options.url)) : resolveUrl('~/services/' + options.service))
+            .attr('action', options.url ? (resolveUrl(options.url)) : resolveUrl('~/Services/' + options.service))
             .appendTo(document.body);
         if (options.target)
             form.attr('target', options.target);
@@ -1930,7 +2073,7 @@
         for (k in Invariant)
             if (Culture[k] === undefined && Object.prototype.hasOwnProperty.call(Invariant, k))
                 Culture[k] = Invariant[k];
-        if (typeof $ != "undefined" && (k = trimToNull($('script#ScriptCulture').html())) != null) {
+        if (typeof $ != "undefined" && (k = trimToNull((document.querySelector('script#ScriptCulture') || {}).innerHTML)) != null) {
             var sc = $.parseJSON(k);
             if (sc.DecimalSeparator != null)
                 Culture.decimalSeparator = sc.DecimalSeparator;
@@ -3219,6 +3362,9 @@
                     "[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))$", "i");
             return emailRegex_1.test(value);
         });
+        $(loadValidationErrorMessages);
+    }
+    function loadValidationErrorMessages() {
         var addMsg = function (m, k) {
             var txt = tryGetText("Validation." + k);
             if (txt)
@@ -3665,7 +3811,8 @@
         }
         window.addEventListener("hashchange", hashChange, false);
         var routerOrder = 1;
-        $(document).on("dialogopen panelopen", ".ui-dialog-content, .s-Panel", function (event, ui) {
+        typeof document !== "undefined" && typeof $ !== "undefined" &&
+            $.fn && $(document).on("dialogopen panelopen", ".ui-dialog-content, .s-Panel", function (event, ui) {
             if (!Router.enabled)
                 return;
             var dlg = $(event.target);
@@ -3772,14 +3919,15 @@
     function setMobileDeviceMode() {
         var isMobile = navigator.userAgent.indexOf('Mobi') >= 0 ||
             (window.matchMedia && window.matchMedia('(max-width: 767px)').matches);
-        var body = $(document.body);
-        if (body.hasClass('mobile-device')) {
+        if (typeof document === "undefined" || !document.documentElement)
+            return;
+        if (document.documentElement.classList.contains('mobile-device')) {
             if (!isMobile) {
-                body.removeClass('mobile-device');
+                document.documentElement.classList.remove('mobile-device');
             }
         }
         else if (isMobile) {
-            body.addClass('mobile-device');
+            document.documentElement.classList.add('mobile-device');
         }
     }
     // @ts-ignore check for global
@@ -3832,6 +3980,7 @@
         Config: Config,
         debounce: debounce,
         isBS3: isBS3,
+        isBS5Plus: isBS5Plus,
         bsModalMarkup: bsModalMarkup,
         dialogButtonToBS: dialogButtonToBS,
         dialogButtonToUI: dialogButtonToUI,
@@ -3839,6 +3988,7 @@
         confirm: confirm,
         iframeDialog: iframeDialog,
         information: information,
+        success: success,
         warning: warning,
         closePanel: closePanel,
         get ErrorHandling () { return ErrorHandling; },
@@ -3963,6 +4113,7 @@
         InvalidCastException: InvalidCastException,
         validatorAbortHandler: validatorAbortHandler,
         validateOptions: validateOptions,
+        loadValidationErrorMessages: loadValidationErrorMessages,
         getHighlightTarget: getHighlightTarget,
         baseValidateOptions: baseValidateOptions,
         validateForm: validateForm,
@@ -6196,7 +6347,7 @@
                         trimToEmpty(itemsWithTab[j].tab) === tab.$);
                     i = j;
                     var li = $(isBS3() ? '<li><a data-toggle="tab" role="tab"></a></li>' :
-                        '<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab"></a></li>')
+                        "<li class=\"nav-item\"><a class=\"nav-link\" data-" + (isBS5Plus() ? "bs-" : "") + "toggle=\"tab\" role=\"tab\"></a></li>")
                         .appendTo(ul);
                     if (tabIndex === 0) {
                         if (isBS3())
@@ -6385,7 +6536,7 @@
             var editorType = EditorTypeRegistry
                 .get((_a = item.editorType) !== null && _a !== void 0 ? _a : 'String');
             var elementAttr = getAttributes(editorType, ElementAttribute, true);
-            var elementHtml = ((elementAttr.length > 0) ?
+            ((elementAttr.length > 0) ?
                 elementAttr[0].value : '<input/>');
             var element = Widget.elementFor(editorType)
                 .addClass('editor')
@@ -7374,7 +7525,7 @@
         });
         return true;
     }
-    typeof $ !== "undefined" && !jQueryDatepickerInitialization() && $(jQueryDatepickerInitialization);
+    typeof $ !== "undefined" && $.fn && !jQueryDatepickerInitialization() && $(jQueryDatepickerInitialization);
 
     var DateTimeEditor = /** @class */ (function (_super) {
         __extends(DateTimeEditor, _super);
@@ -8080,7 +8231,7 @@
         };
         Select2Editor.prototype.getTypeDelay = function () {
             var _a;
-            return ((_a = this.options['typeDelay']) !== null && _a !== void 0 ? _a : 500);
+            return ((_a = this.options['typeDelay']) !== null && _a !== void 0 ? _a : 200);
         };
         Select2Editor.prototype.emptyItemText = function () {
             var _a;
@@ -8155,10 +8306,10 @@
                     if (typeTimeout != null)
                         clearTimeout(typeTimeout);
                     var select2 = $(_this.element).data('select2');
-                    select2 && select2.search && select2.search.removeClass('select2-active');
+                    select2 && select2.search && select2.search.removeClass('select2-active').parent().removeClass('select2-active');
                     typeTimeout = setTimeout(function () {
                         queryPromise && queryPromise.abort && queryPromise.abort();
-                        select2 && select2.search.addClass('select2-active');
+                        select2 && select2.search.addClass('select2-active').parent().addClass('select2-active');
                         queryPromise = _this.asyncSearch(searchQuery, function (result) {
                             queryPromise = null;
                             query.callback({
@@ -8168,7 +8319,7 @@
                         });
                         (queryPromise && (queryPromise.catch || queryPromise.fail)).call(queryPromise, function () {
                             queryPromise = null;
-                            select2 && select2.search && select2.search.removeClass('select2-active');
+                            select2 && select2.search && select2.search.removeClass('select2-active').parent().removeClass('select2-active');
                         });
                     }, !query.term ? 0 : _this.getTypeDelay());
                 };
@@ -9562,7 +9713,7 @@
             _this.toolbar = new Toolbar($('<div/>').appendTo(_this.element), {
                 buttons: _this.getToolButtons()
             });
-            $('<div><div></div></div>')
+            _this.progress = $('<div><div></div></div>')
                 .addClass('upload-progress')
                 .prependTo(_this.toolbar.element);
             var uio = _this.getUploadInputOptions();
@@ -9783,14 +9934,15 @@
             _this.toolbar = new Toolbar($('<div/>').appendTo(_this.element), {
                 buttons: _this.getToolButtons()
             });
-            var progress = $('<div><div></div></div>')
-                .addClass('upload-progress').prependTo(_this.toolbar.element);
+            _this.progress = $('<div><div></div></div>')
+                .addClass('upload-progress')
+                .prependTo(_this.toolbar.element);
             var addFileButton = _this.toolbar.findButton('add-file-button');
             _this.uploadInput = UploadHelper.addUploadInput({
                 container: addFileButton,
                 zone: _this.element,
                 inputName: _this.uniqueName,
-                progress: progress,
+                progress: _this.progress,
                 fileDone: function (response, name, data) {
                     if (!UploadHelper.checkImageConstraints(response, _this.options)) {
                         return;
@@ -10404,25 +10556,27 @@
         return QuickSearchInput;
     }(Widget));
 
-    $.fn.flexHeightOnly = function (flexY) {
-        if (flexY === void 0) { flexY = 1; }
-        return this.flexWidthHeight(0, flexY);
-    };
-    $.fn.flexWidthOnly = function (flexX) {
-        if (flexX === void 0) { flexX = 1; }
-        return this.flexWidthHeight(flexX, 0);
-    };
-    $.fn.flexWidthHeight = function (flexX, flexY) {
-        if (flexX === void 0) { flexX = 1; }
-        if (flexY === void 0) { flexY = 1; }
-        return this.addClass('flexify').data('flex-x', flexX).data('flex-y', flexY);
-    };
-    $.fn.flexX = function (flexX) {
-        return this.data('flex-x', flexX);
-    };
-    $.fn.flexY = function (flexY) {
-        return this.data('flex-y', flexY);
-    };
+    if (typeof $ !== "undefined" && $.fn) {
+        $.fn.flexHeightOnly = function (flexY) {
+            if (flexY === void 0) { flexY = 1; }
+            return this.flexWidthHeight(0, flexY);
+        };
+        $.fn.flexWidthOnly = function (flexX) {
+            if (flexX === void 0) { flexX = 1; }
+            return this.flexWidthHeight(flexX, 0);
+        };
+        $.fn.flexWidthHeight = function (flexX, flexY) {
+            if (flexX === void 0) { flexX = 1; }
+            if (flexY === void 0) { flexY = 1; }
+            return this.addClass('flexify').data('flex-x', flexX).data('flex-y', flexY);
+        };
+        $.fn.flexX = function (flexX) {
+            return this.data('flex-x', flexX);
+        };
+        $.fn.flexY = function (flexY) {
+            return this.data('flex-y', flexY);
+        };
+    }
     var Flexify = /** @class */ (function (_super) {
         __extends(Flexify, _super);
         function Flexify(container, options) {
@@ -10826,7 +10980,7 @@
             return closePanel(element, e);
         };
         TemplatedDialog.prototype.onDialogOpen = function () {
-            if (!$(document.body).hasClass('mobile-device'))
+            if (!$(document.documentElement).hasClass('mobile-device'))
                 $(':input', this.element).not('button').eq(0).focus();
             this.arrange();
             this.tabs && this.tabs.tabs('option', 'active', 0);
@@ -10958,7 +11112,7 @@
         TemplatedDialog.prototype.handleResponsive = function () {
             var dlg = this.element.dialog();
             var uiDialog = this.element.closest('.ui-dialog');
-            if ($(document.body).hasClass('mobile-device')) {
+            if ($(document.documentElement).hasClass('mobile-device')) {
                 var data = this.element.data('responsiveData');
                 if (!data) {
                     data = {};
@@ -11025,8 +11179,10 @@
         };
         PropertyDialog.prototype.getDialogButtons = function () {
             var _this = this;
+            _super.prototype.getDialogButtons.call(this);
             return [{
                     text: text('Dialogs.OkButton'),
+                    cssClass: "btn btn-primary",
                     click: function () { return _this.okClick(); }
                 }, {
                     text: text('Dialogs.CancelButton'),
@@ -11905,9 +12061,6 @@
             }
             this.toolbar.findButton('localization-hidden')
                 .removeClass('localization-hidden').show();
-            this.saveAndCloseButton && this.saveAndCloseButton
-                .find('.button-inner').text(text((this.isNew() ? 'Controls.EntityDialog.SaveButton' :
-                'Controls.EntityDialog.UpdateButton')));
             if (!hasSavePermission || viewMode || readOnly)
                 EditorUtils.setContainerReadOnly(this.byId("Form"), true);
         };
@@ -13108,7 +13261,7 @@
             row.children('a.delete')
                 .attr('title', text('Controls.FilterPanel.RemoveField'))
                 .click(function (e) { return _this.deleteRowClick(e); });
-            var fieldSel = new FilterFieldSelect(row.children('div.f')
+            new FilterFieldSelect(row.children('div.f')
                 .children('input'), this.get_store().get_fields())
                 .changeSelect2(function (e) { return _this.onRowFieldChange(e); });
             this.updateParens();
@@ -13129,7 +13282,7 @@
             row.removeData('Filtering');
             var select = row.children('div.f').find('input.field-select')
                 .getWidget(FilterFieldSelect);
-            var fieldName = select.get_value();
+            select.get_value();
             this.removeFiltering(row);
             this.populateOperatorList(row);
             this.rowOperatorChange(row);
@@ -13396,7 +13549,7 @@
             $('.slick-pg-current', _this.element).keydown(function (e) { if (e.keyCode == 13)
                 self._changePage('input'); });
             if (self.options.showRowsPerPage) {
-                var opt, sel = "";
+                var opt = "", sel = "";
                 for (var nx = 0; nx < o.rowsPerPageOptions.length; nx++) {
                     if (v.rowsPerPage == o.rowsPerPageOptions[nx])
                         sel = 'selected="selected"';
@@ -13887,7 +14040,7 @@
                 }
                 if ($(e1.target).hasClass('select-all-items')) {
                     e1.preventDefault();
-                    var view = grid.getView();
+                    grid.getView();
                     if (Object.keys(_this.include).length > 0) {
                         clearKeys(_this.include);
                     }
@@ -14291,7 +14444,7 @@
                 return result;
             }
             for (var i = 0; i < items.length; i++) {
-                result.push(toSlickColumn(items[i]));
+                result.push(PropertyItemSlickConverter.toSlickColumn(items[i]));
             }
             return result;
         }
@@ -14609,7 +14762,6 @@
                         (a.value > b.value ? 1 : -1));
                 },
                 predefinedValues: [],
-                aggregators: [],
                 aggregateEmpty: false,
                 aggregateCollapsed: false,
                 aggregateChildGroups: false,
@@ -16063,7 +16215,30 @@
         };
         DataGrid.prototype.postProcessColumns = function (columns) {
             SlickHelper.setDefaults(columns, this.getLocalTextDbPrefix());
+            var delta = this.getColumnWidthDelta();
+            var scale = this.getColumnWidthScale();
+            if (scale < 0)
+                scale = 1;
+            if (delta !== 0 || scale !== 1) {
+                for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
+                    var col = columns_1[_i];
+                    if (typeof col.width === "number")
+                        col.width = col.width * scale + delta;
+                    if (typeof col.minWidth === "number")
+                        col.minWidth = col.minWidth * scale + delta;
+                    if (typeof col.maxWidth === "number")
+                        col.maxWidth = col.maxWidth * scale + delta;
+                }
+            }
             return columns;
+        };
+        DataGrid.prototype.getColumnWidthDelta = function () {
+            var _a;
+            return (_a = DataGrid_1.defaultColumnWidthDelta) !== null && _a !== void 0 ? _a : 0;
+        };
+        DataGrid.prototype.getColumnWidthScale = function () {
+            var _a;
+            return (_a = DataGrid_1.defaultColumnWidthScale) !== null && _a !== void 0 ? _a : 1;
         };
         DataGrid.prototype.initialPopulate = function () {
             var self = this;
@@ -16099,9 +16274,8 @@
             });
         };
         DataGrid.prototype.createSlickGrid = function () {
-            var visibleColumns;
             this.allColumns = this.getColumns();
-            visibleColumns = this.postProcessColumns(this.allColumns).filter(function (x) {
+            var visibleColumns = this.postProcessColumns(this.allColumns).filter(function (x) {
                 return x.visible !== false;
             });
             var slickOptions = this.getSlickOptions();
@@ -16253,8 +16427,8 @@
         };
         DataGrid.prototype.getIncludeColumns = function (include) {
             var columns = this.slickGrid.getColumns();
-            for (var _i = 0, columns_1 = columns; _i < columns_1.length; _i++) {
-                var column = columns_1[_i];
+            for (var _i = 0, columns_2 = columns; _i < columns_2.length; _i++) {
+                var column = columns_2[_i];
                 if (column.field) {
                     include[column.field] = true;
                 }
@@ -16419,7 +16593,7 @@
             return null;
         };
         DataGrid.prototype.getPropertyItems = function () {
-            var attr = this.attrs(ColumnsKeyAttribute);
+            this.attrs(ColumnsKeyAttribute);
             var columnsKey = this.getColumnsKey();
             if (!isEmptyOrNull(columnsKey)) {
                 return getColumns(columnsKey);
@@ -16823,8 +16997,8 @@
                 settings.columns = [];
                 var sortColumns = this.slickGrid.getSortColumns();
                 var columns = this.slickGrid.getColumns();
-                for (var _i = 0, columns_2 = columns; _i < columns_2.length; _i++) {
-                    var column = columns_2[_i];
+                for (var _i = 0, columns_3 = columns; _i < columns_3.length; _i++) {
+                    var column = columns_3[_i];
                     var p = {
                         id: column.id
                     };
@@ -17118,7 +17292,7 @@
                         $(evt.item).appendTo(_this.ulVisible);
                         _this.updateListStates();
                     },
-                    onEnd: function (evt) { return _this.updateListStates(); }
+                    onEnd: function () { return _this.updateListStates(); }
                 });
             }
         };
@@ -17148,32 +17322,39 @@
         function EntityGrid(container, options) {
             var _this = _super.call(this, container, options) || this;
             _this.element.addClass('route-handler')
-                .on('handleroute.' + _this.uniqueName, function (e, arg) {
-                if (!!arg.handled)
-                    return;
-                if (!!(arg.route === 'new')) {
-                    arg.handled = true;
-                    _this.addButtonClick();
-                    return;
-                }
-                var parts = arg.route.split('/');
-                if (!!(parts.length === 2 && parts[0] === 'edit')) {
-                    arg.handled = true;
-                    _this.editItem(parts[1]);
-                    return;
-                }
-                if (!!(parts.length === 2 && parts[1] === 'new')) {
-                    arg.handled = true;
-                    _this.editItemOfType(cast(parts[0], String), null);
-                    return;
-                }
-                if (!!(parts.length === 3 && parts[1] === 'edit')) {
-                    arg.handled = true;
-                    _this.editItemOfType(cast(parts[0], String), parts[2]);
-                }
-            });
+                .on('handleroute.' + _this.uniqueName, function (_, args) { return _this.handleRoute(args); });
             return _this;
         }
+        EntityGrid.prototype.handleRoute = function (args) {
+            if (!!args.handled)
+                return;
+            if (!!(args.route === 'new')) {
+                args.handled = true;
+                this.addButtonClick();
+                return;
+            }
+            var oldRequests = jQuery["active"];
+            var parts = args.route.split('/');
+            if (!!(parts.length === 2 && parts[0] === 'edit')) {
+                args.handled = true;
+                this.editItem(decodeURIComponent(parts[1]));
+            }
+            else if (!!(parts.length === 2 && parts[1] === 'new')) {
+                args.handled = true;
+                this.editItemOfType(parts[0], null);
+            }
+            else if (!!(parts.length === 3 && parts[1] === 'edit')) {
+                args.handled = true;
+                this.editItemOfType(parts[0], decodeURIComponent(parts[2]));
+            }
+            else
+                return;
+            if (jQuery["active"] > oldRequests && args.handled && args.index >= 0 && args.index < args.parts.length - 1) {
+                $(document).one('ajaxStop', function () {
+                    setTimeout(function () { return Router.resolve('#' + args.parts.join('/+/')); }, 1);
+                });
+            }
+        };
         EntityGrid.prototype.usePager = function () {
             return true;
         };
@@ -18257,7 +18438,7 @@
             };
             ReportPage.prototype.reportLinkClick = function (e) {
                 e.preventDefault();
-                var dialog = new ReportDialog({ reportKey: $(e.target).data('key') });
+                new ReportDialog({ reportKey: $(e.target).data('key') });
             };
             ReportPage = __decorate([
                 Decorators.registerClass('Serenity.Reporting.ReportPage')
@@ -18439,7 +18620,7 @@
             return null;
         };
         Select2AjaxEditor.prototype.getTypeDelay = function () {
-            return 500;
+            return 200;
         };
         Select2AjaxEditor.prototype.getSelect2Options = function () {
             var _this = this;
@@ -18456,7 +18637,10 @@
                     if (queryTimeout !== 0) {
                         window.clearTimeout(queryTimeout);
                     }
+                    var select2 = $(_this.element).data('select2');
+                    select2 && select2.search && select2.search.removeClass('select2-active').parent().removeClass('select2-active');
                     queryTimeout = window.setTimeout(function () {
+                        select2 && select2.search.addClass('select2-active').parent().addClass('select2-active');
                         _this.query(request, function (response) {
                             query.callback({
                                 results: response.Entities.slice(0, _this.pageSize).map(function (x) {
@@ -18831,11 +19015,11 @@
                 if ($(event.target).closest(".ui-dialog").length) {
                     return true;
                 }
-                return !!$(event.target).closest(".ui-datepicker, .select2-drop, .cke, .cke_dialog, #support-modal").length;
+                return !!$(event.target).closest(".ui-datepicker, .select2-drop, .cke, .cke_dialog, .modal, #support-modal").length;
             };
             (function (orig) {
                 $.ui.dialog.prototype._focusTabbable = function () {
-                    if ($(document.body).hasClass('mobile-device')) {
+                    if ($(document.documentElement).hasClass('mobile-device')) {
                         this.uiDialog && this.uiDialog.focus();
                         return;
                     }
@@ -18849,8 +19033,8 @@
                 };
             })($.ui.dialog.prototype._createTitlebar);
         }
-        !applyJQueryUIFixes() && typeof $ !== "undefined" && $(applyJQueryUIFixes);
-        if (typeof $ !== "undefined") {
+        !applyJQueryUIFixes() && typeof $ !== "undefined" && $.fn && $(applyJQueryUIFixes);
+        if (typeof $ !== "undefined" && $.fn) {
             // for backward compatibility
             if (!$.toJSON)
                 $.toJSON = JSON.stringify;
@@ -18991,7 +19175,7 @@
             return true;
         }
         // @ts-ignore
-        !vueIntegration() && typeof $ !== "undefined" && $(vueIntegration);
+        !vueIntegration() && typeof $ !== "undefined" && $.fn && $(vueIntegration);
     }
 
     if (typeof jQuery === "function") {
@@ -19006,28 +19190,6 @@
     exports.Q = exports.Q || {}; extend(exports.Q, indexAll);
     exports.Serenity = exports.Serenity || {}; extend(exports.Serenity, index);
     exports.Slick = exports.Slick || {}; extend(exports.Slick, index$1);
-    exports.__asyncDelegator = exports.__asyncDelegator || __asyncDelegator;
-    exports.__asyncGenerator = exports.__asyncGenerator || __asyncGenerator;
-    exports.__asyncValues = exports.__asyncValues || __asyncValues;
-    exports.__await = exports.__await || __await;
-    exports.__awaiter = exports.__awaiter || __awaiter;
-    exports.__classPrivateFieldGet = exports.__classPrivateFieldGet || __classPrivateFieldGet;
-    exports.__classPrivateFieldSet = exports.__classPrivateFieldSet || __classPrivateFieldSet;
-    exports.__createBinding = exports.__createBinding || __createBinding;
-    exports.__decorate = exports.__decorate || __decorate;
-    exports.__exportStar = exports.__exportStar || __exportStar;
-    exports.__extends = exports.__extends || __extends;
-    exports.__generator = exports.__generator || __generator;
-    exports.__importDefault = exports.__importDefault || __importDefault;
-    exports.__importStar = exports.__importStar || __importStar;
-    exports.__makeTemplateObject = exports.__makeTemplateObject || __makeTemplateObject;
-    exports.__metadata = exports.__metadata || __metadata;
-    exports.__param = exports.__param || __param;
-    exports.__read = exports.__read || __read;
-    exports.__rest = exports.__rest || __rest;
-    exports.__spread = exports.__spread || __spread;
-    exports.__spreadArrays = exports.__spreadArrays || __spreadArrays;
-    exports.__values = exports.__values || __values;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
