@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29411.108
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerExtra.Web", "SerExtra\SerExtra.Web\SerExtra.Web.csproj", "{E298DC33-D240-4585-AC47-775575246780}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerExtraCore.Web", "SerExtraCore\SerExtraCore.Web\SerExtraCore.Web.csproj", "{49F052D8-E49C-4C03-8C2A-68A62DD4585C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerExtraNet5.Web", "SerExtraNet5\SerExtraNet5.Web\SerExtraNet5.Web.csproj", "{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerExtraNet5.Web", "SerExtraNet5\SerExtraNet5.Web\SerExtraNet5.Web.csproj", "{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{E298DC33-D240-4585-AC47-775575246780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E298DC33-D240-4585-AC47-775575246780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E298DC33-D240-4585-AC47-775575246780}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49F052D8-E49C-4C03-8C2A-68A62DD4585C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49F052D8-E49C-4C03-8C2A-68A62DD4585C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49F052D8-E49C-4C03-8C2A-68A62DD4585C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49F052D8-E49C-4C03-8C2A-68A62DD4585C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Release|Any CPU.ActiveCfg = Release|Any CPU
