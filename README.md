@@ -77,4 +77,4 @@ protected getSlickOptions() {
  
  ### Please explore the code to know more...
  
- #### Online demo (by @edwardch) https://serenity-extra.azurewebsites.net
+ #### Online demo http://serenity-extra.herokuapp.com/
