@@ -35,14 +35,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 5. Add following line in ScriptInitialization.ts
 ```Q.Config.rootNamespaces.push('_Ext');```
 
-## How to use (for .net core)
-1. Copy the Modules/_Ext folder from the SerExtraCore project and place it accordingly.
-2. Copy the wwwroot/Modules folder from the SerExtraCore project
-3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
-4. If want to apply Serenity.Extra css then you could add line in wwwroot\Content\site\CssBundles.json
-`"~/Modules/_Ext/ExtStyles.css"`
-
-## How to use (for .net 5)
+## How to use (for .net 5+)
 1. Copy the Modules/_Ext folder from the SerExtraNet5 project and place it accordingly.
 2. Copy the wwwroot/Modules folder from the SerExtraNet5 project
 3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
@@ -77,4 +70,4 @@ protected getSlickOptions() {
  
  ### Please explore the code to know more...
  
- #### Online demo (by @edwardch) https://serenity-extra.azurewebsites.net
+ #### Online demo http://serenity-extra.herokuapp.com/
