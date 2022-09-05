@@ -43,6 +43,9 @@
     <PackageReference Include="Serenity.Scripts" Version="6.0.8" />
     <PackageReference Include="Serenity.Demo.ThemeSamples" Version="6.0.5.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\ExtraSamples\Mixins\" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)Serenity\build\submodule.targets" Condition="Exists('$(SolutionDir)Serenity\build\submodule.targets')" />
   <Target Name="CreateInputsOutputs" BeforeTargets="BeforeBuild">
     <CreateItem Include="Modules\**\*.ts;Imports\**\*.ts;tsconfig.json">

@@ -1,0 +1,42 @@
+﻿@model SerExtraNet5.ExtraSamples.OrdersByCustomerReportModel
+@{
+    Layout = MVC.Views.Shared._LayoutReport;
+    ViewData["Title"] = "Orders By Customer";
+    ViewData["IgnoreImmediatePrint"] = "Yes";
+    var r = Model.Request;
+    int i = 1;
+}
+
+<div class="row">
+    <div class="report-label col-md-6">
+        <label>Customer</label>
+        <span>: @r.CustomerId</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-condensed table-excel-exportable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Order Number</th>
+                    <th>Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{i = 1;}
+                @foreach (var row in Model.OrderRows)
+                {
+                    <tr>
+                        <td class="rpt-id">@i@{i++;} </td>
+                        <td>@row.OrderID</td>
+                        <td class="rpt-date">@row.OrderDate.ToDateFormat()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

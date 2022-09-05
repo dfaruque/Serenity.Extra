@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+@{
+    var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+}
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
+<head>
+    @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
+    @Html.Stylesheet("~/Modules/_Ext/Reporting/report.css")
+    @RenderSection("Head", false)
+    <title>@ViewData["Title"]</title>
+
+    <script type="text/javascript">
+        var pdfInfo = {};
+        var x = document.location.search.substring(1).split('&');
+        for (var i in x) { var z = x[i].split('=', 2); pdfInfo[z[0]] = unescape(z[1]); }
+        function getPdfInfo() {
+            //var page = pdfInfo.page || 1;
+            //var pageCount = pdfInfo.topage || 1;
+            //document.getElementById('pdfkit_page_current').textContent = page;
+            //document.getElementById('pdfkit_page_count').textContent = pageCount;
+        }
+
+        function ExcelExport(fileName) {
+            var textRange; var j = 0;
+            //var tab_text = document.body.innerHTML;
+            var myTables = document.getElementsByClassName('table-excel-exportable');
+
+            var tab_text = fileName;
+            tab_text += "<table style='margin-bottom:20px' border='1px'><tr>";
+
+            for (var t = 0; t < myTables.length; t++) {
+                var tab = myTables[t];
+                if(t > 0)
+                {
+                     tab_text += "<table border='1px'><tr>";
+                }
+
+                for (j = 0; j < tab.rows.length; j++) {
+                    tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+                }
+
+                tab_text = tab_text + "</table>";
+                tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+                tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+                tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+            }
+
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+            {
+                txtArea1.document.open("txt/html", "replace");
+                txtArea1.document.write(tab_text);
+                txtArea1.document.close();
+                txtArea1.focus();
+                sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+            }
+            else                 //other browser not tested on IE 11
+            {
+                var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text)
+
+                var downloadLink = document.createElement("a");
+                downloadLink.href = uri;
+
+                var dt = new Date();
+                var day = dt.getDate();
+                var month = dt.getMonth() + 1;
+                var year = dt.getFullYear();
+                var postfix = day + "-" + month + "-" + year;
+                downloadLink.download = fileName + " - " + postfix + ".xls";
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+        }
+
+        function PrintDocument() {
+            window.print();
+        }
+    </script>
+
+</head>
+<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) no-navigation@(rtl ? " rtl" : "")">
+    <section class="invoice">
+        <div class="row report-header">
+            <div class="col-xs-2">
+                <img width="110" height="110" src="~/Content/serenity/images/dialog-confirm.png" />
+            </div>
+
+            <div class="col-xs-10">
+                <div class="no-print pull-right">
+                    <button id="btn-excel-export" class="btn btn-info hidden" title="Excel Export" onclick="ExcelExport('@ViewData["Title"]');"><i class="fa fa-file-excel-o margin-r-5"></i> Export to Excel</button>
+                    <button class="btn btn-primary" title="Print" onclick="PrintDocument();"><i class="fa fa-print margin-r-5"></i> Print</button>
+                </div>
+
+                <h2>Company Name</h2>
+                <h4>Address</h4>
+                <h5>Contact</h5>
+                <span @((ViewData["HideDate"] != null) ? "hidden" : "") class="pull-right">Print Date: @DateTime.Now.ToDateFormat()</span>
+                <hr />
+
+            </div>
+
+        </div>
+
+        <div class="row report-title">
+            <div class="col-xs-12">
+                <h3 class="align-center">
+                    @ViewData["Title"]
+                </h3>
+            </div>
+        </div>
+
+        <div class="report-body">
+            @RenderBody()
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        $(function () {
+             var excelExportableTables = document.getElementsByClassName('table-excel-exportable');
+
+             if (excelExportableTables.length > 0) {
+                 $('#btn-excel-export').removeClass('hidden');
+             }
+        });
+    </script>
+</body>
+
+
+</html>

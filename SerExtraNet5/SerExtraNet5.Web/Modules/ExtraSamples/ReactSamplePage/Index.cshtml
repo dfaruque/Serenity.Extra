@@ -1,0 +1,12 @@
+﻿@inject ITextLocalizer localizer;
+@{
+    ViewData["Title"] = localizer.Get("Db.Northwind.Customer.EntityPlural");
+}
+
+<div id="reactRoot"></div>
+
+<script type="text/javascript">
+        ReactDOM.render(
+        React.createElement(SerExtraNet5.ExtraSamples.Profile, null),
+        document.getElementById('reactRoot'));
+</script>

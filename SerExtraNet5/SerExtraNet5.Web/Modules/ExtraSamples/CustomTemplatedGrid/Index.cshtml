@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Custom Template Grid";
+}
+
+<div id="GridDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new SerExtraNet5.ExtraSamples.CustomTemplatedGrid($('#GridDiv'), {}).init();
+
+        Q.initFullHeightGridPage($('#GridDiv'));
+    });
+</script>
