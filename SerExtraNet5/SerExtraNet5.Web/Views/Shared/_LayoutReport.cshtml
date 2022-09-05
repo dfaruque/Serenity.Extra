@@ -4,7 +4,7 @@
 }
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
-    @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
+    <partial name="@MVC.Views.Shared._LayoutHead" />
     @Html.Stylesheet("~/Modules/_Ext/Reporting/report.css")
     @RenderSection("Head", false)
     <title>@ViewData["Title"]</title>
@@ -30,9 +30,8 @@
 
             for (var t = 0; t < myTables.length; t++) {
                 var tab = myTables[t];
-                if(t > 0)
-                {
-                     tab_text += "<table border='1px'><tr>";
+                if (t > 0) {
+                    tab_text += "<table border='1px'><tr>";
                 }
 
                 for (j = 0; j < tab.rows.length; j++) {
