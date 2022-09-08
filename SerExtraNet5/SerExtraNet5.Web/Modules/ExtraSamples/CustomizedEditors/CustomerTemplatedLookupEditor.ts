@@ -1,4 +1,4 @@
-﻿namespace SerExtra {
+﻿namespace SerExtraNet5 {
 
     @Serenity.Decorators.registerEditor()
     export class CustomerTemplatedLookupEditor extends Serenity.LookupEditorBase<any, any> {
