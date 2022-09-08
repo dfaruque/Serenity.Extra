@@ -12,7 +12,7 @@ namespace _Ext.Entities
     [ConnectionKey("Log"), TableName("[AuditLog]")]
     [DisplayName("Audit Log"), InstanceName("Audit Log"), TwoLevelCached]
     [ReadPermission("Administration:AuditLog")]
-    [ModifyPermission("Administration:AuditLog")]
+    [ModifyPermission("Administration:AuditLog:Modify")]
     public sealed class AuditLogRow : Row, IIdRow, INameRow
     {
         [DisplayName("Id"), Identity, NotNull]
