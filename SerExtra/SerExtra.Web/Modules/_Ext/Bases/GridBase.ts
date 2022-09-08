@@ -122,11 +122,11 @@ namespace _Ext {
                 for (let quickFilter of quickFilters) {
                     let filterValue = request.EqualityFilter[quickFilter.field];
                     if (filterValue && filterValue.length > 0) {
-                        if (quickFilter.options?.lookupKey) {
+                        if (quickFilter.options && quickFilter.options.lookupKey) {
                             let lookup = Q.getLookup(quickFilter.options.lookupKey);
                             request.EqualityFilterWithTextValue[quickFilter.title] = lookup.itemById[filterValue][lookup.textField];
                         }
-                        else if (quickFilter.options?.enumKey) {
+                        else if (quickFilter.options && quickFilter.options.enumKey) {
                             let enumKey = quickFilter.options.enumKey;
                             let enumValue = Q.toId(filterValue);
                             request.EqualityFilterWithTextValue[quickFilter.title] = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), enumValue);
