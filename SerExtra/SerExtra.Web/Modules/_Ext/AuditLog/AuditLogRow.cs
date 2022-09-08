@@ -18,7 +18,7 @@ namespace _Ext.Entities
         [DisplayName("Id"), Identity, NotNull]
         public Int64? Id { get { return Fields.Id[this]; } set { Fields.Id[this] = value; } }
 
-        [DisplayName("User"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("jUser")]
+        [DisplayName("User"), NotNull]
         [LookupEditor("Administration.User"), QuickFilter]
         public Int64? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
 
@@ -47,7 +47,7 @@ namespace _Ext.Entities
 
         #region Foreign Fields
 
-        [DisplayName("User Name"), Expression("jUser.DisplayName")]
+        [DisplayName("User Name"), NotMapped]
         public String UserName { get => Fields.UserName[this]; set => Fields.UserName[this] = value; }
 
         #endregion Foreign Fields

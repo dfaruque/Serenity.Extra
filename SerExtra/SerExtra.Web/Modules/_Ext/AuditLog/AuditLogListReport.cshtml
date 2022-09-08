@@ -37,7 +37,7 @@
             </thead>
             <tbody>
                 @{i = 1;}
-                @foreach (var item in Model.ConsumerList)
+                @foreach (var item in Model.AuditLogs)
                 {
                     <tr>
                         <td class="rpt-id">@(i++) </td>
@@ -45,7 +45,7 @@
                             @item.EntityTableName - @item.EntityId
                             <br />@item.ActionType.GetText()
                             <br />@item.ActionDate.ToDateTimeFormat()
-                            <br /> @item.UserId
+                            <br /> @item.UserName [@item.UserId]
                         </td>
                         <td class="rpt-text">
                             @if (!string.IsNullOrEmpty(item.Changes))

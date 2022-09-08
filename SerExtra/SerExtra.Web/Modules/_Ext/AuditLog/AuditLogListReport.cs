@@ -7,6 +7,7 @@ using _Ext.Repositories;
 using Serenity;
 using Serenity.Data;
 using Serenity.Reporting;
+using SerExtra.Administration.Entities;
 
 namespace _Ext.Reports
 {
@@ -25,15 +26,23 @@ namespace _Ext.Reports
 
     public class AuditLogListReportModel : ListReportModelBase
     {
-        public List<AuditLogRow> ConsumerList { get; set; } = new List<AuditLogRow>();
+        public List<AuditLogRow> AuditLogs { get; set; } = new List<AuditLogRow>();
+        public List<UserRow> Users { get; set; } = new List<UserRow>();
 
         public AuditLogListReportModel(IDbConnection connection, ListReportRequest request)
         {
             Request = request;
 
-            request.IncludeColumns.Add(nameof(AuditLogRow.UserName));
+            AuditLogs = new AuditLogRepository().List(connection, request).Entities;
 
-            ConsumerList = new AuditLogRepository().List(connection, request).Entities;
+            using (var userConnection = SqlConnections.NewFor<UserRow>())
+            {
+                var ufld = UserRow.Fields;
+                Users = userConnection.List<UserRow>(q => q.Select(ufld.UserId, ufld.DisplayName));
+
+                AuditLogs.ForEach(a => a.UserName = Users.Find(f => f.UserId == a.UserId)?.DisplayName);
+            }
+
         }
 
     }
