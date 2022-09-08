@@ -867,6 +867,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Modules\_Ext\AuditLog\AuditLogListReport.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -2371,6 +2372,7 @@
     <Compile Include="Modules\_Ext\AuditLog\AuditLogPage.cs" />
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRepository.cs" />
     <Compile Include="Modules\_Ext\AuditLog\AuditLogRow.cs" />
+    <Compile Include="Modules\_Ext\AuditLog\AuditLogListReport.cs" />
     <Compile Include="Modules\_Ext\Behaviours\AuditLogBehaviour.cs" />
     <Compile Include="Modules\_Ext\DevTools\CodeSnippets\CodeSnippetsPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />

@@ -18,8 +18,8 @@ namespace _Ext.Entities
         [DisplayName("Id"), Identity, NotNull]
         public Int64? Id { get { return Fields.Id[this]; } set { Fields.Id[this] = value; } }
 
-        [DisplayName("User"), NotNull, QuickFilter]
-        [LookupEditor("Administration.User")]
+        [DisplayName("User"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("jUser")]
+        [LookupEditor("Administration.User"), QuickFilter]
         public Int64? UserId { get { return Fields.UserId[this]; } set { Fields.UserId[this] = value; } }
 
         [DisplayName("Action Type"), NotNull, QuickFilter]
@@ -33,7 +33,7 @@ namespace _Ext.Entities
         [DisplayName("Table Name"), Size(100), Column("TableName"), NotNull, QuickFilter, QuickSearch]
         public String EntityTableName { get { return Fields.EntityTableName[this]; } set { Fields.EntityTableName[this] = value; } }
 
-        [DisplayName("Entity Id"), NotNull]
+        [DisplayName("Entity Id"), NotNull, QuickFilter]
         public Int64? EntityId { get { return Fields.EntityId[this]; } set { Fields.EntityId[this] = value; } }
         
         [DisplayName("Changes")]
@@ -44,8 +44,12 @@ namespace _Ext.Entities
 
         [DisplayName("Session Id"), Size(100)]
         public String SessionId { get { return Fields.SessionId[this]; } set { Fields.SessionId[this] = value; } }
-        
+
         #region Foreign Fields
+
+        [DisplayName("User Name"), Expression("jUser.DisplayName")]
+        public String UserName { get => Fields.UserName[this]; set => Fields.UserName[this] = value; }
+
         #endregion Foreign Fields
 
 
@@ -60,6 +64,7 @@ namespace _Ext.Entities
             public StringField Changes;
             public StringField IpAddress;
             public StringField SessionId;
+            public StringField UserName;
 
             public RowFields() : base()
             {

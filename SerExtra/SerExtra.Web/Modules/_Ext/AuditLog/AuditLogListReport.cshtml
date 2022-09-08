@@ -1,0 +1,77 @@
+﻿@model _Ext.Reports.AuditLogListReportModel
+@{
+    Layout = MVC.Views.Shared._LayoutReport;
+    ViewData["Title"] = "Audit Log List Report";
+    ViewData["IgnoreImmediatePrint"] = "Yes";
+    int i = 1;
+    var fld = _Ext.Entities.AuditLogRow.Fields;
+}
+
+<br />
+<div class="row">
+
+    @foreach (var f in Model.Request.EqualityFilterWithTextValue)
+    {
+        <div class="col-md-6 report-label">
+            <label>@f.Key</label>
+            <span>: @f.Value</span>
+        </div>
+    }
+</div>
+<br />
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-condensed table-excel-exportable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @fld.EntityTableName.Title - @fld.EntityId.Title
+                        <br />@fld.ActionType.Title
+                        <br />@fld.ActionDate.Title
+                        <br />@fld.UserId.Title
+                    </th>
+                    <th>@fld.Changes.Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{i = 1;}
+                @foreach (var item in Model.ConsumerList)
+                {
+                    <tr>
+                        <td class="rpt-id">@(i++) </td>
+                        <td class="rpt-text">
+                            @item.EntityTableName - @item.EntityId
+                            <br />@item.ActionType.GetText()
+                            <br />@item.ActionDate.ToDateTimeFormat()
+                            <br /> @item.UserId
+                        </td>
+                        <td class="rpt-text">
+                            @if (!string.IsNullOrEmpty(item.Changes))
+                            {
+                                var changes = JSON.Parse<Dictionary<string, object[]>>(item.Changes ?? "");
+
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Old Value</th>
+                                        <th>New Value</th>
+                                    </tr>
+                                    @foreach (var change in changes)
+                                    {
+                                        <tr>
+                                            <td>@change.Key</td>
+                                            <td>@change.Value[0]</td>
+                                            <td>@change.Value[1]</td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

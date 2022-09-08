@@ -19,5 +19,14 @@ namespace _Ext {
 
             return buttons;
         }
+
+        protected getReportRequest() {
+            let request = super.getReportRequest();
+
+            request.ReportKey = "_Ext.AuditLogList";
+
+            return request;
+        }
+
     }
 }
