@@ -868,6 +868,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Modules\_Ext\AuditLog\AuditLogListReport.cshtml" />
+    <Content Include="Modules\_Ext\DevTools\EnumExproler\EnumExprolerIndex.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -2378,6 +2379,8 @@
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\CompareEntityToDB\SchemaHelper.cs" />
+    <Compile Include="Modules\_Ext\DevTools\EnumExproler\EnumExprolerPage.cs" />
+    <Compile Include="Modules\_Ext\DevTools\EnumExproler\EnumExprolerPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPage.cs" />
     <Compile Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityPageModel.cs" />
     <Compile Include="Modules\_Ext\DevTools\Sergen\SergenEndpoint.cs" />

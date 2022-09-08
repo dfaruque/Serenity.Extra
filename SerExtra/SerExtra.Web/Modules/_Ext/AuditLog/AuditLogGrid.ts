@@ -1,6 +1,7 @@
 ﻿/// <reference path="../Bases/GridBase.ts" />
 
 namespace _Ext {
+    import fld = AuditLogRow.Fields;
 
     @Serenity.Decorators.registerClass()
     export class AuditLogGrid extends GridBase<AuditLogRow, any> {
@@ -18,6 +19,14 @@ namespace _Ext {
             buttons.splice(0, 1);
 
             return buttons;
+        }
+
+        protected createQuickFilters(): void {
+            super.createQuickFilters();
+
+            let actionDateQuickFilter = this.findQuickFilter(Serenity.DateTimeEditor, fld.ActionDate);
+
+            actionDateQuickFilter.valueAsDate = Q.today();
         }
 
         protected getReportRequest() {
