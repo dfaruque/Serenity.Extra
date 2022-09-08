@@ -103,7 +103,7 @@ namespace _Ext.ExcelImporter
                         propertyItem.Title += " [" + propertyItem.Name + "]";
                         propertyItem.EditLinkCssClass += "HasEditLink";
 
-                        var editLinkIdPropertyItem = propertyItems.First(f => f.Name == editLinkIdField.Name);
+                        var editLinkIdPropertyItem = propertyItems.First(f => f.Name == editLinkIdField.PropertyName);
                         editLinkIdPropertyItem.Title += " [" + editLinkIdPropertyItem.Name + "]";
                         editLinkIdPropertyItem.EditLinkCssClass += "IsEditLink";
 
