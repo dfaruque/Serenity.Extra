@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerExtra.Web", "SerExtra\Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerExtraNet5.Web", "SerExtraNet5\SerExtraNet5.Web\SerExtraNet5.Web.csproj", "{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerExtraESM.Web", "SerExtraESM\SerExtraESM.Web\SerExtraESM.Web.csproj", "{A84579B9-FFEA-451A-946C-0BB8DDAA4238}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4EB0C9A-9B3E-43B8-A05F-4BA8E6786350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84579B9-FFEA-451A-946C-0BB8DDAA4238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84579B9-FFEA-451A-946C-0BB8DDAA4238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84579B9-FFEA-451A-946C-0BB8DDAA4238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84579B9-FFEA-451A-946C-0BB8DDAA4238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "sergen": {
+      "version": "6.5.1",
+      "commands": [
+        "sergen"
+      ]
+    },
+    "microsoft.web.librarymanager.cli": {
+      "version": "2.1.161",
+      "commands": [
+        "libman"
+      ]
+    }
+  }
+}
