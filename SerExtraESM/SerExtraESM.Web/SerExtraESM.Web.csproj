@@ -9,6 +9,15 @@
   <ItemGroup>
     <TypeScriptCompile Remove="node_modules\**" />
     <EmbeddedResource Include="Migrations\**\*.sql" />
+    <None Include="Modules\_Ext\DevTools\CompareEntityToDB\CompareEntityToDBIndex.cshtml" />
+    <None Include="Modules\_Ext\DevTools\EnumExproler\EnumExprolerIndex.cshtml" />
+    <None Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityIndex.cshtml" />
+    <None Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntityMigrationViewer.cshtml" />
+    <None Include="Modules\_Ext\DevTools\GenerateMigrationFromEntity\GenerateMigrationFromEntitySuccessMsg.cshtml" />
+    <None Include="wwwroot\lib\_Ext\CustomSlickGridPlugin\slick.autocolumnsize.js" />
+    <None Include="wwwroot\lib\_Ext\CustomSlickGridPlugin\slick.headerfilters.js" />
+    <None Include="wwwroot\lib\_Ext\Editors\SerenityInlineEditors.js" />
+    <None Include="wwwroot\lib\_Ext\Editors\slick.editors.js" />
     <Content Update=".eslintrc.json;libman.json;package.json;package-lock.json;sergen.json;tsconfig.json;tslint.json;Modules\tsconfig.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" />
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +37,6 @@
     <PackageReference Include="Serenity.Demo.Northwind" Version="6.5.1" />
     <PackageReference Include="Serenity.Demo.BasicSamples" Version="6.5.1" />
   </ItemGroup>
-  <ItemGroup></ItemGroup>
   <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Condition="!Exists('node_modules\@types\jquery\index.d.ts')">
     <Message Text="Installing NPM packages..." Importance="high" />
     <Exec Command="npm install" />

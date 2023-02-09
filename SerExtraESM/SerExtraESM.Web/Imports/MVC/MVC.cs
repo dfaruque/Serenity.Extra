@@ -3,6 +3,30 @@ namespace MVC
 {
     public static class Views
     {
+        public static class _Ext
+        {
+            public static class DevTools
+            {
+                public static class CompareEntityToDB
+                {
+                    public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static class EnumExproler
+                {
+                    public const string EnumExprolerIndex = "~/Modules/_Ext/DevTools/EnumExproler/EnumExprolerIndex.cshtml";
+                }
+
+                public static class GenerateMigrationFromEntity
+                {
+                    public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
+                    public const string GenerateMigrationFromEntityMigrationViewer = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityMigrationViewer.cshtml";
+                    public const string GenerateMigrationFromEntitySuccessMsg = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntitySuccessMsg.cshtml";
+                }
+            }
+
+        }
+
         public static class Common
         {
             public static class Dashboard
