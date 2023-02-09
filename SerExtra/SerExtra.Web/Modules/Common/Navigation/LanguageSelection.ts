@@ -10,7 +10,7 @@
                     path: Q.Config.applicationPath,
                     expires: 365
                 });
-                window.location.reload(true);
+                window.location.reload();
             });
 
             Q.getLookupAsync<Administration.LanguageRow>('Administration.Language').then(x => {
