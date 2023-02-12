@@ -48,6 +48,7 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
 4. If want to apply Serenity.Extra css then you could add line in appsettings.bundles.json
 `"~/Modules/_Ext/ExtStyles.css"`
+5. See LanguageGrid.ts and LanguageDialog.ts for example.
 
 ## Examples
 
