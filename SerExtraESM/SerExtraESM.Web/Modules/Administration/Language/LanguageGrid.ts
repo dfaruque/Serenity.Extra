@@ -1,9 +1,10 @@
-﻿import { LanguageDialog } from "./LanguageDialog";
+import { LanguageDialog } from "./LanguageDialog";
 import { LanguageColumns, LanguageRow, LanguageService } from "../";
-import { Decorators, EntityGrid } from "@serenity-is/corelib"
+import { Decorators } from "@serenity-is/corelib"
+import { GridBase } from "@/_Ext/Bases/GridBase"
 
 @Decorators.registerClass('SerExtraESM.Administration.LanguageGrid')
-export class LanguageGrid extends EntityGrid<LanguageRow, any> {
+export class LanguageGrid extends GridBase<LanguageRow, any> {
     protected useAsync() { return true; }
     protected getColumnsKey() { return LanguageColumns.columnsKey; }
     protected getDialogType() { return LanguageDialog; }
