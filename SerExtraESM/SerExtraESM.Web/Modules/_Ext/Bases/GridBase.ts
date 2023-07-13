@@ -234,21 +234,21 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
                 if (column.sourceItem.editorType == "Lookup") {
                     if (!column.sourceItem.editorParams.autoComplete) {
-                        (column as any).lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey)
-                        column.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                            if (columnDef.sourceItem.editorParams.multiple == true) {
-                                if (value) {
-                                    let items = value.map(m => columnDef.lookup.itemById[m]);
-                                    let texts = items.map(m => m[columnDef.lookup.textField]);
+                        column.format = ctx => {
+                            let lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey);
+                            if (ctx.column.sourceItem.editorParams.multiple == true) {
+                                if (ctx.value) {
+                                    let items = ctx.value.map(m => lookup.itemById[m]);
+                                    let texts = items.map(m => m[lookup.textField]);
 
-                                    return texts.length > 0 ? texts.join(', ') : emptyText;;
+                                    return texts.length > 0 ? texts.join(', ') : emptyText;
                                 }
                             } else {
-                                let item = columnDef.lookup.itemById[value];
-                                if (item) return item[columnDef.lookup.textField];
+                                let item = lookup.itemById[ctx.value];
+                                if (item) return item[lookup.textField];
                                 else return emptyText;
                             }
-                        };
+                        }
                     }
                 } else if (column.sourceItem.editorType == "ServiceLookup") {
                     if (!column.sourceItem.editorParams.autoComplete) {
