@@ -1,7 +1,7 @@
 import * as Serenity from "@serenity-is/corelib"
 
 @Serenity.Decorators.registerEditor('_Ext.JsonViewer', [Serenity.IGetEditValue, Serenity.ISetEditValue])
-@Serenity.Decorators.element("<div/>")
+@Serenity.Decorators.element("<pre/>")
 export class JsonViewer extends Serenity.TemplatedWidget<any>
     implements Serenity.IGetEditValue, Serenity.ISetEditValue {
     public getEditValue(property, target) { target[property.name] = this.value; }
@@ -16,7 +16,11 @@ export class JsonViewer extends Serenity.TemplatedWidget<any>
 
     public set value(val) {
         this._value = val;
-        this.element.text(JSON.stringify(val));
+        if (typeof val == 'string') {
+            this.element.text(JSON.stringify(JSON.parse(val), null, '\t'));
+        } else {
+            this.element.text(JSON.stringify(val, null, '\t'));
+        }
     }
 
     public get value(): string {
