@@ -1,24 +1,39 @@
 ﻿using Serenity.Data;
+using Serenity.Data.Mapping;
 using Serenity.Web;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace _Ext
+namespace _Ext;
+
+public class SortedLookupScript<TRow> : RowLookupScript<TRow> where TRow : class, IRow, new()
 {
-    public class SortedLookupScript<TRow> : RowLookupScript<TRow> where TRow : class, IRow, new()
+    public SortedLookupScript(ISqlConnections connections) : base(connections) { }
+
+    protected override void PrepareQuery(SqlQuery query)
     {
-        public SortedLookupScript(ISqlConnections connections) : base(connections) { }
+        base.PrepareQuery(query);
 
-        protected override void ApplyOrder(SqlQuery query)
+        var row = (IRow)(query as ISqlQueryExtensible).FirstIntoRow;
+
+        if (row is IIsActiveRow isActiveRow)
+            query.Where(isActiveRow.IsActiveField == 1);
+    }
+
+    protected override void ApplyOrder(SqlQuery query)
+    {
+        var row = (IRow)(query as ISqlQueryExtensible).FirstIntoRow;
+
+        var sortOrders = row.GetFields().SortOrders;
+
+        if (sortOrders != null)
         {
-            base.ApplyOrder(query);
-
-            var r = new TRow();
-            var firstSortOrder = r.GetFields().SortOrders.FirstOrDefault();
-
-            if (firstSortOrder != null)
+            foreach (var sortOrder in sortOrders)
             {
-                query.OrderByFirst(firstSortOrder.Item1.Expression, firstSortOrder.Item2);
+                query.OrderBy(sortOrder.Item1.Expression, sortOrder.Item2);
             }
         }
+
+        base.ApplyOrder(query);
     }
 }
