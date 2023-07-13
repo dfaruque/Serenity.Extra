@@ -1,6 +1,17 @@
 
-export function sum(xs: any[], key): number {
-    if (!xs) return null;
+export function sum(arr: number[]): number {
+    if (!arr) return 0;
+
+    let sumValue = arr.reduce(function (rv, x) {
+        (rv += x || 0);
+        return rv;
+    }, 0)
+
+    return sumValue;
+}
+
+export function sumByKey(xs: any[], key): number {
+    if (!xs) return 0;
 
     let initObj = {};
     initObj[key] = 0;
