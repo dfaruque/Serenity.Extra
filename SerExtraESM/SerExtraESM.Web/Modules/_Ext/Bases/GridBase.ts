@@ -12,13 +12,14 @@ import * as Ext from "@serenity-is/extensions"
 
 @Serenity.Decorators.filterable()
 export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
-    protected getRowType(): { idProperty?: string, localTextPrefix?: string, nameProperty?: string, insertPermission?: string, updatePermission?: string, deletePermission?: string, } { return {}; }
-    protected getIdProperty() { return this.getRowType().idProperty; }
-    protected getLocalTextPrefix() { return this.getRowType().localTextPrefix; }
-    protected getNameProperty() { return this.getRowType().nameProperty; }
-    protected getInsertPermission() { return this.getRowType().insertPermission; }
-    protected getUpdatePermission() { return this.getRowType().updatePermission; }
-    protected getDeletePermission() { return this.getRowType().deletePermission; }
+    //getRowType() is now buit in getRowDefinition()
+    //protected getRowType(): { idProperty?: string, localTextPrefix?: string, nameProperty?: string, insertPermission?: string, updatePermission?: string, deletePermission?: string, } { return {}; }
+    //protected getIdProperty() { return this.getRowType().idProperty; }
+    //protected getLocalTextPrefix() { return this.getRowType().localTextPrefix; }
+    //protected getNameProperty() { return this.getRowType().nameProperty; }
+    //protected getInsertPermission() { return this.getRowType().insertPermission; }
+    //protected getUpdatePermission() { return this.getRowType().updatePermission; }
+    //protected getDeletePermission() { return this.getRowType().deletePermission; }
 
     protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
     protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
