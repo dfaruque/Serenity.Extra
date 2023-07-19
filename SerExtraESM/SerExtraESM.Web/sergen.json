@@ -1,16 +1,44 @@
-﻿{
+{
+  "Extends": "defaults@6.6.0",
   "RootNamespace": "SerExtraESM",
-  "EndOfLine": "LF",
-  "ServerTypings": {
-    "LocalTexts": true
-  },
-  "Restore": {
-    "Exclude": [
-      "/**/*"
-    ]
-  },
   "UpgradeInfo": {
     "InitialType": "Community",
-    "InitialVersion": "6.5.1.0"
+    "InitialVersion": "6.7.1.0"
+  },
+  "BaseRowClasses": [
+    {
+      "ClassName": "RowBase",
+      "Fields": [
+        "IUser",
+        "EUser",
+        "IDate",
+        "EDate"
+      ]
+    }
+  ],
+  "RemoveForeignFields": [
+    "Remarks",
+    "SortOrder",
+    "IUser",
+    "EUser",
+    "IDate",
+    "EDate",
+    "PasswordHash",
+    "PasswordSalt",
+    "UserImage",
+    "LastDirectoryUpdate",
+    "Source",
+    "InsertDate",
+    "InsertUserId",
+    "UpdateDate",
+    "UpdateUserId",
+    "IsActive"
+  ],
+  "CustomTemplates": "Modules\\_Ext\\CodeGeneratorTemplates",
+  "CustomGenerate": {
+    "EditorColumns": "{2}\\Editor\\{0}EditorColumns.cs",
+    "EditorForm": "{2}\\Editor\\{0}EditorForm.cs",
+    "GridEditor": "{2}\\Editor\\{0}GridEditor.ts",
+    "EditorDialog": "{2}\\Editor\\{0}EditorDialog.ts"
   }
 }
