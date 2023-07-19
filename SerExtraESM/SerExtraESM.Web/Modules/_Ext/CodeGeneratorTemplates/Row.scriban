@@ -1,41 +1,53 @@
-namespace {{RootNamespace}}{{DotModule}};
+{{USING "Serenity.ComponentModel"}}
+{{USING "Serenity.Data"}}
+{{USING "Serenity.Data.Mapping"}}
+{{USING "System.ComponentModel"}}
 
-using Serenity;
-using Serenity.ComponentModel;
-using Serenity.Data;
-using Serenity.Data.Mapping;
-using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.IO;
-
-[ConnectionKey("{{ConnectionKey}}"), TableName("{{SchemaAndTable}}")]
-[DisplayName("{{Title}}"), InstanceName("{{Title}}"), TwoLevelCached]
+{{NAMESPACE ModuleNamespace}}{{capture block~}}
+[ConnectionKey("{{ConnectionKey}}"){{if Module}}, Module("{{Module}}"){{end}}, TableName("{{SchemaAndTable}}")]
+[DisplayName("{{Title}}"), InstanceName("{{Title}}")]
 [NavigationPermission("{{Module}}:{{ClassName}}:Navigation")]
 [ReadPermission("{{Module}}:{{ClassName}}:Read")]
 [InsertPermission("{{Module}}:{{ClassName}}:Insert")]
 [UpdatePermission("{{Module}}:{{ClassName}}:Update")]
 [DeletePermission("{{Module}}:{{ClassName}}:Delete")]
-public sealed class {{RowClassName}} : {{RowBaseClassAndInterfaces}}
-{
-{{~for x in Fields}}
-    [{{x.Attributes}}]
-    public {{x.PropertyType}} {{x.Ident}} { get => Fields.{{x.Ident}}[this]; set => Fields.{{x.Ident}}[this] = value; }
-	public partial class RowFields { public {{x.FieldType}}Field {{x.Ident}}; }
-{{end}}
+public sealed{{if EnableRowTemplates}} partial{{end}} class {{RowClassName}} : {{TYPEREFLIST RowBaseClassAndInterfaceList}}
+{   {{~if DeclareJoinConstants && !Joins.empty?~}}
+
+    {{~for j in Joins~}}
+    const string {{j.Alias}} = nameof({{j.Alias}});
+    {{~end~}}
+    {{~end~}}
+    {{~if EnableRowTemplates~}}
+
+    class RowTemplate
+    {   {{~for x in AllFields~}}
+
+        [{{ATTRREF x.AttributeList}}]
+        public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get; set; }
+        {{~end~}}
+    }
+    {{~if FieldsBaseClass != "Serenity.Data.RowFieldsBase"~}}
+
+    public partial class RowFields : {{TYPEREF FieldsBaseClass}}
+    {
+    }
+    {{~end~}}
+    {{~else~}}
+    {{~for x in Fields}}
+    [{{ATTRREF x.AttributeList}}]
+    public {{TYPEREF x.PropertyType}} {{x.Ident}} { get => fields.{{x.Ident}}[this]; set => fields.{{x.Ident}}[this] = value; }
+    public partial class RowFields { public {{x.FieldType}}Field {{x.Ident}}; }
+    {{end}}
     #region Foreign Fields
-{{~for j in Joins}}
-{{~for k in j.Fields}}
-    [{{k.Attributes}}, ReadOnly(true)]
-    public {{k.PropertyType}} {{k.Ident}} { get => Fields.{{k.Ident}}[this]; set => Fields.{{k.Ident}}[this] = value; }
-	public partial class RowFields { public {{k.FieldType}}Field {{k.Ident}}; }
-{{~end}}
-{{~end}}
+    {{~for j in Joins}}{{~for k in j.Fields}}
+    [{{ATTRREF k.AttributeList}}, ReadOnly(true)]
+    public {{TYPEREF k.PropertyType}} {{k.Ident}} { get => fields.{{k.Ident}}[this]; set => fields.{{k.Ident}}[this] = value; }
+    public partial class RowFields { public {{k.FieldType}}Field {{k.Ident}}; }
+    {{~end}}{{~end}}
     #endregion Foreign Fields
 
-    public {{RowClassName}}() : base() { }
-
-    public {{RowClassName}}(RowFields fields) : base(fields) { }
-
-	public partial class RowFields : {{FieldsBaseClass}} { }
+    public partial class RowFields : {{TYPEREF FieldsBaseClass}} { }
+    {{~end~}}
 }
+{{~end}}{{NAMESPACEBLOCK block~}}

@@ -1,18 +1,12 @@
-﻿
-namespace {{RootNamespace}}{{DotModule}}.Forms
-{
-    using Serenity;
-    using Serenity.ComponentModel;
-    using Serenity.Data;
-    using System;
-    using System.ComponentModel;
-    using System.Collections.Generic;
-    using System.IO;
+﻿{{USING "Serenity.ComponentModel"}}
 
-    [FormScript("{{ModuleDot}}{{ClassName}}Editor")]
-    [BasedOnRow(typeof({{RowClassName}}), CheckNames = true)]
-    public class {{ClassName}}EditorForm
-    {%{{}%}{{for x in Fields}}{{if x.Ident != IdField}}
-        public {{x.DataType}} {{x.Ident}} { get; set; }{{end}}{{end}}
-    }
+{{NAMESPACE FormNamespace}}{{capture block~}}
+[FormScript("{{FormKey}}Editor")]
+[BasedOnRow(typeof({{RowClassName}}), CheckNames = true)]
+public class {{ClassName}}EditorForm
+{
+    {{~for x in FormFields~}}
+    public {{TYPEREF x.DataType}} {{x.PropertyName}} { get; set; }
+    {{~end~}}
 }
+{{~end}}{{NAMESPACEBLOCK block~}}
