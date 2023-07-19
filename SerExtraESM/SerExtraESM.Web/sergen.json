@@ -5,6 +5,9 @@
     "InitialType": "Community",
     "InitialVersion": "6.7.1.0"
   },
+  "ServerTypings": {
+    "LocalTexts": true
+  },
   "BaseRowClasses": [
     {
       "ClassName": "RowBase",
