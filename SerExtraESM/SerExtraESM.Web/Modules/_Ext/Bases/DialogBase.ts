@@ -7,15 +7,10 @@ import * as DialogUtils from "../Utils/DialogUtils"
 @Serenity.Decorators.responsive()
 @Serenity.Decorators.maximizable()
 export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity, TOptions> {
-    protected getRowType(): { idProperty?: string, localTextPrefix?: string, nameProperty?: string, insertPermission?: string, updatePermission?: string, deletePermission?: string, } { return {}; }
-    protected getIdProperty() { return this.getRowType().idProperty; }
-    protected getLocalTextPrefix() { return this.getRowType().localTextPrefix; }
-    protected getNameProperty() { return this.getRowType().nameProperty; }
-    protected getInsertPermission() { return this.getRowType().insertPermission; }
-    protected getUpdatePermission() { return this.getRowType().updatePermission; }
-    protected getDeletePermission() { return this.getRowType().deletePermission; }
 
-    protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEntityDialogOptions); }
+    protected get_ExtDialogOptions(): ExtDialogOptions {
+        return Q.deepClone(q.DefaultEntityDialogOptions);
+    }
 
     protected loadedState: string;
     isReadOnly: boolean = false;
