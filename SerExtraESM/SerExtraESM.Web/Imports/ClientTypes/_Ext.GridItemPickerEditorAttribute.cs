@@ -100,6 +100,12 @@ namespace _Ext
             set { SetOption("nameFieldInThisRow", value); }
         }
 
+        public string PageImportPath
+        {
+            get { return GetOption<string>("pageImportPath"); }
+            set { SetOption("pageImportPath", value); }
+        }
+
         public object PreSelectedKeys
         {
             get { return GetOption<object>("preSelectedKeys"); }
