@@ -28,7 +28,10 @@ export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
             this.isReadOnly = true
         }
         super.updateInterface();
-        this.saveAndCloseButton.find('.button-inner').text(this.isNew() ? (Q.tryGetText('Controls.AddButton') || 'Add') : (Q.tryGetText('Controls.ApplyButton') || 'Apply'));
+
+        let saveButtonText = this.isNew() ? (Q.tryGetText('Controls.AddButton') || 'Add') : (Q.tryGetText('Controls.ApplyButton') || 'Apply');
+        this.saveAndCloseButton.find('.button-inner').html(`<i class="fa fa-check-circle text-purple"></i> ${saveButtonText}`);
+
         // apply changes button doesn't work properly with in-memory grids yet
         if (this.applyChangesButton) {
             this.applyChangesButton.hide();
