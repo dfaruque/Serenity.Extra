@@ -6,7 +6,7 @@ export class {{GridClassName}} extends {{IMPORTFROM "@/_Ext/Bases/GridBase" "Gri
     protected getRowDefinition() { return {{SERVERTYPEIMPORT RowClassName}}; }
     protected getService() { return {{SERVERTYPEIMPORT ServiceClassName}}.baseUrl; }
 
-    constructor(container: JQuery) {
-        super(container);
+    constructor(container: JQuery, options?) {
+        super(container, options);
     }
 }
