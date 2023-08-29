@@ -1,5 +1,6 @@
 interface GridItemPickerEditorOptions extends Serenity.Select2FilterOptions {
     gridType: any;
+    pageImportPath: string;
     nameFieldInThisRow?: string;
     serviceUrl?: string;
 

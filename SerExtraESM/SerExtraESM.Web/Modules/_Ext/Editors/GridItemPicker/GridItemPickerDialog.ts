@@ -18,24 +18,22 @@ export class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPicke
     constructor(options: GridItemPickerEditorOptions) {
         super(options);
 
-        var gridType = options.gridType;
 
-        if (!gridType.prototype)
-            gridType = Q.getType(options.gridType);
+            try {
+                var gridType = Q.getType(options.gridType) as any;
 
-        try {
-            this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
-            if (options.preSelectedKeys)
-                this.checkGrid.selectedKeys = options.preSelectedKeys;
+                this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
+                if (options.preSelectedKeys)
+                    this.checkGrid.selectedKeys = options.preSelectedKeys;
 
-            this.dialogTitle = q.text('Controls.Select', "Select") + " - " + this.checkGrid.getTitle();
-            this.checkGrid.setTitle(null);
-            this.checkGrid.element.height(500);
+                this.dialogTitle = q.text('Controls.Select', "Select") + " - " + this.checkGrid.getTitle();
+                this.checkGrid.setTitle(null);
+                this.checkGrid.element.height(500);
 
-            this.checkGrid.pickerDialog = this;
-        } catch (ex) {
-            console.warn('Could not intialize ' + options.gridType);
-        }
+                this.checkGrid.pickerDialog = this;
+            } catch (ex) {
+                console.warn('Could not intialize ' + options.gridType);
+            }
     }
 
     onSuccess = (selectedItems) => { }

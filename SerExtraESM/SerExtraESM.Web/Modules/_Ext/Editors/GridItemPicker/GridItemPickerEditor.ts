@@ -16,6 +16,8 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     constructor(container: JQuery, public options: GridItemPickerEditorOptions) {
         super(container, options);
 
+        this.importPagejs(options);
+
         this.element.addClass('select2-offscreen');
 
         this.containerDiv = $(`<div class="editor s-GridItemPickerEditor select2-container ${options.multiple ? 'select2-container-multi' : ''} has-inplace-button">
@@ -29,6 +31,21 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
 
         this.setCascadeFrom(this.options.cascadeFrom);
 
+    }
+
+    protected importPagejs(options: GridItemPickerEditorOptions): void {
+
+        let pageImportPath = options.pageImportPath;
+
+        if (pageImportPath.startsWith("@/")) {
+            pageImportPath = "~/esm/Modules/" + pageImportPath.substring(2);
+            if (!pageImportPath.endsWith(".js"))
+                pageImportPath += ".js";
+        }
+
+        pageImportPath = Q.resolveUrl(pageImportPath);
+
+        import(pageImportPath);
     }
 
     protected addInplaceButtons(): void {
