@@ -32,7 +32,7 @@ export var DefaultEditorGridOptions: ExtGridOptions = {
 };
 
 export var DefaultEntityDialogOptions: ExtDialogOptions = {
-    AutoFitContentArea: true,
+    AutoFitContentArea: false,
     HideCategoyLinksBar: true,
     PendingChangesConfirmation: true,
     ShowSaveAndNewButtonInToolbar: false,
