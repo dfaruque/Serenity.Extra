@@ -31,7 +31,7 @@ public static class ExcelWorksheetHelper
         return val;
     }
 
-    public static void ValidateByEnumColumn<T>(this ExcelWorksheet worksheet) where T : Enum
+    public static void ValidateByEnumColumn<T>(this ExcelWorksheet worksheet, int headerRowNumber = 1) where T : Enum
     {
         //public enum SampleExcelColumn
         //{
@@ -42,7 +42,7 @@ public static class ExcelWorksheetHelper
         foreach (var column in EnumUtil.GetValues<T>())
         {
             var columnIndex = Convert.ToInt32(column);
-            var cell = worksheet.Cells[1, columnIndex];
+            var cell = worksheet.Cells[headerRowNumber, columnIndex];
             var columnHeader = Convert.ToString(cell.Value ?? "").Trim();
 
             if (columnHeader != column.GetDescription())
