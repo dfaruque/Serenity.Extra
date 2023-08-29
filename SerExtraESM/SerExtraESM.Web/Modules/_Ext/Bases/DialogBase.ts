@@ -3,6 +3,7 @@ import * as Q from "@serenity-is/corelib/q"
 import { GridBase } from "./GridBase"
 import * as q from "../_q/_q"
 import * as DialogUtils from "../Utils/DialogUtils"
+import { hasPermission } from "@/Administration/User/Authentication/Authorization"
 
 @Serenity.Decorators.responsive()
 @Serenity.Decorators.maximizable()
@@ -11,6 +12,8 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
     protected get_ExtDialogOptions(): ExtDialogOptions {
         return Q.deepClone(q.DefaultEntityDialogOptions);
     }
+
+    protected getTenantIdEditor() { return this.form.TenantId; }
 
     protected loadedState: string;
     isReadOnly: boolean = false;
@@ -30,17 +33,21 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
         this.setReadOnly(this.isReadOnly);
 
+        q.showField(this.getTenantIdEditor(), hasPermission('Administration:Tenant:Update'));
+
         //this.element.fadeTo(100, 1);
     }
 
     protected onDialogOpen() {
         super.onDialogOpen();
 
-        if (this.get_ExtDialogOptions().AutoFitContentArea == true) {
+        let extOptions = this.get_ExtDialogOptions();
+
+        if (extOptions.AutoFitContentArea == true) {
             this.fullContentArea();
         }
 
-        if (this.get_ExtDialogOptions().HideCategoyLinksBar == true) {
+        if (extOptions.HideCategoyLinksBar == true) {
             this.element.find('.category-links').hide();
 
             let $FirstCategory = this.element.find('.first-category > .category-title');
@@ -50,43 +57,42 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
         }
 
-        if (this.get_ExtDialogOptions().ShowKeyboardLayoutButtonInToolbar == true) {
+        if (extOptions.ShowKeyboardLayoutButtonInToolbar == true) {
             let $thisElement = this.element;
 
             //if (q.isBanglaMode())
             //    q.switchKeybordLayout($thisElement, 'phonetic')
 
-            this.toolbar.element.append(`<div class="dropdown pull-right" style="padding: 5px 10px;">
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}">
-                        <i class="fa fa-keyboard-o"></i> <span class="selected-layout"> </span> <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right choose-keyboard">
-                        <li class="dropdown-header">${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}</li>
-                        <li data-kb="phonetic"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaPhonetic', 'Bangla-Phonetic')}</a></li>
-                        <li data-kb="probhat"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaProbhat', 'Bangla-Probhat')}</a></li>
-                        <li data-kb="unijoy"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaUnijoy', 'Bangla-Unijoy')}</a></li>
-                        <li data-kb="english"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.English', 'English')}</a></li>
-                    </ul>
-                </div>`);
+            //this.toolbar.element.append(`<div class="dropdown pull-right" style="padding: 5px 10px;">
+            //        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}">
+            //            <i class="fa fa-keyboard-o"></i> <span class="selected-layout"> </span> <span class="caret"></span>
+            //        </a>
+            //        <ul class="dropdown-menu dropdown-menu-right choose-keyboard">
+            //            <li class="dropdown-header">${q.text('Controls.KeyboardLayout.Title', 'Keyboard Layout')}</li>
+            //            <li data-kb="phonetic"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaPhonetic', 'Bangla-Phonetic')}</a></li>
+            //            <li data-kb="probhat"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaProbhat', 'Bangla-Probhat')}</a></li>
+            //            <li data-kb="unijoy"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.BanglaUnijoy', 'Bangla-Unijoy')}</a></li>
+            //            <li data-kb="english"><a href="javascript:"> ${q.text('Controls.KeyboardLayout.English', 'English')}</a></li>
+            //        </ul>
+            //    </div>`);
 
-            let selected_layout_display_span = this.toolbar.element.find('.selected-layout');
-            let keyboard_choice_ul = this.toolbar.element.find('.choose-keyboard');
-            let keyboard_choice_li = keyboard_choice_ul.find('li');
+            //let selected_layout_display_span = this.toolbar.element.find('.selected-layout');
+            //let keyboard_choice_ul = this.toolbar.element.find('.choose-keyboard');
+            //let keyboard_choice_li = keyboard_choice_ul.find('li');
 
-            keyboard_choice_li.on('click', function () {
-                let select_choice = $(this);
-                let selected_val = select_choice.data('kb');
+            //keyboard_choice_li.on('click', function () {
+            //    let select_choice = $(this);
+            //    let selected_val = select_choice.data('kb');
 
-                if (selected_val) {
-                    selected_layout_display_span.text(select_choice.text());
+            //    if (selected_val) {
+            //        selected_layout_display_span.text(select_choice.text());
 
-                    q.switchKeybordLayout($thisElement, selected_val);
+            //        q.switchKeybordLayout($thisElement, selected_val);
 
-                    keyboard_choice_li.removeClass('active');
-                    keyboard_choice_ul.find('[data-kb="' + selected_val + '"]').addClass('active');
-                }
-            });
-
+            //        keyboard_choice_li.removeClass('active');
+            //        keyboard_choice_ul.find('[data-kb="' + selected_val + '"]').addClass('active');
+            //    }
+            //});
         }
 
         //temporary fix for set grid editor height
@@ -299,7 +305,8 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
     }
 
     fullContentArea() {
-        this.setDialogSize();
+        if (window.innerWidth > 768)
+            this.setDialogSize();
     }
     // set the dialog size relative to content area (to shrink use negative value)
     setDialogSize(width?, height?, top?, left?, $content?) {
@@ -314,7 +321,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
         if ($content.length > 0 && dialogElement.length > 0) {
 
-            let dialogWidth = $content.width() + 30 + (width || 0);
+            let dialogWidth = $content.width() + 28 + (width || 0);
             let dialogHeight = $content.height() + (height || 30);
 
             this.element.dialog("option", "width", dialogWidth);
@@ -328,7 +335,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
             $categories.height(dialogHeight - titleBarHeight - categoriesTop - 20);
 
             dialogElement.css({
-                left: $content.position().left + (left || 0),
+                left: $content.position().left + (left || 2),
                 top: (top || 50),
             });
         }
