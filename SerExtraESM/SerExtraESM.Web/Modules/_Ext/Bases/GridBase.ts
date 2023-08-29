@@ -9,13 +9,14 @@ import { GridItemPickerDialog } from "../Editors/GridItemPicker/GridItemPickerDi
 import * as q from "../_q/_q"
 import { usingSlickAutoColumnSize, usingSlickGridEditors } from "../Utils/Using"
 import * as Ext from "@serenity-is/extensions"
+import { GroupInfo } from "@serenity-is/corelib/slick"
 
 @Serenity.Decorators.filterable()
 export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
 
     protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
     protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
-    protected getGrouping()/*: Slick.GroupInfo<TItem>[]*/ { return []; }
+    protected getGrouping(): GroupInfo<TItem>[] { return []; }
 
     isReadOnly: boolean;
     isRequired: boolean;
@@ -24,7 +25,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     nextRowNumber = 1;
     public autoColumnSizePlugin;
 
-    public rowSelection: Serenity.GridRowSelectionMixin;
+    public rowSelection = new Serenity.GridRowSelectionMixin(this);
     public pickerDialog: GridItemPickerDialog;
 
     constructor(container: JQuery, options?: TOptions) {
@@ -34,10 +35,6 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
         if (extOptions.AutoColumnSize == true) {
             this.slickContainer.fadeTo(0, 0);
-        }
-
-        if (extOptions.ShowRowSelectionCheckboxColumn == true) {
-            this.rowSelection = new Serenity.GridRowSelectionMixin(this);
         }
 
         let grouping = this.getGrouping();
@@ -245,26 +242,26 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                     }
                 } else if (column.sourceItem.editorType == "ServiceLookup") {
                     if (!column.sourceItem.editorParams.autoComplete) {
-                        (column as any).textFieldInThisRow = column.sourceItem.editorParams.textFieldInThisRow || column.sourceItem.editorParams.textField;
-                        column.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                            if (dataContext) return dataContext[columnDef.textFieldInThisRow];
+                        column.format = ctx => {
+                            let textFieldInThisRow = column.sourceItem.editorParams.textFieldInThisRow || column.sourceItem.editorParams.textField;
+                            if (ctx.item) return ctx.item[textFieldInThisRow];
                             else return emptyText;
                         };
                     }
                 } else if (column.sourceItem.filteringType == "Lookup") {
-                    column.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                        if (Q.isEmptyOrNull(value)) return emptyText;
-                        else return value;
+                    column.format = ctx => {
+                        if (Q.isEmptyOrNull(ctx.value)) return emptyText;
+                        else return ctx.value;
                     };
 
                 } else if (formatterType == "Enum") {
 
-                    column.formatter = (row, cell, value, columnDef: any, dataContext) => {
-                        let enumKey = columnDef.sourceItem.editorParams.enumKey
-                        if (columnDef.sourceItem.editorParams.multiple == true) {
+                    column.format = ctx => {
+                        let enumKey = ctx.column.sourceItem.editorParams.enumKey
+                        if (ctx.column.sourceItem.editorParams.multiple == true) {
                             let texts = '';
 
-                            let vals = value as number[];
+                            let vals = ctx.value as number[];
                             if (vals && vals.length > 0) {
                                 texts = vals.map(m => Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(m))).join(', ');
                             }
@@ -273,7 +270,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
                         }
                         else {
-                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(value));
+                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(ctx.value));
                             if (text) return text;
                             else return emptyText;
                         }
@@ -440,7 +437,8 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             this.autoColumnSizePlugin = new Slick.AutoColumnSize();
             grid.registerPlugin(this.autoColumnSizePlugin);
         }
-        grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+
+        grid.registerPlugin(new SleekGrid.GroupItemMetadataProvider());
 
         return grid;
     }
@@ -584,7 +582,8 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     protected getViewOptions() {
         let opt = super.getViewOptions();
 
-        opt.rowsPerPage = q.DefaultMainGridOptions.RowsPerPage;
+        if (this.usePager())
+            opt.rowsPerPage = q.DefaultMainGridOptions.RowsPerPage;
 
         return opt;
     }
@@ -683,7 +682,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     }
 
     //override getGrouping instead of calling setGrouping
-    public setGrouping(groupInfo/*: Slick.GroupInfo<TItem>[]*/): void {
+    public setGrouping(groupInfo: GroupInfo<TItem>[]): void {
         this.view.setGrouping(groupInfo);
         this.resetRowNumber();
     }
