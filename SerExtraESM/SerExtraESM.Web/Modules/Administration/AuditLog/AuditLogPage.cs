@@ -15,6 +15,5 @@ public class AuditLogController : Controller
     {
         return this.GridPage("@/Administration/AuditLog/AuditLogPage",
             AuditLogRow.Fields.PageTitle());
-
     }
 }

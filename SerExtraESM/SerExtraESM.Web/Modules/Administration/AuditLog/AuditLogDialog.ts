@@ -1,4 +1,4 @@
-import { AuditLogRow, AuditLogForm, AuditLogService } from "../";
+import { AuditLogRow, AuditLogForm, AuditLogService } from "@/ServerTypes/_Ext";
 import { Decorators } from "@serenity-is/corelib"
 import { DialogBase } from "@/_Ext/Bases/DialogBase"
 

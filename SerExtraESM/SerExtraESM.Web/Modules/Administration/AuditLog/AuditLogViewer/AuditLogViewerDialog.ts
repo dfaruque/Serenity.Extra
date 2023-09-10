@@ -1,4 +1,4 @@
-import { AuditLogViewerRequest, AuditLogViewerService, AuditActionType } from "../../"
+import { AuditLogViewerRequest, AuditLogViewerService, AuditActionType } from "@/ServerTypes/_Ext";
 import { Decorators, TemplatedDialog } from "@serenity-is/corelib"
 import { AuditLogViewer } from "./AuditLogViewer"
 import { usingVuejs } from "@/_Ext/Utils/Using"

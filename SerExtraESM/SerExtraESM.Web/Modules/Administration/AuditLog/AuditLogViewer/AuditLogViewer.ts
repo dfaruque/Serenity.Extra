@@ -1,5 +1,5 @@
 import { AuditLogDialog } from "../AuditLogDialog";
-import { AuditLogRow } from "../../";
+import { AuditLogRow } from "@/ServerTypes/_Ext";
 
 export class AuditLogViewer {
     el = '.content-wrapper';

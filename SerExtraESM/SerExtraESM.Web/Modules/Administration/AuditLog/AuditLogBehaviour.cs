@@ -9,132 +9,131 @@ using Serenity.ComponentModel;
 using Serenity.Data;
 using Serenity.Services;
 
-namespace _Ext
+namespace _Ext;
+
+public class AuditRowBehavior : BaseSaveDeleteBehavior, IImplicitBehavior
 {
-    public class AuditRowBehavior : BaseSaveDeleteBehavior, IImplicitBehavior
+    protected ISqlConnections SqlConnections { get; }
+    public HttpContext HttpContext { get; }
+
+    public AuditRowBehavior(ISqlConnections sqlConnections, IHttpContextAccessor httpContextAccessor)
     {
-        protected ISqlConnections SqlConnections { get; }
-        public HttpContext HttpContext { get; }
+        SqlConnections = sqlConnections;
+        HttpContext = httpContextAccessor.HttpContext;
+    }
 
-        public AuditRowBehavior(ISqlConnections sqlConnections, IHttpContextAccessor httpContextAccessor)
+    public bool ActivateFor(IRow row)
+    {
+        return row is IAuditLog;
+    }
+
+    public override void OnAudit(ISaveRequestHandler handler)
+    {
+        //if (handler.IsCreate)
+        //{
+        //    InsertNewLog(handler.UnitOfWork, handler.Row, handler.Old, AuditActionType.Insert);
+        //}
+
+        if (handler.IsUpdate)
         {
-            SqlConnections = sqlConnections;
-            HttpContext = httpContextAccessor.HttpContext;
+            InsertNewLog(handler.Context, handler.Row, handler.Old, AuditActionType.Update);
         }
+    }
 
-        public bool ActivateFor(IRow row)
+    public override void OnAudit(IDeleteRequestHandler handler)
+    {
+        InsertNewLog(handler.Context, handler.Row, null, AuditActionType.Delete);
+    }
+
+    private void InsertNewLog(IRequestContext context, IRow row, IRow oldRow, AuditActionType auditActionType)
+    {
+        try
         {
-            return row is IAuditLog;
-        }
+            using var auditLogConnection = SqlConnections.NewFor<AuditLogRow>();
+            var fld = AuditLogRow.Fields;
 
-        public override void OnAudit(ISaveRequestHandler handler)
-        {
-            //if (handler.IsCreate)
-            //{
-            //    InsertNewLog(handler.UnitOfWork, handler.Row, handler.Old, AuditActionType.Insert);
-            //}
+            var entityId = row.IdField.AsObject(row);
 
-            if (handler.IsUpdate)
+            var changes = GetChanges(row, oldRow);
+
+            if (changes.Count > 0)
             {
-                InsertNewLog(handler.Context, handler.Row, handler.Old, AuditActionType.Update);
+                var auditLogRow = new AuditLogRow
+                {
+                    UserId = context.User.GetIdentifier(),
+                    ActionType = auditActionType,
+                    ActionDate = DateTime.Now,
+                    EntityTableName = row.Table,
+                    EntityId = entityId.ToString(),
+                    Changes = changes.ToJson(),
+                    IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
+                    SessionId = HttpContext.TraceIdentifier,
+                    RequestedURI = HttpContext.Request.GetEncodedUrl()
+                };
+
+                auditLogConnection.Insert(auditLogRow);
             }
         }
-
-        public override void OnAudit(IDeleteRequestHandler handler)
+        catch (Exception ex)
         {
-            InsertNewLog(handler.Context, handler.Row, null, AuditActionType.Delete);
+            ex.Log(null);
         }
+    }
 
-        private void InsertNewLog(IRequestContext context, IRow row, IRow oldRow, AuditActionType auditActionType)
+    private static Dictionary<string, object[]> GetChanges(IRow row, IRow oldRow)
+    {
+        var changes = new Dictionary<string, object[]>();
+        var tableFields = row.EnumerateTableFields();
+
+        foreach (var field in tableFields)
         {
-            try
+            if (row.IsAssigned(field))
             {
-                using var auditLogConnection = SqlConnections.NewFor<AuditLogRow>();
-                var fld = AuditLogRow.Fields;
+                object oldValue;
+                object newValue;
 
-                var entityId = row.IdField.AsObject(row);
-
-                var changes = GetChanges(row, oldRow);
-
-                if (changes.Count > 0)
+                if (field.Type == FieldType.Object)
                 {
-                    var auditLogRow = new AuditLogRow
-                    {
-                        UserId = context.User.GetIdentifier(),
-                        ActionType = auditActionType,
-                        ActionDate = DateTime.Now,
-                        EntityTableName = row.Table,
-                        EntityId = entityId.ToString(),
-                        Changes = changes.ToJson(),
-                        IpAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
-                        SessionId = HttpContext.TraceIdentifier,
-                        RequestedURI = HttpContext.Request.GetEncodedUrl()
-                    };
+                    oldValue = oldRow?[field.Name].ToJson();
+                    newValue = row[field.Name].ToJson();
+                }
+                else
+                {
+                    oldValue = oldRow?[field.Name];
+                    newValue = row[field.Name];
+                }
 
-                    auditLogConnection.Insert(auditLogRow);
+                if (!Equals(oldValue, newValue))
+                {
+                    var fieldChange = new object[] { oldValue, newValue };
+                    changes.Add(field.Name, fieldChange);
                 }
             }
-            catch (Exception ex)
-            {
-                ex.Log(null);
-            }
         }
 
-        private static Dictionary<string, object[]> GetChanges(IRow row, IRow oldRow)
-        {
-            var changes = new Dictionary<string, object[]>();
-            var tableFields = row.EnumerateTableFields();
-
-            foreach (var field in tableFields)
-            {
-                if (row.IsAssigned(field))
-                {
-                    object oldValue;
-                    object newValue;
-
-                    if (field.Type == FieldType.Object)
-                    {
-                        oldValue = oldRow?[field.Name].ToJson();
-                        newValue = row[field.Name].ToJson();
-                    }
-                    else
-                    {
-                        oldValue = oldRow?[field.Name];
-                        newValue = row[field.Name];
-                    }
-
-                    if (!Equals(oldValue, newValue))
-                    {
-                        var fieldChange = new object[] { oldValue, newValue };
-                        changes.Add(field.Name, fieldChange);
-                    }
-                }
-            }
-
-            return changes;
-        }
+        return changes;
     }
-
-    /// <summary>
-    /// This interface is used to log the changes for Insert / Update and Delete.
-    /// </summary>
-    public interface IAuditLog
-    {
-    }
-
-
-    [EnumKey("Enum.Audit.AuditActionType"), ScriptInclude]
-    public enum AuditActionType
-    {
-        Insert = 1,
-        Update = 2,
-        Delete = 3
-    }
-
-    /// <summary>
-    /// Any field which does not required to log in audit table. For Example InsertUserId, InsertDate etc
-    /// </summary>
-    //public class IgnoreAuditLogAttribute : Attribute
-    //{
-    //}
 }
+
+/// <summary>
+/// This interface is used to log the changes for Insert / Update and Delete.
+/// </summary>
+public interface IAuditLog
+{
+}
+
+
+[EnumKey("Enum.Audit.AuditActionType"), ScriptInclude]
+public enum AuditActionType
+{
+    Insert = 1,
+    Update = 2,
+    Delete = 3
+}
+
+/// <summary>
+/// Any field which does not required to log in audit table. For Example InsertUserId, InsertDate etc
+/// </summary>
+//public class IgnoreAuditLogAttribute : Attribute
+//{
+//}

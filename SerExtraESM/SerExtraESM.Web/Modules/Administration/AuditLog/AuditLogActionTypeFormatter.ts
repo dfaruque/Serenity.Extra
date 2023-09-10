@@ -1,7 +1,6 @@
 import * as Serenity from "@serenity-is/corelib"
 import * as Slick from "@serenity-is/sleekgrid"
-import { AuditLogRow, AuditLogForm, AuditLogService } from "../";
-import { AuditActionType } from "../"
+import { AuditLogRow, AuditActionType } from "@/ServerTypes/_Ext";
 
 @Serenity.Decorators.registerFormatter('_Ext.AuditLogActionTypeFormatter', [Serenity.ISlickFormatter])
 export class AuditLogActionTypeFormatter implements Serenity.Formatter {
@@ -17,7 +16,7 @@ export class AuditLogActionTypeFormatter implements Serenity.Formatter {
             klass = 'default'
         }
 
-        return `<span class="label label-${klass}">${AuditActionType[item.ActionType]}</span>`;
+        return `<span class="badge bg-${klass}">${AuditActionType[item.ActionType]}</span>`;
     }
 
     format(ctx: Slick.FormatterContext) {
