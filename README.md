@@ -39,14 +39,14 @@ Common.EditorDialogBase | _Ext.EditorDialogBase
 1. Copy the **Modules/_Ext** folder from the SerExtraNet5 project and place it accordingly.
 2. Copy the **wwwroot/Modules** folder from the SerExtraNet5 project
 3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
-4. If want to apply Serenity.Extra css then you could add line in appsettings.bundles.json
+4. If want to apply Serenity.Extra css then you could add a line in appsettings.bundles.json
 `"~/Modules/_Ext/ExtStyles.css"`
 
 ## How to use (for .net 6+ and ES module)
 1. Copy the **Modules/_Ext** folder from the **SerExtraESM** project and place it accordingly.
 2. Copy the **wwwroot/lib/_Ext** folder from the **SerExtraESM** project
 3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
-4. If want to apply Serenity.Extra css then you could add line in appsettings.bundles.json
+4. If want to apply Serenity.Extra css then you could add a line in appsettings.bundles.json
 `"~/Modules/_Ext/ExtStyles.css"`
 5. See LanguageGrid.ts and LanguageDialog.ts for example.
 
