@@ -1,18 +1,17 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
-import * as Slick from "@serenity-is/sleekgrid"
+import { Decorators, deepClone, GridUtils, IGetEditValue, indexOf, IReadOnly, ISetEditValue, SaveRequest, ServiceOptions, ServiceResponse, ToolButton, trimToNull } from "@serenity-is/corelib"
+import { Grid } from "@serenity-is/sleekgrid"
 import { GridBase } from "../Bases/GridBase"
 import { DialogBase } from "../Bases/DialogBase"
 import { EditorDialogBase } from "./EditorDialogBase"
 import * as q from "../_q/_q"
 
-@Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
-@Serenity.Decorators.editor()
-@Serenity.Decorators.element("<div/>")
+@Decorators.registerClass([IGetEditValue, ISetEditValue, IReadOnly])
+@Decorators.editor()
+@Decorators.element("<div/>")
 export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntity, TOptions>
-    implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+    implements IGetEditValue, ISetEditValue, IReadOnly {
 
-    protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultEditorGridOptions); }
+    protected get_ExtGridOptions(): ExtGridOptions { return deepClone(q.DefaultEditorGridOptions); }
 
     protected getIdProperty() { return "__id"; }
 
@@ -24,18 +23,18 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         super(container, options);
 
         this.slickGrid.onSort.subscribe((e, args) => {
-            this.sortGridFunction((args.grid as Slick.Grid), args.sortCols[0], args.sortCols[0].sortCol.field);
+            this.sortGridFunction((args.grid as Grid), args.sortCols[0], args.sortCols[0].sortCol.field);
 
-            //(args.grid as Slick.Grid).init();
-            (args.grid as Slick.Grid).invalidateAllRows();
-            (args.grid as Slick.Grid).invalidate();
-            (args.grid as Slick.Grid).render();
-            (args.grid as Slick.Grid).resizeCanvas();
+            //(args.grid as Grid).init();
+            (args.grid as Grid).invalidateAllRows();
+            (args.grid as Grid).invalidate();
+            (args.grid as Grid).render();
+            (args.grid as Grid).resizeCanvas();
         });
 
     }
 
-    private sortGridFunction(grid: Slick.Grid, column: any, field: any) {
+    private sortGridFunction(grid: Grid, column: any, field: any) {
         grid.getData().sort(function (a, b) {
             var result = a[field] > b[field] ? 1 :
                 a[field] < b[field] ? -1 :
@@ -52,9 +51,9 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         return (entity as any)[this.getIdProperty()];
     }
 
-    protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void) {
-        var request = opt.request as Serenity.SaveRequest<TEntity>;
-        var row = Q.deepClone(request.Entity);
+    protected save(opt: ServiceOptions<any>, callback: (r: ServiceResponse) => void) {
+        var request = opt.request as SaveRequest<TEntity>;
+        var row = deepClone(request.Entity);
 
         var id = this.id(row);
         if (id == null) {
@@ -70,8 +69,8 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
             items.push(row);
         }
         else {
-            var index = Q.indexOf(items, x => this.id(x) === id);
-            items[index] = Q.deepClone({} as TEntity, items[index], row);
+            var index = indexOf(items, x => this.id(x) === id);
+            items[index] = deepClone({} as TEntity, items[index], row);
         }
 
         this.value = items;
@@ -96,7 +95,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         return {} as TEntity;
     }
 
-    protected getButtons(): Serenity.ToolButton[] {
+    protected getButtons(): ToolButton[] {
         return [{
             title: this.getItemName(),
             cssClass: 'add-button',
@@ -149,7 +148,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         this.onBeforeGetValue(items);
 
         return items.map(x => {
-            var y = Q.deepClone(x);
+            var y = deepClone(x);
             var id = y[p];
             if (id && id.toString().charAt(0) == '`')
                 delete y[p];
@@ -166,7 +165,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         let val = value || [];
 
         let items = val.map(x => {
-            var y = Q.deepClone(x);
+            var y = deepClone(x);
             if ((y as any)[id] == null) {
                 (y as any)[id] = "`" + this.nextId++;
             }
@@ -199,8 +198,8 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
     protected createToolbarExtensions(): void {
         //super.createToolbarExtensions();
         if (this.get_ExtGridOptions().EnableQuickSearch) {
-            Serenity.GridUtils.addQuickSearchInputCustom(this.toolbar.element, (field, text) => {
-                this.searchText = Select2.util.stripDiacritics(Q.trimToNull(text) || '').toLowerCase();
+            GridUtils.addQuickSearchInputCustom(this.toolbar.element, (field, text) => {
+                this.searchText = Select2.util.stripDiacritics(trimToNull(text) || '').toLowerCase();
                 this.view.setItems(this.view.getItems(), true);
             });
         }

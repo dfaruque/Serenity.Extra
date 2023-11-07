@@ -1,13 +1,13 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Slick from "@serenity-is/sleekgrid"
+import { Decorators, Formatter, ISlickFormatter } from "@serenity-is/corelib"
+import { FormatterContext } from "@serenity-is/sleekgrid"
 
-@Serenity.Decorators.registerFormatter('_Ext.HexColorFormatter', [Serenity.ISlickFormatter])
-export class HexColorFormatter implements Serenity.Formatter {
+@Decorators.registerFormatter('_Ext.HexColorFormatter', [ISlickFormatter])
+export class HexColorFormatter implements Formatter {
     static format(val) {
         return `<span class="label" style="background-color: ${val}"> ${val} </span>`;
     }
 
-    format(ctx: Slick.FormatterContext) {
+    format(ctx: FormatterContext) {
         return HexColorFormatter.format(ctx.value);
     }
 }

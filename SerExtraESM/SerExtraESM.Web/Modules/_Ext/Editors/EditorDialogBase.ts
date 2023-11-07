@@ -1,21 +1,20 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, deepClone, DeleteResponse, SaveResponse, ServiceOptions, tryGetText } from "@serenity-is/corelib"
 import { DialogBase } from "../Bases/DialogBase"
 import { GridEditorBase } from "./GridEditorBase"
 import * as q from "../_q/_q"
 
-@Serenity.Decorators.registerClass()
+@Decorators.registerClass()
 export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
 
-    protected get_ExtDialogOptions(): ExtDialogOptions { return Q.deepClone(q.DefaultEditorDialogOptions); }
+    protected get_ExtDialogOptions(): ExtDialogOptions { return deepClone(q.DefaultEditorDialogOptions); }
 
     protected getIdProperty() { return "__id"; }
 
-    public onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>,
-        callback: (response: Serenity.SaveResponse) => void) => void;
+    public onSave: (options: ServiceOptions<SaveResponse>,
+        callback: (response: SaveResponse) => void) => void;
 
-    public onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>,
-        callback: (response: Serenity.DeleteResponse) => void) => void;
+    public onDelete: (options: ServiceOptions<DeleteResponse>,
+        callback: (response: DeleteResponse) => void) => void;
 
     public destroy() {
         this.onSave = null;
@@ -29,7 +28,7 @@ export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
         }
         super.updateInterface();
 
-        let saveButtonText = this.isNew() ? (Q.tryGetText('Controls.AddButton') || 'Add') : (Q.tryGetText('Controls.ApplyButton') || 'Apply');
+        let saveButtonText = this.isNew() ? (tryGetText('Controls.AddButton') || 'Add') : (tryGetText('Controls.ApplyButton') || 'Apply');
         this.saveAndCloseButton.find('.button-inner').html(`<i class="fa fa-check-circle text-purple"></i> ${saveButtonText}`);
 
         // apply changes button doesn't work properly with in-memory grids yet
@@ -39,13 +38,13 @@ export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
 
     }
 
-    protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>,
-        callback: (response: Serenity.SaveResponse) => void): void {
+    protected saveHandler(options: ServiceOptions<SaveResponse>,
+        callback: (response: SaveResponse) => void): void {
         this.onSave && this.onSave(options, callback);
     }
 
-    protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>,
-        callback: (response: Serenity.DeleteResponse) => void): void {
+    protected deleteHandler(options: ServiceOptions<DeleteResponse>,
+        callback: (response: DeleteResponse) => void): void {
         this.onDelete && this.onDelete(options, callback);
     }
 

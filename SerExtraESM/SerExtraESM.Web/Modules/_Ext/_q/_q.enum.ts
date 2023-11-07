@@ -1,8 +1,8 @@
-import * as Serenity from "@serenity-is/corelib"
+import { EnumFormatter, EnumTypeRegistry } from "@serenity-is/corelib"
 
 export function getEnumText(enumTypeOrKey, value) {
     let enumKey = enumTypeOrKey.__typeName ? enumTypeOrKey.__typeName : enumTypeOrKey;
-    let title = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), value);
+    let title = EnumFormatter.format(EnumTypeRegistry.get(enumKey), value);
     return title;
 }
 

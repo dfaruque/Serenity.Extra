@@ -1,5 +1,4 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { EditorUtils, Widget } from "@serenity-is/corelib"
 import { DialogBase } from "../Bases/DialogBase"
 import { GridEditorBase } from "../Editors/GridEditorBase"
 
@@ -49,7 +48,7 @@ export function setGridEditorHeight(editor: JQuery, heightInPx: number) {
         .height(heightInPx);
 }
 
-export function addNotificationIcon(editor: Serenity.Widget<any>, isSuccess: boolean): void {
+export function addNotificationIcon(editor: Widget<any>, isSuccess: boolean): void {
 
     let isAddOnInitialized = editor.element.data('isAddOnInitialized');
 
@@ -70,7 +69,7 @@ export function addNotificationIcon(editor: Serenity.Widget<any>, isSuccess: boo
     }
 }
 
-export function addPopoverIcon(editor: Serenity.Widget<any>, isSuccess: boolean, popoverOptions: any): void { // popoverOptions: Bootstrap.PopoverOptions
+export function addPopoverIcon(editor: Widget<any>, isSuccess: boolean, popoverOptions: any): void { // popoverOptions: Bootstrap.PopoverOptions
     addNotificationIcon(editor, isSuccess);
 
     //(editor.element as any).popover('destroy');
@@ -85,17 +84,17 @@ export function addPopoverIcon(editor: Serenity.Widget<any>, isSuccess: boolean,
 
 }
 
-export function setEditorLabel(editor: Serenity.Widget<any>, value: string) {
+export function setEditorLabel(editor: Widget<any>, value: string) {
 
     editor.element.siblings('label').text(value);
 }
 
-export function hideEditorLabel(editor: Serenity.Widget<any>) {
+export function hideEditorLabel(editor: Widget<any>) {
 
     editor.element.siblings('label').hide();
 }
 
-export function setEditorCategoryLabel(editor: Serenity.Widget<any>, value: string) {
+export function setEditorCategoryLabel(editor: Widget<any>, value: string) {
     let categoryAnchor = editor.element.closest('.category').find('.category-anchor');
     categoryAnchor.text(value);
 
@@ -103,7 +102,7 @@ export function setEditorCategoryLabel(editor: Serenity.Widget<any>, value: stri
     categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).text(value);
 }
 
-export function hideEditorCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+export function hideEditorCategory(editor: Widget<any>, value: boolean = true) {
     if (value == true)
         editor.element.closest('.category').hide();
     else
@@ -145,7 +144,7 @@ export function hideFieldsAndCategories(containerElement: JQuery, value: boolean
     hideCategories(containerElement);
 }
 
-export function hideField(editor: Serenity.Widget<any>, value: boolean = true) {
+export function hideField(editor: Widget<any>, value: boolean = true) {
     if (editor) {
         if (value == true)
             editor.element.closest('.field').hide();
@@ -153,7 +152,7 @@ export function hideField(editor: Serenity.Widget<any>, value: boolean = true) {
             editor.element.closest('.field').show();
     }
 }
-export function showField(editor: Serenity.Widget<any>, value: boolean = true) {
+export function showField(editor: Widget<any>, value: boolean = true) {
     if (editor) {
         if (value == true)
             editor.element.closest('.field').show();
@@ -162,19 +161,19 @@ export function showField(editor: Serenity.Widget<any>, value: boolean = true) {
     }
 }
 
-export function showAndEnableField(editor: Serenity.Widget<any>) {
+export function showAndEnableField(editor: Widget<any>) {
     showField(editor);
-    Serenity.EditorUtils.setReadOnly(editor, false);
+    EditorUtils.setReadOnly(editor, false);
 
 }
 
-export function showFieldAndCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+export function showFieldAndCategory(editor: Widget<any>, value: boolean = true) {
     showField(editor, value);
     if (value == true)
         hideEditorCategory(editor, false);
 }
 
-export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
+export function hideEditorTab(editor: Widget<any>, value: boolean = true) {
     if (value) {
         let tabId = editor.element.closest('.tab-pane').hide().attr('id');
         let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
@@ -186,7 +185,7 @@ export function hideEditorTab(editor: Serenity.Widget<any>, value: boolean = tru
     }
 }
 
-export function disableEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
+export function disableEditorTab(editor: Widget<any>, value: boolean = true) {
     let tabId = editor.element.closest('.tab-pane').attr('id');
 
     let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);
@@ -203,44 +202,44 @@ export function disableEditorTab(editor: Serenity.Widget<any>, value: boolean = 
 
 }
 
-export function readOnlyEditorTab(editor: Serenity.Widget<any>, value: boolean = true) {
+export function readOnlyEditorTab(editor: Widget<any>, value: boolean = true) {
     let $editors = editor.element.closest('.tab-pane').find('.editor');
 
-    Serenity.EditorUtils.setReadonly($editors, value);
+    EditorUtils.setReadonly($editors, value);
 }
 
-export function readOnlyEditorCategory(editor: Serenity.Widget<any>, value: boolean = true) {
+export function readOnlyEditorCategory(editor: Widget<any>, value: boolean = true) {
     let $editors = editor.element.closest('.category').find('.editor');
 
-    Serenity.EditorUtils.setReadonly($editors, value);
+    EditorUtils.setReadonly($editors, value);
 }
 export function readonlyEditorCategory($editor: JQuery, value: boolean = true) {
     let $editors = $editor.closest('.category').find('.editor');
-    Serenity.EditorUtils.setReadonly($editors, value);
+    EditorUtils.setReadonly($editors, value);
 }
 
-export function readOnlyEditorPropertyGrid(editor: Serenity.Widget<any>, value: boolean = true) {
+export function readOnlyEditorPropertyGrid(editor: Widget<any>, value: boolean = true) {
     let $propertyGrid = editor.element.closest('.s-PropertyGrid');
     let $editors = $propertyGrid.find('.editor');
-    Serenity.EditorUtils.setReadonly($editors, value);
-    Serenity.EditorUtils.setContainerReadOnly($propertyGrid, value);
+    EditorUtils.setReadonly($editors, value);
+    EditorUtils.setContainerReadOnly($propertyGrid, value);
 }
 export function readonlyEditorPropertyGrid($editor: JQuery, value: boolean = true) {
     let $propertyGrid = $editor.closest('.s-PropertyGrid');
     let $editors = $propertyGrid.find('.editor');
-    Serenity.EditorUtils.setReadonly($editors, value);
-    Serenity.EditorUtils.setContainerReadOnly($propertyGrid, value);
+    EditorUtils.setReadonly($editors, value);
+    EditorUtils.setContainerReadOnly($propertyGrid, value);
 }
 
-export function readOnlyEditor(editor: Serenity.Widget<any>, value: boolean = true) {
-    Serenity.EditorUtils.setReadOnly(editor, value);
+export function readOnlyEditor(editor: Widget<any>, value: boolean = true) {
+    EditorUtils.setReadOnly(editor, value);
 }
 
 export function readonlyEditor($editor: JQuery, value: boolean = true) {
-    Serenity.EditorUtils.setReadonly($editor, value);
+    EditorUtils.setReadonly($editor, value);
 }
 
-export function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend = false) {
+export function moveEditorFromTab(editor: Widget<any>, toElement: JQuery, isPrepend = false) {
     let fieldDiv = editor.element.closest('.field');
 
     if (isPrepend == true)
@@ -249,7 +248,7 @@ export function moveEditorFromTab(editor: Serenity.Widget<any>, toElement: JQuer
         fieldDiv.appendTo(toElement);
 }
 
-export function moveEditorCategoryFromTab(editor: Serenity.Widget<any>, toElement: JQuery, isPrepend = false) {
+export function moveEditorCategoryFromTab(editor: Widget<any>, toElement: JQuery, isPrepend = false) {
     let fieldDiv = editor.element.closest('.field');
     let categoryDiv = editor.element.closest('.category');
 
@@ -265,7 +264,7 @@ export function moveEditorCategoryFromTab(editor: Serenity.Widget<any>, toElemen
 
 }
 
-export function selectEditorTab(editor: Serenity.Widget<any>) {
+export function selectEditorTab(editor: Widget<any>) {
     let tabId = editor.element.closest('.tab-pane').attr('id');
 
     let tabAnchor = editor.element.closest('.s-PropertyGrid').find(`a[href='#${tabId}']`);

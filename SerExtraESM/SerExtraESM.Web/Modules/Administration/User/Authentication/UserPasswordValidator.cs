@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Serenity;
 using Serenity.Abstractions;
+using Serenity.ComponentModel;
 using Serenity.Data;
 using SerExtraESM.Administration;
 using SerExtraESM.Administration.Repositories;

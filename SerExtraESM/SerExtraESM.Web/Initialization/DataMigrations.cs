@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Common;
 using System.Globalization;
 using System.IO;
@@ -11,7 +11,9 @@ using FluentMigrator.Runner.Processors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
+using Serenity.Abstractions;
 using Serenity.Data;
+using Serenity.Extensions;
 
 namespace SerExtraESM
 {
@@ -22,16 +24,17 @@ namespace SerExtraESM
             , "Northwind"
         };
 
-        public bool SkippedMigrations { get; private set; }
-        protected ISqlConnections SqlConnections { get; }
-        protected IWebHostEnvironment HostEnvironment { get; }
+        private readonly ITypeSource typeSource;
+        private readonly ISqlConnections sqlConnections;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public DataMigrations(ISqlConnections sqlConnections, IWebHostEnvironment hostEnvironment)
+        public DataMigrations(ITypeSource typeSource,
+            ISqlConnections sqlConnections,
+            IWebHostEnvironment hostEnvironment)
         {
-            SqlConnections = sqlConnections ??
-                throw new ArgumentNullException(nameof(sqlConnections));
-            HostEnvironment = hostEnvironment ??
-                throw new ArgumentNullException(nameof(hostEnvironment));
+            this.typeSource = typeSource ?? throw new ArgumentNullException(nameof(typeSource));
+            this.sqlConnections = sqlConnections ?? throw new ArgumentNullException(nameof(sqlConnections));
+            this.hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
         }
 
         public void Initialize()
@@ -49,160 +52,36 @@ namespace SerExtraESM
         /// </summary>
         private void EnsureDatabase(string databaseKey)
         {
-            var cs = SqlConnections.TryGetConnectionString(databaseKey);
-            if (cs == null)
-                throw new ArgumentNullException(nameof(databaseKey));
-
-            var serverType = cs.Dialect.ServerType;
-            bool isSql = serverType.StartsWith("SqlServer", StringComparison.OrdinalIgnoreCase);
-            bool isPostgres = serverType.StartsWith("Postgres", StringComparison.OrdinalIgnoreCase);
-            bool isMySql = serverType.StartsWith("MySql", StringComparison.OrdinalIgnoreCase);
-            bool isSqlite = serverType.StartsWith("Sqlite", StringComparison.OrdinalIgnoreCase);
-            bool isFirebird = serverType.StartsWith("Firebird", StringComparison.OrdinalIgnoreCase);
-
-            if (isSqlite)
-            {
-                var contentRoot = HostEnvironment.ContentRootPath;
-                Directory.CreateDirectory(Path.Combine(contentRoot, "App_Data"));
-                return;
-            }
-
-            var cb = DbProviderFactories.GetFactory(cs.ProviderName).CreateConnectionStringBuilder();
-            cb.ConnectionString = cs.ConnectionString;
-
-            if (isFirebird)
-            {
-                if (cb.ConnectionString.IndexOf(@"localhost", StringComparison.Ordinal) < 0 &&
-                    cb.ConnectionString.IndexOf(@"127.0.0.1", StringComparison.Ordinal) < 0)
-                    return;
-
-                var database = cb["Database"] as string;
-                if (string.IsNullOrEmpty(database))
-                    return;
-
-                database = Path.GetFullPath(database);
-                if (File.Exists(database))
-                    return;
-                Directory.CreateDirectory(Path.GetDirectoryName(database));
-
-                using var fbConnection = SqlConnections.New(cb.ConnectionString,
-                    cs.ProviderName, cs.Dialect);
-                ((WrappedConnection)fbConnection).ActualConnection.GetType()
-                    .GetMethod("CreateDatabase", new Type[] { typeof(string), typeof(bool) })
-                    .Invoke(null, new object[] { fbConnection.ConnectionString, false });
-
-                return;
-            }
-
-            if (!isSql && !isPostgres && !isMySql)
-                return;
-
-            string catalogKey = "?";
-
-            foreach (var ck in new[] { "Initial Catalog", "Database", "AttachDBFilename" })
-                if (cb.ContainsKey(ck))
-                {
-                    catalogKey = ck;
-                    break;
-                }
-
-            var catalog = cb[catalogKey] as string;
-            cb[catalogKey] = isPostgres ? "postgres" : null;
-
-            using var serverConnection = SqlConnections.New(cb.ConnectionString,
-                cs.ProviderName, cs.Dialect);
-            serverConnection.Open();
-
-            string databasesQuery = "SELECT * FROM sys.databases WHERE NAME = @name";
-            string createDatabaseQuery = @"CREATE DATABASE [{0}]";
-
-            if (isPostgres)
-            {
-                databasesQuery = "select * from postgres.pg_catalog.pg_database where datname = @name";
-                createDatabaseQuery = "CREATE DATABASE \"{0}\"";
-            }
-            else if (isMySql)
-            {
-                databasesQuery = "SELECT * FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = @name";
-                createDatabaseQuery = "CREATE DATABASE `{0}`";
-            }
-
-            if (serverConnection.Query(databasesQuery, new { name = catalog }).Any())
-                return;
-
-            var isLocalServer = isSql && (
-                serverConnection.ConnectionString.Contains(@"(localdb)\", StringComparison.OrdinalIgnoreCase) ||
-                serverConnection.ConnectionString.Contains(@".\", StringComparison.OrdinalIgnoreCase) ||
-                serverConnection.ConnectionString.Contains(@"localhost", StringComparison.OrdinalIgnoreCase) ||
-                serverConnection.ConnectionString.Contains(@"127.0.0.1", StringComparison.OrdinalIgnoreCase));
-
-            string command;
-            if (isLocalServer)
-            {
-                string baseDirectory = HostEnvironment.ContentRootPath;
-
-                var filename = Path.Combine(Path.Combine(baseDirectory, "App_Data"), catalog);
-                Directory.CreateDirectory(Path.GetDirectoryName(filename));
-
-                command = string.Format(CultureInfo.InvariantCulture, @"CREATE DATABASE [{0}] ON PRIMARY (Name = N'{0}', FILENAME = '{1}.mdf') " +
-                    "LOG ON (NAME = N'{0}_log', FILENAME = '{1}.ldf')",
-                    catalog, filename);
-
-                if (File.Exists(filename + ".mdf"))
-                    command += " FOR ATTACH";
-            }
-            else
-            {
-                command = string.Format(CultureInfo.InvariantCulture, createDatabaseQuery, catalog);
-            }
-
-            serverConnection.Execute(command);
-            SqlConnection.ClearAllPools();
+            MigrationUtils.EnsureDatabase(databaseKey,
+                hostEnvironment.ContentRootPath, sqlConnections);
+            Microsoft.Data.SqlClient.SqlConnection.ClearAllPools();
         }
 
         private void RunMigrations(string databaseKey)
         {
-            var cs = SqlConnections.TryGetConnectionString(databaseKey);
-            if (cs == null)
+            var cs = sqlConnections.TryGetConnectionString(databaseKey) ??
                 throw new ArgumentOutOfRangeException(nameof(databaseKey));
-
             string serverType = cs.Dialect.ServerType;
             bool isOracle = serverType.StartsWith("Oracle", StringComparison.OrdinalIgnoreCase);
             bool isFirebird = serverType.StartsWith("Firebird", StringComparison.OrdinalIgnoreCase);
-
-            // safety check to ensure that we are not modifying an arbitrary database.
-            // remove these lines if you want SerExtraESM migrations to run on your DB.
-            if (!isOracle && cs.ConnectionString.IndexOf(typeof(DataMigrations).Namespace +
-                    @"_" + databaseKey + "_v1", StringComparison.OrdinalIgnoreCase) < 0)
-            {
-                SkippedMigrations = true;
-                return;
-            }
 
             string databaseType = isOracle ? "OracleManaged" : serverType;
 
             var conventionSet = new DefaultConventionSet(defaultSchemaName: null,
                 Path.GetDirectoryName(typeof(DataMigrations).Assembly.Location));
-            var migrationNamespace = "SerExtraESM.Migrations." + databaseKey + "DB";
-            var migrationAssemblies = new[] { typeof(DataMigrations).Assembly };
-
-            if (databaseKey.Equals("Northwind", StringComparison.OrdinalIgnoreCase))
-            {
-                migrationNamespace = typeof(Serenity.Demo.Northwind.Migrations.MigrationAttribute).Namespace;
-                migrationAssemblies = new[] { typeof(Serenity.Demo.Northwind.Migrations.MigrationAttribute).Assembly };
-            }
 
             var serviceProvider = new ServiceCollection()
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .AddFluentMigratorCore()
                 .AddSingleton<IConventionSet>(conventionSet)
-                .Configure<TypeFilterOptions>(options =>
-                {
-                    options.Namespace = migrationNamespace;
-                })
                 .Configure<ProcessorOptions>(options =>
                 {
                     options.Timeout = TimeSpan.FromSeconds(90);
+                })
+                .Configure<RunnerOptions>(options =>
+                {
+                    options.Tags = new[] { databaseKey + "DB" };
+                    options.IncludeUntaggedMigrations = databaseKey == "Default";
                 })
                 .ConfigureRunner(builder =>
                 {
@@ -220,7 +99,7 @@ namespace SerExtraESM
                         builder.AddSqlServer();
 
                     builder.WithGlobalConnectionString(cs.ConnectionString);
-                    builder.WithMigrationsIn(migrationAssemblies);
+                    builder.ScanIn(((IGetAssemblies)typeSource).GetAssemblies().ToArray()).For.Migrations();
                 })
                 .BuildServiceProvider();
 

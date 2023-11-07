@@ -1,12 +1,11 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { CascadedWidgetLink, coalesce, Decorators, EditorUtils, getType, IGetEditValue, IReadOnly, isEmptyOrNull, ISetEditValue, IStringValue, IValidateRequired, resolveUrl, RetrieveColumnSelection, RetrieveRequest, RetrieveResponse, Select2EditorOptions, serviceCall, Widget } from "@serenity-is/corelib"
 import { DialogBase } from "../../Bases/DialogBase"
 import { GridItemPickerDialog } from "./GridItemPickerDialog"
 
-@Serenity.Decorators.registerEditor('_Ext.GridItemPickerEditor', [Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired])
-@Serenity.Decorators.element("<input type=\"text\" />")
-export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOptions>
-    implements Serenity.ISetEditValue, Serenity.IGetEditValue, Serenity.IStringValue, Serenity.IReadOnly, Serenity.IValidateRequired {
+@Decorators.registerEditor('_Ext.GridItemPickerEditor', [ISetEditValue, IGetEditValue, IStringValue, IReadOnly, IValidateRequired])
+@Decorators.element("<input type=\"text\" />")
+export class GridItemPickerEditor extends Widget<GridItemPickerEditorOptions>
+    implements ISetEditValue, IGetEditValue, IStringValue, IReadOnly, IValidateRequired {
 
     containerDiv: JQuery;
     inplaceSearchButton: JQuery;
@@ -43,7 +42,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
                 pageImportPath += ".js";
         }
 
-        pageImportPath = Q.resolveUrl(pageImportPath);
+        pageImportPath = resolveUrl(pageImportPath);
 
         import(pageImportPath);
     }
@@ -94,7 +93,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
             this.value = pickerDialog.checkGrid.rowSelection.getSelectedKeys().join(',');
             this.text = selectedItems.map(m => m[this.options.nameFieldInGridRow]).join(', ');
 
-            if (Q.isEmptyOrNull(this.text)) {
+            if (isEmptyOrNull(this.text)) {
                 console.warn('nameFieldInGridRow might be wrong in ' + this.widgetName);
             }
 
@@ -112,7 +111,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     protected inplaceViewClick(e: any): void {
         var val = this.value;
 
-        if (!Q.isEmptyOrNull(val)) {
+        if (!isEmptyOrNull(val)) {
             var dlg = this.getDialogInstance();
             dlg.isReadOnly = true;
             dlg.loadByIdAndOpenDialog(val, false);
@@ -123,7 +122,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
         var dialogType = this.options.dialogType;
 
         if (!dialogType.prototype)
-            dialogType = Q.getType(this.options.dialogType);
+            dialogType = getType(this.options.dialogType);
 
         try {
             var dlg = new dialogType() as DialogBase<any, any>;
@@ -141,7 +140,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     public set value(val: string) {
         this.element.val(val);
 
-        if (Q.isEmptyOrNull(val)) {
+        if (isEmptyOrNull(val)) {
             this.text = '';
             this.inplaceViewButton.hide()
             this.clearSelectionButton.hide()
@@ -155,7 +154,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
 
     public get values(): string[] {
         let valCVS = this.value;
-        if (Q.isEmptyOrNull(valCVS))
+        if (isEmptyOrNull(valCVS))
             return [];
         else
             return valCVS.split(',');
@@ -244,15 +243,15 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
             && this.selectedItemIncludeColumns.every(e => this._selectedItem[e])
         )
             return this._selectedItem;
-        else if (!Q.isEmptyOrNull(this.value)) {
+        else if (!isEmptyOrNull(this.value)) {
 
-            Q.serviceCall<Serenity.RetrieveResponse<any>>({
+            serviceCall<RetrieveResponse<any>>({
                 service: this.serviceUrl + '/Retrieve',
                 request: {
                     EntityId: this.value,
-                    ColumnSelection: Serenity.RetrieveColumnSelection.list,
+                    ColumnSelection: RetrieveColumnSelection.list,
                     IncludeColumns: this.selectedItemIncludeColumns
-                } as Serenity.RetrieveRequest,
+                } as RetrieveRequest,
                 async: false,
                 onSuccess: (response) => {
                     this._selectedItem = response.Entity;
@@ -267,7 +266,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
 
     private _serviceUrl: string;
     get serviceUrl(): string {
-        if (Q.isEmptyOrNull(this._serviceUrl)) {
+        if (isEmptyOrNull(this._serviceUrl)) {
             var dlg = this.getDialogInstance();
             this._serviceUrl = dlg['getService']();
         }
@@ -280,33 +279,33 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     //-------------------------------cascading and filtering -----------------------------------
-    protected getCascadeFromValue(parent: Serenity.Widget<any>) {
-        return Serenity.EditorUtils.getValue(parent);
+    protected getCascadeFromValue(parent: Widget<any>) {
+        return EditorUtils.getValue(parent);
     }
 
-    protected cascadeLink: Serenity.CascadedWidgetLink<Serenity.Widget<any>>;
+    protected cascadeLink: CascadedWidgetLink<Widget<any>>;
 
     protected setCascadeFrom(value: string) {
 
-        if (Q.isEmptyOrNull(value)) {
+        if (isEmptyOrNull(value)) {
             if (this.cascadeLink != null) {
                 this.cascadeLink.set_parentID(null);
                 this.cascadeLink = null;
             }
-            (this.options as Serenity.Select2EditorOptions).cascadeFrom = null;
+            (this.options as Select2EditorOptions).cascadeFrom = null;
             return;
         }
 
-        this.cascadeLink = new Serenity.CascadedWidgetLink<Serenity.Widget<any>>(Serenity.Widget, this, p => {
+        this.cascadeLink = new CascadedWidgetLink<Widget<any>>(Widget, this, p => {
             this.set_cascadeValue(this.getCascadeFromValue(p));
         });
 
         this.cascadeLink.set_parentID(value);
-        (this.options as Serenity.Select2EditorOptions).cascadeFrom = value;
+        (this.options as Select2EditorOptions).cascadeFrom = value;
     }
 
     protected get_cascadeFrom(): string {
-        return (this.options as Serenity.Select2EditorOptions).cascadeFrom;
+        return (this.options as Select2EditorOptions).cascadeFrom;
     }
 
     get cascadeFrom(): string {
@@ -314,7 +313,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected set_cascadeFrom(value: string) {
-        if (value !== (this.options as Serenity.Select2EditorOptions).cascadeFrom) {
+        if (value !== (this.options as Select2EditorOptions).cascadeFrom) {
             this.setCascadeFrom(value);
             this.updateItems();
         }
@@ -325,7 +324,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected get_cascadeField() {
-        return Q.coalesce((this.options as Serenity.Select2EditorOptions).cascadeField, (this.options as Serenity.Select2EditorOptions).cascadeFrom);
+        return coalesce((this.options as Select2EditorOptions).cascadeField, (this.options as Select2EditorOptions).cascadeFrom);
     }
 
     get cascadeField(): string {
@@ -333,7 +332,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected set_cascadeField(value: string) {
-        (this.options as Serenity.Select2EditorOptions).cascadeField = value;
+        (this.options as Select2EditorOptions).cascadeField = value;
     }
 
     set cascadeField(value: string) {
@@ -341,7 +340,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected get_cascadeValue(): any {
-        return (this.options as Serenity.Select2EditorOptions).cascadeValue;
+        return (this.options as Select2EditorOptions).cascadeValue;
     }
 
     get cascadeValue(): any {
@@ -349,8 +348,8 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected set_cascadeValue(value: any) {
-        if ((this.options as Serenity.Select2EditorOptions).cascadeValue !== value) {
-            (this.options as Serenity.Select2EditorOptions).cascadeValue = value;
+        if ((this.options as Select2EditorOptions).cascadeValue !== value) {
+            (this.options as Select2EditorOptions).cascadeValue = value;
             this.set_value(null);
             this.updateItems();
 
@@ -362,7 +361,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected get_filterField() {
-        return (this.options as Serenity.Select2EditorOptions).filterField;
+        return (this.options as Select2EditorOptions).filterField;
     }
 
     get filterField(): string {
@@ -370,7 +369,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected set_filterField(value: string) {
-        (this.options as Serenity.Select2EditorOptions).filterField = value;
+        (this.options as Select2EditorOptions).filterField = value;
     }
 
     set filterField(value: string) {
@@ -378,7 +377,7 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected get_filterValue(): any {
-        return (this.options as Serenity.Select2EditorOptions).filterValue;
+        return (this.options as Select2EditorOptions).filterValue;
     }
 
     get filterValue(): any {
@@ -386,8 +385,8 @@ export class GridItemPickerEditor extends Serenity.Widget<GridItemPickerEditorOp
     }
 
     protected set_filterValue(value: any) {
-        if ((this.options as Serenity.Select2EditorOptions).filterValue !== value) {
-            (this.options as Serenity.Select2EditorOptions).filterValue = value;
+        if ((this.options as Select2EditorOptions).filterValue !== value) {
+            (this.options as Select2EditorOptions).filterValue = value;
             this.set_value(null);
             this.updateItems();
 

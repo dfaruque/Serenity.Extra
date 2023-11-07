@@ -1,7 +1,7 @@
-import * as Serenity from "@serenity-is/corelib"
+import { Decorators } from "@serenity-is/corelib";
 import { GridBase } from "./GridBase"
 
-@Serenity.Decorators.filterable()
+@Decorators.filterable()
 export class ReportGridBase<TItem, TOptions> extends GridBase<TItem, TOptions> {
 
     protected getButtons() {

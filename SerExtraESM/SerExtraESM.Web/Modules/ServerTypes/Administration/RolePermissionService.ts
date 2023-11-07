@@ -1,8 +1,7 @@
-﻿import { RolePermissionUpdateRequest } from "./RolePermissionUpdateRequest";
-import { SaveResponse } from "@serenity-is/corelib";
-import { ServiceOptions, serviceRequest } from "@serenity-is/corelib/q";
+﻿import { SaveResponse, ServiceOptions, serviceRequest } from "@serenity-is/corelib";
 import { RolePermissionListRequest } from "./RolePermissionListRequest";
 import { RolePermissionListResponse } from "./RolePermissionListResponse";
+import { RolePermissionUpdateRequest } from "./RolePermissionUpdateRequest";
 
 export namespace RolePermissionService {
     export const baseUrl = 'Administration/RolePermission';

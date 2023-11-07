@@ -30,12 +30,12 @@
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Serenity.Assets" Version="6.5.1" />
-    <PackageReference Include="Serenity.Scripts" Version="6.5.1" />
-    <PackageReference Include="Serenity.Net.Web" Version="6.5.1" />
-    <PackageReference Include="Serenity.Extensions" Version="6.5.1" />
-    <PackageReference Include="Serenity.Demo.Northwind" Version="6.5.1" />
-    <PackageReference Include="Serenity.Demo.BasicSamples" Version="6.5.1" />
+    <PackageReference Include="Serenity.Assets" Version="6.9.5" />
+    <PackageReference Include="Serenity.Scripts" Version="6.9.5" />
+    <PackageReference Include="Serenity.Net.Web" Version="6.9.5" />
+    <PackageReference Include="Serenity.Extensions" Version="6.9.5" />
+    <PackageReference Include="Serenity.Demo.Northwind" Version="6.9.5" />
+    <PackageReference Include="Serenity.Demo.BasicSamples" Version="6.9.5" />
   </ItemGroup>
   <Target Name="NpmInstall" BeforeTargets="BeforeBuild" Condition="!Exists('node_modules\@types\jquery\index.d.ts')">
     <Message Text="Installing NPM packages..." Importance="high" />

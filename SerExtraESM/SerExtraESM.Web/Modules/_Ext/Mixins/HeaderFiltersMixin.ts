@@ -1,5 +1,4 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { any, Criteria, DataGrid, deepClone, ListRequest, ListResponse, serviceCall } from "@serenity-is/corelib"
 import { usingSlickHeaderFilters } from "../Utils/Using"
 
 /**
@@ -7,7 +6,7 @@ import { usingSlickHeaderFilters } from "../Utils/Using"
  */
 export class HeaderFiltersMixin<TItem> {
 
-    private dataGrid: Serenity.DataGrid<TItem, any>;
+    private dataGrid: DataGrid<TItem, any>;
 
     constructor(private options: HeaderFiltersMixinOptions<TItem>) {
         var dg = this.dataGrid = options.grid;
@@ -20,7 +19,7 @@ export class HeaderFiltersMixin<TItem> {
         var headerFilters = new Slick['Plugins'].HeaderFilters({
             getFilterValues: function (column, setFilterableValues) {
                 if (!dg.view.url || !dg.view["getPagingInfo"]().rowsPerPage || dg.view.getLength() == 0
-                    && !Q.any(dg.slickGrid.getColumns(), (x: any) => x.filterValues && x.filterValues.length > 0)) {
+                    && !any(dg.slickGrid.getColumns(), (x: any) => x.filterValues && x.filterValues.length > 0)) {
                     return null
                 }
                 currentColumn = column;
@@ -32,7 +31,7 @@ export class HeaderFiltersMixin<TItem> {
                 } finally {
                     currentColumn = null
                 }
-                var request = Q.deepClone(dg.view.params) as Serenity.ListRequest;
+                var request = deepClone(dg.view.params) as ListRequest;
                 request.DistinctFields = [column.field];
                 request.Skip = 0;
                 request.Take = 0;
@@ -41,10 +40,10 @@ export class HeaderFiltersMixin<TItem> {
                 if (cachedValue && cachedValue.expires > (new Date).getTime())
                     setFilterableValues(cachedValue.value);
                 else {
-                    Q.serviceCall({
+                    serviceCall({
                         request: request,
                         url: dg.view.url,
-                        onSuccess: function (response: Serenity.ListResponse<TItem>) {
+                        onSuccess: function (response: ListResponse<TItem>) {
                             cachedValues[cacheKey] = {
                                 value: response.Values,
                                 expires: (new Date).getTime() + 1e3 * 30
@@ -68,7 +67,7 @@ export class HeaderFiltersMixin<TItem> {
             if (!oldOnViewSubmit.call(dg))
                 return false;
             var columns = dg.slickGrid.getColumns();
-            var request = dg.view.params as Serenity.ListRequest;
+            var request = dg.view.params as ListRequest;
             for (var n = 0; n < columns.length; n++) {
                 var column = columns[n];
                 if (column === currentColumn)
@@ -79,11 +78,11 @@ export class HeaderFiltersMixin<TItem> {
                     var d = [[column.field], "in", [u]];
                     if (u.length !== filterValues.length) {
                         if (u.length > 0)
-                            d = Serenity.Criteria.or(["is null", [column.field]], d);
+                            d = Criteria.or(["is null", [column.field]], d);
                         else
                             d = ["is null", [column.field]]
                     }
-                    request.Criteria = Serenity.Criteria.and(request.Criteria, d)
+                    request.Criteria = Criteria.and(request.Criteria, d)
                 }
             }
             return true
@@ -93,5 +92,5 @@ export class HeaderFiltersMixin<TItem> {
 }
 export interface HeaderFiltersMixinOptions<TItem> {
     // data grid object
-    grid: Serenity.DataGrid<TItem, any>;
+    grid: DataGrid<TItem, any>;
 }

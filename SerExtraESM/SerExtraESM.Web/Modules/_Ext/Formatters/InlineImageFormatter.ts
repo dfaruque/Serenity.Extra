@@ -1,12 +1,11 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
-import * as Slick from "@serenity-is/sleekgrid"
+import { Decorators, Formatter, IInitializeColumn, resolveUrl } from "@serenity-is/corelib"
+import { Column, FormatterContext } from "@serenity-is/sleekgrid"
 
-@Serenity.Decorators.registerFormatter('_Ext.InlineImageFormatter')
+@Decorators.registerFormatter('_Ext.InlineImageFormatter')
 export class InlineImageFormatter
-    implements Serenity.Formatter, Serenity.IInitializeColumn {
+    implements Formatter, IInitializeColumn {
 
-    format(ctx: Slick.FormatterContext): string {
+    format(ctx: FormatterContext): string {
 
         var file = (this.fileProperty ? ctx.item[this.fileProperty] : ctx.value) as string;
 
@@ -14,42 +13,42 @@ export class InlineImageFormatter
         let src = '';
 
         if (!file || !file.length) {
-            href = Q.resolveUrl(this.defaultImage)
+            href = resolveUrl(this.defaultImage)
             src = href
         } else {
-            href = Q.resolveUrl("~/upload/" + file);
+            href = resolveUrl("~/upload/" + file);
 
             if (this.thumb) {
                 var parts = file.split('.');
                 file = parts.slice(0, parts.length - 1).join('.') + '_t.jpg';
             }
 
-            src = Q.resolveUrl('~/upload/' + file);
+            src = resolveUrl('~/upload/' + file);
         }
 
         return `<a class="inline-image" target='_blank' href="${href}">` +
             `<img src="${src}" style='max-height: ${this.maxHeight}; max-width: ${this.maxWidth};' /></a>`;
     }
 
-    initializeColumn(column: Slick.Column): void {
+    initializeColumn(column: Column): void {
         if (this.fileProperty) {
             column.referencedFields = column.referencedFields || [];
             column.referencedFields.push(this.fileProperty);
         }
     }
 
-    @Serenity.Decorators.option()
+    @Decorators.option()
     public fileProperty: string;
 
-    @Serenity.Decorators.option()
+    @Decorators.option()
     public thumb: boolean;
 
-    @Serenity.Decorators.option()
+    @Decorators.option()
     public defaultImage: string;
 
-    @Serenity.Decorators.option()
+    @Decorators.option()
     public maxHeight: string = '144px';
 
-    @Serenity.Decorators.option()
+    @Decorators.option()
     public maxWidth: string = '100%';
 }

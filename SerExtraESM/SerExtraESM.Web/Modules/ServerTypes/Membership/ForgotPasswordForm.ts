@@ -1,12 +1,11 @@
-﻿import { EmailAddressEditor, PrefixedContext } from "@serenity-is/corelib";
-import { initFormType } from "@serenity-is/corelib/q";
+﻿import { EmailAddressEditor, PrefixedContext, initFormType } from "@serenity-is/corelib";
 
 export interface ForgotPasswordForm {
     Email: EmailAddressEditor;
 }
 
 export class ForgotPasswordForm extends PrefixedContext {
-    static formKey = 'Membership.ForgotPassword';
+    static readonly formKey = 'Membership.ForgotPassword';
     private static init: boolean;
 
     constructor(prefix: string) {

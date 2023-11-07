@@ -1,7 +1,7 @@
-import * as Serenity from "@serenity-is/corelib"
+import { Decorators, Select2Editor } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.HardCodedLookupEditor')
-export class HardCodedLookupEditor extends Serenity.Select2Editor<any, any> {
+@Decorators.registerEditor('_Ext.HardCodedLookupEditor')
+export class HardCodedLookupEditor extends Select2Editor<any, any> {
 
     constructor(container: JQuery, options: HardCodedLookupEditorOptions) {
         super(container, options);

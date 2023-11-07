@@ -1,15 +1,14 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, Lookup, LookupEditorBase, LookupEditorOptions } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.EmptyLookupEditor')
-export class EmptyLookupEditor extends Serenity.LookupEditorBase<Serenity.LookupEditorOptions, any> {
+@Decorators.registerEditor('_Ext.EmptyLookupEditor')
+export class EmptyLookupEditor extends LookupEditorBase<LookupEditorOptions, any> {
 
     public setSelect2Items(items: Select2Item[]) {
         this.clearItems();
         items.forEach(item => { this.addItem(item); });
     }
 
-    public setLookupItems(lookup: Q.Lookup<any>) {
+    public setLookupItems(lookup: Lookup<any>) {
         var items = lookup.items.map<Select2Item>(m => {
             return {
                 id: m[lookup.idField],

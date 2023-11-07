@@ -1,10 +1,9 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, formatDate, IGetEditValue, IReadOnly, ISetEditValue, parseISODateTime, Widget } from "@serenity-is/corelib"
 import { usingJqueryUITimepickerAddon } from "../Utils/Using"
 
-@Serenity.Decorators.registerEditor('_Ext.DateTimePickerEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
-@Serenity.Decorators.element("<input/>")
-export class DateTimePickerEditor extends Serenity.Widget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+@Decorators.registerEditor('_Ext.DateTimePickerEditor', [IGetEditValue, ISetEditValue, IReadOnly])
+@Decorators.element("<input/>")
+export class DateTimePickerEditor extends Widget<any> implements IGetEditValue, ISetEditValue, IReadOnly {
     public getEditValue(property, target) { target[property.name] = this.value; }
     public setEditValue(source, property) { this.value = source[property.name]; }
 
@@ -24,11 +23,11 @@ export class DateTimePickerEditor extends Serenity.Widget<any> implements Sereni
     //http://trentrichardson.com/examples/timepicker
 
     public get value(): string {
-        return Q.formatDate(this.valueAsDate, 'yyyy-MM-ddTHH:mm');
+        return formatDate(this.valueAsDate, 'yyyy-MM-ddTHH:mm');
     }
 
     public set value(val: string) {
-        this.valueAsDate = Q.parseISODateTime(val);
+        this.valueAsDate = parseISODateTime(val);
     }
 
     public get valueAsDate(): Date {

@@ -1,10 +1,9 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { coalesce, Culture, Decorators, formatDate, ISetEditValue, PropertyItem, Widget } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.StaticTextBlock', [Serenity.ISetEditValue])
-@Serenity.Decorators.element("<div/>")
-export class StaticTextBlock extends Serenity.Widget<StaticTextBlockOptions>
-    implements Serenity.ISetEditValue {
+@Decorators.registerEditor('_Ext.StaticTextBlock', [ISetEditValue])
+@Decorators.element("<div/>")
+export class StaticTextBlock extends Widget<StaticTextBlockOptions>
+    implements ISetEditValue {
 
     private _value: string;
 
@@ -22,17 +21,17 @@ export class StaticTextBlock extends Serenity.Widget<StaticTextBlockOptions>
     }
 
     private updateElementContent() {
-        var text = Q.coalesce(this.options.text, this._value);
+        var text = coalesce(this.options.text, this._value);
 
         if (this.options.isDate)
-            text = Q.formatDate(text);
+            text = formatDate(text);
 
         if (this.options.isDateTime)
-            text = Q.formatDate(text, Q.Culture.dateTimeFormat);
+            text = formatDate(text, Culture.dateTimeFormat);
 
         // if isLocalText is set, text is actually a local text key
         if (this.options.isLocalText)
-            text = Q.text(text);
+            text = text(text);
 
         // don't html encode if isHtml option is true
         if (this.options.isHtml)
@@ -45,9 +44,9 @@ export class StaticTextBlock extends Serenity.Widget<StaticTextBlockOptions>
      * By implementing ISetEditValue interface, we allow this editor to display its field value.
      * But only do this when our text content is not explicitly set in options
      */
-    public setEditValue(source: any, property: Serenity.PropertyItem) {
+    public setEditValue(source: any, property: PropertyItem) {
         if (this.options.text == null) {
-            this._value = Q.coalesce(this.options.text, source[property.name]);
+            this._value = coalesce(this.options.text, source[property.name]);
             this.updateElementContent();
         }
     }

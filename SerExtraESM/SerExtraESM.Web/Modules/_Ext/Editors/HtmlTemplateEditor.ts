@@ -1,12 +1,12 @@
-import * as Serenity from "@serenity-is/corelib"
+import { CKEditorConfig, Decorators, HtmlContentEditor, HtmlContentEditorOptions } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.HtmlTemplateEditor')
-export class HtmlTemplateEditor extends Serenity.HtmlContentEditor {
+@Decorators.registerEditor('_Ext.HtmlTemplateEditor')
+export class HtmlTemplateEditor extends HtmlContentEditor {
     constructor(textArea: JQuery, opt?: HtmlTemplateEditorOptions) {
         super(textArea, opt);
     }
 
-    protected getConfig(): Serenity.CKEditorConfig {
+    protected getConfig(): CKEditorConfig {
         var config = super.getConfig() as any;
 
         config.extraPlugins = config.extraPlugins || '';
@@ -29,7 +29,7 @@ export class HtmlTemplateEditor extends Serenity.HtmlContentEditor {
     }
 }
 
-export interface HtmlTemplateEditorOptions extends Serenity.HtmlContentEditorOptions {
+export interface HtmlTemplateEditorOptions extends HtmlContentEditorOptions {
     cols?: any;
     rows?: any;
 

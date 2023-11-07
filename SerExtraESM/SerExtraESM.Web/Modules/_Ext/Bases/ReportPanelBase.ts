@@ -1,8 +1,7 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
-import * as Ext from "@serenity-is/extensions"
+import { PropertyPanel, text } from "@serenity-is/corelib"
+import { ReportHelper } from "@serenity-is/extensions"
 
-export class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, any> {
+export class ReportPanelBase<TRequest> extends PropertyPanel<TRequest, any> {
     //protected getTemplateName() { return 'ReportPanel'; }
     protected getReportTitle() { return 'Report Title'; }
     protected getReportKey() { return 'Report.Key'; }
@@ -22,7 +21,7 @@ export class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, 
                 return;
             }
 
-            Ext.ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'html' });
+            ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'html' });
 
         });
 
@@ -33,7 +32,7 @@ export class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, 
                 return;
             }
 
-            Ext.ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'pdf' });
+            ReportHelper.execute({ reportKey: this.getReportKey(), params: { Request: this.getReportRequest() }, extension: 'pdf' });
 
         });
 
@@ -53,8 +52,8 @@ export class ReportPanelBase<TRequest> extends Serenity.PropertyPanel<TRequest, 
         </form>
         <br />
         <div class="buttons align-center">
-            <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i> ${Q.text('Controls.View')}</button>
-            <button id="~_DownloadPdfButton" class="btn btn-default"><i class="fa fa-file-pdf-o margin-r-5"></i> ${Q.text('Controls.DownloadPDF')}</button>
+            <button id="~_SubmitButton" class="btn btn-primary"><i class="fa fa-search margin-r-5"></i> ${text('Controls.View')}</button>
+            <button id="~_DownloadPdfButton" class="btn btn-default"><i class="fa fa-file-pdf-o margin-r-5"></i> ${text('Controls.DownloadPDF')}</button>
         </div>
     </div>
 `;

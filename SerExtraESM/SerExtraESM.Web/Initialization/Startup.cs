@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Common;
 using System.IO;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -50,8 +50,8 @@ namespace SerExtraESM
                 typeof(IDynamicScriptManager).Assembly,
                 typeof(Startup).Assembly,
                 typeof(Serenity.Extensions.EnvironmentSettings).Assembly,
-                typeof(Serenity.Demo.Northwind.CustomerController).Assembly,
-                typeof(Serenity.Demo.BasicSamples.BasicSamplesController).Assembly,
+                typeof(Serenity.Demo.Northwind.CustomerPage).Assembly,
+                typeof(Serenity.Demo.BasicSamples.BasicSamplesPage).Assembly,
             }));
 
             services.Configure<ConnectionStringOptions>(Configuration.GetSection(ConnectionStringOptions.SectionKey));
@@ -145,7 +145,7 @@ namespace SerExtraESM
             services.AddCssBundling();
             services.AddScriptBundling();
             services.AddUploadStorage();
-            services.AddSingleton<Administration.IUserPasswordValidator, Administration.UserPasswordValidator>();
+            services.AddSingleton<IUserPasswordValidator, Administration.UserPasswordValidator>();
             services.AddSingleton<IHttpContextItemsAccessor, HttpContextItemsAccessor>();
             services.AddSingleton<IUserAccessor, Administration.UserAccessor>();
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();

@@ -1,5 +1,5 @@
-﻿import { AuditActionType } from "./AuditActionType";
-import { fieldsProxy } from "@serenity-is/corelib/q";
+﻿import { fieldsProxy } from "@serenity-is/corelib";
+import { AuditActionType } from "./AuditActionType";
 
 export interface AuditLogRow {
     Id?: number;

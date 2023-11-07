@@ -1,16 +1,15 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
-import * as Slick from "@serenity-is/sleekgrid"
+import { Decorators, Formatter, ISlickFormatter, text } from "@serenity-is/corelib"
+import { FormatterContext } from "@serenity-is/sleekgrid"
 
-@Serenity.Decorators.registerFormatter('_Ext.YesNoFormatter', [Serenity.ISlickFormatter])
-export class YesNoFormatter implements Serenity.Formatter {
+@Decorators.registerFormatter('_Ext.YesNoFormatter', [ISlickFormatter])
+export class YesNoFormatter implements Formatter {
     static format(val) {
         let valAsBool = Boolean(val);
 
-        return valAsBool ? Q.text('Dialogs.YesButton') : Q.text('Dialogs.NoButton');
+        return valAsBool ? text('Dialogs.YesButton') : text('Dialogs.NoButton');
     }
 
-    format(ctx: Slick.FormatterContext) {
+    format(ctx: FormatterContext) {
         return YesNoFormatter.format(ctx.value);
     }
 }

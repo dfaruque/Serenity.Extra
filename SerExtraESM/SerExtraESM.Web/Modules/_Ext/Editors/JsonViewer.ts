@@ -1,9 +1,9 @@
-import * as Serenity from "@serenity-is/corelib"
+import { Decorators, IGetEditValue, ISetEditValue, TemplatedWidget } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.JsonViewer', [Serenity.IGetEditValue, Serenity.ISetEditValue])
-@Serenity.Decorators.element("<pre/>")
-export class JsonViewer extends Serenity.TemplatedWidget<any>
-    implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+@Decorators.registerEditor('_Ext.JsonViewer', [IGetEditValue, ISetEditValue])
+@Decorators.element("<pre/>")
+export class JsonViewer extends TemplatedWidget<any>
+    implements IGetEditValue, ISetEditValue {
     public getEditValue(property, target) { target[property.name] = this.value; }
     public setEditValue(source, property) { this.value = source[property.name]; }
 

@@ -1,5 +1,4 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Culture, DateEditor, DateTimeEditor, formatISODateTimeUTC, parseDate, zeroPad } from "@serenity-is/corelib"
 import { DateTimePickerEditor } from "../Editors/DateTimePickerEditor"
 import { TimeUoM } from "../../ServerTypes/_Ext/TimeUoM"
 
@@ -124,19 +123,19 @@ export function bindDateTimeEditorChange(editor, handler): void {
     editor.element.closest('.field').find('.inplace-now').click(handler);
 }
 
-export function setMinDate(editor: Serenity.DateEditor | Serenity.DateTimeEditor, value: Date): void {
+export function setMinDate(editor: DateEditor | DateTimeEditor, value: Date): void {
     editor.element.datepicker("option", "minDate", value);
     editor.set_minDate(value);
 }
 
-export function setMaxDate(editor: Serenity.DateEditor | Serenity.DateTimeEditor, value: Date): void {
+export function setMaxDate(editor: DateEditor | DateTimeEditor, value: Date): void {
     let date = new Date(value.getFullYear(), value.getMonth(), value.getDate() + 1);
     date.setMilliseconds(-1);
     editor.element.datepicker("option", "maxDate", date);
     editor.set_maxDate(date);
 }
 
-export function initDateRangeEditor(fromDateEditor: Serenity.DateEditor, toDateEditor: Serenity.DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
+export function initDateRangeEditor(fromDateEditor: DateEditor, toDateEditor: DateEditor, onChangeHandler?: (e: JQueryEventObject) => void): void {
 
     var startDateTextBox = (<any>fromDateEditor.element);
     var endDateTextBox = (<any>toDateEditor.element);
@@ -252,7 +251,7 @@ export function formatDate(d: Date | string, format?: string) {
 
     let date: Date;
     if (typeof d == "string") {
-        var res = Q.parseDate(d);
+        var res = parseDate(d);
         if (!res)
             return d;
         date = res as Date;
@@ -261,19 +260,19 @@ export function formatDate(d: Date | string, format?: string) {
         date = d;
 
     if (format == null || format == "d") {
-        format = Q.Culture.dateFormat;
+        format = Culture.dateFormat;
     }
     else {
         switch (format) {
-            case "g": format = Q.Culture.dateTimeFormat.replace(":ss", ""); break;
-            case "G": format = Q.Culture.dateTimeFormat; break;
+            case "g": format = Culture.dateTimeFormat.replace(":ss", ""); break;
+            case "G": format = Culture.dateTimeFormat; break;
             case "s": format = "yyyy-MM-ddTHH:mm:ss"; break;
-            case "u": return Q.formatISODateTimeUTC(date);
+            case "u": return formatISODateTimeUTC(date);
         }
     }
 
     let pad = function (i: number) {
-        return Q.zeroPad(i, 2);
+        return zeroPad(i, 2);
     };
 
     return format.replace(new RegExp('dd?d?d?|MM?M?M?|yy?y?y?|hh?|HH?|mm?|ss?|tt?|fff|zz?z?|\\/', 'g'),
@@ -282,7 +281,7 @@ export function formatDate(d: Date | string, format?: string) {
             var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
             switch (fmt) {
-                case '/': return Q.Culture.dateSeparator;
+                case '/': return Culture.dateSeparator;
                 case 'hh': return pad(((date.getHours() < 13) ? date.getHours() : (date.getHours() - 12)));
                 case 'h': return ((date.getHours() < 13) ? date.getHours() : (date.getHours() - 12));
                 case 'HH': return pad(date.getHours());
@@ -303,7 +302,7 @@ export function formatDate(d: Date | string, format?: string) {
                 case 'M': return date.getMonth() + 1;
                 case 't': return ((date.getHours() < 12) ? 'A' : 'P');
                 case 'tt': return ((date.getHours() < 12) ? 'AM' : 'PM');
-                case 'fff': return Q.zeroPad(date.getMilliseconds(), 3);
+                case 'fff': return zeroPad(date.getMilliseconds(), 3);
                 case 'zzz':
                 case 'zz':
                 case 'z': return '';

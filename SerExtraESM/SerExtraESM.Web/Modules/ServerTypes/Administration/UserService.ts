@@ -1,7 +1,6 @@
-﻿import { SaveRequest, SaveResponse, DeleteRequest, DeleteResponse, RetrieveRequest, RetrieveResponse, ListResponse } from "@serenity-is/corelib";
-import { UserRow } from "./UserRow";
-import { ServiceOptions, serviceRequest } from "@serenity-is/corelib/q";
+﻿import { SaveRequest, SaveResponse, ServiceOptions, DeleteRequest, DeleteResponse, RetrieveRequest, RetrieveResponse, ListResponse, serviceRequest } from "@serenity-is/corelib";
 import { UserListRequest } from "./UserListRequest";
+import { UserRow } from "./UserRow";
 
 export namespace UserService {
     export const baseUrl = 'Administration/User';

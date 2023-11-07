@@ -1,5 +1,4 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { NumberFormatter, text as QText } from "@serenity-is/corelib"
 
 export * from "./_q.array"
 export * from "./_q.datetime"
@@ -9,7 +8,7 @@ export * from "./_q.keyboard-layout"
 export * from "./_q.var"
 
 export function text(key: string, fallback: string): string {
-    var result = Q.text(key);
+    var result = QText(key);
 
     if (result == key) return fallback;
     else return result;
@@ -31,12 +30,12 @@ export function isBanglaMode(): boolean {
 }
 
 export function formatDecimal(value) {
-    let title = Serenity.NumberFormatter.format(value, '#,##0.00');
+    let title = NumberFormatter.format(value, '#,##0.00');
     return title;
 }
 
 export function formatInt(value) {
-    let title = Serenity.NumberFormatter.format(value, '#,##0');
+    let title = NumberFormatter.format(value, '#,##0');
     return title;
 }
 

@@ -1,4 +1,4 @@
-import * as Q from "@serenity-is/corelib/q"
+import { resolveUrl } from "@serenity-is/corelib";
 
 export function loadScript(url) {
     $.ajax({
@@ -25,7 +25,7 @@ export function loadCss(url, styleId) {
         .attr("type", "text/css")
         .attr("id", styleId)
         .attr("rel", "stylesheet")
-        .attr("href", Q.resolveUrl(url))
+        .attr("href", resolveUrl(url))
         .appendTo(document.head);
 
     var node = document.createElement("style");
@@ -38,7 +38,7 @@ export function usingVuejs() {
     if (window['Vue']) {
         return;
     } else {
-        loadScript(Q.resolveUrl("~/Scripts/vue.js"));
+        loadScript(resolveUrl("~/Scripts/vue.js"));
 
         //filters
         //window['Vue'].filter('formatDate', function (value, format) {
@@ -133,7 +133,7 @@ export function usingBootstrapDatePicker() {
         return;
     } else {
         loadCss("~/Scripts/datepicker/datepicker3.css", "bootstrapdatepicker");
-        loadScript(Q.resolveUrl("~/Scripts/datepicker/bootstrap-datepicker.js"));
+        loadScript(resolveUrl("~/Scripts/datepicker/bootstrap-datepicker.js"));
 
         //localization
         $.fn.datepicker['dates'].bn = {
@@ -160,7 +160,7 @@ export function usingBootstrapColorPicker() {
         return;
     } else {
         loadCss("~/Scripts/colorpicker/bootstrap-colorpicker.min.css", "colorpicker");
-        loadScript(Q.resolveUrl("~/Scripts/colorpicker/bootstrap-colorpicker.min.js"))
+        loadScript(resolveUrl("~/Scripts/colorpicker/bootstrap-colorpicker.min.js"))
     }
 }
 
@@ -169,7 +169,7 @@ export function usingJqueryUITimepickerAddon() {
         return;
     } else {
         loadCss("~/Content/jquery-ui-timepicker-addon.css", "datetimepicker");
-        loadScript(Q.resolveUrl("~/Scripts/jquery-ui-timepicker-addon.js"))
+        loadScript(resolveUrl("~/Scripts/jquery-ui-timepicker-addon.js"))
     }
 }
 
@@ -177,7 +177,7 @@ export function usingChartjs() {
     if (window['Chart']) {
         return;
     } else {
-        loadScript(Q.resolveUrl('~/Scripts/chartjs/Chart.min.js'))
+        loadScript(resolveUrl('~/Scripts/chartjs/Chart.min.js'))
     }
 
     window['Chart'].defaults.global.defaultFontFamily = $('body').css('font-family');
@@ -190,7 +190,7 @@ export function usingSlickGridEditors() {
     if (window['Slick'] && window['Slick']['Editors'] && window['Slick']['Editors']['Text']) {
         return;
     } else {
-        loadScript(Q.resolveUrl("~/lib/_Ext/Editors/slick.editors.js"))
+        loadScript(resolveUrl("~/lib/_Ext/Editors/slick.editors.js"))
     }
 }
 
@@ -198,7 +198,7 @@ export function usingSlickAutoColumnSize() {
     if (window['Slick'] && window['Slick']['AutoColumnSize']) {
         return;
     } else {
-        loadScript(Q.resolveUrl("~/lib/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js"))
+        loadScript(resolveUrl("~/lib/_Ext/CustomSlickGridPlugin/slick.autocolumnsize.js"))
     }
 }
 
@@ -207,6 +207,6 @@ export function usingSlickHeaderFilters() {
         return;
     } else {
         loadCss("~/lib/_Ext/CustomSlickGridPlugin/slick-headerfilters.css", "slick-headerfilters");
-        loadScript(Q.resolveUrl("~/lib/_Ext/CustomSlickGridPlugin/slick.headerfilters.js"));
+        loadScript(resolveUrl("~/lib/_Ext/CustomSlickGridPlugin/slick.headerfilters.js"));
     }
 }

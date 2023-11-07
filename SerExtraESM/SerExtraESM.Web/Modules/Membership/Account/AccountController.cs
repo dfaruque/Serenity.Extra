@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Serenity;
 using Serenity.Abstractions;
+using Serenity.ComponentModel;
 using Serenity.Services;
 using SerExtraESM.Administration;
 

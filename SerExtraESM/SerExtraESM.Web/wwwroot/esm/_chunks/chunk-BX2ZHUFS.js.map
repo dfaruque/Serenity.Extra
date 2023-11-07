@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["external-global:Serenity", "external-global:Q"],
+  "sourcesContent": ["module.exports = Serenity;", "module.exports = Q;"],
+  "mappings": "+4BAAA,IAAAA,EAAAC,EAAA,CAAAC,EAAAC,IAAA,CAAAA,EAAO,QAAU,WCAjB,IAAAC,EAAAC,EAAA,CAAAC,EAAAC,IAAA,CAAAA,EAAO,QAAU",
+  "names": ["require_Serenity", "__commonJSMin", "exports", "module", "require_Q", "__commonJSMin", "exports", "module"]
+}

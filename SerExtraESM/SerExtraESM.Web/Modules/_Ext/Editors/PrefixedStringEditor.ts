@@ -1,9 +1,8 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, getType, IGetEditValue, IReadOnly, ISetEditValue, Widget } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.PrefixedStringEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
-@Serenity.Decorators.element('<input type="text"/>')
-export class PrefixedStringEditor extends Serenity.Widget<PrefixedStringEditorOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+@Decorators.registerEditor('_Ext.PrefixedStringEditor', [IGetEditValue, ISetEditValue, IReadOnly])
+@Decorators.element('<input type="text"/>')
+export class PrefixedStringEditor extends Widget<PrefixedStringEditorOptions> implements IGetEditValue, ISetEditValue, IReadOnly {
     public getEditValue(property, target) { target[property.name] = this.value; }
     public setEditValue(source, property) { this.value = source[property.name]; }
 
@@ -57,7 +56,7 @@ export class PrefixedStringEditor extends Serenity.Widget<PrefixedStringEditorOp
     public set prefix(val: string) {
         this._prefix = val;
         if (this.options.prefixFormatterType) {
-            let formatterType = Q.getType(this.options.prefixFormatterType);
+            let formatterType = getType(this.options.prefixFormatterType);
             if (formatterType)
                 this.prefixInput.val((formatterType as any).format(val));
             else

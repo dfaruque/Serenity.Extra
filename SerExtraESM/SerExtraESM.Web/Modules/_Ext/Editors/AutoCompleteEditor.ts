@@ -1,14 +1,13 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, getLookup, StringEditor, WX } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.AutoCompleteEditor')
-export class AutoCompleteEditor extends Serenity.StringEditor {
+@Decorators.registerEditor('_Ext.AutoCompleteEditor')
+export class AutoCompleteEditor extends StringEditor {
     constructor(input: JQuery, options: AutoCompleteOptions) {
         super(input);
         this.options = options;
 
         input.bind('change', e => {
-            if (!Serenity.WX.hasOriginalEvent(e)) {
+            if (!WX.hasOriginalEvent(e)) {
                 return;
             }
         });
@@ -25,7 +24,7 @@ export class AutoCompleteEditor extends Serenity.StringEditor {
             source = opt.sourceCSV.split(',');
         }
         else if (this.options.lookupKey) {
-            let lookup = Q.getLookup(opt.lookupKey);
+            let lookup = getLookup(opt.lookupKey);
             source = lookup.items.map(m => m[lookup.textField]);
         }
 

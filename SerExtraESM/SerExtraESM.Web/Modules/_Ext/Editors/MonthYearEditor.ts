@@ -1,11 +1,10 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, IGetEditValue, IReadOnly, ISetEditValue, parseISODateTime, Widget } from "@serenity-is/corelib"
 import * as q from "../_q/_q"
 import { usingBootstrapDatePicker } from "../Utils/Using"
 
-@Serenity.Decorators.registerEditor('_Ext.MonthYearEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly])
-@Serenity.Decorators.element('<input type="text" autocomplete="off"/>')
-export class MonthYearEditor extends Serenity.Widget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue, Serenity.IReadOnly {
+@Decorators.registerEditor('_Ext.MonthYearEditor', [IGetEditValue, ISetEditValue, IReadOnly])
+@Decorators.element('<input type="text" autocomplete="off"/>')
+export class MonthYearEditor extends Widget<any> implements IGetEditValue, ISetEditValue, IReadOnly {
     public getEditValue(property, target) { target[property.name] = this.value; }
     public setEditValue(source, property) { this.value = source[property.name]; }
 
@@ -30,7 +29,7 @@ export class MonthYearEditor extends Serenity.Widget<any> implements Serenity.IG
     }
 
     public set value(val: string) {
-        this.element['BSdatepicker']("update", Q.parseISODateTime(val));
+        this.element['BSdatepicker']("update", parseISODateTime(val));
     }
 
     get_readOnly(): boolean {
@@ -49,10 +48,10 @@ export class MonthYearEditor extends Serenity.Widget<any> implements Serenity.IG
 
     //get_minValue(): string { }
     set_minValue(value: string): void {
-        this.element['BSdatepicker']("setStartDate", Q.parseISODateTime(value));
+        this.element['BSdatepicker']("setStartDate", parseISODateTime(value));
     }
     //get_maxValue(): string { }
     set_maxValue(value: string): void {
-        this.element['BSdatepicker']("setEndDate", Q.parseISODateTime(value));
+        this.element['BSdatepicker']("setEndDate", parseISODateTime(value));
     }
 }

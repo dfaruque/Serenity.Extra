@@ -1,5 +1,4 @@
-﻿import { PasswordEditor, PrefixedContext } from "@serenity-is/corelib";
-import { initFormType } from "@serenity-is/corelib/q";
+﻿import { PasswordEditor, PrefixedContext, initFormType } from "@serenity-is/corelib";
 
 export interface ResetPasswordForm {
     NewPassword: PasswordEditor;
@@ -7,7 +6,7 @@ export interface ResetPasswordForm {
 }
 
 export class ResetPasswordForm extends PrefixedContext {
-    static formKey = 'Membership.ResetPassword';
+    static readonly formKey = 'Membership.ResetPassword';
     private static init: boolean;
 
     constructor(prefix: string) {

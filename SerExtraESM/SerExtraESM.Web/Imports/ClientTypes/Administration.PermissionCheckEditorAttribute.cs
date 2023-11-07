@@ -1,25 +1,23 @@
 ﻿using Serenity;
 using Serenity.ComponentModel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SerExtraESM.Administration
+namespace SerExtraESM.Administration;
+
+public partial class PermissionCheckEditorAttribute : CustomEditorAttribute
 {
-    public partial class PermissionCheckEditorAttribute : CustomEditorAttribute
+    public const string Key = "SerExtraESM.Administration.PermissionCheckEditor";
+
+    public PermissionCheckEditorAttribute()
+        : base(Key)
     {
-        public const string Key = "SerExtraESM.Administration.PermissionCheckEditor";
+    }
 
-        public PermissionCheckEditorAttribute()
-            : base(Key)
-        {
-        }
-
-        public bool ShowRevoke
-        {
-            get { return GetOption<bool>("showRevoke"); }
-            set { SetOption("showRevoke", value); }
-        }
+    public bool ShowRevoke
+    {
+        get { return GetOption<bool>("showRevoke"); }
+        set { SetOption("showRevoke", value); }
     }
 }

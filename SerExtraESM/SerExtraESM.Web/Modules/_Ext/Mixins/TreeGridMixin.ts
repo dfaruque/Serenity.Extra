@@ -1,14 +1,12 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { coalesce, DataGrid, Format, first, htmlEncode, ListResponse, RemoteView, SlickTreeHelper, toGrouping } from "@serenity-is/corelib"
 import { FormatterContext } from "@serenity-is/sleekgrid"
-import { RemoteView, Format } from '@serenity-is/corelib/slick';
 
 ///**
 // * A mixin that can be applied to a DataGrid for tree functionality
 // */
 export class TreeGridMixin<TItem> {
 
-    private dataGrid: Serenity.DataGrid<TItem, any>;
+    private dataGrid: DataGrid<TItem, any>;
     private getId: (item: TItem) => any;
 
     constructor(private options: TreeGridMixinOptions<TItem>) {
@@ -35,20 +33,20 @@ export class TreeGridMixin<TItem> {
         };
 
         var oldProcessData = (dg as any).onViewProcessData;
-        (dg as any).onViewProcessData = function (response: Serenity.ListResponse<TItem>) {
+        (dg as any).onViewProcessData = function (response: ListResponse<TItem>) {
 
             response = oldProcessData.apply(this, [response]);
             response.Entities = TreeGridMixin.applyTreeOrdering(response.Entities, getId, options.getParentId);
-            Serenity.SlickTreeHelper.setIndents(response.Entities, getId, options.getParentId,
+            SlickTreeHelper.setIndents(response.Entities, getId, options.getParentId,
                 (options.initialCollapse && options.initialCollapse()) || false);
             return response;
         };
 
         if (options.toggleField) {
-            var col = Q.first(dg.getGrid().getColumns(), x => x.field == options.toggleField);
+            var col = first(dg.getGrid().getColumns(), x => x.field == options.toggleField);
             col.format = TreeGridMixin.treeToggle(() => dg.view, getId,
-                col.format || (ctx => Q.htmlEncode(ctx.value)));
-            //col.formatter = Serenity.SlickHelper.convertToFormatter(col.format);
+                col.format || (ctx => htmlEncode(ctx.value)));
+            //col.formatter = SlickHelper.convertToFormatter(col.format);
         }
     }
 
@@ -56,18 +54,18 @@ export class TreeGridMixin<TItem> {
     //     * Expands / collapses all rows in a grid automatically
     //     */
     toggleAll(): void {
-        Serenity.SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(),
+        SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(),
             !this.dataGrid.view.getItems().every(x => (x as any)._collapsed == true));
 
         this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
     }
     expandAll(): void {
-        Serenity.SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), false);
+        SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), false);
 
         this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
     }
     collapsedAll(): void {
-        Serenity.SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), true);
+        SlickTreeHelper.setCollapsed(this.dataGrid.view.getItems(), true);
 
         this.dataGrid.view.setItems(this.dataGrid.view.getItems(), true);
     }
@@ -81,8 +79,8 @@ export class TreeGridMixin<TItem> {
     static applyTreeOrdering<TItem>(items: TItem[], getId: (item: TItem) => any, getParentId: (item: TItem) => any): TItem[] {
         var result: TItem[] = [];
 
-        var byId = Q.toGrouping(items, getId);
-        var byParentId = Q.toGrouping(items, getParentId);
+        var byId = toGrouping(items, getId);
+        var byParentId = toGrouping(items, getParentId);
         var visited = {};
 
         function takeChildren(theParentId: any) {
@@ -111,7 +109,7 @@ export class TreeGridMixin<TItem> {
     }
 
     static filterById<TItem>(item: TItem, view: RemoteView<TItem>, idProperty, getParentId: (x: TItem) => any): boolean {
-        return Serenity.SlickTreeHelper.filterCustom(item, function (x) {
+        return SlickTreeHelper.filterCustom(item, function (x) {
             var parentId = getParentId(x);
             if (parentId == null) {
                 return null;
@@ -128,13 +126,13 @@ export class TreeGridMixin<TItem> {
             var text = formatter(ctx);
             var view = getView();
             if (!view) return;
-            var indent = Q.coalesce(ctx.item._indent, 0);
+            var indent = coalesce(ctx.item._indent, 0);
             var spacer = '<span class="s-TreeIndent" style="width:' + 15 * indent + 'px"></span>';
             var id = getId(ctx.item);
             var idx = view.getIdxById(ctx.item.__id || id);
             var next = view.getItemByIdx(idx + 1);
             if (next != null) {
-                var nextIndent = Q.coalesce(next._indent, 0);
+                var nextIndent = coalesce(next._indent, 0);
                 if (nextIndent > indent) {
                     if (!!!!ctx.item._collapsed) {
                         return spacer + '<span class="s-TreeToggle s-TreeExpand"></span>' + text;
@@ -170,7 +168,7 @@ export class TreeGridMixin<TItem> {
             if (e.shiftKey) {
                 view.beginUpdate();
                 try {
-                    Serenity.SlickTreeHelper.setCollapsed(view.getItems(), !!item._collapsed);
+                    SlickTreeHelper.setCollapsed(view.getItems(), !!item._collapsed);
                     view.setItems(view.getItems(), true);
                 }
                 finally {
@@ -182,7 +180,7 @@ export class TreeGridMixin<TItem> {
 }
 export interface TreeGridMixinOptions<TItem> {
     // data grid object
-    grid: Serenity.DataGrid<TItem, any>;
+    grid: DataGrid<TItem, any>;
     idField?: string;
     // a function to get parent id
     getParentId: (item: TItem) => any;

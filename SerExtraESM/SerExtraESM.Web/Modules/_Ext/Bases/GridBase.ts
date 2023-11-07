@@ -1,20 +1,19 @@
 /// <reference path="../_q/_q.d.ts" />
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
-import * as SleekGrid from "@serenity-is/sleekgrid"
+import { confirmDialog, Criteria, DateEditor, Decorators, deepClone, EntityGrid, EnumFormatter, EnumTypeRegistry, format, getLookup, GridRowSelectionMixin, GroupInfo, isEmptyOrNull, isValue, ListRequest, ListResponse, notifyWarning, NumberFormatter, postToService, resolveUrl, RetrieveRequest, serviceRequest, text, toId } from "@serenity-is/corelib"
 import { DialogBase } from "./DialogBase"
 import { ListReportRequest } from "../../ServerTypes/_Ext/ListReportRequest"
 import { GridItemPickerEditor } from "../Editors/GridItemPicker/GridItemPickerEditor"
 import { GridItemPickerDialog } from "../Editors/GridItemPicker/GridItemPickerDialog"
 import * as q from "../_q/_q"
 import { usingSlickAutoColumnSize, usingSlickGridEditors } from "../Utils/Using"
-import * as Ext from "@serenity-is/extensions"
-import { GroupInfo } from "@serenity-is/corelib/slick"
+import { ExcelExportHelper, ReportHelper } from "@serenity-is/extensions"
+import { Column, Group, GroupItemMetadataProvider } from "@serenity-is/sleekgrid"
+import { DefaultMainGridOptions, ListExcelServiceMethodName, useSerenityInlineEditors } from "../_q/_q"
 
-@Serenity.Decorators.filterable()
-export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptions> {
+@Decorators.filterable()
+export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
 
-    protected get_ExtGridOptions(): ExtGridOptions { return Q.deepClone(q.DefaultMainGridOptions); }
+    protected get_ExtGridOptions(): ExtGridOptions { return deepClone(DefaultMainGridOptions); }
     protected isPickerMode(): boolean { return this.element.hasClass('RowSelectionCheckGrid'); }
     protected getGrouping(): GroupInfo<TItem>[] { return []; }
 
@@ -25,7 +24,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     nextRowNumber = 1;
     public autoColumnSizePlugin;
 
-    public rowSelection = new Serenity.GridRowSelectionMixin(this);
+    public rowSelection: GridRowSelectionMixin;
     public pickerDialog: GridItemPickerDialog;
 
     constructor(container: JQuery, options?: TOptions) {
@@ -41,6 +40,11 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         if (grouping.length > 0)
             this.setGrouping(grouping);
 
+    }
+
+    protected createToolbarExtensions() {
+        super.createToolbarExtensions();
+        this.rowSelection = new GridRowSelectionMixin(this);
     }
 
     protected markupReady(): void {
@@ -62,7 +66,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         let reportRequest = this.getReportRequest();
 
         if (reportRequest.ListExcelServiceMethodName) {
-            buttons.push(Ext.ExcelExportHelper.createToolButton({
+            buttons.push(ExcelExportHelper.createToolButton({
                 grid: this,
                 service: this.getService() + '/' + reportRequest.ListExcelServiceMethodName,
                 onViewSubmit: () => this.onViewSubmit(),
@@ -77,7 +81,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                 onClick: () => {
                     let request = this.getReportRequest();
                     if (request)
-                        Ext.ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: request } });
+                        ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: request } });
                 }
             });
 
@@ -87,7 +91,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                 onClick: () => {
                     let request = this.getReportRequest();
                     if (request)
-                        Ext.ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: request }, extension: 'html' });
+                        ReportHelper.execute({ reportKey: reportRequest.ReportKey, params: { request: request }, extension: 'html' });
                 }
             });
 
@@ -98,7 +102,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                 onClick: () => {
                     let request = this.getReportRequest();
                     if (request)
-                        Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + reportRequest.ReportServiceMethodName), request: request, target: '_blank' });
+                        postToService({ service: resolveUrl(this.getService() + '/' + reportRequest.ReportServiceMethodName), request: request, target: '_blank' });
                 }
             });
 
@@ -116,10 +120,10 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     protected getReportRequest(): ListReportRequest {
         let view = this.getView();
 
-        var request = Q.deepClone(view ? view.params : {}) //as _Ext.ReportRequest;
+        var request = deepClone(view ? view.params : {}) //as _Ext.ReportRequest;
         request.ReportServiceMethodName = null;     // if some value found in this property then "view as report" button will appear
         request.ReportKey = null;                   // if some value found in this property then "export to pdf" button will appear
-        request.ListExcelServiceMethodName = q.ListExcelServiceMethodName;  // if some value found in this property then "export to xls" button will appear
+        request.ListExcelServiceMethodName = ListExcelServiceMethodName;  // if some value found in this property then "export to xls" button will appear
         request.EqualityFilterWithTextValue = {};
         request.CustomParameters = {};
 
@@ -130,13 +134,13 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                 let filterValue = request.EqualityFilter[quickFilter.field];
                 if (filterValue && filterValue.length > 0) {
                     if (quickFilter.options.lookupKey) {
-                        let lookup = Q.getLookup(quickFilter.options.lookupKey);
+                        let lookup = getLookup(quickFilter.options.lookupKey);
                         request.EqualityFilterWithTextValue[quickFilter.title] = lookup.itemById[filterValue][lookup.textField];
                     }
                     else if (quickFilter.options.enumKey) {
                         let enumKey = quickFilter.options.enumKey;
-                        let enumValue = Q.toId(filterValue);
-                        request.EqualityFilterWithTextValue[quickFilter.title] = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), enumValue);
+                        let enumValue = toId(filterValue);
+                        request.EqualityFilterWithTextValue[quickFilter.title] = EnumFormatter.format(EnumTypeRegistry.get(enumKey), enumValue);
                     }
                     else if (quickFilter.type == GridItemPickerEditor) {
                         var customFilter = this.findQuickFilter(GridItemPickerEditor, quickFilter.field);
@@ -146,20 +150,20 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                     else {
                         request.EqualityFilterWithTextValue[quickFilter.title] = filterValue;
                     }
-                } else if (quickFilter.type == Serenity.DateEditor) {
-                    let qf = this.findQuickFilter(Serenity.DateEditor, quickFilter.field);
+                } else if (quickFilter.type == DateEditor) {
+                    let qf = this.findQuickFilter(DateEditor, quickFilter.field);
                     let dateFrom = qf.element.val();
                     let dateTo = qf.element.siblings('input').val()
 
                     let filterText = '';
 
-                    if (!Q.isEmptyOrNull(dateFrom))
-                        filterText = Q.format(q.text('Controls.FromDate', 'From {0}'), dateFrom) + ' ';
+                    if (!isEmptyOrNull(dateFrom))
+                        filterText = format(q.text('Controls.FromDate', 'From {0}'), dateFrom) + ' ';
 
-                    if (!Q.isEmptyOrNull(dateTo))
-                        filterText = filterText + Q.format(q.text('Controls.ToDate', 'To {0}'), dateTo);
+                    if (!isEmptyOrNull(dateTo))
+                        filterText = filterText + format(q.text('Controls.ToDate', 'To {0}'), dateTo);
 
-                    if (!Q.isEmptyOrNull(filterText)) {
+                    if (!isEmptyOrNull(filterText)) {
                         request.EqualityFilterWithTextValue[quickFilter.title] = filterText
                     }
                     else if (this.get_ExtGridOptions().ShowAnyInEqualityFilterWithTextValue == true) {
@@ -172,8 +176,8 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
             if (this.filterBar) {
                 let filterBarDisplayText = this.filterBar.get_store().get_displayText();
-                if (!Q.isEmptyOrNull(filterBarDisplayText))
-                    request.EqualityFilterWithTextValue[Q.text('Controls.FilterPanel.EditFilter')] = filterBarDisplayText;
+                if (!isEmptyOrNull(filterBarDisplayText))
+                    request.EqualityFilterWithTextValue[text('Controls.FilterPanel.EditFilter')] = filterBarDisplayText;
             }
 
         }
@@ -181,7 +185,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         return request;
     }
 
-    protected getColumns(): SleekGrid.Column[] {
+    protected getColumns(): Column[] {
         let columns = super.getColumns();
 
         let isEditable = this.getSlickOptions().editable;
@@ -225,7 +229,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                 if (column.sourceItem.editorType == "Lookup") {
                     if (!column.sourceItem.editorParams.autoComplete) {
                         column.format = ctx => {
-                            let lookup = Q.getLookup(column.sourceItem.editorParams.lookupKey);
+                            let lookup = getLookup(column.sourceItem.editorParams.lookupKey);
                             if (ctx.column.sourceItem.editorParams.multiple == true) {
                                 if (ctx.value) {
                                     let items = ctx.value.map(m => lookup.itemById[m]);
@@ -250,7 +254,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                     }
                 } else if (column.sourceItem.filteringType == "Lookup") {
                     column.format = ctx => {
-                        if (Q.isEmptyOrNull(ctx.value)) return emptyText;
+                        if (isEmptyOrNull(ctx.value)) return emptyText;
                         else return ctx.value;
                     };
 
@@ -263,14 +267,14 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
                             let vals = ctx.value as number[];
                             if (vals && vals.length > 0) {
-                                texts = vals.map(m => Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(m))).join(', ');
+                                texts = vals.map(m => EnumFormatter.format(EnumTypeRegistry.get(enumKey), toId(m))).join(', ');
                             }
                             if (texts) return texts;
                             else return emptyText;
 
                         }
                         else {
-                            let text = Serenity.EnumFormatter.format(Serenity.EnumTypeRegistry.get(enumKey), Q.toId(ctx.value));
+                            let text = EnumFormatter.format(EnumTypeRegistry.get(enumKey), toId(ctx.value));
                             if (text) return text;
                             else return emptyText;
                         }
@@ -298,12 +302,12 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
                         }
                     }
 
-                    column.format = ctx => Serenity.NumberFormatter.format(ctx.value, formatSrt);
+                    column.format = ctx => NumberFormatter.format(ctx.value, formatSrt);
                 }
 
                 //editor
                 if (isEditable == true && column.sourceItem.readOnly != true) {
-                    if (q.useSerenityInlineEditors) {
+                    if (useSerenityInlineEditors) {
                         column.editor = SerenityInlineEditor as any;
                     } else {
                         let editorType = column.sourceItem.editorType;
@@ -347,7 +351,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             minWidth: 40,
             maxWidth: 40,
             visible: extOptions.ShowRowNumberColumn,
-            format: ctx => {
+            format: (ctx: any) => {
                 if (!ctx.item.RowNum) {
                     ctx.item.RowNum = this.nextRowNumber++;
                 }
@@ -389,7 +393,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         }
 
         if (extOptions.ShowRowSelectionCheckboxColumn == true) {
-            let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+            let rowSelectionCol = GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
             rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
             columns.unshift(rowSelectionCol);
         }
@@ -397,7 +401,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         if (this.isPickerMode()) { //show checkbox column in picker mode
             let options = (this.options as any) as GridItemPickerEditorOptions;
             if (!options.multiple && !options.gridType) {
-                Q.notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
+                notifyWarning("Could not determine multiple/single. Probably there is no 'options' parameter in grid's constructor.");
             }
 
             //remove edit link in picker mode
@@ -407,7 +411,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             });
 
             if (options.multiple == true) {
-                let rowSelectionCol = Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
+                let rowSelectionCol = GridRowSelectionMixin.createSelectColumn(() => this.rowSelection);
                 rowSelectionCol.width = rowSelectionCol.minWidth = rowSelectionCol.maxWidth = 27
                 columns.unshift(rowSelectionCol);
             } else {
@@ -438,12 +442,12 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             grid.registerPlugin(this.autoColumnSizePlugin);
         }
 
-        grid.registerPlugin(new SleekGrid.GroupItemMetadataProvider());
+        grid.registerPlugin(new GroupItemMetadataProvider());
 
         return grid;
     }
 
-    public resetColumns(columns: SleekGrid.Column[]) {
+    public resetColumns(columns: Column[]) {
 
         this.slickContainer.fadeTo(0, 0);
 
@@ -469,7 +473,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
 
         this.slickGrid.setOptions({ forceFitColumns: false });
 
-        let allVisibleColumns = this.autoColumnSizePlugin.resizeAllColumns().filter(f => f.visible != false) as SleekGrid.Column[];// this.allColumns;
+        let allVisibleColumns = this.autoColumnSizePlugin.resizeAllColumns().filter(f => f.visible != false) as Column[];// this.allColumns;
 
 
         let allVisibleColumnWidth = 0;
@@ -583,7 +587,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         let opt = super.getViewOptions();
 
         if (this.usePager())
-            opt.rowsPerPage = q.DefaultMainGridOptions.RowsPerPage;
+            opt.rowsPerPage = DefaultMainGridOptions.RowsPerPage;
 
         return opt;
     }
@@ -615,15 +619,15 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
     protected onInlineActionClick(target: JQuery, recordId, item: TItem): void {
         if (target.hasClass('delete-row')) {
             if (this.isReadOnly == true) {
-                Q.notifyWarning('Read only records could not be deleted!');
+                notifyWarning('Read only records could not be deleted!');
             } else {
-                Q.confirm(q.text('Db.Administration.Translation.DeleteWarning', 'Delete record?'), () => {
+                confirmDialog(q.text('Db.Administration.Translation.DeleteWarning', 'Delete record?'), () => {
                     let o = this as any;
                     if (o.deleteEntity) { //for in-memory grid
                         o.deleteEntity(recordId);
                     }
                     else {
-                        Q.serviceRequest(this.getService() + '/Delete', { EntityId: recordId }, response => {
+                        serviceRequest(this.getService() + '/Delete', { EntityId: recordId }, response => {
                             this.refresh();
                         });
                     }
@@ -636,9 +640,9 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             this.editItem(recordId);
         }
         else if (target.hasClass('print-row')) {
-            let request: Serenity.RetrieveRequest = { EntityId: recordId };
+            let request: RetrieveRequest = { EntityId: recordId };
 
-            Q.postToService({ service: Q.resolveUrl(this.getService() + '/' + this.getPrintRowServiceMethod()), request: request, target: '_blank' });
+            postToService({ service: resolveUrl(this.getService() + '/' + this.getPrintRowServiceMethod()), request: request, target: '_blank' });
         }
         else if (target.hasClass('select-row')) {
             this.rowSelection.setSelectedKeys([recordId]);
@@ -659,7 +663,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             }
         } else if (grouping_fields.length > 0) {
 
-            let generateRowNumber = (groups: SleekGrid.Group<any>[]) => {
+            let generateRowNumber = (groups: Group<any>[]) => {
 
                 for (let gi = 0; gi < groups.length; gi++) {
                     let subGroups = groups[gi].groups;
@@ -705,7 +709,7 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
         return sortBy;
     }
 
-    protected onViewProcessData(response: Serenity.ListResponse<TItem>): Serenity.ListResponse<TItem> {
+    protected onViewProcessData(response: ListResponse<TItem>): ListResponse<TItem> {
         let r = super.onViewProcessData(response);
 
         if (this.get_ExtGridOptions().ShowRowNumberColumn == true) {
@@ -747,21 +751,21 @@ export class GridBase<TItem, TOptions> extends Serenity.EntityGrid<TItem, TOptio
             return false;
         }
 
-        var request = this.view.params as Serenity.ListRequest;
+        var request = this.view.params as ListRequest;
 
         let options = (this.options as any) as GridItemPickerEditorOptions;
 
         if (options.filteringCriteria) {
-            request.Criteria = Serenity.Criteria.and(request.Criteria, options.filteringCriteria);
+            request.Criteria = Criteria.and(request.Criteria, options.filteringCriteria);
         }
 
-        if (options.filterField && Q.isValue(options.filterValue)) {
+        if (options.filterField && isValue(options.filterValue)) {
             request.EqualityFilter = request.EqualityFilter || {};
             request.EqualityFilter[options.filterField] = options.filterValue;
         }
 
         let cascadeField = options.cascadeField || options.cascadeFrom;
-        if (cascadeField && Q.isValue(options.cascadeValue)) {
+        if (cascadeField && isValue(options.cascadeValue)) {
             request.EqualityFilter = request.EqualityFilter || {};
             request.EqualityFilter[cascadeField] = options.cascadeValue;
         }

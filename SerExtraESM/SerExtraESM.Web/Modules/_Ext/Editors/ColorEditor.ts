@@ -1,10 +1,10 @@
-import * as Serenity from "@serenity-is/corelib"
+import { Decorators, IGetEditValue, ISetEditValue, TemplatedWidget } from "@serenity-is/corelib"
 import { usingBootstrapColorPicker } from "../Utils/Using"
 
-@Serenity.Decorators.registerEditor('_Ext.ColorEditor', [Serenity.IGetEditValue, Serenity.ISetEditValue])
-@Serenity.Decorators.element("<div/>")
-export class ColorEditor extends Serenity.TemplatedWidget<any>
-    implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+@Decorators.registerEditor('_Ext.ColorEditor', [IGetEditValue, ISetEditValue])
+@Decorators.element("<div/>")
+export class ColorEditor extends TemplatedWidget<any>
+    implements IGetEditValue, ISetEditValue {
     protected getTemplate() {
         usingBootstrapColorPicker()
 

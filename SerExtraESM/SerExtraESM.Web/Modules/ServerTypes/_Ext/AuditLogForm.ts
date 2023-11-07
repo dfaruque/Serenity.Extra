@@ -1,7 +1,6 @@
-﻿import { StringEditor, EnumEditor, DateTimeEditor, IntegerEditor, LookupEditor, PrefixedContext } from "@serenity-is/corelib";
+﻿import { StaticTextBlock } from "@/_Ext/Editors/StaticTextBlock";
+import { StringEditor, EnumEditor, DateTimeEditor, IntegerEditor, LookupEditor, PrefixedContext, initFormType } from "@serenity-is/corelib";
 import { AuditActionType } from "./AuditActionType";
-import { StaticTextBlock } from "@/_Ext/Editors/StaticTextBlock";
-import { initFormType } from "@serenity-is/corelib/q";
 
 export interface AuditLogForm {
     EntityTableName: StringEditor;
@@ -16,7 +15,7 @@ export interface AuditLogForm {
 }
 
 export class AuditLogForm extends PrefixedContext {
-    static formKey = '_Ext.AuditLog';
+    static readonly formKey = '_Ext.AuditLog';
     private static init: boolean;
 
     constructor(prefix: string) {

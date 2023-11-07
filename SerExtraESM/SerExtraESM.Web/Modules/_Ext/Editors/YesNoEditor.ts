@@ -1,16 +1,15 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, Select2Editor, text } from "@serenity-is/corelib"
 
-@Serenity.Decorators.registerEditor('_Ext.YesNoEditor')
-export class YesNoEditor extends Serenity.Select2Editor<any, any> {
+@Decorators.registerEditor('_Ext.YesNoEditor')
+export class YesNoEditor extends Select2Editor<any, any> {
     public getEditValue(property, target) { target[property.name] = this.valueAsBoolean; }
     public setEditValue(source, property) { this.valueAsBoolean = source[property.name]; }
 
     constructor(container: JQuery) {
         super(container, null);
 
-        this.addOption("1", Q.text('Dialogs.YesButton'));
-        this.addOption("0", Q.text('Dialogs.NoButton'));
+        this.addOption("1", text('Dialogs.YesButton'));
+        this.addOption("0", text('Dialogs.NoButton'));
     }
 
     public get valueAsBoolean(): boolean {

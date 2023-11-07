@@ -1,4 +1,3 @@
-import * as Serenity from "@serenity-is/corelib"
 import { GridEditorBase } from "./GridEditorBase"
 
 export class JsonGridEditorBase<TEntity> extends GridEditorBase<TEntity> {

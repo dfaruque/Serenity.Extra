@@ -1,5 +1,4 @@
-﻿import { StringEditor, EmailAddressEditor, LookupEditor, ImageUploadEditor, PasswordEditor, PrefixedContext } from "@serenity-is/corelib";
-import { initFormType } from "@serenity-is/corelib/q";
+﻿import { StringEditor, EmailAddressEditor, LookupEditor, ImageUploadEditor, PasswordEditor, PrefixedContext, initFormType } from "@serenity-is/corelib";
 
 export interface UserForm {
     Username: StringEditor;
@@ -13,7 +12,7 @@ export interface UserForm {
 }
 
 export class UserForm extends PrefixedContext {
-    static formKey = 'Administration.User';
+    static readonly formKey = 'Administration.User';
     private static init: boolean;
 
     constructor(prefix: string) {

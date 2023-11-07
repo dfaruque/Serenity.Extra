@@ -1,6 +1,6 @@
-﻿import { AuditLogViewerRequest } from "./AuditLogViewerRequest";
+﻿import { ServiceOptions, serviceRequest } from "@serenity-is/corelib";
+import { AuditLogViewerRequest } from "./AuditLogViewerRequest";
 import { AuditLogViewerResponse } from "./AuditLogViewerResponse";
-import { ServiceOptions, serviceRequest } from "@serenity-is/corelib/q";
 
 export namespace AuditLogViewerService {
     export const baseUrl = 'AuditLogViewer';

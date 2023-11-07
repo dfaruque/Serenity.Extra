@@ -1,16 +1,15 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, deepClone, EditorUtils, EntityDialog, getInstanceType, isEmptyOrNull, ToolButton, tryFirst, Widget } from "@serenity-is/corelib"
 import { GridBase } from "./GridBase"
 import * as q from "../_q/_q"
 import * as DialogUtils from "../Utils/DialogUtils"
 import { hasPermission } from "@/Administration/User/Authentication/Authorization"
 
-@Serenity.Decorators.responsive()
-@Serenity.Decorators.maximizable()
-export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity, TOptions> {
+@Decorators.responsive()
+@Decorators.maximizable()
+export class DialogBase<TEntity, TOptions> extends EntityDialog<TEntity, TOptions> {
 
     protected get_ExtDialogOptions(): ExtDialogOptions {
-        return Q.deepClone(q.DefaultEntityDialogOptions);
+        return deepClone(q.DefaultEntityDialogOptions);
     }
 
     protected getTenantIdEditor() { return this.form.TenantId; }
@@ -52,7 +51,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
             let $FirstCategory = this.element.find('.first-category > .category-title');
 
-            if (Q.isEmptyOrNull($FirstCategory.find('.category-anchor').text()))
+            if (isEmptyOrNull($FirstCategory.find('.category-anchor').text()))
                 $FirstCategory.hide();
 
         }
@@ -128,7 +127,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
                 if (this.form[editor].widgetName) {
 
                     try {
-                        Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
+                        EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
                     } catch { }
                 }
             }
@@ -136,7 +135,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
         }
     }
 
-    protected getToolbarButtons(): Serenity.ToolButton[] {
+    protected getToolbarButtons(): ToolButton[] {
         let buttons = super.getToolbarButtons();
         let extOptions = this.get_ExtDialogOptions();
 
@@ -184,7 +183,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
             //                if (entityId) {
 
-            //                    Q.serviceRequest(this.getService() + '/List', {}, (response: Serenity.ListResponse<any>) => {
+            //                    Q.serviceRequest(this.getService() + '/List', {}, (response: ListResponse<any>) => {
             //                        let entityList = response.Entities;
 
             //                        let dlg = new ReplaceRowDialog({
@@ -229,7 +228,7 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
             //}
 
             //clone button click event customization
-            let cloneButton = Q.tryFirst(buttons, x => x.cssClass == 'clone-button');
+            let cloneButton = tryFirst(buttons, x => x.cssClass == 'clone-button');
 
             cloneButton.onClick = () => {
 
@@ -239,8 +238,8 @@ export class DialogBase<TEntity, TOptions> extends Serenity.EntityDialog<TEntity
 
                 var cloneEntity = this.getCloningEntity();
 
-                Serenity.Widget.create({
-                    type: Q.getInstanceType(this),
+                Widget.create({
+                    type: getInstanceType(this),
                     init: (dlg: DialogBase<any, any>) => {
                         this.parentGrid.initDialog(dlg);
                         dlg.loadEntityAndOpenDialog(cloneEntity, null);

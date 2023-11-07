@@ -1,10 +1,9 @@
-import * as Serenity from "@serenity-is/corelib"
-import * as Q from "@serenity-is/corelib/q"
+import { Decorators, getType, notifyWarning, TemplatedDialog, text } from "@serenity-is/corelib"
 import * as q from "../../_q/_q"
 import { GridBase } from "../../Bases/GridBase"
 
-@Serenity.Decorators.registerClass()
-export class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPickerEditorOptions> {
+@Decorators.registerClass()
+export class GridItemPickerDialog extends TemplatedDialog<GridItemPickerEditorOptions> {
     getTemplate() {
         return `<div id="~_RowSelectionCheckGrid" 
                 class="RowSelectionCheckGrid ${this.options.multiple == true ? 'multi-select' : 'single-select'}" 
@@ -20,7 +19,7 @@ export class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPicke
 
 
             try {
-                var gridType = Q.getType(options.gridType) as any;
+                var gridType = getType(options.gridType) as any;
 
                 this.checkGrid = new gridType(this.byId("RowSelectionCheckGrid"), options);
                 if (options.preSelectedKeys)
@@ -41,18 +40,18 @@ export class GridItemPickerDialog extends Serenity.TemplatedDialog<GridItemPicke
     getDialogOptions() {
         let opt = super.getDialogOptions();
         opt.buttons = [{
-            text: Q.text("Dialogs.OkButton"),
+            text: text("Dialogs.OkButton"),
             click: () => {
                 var selectedItems = this.checkGrid.selectedItems;
                 if (!selectedItems.length) {
-                    Q.notifyWarning("Please select some items!");
+                    notifyWarning("Please select some items!");
                     return
                 }
                 this.onSuccess(selectedItems);
                 this.dialogClose();
             }
         }, {
-            text: Q.text("Dialogs.CancelButton"),
+            text: text("Dialogs.CancelButton"),
             click: () => {
                 this.dialogClose()
             }
