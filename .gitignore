@@ -266,3 +266,4 @@ __pycache__/
 /SerExtra/SerExtra.Web/Properties/PublishProfiles
 /SerExtraNet5/SerExtraNet5.Web/wwwroot/Scripts/site/SerExtraNet5.Web.js
 /SerExtraNet5/SerExtraNet5.Web/App_Data
+/SerExtraESM/SerExtraESM.Web/wwwroot/esm
