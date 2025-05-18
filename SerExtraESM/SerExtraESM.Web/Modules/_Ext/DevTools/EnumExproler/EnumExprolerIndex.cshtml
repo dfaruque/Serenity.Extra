@@ -3,24 +3,22 @@
     ViewData["Title"] = "Enum Exproler";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading"><h4>Enum Explorer <small style="color:white">Summery</small> </h4></div>
-    <div class="panel-body">
+<div class="card m-3">
+    <div class="card-header"><h4>Enum Explorer <small>Summery</small> </h4></div>
+    <div class="card-body">
         <h4>Total Enums: @Model.EnumInfos.Count</h4>
     </div>
 </div>
-<hr />
 
 <div class="row">
-
     @foreach (var enumInfo in Model.EnumInfos)
     {
         <div class="col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card m-3">
+                <div class="card-header">
                     <h4> @enumInfo.EnumName <small>@enumInfo.EnumFullName</small></h4>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <table class="table table-striped table-condensed">
                         <tr>
                             <th>Name</th>
