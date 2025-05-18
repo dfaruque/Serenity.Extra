@@ -123,12 +123,12 @@ export function bindDateTimeEditorChange(editor, handler): void {
     editor.element.closest('.field').find('.inplace-now').click(handler);
 }
 
-export function setMinDate(editor: DateEditor | DateTimeEditor, value: Date): void {
+export function setMinDate(editor: DateEditor | DateTimeEditor | DateTimePickerEditor, value: Date): void {
     editor.element.datepicker("option", "minDate", value);
     editor.set_minDate(value);
 }
 
-export function setMaxDate(editor: DateEditor | DateTimeEditor, value: Date): void {
+export function setMaxDate(editor: DateEditor | DateTimeEditor | DateTimePickerEditor, value: Date): void {
     let date = new Date(value.getFullYear(), value.getMonth(), value.getDate() + 1);
     date.setMilliseconds(-1);
     editor.element.datepicker("option", "maxDate", date);
