@@ -233,7 +233,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
                             if (ctx.column.sourceItem.editorParams.multiple == true) {
                                 if (ctx.value) {
                                     let items = ctx.value.map(m => lookup.itemById[m]);
-                                    let texts = items.map(m => m[lookup.textField]);
+                                    let texts = items.map(m => m ? m[lookup.textField] : '?');
 
                                     return texts.length > 0 ? texts.join(', ') : emptyText;
                                 }
