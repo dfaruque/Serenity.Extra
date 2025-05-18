@@ -9,6 +9,7 @@ namespace MVC
             public static class AuditLog
             {
                 public const string AuditLogIndex = "~/Modules/_Ext/AuditLog/AuditLogIndex.cshtml";
+                public const string AuditLogListReport = "~/Modules/_Ext/AuditLog/AuditLogListReport.cshtml";
             }
 
             public static class DevTools
@@ -21,6 +22,11 @@ namespace MVC
                 public static class CompareEntityToDB
                 {
                     public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static class EnumExproler
+                {
+                    public const string EnumExprolerIndex = "~/Modules/_Ext/DevTools/EnumExproler/EnumExprolerIndex.cshtml";
                 }
 
                 public static class GenerateMigrationFromEntity
