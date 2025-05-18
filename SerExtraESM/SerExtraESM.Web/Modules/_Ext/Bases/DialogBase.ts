@@ -47,13 +47,7 @@ export class DialogBase<TEntity, TOptions> extends EntityDialog<TEntity, TOption
         }
 
         if (extOptions.HideCategoyLinksBar == true) {
-            this.element.find('.category-links').hide();
-
-            let $FirstCategory = this.element.find('.first-category > .category-title');
-
-            if (isEmptyOrNull($FirstCategory.find('.category-anchor').text()))
-                $FirstCategory.hide();
-
+            this.hideCategoyLinksBar();
         }
 
         if (extOptions.ShowKeyboardLayoutButtonInToolbar == true) {
@@ -97,6 +91,15 @@ export class DialogBase<TEntity, TOptions> extends EntityDialog<TEntity, TOption
         //temporary fix for set grid editor height
         setTimeout(() => { this.onAfterSetDialogSize(); }, 200)
 
+    }
+
+    protected hideCategoyLinksBar() {
+        this.element.find('.category-links').hide();
+
+        let $FirstCategory = this.element.find('.first-category > .category-title');
+
+        if (isEmptyOrNull($FirstCategory.find('.category-anchor').text()))
+            $FirstCategory.hide();
     }
 
     protected onDialogClose() {
