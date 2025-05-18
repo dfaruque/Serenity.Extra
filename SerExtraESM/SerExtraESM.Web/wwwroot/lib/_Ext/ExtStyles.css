@@ -22,7 +22,7 @@ body:lang(bn) {
     margin-bottom: 0;
 }
 
-/* unset roundness ---------------------------------------*/
+/* unset roundness ---------------------------------------
 .box, .ui-corner-top, section.content > .s-DataGrid,
 .s-QuickSearchBar, .quick-search-icon, .s-QuickSearchInput, .quick-filters-bar,
 .btn, .tool-button, .button-outer, .inplace-button,
@@ -30,6 +30,7 @@ body:lang(bn) {
 input, textarea {
     border-radius: 1px !important;
 }
+*/
 
 /*.tool-button, .button-outer, button-inner {
     border-color: #ddd !important;
@@ -47,10 +48,10 @@ input, textarea {
     }*/
 
 /* Form Styles ---------------------------------------*/
-.field > input, .field > textarea,
+.field > input:not([type=checkbox]), .field > textarea,
 .field > .select2-container > .select2-choice,
 .field > .select2-container > .select2-choices {
-    border-left-width: 5px !important;
+  border-left-width: 5px !important;
 }
 
 .required:not(.readonly),
