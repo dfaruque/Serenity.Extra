@@ -102,9 +102,14 @@ export function setEditorCategoryLabel(editor: Widget<any>, value: string) {
     categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).text(value);
 }
 
-export function hideEditorCategory(editor: Widget<any>, value: boolean = true) {
-    if (value == true)
+export function hideEditorCategory(editor: Widget<any>, value: boolean = true, clearEditorValue: boolean = true) {
+    if (value == true) {
         editor.element.closest('.category').hide();
+
+        if (clearEditorValue) {
+            editor.element.closest('.category').find('input.editor').val('');
+        }
+    }
     else
         editor.element.closest('.category').show();
 
@@ -112,9 +117,11 @@ export function hideEditorCategory(editor: Widget<any>, value: boolean = true) {
 
     let categoryAnchorName = categoryAnchor.attr('name');
     if (value == true)
-        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide();
+        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).hide()
+            .next('.separator').hide();
     else
-        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).show();
+        categoryAnchor.closest('.s-PropertyGrid').find(`a[href='#${categoryAnchorName}']`).show()
+            .next('.separator').show();;
 }
 
 export function hideCategories(containerElement: JQuery, value: boolean = true) {
@@ -144,10 +151,12 @@ export function hideFieldsAndCategories(containerElement: JQuery, value: boolean
     hideCategories(containerElement);
 }
 
-export function hideField(editor: Widget<any>, value: boolean = true) {
+export function hideField(editor: Widget<any>, value: boolean = true, clearEditorValue: boolean = true) {
     if (editor) {
-        if (value == true)
+        if (value == true) {
             editor.element.closest('.field').hide();
+            EditorUtils.setValue(editor, '');
+        }
         else
             editor.element.closest('.field').show();
     }
