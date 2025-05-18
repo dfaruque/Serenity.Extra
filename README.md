@@ -1,15 +1,15 @@
 # Serenity.Extra
 
-Name of the repo says that this is an EXTRA of my Beloved https://github.com/volkanceylan/Serenity platform
+The name of the repo says that this is an EXTRA of my Beloved https://github.com/volkanceylan/Serenity platform
 
 It is just some useful utilities and some extra functionalities like 
-- Showing lookup text instead of id value in grid.
+- Showing lookup text instead of ID value in the grid.
 - Automatic width adjustment of grid columns.
-- Adding export report button automatically in grid if a report service method is defined.
-- Added funtionality to make a detail grid editable (inline)
-- Added some useful function in q (Not Q).
+- Added functionality to make a detail grid editable (inline)
+- Added some useful functions in q (Not Q).
 - Audit Log in a single Table and a nice viewer.
-- Replace Row (useful for deleting a record and replace the dependants records with another record)
+- Compare the database schema with the entity/row
+- Generating database migration from entity/row
 - Added some editors
    - Grid Item Picker Editor
    - AutoCompleteEditor
@@ -18,11 +18,31 @@ It is just some useful utilities and some extra functionalities like
    - EmptyLookupEditor
    - StaticTextBlock
    
-## How to use (for .net old framework)
-1. Install NuGet Package Serenity.Extra
-4. If want to apply Serenity.Extra css then you could add line in Content\site\CssBundles.json
+## How to use (for .net 6+ and ES module)
+1. Copy the **Modules/_Ext** folder from the **SerExtraESM** project and place it accordingly.
+2. Copy the **wwwroot/lib/_Ext** folder from the **SerExtraESM** project
+3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
+4. If you want to apply Serenity.Extra CSS, then you could add a line in appsettings.bundles.json
+`"~/lib/_Ext/ExtStyles.css"`
+5. If you want to use code generator custom templates, then follow **sergen.json** file from **SerExtraESM** project
+6. See LanguageGrid.ts and LanguageDialog.ts for example.
+
+## How to use (for .net 5+)
+1. Copy the **Modules/_Ext** folder from the SerExtraNet5 project and place it accordingly.
+2. Copy the **wwwroot/Modules** folder from the SerExtraNet5 project
+3. Add the following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
+4. If you want to apply Serenity.Extra css then you could add a line in appsettings.bundles.json
 `"~/Modules/_Ext/ExtStyles.css"`
-3. Change Base/Super classes of Dialog.ts and Grid.ts using following mappings
+
+## How to use (for .net old framework)
+1. Install the NuGet Package Serenity.Extra
+4. If you want to apply Serenity.Extra CSS, then you could add a line in Content\site\CssBundles.json
+`"~/Modules/_Ext/ExtStyles.css"`
+5. Add [LookupScript("Administration.User")] on UserRow
+6. Add the following line in ScriptInitialization.ts
+```Q.Config.rootNamespaces.push('_Ext');```
+
+Change Base/Super classes of Dialog.ts and Grid.ts using the following mappings
 
 Serenity Default  |  _Ext
 ------------ | -------------
@@ -30,26 +50,6 @@ Serenity.EntityGrid | _Ext.GridBase
 Serenity.EntityDialog | _Ext.DialogBase
 Common.GridEditorBase | _Ext.GridEditorBase
 Common.EditorDialogBase | _Ext.EditorDialogBase
-
-4. Add [LookupScript("Administration.User")] on UserRow
-5. Add following line in ScriptInitialization.ts
-```Q.Config.rootNamespaces.push('_Ext');```
-
-## How to use (for .net 5+)
-1. Copy the **Modules/_Ext** folder from the SerExtraNet5 project and place it accordingly.
-2. Copy the **wwwroot/Modules** folder from the SerExtraNet5 project
-3. Add following line in ScriptInitialization.ts `Q.Config.rootNamespaces.push('_Ext');`
-4. If want to apply Serenity.Extra css then you could add a line in appsettings.bundles.json
-`"~/Modules/_Ext/ExtStyles.css"`
-
-## How to use (for .net 6+ and ES module)
-1. Copy the **Modules/_Ext** folder from the **SerExtraESM** project and place it accordingly.
-2. Copy the **wwwroot/lib/_Ext** folder from the **SerExtraESM** project
-3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
-4. If want to apply Serenity.Extra css then you could add a line in appsettings.bundles.json
-`"~/lib/_Ext/ExtStyles.css"`
-5. If you want to use code generator custom templates then follow **sergen.json** file from **SerExtraESM** project
-6. See LanguageGrid.ts and LanguageDialog.ts for example.
 
 ## Examples
 
