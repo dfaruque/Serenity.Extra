@@ -1,8 +1,8 @@
-import { hasPermission } from "@/Administration/User/Authentication/Authorization";
 import { Decorators, deepClone, EditorUtils, EntityDialog, getInstanceType, localText, ToolButton, tryFirst, Widget } from "@serenity-is/corelib";
 import { DialogUtils } from "@serenity-is/extensions";
 import { DefaultEntityDialogOptions, showField } from "../_q/_q";
 import { GridBase } from "./GridBase";
+import { hasPermission } from "../../Administration/User/Authentication/Authorization";
 
 @Decorators.maximizable()
 export class DialogBase<TEntity, TOptions> extends EntityDialog<TEntity, TOptions> {
