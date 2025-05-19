@@ -1,0 +1,63 @@
+{{~f = NET5Plus ? "f" : "F"~}}
+{{USING "Serenity.ComponentModel"}}
+{{USING "Serenity.Data"}}
+{{USING "Serenity.Data.Mapping"}}
+{{USING "System.ComponentModel"}}
+
+{{NAMESPACE ModuleNamespace}}{{capture block~}}
+[ConnectionKey("{{ConnectionKey}}"){{if Module}}, Module("{{Module}}"){{end}}, TableName("{{SchemaAndTable}}")]
+[DisplayName("{{Title}}"), InstanceName("{{Title}}"){{if EnableGenerateFields}}, GenerateFields{{end}}]
+[NavigationPermission("{{Module}}:{{ClassName}}:Navigation")]
+[ReadPermission("{{Module}}:{{ClassName}}:Read")]
+[InsertPermission("{{Module}}:{{ClassName}}:Insert")]
+[UpdatePermission("{{Module}}:{{ClassName}}:Update")]
+[DeletePermission("{{Module}}:{{ClassName}}:Delete")]
+{{~if ServiceLookupPermission~}}
+[ServiceLookupPermission("{{Module}}:{{ClassName}}:Lookup")]
+{{~end~}}
+public sealed{{if EnableGenerateFields || EnableRowTemplates}} partial{{end}} class {{RowClassName}} : {{TYPEREFLIST RowBaseClassAndInterfaceList}}
+{   {{~if DeclareJoinConstants && !Joins.empty?~}}
+
+    {{~for j in Joins~}}
+    const string {{j.Alias}} = nameof({{j.Alias}});
+    {{~end~}}
+    {{~end~}}
+    {{~if EnableGenerateFields~}}
+    {{~for x in AllFields~}}
+
+    [{{ATTRREF x.AttributeList}}]
+    public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get => fields.{{x.PropertyName}}[this]; set => fields.{{x.PropertyName}}[this] = value; }
+    {{~end~}}
+    {{~else if EnableRowTemplates~}}
+
+    class RowTemplate
+    {   {{~for x in AllFields~}}
+
+        [{{ATTRREF x.AttributeList}}]
+        public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get; set; }
+        {{~end~}}
+    }
+    {{~if FieldsBaseClass != "Serenity.Data.RowFieldsBase"~}}
+
+    public partial class RowFields : {{TYPEREF FieldsBaseClass}}
+    {
+    }
+    {{~end~}}
+    {{~else~}}
+    {{~for x in Fields}}
+    [{{ATTRREF x.AttributeList}}]
+    public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get => fields.{{x.PropertyName}}[this]; set => fields.{{x.PropertyName}}[this] = value; }
+    public partial class RowFields { public {{x.FieldType}}Field {{x.PropertyName}}; }
+    {{end}}
+    #region Foreign Fields
+    {{~for j in Joins}}{{~for k in j.Fields}}
+    [{{ATTRREF k.AttributeList}}, ReadOnly(true)]
+    public {{TYPEREF k.PropertyType}} {{k.PropertyName}} { get => fields.{{k.PropertyName}}[this]; set => fields.{{k.PropertyName}}[this] = value; }
+    public partial class RowFields { public {{k.FieldType}}Field {{k.PropertyName}}; }
+    {{~end}}{{~end}}
+    #endregion Foreign Fields
+
+    public partial class RowFields : {{TYPEREF FieldsBaseClass}} { }
+    {{~end~}}
+}
+{{~end}}{{NAMESPACEBLOCK block~}}

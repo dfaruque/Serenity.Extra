@@ -1,0 +1,8 @@
+﻿
+@{{SERENITYIMPORT "Decorators"}}.registerClass('{{RootNamespaceDotModuleDot}}{{ClassName}}EditorDialog')
+export class {{ClassName}}EditorDialog extends {{IMPORTFROM "@/_Ext/Editors/EditorDialogBase" "EditorDialogBase"}}<{{RowClassName}}> {
+    protected getFormKey() { return {{SERVERTYPEIMPORT ClassName + "EditorForm"}}.formKey; }
+    protected getRowDefinition() { return {{SERVERTYPEIMPORT RowClassName}}; }
+
+    protected form = new {{ClassName + "EditorForm"}}(this.idPrefix);
+}

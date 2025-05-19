@@ -5,6 +5,29 @@ public static partial class MVC
 {
     public static partial class Views
     {
+        public static partial class _Ext
+        {
+            public static partial class DevTools
+            {
+                public static partial class CompareEntityToDB
+                {
+                    public const string CompareEntityToDBIndex = "~/Modules/_Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static partial class EnumExproler
+                {
+                    public const string EnumExprolerIndex = "~/Modules/_Ext/DevTools/EnumExproler/EnumExprolerIndex.cshtml";
+                }
+
+                public static partial class GenerateMigrationFromEntity
+                {
+                    public const string GenerateMigrationFromEntityIndex = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
+                    public const string GenerateMigrationFromEntityMigrationViewer = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityMigrationViewer.cshtml";
+                    public const string GenerateMigrationFromEntitySuccessMsg = "~/Modules/_Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntitySuccessMsg.cshtml";
+                }
+            }
+        }
+
         public static partial class Common
         {
             public static partial class Dashboard
