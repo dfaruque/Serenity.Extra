@@ -17,8 +17,16 @@ It is just some useful utilities and some extra functionalities like
    - DateTimePickerEditor
    - EmptyLookupEditor
    - StaticTextBlock
-   
-## How to use (for .net 6+ and ES module)
+      
+## How to use (for .net 8+)
+1. Copy the **Modules/_Ext** folder from the **SerExtraNet8** project and place it accordingly.
+3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
+4. If you want to apply Serenity.Extra CSS, then you could copy then add a line in appsettings.bundles.json
+`"~/Content/site/site.ext.css"`
+5. If you want to use code generator custom templates, then follow **sergen.json** file from **SerExtraNet8** project
+6. See LanguageGrid.ts and LanguageDialog.ts for example.
+
+## How to use (for .net 6 with ES module)
 1. Copy the **Modules/_Ext** folder from the **SerExtraESM** project and place it accordingly.
 2. Copy the **wwwroot/lib/_Ext** folder from the **SerExtraESM** project
 3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
