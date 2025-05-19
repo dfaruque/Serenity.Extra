@@ -1,3 +1,7 @@
+:root {
+  --bs-body-font-size: 14px;
+}
+
 .s-site-logo-img {
   content: url(../../Serenity.Assets/logo/white-128.png);
 }
