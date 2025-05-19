@@ -1,8 +1,10 @@
-﻿import { Config, ErrorHandling, HtmlContentEditor, TranslationConfig, getjQuery } from "@serenity-is/corelib";
+import { Config, ErrorHandling, HtmlContentEditor, TranslationConfig, getjQuery } from "@serenity-is/corelib";
 import { gridDefaults } from "@serenity-is/sleekgrid";
 import { getLanguageList } from "./Helpers/LanguageList";
 
 Config.rootNamespaces.push('SerExtraNet8');
+Config.rootNamespaces.push('_Ext');
+
 TranslationConfig.getLanguageList = getLanguageList;
 HtmlContentEditor.CKEditorBasePath = "~/Serenity.Assets/Scripts/ckeditor/";
 gridDefaults.useCssVars = false;
