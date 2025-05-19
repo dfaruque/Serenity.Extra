@@ -1,0 +1,250 @@
+/* bengali language ---------------------------------------*/
+@font-face {
+  font-family: 'Siyam Rupali';
+  src: url('../../fonts/Siyamrupali.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Siyam Rupali ANSI';
+  src: url('../../fonts/Siyam Rupali ANSI.ttf') format('truetype');
+  unicode-range: U+30-39;
+}
+
+body:lang(bn) {
+  font-family: 'Siyam Rupali', Helvetica, Tahoma, Arial, sans-serif !important;
+}
+
+.do-not-change-ANSI-font {
+  font-family: 'Siyam Rupali', Helvetica, Tahoma, Arial, sans-serif !important;
+}
+
+/* unset roundness ---------------------------------------
+.box, .ui-corner-top, section.content > .s-DataGrid,
+.s-QuickSearchBar, .quick-search-icon, .s-QuickSearchInput, .quick-filters-bar,
+.btn, .tool-button, .button-outer, .inplace-button,
+.select2-choice, .select2-arrow, .select2-drop,
+input, textarea {
+    border-radius: 1px !important;
+}
+*/
+
+/* Form Styles ---------------------------------------*/
+.field > input:not([type=checkbox]), .field > textarea,
+.field > .select2-container {
+  border-left-width: 5px !important;
+}
+
+.required:not(.readonly),
+.required:not(.readonly) > .select2-container {
+  border-left-color: #f77 !important;
+}
+
+.field > .caption > sup {
+  display: none !important;
+}
+
+.s-Form label.caption {
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 0px;
+  /*width: 170px;*/
+}
+
+  .s-Form label.caption sup {
+    float: right;
+  }
+
+.row-reversed {
+  flex-direction: row-reverse;
+}
+
+.no-label, .field-only {
+  padding-left: 5px;
+}
+
+  .no-label label.caption, .field-only label.caption {
+    display: none;
+  }
+
+.label-only > label {
+  width: 90% !important;
+}
+
+.label-only > input {
+  display: none;
+}
+
+.label-subcategory {
+  margin: 0px 10px 8px 10px;
+  border-bottom: 1px dotted #7380C4;
+  width: 100%;
+}
+
+  .label-subcategory > input {
+    display: none;
+  }
+
+  .label-subcategory > label.caption {
+    font-weight: bold !important;
+    color: cornflowerblue;
+    padding-left: 0px;
+    width: 90% !important;
+  }
+
+.offset-field {
+}
+
+  .offset-field label {
+    display: none;
+  }
+
+  .offset-field input {
+    display: none;
+  }
+
+/* Grid Styles ---------------------------------------*/
+.slick-header-column {
+  text-align: center;
+}
+
+.slick-cell {
+  border-left: 1px solid #ddd !important;
+  border-width: thin !important;
+}
+
+  .slick-cell.r0 {
+    border-left: none !important;
+  }
+
+  .slick-cell.editable {
+    border-style: none;
+  }
+
+.rownum-column {
+  background-color: #f7f7f7 !important;
+  border-bottom: none;
+  text-align: center;
+}
+
+.quick-filter-item .inplace-button {
+  float: right;
+  padding-top: 2px;
+  vertical-align: top;
+  margin-top: 3px;
+}
+
+.quick-filter-item .has-inplace-button {
+  margin-right: 0;
+}
+
+.quick-filter-item .inplace-create {
+  display: none;
+}
+
+/*.quick-filter-item .s-DateEditor.dateQ {
+  width: 100px;
+}
+*/
+.inline-actions {
+  opacity: 0.80;
+  cursor: pointer;
+}
+
+  .inline-actions :hover {
+    text-shadow: 0px 0px 1px #111;
+    opacity: 1;
+  }
+
+.slick-row:hover {
+  text-shadow: 0px 0px 1px #ccc;
+}
+
+
+@media (min-width: 768px) {
+  .s-horizontal-field {
+    flex-wrap: nowrap !important;
+  }
+
+    .s-horizontal-field label.caption {
+      flex-basis: auto !important;
+      flex-grow: 2 !important;
+      width: unset !important;
+      padding-top: 2px !important;
+      padding-bottom: 0 !important;
+      padding-right: 9px !important;
+    }
+}
+
+.s-hide-vx .vx {
+  display: none !important;
+}
+
+.s-dotted-border-bottom {
+  border-bottom: 1px dotted #112383;
+}
+
+.has-sub-category .category-title a {
+  font-size: 1.2rem;
+}
+
+.has-sub-category .sub-category .category-title {
+  border-bottom-style: dashed;
+}
+
+  .has-sub-category .sub-category .category-title a {
+    font-size: 1.05rem;
+    color: #6824bf;
+    font-weight: 500;
+  }
+
+.has-sub-category .field:has(>.s-BooleanEditor) {
+  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+  justify-content: start;
+}
+
+  .has-sub-category .field:has(>.s-BooleanEditor) .caption {
+    flex-basis: calc(100% - 15px);
+  }
+
+  .has-sub-category .field:has(>.s-BooleanEditor) .vx {
+    display: none;
+  }
+
+/* bg-colors ---------------------------------------*/
+
+.bg-yellow-gradient {
+  background: #f39c12 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f39c12), color-stop(1, #f7bc60)) !important;
+  background: -moz-linear-gradient(center bottom, #f39c12 0%, #f7bc60 100%) !important;
+  background: -o-linear-gradient(#f7bc60, #f39c12) !important;
+  color: #fff;
+}
+
+.bg-teal {
+  background-color: teal !important;
+}
+
+.bg-orange {
+  background-color: darkorange !important;
+}
+
+.bg-blueviolet {
+  background-color: blueviolet !important;
+}
+
+.bg-violetred {
+  background-color: mediumvioletred !important;
+}
+
+.bg-purple {
+  background-color: purple !important;
+}
+
+.bg-midnightblue {
+  background-color: midnightblue !important;
+}
+
+.bg-maroon {
+  background-color: maroon !important;
+}
