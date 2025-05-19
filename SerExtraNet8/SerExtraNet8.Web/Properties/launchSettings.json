@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SerExtraNet8.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:65230;http://localhost:65231"
+    }
+  }
+}

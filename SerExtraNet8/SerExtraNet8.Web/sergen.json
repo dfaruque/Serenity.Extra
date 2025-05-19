@@ -1,0 +1,12 @@
+﻿{
+  "Extends": "defaults@6.6.0",
+  "RootNamespace": "SerExtraNet8",
+  "FileScopedNamespaces": true,
+  "ServerTypings": {
+    "LocalTexts": true
+  },
+  "UpgradeInfo": {
+    "InitialType": "Community",
+    "InitialVersion": "8.8.1.0"
+  }
+}
