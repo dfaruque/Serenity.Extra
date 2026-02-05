@@ -1,0 +1,19 @@
+﻿{{USING "Serenity.ComponentModel"}}
+
+{{NAMESPACE ColumnsNamespace}}{{capture block~}}
+[ColumnsScript("{{ColumnsKey}}Editor")]
+[BasedOnRow(typeof({{RowClassName}}), CheckNames = true)]
+public class {{ClassName}}EditorColumns
+{
+    {{~for x in GridFields~}}
+    {{~if !x.ColAttributes.empty?~}}
+    [{{ATTRREF x.ColAttributeList}}]
+    {{~end~}}
+    {{~if x.TextualField~}}
+    public string {{x.TextualField}} { get; set; }
+    {{~else~}}
+    public {{TYPEREF x.DataType}} {{x.PropertyName}} { get; set; }
+    {{~end~}}
+    {{~end~}}
+}
+{{~end}}{{NAMESPACEBLOCK block~}}

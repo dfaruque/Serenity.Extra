@@ -1,0 +1,9 @@
+
+export class {{ClassName}}EditorDialog extends {{IMPORTFROM "@ext/Editors/EditorDialogBase" "EditorDialogBase"}}<{{RowClassName}}> {
+    static override [Symbol.typeInfo] = this.registerClass("{{ModuleNamespace}}.");
+
+    protected override getFormKey() { return {{IMPORTFROM "@ServerTypes/" + Module ClassName + "EditorForm"}}.formKey; }
+    protected override getRowDefinition() { return {{IMPORTFROM "@ServerTypes/" + Module RowClassName}}; }
+
+    protected override form = new {{ClassName + "EditorForm"}}(this.idPrefix);
+}

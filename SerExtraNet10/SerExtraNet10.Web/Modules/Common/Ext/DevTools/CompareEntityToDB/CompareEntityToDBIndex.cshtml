@@ -1,0 +1,75 @@
+@namespace Ext.DevTools.Model
+@model CompareEntityToDBPageModel
+@inject ITextLocalizer localizer
+@{
+    ViewData["Title"] = "Compare Entity To DB";
+}
+
+@section Head {
+
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><h4>Compare Entity To DB <small style="color:white">Summery</small> </h4></div>
+    <div class="panel-body">
+        <h4>Total Rows/Entities: @Model.TableComparisonInfos.Count</h4>
+
+        <h4>Contains Issues in <strong> @Model.TableComparisonInfos.Count(c => c.HasIssue) </strong> Rows/Entities</h4>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+
+    @foreach (var TableComparisonInfo in Model.TableComparisonInfos.FindAll(f => f.HasIssue).OrderBy(o => o.SortOrder))
+    {
+        <div class="col-md-6 col-sm-12">
+            <div class="panel panel-@TableComparisonInfo.CssClass">
+                <div class="panel-heading">
+                    <h4> @TableComparisonInfo.RowClassName <small>Table Name: @TableComparisonInfo.TableName</small></h4>
+                </div>
+                <div class="panel-body">
+                    @if (TableComparisonInfo.Issues.Length > 0)
+                    {
+                        <div class="alert alert-danger">@TableComparisonInfo.Issues</div>
+                    }
+
+                    @if (TableComparisonInfo.FieldComparisonInfos.Exists(f => f.HasIssue))
+                    {
+                        <table class="table table-striped table-condensed">
+                            <tr>
+                                <th>Field Name</th>
+                                <th>In Database</th>
+                                <th>In Row/Entity</th>
+                                <th>Issues</th>
+                            </tr>
+                            @foreach (var field in TableComparisonInfo.FieldComparisonInfos.FindAll(f => f.HasIssue))
+                            {
+                                <tr>
+                                    <td>@field.Name</td>
+                                    <td>
+                                        @if (field.DBField != null)
+                                        {
+                                            <span title="@field.DBField.ToJson()">
+                                                @(field.DBField.IsNullable == true ? "NULLABLE " : "NOT NULLABLE") @field.DBField.DataType.ToUpper()
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>@(field.RowField.Flags.HasFlag(Serenity.Data.FieldFlags.NotNull) == true ? "[NotNull]" : "Nullable") @field.RowField.Type</td>
+                                    <td>
+                                        @foreach (var issue in field.Issues)
+                                        {
+                                            <span class="label label-@issue.GetCssClass("default")">@issue.GetText(localizer)</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

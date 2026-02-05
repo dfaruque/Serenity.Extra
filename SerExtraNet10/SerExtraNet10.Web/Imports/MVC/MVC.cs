@@ -9,6 +9,29 @@ public static partial class Views
         {
             public const string DashboardIndex = "~/Modules/Common/Dashboard/DashboardIndex.cshtml";
         }
+
+        public static partial class Ext
+        {
+            public static partial class DevTools
+            {
+                public static partial class CompareEntityToDB
+                {
+                    public const string CompareEntityToDBIndex = "~/Modules/Common/Ext/DevTools/CompareEntityToDB/CompareEntityToDBIndex.cshtml";
+                }
+
+                public static partial class EnumExproler
+                {
+                    public const string EnumExprolerIndex = "~/Modules/Common/Ext/DevTools/EnumExproler/EnumExprolerIndex.cshtml";
+                }
+
+                public static partial class GenerateMigrationFromEntity
+                {
+                    public const string GenerateMigrationFromEntityIndex = "~/Modules/Common/Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityIndex.cshtml";
+                    public const string GenerateMigrationFromEntityMigrationViewer = "~/Modules/Common/Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntityMigrationViewer.cshtml";
+                    public const string GenerateMigrationFromEntitySuccessMsg = "~/Modules/Common/Ext/DevTools/GenerateMigrationFromEntity/GenerateMigrationFromEntitySuccessMsg.cshtml";
+                }
+            }
+        }
     }
 
     public static partial class Errors

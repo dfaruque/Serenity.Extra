@@ -1,0 +1,12 @@
+
+export class {{ClassName}}GridEditor extends {{IMPORTFROM "@ext/Editors/GridEditorBase" "GridEditorBase"}}<{{RowClassName}}> {
+    static override [Symbol.typeInfo] = this.registerClass("{{ModuleNamespace}}.");
+
+    protected override getColumnsKey() { return {{IMPORTFROM "@ServerTypes/" + Module ClassName + "EditorColumns"}}.columnsKey; }
+    protected override getDialogType() { return {{IMPORTFROM "./" + ClassName + "EditorDialog" ClassName + "EditorDialog"}}; }
+    protected override getRowDefinition() { return {{IMPORTFROM "@ServerTypes/" + Module RowClassName}}; }
+
+    constructor(props: any) {
+        super(props);
+    }
+}
