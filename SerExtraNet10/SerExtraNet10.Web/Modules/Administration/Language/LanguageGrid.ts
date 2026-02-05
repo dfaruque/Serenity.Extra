@@ -1,9 +1,9 @@
-import { EntityGrid } from "@serenity-is/corelib";
 import { LanguageColumns, LanguageRow, LanguageService } from "../../ServerTypes/Administration";
 import { nsAdministration } from "../../ServerTypes/Namespaces";
 import { LanguageDialog } from "./LanguageDialog";
+import { GridBase } from "../../Common/Ext/Bases/GridBase";
 
-export class LanguageGrid extends EntityGrid<LanguageRow, any> {
+export class LanguageGrid extends GridBase<LanguageRow, any> {
     static override[Symbol.typeInfo] = this.registerClass(nsAdministration);
 
     protected override useAsync() { return true; }
