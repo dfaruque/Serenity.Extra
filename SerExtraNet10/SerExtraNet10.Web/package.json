@@ -1,6 +1,7 @@
 {
   "name": "serene.web",
   "dependencies": {
+    "@serenity-is/assets": "./node_modules/.dotnet/serenity.assets",
     "@serenity-is/corelib": "./node_modules/.dotnet/serenity.corelib",
     "@serenity-is/demo.northwind": "./node_modules/.dotnet/serenity.demo.northwind",
     "@serenity-is/domwise": "./node_modules/.dotnet/serenity.domwise",
