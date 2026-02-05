@@ -1,8 +1,50 @@
-﻿{
+{
   "Extends": "defaults@9.0.0",
   "RootNamespace": "SerExtraNet10",
   "UpgradeInfo": {
     "InitialType": "Community",
     "InitialVersion": "9.1.1.1"
+  },
+  "BaseRowClasses": [
+    {
+      "ClassName": "RowBase",
+      "Fields": [
+        "IUser",
+        "IDate",
+        "EUser",
+        "EDate",
+        "DUser",
+        "DDate",
+        "IsDeleted"
+      ]
+    }
+  ],
+  "RemoveForeignFields": [
+    "Remarks",
+    "SortOrder",
+    "IUser",
+    "IDate",
+    "EUser",
+    "EDate",
+    "DUser",
+    "DDate",
+    "IsDeleted",
+    "PasswordHash",
+    "PasswordSalt",
+    "UserImage",
+    "LastDirectoryUpdate",
+    "Source",
+    "InsertDate",
+    "InsertUserId",
+    "UpdateDate",
+    "UpdateUserId",
+    "IsActive"
+  ],
+  "CustomTemplates": "Modules\\Common\\Ext\\CodeGeneratorTemplates",
+  "CustomGenerate": {
+    "EditorColumns": "{2}\\Editor\\{0}EditorColumns.cs",
+    "EditorForm": "{2}\\Editor\\{0}EditorForm.cs",
+    "GridEditor": "{2}\\Editor\\{0}GridEditor.ts",
+    "EditorDialog": "{2}\\Editor\\{0}EditorDialog.ts"
   }
 }
