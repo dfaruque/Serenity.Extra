@@ -349,7 +349,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
                 minWidth: inlineActionsColumnWidth,
                 maxWidth: inlineActionsColumnWidth,
                 visible: true,
-                formatter: (row, cell, value, columnDef, dataContext) => {
+                format: ctx => {
                     return inlineActionsColumnContent;
                 }
             });
@@ -406,7 +406,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
 
     public resetColumns(columns: Column[]) {
 
-        this.slickGrid.setColumns(columns);
+        this.sleekGrid.setColumns(columns);
 
         if (this.getExtGridOptions().AutoColumnSize == true) {
             this.resizeAllCulumn(columns);
@@ -427,7 +427,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
         if (gridContainerWidth > 0) { } else { gridContainerWidth = this.element.closest('.s-Panel')?.getNode()?.clientWidth - 55; }
         if (gridContainerWidth > 0) { } else { gridContainerWidth = Fluent.findFirst('section.content')?.getNode()?.clientWidth - 75; }
 
-        this.slickGrid.setOptions({ forceFitColumns: false });
+        this.sleekGrid.setOptions({ forceFitColumns: false });
 
         let allVisibleColumns = columns.filter(f => f.visible);
 
@@ -514,8 +514,8 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
                 //else c.width = c.width + 200;
             });
 
-            this.slickGrid.setColumns(allVisibleColumns);
-            this.slickGrid.onColumnsResized.notify();
+            this.sleekGrid.setColumns(allVisibleColumns);
+            this.sleekGrid.onColumnsResized.notify();
         }
     }
 
@@ -527,6 +527,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
         }
 
         opt.enableTextSelectionOnCells = true;
+        opt.enableHtmlRendering = true;
 
         //opt.enableCellNavigation = true;
         //opt.asyncEditorLoading = false;
@@ -586,7 +587,7 @@ export class GridBase<TItem, TOptions> extends EntityGrid<TItem, TOptions> {
             }
         }
         else if (target.hasClass('view-details')) {
-            (this.slickGrid as any).getEditController().commitCurrentEdit();
+            (this.sleekGrid as any).getEditController().commitCurrentEdit();
 
             this.editItem(recordId);
         }
