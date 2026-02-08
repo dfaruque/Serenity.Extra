@@ -1,4 +1,4 @@
-import { coalesce, DataGrid, Format, first, htmlEncode, ListResponse, RemoteView, SlickTreeHelper, toGrouping, Fluent } from "@serenity-is/corelib"
+import { DataGrid, Format, first, htmlEncode, ListResponse, RemoteView, SlickTreeHelper, toGrouping, Fluent } from "@serenity-is/corelib"
 import { FormatterContext } from "@serenity-is/sleekgrid"
 
 ///**
@@ -16,10 +16,10 @@ export class TreeGridMixin<TItem> {
 
         dg.element.findFirst('.grid-container').on('click', e => {
             if (Fluent(e.target).hasClass('s-TreeToggle')) {
-                var src = dg.slickGrid.getCellFromEvent(e);
+                var src = dg.sleekGrid.getCellFromEvent(e);
                 if (src.cell >= 0 &&
                     src.row >= 0) {
-                    TreeGridMixin.toggleClick<TItem>(e, src.row, src.row, dg.view, getId);
+                    TreeGridMixin.toggleClick<TItem>(e, src.row, src.row, dg.view as RemoteView, getId);
                 }
             }
         });
@@ -29,7 +29,7 @@ export class TreeGridMixin<TItem> {
             if (!oldViewFilter.apply(this, [item]))
                 return false;
 
-            return TreeGridMixin.filterById(item, dg.view, idProperty, options.getParentId);
+            return TreeGridMixin.filterById(item, dg.view as RemoteView, idProperty, options.getParentId);
         };
 
         var oldProcessData = (dg as any).onViewProcessData;
@@ -44,7 +44,7 @@ export class TreeGridMixin<TItem> {
 
         if (options.toggleField) {
             var col = first(dg.getGrid().getColumns(), x => x.field == options.toggleField);
-            col.format = TreeGridMixin.treeToggle(() => dg.view, getId,
+            col.format = TreeGridMixin.treeToggle(() => dg.view as RemoteView, getId,
                 col.format || (ctx => htmlEncode(ctx.value)));
             //col.formatter = SlickHelper.convertToFormatter(col.format);
         }
@@ -108,7 +108,7 @@ export class TreeGridMixin<TItem> {
         return result;
     }
 
-    static filterById<TItem>(item: TItem, view: RemoteView<TItem>, idProperty, getParentId: (x: TItem) => any): boolean {
+    static filterById<TItem>(item: TItem, view: RemoteView<TItem>, idProperty: string, getParentId: (x: TItem) => any): boolean {
         return SlickTreeHelper.filterCustom(item, function (x) {
             var parentId = getParentId(x);
             if (parentId == null) {
@@ -126,13 +126,13 @@ export class TreeGridMixin<TItem> {
             var text = formatter(ctx);
             var view = getView();
             if (!view) return;
-            var indent = coalesce(ctx.item._indent, 0);
+            var indent = ctx.item._indent ?? 0;
             var spacer = '<span class="s-TreeIndent" style="width:' + 15 * indent + 'px"></span>';
             var id = getId(ctx.item);
             var idx = view.getIdxById(ctx.item.__id || id);
             var next = view.getItemByIdx(idx + 1);
             if (next != null) {
-                var nextIndent = coalesce(next._indent, 0);
+                var nextIndent = next._indent ?? 0;
                 if (nextIndent > indent) {
                     if (!!!!ctx.item._collapsed) {
                         return spacer + '<span class="s-TreeToggle s-TreeExpand"></span>' + text;

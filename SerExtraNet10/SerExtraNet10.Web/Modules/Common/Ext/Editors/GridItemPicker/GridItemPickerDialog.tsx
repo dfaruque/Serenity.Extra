@@ -29,7 +29,7 @@ export class GridItemPickerDialog<TItem> extends BaseDialog<GridItemPickerEditor
 
     onSuccess = (selectedItems: TItem[]) => { }
 
-    getDialogOptions() {
+    override getDialogOptions() {
         let opt = super.getDialogOptions();
         opt.buttons = [{
             text: localText("Dialogs.OkButton"),
@@ -54,7 +54,7 @@ export class GridItemPickerDialog<TItem> extends BaseDialog<GridItemPickerEditor
         return opt;
     }
 
-    protected renderContents(): any {
+    protected override renderContents(): any {
         const id = this.useIdPrefix();
         return <div id={id.RowSelectionCheckGrid}
             class={"RowSelectionCheckGrid " + (this.options.multiple == true ? 'multi-select' : 'single-select')}

@@ -10,7 +10,7 @@ export function sum(arr: number[]): number {
     return sumValue;
 }
 
-export function sumByKey(xs: any[], key): number {
+export function sumByKey(xs: any[], key: string): number {
     if (!xs) return 0;
 
     let initObj = {};
@@ -24,7 +24,7 @@ export function sumByKey(xs: any[], key): number {
     return sumObj[key];
 }
 
-export function sortBy<T>(xs: T[], key) {
+export function sortBy<T>(xs: T[], key: string) {
     return xs.sort((a, b) => {
         if (a[key] < b[key]) {
             return -1;
@@ -37,7 +37,7 @@ export function sortBy<T>(xs: T[], key) {
     });
 }
 
-export function sortByDesc<T>(xs: T[], key) {
+export function sortByDesc<T>(xs: T[], key: string) {
     return xs.sort((a, b) => {
         if (a[key] > b[key]) {
             return -1;

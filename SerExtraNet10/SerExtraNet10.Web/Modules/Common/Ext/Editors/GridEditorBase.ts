@@ -11,18 +11,18 @@ import * as q from "../q/q"
 export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntity, TOptions>
     implements IGetEditValue, ISetEditValue, IReadOnly {
 
-    protected getExtGridOptions(): ExtGridOptions { return deepClone(q.DefaultEditorGridOptions); }
+    protected override getExtGridOptions(): ExtGridOptions { return deepClone(q.DefaultEditorGridOptions); }
 
-    protected getIdProperty() { return "__id"; }
+    protected override getIdProperty() { return "__id"; }
 
-    isChildGrid = true;
+    override isChildGrid = true;
 
     protected nextId = 1;
 
     constructor(props: any) {
         super(props);
 
-        this.slickGrid.onSort.subscribe((e, args) => {
+        this.sleekGrid.onSort.subscribe((e, args) => {
             this.sortGridFunction((args.grid as Grid), args.sortCols[0], args.sortCols[0].sortCol.field);
 
             //(args.grid as Grid).init();
@@ -43,7 +43,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         });
     }
 
-    protected getQuickFilters() {
+    protected override getQuickFilters() {
         return [];
     }
 
@@ -70,7 +70,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         }
         else {
             var index = indexOf(items, x => this.id(x) === id);
-            items[index] = deepClone({} as TEntity, items[index], row);
+            items[index] = row = Object.assign({} as TEntity, deepClone(items[index]), row);
         }
 
         this.value = items;
@@ -95,7 +95,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         return {} as TEntity;
     }
 
-    protected getButtons(): ToolButton[] {
+    protected override getButtons(): ToolButton[] {
         return [{
             title: this.getItemName(),
             cssClass: 'add-button',
@@ -103,7 +103,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         }];
     }
 
-    protected addButtonClick(): void {
+    protected override addButtonClick(): void {
         this.createEntityDialog(this.getItemType(), dlg => {
             var dialog = dlg as EditorDialogBase<TEntity>;
             dialog.parentEditor = this;
@@ -112,7 +112,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         });
     }
 
-    protected editItem(entityOrId: any): void {
+    protected override editItem(entityOrId: any): void {
 
         var id = entityOrId;
         var item = this.view.getItemById(id);
@@ -141,7 +141,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
     public get value(): TEntity[] {
         var p = this.getIdProperty();
 
-        (this.slickGrid as any).getEditController().commitCurrentEdit();
+        (this.sleekGrid as any).getEditController().commitCurrentEdit();
 
         let items = this.view.getItems();
 
@@ -181,21 +181,21 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         this.resetRowNumber(); // to generate serial no.
     }
 
-    protected getGridCanLoad() {
+    protected override getGridCanLoad() {
         return false;
     }
 
-    protected usePager() {
+    protected override usePager() {
         return false;
     }
 
-    protected getInitialTitle() {
+    protected override getInitialTitle() {
         return null;
     }
 
     private searchText: string;
 
-    protected createToolbarExtensions(): void {
+    protected override createToolbarExtensions(): void {
         //super.createToolbarExtensions();
         if (this.getExtGridOptions().EnableQuickSearch) {
             GridUtils.addQuickSearchInputCustom(this.toolbar.element, (field, text) => {
@@ -205,7 +205,7 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
         }
     }
 
-    protected onViewFilter(row): boolean {
+    protected override onViewFilter(row): boolean {
         if (!super.onViewFilter(row)) {
             return false;
         }
@@ -237,26 +237,26 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
 
     protected enableFiltering(): boolean { return false; }
 
-    protected onViewSubmit() { return false; }
+    protected override onViewSubmit() { return false; }
 
-    get_readOnly(): boolean {
+    override get_readOnly(): boolean {
         return this.isReadOnly;
     }
-    set_readOnly(value: boolean): void {
+    override set_readOnly(value: boolean): void {
         this.isReadOnly = value;
         if (value == true) {
             this.element.findFirst('.add-button').addClass('disabled');
-            let opt = this.slickGrid.getOptions();
+            let opt = this.sleekGrid.getOptions();
             opt.editable = false;
 
-            this.slickGrid.setOptions(opt);
+            this.sleekGrid.setOptions(opt);
         } else {
             this.element.findFirst('.add-button').removeClass('disabled');
         }
 
     }
 
-    protected getSlickOptions() {
+    protected override getSlickOptions() {
         let opt = super.getSlickOptions();
         opt.forceFitColumns = false;
         //opt.autoHeight = true; // If you need to show footer, you have to do opt.autoHeight = false
@@ -274,14 +274,14 @@ export class GridEditorBaseWithOption<TEntity, TOptions> extends GridBase<TEntit
     }
 }
 
-export class GridEditorBase<TEntity> extends GridEditorBaseWithOption<TEntity, any>{
+export class GridEditorBase<TEntity> extends GridEditorBaseWithOption<TEntity, any> {
 
 }
 
-export class GridEditorBaseForJsonField<TEntity> extends GridEditorBaseWithOption<TEntity, any>{
+export class GridEditorBaseForJsonField<TEntity> extends GridEditorBaseWithOption<TEntity, any> {
     protected getRowIdField() { return 'Id' }
 
-    public getEditValue(property, target) {
+    public override getEditValue(property, target) {
         let val = this.value;
 
         let idField = this.getRowIdField();

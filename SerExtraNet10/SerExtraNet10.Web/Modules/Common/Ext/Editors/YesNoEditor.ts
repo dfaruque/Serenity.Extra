@@ -2,8 +2,8 @@ import { ComboboxEditor, Decorators, localText, WidgetProps } from "@serenity-is
 
 @Decorators.registerEditor('Ext.YesNoEditor')
 export class YesNoEditor extends ComboboxEditor<any, any> {
-    public getEditValue(property, target) { target[property.name] = this.valueAsBoolean; }
-    public setEditValue(source, property) { this.valueAsBoolean = source[property.name]; }
+    public override getEditValue(property, target) { target[property.name] = this.valueAsBoolean; }
+    public override setEditValue(source, property) { this.valueAsBoolean = source[property.name]; }
 
     constructor(props: WidgetProps<any>) {
         super(props);

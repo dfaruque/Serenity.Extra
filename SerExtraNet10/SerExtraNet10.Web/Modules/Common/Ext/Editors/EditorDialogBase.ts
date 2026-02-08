@@ -6,9 +6,9 @@ import { DefaultEditorDialogOptions } from "../q/q";
 @Decorators.panel(false)
 export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
 
-    protected getExtDialogOptions(): ExtDialogOptions { return deepClone(DefaultEditorDialogOptions); }
+    protected override getExtDialogOptions(): ExtDialogOptions { return deepClone(DefaultEditorDialogOptions); }
 
-    protected getIdProperty() { return "__id"; }
+    protected override getIdProperty() { return "__id"; }
 
     public onSave: (options: ServiceOptions<SaveResponse>,
         callback: (response: SaveResponse) => void) => void;
@@ -16,13 +16,13 @@ export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
     public onDelete: (options: ServiceOptions<DeleteResponse>,
         callback: (response: DeleteResponse) => void) => void;
 
-    public destroy() {
+    public override destroy() {
         this.onSave = null;
         this.onDelete = null;
         super.destroy();
     }
 
-    protected updateInterface() {
+    protected override updateInterface() {
         if (this.parentEditor && this.parentEditor.isReadOnly == true) {
             this.isReadOnly = true
         }
@@ -39,12 +39,12 @@ export class EditorDialogBase<TEntity> extends DialogBase<TEntity, any> {
         }
     }
 
-    protected saveHandler(options: ServiceOptions<SaveResponse>,
+    protected override saveHandler(options: ServiceOptions<SaveResponse>,
         callback: (response: SaveResponse) => void): void {
         this.onSave && this.onSave(options, callback);
     }
 
-    protected deleteHandler(options: ServiceOptions<DeleteResponse>,
+    protected override deleteHandler(options: ServiceOptions<DeleteResponse>,
         callback: (response: DeleteResponse) => void): void {
         this.onDelete && this.onDelete(options, callback);
     }
