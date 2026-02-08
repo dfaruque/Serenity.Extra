@@ -12,12 +12,16 @@ It is just some useful utilities and some extra functionalities like
 - Generating database migration from entity/row
 - Added some editors
    - Grid Item Picker Editor
-   - AutoCompleteEditor
-   - ColorEditor
-   - DateTimePickerEditor
-   - EmptyLookupEditor
-   - StaticTextBlock
-      
+   - YesNoEditor
+   - JsonGridEditorBase
+
+## How to use (for .net 10+)
+1. Copy the **Modules/Common/Ext** folder from the **SerExtraNet10** project and place it accordingly.
+2. Add following paths in tsconfig.json `"@ext/*": [ "./Modules/Common/Ext/*" ]` and `"@ServerTypes/*": [ "./Modules/ServerTypes/*" ]`
+3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('Ext');`
+4. If you want to use code generator custom templates, then follow **sergen.json** file from **SerExtraNet10** project
+5. See LanguageGrid.ts and LanguageDialog.ts for example.      
+
 ## How to use (for .net 8+)
 1. Copy the **Modules/_Ext** folder from the **SerExtraNet8** project and place it accordingly.
 3. Add following line in Modules/Common/ScriptInit.ts `Q.Config.rootNamespaces.push('_Ext');`
